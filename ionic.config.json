@@ -1,0 +1,7 @@
+{
+  "name": "omni-method",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
