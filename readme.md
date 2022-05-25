@@ -1,3 +1,18 @@
+built with
+- Angular https://angular.io/
+- Capactor
+-- https://capacitorjs.com/
+-- https://capacitorjs.com/solution/angular
+- Ionic
+
+
+need to install 
+- node
+- xcode
+- cocoapods
+
+
+
 
 #Setting up google authentication
 https://developers.google.com/identity/gsi/web/guides/client-library
