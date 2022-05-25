@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button expand="full" (click)="signIn()" *ngIf="!user"><ion-icon name="logo-google" slot="start"></ion-icon>Sign in with Google</ion-button>
+  <ion-button expand="full" (click)="signOut()" *ngIf="user"> Sign out</ion-button>
+  <!-- <ion-button expand="full" (click)="refresh()" *ngIf="!user">Try refresh</ion-button> -->
+
+  <ion-item *ngIf="user">
+    <ion-avatar slot="start">
+      <!-- <img [src]="user.imageUrl"/> -->
+    </ion-avatar>
+    <ion-label>
+      <!-- <p>{{user.email}}</p> -->
+    </ion-label>
+  </ion-item>
+</ion-content>

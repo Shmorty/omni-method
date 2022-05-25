@@ -1,17 +1,48 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+
+  <ion-header collapse="fade">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title>Assessments</ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button text="Close" defaultHref="landing"></ion-back-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button *ngIf="isLoggedIn()" (click)="logout()">logout</ion-button>
+        <ion-button *ngIf="!isLoggedIn()" >reload</ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-card class="card cardStyle" *ngIf="isLoggedIn()">
+    <ion-item lines="none">
+      <span slot="start">
+        <ion-avatar>
+        <img src="{{userInfo?.info?.picture}}">
+        </ion-avatar>
+      </span>
+      <span id="name">
+        <div>{{userInfo?.info?.given_name}}</div>
+        <div>{{userInfo?.info?.family_name}}</div>
+      </span>
+      <span slot="end">
+        <div style="font-weight: 400;">Omni Score</div>
+        <div style="font-size: 1.4em; font-weight: 600; text-align: center;">{{omniScore}}</div>
+        </span>
+    </ion-item>
+  
+    <ion-card-content>
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-item *ngFor="let a of assessments">
+      <ion-icon slot="first" name="star"></ion-icon>
+      <ion-label>{{a.label}}</ion-label>
+      <span slot="end">{{a.score}}</span>
+    </ion-item>
+  </ion-card>
+
 </ion-content>

@@ -1,0 +1,6 @@
+{
+	"appId": "com.shmorty.omni-method",
+	"appName": "omni-method",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

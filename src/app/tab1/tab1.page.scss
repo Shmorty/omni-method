@@ -1,0 +1,26 @@
+.cardStyle {
+    --ion-background-color: rgb(99, 175, 255);
+    border-radius: 20px;
+    padding: 20px 4px;
+
+    ion-button {
+        --background: slategray;
+    }
+
+    span {
+        color: white;
+        font-weight: 200;
+    }
+
+    #name {
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+}
+.pageLabel {
+    text-align: center;
+    margin: 15px;
+    font-weight: 400;
+    font-size: 1.5em;
+}
+
