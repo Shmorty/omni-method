@@ -8,7 +8,7 @@ const oAuthConfig: AuthConfig = {
   strictDiscoveryDocumentValidation: false,
   redirectUri: window.location.origin,
   clientId: environment.gapi_client_id,
-  scope: 'openid profile email'
+  scope: 'openid profile email',
 }
 
 export interface UserInfo {
