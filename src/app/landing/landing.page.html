@@ -1,49 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Omni Method</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/login">Sign in</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
-    <ion-label position="stacked" color="primary">Welcome to the Omni Method</ion-label>
-    <ion-label color="secondary">Login with Google</ion-label>
-    <ion-item lines="none">
-      <ion-button expand="full" (click)="signIn()" *ngIf="!user"><ion-icon name="logo-google" slot="start"></ion-icon>Sign in with Google</ion-button>
-      <ion-button expand="full" (click)="signOut()" *ngIf="user"> Sign out</ion-button>
-    
-        <ion-button routerLink="/tabs">login</ion-button>
-    </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-label>Default Input</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      
-      <ion-item>
-        <ion-label position="fixed">Fixed</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      
-      <ion-item>
-        <ion-label position="floating">Floating</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      
-      <ion-item>
-        <ion-label position="stacked">Stacked</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      
-      <ion-item>
-        <ion-label>Toggle</ion-label>
-        <ion-toggle slot="end" checked></ion-toggle>
-      </ion-item>
-      
-      <ion-item>
-        <ion-checkbox slot="start" checked></ion-checkbox>
-        <ion-label>Checkbox</ion-label>
-      </ion-item>
-    </ion-card>
-  </ion-content>
+<ion-content class="ion-padding">
+  <ion-slides pager>
+    <ion-slide>
+      <h1 color="primary">Welcome to the Omni Method</h1>
+    </ion-slide>
+    <ion-slide>
+      <h1 color="primary">Slide Two</h1>
+    </ion-slide>
+    <ion-slide>
+      <h1 color="primary">Slide Three</h1>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-button routerLink="/tabs"  full>Create account</ion-button>
+    </ion-toolbar>
+  </ion-footer>

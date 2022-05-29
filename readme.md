@@ -14,6 +14,10 @@ need to install
   npm i -g @ionic/cli
 
 
+to build locally 
+1. clone repo
+2. run npm install
+3. ionic serve
 
 
 #Setting up google authentication

@@ -1,18 +1,19 @@
 
-<ion-content [fullscreen]="true">
-
-  <ion-header collapse="fade">
-    <ion-toolbar>
-      <ion-title>Assessments</ion-title>
+  <ion-header collapse="false">
+    <ion-toolbar color="primary">
       <ion-buttons slot="start">
         <ion-back-button text="Close" defaultHref="landing"></ion-back-button>
       </ion-buttons>
+      <ion-title>Assessments</ion-title>
       <ion-buttons slot="end">
         <!-- <ion-button *ngIf="isLoggedIn()" (click)="logout()">logout</ion-button>
         <ion-button *ngIf="!isLoggedIn()" >reload</ion-button> -->
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
+
+<!-- <ion-content [fullscreen]="true"> -->
+<ion-content #scrollarea >
 
   <ion-card class="card cardStyle" *ngIf="isLoggedIn()">
     <ion-item lines="none">
@@ -37,12 +38,12 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngFor="let c of assessments">
-    <ion-label>{{c.label}}</ion-label>
-    <ion-item *ngFor="let a of c.assessments">
+  <ion-card *ngFor="let category of assessments">
+    <ion-card-header type="primary">{{category.label}}</ion-card-header>
+    <ion-item *ngFor="let assessment of category.assessments">
       <ion-icon slot="first" name="star"></ion-icon>
-      <ion-label>{{a.label}}</ion-label>
-      <span slot="end">{{a.score}}</span>
+      <ion-label>{{assessment.label}}</ion-label>
+      <span slot="end">{{assessment.score}}</span>
     </ion-item>
   </ion-card>
 
