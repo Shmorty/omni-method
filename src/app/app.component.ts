@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GoogleSigninService } from './google-signin.service';
+// import { GoogleSigninService } from './google-signin.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,8 @@ import { GoogleSigninService } from './google-signin.service';
 export class AppComponent {
   title = 'Omni Method'
 
-  constructor(private readonly google: GoogleSigninService) {}
+  // constructor(private readonly google: GoogleSigninService) {}
+  constructor() {}
 
 }
 

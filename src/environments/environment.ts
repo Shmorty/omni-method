@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: FontFaceSetLoadEvent,
+  production: false,
+  // production: FontFaceSetLoadEvent,
   API_KEY : '',
   // API_URL : 'https://api.shmorty.com/omnimethod/v1/'
   API_URL : 'https://jsonplaceholder.typicode.com/todos/1',

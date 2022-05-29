@@ -34,10 +34,13 @@ export class GoogleSigninService {
     oAuthService.loadDiscoveryDocument().then( () => {
       oAuthService.tryLoginImplicitFlow().then( () => {
         if(!oAuthService.hasValidIdToken()) {
+          console.log("initLoginFlow()")
           oAuthService.initLoginFlow()
         } else {
           oAuthService.loadUserProfile().then( (userProfile) => {
+            console.log("loading userProfile")
             this.userProfileSubject.next(userProfile as UserInfo)
+            console.log("email: ", userProfile)
           })
         }
       })

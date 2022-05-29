@@ -10,12 +10,17 @@ need to install
 - node
 - xcode
 - cocoapods
+- capacitor
+  npm i -g @ionic/cli
 
 
 
 
 #Setting up google authentication
 https://developers.google.com/identity/gsi/web/guides/client-library
+
+https://console.cloud.google.com/apis/dashboard
+
 
 Add to index.html
 <script src="https://accounts.google.com/gsi/client" async defer></script>
