@@ -4,7 +4,12 @@
     font-weight: 400;
     font-size: 1.5em;
 }
-
+ion-slide>ion-icon {
+    font-size: 6em;
+    color: rgb(99, 175, 255);
+    display: block;
+    text-align: center;
+}
 /* Without setting height the slides will take up the height of the slide's content */
 ion-slides {
     height: 100%;
