@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" forceOverscroll="false">
   <ion-slides pager>
     <ion-slide>
       <ion-icon name="body-outline"></ion-icon>
@@ -14,25 +14,27 @@
     </ion-slide>
     <ion-slide>
       <ion-icon name="barbell-outline"></ion-icon>
-      <h1 color="primary">Slide Two</h1>
-    </ion-slide>
-    <ion-slide>
-      <ion-icon name="trophy-outline"></ion-icon>
-      <h1 color="primary">Slide Three</h1>
-    </ion-slide>
-    <ion-slide>
-      <ion-icon name="footsteps-outline"></ion-icon>
-      <h1 color="primary">Slide Four</h1>
+      <h1 color="primary">Strength</h1>
     </ion-slide>
     <ion-slide>
       <ion-icon name="fitness-outline"></ion-icon>
-      <h1 color="primary">Slide Five</h1>
+      <h1 color="primary">Endurance</h1>
+    </ion-slide>
+    <ion-slide>
+      <ion-icon name="footsteps-outline"></ion-icon>
+      <h1 color="primary">Power</h1>
+    </ion-slide>
+    <ion-slide>
+      <ion-icon name="trophy-outline"></ion-icon>
+      <h1 color="primary">Flexibility</h1>
     </ion-slide>
   </ion-slides>
 </ion-content>
 
   <ion-footer>
     <ion-toolbar>
-      <ion-button routerLink="/tabs"  full>Create account</ion-button>
+      <div style="text-align: center;">
+        <ion-button routerLink="/tabs"  full>Create account</ion-button>
+      </div>
     </ion-toolbar>
   </ion-footer>
