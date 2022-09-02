@@ -2,7 +2,7 @@
   <ion-header collapse="false">
     <ion-toolbar color="primary">
       <ion-buttons slot="start">
-        <ion-back-button text="Close" defaultHref="landing"></ion-back-button>
+        <ion-back-button text="Close" defaultHref="/"></ion-back-button>
       </ion-buttons>
       <ion-title>Assessments</ion-title>
       <ion-buttons slot="end">
@@ -13,18 +13,18 @@
   </ion-header>
 
 <!-- <ion-content [fullscreen]="true"> -->
-<ion-content #scrollarea >
+<ion-content #scrollarea  color="">
 
-  <ion-card class="card cardStyle" *ngIf="isLoggedIn()" color="primary">
+  <ion-card class="card cardStyle"  color="">
     <ion-item lines="none" color="primary">
       <span slot="start">
         <ion-avatar>
-          <img src="{{userInfo?.info?.picture}}">
+          <img src="{{user?.avatar}}">
         </ion-avatar>
       </span>
       <span id="name">
-        <div>{{userInfo?.info?.given_name}}</div>
-        <div>{{userInfo?.info?.family_name}}</div>
+        <div>{{user$.firstName}}</div>
+        <div>{{user$?.lastName}}</div>
       </span>
       <span slot="end">
         <div style="font-weight: 400;">Omni Score</div>
@@ -32,28 +32,50 @@
       </span>
     </ion-item>
   
-    <ion-card-content>
-      <ion-grid class="ion-text-center" color="light">
+    <ion-item color="primary">
+      <ion-grid class="ion-text-center" color="">
         <ion-row>
           <ion-col>Body Weight</ion-col>
           <ion-col>Height</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>Unadjusted</ion-col>
-          <ion-col>Local Rank</ion-col>
-          <ion-col>World Rank</ion-col>
+          <ion-col>
+            Unadjusted
+          </ion-col>
+          <ion-col>
+            <ion-icon name="pin"></ion-icon><br>
+            Local Rank
+          </ion-col>
+          <ion-col>
+            <ion-icon name="globe"></ion-icon><br>
+            World Rank
+          </ion-col>
         </ion-row>
       </ion-grid>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card *ngFor="let category of assessments">
-    <ion-card-header type="primary">{{category.label}}</ion-card-header>
-    <ion-item *ngFor="let assessment of category.assessments">
-      <ion-icon slot="first" name="star"></ion-icon>
-      <ion-label>{{assessment.label}}</ion-label>
-      <span slot="end">{{assessment.score}}</span>
     </ion-item>
   </ion-card>
+
+  <ion-card style="box-shadow: none;">
+    <ion-card-header >
+      <ion-card-title >All Assessments</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card class="card cardStyle" *ngFor="let category of assessments">
+    <ion-card-header type="primary">{{category.label}}</ion-card-header>
+    <ion-item *ngFor="let assessment of category.assessments" 
+      (click)="openAssessmentDetailModal(assessment, category)">
+    <!-- <ion-item *ngFor="let assessment of category.assessments"> -->
+      <ion-thumbnail slot="start">
+        <ion-img src="{{assessment.icon}}"></ion-img>
+      </ion-thumbnail>
+      <ion-label>{{assessment.label}}</ion-label>
+      <div slot="end">
+        <span class="units">{{assessment.units}}</span>
+        <br>
+        <span class="score">{{assessment.score}}</span>
+        </div>
+    </ion-item>
+</ion-card>
 
 </ion-content>

@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModel()">Close</ion-button>
+    </ion-buttons>
+  <ion-title>{{ assessment.label }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-img src="{{assessment.icon}}"></ion-img>
+  </ion-card>
+
+  <ion-item>
+    <ion-label>
+      <ion-card-title>
+        <h1>{{ assessment.label }}</h1>
+      </ion-card-title>
+      <ion-card-subtitle>
+        <h5>{{ category.label }}</h5>
+      </ion-card-subtitle>
+      </ion-label>
+  </ion-item>
+
+  <ion-item button detail-icon="create-outline" lines="full">
+    <ion-label slot="start">
+      <div>{{ assessment.units }}</div>
+      <div style="font-weight: bold;">{{ assessment.score }}</div>
+    </ion-label>
+    <ion-label slot="end">
+      <div>Exercise Score:</div>
+      <div>{{ assessment.score }}</div>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <p>{{ assessment.description }}</p>
+  </ion-item>
+
+</ion-content>
+
+<ion-footer>
+  <ion-text>This is the assessment-detail footer</ion-text>
+</ion-footer>

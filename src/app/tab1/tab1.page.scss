@@ -9,12 +9,23 @@
 
     span {
         // color: white;
-        font-weight: 200;
+        font-weight: 400;
     }
 
     #name {
         font-size: 1.1em;
         font-weight: bold;
+    }
+    .units {
+        float: right;
+    }
+    .score {
+        color: white;
+        background-color: #35b5ff;
+        border-radius: 12px;
+        float: right;
+        font-weight: bold;
+        padding: 0em 1em;
     }
 }
 .pageLabel {

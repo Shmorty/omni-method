@@ -1,16 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Assessment } from './store/models/assessment.model';
+import { User } from './store/models/user.model';
+import { AppState } from './store/models/state.model';
+ 
 // import { GoogleSigninService } from './google-signin.service';
+
+/*
+theme
+https://material.io/resources/color/#!/?view.left=0&view.right=1&primary.color=03c4e6&primary.text.color=000000
+*/
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
-  title = 'Omni Method'
+export class AppComponent implements OnInit {
+  title = 'Omni Method';
+  assessments$: Observable<Array<Assessment>>;
 
   // constructor(private readonly google: GoogleSigninService) {}
-  constructor() {}
+  constructor(private store: Store<AppState>) {}
+
+  ngOnInit(): void {
+    this.assessments$ = this.store.select((store) => store.assessments);
+  }
 
 }
 
