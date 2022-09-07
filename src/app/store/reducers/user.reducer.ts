@@ -16,11 +16,6 @@ const initialState = {
     user: initialUserState,
     error: ''
 };
-export interface UserState {
-    loading: boolean;
-    user: User;
-    error: string;
-}
 // create reducers
 const _userReducer = createReducer(
     initialState,

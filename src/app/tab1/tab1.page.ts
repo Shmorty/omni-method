@@ -12,6 +12,7 @@ import { User } from '../store/models/user.model';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/models/state.model';
+import { selectUser } from '../store/selectors/user.selectors';
 
 const API_URL = environment.API_URL;
 
@@ -50,6 +51,7 @@ export class Tab1Page implements OnInit {
 
   ngOnInit(): void {
       this.user$ = this.store.select((store) => store.user);
+      // this.user$ = selectUser;
   }
 
   async openAssessmentDetailModal(assessment, category) {
