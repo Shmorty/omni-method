@@ -21,23 +21,22 @@ import { userReducer } from './store/reducers/user.reducer';
 
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    IonicModule.forRoot(),
-    StoreModule.forRoot({
-      // user: userReducer,
-      assessments: assessmentReducer
-    }),
-    EffectsModule.forRoot([]),
-    // storeDevTools,
-    // OAuthModule.forRoot()
-  ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        IonicModule.forRoot(),
+        StoreModule.forRoot({
+            // user: userReducer,
+            assessments: assessmentReducer
+        }),
+        EffectsModule.forRoot([]),
+        // storeDevTools,
+        // OAuthModule.forRoot()
+    ],
+    providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
