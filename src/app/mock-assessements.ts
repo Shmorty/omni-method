@@ -136,12 +136,12 @@ export const DATA: Category[] = [
     id: 5,
     label: 'Metabolic',
     assessments: [
-      {
-        id: 1,
-        icon: '/assets/images/breath-hold.png',
-        label: 'VO2 Max',
-        score: 51.09,
-      },
+      // {
+      //   id: 1,
+      //   icon: '/assets/images/breath-hold.png',
+      //   label: 'VO2 Max',
+      //   score: 51.09,
+      // },
       {
         id: 2,
         icon: '/assets/images/2-minute-distance.png',
