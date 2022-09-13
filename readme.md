@@ -19,6 +19,9 @@ to build locally
 2. run npm install
 3. ionic serve
 
+Using NgRx 
+helpful article https://www.concretepage.com/ngrx/ngrx-effects-example
+
 
 #Setting up google authentication
 https://developers.google.com/identity/gsi/web/guides/client-library
