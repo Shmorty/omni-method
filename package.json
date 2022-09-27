@@ -35,7 +35,7 @@
     "@ionic/angular": "^6.1.5",
     "@ngrx/effects": "^14.3.1",
     "@ngrx/store": "^14.3.1",
-    "angular-in-memory-web-api": "^0.13.0",
+    "angular-in-memory-web-api": "^0.14.0",
     "angular-oauth2-oidc": "^13.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
