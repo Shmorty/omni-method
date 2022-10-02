@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -14,14 +15,19 @@ export class AssessmentDetailPage implements OnInit {
   @Input() category: Category;
   constructor(
     private modalController: ModalController,
-    private router: Router
-  ) { }
+    private router: Router,
+    private _location: Location
+  ) { let count = 0; }
 
-  ngOnInit() {
-  }
 
-  async closeModel() {
-    const close: string = "Modal Removed";
-    await this.modalController.dismiss(close);
-  }
+  ngOnInit() { }
+
+  // async closeModel() {
+  //   const close: string = "Modal Removed";
+  //   await this.modalController.dismiss(close);
+  // }
+
+  // back(): void {
+  //   this._location.historyGo(-1);
+  // }
 }

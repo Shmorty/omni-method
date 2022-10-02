@@ -12,29 +12,32 @@ const routes: Routes = [
     loadChildren: () => import('./welcome/welcome.module').then( m => m.WelcomePageModule)
   },
   {
-    path: 'landing',
-    loadChildren: () => import('./landing/landing.module').then( m => m.LandingPageModule)
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
-  {
-    path: 'tabs',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },
-  {
-    path: 'welcome',
-    loadChildren: () => import('./welcome/welcome.module').then( m => m.WelcomePageModule)
-  },
-  {
-    path: 'assessment-detail',
-    loadChildren: () => import('./assessment-detail/assessment-detail.module').then( m => m.AssessmentDetailPageModule)
-  }
+  // {
+  //   path: 'videos',
+  //   loadChildren: () => import('./videos/videos.module').then( m => m.VideosPageModule)
+  // },
+  // {
+  //   path: 'login',
+  //   loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  // },
+  // {
+  //   path: 'welcome',
+  //   loadChildren: () => import('./welcome/welcome.module').then( m => m.WelcomePageModule)
+  // },
+  // {
+  //   path: 'assessment-detail',
+  //   loadChildren: () => import('./assessment-detail/assessment-detail.module').then( m => m.AssessmentDetailPageModule)
+  // }
 ];
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+      // enableTracing: true
+    })
   ],
   exports: [RouterModule]
 })

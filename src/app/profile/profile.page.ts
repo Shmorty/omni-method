@@ -7,7 +7,7 @@ import { Assessment } from '../store/models/assessment.model';
 import { Category } from '../store/models/category.model';
 import { AssessmentService } from '../assessment.service';
 import { AssessmentDetailPage } from '../assessment-detail/assessment-detail.page';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { User } from '../store/models/user.model';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -17,11 +17,11 @@ import { selectUser } from '../store/selectors/user.selectors';
 const API_URL = environment.API_URL;
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-profile',
+  templateUrl: 'profile.page.html',
+  styleUrls: ['profile.page.scss']
 })
-export class Tab1Page implements OnInit {
+export class ProfilePage implements OnInit {
 
   user$: Observable<User>;
 
@@ -54,6 +54,16 @@ export class Tab1Page implements OnInit {
       // this.user$ = selectUser;
   }
 
+  openDetails(assessment, category) {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        'assessment': assessment,
+        'category': category,
+      }
+    };
+    this.router.navigate(['/home', 'profile', 'details'], navigationExtras);
+  }
+
   async openAssessmentDetailModal(assessment, category) {
     const modal = this.modalController.create({
       component: AssessmentDetailPage,
@@ -62,6 +72,7 @@ export class Tab1Page implements OnInit {
         'category': category,
       },
     });
+    
     console.log("label: " + assessment.label);
     //     assessment-detail
     // this.router.navigate(['/assessment-detail'], {skipLocationChange: false});
