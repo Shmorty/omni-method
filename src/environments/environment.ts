@@ -2,8 +2,14 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { UserService } from "src/app/api/user.service";
+import { UserService as MockUserService } from "src/app/api/user.mock.service";
+
 export const environment = {
   production: false,
+  providers: [
+    { provide: UserService, useClass: MockUserService },
+  ],
   // production: FontFaceSetLoadEvent,
   API_KEY : '',
   // API_URL : 'https://api.shmorty.com/omnimethod/v1/'

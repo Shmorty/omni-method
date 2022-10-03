@@ -36,7 +36,10 @@ import { userReducer } from './store/reducers/user.reducer';
         // storeDevTools,
         // OAuthModule.forRoot()
     ],
-    providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+    providers: [
+        ...environment.providers,
+        // { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

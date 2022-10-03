@@ -1,6 +1,6 @@
 import { IonSplitPane } from '@ionic/angular';
-import { Assessment } from './store/models/assessment.model';
-import { Category } from './store/models/category.model';
+import { Assessment } from '../store/models/assessment.model';
+import { Category } from '../store/models/category.model';
 
 export const DATA: Category[] = [
   {

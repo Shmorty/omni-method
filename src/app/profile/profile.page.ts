@@ -5,14 +5,14 @@ import { environment } from 'src/environments/environment';
 // import { GoogleSigninService, UserInfo } from '../google-signin.service';
 import { Assessment } from '../store/models/assessment.model';
 import { Category } from '../store/models/category.model';
-import { AssessmentService } from '../assessment.service';
+import { AssessmentService } from '../services/assessment.service';
 import { AssessmentDetailPage } from '../assessment-detail/assessment-detail.page';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { User } from '../store/models/user.model';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/models/state.model';
-import { selectUser } from '../store/selectors/user.selectors';
+import { UserService } from '../api/user.mock.service';
 
 const API_URL = environment.API_URL;
 
@@ -22,10 +22,8 @@ const API_URL = environment.API_URL;
   styleUrls: ['profile.page.scss']
 })
 export class ProfilePage implements OnInit {
-
-  user$: Observable<User>;
-
-  // userInfo?: UserInfo
+  user: User;
+  omniScore :number = 245;
 
   // static data
   // omniScore :number = 245;
@@ -34,7 +32,8 @@ export class ProfilePage implements OnInit {
 
   // constructor(public httpClient:HttpClient, private readonly googleApi: GoogleSigninService) {
   constructor(
-    private assessmentService:AssessmentService,
+    private userService: UserService,
+    private assessmentService: AssessmentService,
     public modalController: ModalController,
     private router: Router,
     private route: ActivatedRoute,
@@ -50,8 +49,10 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit(): void {
-      this.user$ = this.store.select((store) => store.user);
-      // this.user$ = selectUser;
+      // this.user$ = this.store.select((store) => store.user);
+      this.userService.getUser().subscribe(data => {
+        this.user = data;
+      });
   }
 
   openDetails(assessment, category) {
