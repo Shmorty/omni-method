@@ -5,14 +5,14 @@ import { environment } from 'src/environments/environment';
 // import { GoogleSigninService, UserInfo } from '../google-signin.service';
 import { Assessment } from '../store/models/assessment.model';
 import { Category } from '../store/models/category.model';
-import { AssessmentService } from '../services/assessment.service';
+import { AssessmentService } from '../api/assessments/assessment.service';
 import { AssessmentDetailPage } from '../assessment-detail/assessment-detail.page';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { User } from '../store/models/user.model';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/models/state.model';
-import { UserService } from '../api/user.mock.service';
+import { UserService } from '../api/user/user.mock.service';
 
 const API_URL = environment.API_URL;
 
@@ -40,7 +40,8 @@ export class ProfilePage implements OnInit {
     private store: Store<AppState>
     ) {
 
-    this.assessments = assessmentService.getAssessments()
+    // this.assessments = assessmentService.getAssessments()
+
     // googleApi.userProfileSubject.subscribe( info => {
     //   this.userInfo = info
     //   console.log("userInfo: ", this.userInfo)
@@ -53,31 +54,15 @@ export class ProfilePage implements OnInit {
       this.userService.getUser().subscribe(data => {
         this.user = data;
       });
+      this.assessmentService.getAssessments().subscribe(data => {
+        this.assessments = data;
+      })
   }
 
   openDetails(assessment, category) {
-    let navigationExtras: NavigationExtras = {
-      state: {
-        'assessment': assessment,
-        'category': category,
-      }
-    };
-    this.router.navigate(['/home', 'profile', 'details'], navigationExtras);
-  }
-
-  async openAssessmentDetailModal(assessment, category) {
-    const modal = this.modalController.create({
-      component: AssessmentDetailPage,
-      componentProps: {
-        'assessment': assessment,
-        'category': category,
-      },
-    });
-    
-    console.log("label: " + assessment.label);
-    //     assessment-detail
-    // this.router.navigate(['/assessment-detail'], {skipLocationChange: false});
-    return (await modal).present();
+    this.assessmentService.setCurrentCategory(category);
+    this.assessmentService.setCurrentAssessment(assessment);
+    this.router.navigate(['/home', 'profile', 'details']);
   }
 
   isLoggedIn(): boolean {

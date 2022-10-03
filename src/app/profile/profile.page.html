@@ -15,16 +15,17 @@
 <!-- <ion-content [fullscreen]="true"> -->
 <ion-content #scrollarea  color="">
 
-  <ion-card class="card cardStyle"  color="">
+  <ion-card class="card cardStyle topCard">
     <ion-item lines="none" color="primary">
       <span slot="start">
         <ion-avatar>
           <span *ngIf="user.avatar">
             <img src="{{user?.avatar}}">
           </span>
-          <span *ngIf="!user.avatar">
-            <img src="{{user?.avatar}}">
-          </span>
+          <ion-label *ngIf="!user.avatar" class="textAvatar">
+            {{user?.firstName | slice : 0 : 1 }}
+            {{user?.lastName | slice : 0 : 1 }}
+          </ion-label>
         </ion-avatar>
       </span>
       <span id="name">
@@ -37,30 +38,38 @@
       </span>
     </ion-item>
   
-    <ion-item color="primary">
+    <ion-item lines="none" color="primary">
       <ion-grid class="ion-text-center" color="">
         <ion-row>
-          <ion-col>Body Weight {{user.weight}}</ion-col>
-          <ion-col>Height {{user.height.feet}}' {{user.height.inches}}"</ion-col>
+          <ion-col>Body Weight
+            <div>{{user.weight}}</div>
+          </ion-col>
+          <ion-col>Height
+            <div>{{user.height.feet}}' {{user.height.inches}}"</div>
+          </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
+            <ion-icon name="bookmark"></ion-icon><br>
             Unadjusted
+            <div>N/A</div>
           </ion-col>
           <ion-col>
             <ion-icon name="pin"></ion-icon><br>
             Local Rank
+            <div>N/A</div>
           </ion-col>
           <ion-col>
             <ion-icon name="globe"></ion-icon><br>
             World Rank
+            <div>N/A</div>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-item>
   </ion-card>
 
-  <ion-card style="box-shadow: none;">
+  <ion-card  style="box-shadow: none; margin-bottom: 0;">
     <ion-card-header >
       <ion-card-title >All Assessments</ion-card-title>
     </ion-card-header>

@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { AssessmentService } from '../api/assessments/assessment.service';
 import { Assessment } from '../store/models/assessment.model';
 import { Category } from '../store/models/category.model';
 
@@ -16,11 +17,18 @@ export class AssessmentDetailPage implements OnInit {
   constructor(
     private modalController: ModalController,
     private router: Router,
-    private _location: Location
-  ) { let count = 0; }
+    private assessmentService: AssessmentService
+  ) {  }
 
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.assessmentService.getCurrentCategory().subscribe(data => {
+      this.category = data;
+    });
+    this.assessmentService.getCurrentAssessment().subscribe(data => {
+      this.assessment = data;
+    });
+  }
 
   // async closeModel() {
   //   const close: string = "Modal Removed";

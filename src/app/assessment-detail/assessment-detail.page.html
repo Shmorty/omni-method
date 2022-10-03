@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button text="Close" defaultHref="/"></ion-back-button>
+      <ion-back-button text="Back" defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ assessment.label }}</ion-title>
   </ion-toolbar>
@@ -9,33 +9,33 @@
 
 <ion-content>
   <ion-card>
-    <!-- <ion-img src="{{assessment.icon}}"></ion-img> -->
+    <ion-img src="{{assessment.icon}}"></ion-img>
   </ion-card>
 
   <ion-item>
     <ion-label>
       <ion-card-title>
-        <!-- <h1>{{ assessment.label }}</h1> -->
+        <h1>{{ assessment.label }}</h1>
       </ion-card-title>
       <ion-card-subtitle>
-        <!-- <h5>{{ category.label }}</h5> -->
+        <h5>{{ category.label }}</h5>
       </ion-card-subtitle>
       </ion-label>
   </ion-item>
 
   <ion-item button detail-icon="create-outline" lines="full">
     <ion-label slot="start">
-      <!-- <div>{{ assessment.units }}</div> -->
-      <!-- <div style="font-weight: bold;">{{ assessment.score }}</div> -->
+      <div>{{ assessment.units }}</div>
+      <div style="font-weight: bold;">{{ assessment.score }}</div>
     </ion-label>
     <ion-label slot="end">
       <div>Exercise Score:</div>
-      <!-- <div>{{ assessment.score }}</div> -->
+      <div>{{ assessment.score }}</div>
     </ion-label>
   </ion-item>
 
   <ion-item>
-    <!-- <p>{{ assessment.description }}</p> -->
+    <p>{{ assessment.description }}</p>
   </ion-item>
 
 </ion-content>

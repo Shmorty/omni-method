@@ -1,6 +1,7 @@
 .cardStyle {
     // --ion-background-color: rgb(99, 175, 255);
     border-radius: 20px;
+    margin: 12px;
     padding: 20px 4px;
 
     // ion-button {
@@ -27,6 +28,23 @@
         font-weight: bold;
         padding: 0em 1em;
     }
+    .textAvatar {
+        color: #35b5ff;
+        background-color: white;
+        border-color: lightgray;
+        border-radius: 50%;
+        border-width: 2px;
+        border-style: solid;
+        font-weight: bold;
+        overflow: visible;
+        padding: 10px 6px;
+    }
+}
+.topCard {
+    background-color: #35b5ff;
+}
+ion-card-header {
+    padding: 0px 0px 0px 16px;
 }
 .pageLabel {
     text-align: center;
