@@ -3,16 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 // import { GoogleSigninService, UserInfo } from '../google-signin.service';
-import { Assessment } from '../store/models/assessment.model';
-import { Category } from '../store/models/category.model';
-import { AssessmentService } from '../api/assessments/assessment.service';
+import { Assessment } from '../../store/models/assessment.model';
+import { Category } from '../../store/models/category.model';
+import { AssessmentService } from '../../api/assessments/assessment.service';
 import { AssessmentDetailPage } from '../assessment-detail/assessment-detail.page';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { User } from '../store/models/user.model';
+import { User } from '../../store/models/user.model';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { AppState } from '../store/models/state.model';
-import { UserService } from '../api/user/user.mock.service';
+import { AppState } from '../../store/models/state.model';
+import { UserService } from '../../api/user/user.mock.service';
 
 const API_URL = environment.API_URL;
 

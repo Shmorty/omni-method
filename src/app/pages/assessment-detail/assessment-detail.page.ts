@@ -2,9 +2,9 @@ import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { AssessmentService } from '../api/assessments/assessment.service';
-import { Assessment } from '../store/models/assessment.model';
-import { Category } from '../store/models/category.model';
+import { AssessmentService } from '../../api/assessments/assessment.service';
+import { Assessment } from '../../store/models/assessment.model';
+import { Category } from '../../store/models/category.model';
 
 @Component({
   selector: 'app-assessment-detail',
