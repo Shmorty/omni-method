@@ -3,7 +3,7 @@ import { GetUserAction, GetUserSuccessAction, UserActionType } from "../actions/
 import { createReducer, on } from "@ngrx/store";
 // create a dummy initial state
 const initialUserState: User = {
-    id: 0,
+    id: '0000',
     email: 'jack@lalane.not',
     firstName: 'Francois',
     lastName: 'LaLanne',

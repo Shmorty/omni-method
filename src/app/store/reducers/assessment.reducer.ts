@@ -7,7 +7,7 @@ const initialState: Array<Assessment> = [
         label: '',
         description: '',
         icon: '',
-        score: 0,
+        scores: [],
         units: '',
     },
 ];

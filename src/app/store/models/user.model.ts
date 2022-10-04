@@ -1,16 +1,15 @@
-export interface Height {
-  feet: number,
-  inches: number,
-}
 
 export interface User {
-    id: number,
+    id: string,
     email: string,
     firstName: string,
     lastName: string,
     nickname?: string,
     avatar?: string,
     dob: Date,
-    height?: Height,
+    height?: {
+      feet: number,
+      inches: number,
+    },
     weight: number
   }

@@ -10,7 +10,7 @@ import { IUserService } from './user.service.interface';
 export class UserService implements IUserService {
 
   private mockUser: User = {
-    id: 1,
+    id: '0001',
     email: 'fake@email.com',
     firstName: 'Kyle',
     lastName: 'Martel',
