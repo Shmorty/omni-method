@@ -26,11 +26,11 @@
   <ion-item button detail-icon="create-outline" lines="full">
     <ion-label slot="start">
       <div>{{ assessment.units }}</div>
-      <div style="font-weight: bold;">{{ assessment.scores[0].rawScore }}</div>
+      <div style="font-weight: bold;">{{ assessment.scores?.[0].rawScore }}</div>
     </ion-label>
     <ion-label slot="end">
       <div>Exercise Score:</div>
-      <div>{{ assessment.scores[0].rawScore }}</div>
+      <div>{{ assessment.scores?.[0].calculatedScore }}</div>
     </ion-label>
   </ion-item>
 

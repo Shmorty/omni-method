@@ -2,13 +2,11 @@ import { User } from "./user.model";
 import { Assessment } from "./assessment.model";
 import { Category } from "./category.model";
 import { Score } from "./score.model";
-
+import { Standing } from "./standing.model";
 
 export interface userState {
     user: User,
-    unadjustedScore: number, // sum category averages
-    localRank: number,
-    worldRank: number,
+    standing: Standing,
     categories: Category[],
     assessments: [
         {

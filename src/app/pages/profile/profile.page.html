@@ -88,7 +88,7 @@
       <div slot="end">
         <span class="units">{{assessment.units}}</span>
         <br>
-        <span class="score">{{assessment.score}}</span>
+        <span ngClass="{{scoreClass(assessment.scores?.[0]?.date)}}">{{assessment.scores?.[0]?.rawScore}}</span>
         </div>
     </ion-item>
 </ion-card>

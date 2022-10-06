@@ -1,5 +1,5 @@
 export interface Score {
     rawScore: number,
-    caldulatedScore: number,
+    calculatedScore: number,
     date: Date,
 }

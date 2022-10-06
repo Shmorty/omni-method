@@ -70,6 +70,19 @@ export class ProfilePage implements OnInit {
     return true
   }
 
+  scoreClass(date: Date): string {
+    const oneDay = 1000 * 3600 * 24;
+    const days = Math.ceil((Date.now().valueOf() - date.valueOf()) / oneDay);
+
+    if (days > 30) {
+      return "score stale";
+    } else if (days > 14) {
+      return "score warn";
+    } else {
+      return "score";
+    }
+  }
+
   // logout() {
   //   this.googleApi.signOut()
   // }
@@ -80,5 +93,6 @@ export class ProfilePage implements OnInit {
   //   })
 
   // }
+  
 
 }

@@ -28,6 +28,12 @@
         font-weight: bold;
         padding: 0em 1em;
     }
+    .warn {
+        background-color: orange;
+    }
+    .stale {
+        background-color: red;
+    }
     .textAvatar {
         color: #35b5ff;
         background-color: white;

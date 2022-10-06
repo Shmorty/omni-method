@@ -10,43 +10,55 @@
 <ion-content color="medium">
 
   <form [formGroup]="formData" (ngSubmit)="onSubmit()">
-    <ion-list>
-      <ion-item>
-        <ion-label>First Name</ion-label>
-        <ion-input formControlName="firstName"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Last Name</ion-label>
-        <ion-input formControlName="lastName"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>email</ion-label>
-        <ion-input formControlName="email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Nickname</ion-label>
-        <ion-input formControlName="nickname"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>DOB</ion-label>
-        <ion-input formControlName="dob"></ion-input>
-      </ion-item>
-      <fieldset formGroupName="height">
+    <div class="input-group">
+      <ion-list>
         <ion-item>
-          <ion-label>Height</ion-label>
-          <ion-label>feet</ion-label>
-          <ion-input formControlName="feet"></ion-input>
-          <ion-label>inches</ion-label>
-          <ion-input formControlName="inches"></ion-input>
+          <!-- <ion-label>First Name</ion-label> -->
+          <ion-input formControlName="firstName" placeholder="First"></ion-input>
         </ion-item>
-        </fieldset>
-      <ion-item>
-        <ion-label>Weight</ion-label>
-        <ion-input formControlName="weight"></ion-input>
-      </ion-item>
-    </ion-list>
-
-    <ion-button type="submit" expand="block">Submit</ion-button>
+        <div *ngIf="(first.dirty || first.touched) && first.errors" class="errors">
+          <span *ngIf="first.errors?.required">First name is required</span>
+        </div>
+        <ion-item>
+          <!-- <ion-label>Last Name</ion-label> -->
+          <ion-input formControlName="lastName" placeholder="Last"></ion-input>
+        </ion-item>
+        <div *ngIf="(last.dirty || last.touched) && last.errors" class="errors">
+          <span *ngIf="last.errors?.required">Last name is required</span>
+        </div>
+        <ion-item>
+          <!-- <ion-label>email</ion-label> -->
+          <ion-input formControlName="email" type="email" placeholder="Email"></ion-input>
+        </ion-item>
+        <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+          <span *ngIf="email.errors?.required">Email is required</span>
+          <span *ngIf="email.errors?.email">Email is invalid</span>
+        </div>
+        <ion-item>
+          <!-- <ion-label>Nickname</ion-label> -->
+          <ion-input formControlName="nickname" placeholder="Nickname"></ion-input>
+        </ion-item>
+        <ion-item>
+          <!-- <ion-label>DOB</ion-label> -->
+          <ion-input formControlName="dob" placeholder="DOB"></ion-input>
+        </ion-item>
+        <fieldset formGroupName="height">
+          <ion-item>
+            <ion-label>Height</ion-label>
+            <!-- <ion-label>feet</ion-label> -->
+            <ion-input formControlName="feet" placeholder="Feet"></ion-input>
+            <!-- <ion-label>inches</ion-label> -->
+            <ion-input formControlName="inches" placeholder="Inches"></ion-input>
+          </ion-item>
+          </fieldset>
+        <ion-item>
+          <!-- <ion-label>Weight</ion-label> -->
+          <ion-input formControlName="weight" placeholder="Weight"></ion-input>
+        </ion-item>
+      </ion-list>
+  
+      </div>
+    <ion-button [disabled]="formData.invalid" type="submit" expand="block">Submit</ion-button>
 
     <pre>{{formData.value | json}}</pre>
   </form>
