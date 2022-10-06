@@ -26,6 +26,10 @@ export class UserService implements IUserService {
 
   constructor() { }
 
+  setUser(user: User): Observable<User> {
+    return of(this.mockUser=user);
+  }
+
   getUser(): Observable<User> {
       return of(this.mockUser);
   }

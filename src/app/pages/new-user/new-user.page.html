@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button text="Back" defaultHref="/"></ion-back-button>
     </ion-buttons>
@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="medium">
 
   <form [formGroup]="formData" (ngSubmit)="onSubmit()">
     <ion-list>
@@ -31,13 +31,15 @@
         <ion-label>DOB</ion-label>
         <ion-input formControlName="dob"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label>Height</ion-label>
-        <ion-label>feet</ion-label>
-        <ion-input formControlName="feet"></ion-input>
-        <ion-label>inches</ion-label>
-        <ion-input formControlName="inches"></ion-input>
-      </ion-item>
+      <fieldset formGroupName="height">
+        <ion-item>
+          <ion-label>Height</ion-label>
+          <ion-label>feet</ion-label>
+          <ion-input formControlName="feet"></ion-input>
+          <ion-label>inches</ion-label>
+          <ion-input formControlName="inches"></ion-input>
+        </ion-item>
+        </fieldset>
       <ion-item>
         <ion-label>Weight</ion-label>
         <ion-input formControlName="weight"></ion-input>
@@ -46,6 +48,7 @@
 
     <ion-button type="submit" expand="block">Submit</ion-button>
 
+    <pre>{{formData.value | json}}</pre>
   </form>
 
 </ion-content>

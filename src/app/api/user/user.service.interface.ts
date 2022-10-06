@@ -5,4 +5,6 @@ export interface IUserService {
 
     // return current user
     getUser(): Observable<User>;
+
+    setUser(user: User): Observable<User>;
 }

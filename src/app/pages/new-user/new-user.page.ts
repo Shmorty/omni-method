@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/api/user/user.mock.service';
 
 @Component({
   selector: 'app-new-user',
@@ -10,7 +12,10 @@ export class NewUserPage implements OnInit {
 
   formData: FormGroup;
   
-  constructor() { }
+  constructor(
+    private userService: UserService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     this.formData = new FormGroup({
@@ -19,14 +24,18 @@ export class NewUserPage implements OnInit {
       email: new FormControl(),
       nickname: new FormControl(),
       dob: new FormControl(),
-      feet: new FormControl(),
-      inches: new FormControl(),
+      height: new FormGroup({
+        feet: new FormControl(),
+        inches: new FormControl(),
+      }),
       weight: new FormControl()
     })
   }
 
   onSubmit() {
     console.log(this.formData.value);
+    this.userService.setUser(this.formData.value);
+    this.router.navigate(['/home']);
   }
 
 }
