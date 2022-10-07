@@ -29,7 +29,7 @@
       
       <!-- <ion-item button detail-icon="create-outline" lines="full"> -->
         <!-- <ion-item slot="header">scores</ion-item> -->
-      <ion-item *ngFor="let score of assessment.scores; first as isFirst" slot="{{isFirst ? 'header':'content'}}" lines="full">
+      <ion-item *ngFor="let score of assessment.scores; first as isFirst" lines="full" slot="{{isFirst ? 'header':'content'}}">
         <ion-label slot="start">
           <div>{{ assessment.units }}</div>
           <div style="font-weight: bold;">{{ score.rawScore }}</div>
