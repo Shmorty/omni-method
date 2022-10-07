@@ -62,7 +62,7 @@ export class ProfilePage implements OnInit {
   openDetails(assessment, category) {
     this.assessmentService.setCurrentCategory(category);
     this.assessmentService.setCurrentAssessment(assessment);
-    this.router.navigate(['/home', 'profile', 'details']);
+    this.router.navigate(['/home', 'assessments', assessment.id]);
   }
 
   isLoggedIn(): boolean {
@@ -75,11 +75,13 @@ export class ProfilePage implements OnInit {
     const days = Math.ceil((Date.now().valueOf() - date.valueOf()) / oneDay);
 
     if (days > 30) {
-      return "score stale";
+      // return "score stale";
+      return "stale";
     } else if (days > 14) {
-      return "score warn";
-    } else {
-      return "score";
+      // return "score warn";
+      return "warn";
+    // } else {
+    //   return "score";
     }
   }
 

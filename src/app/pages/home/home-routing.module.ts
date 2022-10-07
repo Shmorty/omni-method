@@ -8,18 +8,13 @@ const routes: Routes = [
     component: HomePage,
     children: [
       {
-        path: 'profile',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
-          },
-          {
-            path: 'details',
-            loadChildren: () => import('../assessment-detail/assessment-detail.module')
-              .then( m => m.AssessmentDetailPageModule)
-          }
-        ]
+        path: 'assessments',
+        loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
+      },
+      {
+        path: 'assessments/:id',
+        loadChildren: () => import('../assessment-detail/assessment-detail.module')
+          .then( m => m.AssessmentDetailPageModule)
       },
       {
         path: 'videos',
@@ -35,14 +30,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/home/profile',
+        redirectTo: '/home/assessments',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/home/profile',
+    redirectTo: '/home/assessments',
     pathMatch: 'full'
   },
 ];

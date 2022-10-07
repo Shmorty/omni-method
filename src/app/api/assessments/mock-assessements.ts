@@ -1,3 +1,4 @@
+import { AngularDelegate } from '@ionic/angular';
 import { Category } from '../../store/models/category.model';
 
 export const DATA: Category[] = [
@@ -12,8 +13,16 @@ export const DATA: Category[] = [
         units: '1RM (lbs)',
         scores: [{
           rawScore: 455,
-          calculatedScore: 455,
+          calculatedScore: 92,
           date: new Date("10-01-2022")
+        },{
+          rawScore: 420,
+          calculatedScore: 90,
+          date: new Date("09-12-2022")
+        },{
+          rawScore: 380,
+          calculatedScore: 88,
+          date: new Date("08-30-2022")
         }], // 455
         description: "A deadlift is a resistance exercise in which you hinge your hips to lift a loaded barbell off the floor.  The 1RM deadlift assessment tests your maximum force production while lifting a loaded barbell off of the floor. This test is to be performed without equipment including belts, straps, or sleeves."
       },
@@ -68,7 +77,7 @@ export const DATA: Category[] = [
     label: 'Endurance',
     assessments: [
       {
-        id: 1,
+        id: 6,
         icon: '/assets/icon/favicon.png',
         label: 'Squats',
         units: 'Reps',
@@ -79,7 +88,7 @@ export const DATA: Category[] = [
         }], // 50
       },
       {
-        id: 2,
+        id: 7,
         icon: '/assets/images/push-up.png',
         label: 'Pushups',
         units: 'Reps',
@@ -90,7 +99,7 @@ export const DATA: Category[] = [
         }], // 57
       },
       {
-        id: 3,
+        id: 8,
         icon: '/assets/icon/favicon.png',
         label: 'Pullups',
         units: 'Reps',
@@ -101,7 +110,7 @@ export const DATA: Category[] = [
         }], // 21
       },
       {
-        id: 4,
+        id: 9,
         icon: '/assets/images/plank.png',
         label: 'Plank',
         units: 'Time',
@@ -118,7 +127,7 @@ export const DATA: Category[] = [
     label: 'Power',
     assessments: [
       {
-        id: 1,
+        id: 10,
         icon: '/assets/icon/favicon.png',
         label: 'Vertical Jump',
         units: 'Height (in)',
@@ -129,7 +138,7 @@ export const DATA: Category[] = [
         }], // 29
       },
       {
-        id: 2,
+        id: 11,
         icon: '/assets/icon/favicon.png',
         label: 'Chest Launch',
         units: 'lbs*ft',
@@ -140,7 +149,7 @@ export const DATA: Category[] = [
         }], // 325
       },
       {
-        id: 3,
+        id: 12,
         icon: '/assets/images/power-clean.png',
         label: 'Power Clean',
         units: '1RM (lbs)',
@@ -151,7 +160,7 @@ export const DATA: Category[] = [
         }], // 225
       },
       {
-        id: 4,
+        id: 13,
         icon: '/assets/images/100-meter-sprint.png',
         label: '100 meter sprint',
         units: 'Time',
@@ -168,7 +177,7 @@ export const DATA: Category[] = [
     label: 'Flexibility',
     assessments: [
       {
-        id: 1,
+        id: 14,
         icon: '/assets/images/middle-split.png',
         label: 'Posterior',
         scores: [{
@@ -178,7 +187,7 @@ export const DATA: Category[] = [
         }], // 8
       },
       {
-        id: 2,
+        id: 15,
         icon: '/assets/images/toe-touch.png',
         label: 'Anterior',
         scores: [{
@@ -188,7 +197,7 @@ export const DATA: Category[] = [
         }], // 7
       },
       {
-        id: 3,
+        id: 16,
         icon: '/assets/icon/favicon.png',
         label: 'Lateral',
         scores: [{
@@ -203,14 +212,8 @@ export const DATA: Category[] = [
     id: 5,
     label: 'Metabolic',
     assessments: [
-      // {
-      //   id: 1,
-      //   icon: '/assets/images/breath-hold.png',
-      //   label: 'VO2 Max',
-      //   scores: [], // 51.09
-      // },
       {
-        id: 2,
+        id: 17,
         icon: '/assets/images/2-minute-distance.png',
         label: '2 minute distance',
         scores: [{
@@ -220,7 +223,7 @@ export const DATA: Category[] = [
         }], // 0.403
       },
       {
-        id: 3,
+        id: 18,
         icon: '/assets/images/1-hour-distance.png',
         label: '1 hour distance',
         scores: [{
@@ -230,7 +233,7 @@ export const DATA: Category[] = [
         }], // 7.27
       },
       {
-        id: 4,
+        id: 19,
         icon: '/assets/images/breath-hold.png',
         label: 'CO2 Tolerance',
         scores: [{
@@ -246,7 +249,7 @@ export const DATA: Category[] = [
     label: 'Neuromotor',
     assessments: [
       {
-        id: 1,
+        id: 20,
         icon: '/assets/icon/favicon.png',
         label: 'Agility',
         scores: [{
@@ -256,7 +259,7 @@ export const DATA: Category[] = [
         }], // 32
       },
       {
-        id: 2,
+        id: 21,
         icon: '/assets/icon/favicon.png',
         label: 'Balance',
         scores: [{
@@ -266,7 +269,7 @@ export const DATA: Category[] = [
         }], // 7.5 
       },
       {
-        id: 3,
+        id: 22,
         icon: '/assets/icon/favicon.png',
         label: 'Coordination',
         scores: [{
