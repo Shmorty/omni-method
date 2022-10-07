@@ -35,6 +35,10 @@ export const DATA: Category[] = [
           rawScore: 375,
           calculatedScore: 455,
           date: new Date("09-15-2022")
+        },{
+          rawScore: 360,
+          calculatedScore: 425,
+          date: new Date("09-05-2022")
         }], // 375
       },
       {

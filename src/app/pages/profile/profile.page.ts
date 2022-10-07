@@ -62,7 +62,7 @@ export class ProfilePage implements OnInit {
   openDetails(assessment, category) {
     this.assessmentService.setCurrentCategory(category);
     this.assessmentService.setCurrentAssessment(assessment);
-    this.router.navigate(['/home', 'assessments', assessment.id]);
+    this.router.navigate(['/home', 'profile', 'details']);
   }
 
   isLoggedIn(): boolean {

@@ -8,14 +8,31 @@ const routes: Routes = [
     component: HomePage,
     children: [
       {
-        path: 'assessments',
-        loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
+        path: 'profile',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
+          },
+          {
+            path: 'details',
+            loadChildren: () => import('../assessment-detail/assessment-detail.module')
+              .then( m => m.AssessmentDetailPageModule)
+          }
+        ]
       },
-      {
-        path: 'assessments/:id',
-        loadChildren: () => import('../assessment-detail/assessment-detail.module')
-          .then( m => m.AssessmentDetailPageModule)
-      },
+    // path: '',
+    // component: HomePage,
+    // children: [
+    //   {
+    //     path: 'assessments',
+    //     loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
+    //   },
+    //   {
+    //     path: 'assessments/:id',
+    //     loadChildren: () => import('../assessment-detail/assessment-detail.module')
+    //       .then( m => m.AssessmentDetailPageModule)
+    //   },
       {
         path: 'videos',
         loadChildren: () => import('../videos/videos.module').then(m => m.VideosPageModule)
@@ -30,14 +47,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/home/assessments',
+        redirectTo: '/home/profile',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/home/assessments',
+    redirectTo: '/home/profile',
     pathMatch: 'full'
   },
 ];
