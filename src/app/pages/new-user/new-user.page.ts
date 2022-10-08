@@ -29,10 +29,10 @@ export class NewUserPage implements OnInit {
       dob: new FormControl(),
       height: new FormGroup({
         feet: new FormControl("",[
-          Validators.pattern("[3-7]"),
+          Validators.pattern("[0-9]"),
         ]),
         inches: new FormControl("",[
-          Validators.pattern("[0-9]"),
+          Validators.pattern("[0-9]{1,2}"),
           Validators.min(0),
           Validators.max(11)
         ]),
