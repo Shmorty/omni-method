@@ -14,15 +14,15 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 455,
           calculatedScore: 92,
-          date: new Date("10-01-2022")
+          scoreDate: new Date(2022, 9, 1)
         },{
           rawScore: 420,
           calculatedScore: 90,
-          date: new Date("09-12-2022")
+          scoreDate: new Date(2022, 8, 12)
         },{
           rawScore: 380,
           calculatedScore: 88,
-          date: new Date("08-30-2022")
+          scoreDate: new Date(2022, 7, 30)
         }], // 455
         description: "A deadlift is a resistance exercise in which you hinge your hips to lift a loaded barbell off the floor.  The 1RM deadlift assessment tests your maximum force production while lifting a loaded barbell off of the floor. This test is to be performed without equipment including belts, straps, or sleeves."
       },
@@ -34,11 +34,11 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 375,
           calculatedScore: 455,
-          date: new Date("09-15-2022")
+          scoreDate: new Date(2022, 8, 15)
         },{
           rawScore: 360,
           calculatedScore: 425,
-          date: new Date("09-05-2022")
+          scoreDate: new Date(2022, 8, 5)
         }], // 375
       },
       {
@@ -49,7 +49,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 307,
           calculatedScore: 455,
-          date: new Date("08-12-2022")
+          scoreDate: new Date(2022, 7, 12)
         }], // 307
       },
       {
@@ -60,7 +60,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 240,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date(2022, 9, 7)
         }], // 240
       },
       {
@@ -71,7 +71,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 165,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 165
       },
     ],
@@ -88,7 +88,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 50,
           calculatedScore: 455,
-          date: new Date()
+          scoreDate: new Date(2022, 8, 24)
         }], // 50
       },
       {
@@ -99,7 +99,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 57,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date(2022, 8, 1)
         }], // 57
       },
       {
@@ -110,7 +110,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 21,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 21
       },
       {
@@ -121,7 +121,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 5,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 5
       },
     ],
@@ -138,7 +138,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 29,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 29
       },
       {
@@ -149,7 +149,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 325,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 325
       },
       {
@@ -160,7 +160,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 225,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 225
       },
       {
@@ -171,7 +171,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 13.24,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 13.24
       },
     ],
@@ -187,7 +187,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 8,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 8
       },
       {
@@ -197,7 +197,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 7,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 7
       },
       {
@@ -207,7 +207,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 7,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 7
       },
     ],
@@ -223,7 +223,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 0.403,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 0.403
       },
       {
@@ -233,7 +233,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 7.27,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 7.27
       },
       {
@@ -243,7 +243,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 3.75,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 3.75
       },
     ],
@@ -259,7 +259,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 32,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 32
       },
       {
@@ -269,7 +269,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 7.5,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 7.5 
       },
       {
@@ -279,7 +279,7 @@ export const DATA: Category[] = [
         scores: [{
           rawScore: 6,
           calculatedScore: 0,
-          date: new Date()
+          scoreDate: new Date()
         }], // 6
       },
     ],
