@@ -29,7 +29,7 @@ export const DATA: Category[] = [
       {
         id: 2,
         icon: '/assets/images/back-squat.png',
-        label: 'Squat',
+        label: 'Back Squat',
         units: '1RM (lbs)',
         scores: [{
           rawScore: 375,
