@@ -1,64 +1,63 @@
 .cardStyle {
-    // --ion-background-color: rgb(99, 175, 255);
-    border-radius: 20px;
-    margin: 12px;
-    padding: 20px 4px;
+  // --ion-background-color: rgb(99, 175, 255);
+  border-radius: 20px;
+  margin: 12px;
+  padding: 20px 4px;
 
-    // ion-button {
-    //     --background: slategray;
-    // }
+  // ion-button {
+  //     --background: slategray;
+  // }
 
-    span {
-        // color: white;
-        font-weight: 400;
-    }
+  span {
+    // color: white;
+    font-weight: 400;
+  }
 
-    #name {
-        font-size: 1.1em;
-        font-weight: bold;
-    }
-    .units {
-        float: right;
-    }
-    .score {
-        color: white;
-        background-color: #35b5ff;
-        border-radius: 12px;
-        float: right;
-        font-weight: bold;
-        padding: 0em 1em;
-    }
-    ion-badge {
-        float: right;
-    }
-    .warn {
-        background-color: orange;
-    }
-    .stale {
-        background-color: red;
-    }
-    .textAvatar {
-        color: #35b5ff;
-        background-color: white;
-        border-color: lightgray;
-        border-radius: 50%;
-        border-width: 2px;
-        border-style: solid;
-        font-weight: bold;
-        overflow: visible;
-        padding: 10px 6px;
-    }
+  #name {
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+  .units {
+    float: right;
+  }
+  .score {
+    color: white;
+    background-color: #35b5ff;
+    border-radius: 12px;
+    float: right;
+    font-weight: bold;
+    padding: 0em 1em;
+  }
+  ion-badge {
+    float: right;
+  }
+  .warn {
+    background-color: orange;
+  }
+  .stale {
+    background-color: red;
+  }
+  .textAvatar {
+    color: #35b5ff;
+    background-color: white;
+    border-color: lightgray;
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+    font-weight: bold;
+    overflow: visible;
+    padding: 10px 6px;
+  }
 }
 .topCard {
-    background-color: #35b5ff;
+  background-color: #35b5ff;
 }
 ion-card-header {
-    padding: 0px 0px 0px 16px;
+  padding: 0px 0px 0px 16px;
 }
 .pageLabel {
-    text-align: center;
-    margin: 15px;
-    font-weight: 400;
-    font-size: 1.5em;
+  text-align: center;
+  margin: 15px;
+  font-weight: 400;
+  font-size: 1.5em;
 }
-
