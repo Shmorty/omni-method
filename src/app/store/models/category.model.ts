@@ -1,8 +1,9 @@
-import { Assessment } from "./assessment.model";
+import { Assessment } from './assessment.model';
 
 export interface Category {
-    id: number,
-    label: string,
-    categoryAverage?: number,
-    assessments: Assessment[]
+  id: number;
+  cid?: string | number;
+  label: string;
+  categoryAverage?: number;
+  assessments?: Assessment[];
 }

@@ -1,17 +1,17 @@
-import { Observable } from "rxjs";
-import { Category } from "../../store/models/category.model";
-import { Assessment } from "../../store/models/assessment.model";
+import { Observable } from 'rxjs';
+import { Category } from '../../store/models/category.model';
+import { Assessment } from '../../store/models/assessment.model';
 
 export interface IAssessmentService {
+  // getAssessments(): Observable<Category[]>;
+  getCategories(): Observable<Category[]>;
+  getAssessments(): Observable<Assessment[]>;
 
-    getAssessments(): Observable<Category[]>;
+  setCurrentAssessment(assessment: Assessment): void;
 
-    setCurrentAssessment(assessment: Assessment): void;
-    
-    getCurrentAssessment(): Observable<Assessment>;
+  getCurrentAssessment(): Observable<Assessment>;
 
-    setCurrentCategory(category: Category): void;
-    
-    getCurrentCategory(): Observable<Category>;
+  setCurrentCategory(category: Category): void;
 
+  getCurrentCategory(): Observable<Category>;
 }

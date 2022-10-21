@@ -19,16 +19,17 @@ const API_URL = environment.API_URL;
 @Component({
   selector: 'app-profile',
   templateUrl: 'profile.page.html',
-  styleUrls: ['profile.page.scss']
+  styleUrls: ['profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
   user: User;
-  omniScore :number = 245;
+  omniScore: number = 245;
 
   // static data
   // omniScore :number = 245;
 
-  assessments: Category[];
+  categories: Category[];
+  assessments: Assessment[];
 
   // constructor(public httpClient:HttpClient, private readonly googleApi: GoogleSigninService) {
   constructor(
@@ -38,10 +39,8 @@ export class ProfilePage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private store: Store<AppState>
-    ) {
-
+  ) {
     // this.assessments = assessmentService.getAssessments()
-
     // googleApi.userProfileSubject.subscribe( info => {
     //   this.userInfo = info
     //   console.log("userInfo: ", this.userInfo)
@@ -50,13 +49,19 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit(): void {
-      // this.user$ = this.store.select((store) => store.user);
-      this.userService.getUser().subscribe(data => {
-        this.user = data;
-      });
-      this.assessmentService.getAssessments().subscribe(data => {
-        this.assessments = data;
-      })
+    // this.user$ = this.store.select((store) => store.user);
+    this.userService.getUser().subscribe((data) => {
+      this.user = data;
+    });
+
+    this.assessmentService.getAssessments().subscribe((data) => {
+      this.assessments = data;
+      console.log('got assessments: ' + JSON.stringify(data));
+    });
+    this.assessmentService.getCategories().subscribe((data) => {
+      this.categories = data;
+      console.log('got assessments: ' + JSON.stringify(data));
+    });
   }
 
   openDetails(assessment, category) {
@@ -67,7 +72,7 @@ export class ProfilePage implements OnInit {
 
   isLoggedIn(): boolean {
     // return this.googleApi.isLoggedIn()
-    return true
+    return true;
   }
 
   scoreClass(date: Date): string {
@@ -76,12 +81,12 @@ export class ProfilePage implements OnInit {
 
     if (days > 30) {
       // return "score stale";
-      return "stale";
+      return 'stale';
     } else if (days > 14) {
       // return "score warn";
-      return "warn";
-    // } else {
-    //   return "score";
+      return 'warn';
+      // } else {
+      //   return "score";
     }
   }
 
@@ -95,6 +100,4 @@ export class ProfilePage implements OnInit {
   //   })
 
   // }
-  
-
 }

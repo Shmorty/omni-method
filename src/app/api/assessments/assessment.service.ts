@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Assessment } from '../../store/models/assessment.model';
@@ -6,16 +7,62 @@ import { IAssessmentService } from './assessment.service.interface';
 import { DATA } from './mock-assessements';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AssessmentService implements IAssessmentService {
   private _currentAssessment: Assessment;
   private _currentCategory: Category;
+  private _categoryResponse;
+  private _assessmentResponse;
+  baseUrl = 'https://7crsalgmhk.execute-api.us-east-1.amazonaws.com';
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
 
-  getAssessments(): Observable<Category[]> {
-    return of(DATA);
+  getCategories(): Observable<Category[]> {
+    var reply: Category[];
+    this.http.get<any>(this.baseUrl + '/categories').subscribe({
+      next: (data) => {
+        this._categoryResponse = data;
+        console.log(JSON.stringify(data));
+        data.Items.forEach((element) => {
+          console.log(JSON.stringify(element));
+          reply.push({
+            id: element.seq,
+            cid: element.cid,
+            label: element.label,
+          });
+        });
+      },
+      error: (error) => {
+        console.error('There was an error', error);
+      },
+    });
+    return of(reply);
+  }
+
+  getAssessments(): Observable<Assessment[]> {
+    var reply: Assessment[];
+    this.http.get<any>(this.baseUrl + '/assessments').subscribe({
+      next: (data) => {
+        this._assessmentResponse = data;
+        console.log(JSON.stringify(data));
+        data.Items.forEach((element, index) => {
+          console.log(JSON.stringify(element));
+          reply.push({
+            id: index,
+            aid: element.aid,
+            cid: element.cid,
+            icon: element.icon,
+            label: element.label,
+            units: element.units,
+          });
+        });
+      },
+      error: (error) => {
+        console.error('There was an error', error);
+      },
+    });
+    return of(reply);
   }
 
   setCurrentAssessment(assessment: Assessment) {
@@ -27,7 +74,7 @@ export class AssessmentService implements IAssessmentService {
   }
 
   setCurrentCategory(category: Category): void {
-      this._currentCategory = category;
+    this._currentCategory = category;
   }
 
   getCurrentCategory(): Observable<Category> {
