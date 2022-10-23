@@ -9,40 +9,31 @@ import { UserService } from 'src/app/api/user/user.mock.service';
   styleUrls: ['./new-user.page.scss'],
 })
 export class NewUserPage implements OnInit {
-
   formData: FormGroup;
-  
-  constructor(
-    private userService: UserService,
-    private router: Router,
-  ) { }
+
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
     this.formData = new FormGroup({
-      firstName: new FormControl("", Validators.required),
-      lastName: new FormControl("", Validators.required),
-      email: new FormControl("", [
-        Validators.required,
-        Validators.email
-      ]),
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
       nickname: new FormControl(),
       dob: new FormControl(),
       height: new FormGroup({
-        feet: new FormControl("",[
-          Validators.pattern("[0-9]"),
-        ]),
-        inches: new FormControl("",[
-          Validators.pattern("[0-9]{1,2}"),
+        feet: new FormControl('', [Validators.pattern('[0-9]')]),
+        inches: new FormControl('', [
+          Validators.pattern('[0-9]{1,2}'),
           Validators.min(0),
-          Validators.max(11)
+          Validators.max(11),
         ]),
       }),
-      weight: new FormControl("",[
-        Validators.pattern("[0-9]*"),
+      weight: new FormControl('', [
+        Validators.pattern('[0-9]*'),
         Validators.min(50),
-        Validators.max(500)
-      ])
-    })
+        Validators.max(500),
+      ]),
+    });
   }
 
   onSubmit() {
@@ -62,5 +53,4 @@ export class NewUserPage implements OnInit {
   get email() {
     return this.formData.get('email');
   }
-
 }

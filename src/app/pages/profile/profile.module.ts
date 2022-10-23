@@ -6,6 +6,7 @@ import { ProfilePage } from './profile.page';
 // import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { ProfilePageRoutingModule } from './profile-routing.module';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   imports: [
@@ -13,8 +14,9 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
     CommonModule,
     FormsModule,
     // ExploreContainerComponentModule,
-    ProfilePageRoutingModule
+    ProfilePageRoutingModule,
+    NgxSkeletonLoaderModule,
   ],
-  declarations: [ProfilePage]
+  declarations: [ProfilePage],
 })
 export class ProfilePageModule {}

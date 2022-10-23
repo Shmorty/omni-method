@@ -1,10 +1,9 @@
-import { Observable } from "rxjs";
-import { User } from "../../store/models/user.model";
+import { Observable } from 'rxjs';
+import { User } from '../../store/models/user.model';
 
 export interface IUserService {
+  // return current user
+  getUser(id: string): Observable<User>;
 
-    // return current user
-    getUser(): Observable<User>;
-
-    setUser(user: User): Observable<User>;
+  setUser(user: User): Observable<User>;
 }

@@ -5,7 +5,7 @@ import { Assessment } from '../../store/models/assessment.model';
 import { Category } from '../../store/models/category.model';
 import { IAssessmentService } from './assessment.service.interface';
 import { DATA } from './mock-assessements';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
@@ -14,21 +14,22 @@ export class AssessmentService implements IAssessmentService {
   private _currentCategory: Category;
   private _categoryResponse;
   private _assessmentResponse;
-  baseUrl = 'https://7crsalgmhk.execute-api.us-east-1.amazonaws.com';
+  // baseUrl = 'https://7crsalgmhk.execute-api.us-east-1.amazonaws.com';
 
   constructor(private http: HttpClient) {}
 
   getCategories(): Observable<Category[]> {
     var reply: Category[] = [];
-    this.http.get<any>(this.baseUrl + '/categories').subscribe({
+    this.http.get<any>(environment.baseUrl + '/categories').subscribe({
       next: (data) => {
         this._categoryResponse = data;
         console.log(JSON.stringify(data));
         data.Items.forEach((element, index) => {
           // console.log(JSON.stringify(element));
           var rec: Category = {
-            id: element.seq,
+            id: element.cid,
             cid: element.cid,
+            seq: element.seq,
             label: element.label,
             categoryAverage: 0,
             assessments: [],
@@ -36,6 +37,15 @@ export class AssessmentService implements IAssessmentService {
           console.log(JSON.stringify(rec));
           console.log('index: ' + index);
           reply[index] = rec;
+        });
+        reply.sort((a, b) => {
+          if (a.seq < b.seq) {
+            return -1;
+          } else if (a.seq > b.seq) {
+            return 1;
+          } else {
+            return 0;
+          }
         });
       },
       error: (error) => {
@@ -47,7 +57,7 @@ export class AssessmentService implements IAssessmentService {
 
   getAssessments(): Observable<Assessment[]> {
     var reply: Assessment[] = [];
-    this.http.get<any>(this.baseUrl + '/assessments').subscribe({
+    this.http.get<any>(environment.baseUrl + '/assessments').subscribe({
       next: (data) => {
         this._assessmentResponse = data;
         console.log(JSON.stringify(data));

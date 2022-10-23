@@ -5,32 +5,31 @@ import { User } from '../../store/models/user.model';
 import { IUserService } from './user.service.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService implements IUserService {
-
   private mockUser: User = {
     id: '0001',
     email: 'fake@email.com',
-    firstName: 'Kyle',
+    firstName: 'Mock',
     lastName: 'Martel',
-    nickname: 'Kyle',
-    dob: new Date("1996-07-31"),
-    height: 
-    {
+    nickname: 'Mock',
+    dob: new Date('1996-07-31'),
+    height: {
       feet: 6,
       inches: 2,
     },
     weight: 180,
-  }
+  };
 
-  constructor() { }
+  constructor() {}
 
   setUser(user: User): Observable<User> {
-    return of(this.mockUser=user);
+    return of((this.mockUser = user));
   }
 
   getUser(): Observable<User> {
-      return of(this.mockUser);
+    console.log('getUser returning mock data');
+    return of(this.mockUser);
   }
 }

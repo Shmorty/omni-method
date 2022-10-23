@@ -12,7 +12,7 @@ import { User } from '../../store/models/user.model';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/models/state.model';
-import { UserService } from '../../api/user/user.mock.service';
+import { UserService } from '../../api/user/user.service';
 
 const API_URL = environment.API_URL;
 
@@ -20,9 +20,11 @@ const API_URL = environment.API_URL;
   selector: 'app-profile',
   templateUrl: 'profile.page.html',
   styleUrls: ['profile.page.scss'],
+  // pipes: ['category-sort'],
 })
 export class ProfilePage implements OnInit {
   user: User;
+  userLoaded: boolean = false;
   omniScore: number = 245;
 
   // static data
@@ -50,8 +52,11 @@ export class ProfilePage implements OnInit {
 
   ngOnInit(): void {
     // this.user$ = this.store.select((store) => store.user);
-    this.userService.getUser().subscribe((data) => {
+    this.userService.getUser('0001').subscribe(async (data) => {
+      // await new Promise((f) => setTimeout(f, 5000));
       this.user = data;
+      this.userLoaded = true;
+      console.log('got user: ' + JSON.stringify(data));
     });
 
     this.assessmentService.getAssessments().subscribe((data) => {
@@ -60,7 +65,7 @@ export class ProfilePage implements OnInit {
     });
     this.assessmentService.getCategories().subscribe((data) => {
       this.categories = data;
-      console.log('got assessments: ' + JSON.stringify(data));
+      console.log('got categories: ' + JSON.stringify(data));
     });
   }
 

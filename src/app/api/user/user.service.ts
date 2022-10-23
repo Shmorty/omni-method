@@ -1,27 +1,55 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../../store/models/user.model';
 import { IUserService } from './user.service.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService implements IUserService {
-  private _url: string;
+  // var _userResponse: User;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getUser(): Observable<User> {
-      return this.httpClient.get<User>('/api/user');
+  getUser(id: string): Observable<User> {
+    var reply: User;
+
+    var response$ = this.http.get<any>(environment.baseUrl + '/users/' + id);
+    /*
+    response$.subscribe({
+      next: (data) => {
+        console.log('Got user data from service');
+        console.log(JSON.stringify(data));
+        // console.log(JSON.stringify(element));
+        reply = {
+          id: data.id,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          avatar: null,
+          dob: data.dob,
+          weight: data.weight,
+          height: {
+            feet: data.feet,
+            inches: data.inches,
+          },
+        };
+      },
+      error: (error) => {
+        console.error('There was an error', error);
+      },
+    });
+*/
+    return response$;
   }
 
   setUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(this._url, user)
-      .pipe(
-        catchError(this.handleError)
-      );
+    return this.http
+      .post<User>(environment.baseUrl + '/users', user)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -32,9 +60,13 @@ export class UserService implements IUserService {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
       console.error(
-        `Backend returned code ${error.status}, body was: `, error.error);
+        `Backend returned code ${error.status}, body was: `,
+        error.error
+      );
     }
     // Return an observable with a user-facing error message.
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
   }
 }

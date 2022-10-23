@@ -14,32 +14,33 @@ import { AppComponent } from './app.component';
 import { assessmentReducer } from './store/reducers/assessment.reducer';
 import { FormsModule } from '@angular/forms';
 import { userReducer } from './store/reducers/user.reducer';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 // export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
 // export const storeDevTools: ModuleWithProviders[] =
 //     !environment.production ? [StoreDevtoolsModule.instrument()] : [];
 
-
 @NgModule({
-    declarations: [AppComponent],
-    imports: [
-        AppRoutingModule,
-        BrowserModule,
-        FormsModule,
-        HttpClientModule,
-        IonicModule.forRoot(),
-        StoreModule.forRoot({
-            // user: userReducer,
-            assessments: assessmentReducer
-        }),
-        EffectsModule.forRoot([]),
-        // storeDevTools,
-        // OAuthModule.forRoot()
-    ],
-    providers: [
-        ...environment.providers,
-        // { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-    ],
-    bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [
+    AppRoutingModule,
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    IonicModule.forRoot(),
+    StoreModule.forRoot({
+      // user: userReducer,
+      assessments: assessmentReducer,
+    }),
+    EffectsModule.forRoot([]),
+    // storeDevTools,
+    // OAuthModule.forRoot()
+    NgxSkeletonLoaderModule.forRoot(),
+  ],
+  providers: [
+    ...environment.providers,
+    // { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
