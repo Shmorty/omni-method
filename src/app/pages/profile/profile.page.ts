@@ -9,6 +9,7 @@ import { AssessmentService } from '../../api/assessments/assessment.service';
 import { AssessmentDetailPage } from '../assessment-detail/assessment-detail.page';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { User } from '../../store/models/user.model';
+import { Score } from '../../store/models/score.model';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/models/state.model';
@@ -24,7 +25,7 @@ const API_URL = environment.API_URL;
 })
 export class ProfilePage implements OnInit {
   user: User;
-  scores: [];
+  scores: Score[];
   userLoaded: boolean = false;
   omniScore: number = 245;
 
@@ -93,19 +94,33 @@ export class ProfilePage implements OnInit {
     return true;
   }
 
-  scoreClass(date: Date): string {
+  // scoreClass(date: Date): string {
+  scoreClass(assessment: Assessment): string {
+    var scores = this.getScores(assessment);
+    var date = new Date();
+    if (scores?.length) {
+      date = new Date(scores[0].scoreDate);
+    }
     const oneDay = 1000 * 3600 * 24;
     const days = Math.ceil((Date.now().valueOf() - date.valueOf()) / oneDay);
 
     if (days > 30) {
-      // return "score stale";
       return 'stale';
     } else if (days > 14) {
-      // return "score warn";
       return 'warn';
-      // } else {
-      //   return "score";
     }
+  }
+
+  getScores(assessment: Assessment): Array<any> {
+    return this.scores?.filter((element) => element.aid == assessment.aid);
+  }
+
+  getRawScore(assessment: Assessment): string {
+    var scores = this.getScores(assessment);
+    if (scores?.length) {
+      return scores[0].rawScore;
+    }
+    return '0';
   }
 
   // logout() {

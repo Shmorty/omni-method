@@ -106,10 +106,16 @@
               <span class="units">{{assessment.units}}</span>
               <br />
               <!-- <ion-badge
-            ngClass="{{scoreClass(assessment.scores?.[0]?.scoreDate)}}"
+            ngClass="{{scoreClass(scores?.[0]?.scoreDate)}}"
             slot="end"
-            >{{assessment.scores?.[0]?.rawScore}}</ion-badge
+            >{{scores?.[0]?.rawScore}}</ion-badge
           > -->
+              <ion-badge
+                class="score"
+                ngClass="{{scoreClass(assessment)}}"
+                slot="end"
+                >{{getRawScore(assessment)}}</ion-badge
+              >
             </div>
           </ion-item>
         </ng-container>
