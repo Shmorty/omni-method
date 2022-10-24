@@ -24,6 +24,7 @@ const API_URL = environment.API_URL;
 })
 export class ProfilePage implements OnInit {
   user: User;
+  scores: [];
   userLoaded: boolean = false;
   omniScore: number = 245;
 
@@ -54,18 +55,30 @@ export class ProfilePage implements OnInit {
     // this.user$ = this.store.select((store) => store.user);
     this.userService.getUser('0001').subscribe(async (data) => {
       // await new Promise((f) => setTimeout(f, 5000));
-      this.user = data;
+      this.user = data['user'];
+      this.scores = data['scores'];
       this.userLoaded = true;
-      console.log('got user: ' + JSON.stringify(data));
+      console.log('got user: ' + JSON.stringify(this.user));
+      console.log('got scores: ' + JSON.stringify(this.scores));
     });
 
     this.assessmentService.getAssessments().subscribe((data) => {
-      this.assessments = data;
-      console.log('got assessments: ' + JSON.stringify(data));
+      this.assessments = data['assessments'];
+      console.log('got assessments: ' + JSON.stringify(this.assessments));
     });
     this.assessmentService.getCategories().subscribe((data) => {
-      this.categories = data;
-      console.log('got categories: ' + JSON.stringify(data));
+      this.categories = data['categories'];
+      // sort categories
+      this.categories.sort((a, b) => {
+        if (a.seq < b.seq) {
+          return -1;
+        } else if (a.seq > b.seq) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      console.log('got categories: ' + JSON.stringify(this.categories));
     });
   }
 

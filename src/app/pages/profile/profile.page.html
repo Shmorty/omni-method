@@ -89,30 +89,30 @@
     <ion-card-header>
       <ion-card-title>All Assessments</ion-card-title>
     </ion-card-header>
-  </ion-card>
 
-  <ion-card class="card cardStyle" *ngFor="let category of categories">
-    <!-- | category-sort:'seq'" -->
-    <ion-card-header type="primary">{{category.label}}</ion-card-header>
-    <ng-container *ngFor="let assessment of assessments">
-      <ng-container *ngIf="assessment.cid == category.cid">
-        <ion-item (click)="openDetails(assessment, category)">
-          <!-- (click)="openAssessmentDetailModal(assessment, category)"> -->
-          <!-- <ion-item *ngFor="let assessment of category.assessments"> -->
-          <ion-thumbnail slot="start">
-            <ion-img class="fit-thumbnail" src="{{assessment.icon}}"></ion-img>
-          </ion-thumbnail>
-          <ion-label>{{assessment.label}}</ion-label>
-          <div slot="end">
-            <span class="units">{{assessment.units}}</span>
-            <br />
-            <!-- <ion-badge
+    <ng-container class="card cardStyle" *ngFor="let category of categories">
+      <ion-card-header type="primary">{{category.label}}</ion-card-header>
+      <ng-container *ngFor="let assessment of assessments">
+        <ng-container *ngIf="assessment.cid == category.cid">
+          <ion-item (click)="openDetails(assessment, category)">
+            <ion-thumbnail slot="start">
+              <ion-img
+                class="fit-thumbnail"
+                src="{{assessment.icon}}"
+              ></ion-img>
+            </ion-thumbnail>
+            <ion-label>{{assessment.label}}</ion-label>
+            <div slot="end">
+              <span class="units">{{assessment.units}}</span>
+              <br />
+              <!-- <ion-badge
             ngClass="{{scoreClass(assessment.scores?.[0]?.scoreDate)}}"
             slot="end"
             >{{assessment.scores?.[0]?.rawScore}}</ion-badge
           > -->
-          </div>
-        </ion-item>
+            </div>
+          </ion-item>
+        </ng-container>
       </ng-container>
     </ng-container>
   </ion-card>
