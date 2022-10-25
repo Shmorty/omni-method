@@ -32,16 +32,20 @@
         <h5>{{ category.label }}</h5>
       </ion-card-subtitle>
     </ion-label>
+    <ion-button slot="end" (click)="openNewScore()">
+      Add scores&nbsp;
+      <ion-icon name="add-circle-outline" size="small"></ion-icon>
+    </ion-button>
   </ion-item>
 
   <ion-accordion-group>
-    <ion-accordion>
+    <ion-accordion toggleIconSlot="start">
       <!-- *ngIf="assessment.scores"> -->
 
       <!-- <ion-item button detail-icon="create-outline" lines="full"> -->
       <!-- <ion-item slot="header">scores</ion-item> -->
       <ion-item
-        *ngFor="let score of assessment.scores; first as isFirst"
+        *ngFor="let score of scores; first as isFirst"
         lines="full"
         slot="{{isFirst ? 'header':'content'}}"
       >

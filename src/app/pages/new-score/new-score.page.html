@@ -1,0 +1,40 @@
+<!-- <ion-fab slot="fixed">
+  <ion-fab-button
+    (click)="dismiss()"
+    routerDirection="back"
+    type="button"
+    size="small"
+    color="secondary"
+    ><ion-icon name="close"></ion-icon>
+  </ion-fab-button>
+</ion-fab> -->
+
+<ion-content>
+  <ion-button (click)="dismiss()" slot="end">
+    <ion-icon name="close"></ion-icon>
+  </ion-button>
+  <!-- <ion-title>{{assessment.label}}</ion-title> -->
+  <form [formGroup]="formData" (ngSubmit)="onSubmit()">
+    <div class="input-group">
+      <ion-title>Assessment</ion-title>
+      <ion-list>
+        <ion-item>
+          <ion-label>Enter Score</ion-label>
+          <ion-input formControlName="rawScore"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Assessment Date</ion-label>
+          <ion-input
+            formControlName="scoreDate"
+            placeholder="YYYY-MM-DD"
+          ></ion-input>
+        </ion-item>
+      </ion-list>
+    </div>
+    <ion-footer>
+      <ion-button [disabled]="formData.invalid" type="submit">
+        Submit
+      </ion-button>
+    </ion-footer>
+  </form>
+</ion-content>

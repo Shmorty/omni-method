@@ -4,7 +4,8 @@ import { Observable, of } from 'rxjs';
 import { Assessment } from '../../store/models/assessment.model';
 import { Category } from '../../store/models/category.model';
 import { IAssessmentService } from './assessment.service.interface';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
+import { Score } from '../../store/models/score.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class AssessmentService implements IAssessmentService {
   private _currentAssessment: Assessment;
   private _currentCategory: Category;
+  private _currentScores: Score[];
 
   constructor(private http: HttpClient) {}
 
@@ -37,5 +39,13 @@ export class AssessmentService implements IAssessmentService {
 
   getCurrentCategory(): Observable<Category> {
     return of(this._currentCategory);
+  }
+
+  setCurrentScores(scores: Score[]) {
+    this._currentScores = scores;
+  }
+
+  getCurrentScores(): Observable<Score[]> {
+    return of(this._currentScores);
   }
 }

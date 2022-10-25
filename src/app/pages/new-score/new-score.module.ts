@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { NewUserPageRoutingModule } from './new-user-routing.module';
+import { NewScorePageRoutingModule } from './new-score-routing.module';
 
-import { NewUserPage } from './new-user.page';
+import { NewScorePage } from './new-score.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
-    NewUserPageRoutingModule,
     ReactiveFormsModule,
+    IonicModule,
+    NewScorePageRoutingModule,
   ],
-  declarations: [NewUserPage],
+  declarations: [NewScorePage],
 })
-export class NewUserPageModule {}
+export class NewScorePageModule {}

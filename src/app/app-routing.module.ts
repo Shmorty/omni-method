@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'new-user',
     loadChildren: () => import('./pages/new-user/new-user.module').then( m => m.NewUserPageModule)
   },
+  {
+    path: 'new-score',
+    loadChildren: () => import('./pages/new-score/new-score.module').then( m => m.NewScorePageModule)
+  },
 ];
 @NgModule({
   imports: [

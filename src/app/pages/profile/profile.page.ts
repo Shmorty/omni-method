@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/models/state.model';
 import { UserService } from '../../api/user/user.service';
+import { NewScorePage } from '../new-score/new-score.page';
 
 const API_URL = environment.API_URL;
 
@@ -29,9 +30,6 @@ export class ProfilePage implements OnInit {
   userLoaded: boolean = false;
   omniScore: number = 245;
 
-  // static data
-  // omniScore :number = 245;
-
   categories: Category[];
   assessments: Assessment[];
 
@@ -39,7 +37,6 @@ export class ProfilePage implements OnInit {
   constructor(
     private userService: UserService,
     private assessmentService: AssessmentService,
-    public modalController: ModalController,
     private router: Router,
     private route: ActivatedRoute,
     private store: Store<AppState>
@@ -86,6 +83,7 @@ export class ProfilePage implements OnInit {
   openDetails(assessment, category) {
     this.assessmentService.setCurrentCategory(category);
     this.assessmentService.setCurrentAssessment(assessment);
+    this.assessmentService.setCurrentScores(this.getScores(assessment));
     this.router.navigate(['/home', 'profile', 'details']);
   }
 
@@ -111,16 +109,16 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  getScores(assessment: Assessment): Array<any> {
+  getScores(assessment: Assessment): Array<Score> {
     return this.scores?.filter((element) => element.aid == assessment.aid);
   }
 
-  getRawScore(assessment: Assessment): string {
+  getRawScore(assessment: Assessment): number {
     var scores = this.getScores(assessment);
     if (scores?.length) {
       return scores[0].rawScore;
     }
-    return '0';
+    return 0;
   }
 
   // logout() {
