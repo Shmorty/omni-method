@@ -11,7 +11,7 @@ import { Score } from '../../store/models/score.model';
   providedIn: 'root',
 })
 export class UserService implements IUserService {
-  // var _userResponse: User;
+  private _currentUser: User = null;
 
   constructor(private http: HttpClient) {}
 
@@ -21,12 +21,20 @@ export class UserService implements IUserService {
   }
 
   setUser(user: User): Observable<User> {
-    return this.http
-      .post<User>(environment.baseUrl + '/users', user)
-      .pipe(catchError(this.handleError));
+    console.log('TODO: user.service.setUser');
+    return of(user);
+  }
+
+  setCurrentUser(user: User) {
+    this._currentUser = user;
+  }
+
+  getCurrentUser(): User {
+    return this._currentUser;
   }
 
   saveScore(score: Score) {
+    console.log('user.service.saveScore ' + JSON.stringify(score));
     return this.http
       .post<Score>(environment.baseUrl + `/users/${score.uid}/scores`, score)
       .pipe(catchError(this.handleError));

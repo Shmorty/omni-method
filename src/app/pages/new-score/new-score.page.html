@@ -1,4 +1,4 @@
-<!-- <ion-fab slot="fixed">
+<ion-fab slot="fixed" horizontal="end">
   <ion-fab-button
     (click)="dismiss()"
     routerDirection="back"
@@ -7,20 +7,21 @@
     color="secondary"
     ><ion-icon name="close"></ion-icon>
   </ion-fab-button>
-</ion-fab> -->
+</ion-fab>
 
 <ion-content>
-  <ion-button (click)="dismiss()" slot="end">
+  <!-- <ion-button (click)="dismiss()" slot="end">
     <ion-icon name="close"></ion-icon>
-  </ion-button>
+  </ion-button> -->
   <!-- <ion-title>{{assessment.label}}</ion-title> -->
   <form [formGroup]="formData" (ngSubmit)="onSubmit()">
     <div class="input-group">
-      <ion-title>Assessment</ion-title>
+      <ion-title>{{assessment.label}}</ion-title>
       <ion-list>
         <ion-item>
           <ion-label>Enter Score</ion-label>
           <ion-input formControlName="rawScore"></ion-input>
+          <ion-text slot="end" class="units">{{assessment.units}}</ion-text>
         </ion-item>
         <ion-item>
           <ion-label>Assessment Date</ion-label>

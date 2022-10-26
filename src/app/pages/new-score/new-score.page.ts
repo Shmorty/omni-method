@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -6,8 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { UserService } from 'src/app/api/user/user.service';
-import { Assessment } from 'src/app/store/models/assessment.model';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { User } from '../../store/models/user.model';
+import { UserService } from '../../api/user/user.service';
+import { Assessment } from '../../store/models/assessment.model';
+import { Score } from '../../store/models/score.model';
 
 @Component({
   selector: 'app-new-score',
@@ -15,7 +18,9 @@ import { Assessment } from 'src/app/store/models/assessment.model';
   styleUrls: ['./new-score.page.scss'],
 })
 export class NewScorePage implements OnInit {
-  @Input() public assessment: Assessment;
+  @Input() assessment: Assessment;
+  // @Input() user: User;
+  @Output() score: Score;
   formData: FormGroup;
   today = new Date();
 
@@ -25,10 +30,11 @@ export class NewScorePage implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('assessment: ' + this.assessment.aid);
     console.log(this.today.toLocaleDateString());
     this.formData = new FormGroup({
       rawScore: new FormControl('', Validators.required),
-      scoreData: new FormControl('', Validators.required),
+      scoreDate: new FormControl('', Validators.required),
     });
   }
 
@@ -37,8 +43,24 @@ export class NewScorePage implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formData.value);
-    this.userService.saveScore(this.formData.value);
+    this.score = {
+      aid: this.assessment.aid,
+      uid: this.userService.getCurrentUser().id,
+      rawScore: this.formData.controls['rawScore'].value,
+      scoreDate: this.formData.controls['scoreDate'].value,
+    };
+    console.log('score: ' + JSON.stringify(this.score));
+    this.userService.saveScore(this.score).subscribe(
+      (data) => {
+        console.log('saveScore returned ' + JSON.stringify(data));
+        this.dismiss();
+      },
+      (err) => {
+        console.log('Error: ' + err().message);
+        alert(err().message);
+        this.dismiss();
+      }
+    );
   }
 
   get rawScore() {

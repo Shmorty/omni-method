@@ -36,12 +36,13 @@ export class AssessmentDetailPage implements OnInit {
   }
 
   async openNewScore() {
-    console.log('openNewScore NewScorePage');
     const modal = await this.modalCtrl.create({
       component: NewScorePage,
+      componentProps: {
+        assessment: this.assessment,
+      },
       cssClass: 'new-score-modal',
     });
-    modal.component['assessment'] = this.assessment;
     modal.present();
   }
 

@@ -55,6 +55,7 @@ export class ProfilePage implements OnInit {
       // await new Promise((f) => setTimeout(f, 5000));
       this.user = data['user'];
       this.scores = data['scores'];
+      this.userService.setCurrentUser(this.user);
       this.userLoaded = true;
       console.log('got user: ' + JSON.stringify(this.user));
       console.log('got scores: ' + JSON.stringify(this.scores));
