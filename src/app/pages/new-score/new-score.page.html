@@ -4,36 +4,66 @@
     routerDirection="back"
     type="button"
     size="small"
-    color="secondary"
+    color="primary"
     ><ion-icon name="close"></ion-icon>
   </ion-fab-button>
 </ion-fab>
 
-<ion-content>
+<ion-content color="primary">
   <!-- <ion-button (click)="dismiss()" slot="end">
     <ion-icon name="close"></ion-icon>
   </ion-button> -->
   <!-- <ion-title>{{assessment.label}}</ion-title> -->
   <form [formGroup]="formData" (ngSubmit)="onSubmit()">
-    <div class="input-group">
-      <ion-title>{{assessment.label}}</ion-title>
-      <ion-list>
-        <ion-item>
-          <ion-label>Enter Score</ion-label>
-          <ion-input formControlName="rawScore"></ion-input>
-          <ion-text slot="end" class="units">{{assessment.units}}</ion-text>
-        </ion-item>
-        <ion-item>
-          <ion-label>Assessment Date</ion-label>
-          <ion-input
-            formControlName="scoreDate"
-            placeholder="YYYY-MM-DD"
-          ></ion-input>
-        </ion-item>
-      </ion-list>
-    </div>
+    <ion-title>{{assessment.label}}</ion-title>
+    <!-- <div class="input-group"> -->
+    <ion-grid class="input-group" [fixed]="true">
+      <!-- <ion-list class="score-form" slot="start"> -->
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="rounded-input">
+            <ion-input
+              formControlName="rawScore"
+              placeholder="{{assessment.units}}"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-label>Strength Score</ion-label>
+        </ion-col>
+      </ion-row>
+      <!-- </ion-list> -->
+      <!-- <ion-label slot="end">Strength Score</ion-label> -->
+      <!-- <ion-list class="score-form" slot="start"> -->
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="rounded-input">
+            <ion-input
+              formControlName="scoreDate"
+              placeholder="YYYY-MM-DD"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-label>Total Score</ion-label>
+        </ion-col>
+      </ion-row>
+      <!-- </ion-list> -->
+      <!-- <ion-label slot="end">Total Score</ion-label> -->
+      <!-- <ion-list class="score-form" slot="start"> -->
+      <ion-row>
+        <ion-col size="12">
+          <ion-textarea
+            formControlName="notes"
+            placeholder="Notes"
+          ></ion-textarea>
+        </ion-col>
+      </ion-row>
+      <!-- </ion-list> -->
+    </ion-grid>
+    <!-- </div> -->
     <ion-footer>
-      <ion-button [disabled]="formData.invalid" type="submit">
+      <ion-button [disabled]="formData.invalid" type="submit" color="secondary">
         Submit
       </ion-button>
     </ion-footer>

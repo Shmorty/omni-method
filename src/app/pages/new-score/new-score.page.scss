@@ -1,0 +1,13 @@
+.score-form {
+  margin: 20px;
+  border-radius: 12pt;
+  ion-textarea {
+    --color: initial;
+  }
+}
+.rounded-input {
+  --border-radius: 20pt;
+}
+ion-grid {
+  margin-top: 26px;
+}

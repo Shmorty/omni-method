@@ -35,6 +35,7 @@ export class NewScorePage implements OnInit {
     this.formData = new FormGroup({
       rawScore: new FormControl('', Validators.required),
       scoreDate: new FormControl('', Validators.required),
+      notes: new FormControl(''),
     });
   }
 
@@ -48,6 +49,7 @@ export class NewScorePage implements OnInit {
       uid: this.userService.getCurrentUser().id,
       rawScore: this.formData.controls['rawScore'].value,
       scoreDate: this.formData.controls['scoreDate'].value,
+      notes: this.formData.controls['notes'].value,
     };
     console.log('score: ' + JSON.stringify(this.score));
     this.userService.saveScore(this.score).subscribe(
