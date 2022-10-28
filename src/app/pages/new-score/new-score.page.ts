@@ -30,11 +30,13 @@ export class NewScorePage implements OnInit {
   ) {}
 
   ngOnInit() {
+    var today = new Date().toLocaleDateString();
+    console.log('today is ' + today);
     console.log('assessment: ' + this.assessment.aid);
     console.log(this.today.toLocaleDateString());
     this.formData = new FormGroup({
       rawScore: new FormControl('', Validators.required),
-      scoreDate: new FormControl('', Validators.required),
+      scoreDate: new FormControl(today, Validators.required),
       notes: new FormControl(''),
     });
   }
