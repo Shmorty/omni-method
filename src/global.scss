@@ -31,6 +31,7 @@
     backdrop-filter: blur(12px);
   }
   &::part(content) {
+    border-radius: 20pt;
     max-width: 80%;
     max-height: 50%;
     margin: auto;

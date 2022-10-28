@@ -7,19 +7,21 @@
   </ion-toolbar>
 </ion-header> -->
 
-<ion-fab slot="fixed">
-  <ion-fab-button
-    routerDirection="back"
-    type="button"
-    size="small"
-    color="secondary"
-    href="/home"
-    ><ion-icon name="chevron-back-outline"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
-
 <ion-content>
-  <ion-card>
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-button
+      routerDirection="back"
+      type="button"
+      size="small"
+      shape="round"
+      color="secondary"
+      href="/home"
+    >
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+  </ion-fab>
+
+  <ion-card style="border-radius: 20pt">
     <ion-img src="{{assessment.icon}}"></ion-img>
   </ion-card>
 

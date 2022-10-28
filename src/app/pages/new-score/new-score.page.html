@@ -1,21 +1,27 @@
-<ion-fab slot="fixed" horizontal="end">
-  <ion-fab-button
-    (click)="dismiss()"
-    routerDirection="back"
-    type="button"
-    size="small"
-    color="primary"
-    ><ion-icon name="close"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
-
 <ion-content color="primary">
   <!-- <ion-button (click)="dismiss()" slot="end">
     <ion-icon name="close"></ion-icon>
   </ion-button> -->
   <!-- <ion-title>{{assessment.label}}</ion-title> -->
+  <ion-fab slot="fixed" horizontal="end">
+    <ion-button
+      (click)="dismiss()"
+      routerDirection="back"
+      type="button"
+      shape="round"
+      size="small"
+      color="primary"
+      ><ion-icon name="close"></ion-icon>
+    </ion-button>
+  </ion-fab>
+
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>{{assessment.label}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
   <form [formGroup]="formData" (ngSubmit)="onSubmit()">
-    <ion-title>{{assessment.label}}</ion-title>
     <!-- <div class="input-group"> -->
     <ion-grid class="input-group" [fixed]="true">
       <!-- <ion-list class="score-form" slot="start"> -->
@@ -54,6 +60,7 @@
       <ion-row>
         <ion-col size="12">
           <ion-textarea
+            class="custom-textarea"
             formControlName="notes"
             placeholder="Notes"
           ></ion-textarea>
@@ -63,9 +70,15 @@
     </ion-grid>
     <!-- </div> -->
     <ion-footer>
-      <ion-button [disabled]="formData.invalid" type="submit" color="secondary">
-        Submit
-      </ion-button>
+      <ion-toolbar color="primary">
+        <ion-button
+          [disabled]="formData.invalid"
+          type="submit"
+          color="tertiary"
+        >
+          Submit
+        </ion-button>
+      </ion-toolbar>
     </ion-footer>
   </form>
 </ion-content>
