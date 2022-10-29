@@ -103,9 +103,9 @@ export class ProfilePage implements OnInit {
     const oneDay = 1000 * 3600 * 24;
     const days = Math.ceil((Date.now().valueOf() - date.valueOf()) / oneDay);
 
-    if (days > 30) {
+    if (days > 90) {
       return 'stale';
-    } else if (days > 14) {
+    } else if (days > 30) {
       return 'warn';
     }
   }

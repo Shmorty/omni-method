@@ -30,6 +30,7 @@ export class NewScorePage implements OnInit {
   ) {}
 
   ngOnInit() {
+    // prefill date
     var today = new Date().toLocaleDateString();
     console.log('today is ' + today);
     console.log('assessment: ' + this.assessment.aid);
