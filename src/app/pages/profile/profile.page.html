@@ -12,7 +12,7 @@
 </ion-header> -->
 
 <!-- <ion-content [fullscreen]="true"> -->
-<ion-content #scrollarea color="">
+<ion-content #scrollarea>
   <!-- <ion-fab vertical="top" horizontal="start" slot="fixed">
     <ion-fab-button
       routerDirection="back"
@@ -24,6 +24,7 @@
     </ion-fab-button>
   </ion-fab> -->
 
+  <ion-header class="ion-no-border safe-area"> </ion-header>
   <ion-card class="card cardStyle topCard">
     <ion-item lines="none" color="primary">
       <span slot="start">
@@ -91,10 +92,15 @@
     </ion-card-header>
 
     <ng-container class="card cardStyle" *ngFor="let category of categories">
-      <ion-card-header type="primary">{{category.label}}</ion-card-header>
+      <ion-card-header type="primary" class="cat-header"
+        >{{category.label}}</ion-card-header
+      >
       <ng-container *ngFor="let assessment of assessments">
         <ng-container *ngIf="assessment.cid == category.cid">
-          <ion-item (click)="openDetails(assessment, category)">
+          <ion-item
+            (click)="openDetails(assessment, category)"
+            style="--inner-border-width: 0"
+          >
             <ion-thumbnail slot="start">
               <ion-img
                 class="fit-thumbnail"
