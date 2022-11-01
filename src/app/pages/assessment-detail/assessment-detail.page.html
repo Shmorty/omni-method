@@ -8,12 +8,14 @@
 </ion-header> -->
 
 <ion-content>
+  <ion-header class="ion-no-border safe-area"> </ion-header>
+
   <ion-fab vertical="top" horizontal="start" slot="fixed">
     <ion-button
       routerDirection="back"
       type="button"
       size="small"
-      shape="round"
+      shape="circle"
       color="secondary"
       href="/home"
     >
@@ -21,9 +23,9 @@
     </ion-button>
   </ion-fab>
 
-  <ion-card style="border-radius: 20pt">
-    <ion-img src="{{assessment.icon}}"></ion-img>
-  </ion-card>
+  <!-- <ion-card style="border-radius: 20pt"> -->
+  <ion-img src="{{assessment.icon}}"></ion-img>
+  <!-- </ion-card> -->
 
   <ion-item>
     <ion-label>
@@ -34,11 +36,11 @@
         <h5>{{ category.label }}</h5>
       </ion-card-subtitle>
     </ion-label>
-    <ion-button slot="end" (click)="openNewScore()">
-      Add scores&nbsp;
-      <ion-icon name="add-circle-outline" size="small"></ion-icon>
-    </ion-button>
   </ion-item>
+
+  <ion-button expand="block" shape="round" (click)="openNewScore()">
+    <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+  </ion-button>
 
   <ion-accordion-group>
     <ion-accordion toggleIconSlot="start">
@@ -57,10 +59,8 @@
           <div>{{score.scoreDate | date:'mediumDate' }}</div>
         </ion-label>
         <ion-label slot="end">
-          <div>Exercise Score:</div>
-          <div style="font-weight: bold; color: gray; float: right">
-            {{ score.calculatedScore }}
-          </div>
+          <div class="score-label">Exercise Score:</div>
+          <div class="score">{{ score.calculatedScore }}</div>
         </ion-label>
       </ion-item>
     </ion-accordion>
