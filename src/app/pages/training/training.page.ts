@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-training',
@@ -33,6 +33,9 @@ export class TrainingPage implements OnInit {
     // this.assessmentService.setCurrentAssessment(assessment);
     // this.assessmentService.setCurrentScores(this.getScores(assessment));
     // alert('openVideos ' + this.trainingCategories[index]);
-    this.router.navigate(['/home', 'training', 'videos']);
+    let navigationExtras: NavigationExtras = {
+      state: { title: this.trainingCategories[index] },
+    };
+    this.router.navigate(['/home', 'training', 'videos'], navigationExtras);
   }
 }

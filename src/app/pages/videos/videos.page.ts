@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-videos',
@@ -8,10 +8,16 @@ import { Router } from '@angular/router';
 })
 export class VideosPage implements OnInit {
   @Input()
-  title: String;
+  title: String = 'Videos';
 
-  constructor(private router: Router) {}
-
+  // constructor(private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router) {
+    this.route.queryParams.subscribe((params) => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.title = this.router.getCurrentNavigation().extras.state.title;
+      }
+    });
+  }
   ngOnInit() {}
 
   goBack() {
