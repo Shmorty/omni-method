@@ -1,0 +1,8 @@
+ion-fab[vertical="top"] {
+  margin-top: var(--ion-safe-area-top);
+}
+ion-button[shape="circle"] {
+  --border-radius: 50%;
+  // width: 44px;
+  height: 44px;
+}

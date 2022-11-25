@@ -1,0 +1,15 @@
+<ion-header> </ion-header>
+
+<ion-content>
+  <ion-searchbar></ion-searchbar>
+  <ion-header class="section-head">Browse All</ion-header>
+  <ng-container *ngFor="let cat of trainingCategories; let i = index">
+    <span
+      (click)="openVideos(i)"
+      class="card color-{{(i%12)}}"
+      [ngClass]="!(i%2) ? 'left' : 'right'"
+    >
+      <span>{{cat}}</span>
+    </span>
+  </ng-container>
+</ion-content>

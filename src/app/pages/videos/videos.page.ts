@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-videos',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./videos.page.scss'],
 })
 export class VideosPage implements OnInit {
+  @Input()
+  title: String;
 
-  constructor() { }
+  constructor(private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  goBack() {
+    this.router.navigate(['/home', 'training']);
   }
-
 }

@@ -12,50 +12,60 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
+            loadChildren: () =>
+              import('../profile/profile.module').then(
+                (m) => m.ProfilePageModule
+              ),
           },
           {
             path: 'details',
-            loadChildren: () => import('../assessment-detail/assessment-detail.module')
-              .then( m => m.AssessmentDetailPageModule)
-          }
-        ]
+            loadChildren: () =>
+              import('../assessment-detail/assessment-detail.module').then(
+                (m) => m.AssessmentDetailPageModule
+              ),
+          },
+        ],
       },
-    // path: '',
-    // component: HomePage,
-    // children: [
-    //   {
-    //     path: 'assessments',
-    //     loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
-    //   },
-    //   {
-    //     path: 'assessments/:id',
-    //     loadChildren: () => import('../assessment-detail/assessment-detail.module')
-    //       .then( m => m.AssessmentDetailPageModule)
-    //   },
+      // path: '',
+      // component: HomePage,
+      // children: [
+      //   {
+      //     path: 'assessments',
+      //     loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
+      //   },
+      //   {
+      //     path: 'assessments/:id',
+      //     loadChildren: () => import('../assessment-detail/assessment-detail.module')
+      //       .then( m => m.AssessmentDetailPageModule)
+      //   },
       {
-        path: 'videos',
-        loadChildren: () => import('../videos/videos.module').then(m => m.VideosPageModule)
+        path: 'training',
+        loadChildren: () =>
+          import('../training/training.module').then(
+            (m) => m.TrainingPageModule
+          ),
       },
       {
         path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        loadChildren: () =>
+          import('../tab3/tab3.module').then((m) => m.Tab3PageModule),
       },
       {
         path: 'tab4',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        loadChildren: () =>
+          import('../tab3/tab3.module').then((m) => m.Tab3PageModule),
       },
       {
         path: '',
         redirectTo: '/home/profile',
-        pathMatch: 'full'
-      }
-    ]
+        pathMatch: 'full',
+      },
+    ],
   },
   {
     path: '',
     redirectTo: '/home/profile',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
 ];
 
