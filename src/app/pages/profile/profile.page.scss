@@ -9,7 +9,7 @@ span {
   font-weight: 400;
 }
 
-#name {
+.name {
   font-size: 1.1em;
   font-weight: bold;
 }
@@ -36,13 +36,15 @@ ion-badge {
 .stale {
   background-color: red;
 }
+ion-avatar img {
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+}
 .textAvatar {
   color: #35b5ff;
   background-color: white;
-  border-color: lightgray;
   border-radius: 50%;
-  border-width: 2px;
-  border-style: solid;
+  border: 2px solid lightgray;
   font-weight: bold;
   overflow: visible;
   padding: 10px 6px;
