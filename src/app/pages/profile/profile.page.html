@@ -1,29 +1,4 @@
-<!-- <ion-header collapse="false">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button text="Close" defaultHref="/"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Assessments</ion-title>
-    <ion-buttons slot="end">
-      <ion-button *ngIf="isLoggedIn()" (click)="logout()">logout</ion-button>
-      <ion-button *ngIf="!isLoggedIn()">reload</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
-
-<!-- <ion-content [fullscreen]="true"> -->
 <ion-content #scrollarea>
-  <!-- <ion-fab vertical="top" horizontal="start" slot="fixed">
-    <ion-fab-button
-      routerDirection="back"
-      type="button"
-      size="small"
-      color="secondary"
-      href="/"
-      ><ion-icon name="close"></ion-icon>
-    </ion-fab-button>
-  </ion-fab> -->
-
   <ion-header class="ion-no-border safe-area"> </ion-header>
   <ion-card class="card cardStyle topCard">
     <ion-item lines="none" color="primary">
@@ -68,17 +43,24 @@
           }"
         ></ngx-skeleton-loader>
       </span>
-
-      <span slot="end">
-        <div style="font-weight: 400">Omni Score</div>
-        <div style="font-size: 1.4em; font-weight: 600; text-align: center">
-          {{omniScore}}
-        </div>
-      </span>
     </ion-item>
 
     <ion-item lines="none" color="primary">
       <ion-grid class="ion-text-center" color="">
+        <ion-row>
+          <ion-col>
+            <span>
+              <div style="font-weight: 400">Omni Score</div>
+              <div
+                style="font-size: 1.4em; font-weight: 600; text-align: center"
+              >
+                {{omniScore}}
+              </div>
+            </span>
+          </ion-col>
+        </ion-row>
+        <!-- hide weight and height -->
+        <!--
         <ion-row>
           <ion-col
             >Body Weight
@@ -113,17 +95,20 @@
             </div>
           </ion-col>
         </ion-row>
+-->
+
         <ion-row>
-          <ion-col>
+          <!-- <ion-col>
             <ion-icon name="options-outline"></ion-icon><br />
             Unadjusted
             <div>N/A</div>
-          </ion-col>
+          </ion-col> -->
           <ion-col>
             <ion-icon name="pin"></ion-icon><br />
             Local Rank
             <div>N/A</div>
           </ion-col>
+          <ion-col></ion-col>
           <ion-col>
             <ion-icon name="globe"></ion-icon><br />
             World Rank
