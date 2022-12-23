@@ -11,7 +11,7 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { User } from '../../store/models/user.model';
 import { Score } from '../../store/models/score.model';
 import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
+// import { Store } from '@ngrx/store';
 import { AppState } from '../../store/models/state.model';
 import { UserService } from '../../api/user/user.service';
 import { NewScorePage } from '../new-score/new-score.page';
@@ -38,9 +38,9 @@ export class ProfilePage implements OnInit {
     private userService: UserService,
     private assessmentService: AssessmentService,
     private router: Router,
-    private route: ActivatedRoute,
-    private store: Store<AppState>
-  ) {
+    private route: ActivatedRoute
+  ) // private store: Store<AppState>
+  {
     // this.assessments = assessmentService.getAssessments()
     // googleApi.userProfileSubject.subscribe( info => {
     //   this.userInfo = info

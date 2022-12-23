@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "omni-login-63e9f": {
+      "hosting": {
+        "app": [
+          "omni-login-63e9f"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "omni-login-63e9f"
+  }
+}

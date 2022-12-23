@@ -1,5 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 // import { GoogleSigninService } from '../google-signin.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,22 +8,21 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  title = 'google-signin'
-  user = 'none'
+  title = 'Omni Method';
+  user = 'none';
+  email: string = '';
+  password: string = '';
 
   // constructor(private signInService: GoogleSigninService, private ref: ChangeDetectorRef) {
-  constructor(private ref: ChangeDetectorRef) {
+  constructor(private auth: AuthService) {}
 
-  }
-
-  signIn() {
+  doLogin() {
+    this.auth.login(this.email, this.password);
   }
 
   signOut() {
     // this.signInService.signOut()
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

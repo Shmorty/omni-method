@@ -1,19 +1,14 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
+// import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  styleUrls: ['tab3.page.scss'],
 })
 export class Tab3Page {
- 
+  constructor() // private store: Store
+  {}
 
-  constructor(
-    private store: Store
-  ) {}
-
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 }

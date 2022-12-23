@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+// import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Assessment } from './store/models/assessment.model';
 import { User } from './store/models/user.model';
 import { AppState } from './store/models/state.model';
- 
+
 // import { GoogleSigninService } from './google-signin.service';
 
 /*
@@ -22,12 +22,11 @@ export class AppComponent implements OnInit {
   assessments$: Observable<Array<Assessment>>;
 
   // constructor(private readonly google: GoogleSigninService) {}
-  constructor(private store: Store<AppState>) {}
+  // constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.assessments$ = this.store.select((store) => store.assessments);
+    // this.assessments$ = this.store.select((store) => store.assessments);
   }
-
 }
 
 // import {NgZone} from '@angular/core';
@@ -61,7 +60,7 @@ export class AppComponent implements OnInit {
 
 //     App.addListener('appUrlOpen', async data => {
 //       const platform = (await Device.getInfo()).platform as Platform;
-      
+
 //       // because reasons
 //       if (platform === 'ios') {
 //         await Browser.close();
