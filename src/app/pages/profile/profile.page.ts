@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 import { AppState } from '../../store/models/state.model';
 import { UserService } from '../../api/user/user.service';
 import { NewScorePage } from '../new-score/new-score.page';
+import { AuthService } from 'src/app/services/auth.service';
 
 const API_URL = environment.API_URL;
 
@@ -25,6 +26,7 @@ const API_URL = environment.API_URL;
   // pipes: ['category-sort'],
 })
 export class ProfilePage implements OnInit {
+  userId: any = '0001';
   user: User;
   scores: Score[];
   userLoaded: boolean = false;
@@ -35,12 +37,12 @@ export class ProfilePage implements OnInit {
 
   // constructor(public httpClient:HttpClient, private readonly googleApi: GoogleSigninService) {
   constructor(
+    private auth: AuthService,
     private userService: UserService,
     private assessmentService: AssessmentService,
     private router: Router,
-    private route: ActivatedRoute
-  ) // private store: Store<AppState>
-  {
+    private route: ActivatedRoute // private store: Store<AppState>
+  ) {
     // this.assessments = assessmentService.getAssessments()
     // googleApi.userProfileSubject.subscribe( info => {
     //   this.userInfo = info
@@ -51,7 +53,10 @@ export class ProfilePage implements OnInit {
 
   ngOnInit(): void {
     // this.user$ = this.store.select((store) => store.user);
-    this.userService.getUser('0001').subscribe(async (data) => {
+    this.userId = this.auth.currUser.id;
+    console.log('set userId: ' + this.userId);
+    this.userService.getUser(this.userId).subscribe(async (data) => {
+      console.log(data);
       // await new Promise((f) => setTimeout(f, 5000));
       this.user = data['user'];
       this.scores = data['scores'];

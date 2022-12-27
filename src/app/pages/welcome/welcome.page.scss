@@ -1,17 +1,16 @@
-
 ion-content {
-    // --ion-background-color:black;
-    // --ion-text-color: white;
-    --padding-top: 32px;
+  // --ion-background-color:black;
+  // --ion-text-color: white;
+  --padding-top: 32px;
 }
 
 ion-button {
-    --ion-border-radius: 20%;
+  --ion-border-radius: 20%;
 }
 
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 75%;
-  }
+img.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}

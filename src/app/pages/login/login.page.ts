@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import { GoogleSigninService } from '../google-signin.service';
 import { AuthService } from '../../services/auth.service';
+import { ShowHidePasswordComponent } from '../../component/show-hide-password/show-hide-password.component';
 
 @Component({
   selector: 'app-login',
@@ -8,20 +8,23 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  title = 'Omni Method';
+  title = 'Login';
   user = 'none';
   email: string = '';
   password: string = '';
+  showPassword = false;
 
   // constructor(private signInService: GoogleSigninService, private ref: ChangeDetectorRef) {
   constructor(private auth: AuthService) {}
 
   doLogin() {
     this.auth.login(this.email, this.password);
+    this.email = this.password = '';
   }
 
-  signOut() {
-    // this.signInService.signOut()
+  signInWithGoogle() {
+    console.log('sign in with google');
+    this.auth.googleSignIn();
   }
 
   ngOnInit(): void {}

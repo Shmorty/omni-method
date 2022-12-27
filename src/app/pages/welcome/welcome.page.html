@@ -1,15 +1,5 @@
-<!--
-<ion-header>
-  <ion-toolbar>
-    <ion-title>{{title}}</ion-title>
-    <ion-buttons slot="end">
-      <ion-button routerLink="/login">Sign in</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
--->
-
-<ion-content color="dark">
+<ion-content color="default">
+  <ion-header class="ion-no-border safe-area"> </ion-header>
   <img class="center" src="/assets/images/icon.png" alt="OmniMethod" />
 
   <ion-grid>
@@ -17,9 +7,7 @@
       <ion-col>
         <div class="ion-text-center">
           <h1>{{title}}</h1>
-          <a routerLink="/new-user" text-center
-            >Create an account to get started</a
-          >
+          <p text-center>Create an account to get started</p>
         </div>
       </ion-col>
     </ion-row>
@@ -64,7 +52,11 @@
           color="light"
           expand="block"
         >
-          <ion-icon slot="start" color="dark" name="logo-facebook"></ion-icon>
+          <ion-icon
+            slot="start"
+            color="tertiary"
+            name="logo-facebook"
+          ></ion-icon>
           Continue with Facebook</ion-button
         >
       </ion-col>
@@ -72,7 +64,7 @@
     <ion-row>
       <ion-col>
         <ion-button
-          routerLink="/home"
+          routerLink="/register"
           shape="round"
           color="light"
           expand="block"
@@ -84,8 +76,14 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        Alerady have an account?
-        <ion-nav-link routerLink="/login">Log in</ion-nav-link>
+        <p text-center>Alerady have an account?</p>
+        <ion-button
+          routerLink="/login"
+          color="primary"
+          expand="block"
+          shape="round"
+          >Log in</ion-button
+        >
       </ion-col>
     </ion-row>
   </ion-grid>

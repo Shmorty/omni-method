@@ -1,66 +1,119 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button text="Back" defaultHref="/"></ion-back-button>
-    </ion-buttons>
-    <ion-title>NewUser</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content color="medium">
-
+<ion-content color="default">
+  <ion-header class="ion-no-border safe-area"> </ion-header>
   <form [formGroup]="formData" (ngSubmit)="onSubmit()">
-    <div class="input-group">
+    <div>
       <ion-list>
-        <ion-item>
-          <!-- <ion-label>First Name</ion-label> -->
-          <ion-input formControlName="firstName" placeholder="First"></ion-input>
-        </ion-item>
-        <div *ngIf="(first.dirty || first.touched) && first.errors" class="errors">
-          <span *ngIf="first.errors?.required">First name is required</span>
-        </div>
-        <ion-item>
-          <!-- <ion-label>Last Name</ion-label> -->
-          <ion-input formControlName="lastName" placeholder="Last"></ion-input>
-        </ion-item>
-        <div *ngIf="(last.dirty || last.touched) && last.errors" class="errors">
-          <span *ngIf="last.errors?.required">Last name is required</span>
-        </div>
-        <ion-item>
-          <!-- <ion-label>email</ion-label> -->
-          <ion-input formControlName="email" type="email" placeholder="Email"></ion-input>
-        </ion-item>
-        <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
-          <span *ngIf="email.errors?.required">Email is required</span>
-          <span *ngIf="email.errors?.email">Email is invalid</span>
-        </div>
-        <ion-item>
-          <!-- <ion-label>Nickname</ion-label> -->
-          <ion-input formControlName="nickname" placeholder="Nickname"></ion-input>
-        </ion-item>
-        <ion-item>
-          <!-- <ion-label>DOB</ion-label> -->
-          <ion-input formControlName="dob" placeholder="DOB"></ion-input>
-        </ion-item>
-        <fieldset formGroupName="height">
+        <ion-progress-bar [value]="step / 5"></ion-progress-bar>
+        <div *ngIf="step == 1">
+          <div class="ion-text-center">
+            <h1 class="center">Create Account</h1>
+          </div>
           <ion-item>
-            <ion-label>Height</ion-label>
-            <!-- <ion-label>feet</ion-label> -->
-            <ion-input formControlName="feet" placeholder="Feet"></ion-input>
-            <!-- <ion-label>inches</ion-label> -->
-            <ion-input formControlName="inches" placeholder="Inches"></ion-input>
+            <!-- <ion-label>First Name</ion-label> -->
+            <ion-input
+              formControlName="firstName"
+              placeholder="First"
+            ></ion-input>
           </ion-item>
-            </fieldset>
-        <ion-item>
-          <!-- <ion-label>Weight</ion-label> -->
-          <ion-input formControlName="weight" placeholder="Weight"></ion-input>
-        </ion-item>
+          <div
+            *ngIf="(first.dirty || first.touched) && first.errors"
+            class="errors"
+          >
+            <span *ngIf="first.errors?.required">First name is required</span>
+          </div>
+          <ion-item>
+            <!-- <ion-label>Last Name</ion-label> -->
+            <ion-input
+              formControlName="lastName"
+              placeholder="Last"
+            ></ion-input>
+          </ion-item>
+          <div
+            *ngIf="(last.dirty || last.touched) && last.errors"
+            class="errors"
+          >
+            <span *ngIf="last.errors?.required">Last name is required</span>
+          </div>
+          <ion-item>
+            <!-- <ion-label>Nickname</ion-label> -->
+            <ion-input
+              formControlName="nickname"
+              placeholder="Nickname"
+            ></ion-input>
+          </ion-item>
+        </div>
+        <div *ngIf="step == 2">
+          <div class="ion-text-center">
+            <h1 class="center">What is your gender?</h1>
+          </div>
+          <ion-list>
+            <ion-radio-group value="other">
+              <ion-item>
+                <ion-label>Male</ion-label>
+                <ion-radio slot="end" value="male"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Female</ion-label>
+                <ion-radio slot="end" value="female"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Other</ion-label>
+                <ion-radio slot="end" value="other"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </div>
+        <div *ngIf="step == 3">
+          <div class="ion-text-center">
+            <h1 class="center">What is your date of birth?</h1>
+          </div>
+          <ion-item>
+            <!-- <ion-label>DOB</ion-label> -->
+            <ion-datetime
+              formControlName="dob"
+              presentation="year-month-day"
+            ></ion-datetime>
+          </ion-item>
+        </div>
+        <div *ngIf="step == 4">
+          <div class="ion-text-center">
+            <h1 class="center">What is your height?</h1>
+          </div>
+          <fieldset formGroupName="height">
+            <ion-item>
+              <ion-label>Height</ion-label>
+              <!-- <ion-label>feet</ion-label> -->
+              <ion-input formControlName="feet" placeholder="Feet"></ion-input>
+              <!-- <ion-label>inches</ion-label> -->
+              <ion-input
+                formControlName="inches"
+                placeholder="Inches"
+              ></ion-input>
+            </ion-item>
+          </fieldset>
+        </div>
+        <div *ngIf="step == 5">
+          <div class="ion-text-center">
+            <h1 class="center">What is your body weight?</h1>
+          </div>
+          <ion-item>
+            <!-- <ion-label>Weight</ion-label> -->
+            <ion-input
+              formControlName="weight"
+              placeholder="Weight"
+            ></ion-input>
+          </ion-item>
+        </div>
       </ion-list>
-  
-      </div>
-    <ion-button [disabled]="formData.invalid" type="submit" expand="block">Submit</ion-button>
+    </div>
+    <ion-button type="button" (click)="previous()" [disabled]="step == 1"
+      >Previous</ion-button
+    >
+    <ion-button type="button" (click)="next()" [disabled]="step == 5"
+      >Next</ion-button
+    >
+    <ion-button [disabled]="formData.invalid" type="submit">Submit</ion-button>
 
     <!-- <pre>{{formData.value | json}}</pre> -->
   </form>
-
 </ion-content>

@@ -16,8 +16,16 @@ export class UserService implements IUserService {
   constructor(private http: HttpClient) {}
 
   getUser(id: string): Observable<User> {
+    console.log('GET ' + environment.baseUrl + '/users/' + id);
     var response$ = this.http.get<any>(environment.baseUrl + '/users/' + id);
     return response$;
+  }
+
+  addUser(user: User) {
+    console.log('user.service.saveUser ' + JSON.stringify(user));
+    return this.http
+      .post<User>(environment.baseUrl + `/users`, user)
+      .pipe(catchError(this.handleError));
   }
 
   setUser(user: User): Observable<User> {

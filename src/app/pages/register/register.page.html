@@ -1,0 +1,67 @@
+<ion-content color="default">
+  <ion-header class="ion-no-border safe-area"> </ion-header>
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-button
+      routerLink="/welcome"
+      routerDirection="back"
+      type="button"
+      size="small"
+      shape="circle"
+      color="secondary"
+    >
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+  </ion-fab>
+
+  <div class="ion-text-center">
+    <h1>{{title}}</h1>
+  </div>
+  <!-- <img class="center" src="/assets/images/icon.png" alt="OmniMethod" /> -->
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <form>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input
+              [(ngModel)]="email"
+              [ngModelOptions]="{standalone: true}"
+              type="email"
+              required
+            ></ion-input>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-label position="floating">Password</ion-label>
+            <app-show-hide-password>
+              <ion-input
+                [(ngModel)]="password"
+                [ngModelOptions]="{standalone: true}"
+                type="password"
+                required
+              ></ion-input>
+            </app-show-hide-password>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-label position="floating">Confirm Password</ion-label>
+            <app-show-hide-password>
+              <ion-input
+                [(ngModel)]="confirmPassword"
+                [ngModelOptions]="{standalone: true}"
+                type="password"
+                required
+              ></ion-input>
+            </app-show-hide-password>
+          </ion-item>
+          <ion-button
+            type="submit"
+            expand="block"
+            [disabled]="!passwordMatch()"
+            (click)="doRegister()"
+            shape="round"
+            >Register</ion-button
+          >
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

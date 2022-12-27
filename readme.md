@@ -1,35 +1,35 @@
 built with
+
 - Angular https://angular.io/
 - Capactor
--- https://capacitorjs.com/
--- https://capacitorjs.com/solution/angular
+  -- https://capacitorjs.com/
+  -- https://capacitorjs.com/solution/angular
 - Ionic
 
+need to install
 
-need to install 
 - node
 - xcode
 - cocoapods
 - capacitor
   npm i -g @ionic/cli
 
+to build locally
 
-to build locally 
 1. clone repo
 2. run npm install
 3. ionic serve
 
-Using NgRx 
+Using NgRx
 helpful article https://www.concretepage.com/ngrx/ngrx-effects-example
-
 
 #Setting up google authentication
 https://developers.google.com/identity/gsi/web/guides/client-library
 
 https://console.cloud.google.com/apis/dashboard
 
-
 Add to index.html
+
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 
 Then add typescript types
@@ -37,10 +37,10 @@ npm install @types/gapi.auth2
 
 addtypes to tsconfig.app.json
 
-  "compilerOptions": {
-    "outDir": "./out-tsc/app",
-    "types": ["gapi", "gapi.auth2"]
-  },
+"compilerOptions": {
+"outDir": "./out-tsc/app",
+"types": ["gapi", "gapi.auth2"]
+},
 
 ## Try a diagram
 
@@ -57,6 +57,11 @@ setup App Icon for capacitor
 1 install cordova-res
 npm install -g cordova-res
 2 create files
+
 - resources/icon.png
 - resources/splash.png
-3 
+  3
+
+register and then login got error
+auth.service.ts:79 ERROR Error: Uncaught (in promise): FirebaseError: Firebase: We have blocked all requests from this device due to unusual activity. Try again later. (auth/too-many-requests).
+FirebaseError: Firebase: We have blocked all requests from this device due to unusual activity. Try again later. (auth/too-many-requests).

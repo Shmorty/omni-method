@@ -1,0 +1,23 @@
+<ion-content color="default">
+  <ion-header class="ion-no-border safe-area"> </ion-header>
+
+  <div class="ion-text-center">
+    <h1>{{title}}</h1>
+    <p>Link has been sent to your registered email.</p>
+  </div>
+  <!-- <img class="center" src="/assets/images/icon.png" alt="OmniMethod" /> -->
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <form>
+          <ion-item lines="none">
+            <span>
+              Return to &nbsp;
+              <a [routerLink]="['/login']" class="small-text">Login</a>
+            </span>
+          </ion-item>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

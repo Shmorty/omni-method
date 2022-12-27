@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 // import { Store } from '@ngrx/store';
 
 @Component({
@@ -7,8 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['tab3.page.scss'],
 })
 export class Tab3Page {
-  constructor() // private store: Store
-  {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit() {}
+
+  logout() {
+    this.auth.logout();
+  }
 }

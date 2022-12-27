@@ -1,23 +1,15 @@
-ion-content {
-	--padding-top: 40%;
-	--padding-start: 10%;
-	--padding-end: 10%;
-	// --background: url('https://images.unsplash.com/photo-1536431311719-398b6704d4cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1234&q=80')
-	// 	0 0/100% 100% no-repeat;
-}
-
 .input-group {
-	background: #fff;
-	border-radius: 10px;
-	overflow: hidden;
-	margin-bottom: 15px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
 }
 
 .errors {
-	font-size: small;
-	color: #fff;
-	background: var(--ion-color-danger);
-	padding-left: 15px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+  font-size: small;
+  color: #fff;
+  background: var(--ion-color-danger);
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

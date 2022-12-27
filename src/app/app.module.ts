@@ -1,8 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-// import { OAuthModule } from 'angular-oauth2-oidc'
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 // import { StoreModule, MetaReducer } from '@ngrx/store';
@@ -20,6 +19,8 @@ import { environment } from '../environments/environment';
 // import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { ShowHidePasswordModule } from './component/show-hide-password/show-hide-password.module';
+import { ShowHidePasswordComponent } from './component/show-hide-password/show-hide-password.component';
 
 // export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
 // export const storeDevTools: ModuleWithProviders[] =
@@ -33,6 +34,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     FormsModule,
     HttpClientModule,
     IonicModule.forRoot(),
+
     NgxSkeletonLoaderModule.forRoot(),
     // provideFirebaseApp(() => initializeApp(environment.firebase)),
     // provideAuth(() => getAuth()),
@@ -41,6 +43,10 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     AngularFireAuthModule,
   ],
   providers: [
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: () => initializeApp,
+    // },
     ...environment.providers,
     // { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

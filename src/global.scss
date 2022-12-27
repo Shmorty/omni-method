@@ -25,6 +25,11 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+* {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
 .new-score-modal {
   --backdrop-opacity: 0.6;
   &::part(backdrop) {
@@ -39,4 +44,12 @@
 }
 .safe-area {
   height: var(--ion-safe-area-top);
+}
+ion-fab[vertical="top"] {
+  margin-top: var(--ion-safe-area-top);
+}
+ion-button[shape="circle"] {
+  --border-radius: 50%;
+  // width: 44px;
+  height: 44px;
 }
