@@ -62,6 +62,6 @@ npm install -g cordova-res
 - resources/splash.png
   3
 
-register and then login got error
-auth.service.ts:79 ERROR Error: Uncaught (in promise): FirebaseError: Firebase: We have blocked all requests from this device due to unusual activity. Try again later. (auth/too-many-requests).
-FirebaseError: Firebase: We have blocked all requests from this device due to unusual activity. Try again later. (auth/too-many-requests).
+Firebase
+omni-login user
+https://console.firebase.google.com/project/omni-login-63e9f/authentication/users
