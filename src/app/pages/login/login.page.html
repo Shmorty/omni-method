@@ -19,6 +19,55 @@
   <ion-grid>
     <ion-row>
       <ion-col>
+        <form>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input
+              [(ngModel)]="email"
+              [ngModelOptions]="{standalone: true}"
+              type="email"
+              required
+            ></ion-input>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-label position="floating">Password</ion-label>
+            <app-show-hide-password>
+              <ion-input
+                [(ngModel)]="password"
+                [ngModelOptions]="{standalone: true}"
+                type="password"
+                required
+              ></ion-input>
+            </app-show-hide-password>
+          </ion-item>
+          <ion-button
+            type="submit"
+            expand="block"
+            (click)="doLogin()"
+            shape="round"
+            >Sign In</ion-button
+          >
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none">
+          <span>
+            <a [routerLink]="['/forgot-password']" class="small-text"
+              >Forgot Password?</a
+            >
+          </span>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="ion-text-center"><p>OR</p></div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
         <ion-button
           routerLink="/home"
           shape="round"
@@ -61,55 +110,6 @@
           <ion-icon slot="start" name="logo-facebook"></ion-icon>
           Continue with Facebook</ion-button
         >
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <div class="ion-text-center"><p>OR</p></div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <form>
-          <ion-item>
-            <ion-label position="floating">Email</ion-label>
-            <ion-input
-              [(ngModel)]="email"
-              [ngModelOptions]="{standalone: true}"
-              type="email"
-              required
-            ></ion-input>
-          </ion-item>
-          <ion-item lines="full">
-            <ion-label position="floating">Password</ion-label>
-            <app-show-hide-password>
-              <ion-input
-                [(ngModel)]="password"
-                [ngModelOptions]="{standalone: true}"
-                type="password"
-                required
-              ></ion-input>
-            </app-show-hide-password>
-          </ion-item>
-          <ion-button
-            type="submit"
-            expand="block"
-            (click)="doLogin()"
-            shape="round"
-            >Sign In</ion-button
-          >
-        </form>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item lines="none">
-          <span>
-            <a [routerLink]="['/forgot-password']" class="small-text"
-              >Forgot Password?</a
-            >
-          </span>
-        </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>

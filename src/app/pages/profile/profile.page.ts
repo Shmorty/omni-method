@@ -41,7 +41,8 @@ export class ProfilePage implements OnInit {
     private userService: UserService,
     private assessmentService: AssessmentService,
     private router: Router,
-    private route: ActivatedRoute // private store: Store<AppState>
+    private route: ActivatedRoute,
+    private modalCtrl: ModalController
   ) {
     // this.assessments = assessmentService.getAssessments()
     // googleApi.userProfileSubject.subscribe( info => {
@@ -150,4 +151,15 @@ export class ProfilePage implements OnInit {
   //   })
 
   // }
+  async openNewScore(e, assessment) {
+    e.stopPropagation();
+    const modal = await this.modalCtrl.create({
+      component: NewScorePage,
+      componentProps: {
+        assessment: assessment,
+      },
+      cssClass: 'new-score-modal',
+    });
+    modal.present();
+  }
 }

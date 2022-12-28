@@ -43,12 +43,18 @@
           }"
         ></ngx-skeleton-loader>
       </span>
+      <span slot="end">
+        <div style="font-weight: 400">Omni Score</div>
+        <div style="font-size: 1.4em; font-weight: 600; text-align: center">
+          {{omniScore}}
+        </div>
+      </span>
     </ion-item>
 
     <ion-item lines="none" color="primary">
       <ion-grid class="ion-text-center" color="">
         <ion-row>
-          <ion-col>
+          <!-- <ion-col>
             <span>
               <div style="font-weight: 400">Omni Score</div>
               <div
@@ -57,7 +63,7 @@
                 {{omniScore}}
               </div>
             </span>
-          </ion-col>
+          </ion-col> -->
         </ion-row>
         <!-- hide weight and height -->
         <!--
@@ -104,13 +110,13 @@
             <div>N/A</div>
           </ion-col> -->
           <ion-col>
-            <ion-icon name="pin"></ion-icon><br />
+            <ion-icon name="pin"></ion-icon>
             Local Rank
             <div>N/A</div>
           </ion-col>
-          <ion-col></ion-col>
+          <!-- <ion-col></ion-col> -->
           <ion-col>
-            <ion-icon name="globe"></ion-icon><br />
+            <ion-icon name="globe"></ion-icon>
             World Rank
             <div>N/A</div>
           </ion-col>
@@ -153,6 +159,7 @@
                 class="score"
                 ngClass="{{scoreClass(assessment)}}"
                 slot="end"
+                (click)="openNewScore($event, assessment)"
                 >{{getRawScore(assessment)}}</ion-badge
               >
             </div>

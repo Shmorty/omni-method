@@ -25,9 +25,25 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+/*
+ * https://fonts.google.com/specimen/Concert+One
+ */
+@font-face {
+  font-family: ConcertOne;
+  src: url(assets/fonts/ConcertOne-Regular.ttf) format("truetype");
+}
+/*
+ * https://fonts.google.com/specimen/Cuprum
+ */
+@font-face {
+  font-family: Cuprum;
+  src: url(assets/fonts/Cuprum-VariableFont_wght.ttf);
+}
 * {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  // font-family: Cuprum;
+  font-family: ConcertOne;
+  // font-family: ConcertOne, "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+  //   sans-serif;
 }
 
 .new-score-modal {

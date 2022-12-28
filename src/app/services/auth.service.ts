@@ -30,6 +30,7 @@ export class AuthService {
       if (user) {
         this.loggedIn.next(true);
         console.log('AuthService: user is logged in');
+        console.log(user);
       } else {
         // not logged in
         this.loggedIn.next(false);
@@ -41,7 +42,7 @@ export class AuthService {
   public isLoggedIn(): boolean {
     // if (!!this.fireauth.currentUser) {
     this.currUserId = localStorage.getItem('userId');
-    console.log('isLoggedIn: ' + this.currUserId);
+    console.log('auth.isLoggedIn: ' + this.currUserId);
     if (this.loggedIn.value) {
       console.log('currUserId: ' + this.currUserId);
       return true;

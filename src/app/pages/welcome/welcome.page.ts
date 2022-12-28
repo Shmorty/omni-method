@@ -13,12 +13,21 @@ export class WelcomePage implements OnInit {
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.auth.currUser;
+    this.auth.currentUser().then((usr) => {
+      console.log('welcome init got current user');
+      if (usr?.emailVerified) {
+        this.router.navigate(['/home']);
+      } else {
+        console.log('welcome init user');
+        console.log(usr);
+      }
+    });
+
     if (this.auth.isLoggedIn()) {
       console.log('User is logged in, go to home page');
       this.router.navigate(['/home']);
     } else {
-      console.log('user is not logged in');
+      console.log('Welcome.page: user is not logged in');
     }
   }
 }
