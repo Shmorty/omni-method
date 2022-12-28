@@ -47,7 +47,7 @@
             <h1 class="center">What is your gender?</h1>
           </div>
           <ion-list>
-            <ion-radio-group value="other">
+            <ion-radio-group formControlName="gender" value="other">
               <ion-item>
                 <ion-label>Male</ion-label>
                 <ion-radio slot="end" value="male"></ion-radio>
@@ -71,7 +71,8 @@
             <!-- <ion-label>DOB</ion-label> -->
             <ion-datetime
               formControlName="dob"
-              presentation="year-month-day"
+              id="dob"
+              presentation="month-day-year"
             ></ion-datetime>
           </ion-item>
         </div>
@@ -114,6 +115,6 @@
     >
     <ion-button [disabled]="formData.invalid" type="submit">Submit</ion-button>
 
-    <!-- <pre>{{formData.value | json}}</pre> -->
+    <pre>{{formData.value | json}}</pre>
   </form>
 </ion-content>

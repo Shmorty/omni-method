@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Assessment } from './store/models/assessment.model';
 import { User } from './store/models/user.model';
 import { AppState } from './store/models/state.model';
+import { AuthService } from './services/auth.service';
 
 // import { GoogleSigninService } from './google-signin.service';
 

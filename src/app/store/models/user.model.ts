@@ -4,6 +4,7 @@ export interface User {
   firstName: string;
   lastName: string;
   nickname?: string;
+  gender?: string;
   avatar?: string;
   dob: Date;
   height?: {

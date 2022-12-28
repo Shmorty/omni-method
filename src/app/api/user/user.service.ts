@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { User } from '../../store/models/user.model';
 import { IUserService } from './user.service.interface';
 import { environment } from 'src/environments/environment';
@@ -17,20 +17,20 @@ export class UserService implements IUserService {
 
   getUser(id: string): Observable<User> {
     console.log('GET ' + environment.baseUrl + '/users/' + id);
-    var response$ = this.http.get<any>(environment.baseUrl + '/users/' + id);
-    return response$;
-  }
-
-  addUser(user: User) {
-    console.log('user.service.saveUser ' + JSON.stringify(user));
-    return this.http
-      .post<User>(environment.baseUrl + `/users`, user)
-      .pipe(catchError(this.handleError));
+    return this.http.get<User>(environment.baseUrl + '/users/' + id).pipe(
+      map((user) => {
+        this._currentUser = user;
+        return user;
+      })
+    );
   }
 
   setUser(user: User): Observable<User> {
-    console.log('TODO: user.service.setUser');
-    return of(user);
+    console.log('add new user');
+    this._currentUser = user;
+    return this.http
+      .post<User>(environment.baseUrl + `/users`, user)
+      .pipe(catchError(this.handleError));
   }
 
   setCurrentUser(user: User) {

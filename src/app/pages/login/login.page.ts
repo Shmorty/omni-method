@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { ShowHidePasswordComponent } from '../../component/show-hide-password/show-hide-password.component';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +8,6 @@ import { ShowHidePasswordComponent } from '../../component/show-hide-password/sh
 })
 export class LoginPage implements OnInit {
   title = 'Login';
-  user = 'none';
   email: string = '';
   password: string = '';
   showPassword = false;

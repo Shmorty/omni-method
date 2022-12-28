@@ -53,8 +53,20 @@ export class ProfilePage implements OnInit {
 
   ngOnInit(): void {
     // this.user$ = this.store.select((store) => store.user);
-    this.userId = this.auth.currUser.id;
-    console.log('set userId: ' + this.userId);
+    this.auth.currentUser().then((usr) => {
+      if (usr == null) {
+        this.router.navigate(['/login']);
+        return;
+      }
+      console.log(usr);
+      this.userId = usr.uid;
+      this.loadData();
+    });
+  }
+
+  loadData() {
+    // load user data
+    console.log('load user data: ' + this.userId);
     this.userService.getUser(this.userId).subscribe(async (data) => {
       console.log(data);
       // await new Promise((f) => setTimeout(f, 5000));
@@ -65,11 +77,12 @@ export class ProfilePage implements OnInit {
       console.log('got user: ' + JSON.stringify(this.user));
       console.log('got scores: ' + JSON.stringify(this.scores));
     });
-
+    // load assessments
     this.assessmentService.getAssessments().subscribe((data) => {
       this.assessments = data['assessments'];
       console.log('got assessments: ' + JSON.stringify(this.assessments));
     });
+    // load categories
     this.assessmentService.getCategories().subscribe((data) => {
       this.categories = data['categories'];
       // sort categories
