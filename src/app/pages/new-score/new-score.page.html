@@ -1,4 +1,4 @@
-<ion-content color="primary">
+<ion-content color="default">
   <!-- <ion-button (click)="dismiss()" slot="end">
     <ion-icon name="close"></ion-icon>
   </ion-button> -->
@@ -78,12 +78,8 @@
     </ion-grid>
     <!-- </div> -->
     <ion-footer>
-      <ion-toolbar color="primary">
-        <ion-button
-          [disabled]="formData.invalid"
-          type="submit"
-          color="tertiary"
-        >
+      <ion-toolbar color="deffault">
+        <ion-button [disabled]="formData.invalid" type="submit" color="primary">
           Submit
         </ion-button>
       </ion-toolbar>
