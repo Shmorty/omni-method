@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable, of, Subject, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { User } from '../../store/models/user.model';
 import { IUserService } from './user.service.interface';
 import { environment } from 'src/environments/environment';
@@ -12,6 +12,7 @@ import { Score } from '../../store/models/score.model';
 })
 export class UserService implements IUserService {
   private _currentUser: User = null;
+  private newScore = new Subject<Score>();
 
   constructor(private http: HttpClient) {}
 
@@ -41,11 +42,21 @@ export class UserService implements IUserService {
     return this._currentUser;
   }
 
+  onNewScore(): Observable<Score> {
+    return this.newScore.asObservable();
+  }
+
   saveScore(score: Score) {
     console.log('user.service.saveScore ' + JSON.stringify(score));
+    // this.newScore.next(score);
     return this.http
       .post<Score>(environment.baseUrl + `/users/${score.uid}/scores`, score)
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(this.handleError))
+      .pipe(
+        tap((m) => {
+          this.newScore.next(m);
+        })
+      );
   }
 
   private handleError(error: HttpErrorResponse) {

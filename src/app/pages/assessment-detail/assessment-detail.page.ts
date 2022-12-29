@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { Score } from '../../store/models/score.model';
 import { AssessmentService } from '../../api/assessments/assessment.service';
 import { Assessment } from '../../store/models/assessment.model';
 import { Category } from '../../store/models/category.model';
 import { NewScorePage } from '../new-score/new-score.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-assessment-detail',
@@ -19,6 +19,7 @@ export class AssessmentDetailPage implements OnInit {
   @Input() scores: Score[];
   constructor(
     private modalCtrl: ModalController,
+    private navController: NavController,
     private router: Router,
     private assessmentService: AssessmentService
   ) {}
@@ -44,6 +45,10 @@ export class AssessmentDetailPage implements OnInit {
       cssClass: 'new-score-modal',
     });
     modal.present();
+    modal.onDidDismiss().then(() => {
+      this.navController.back();
+      // this.loadData();
+    });
   }
 
   // async closeModel() {

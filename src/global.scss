@@ -46,18 +46,18 @@
   //   sans-serif;
 }
 
-.new-score-modal {
-  --backdrop-opacity: 0.6;
-  &::part(backdrop) {
-    backdrop-filter: blur(12px);
-  }
-  &::part(content) {
-    border-radius: 20pt;
-    max-width: 80%;
-    max-height: 50%;
-    margin: auto;
-  }
-}
+// .new-score-modal {
+//   --backdrop-opacity: 0.6;
+//   &::part(backdrop) {
+//     backdrop-filter: blur(12px);
+//   }
+//   &::part(content) {
+//     border-radius: 10pt;
+//     max-width: 80%;
+//     max-height: 50%;
+//     margin: auto;
+//   }
+// }
 .safe-area {
   height: var(--ion-safe-area-top);
 }

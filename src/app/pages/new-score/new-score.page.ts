@@ -11,6 +11,7 @@ import { User } from '../../store/models/user.model';
 import { UserService } from '../../api/user/user.service';
 import { Assessment } from '../../store/models/assessment.model';
 import { Score } from '../../store/models/score.model';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-new-score',

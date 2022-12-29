@@ -7,8 +7,10 @@ import { ProfilePage } from './profile.page';
 
 import { ProfilePageRoutingModule } from './profile-routing.module';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { NewScorePageModule } from '../new-score/new-score.module';
 
 @NgModule({
+  declarations: [ProfilePage],
   imports: [
     IonicModule,
     CommonModule,
@@ -16,7 +18,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     // ExploreContainerComponentModule,
     ProfilePageRoutingModule,
     NgxSkeletonLoaderModule,
+    NewScorePageModule,
   ],
-  declarations: [ProfilePage],
 })
 export class ProfilePageModule {}

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ModalController } from '@ionic/angular';
+import { IonModal, ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 // import { GoogleSigninService, UserInfo } from '../google-signin.service';
 import { Assessment } from '../../store/models/assessment.model';
@@ -10,7 +10,7 @@ import { AssessmentDetailPage } from '../assessment-detail/assessment-detail.pag
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { User } from '../../store/models/user.model';
 import { Score } from '../../store/models/score.model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 // import { Store } from '@ngrx/store';
 import { AppState } from '../../store/models/state.model';
 import { UserService } from '../../api/user/user.service';
@@ -26,6 +26,8 @@ const API_URL = environment.API_URL;
   // pipes: ['category-sort'],
 })
 export class ProfilePage implements OnInit {
+  @ViewChild(IonModal) modal: IonModal;
+  subscription: Subscription;
   userId: any = '0001';
   user: User;
   scores: Score[];
@@ -63,9 +65,12 @@ export class ProfilePage implements OnInit {
       this.userId = usr.uid;
       this.loadData();
     });
+    this.subscription = this.userService.onNewScore().subscribe((score) => {
+      this.loadData();
+    });
   }
 
-  loadData() {
+  loadData(): void {
     // load user data
     console.log('load user data: ' + this.userId);
     this.userService.getUser(this.userId).subscribe(async (data) => {
@@ -160,6 +165,9 @@ export class ProfilePage implements OnInit {
       },
       cssClass: 'new-score-modal',
     });
-    modal.present();
+    await modal.present();
+    modal.onDidDismiss().then(() => {
+      this.loadData();
+    });
   }
 }
