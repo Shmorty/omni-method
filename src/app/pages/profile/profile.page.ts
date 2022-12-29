@@ -66,11 +66,16 @@ export class ProfilePage implements OnInit {
       this.loadData();
     });
     this.subscription = this.userService.onNewScore().subscribe((score) => {
-      this.loadData();
+      this.loadUserData();
     });
   }
 
   loadData(): void {
+    this.loadUserData();
+    this.loadAssessments();
+  }
+
+  loadUserData(): void {
     // load user data
     console.log('load user data: ' + this.userId);
     this.userService.getUser(this.userId).subscribe(async (data) => {
@@ -83,6 +88,9 @@ export class ProfilePage implements OnInit {
       console.log('got user: ' + JSON.stringify(this.user));
       console.log('got scores: ' + JSON.stringify(this.scores));
     });
+  }
+
+  loadAssessments(): void {
     // load assessments
     this.assessmentService.getAssessments().subscribe((data) => {
       this.assessments = data['assessments'];
@@ -167,7 +175,7 @@ export class ProfilePage implements OnInit {
     });
     await modal.present();
     modal.onDidDismiss().then(() => {
-      this.loadData();
+      this.loadUserData();
     });
   }
 }

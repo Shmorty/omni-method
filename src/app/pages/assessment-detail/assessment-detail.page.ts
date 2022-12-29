@@ -45,7 +45,9 @@ export class AssessmentDetailPage implements OnInit {
       cssClass: 'new-score-modal',
     });
     modal.present();
-    modal.onDidDismiss().then(() => {
+    modal.onDidDismiss().then((res) => {
+      console.log('new score dismissed');
+      console.log(res);
       this.navController.back();
       // this.loadData();
     });
