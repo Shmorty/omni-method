@@ -43,6 +43,8 @@ export class AssessmentDetailPage implements OnInit {
         assessment: this.assessment,
       },
       cssClass: 'new-score-modal',
+      presentingElement: document.querySelector('ion-router-outlet'),
+      canDismiss: true,
     });
     modal.present();
     modal.onDidDismiss().then((res) => {

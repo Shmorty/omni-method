@@ -189,6 +189,8 @@ export class ProfilePage implements OnInit {
         assessment: assessment,
       },
       cssClass: 'new-score-modal',
+      presentingElement: document.querySelector('ion-router-outlet'),
+      canDismiss: true,
     });
     await modal.present();
     modal.onDidDismiss().then(() => {
