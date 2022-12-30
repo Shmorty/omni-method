@@ -131,9 +131,9 @@
     </ion-card-header>
 
     <ng-container class="card cardStyle" *ngFor="let category of categories">
-      <ion-card-header type="primary" class="cat-header"
-        >{{category.label}}</ion-card-header
-      >
+      <ion-card-header type="primary" class="cat-header">
+        {{category.label}}: {{categoryScores.get(category.cid)}}
+      </ion-card-header>
       <ng-container *ngFor="let assessment of assessments">
         <ng-container *ngIf="assessment.cid == category.cid">
           <ion-item

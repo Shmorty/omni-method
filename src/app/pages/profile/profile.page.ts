@@ -28,16 +28,17 @@ const API_URL = environment.API_URL;
 export class ProfilePage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
   subscription: Subscription;
-  userId: any = '0001';
+  userId: string;
   user: User;
   scores: Score[];
   userLoaded: boolean = false;
-  omniScore: number = 245;
+  omniScore: number = 0;
+  unadjustedScore: number = 0;
 
   categories: Category[];
   assessments: Assessment[];
+  categoryScores: Map<string, number> = new Map<string, number>();
 
-  // constructor(public httpClient:HttpClient, private readonly googleApi: GoogleSigninService) {
   constructor(
     private auth: AuthService,
     private userService: UserService,
@@ -87,6 +88,7 @@ export class ProfilePage implements OnInit {
       this.userLoaded = true;
       console.log('got user: ' + JSON.stringify(this.user));
       console.log('got scores: ' + JSON.stringify(this.scores));
+      this.calculateScores();
     });
   }
 
@@ -95,6 +97,7 @@ export class ProfilePage implements OnInit {
     this.assessmentService.getAssessments().subscribe((data) => {
       this.assessments = data['assessments'];
       console.log('got assessments: ' + JSON.stringify(this.assessments));
+      this.calculateScores();
     });
     // load categories
     this.assessmentService.getCategories().subscribe((data) => {
@@ -110,7 +113,31 @@ export class ProfilePage implements OnInit {
         }
       });
       console.log('got categories: ' + JSON.stringify(this.categories));
+      this.categories.forEach((cat) => this.categoryScores.set(cat.cid, 0));
+      this.calculateScores();
     });
+  }
+
+  calculateScores() {
+    this.unadjustedScore = 0;
+    this.categories?.forEach((cat) => {
+      let catTotal = 0;
+      const asmts = this.assessments.filter((asmt) => asmt.cid == cat.cid);
+      asmts.forEach((a) => {
+        let arr = this.scores.filter((s) => a.aid == s.aid);
+        if (arr.length > 0) {
+          catTotal += arr[0]?.calculatedScore;
+        }
+      });
+      this.categoryScores.set(
+        cat.cid,
+        Math.round((catTotal / asmts.length) * 100) / 100
+      );
+      this.unadjustedScore += this.categoryScores.get(cat.cid);
+    });
+    this.omniScore = Math.round(
+      Math.pow(this.unadjustedScore / 1500, 2) * 1500
+    );
   }
 
   openDetails(assessment, category) {
@@ -154,16 +181,6 @@ export class ProfilePage implements OnInit {
     return 0;
   }
 
-  // logout() {
-  //   this.googleApi.signOut()
-  // }
-
-  // loadData() {
-  //   this.httpClient.get(`${API_URL}`).subscribe(results => {
-  //     console.log(results);
-  //   })
-
-  // }
   async openNewScore(e, assessment) {
     e.stopPropagation();
     const modal = await this.modalCtrl.create({

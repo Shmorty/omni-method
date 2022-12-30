@@ -37,7 +37,11 @@ export class NewScorePage implements OnInit {
     console.log('assessment: ' + this.assessment.aid);
     console.log(this.today.toLocaleDateString());
     this.formData = new FormGroup({
-      rawScore: new FormControl('', Validators.required),
+      rawScore: new FormControl('', [
+        Validators.required,
+        Validators.min(this.assessment.min),
+        Validators.max(this.assessment.max),
+      ]),
       scoreDate: new FormControl(today, Validators.required),
       notes: new FormControl(''),
     });

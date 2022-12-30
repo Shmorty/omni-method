@@ -1,6 +1,6 @@
 export interface Score {
   uid: string;
-  aid: string | number;
+  aid: string;
   scoreDate: string;
   rawScore: number;
   calculatedScore?: number;
