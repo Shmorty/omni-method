@@ -56,6 +56,7 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('profilePage ngOnInit');
     // this.user$ = this.store.select((store) => store.user);
     this.auth.currentUser().then((usr) => {
       if (usr == null) {
@@ -72,6 +73,7 @@ export class ProfilePage implements OnInit {
   }
 
   loadData(): void {
+    console.log('profilePage loadData');
     this.loadUserData();
     this.loadAssessments();
   }
@@ -93,6 +95,7 @@ export class ProfilePage implements OnInit {
   }
 
   loadAssessments(): void {
+    console.log('load assessments');
     // load assessments
     this.assessmentService.getAssessments().subscribe((data) => {
       this.assessments = data['assessments'];
@@ -122,8 +125,8 @@ export class ProfilePage implements OnInit {
     this.unadjustedScore = 0;
     this.categories?.forEach((cat) => {
       let catTotal = 0;
-      const asmts = this.assessments.filter((asmt) => asmt.cid == cat.cid);
-      asmts.forEach((a) => {
+      const asmts = this.assessments?.filter((asmt) => asmt.cid == cat.cid);
+      asmts?.forEach((a) => {
         let arr = this.scores.filter((s) => a.aid == s.aid);
         if (arr.length > 0) {
           catTotal += arr[0]?.calculatedScore;

@@ -31,10 +31,12 @@ export class AuthService {
         this.loggedIn.next(true);
         console.log('AuthService: user is logged in');
         console.log(user);
+        router.navigate(['/home']);
       } else {
         // not logged in
         this.loggedIn.next(false);
         console.log('AuthService: user has logged off');
+        router.navigate(['/login']);
       }
     });
   }

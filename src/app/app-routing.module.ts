@@ -45,11 +45,17 @@ const routes: Routes = [
   },
   {
     path: 'verify-email',
-    loadChildren: () => import('./pages/verify-email/verify-email.module').then( m => m.VerifyEmailPageModule)
+    loadChildren: () =>
+      import('./pages/verify-email/verify-email.module').then(
+        (m) => m.VerifyEmailPageModule
+      ),
   },
   {
     path: 'forgot-password',
-    loadChildren: () => import('./pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+    loadChildren: () =>
+      import('./pages/forgot-password/forgot-password.module').then(
+        (m) => m.ForgotPasswordPageModule
+      ),
   },
 ];
 @NgModule({

@@ -1,5 +1,13 @@
-<ion-content #scrollarea>
-  <ion-header class="ion-no-border safe-area"> </ion-header>
+<ion-header [translucent]="true">
+  <!-- x-class="ion-no-border safe-area"> -->
+  <ion-toolbar color="primary">
+    <ion-title>Omni Score {{omniScore}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" #scrollarea>
+  <ion-header collapse="condense">
+    <ion-toolbar> </ion-toolbar>
+  </ion-header>
   <ion-card class="card cardStyle topCard">
     <ion-item lines="none" color="primary">
       <span slot="start" *ngIf="userLoaded">
@@ -19,11 +27,11 @@
           appearance="circle"
           animation="pulse"
           [theme]="{
-            'background-color': 'lightgray',
-            'border-radius': '50%',
-             height: '64px',
-             width: '64px'
-          }"
+              'background-color': 'lightgray',
+              'border-radius': '50%',
+               height: '64px',
+               width: '64px'
+            }"
         ></ngx-skeleton-loader>
       </span>
 
@@ -37,10 +45,10 @@
           appearance="line"
           animation="pulse"
           [theme]="{
-            'background-color': 'lightgray',
-             height: '20px',
-             width: '92px'
-          }"
+              'background-color': 'lightgray',
+               height: '20px',
+               width: '92px'
+            }"
         ></ngx-skeleton-loader>
       </span>
       <span slot="end">
@@ -50,7 +58,6 @@
         </div>
       </span>
     </ion-item>
-
     <ion-item lines="none" color="primary">
       <ion-grid class="ion-text-center" color="">
         <ion-row>
