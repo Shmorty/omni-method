@@ -14,4 +14,6 @@ export interface IAssessmentService {
   setCurrentCategory(category: Category): void;
 
   getCurrentCategory(): Observable<Category>;
+
+  getChecklist(aid: string): Array<string>;
 }

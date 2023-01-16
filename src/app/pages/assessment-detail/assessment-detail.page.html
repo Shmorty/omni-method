@@ -14,7 +14,7 @@
     </ion-button>
   </ion-fab>
 
-  <ion-img src="{{assessment.icon}}"></ion-img>
+  <ion-img class="header-img" src="{{assessment.icon}}"></ion-img>
 
   <ion-item>
     <ion-label>
@@ -27,37 +27,54 @@
     </ion-label>
   </ion-item>
 
-  <ion-button expand="block" shape="round" (click)="openNewScore()">
-    <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
-  </ion-button>
+  <div *ngIf="!assessment.checklist">
+    <ion-button expand="block" shape="round" (click)="openNewScore()">
+      <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+    </ion-button>
 
-  <ion-accordion-group>
-    <ion-accordion toggleIconSlot="start">
-      <!-- *ngIf="assessment.scores"> -->
+    <ion-accordion-group>
+      <ion-accordion toggleIconSlot="start">
+        <!-- *ngIf="assessment.scores"> -->
 
-      <!-- <ion-item button detail-icon="create-outline" lines="full"> -->
-      <!-- <ion-item slot="header">scores</ion-item> -->
-      <ion-item
-        *ngFor="let score of scores; first as isFirst"
-        lines="full"
-        slot="{{isFirst ? 'header':'content'}}"
+        <!-- <ion-item button detail-icon="create-outline" lines="full"> -->
+        <!-- <ion-item slot="header">scores</ion-item> -->
+        <ion-item
+          *ngFor="let score of scores; first as isFirst"
+          lines="full"
+          slot="{{isFirst ? 'header':'content'}}"
+        >
+          <ion-label slot="start">
+            <div>{{ assessment.units }}</div>
+            <div style="font-weight: bold">{{ score.rawScore }}</div>
+            <div>{{score.scoreDate | date:'mediumDate' }}</div>
+          </ion-label>
+          <ion-label slot="end">
+            <div class="score-label">Exercise Score:</div>
+            <div class="score">{{ score.calculatedScore }}</div>
+          </ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <ion-item lines="full">
+      <p>{{ assessment.description }}</p>
+    </ion-item>
+  </div>
+  <div *ngIf="assessment.checklist">
+    <div>
+      <span
+        class="card"
+        *ngFor="let item of getCheckList(assessment.aid);  let i = index"
+        [ngClass]="!(i%2) ? 'left' : 'right'"
       >
-        <ion-label slot="start">
-          <div>{{ assessment.units }}</div>
-          <div style="font-weight: bold">{{ score.rawScore }}</div>
-          <div>{{score.scoreDate | date:'mediumDate' }}</div>
-        </ion-label>
-        <ion-label slot="end">
-          <div class="score-label">Exercise Score:</div>
-          <div class="score">{{ score.calculatedScore }}</div>
-        </ion-label>
-      </ion-item>
-    </ion-accordion>
-  </ion-accordion-group>
-
-  <ion-item lines="full">
-    <p>{{ assessment.description }}</p>
-  </ion-item>
+        <ion-img src="{{assessment.icon}}"></ion-img>
+        <span>
+          <ion-text class="card-label">{{item}}</ion-text>
+          <ion-checkbox class="card-check"></ion-checkbox>
+        </span>
+      </span>
+    </div>
+  </div>
 </ion-content>
 
 <!-- <ion-footer>

@@ -6,7 +6,9 @@
         <ion-progress-bar [value]="step / 5"></ion-progress-bar>
         <div *ngIf="step == 1">
           <div class="ion-text-center">
-            <h1 class="center">Create Account</h1>
+            <ion-text color="primary">
+              <h1 class="center">Create Account</h1>
+            </ion-text>
           </div>
           <ion-item>
             <!-- <ion-label>First Name</ion-label> -->
@@ -44,7 +46,9 @@
         </div>
         <div *ngIf="step == 2">
           <div class="ion-text-center">
-            <h1 class="center">What is your gender?</h1>
+            <ion-text color="primary">
+              <h1 class="center">What is your gender?</h1>
+            </ion-text>
           </div>
           <ion-list>
             <ion-radio-group formControlName="gender" value="other">
@@ -65,20 +69,32 @@
         </div>
         <div *ngIf="step == 3">
           <div class="ion-text-center">
-            <h1 class="center">What is your date of birth?</h1>
+            <ion-text color="primary">
+              <h1 class="center">What is your date of birth?</h1>
+            </ion-text>
           </div>
-          <ion-item>
+          <ion-item (click)="openPicker()">
             <!-- <ion-label>DOB</ion-label> -->
-            <ion-datetime
+            <!-- <ion-datetime
               formControlName="dob"
               id="dob"
-              presentation="month-day-year"
-            ></ion-datetime>
+              presentation="date"
+              value="userDob"
+            ></ion-datetime> -->
+            <!-- <ion-button expand="block" (click)="openPicker()"
+              >Open Picker</ion-button
+            > -->
+            <ion-input
+              formControlName="dob"
+              placeholder="MM-DD-YYYY"
+            ></ion-input>
           </ion-item>
         </div>
         <div *ngIf="step == 4">
           <div class="ion-text-center">
-            <h1 class="center">What is your height?</h1>
+            <ion-text color="primary">
+              <h1 class="center">What is your height?</h1>
+            </ion-text>
           </div>
           <fieldset formGroupName="height">
             <ion-item>
@@ -95,7 +111,9 @@
         </div>
         <div *ngIf="step == 5">
           <div class="ion-text-center">
-            <h1 class="center">What is your body weight?</h1>
+            <ion-text color="primary">
+              <h1 class="center">What is your body weight?</h1>
+            </ion-text>
           </div>
           <ion-item>
             <!-- <ion-label>Weight</ion-label> -->
@@ -108,12 +126,10 @@
       </ion-list>
     </div>
     <ion-button type="button" (click)="previous()" [disabled]="step == 1"
-      >Previous</ion-button
+      >Back</ion-button
     >
-    <ion-button type="button" (click)="next()" [disabled]="step == 5"
-      >Next</ion-button
-    >
-    <ion-button [disabled]="formData.invalid" type="submit">Submit</ion-button>
+    <ion-button type="button" (click)="next()">Continue</ion-button>
+    <!-- <ion-button [disabled]="formData.invalid" type="submit">Submit</ion-button> -->
 
     <!-- <pre>{{formData.value | json}}</pre> -->
   </form>

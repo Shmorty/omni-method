@@ -68,7 +68,8 @@ ion-thumbnail[slot="start"] {
   // default is 16px
   margin-inline-start: -13px;
 }
-.fit-thumbnail {
+.fit-thumbnail::part(image) {
+  border-radius: 5px;
   object-fit: contain;
 }
 .cat-header {

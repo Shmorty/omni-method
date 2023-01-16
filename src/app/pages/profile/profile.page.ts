@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IonModal, ModalController } from '@ionic/angular';
+import { AngularDelegate, IonModal, ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 // import { GoogleSigninService, UserInfo } from '../google-signin.service';
 import { Assessment } from '../../store/models/assessment.model';
@@ -60,9 +60,13 @@ export class ProfilePage implements OnInit {
     // this.user$ = this.store.select((store) => store.user);
     this.auth.currentUser().then((usr) => {
       if (usr == null) {
+        console.log('no session send user to login');
         this.router.navigate(['/login']);
         return;
       }
+      console.log('save user data');
+      this.auth.currUserId = usr.uid;
+      this.auth.currUserEmail = usr.email;
       console.log(usr);
       this.userId = usr.uid;
       this.loadData();
@@ -81,17 +85,27 @@ export class ProfilePage implements OnInit {
   loadUserData(): void {
     // load user data
     console.log('load user data: ' + this.userId);
-    this.userService.getUser(this.userId).subscribe(async (data) => {
-      console.log(data);
-      // await new Promise((f) => setTimeout(f, 5000));
-      this.user = data['user'];
-      this.scores = data['scores'];
-      this.userService.setCurrentUser(this.user);
-      this.userLoaded = true;
-      console.log('got user: ' + JSON.stringify(this.user));
-      console.log('got scores: ' + JSON.stringify(this.scores));
-      this.calculateScores();
-    });
+    this.userService.getUser(this.userId).subscribe(
+      async (data) => {
+        console.log(data);
+        // await new Promise((f) => setTimeout(f, 5000));
+        this.user = data['user'];
+        this.scores = data['scores'];
+        if (this.user && Object.keys(this.user).length === 0) {
+          console.log('user not registered, goto new-user');
+          this.router.navigate(['/new-user']);
+          return;
+        }
+        this.userService.setCurrentUser(this.user);
+        this.userLoaded = true;
+        console.log('got user: ' + JSON.stringify(this.user));
+        console.log('got scores: ' + JSON.stringify(this.scores));
+        this.calculateScores();
+      },
+      (err) => {
+        console.log('profilePage getUser error: ' + err.message);
+      }
+    );
   }
 
   loadAssessments(): void {
@@ -122,25 +136,27 @@ export class ProfilePage implements OnInit {
   }
 
   calculateScores() {
-    this.unadjustedScore = 0;
-    this.categories?.forEach((cat) => {
-      let catTotal = 0;
-      const asmts = this.assessments?.filter((asmt) => asmt.cid == cat.cid);
-      asmts?.forEach((a) => {
-        let arr = this.scores.filter((s) => a.aid == s.aid);
-        if (arr.length > 0) {
-          catTotal += arr[0]?.calculatedScore;
-        }
+    if (this.user && this.assessments && this.scores) {
+      this.unadjustedScore = 0;
+      this.categories?.forEach((cat) => {
+        let catTotal = 0;
+        const asmts = this.assessments?.filter((asmt) => asmt.cid == cat.cid);
+        asmts?.forEach((a) => {
+          let arr = this.scores.filter((s) => a.aid == s.aid);
+          if (arr.length > 0) {
+            catTotal += arr[0]?.calculatedScore;
+          }
+        });
+        this.categoryScores.set(
+          cat.cid,
+          Math.round((catTotal / asmts?.length) * 100) / 100
+        );
+        this.unadjustedScore += this.categoryScores.get(cat.cid);
       });
-      this.categoryScores.set(
-        cat.cid,
-        Math.round((catTotal / asmts.length) * 100) / 100
+      this.omniScore = Math.round(
+        Math.pow(this.unadjustedScore / 1500, 2) * 1500
       );
-      this.unadjustedScore += this.categoryScores.get(cat.cid);
-    });
-    this.omniScore = Math.round(
-      Math.pow(this.unadjustedScore / 1500, 2) * 1500
-    );
+    }
   }
 
   openDetails(assessment, category) {

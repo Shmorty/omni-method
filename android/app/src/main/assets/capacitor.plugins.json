@@ -14,5 +14,9 @@
 	{
 		"pkg": "@capacitor/status-bar",
 		"classpath": "com.capacitorjs.plugins.statusbar.StatusBarPlugin"
+	},
+	{
+		"pkg": "@pantrist/capacitor-date-picker",
+		"classpath": "com.getcapacitor.community.datepicker.DatePickerPlugin"
 	}
 ]

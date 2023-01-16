@@ -13,3 +13,6 @@ project(':capacitor-keyboard').projectDir = new File('../node_modules/@capacitor
 
 include ':capacitor-status-bar'
 project(':capacitor-status-bar').projectDir = new File('../node_modules/@capacitor/status-bar/android')
+
+include ':pantrist-capacitor-date-picker'
+project(':pantrist-capacitor-date-picker').projectDir = new File('../node_modules/@pantrist/capacitor-date-picker/android')

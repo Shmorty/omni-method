@@ -55,6 +55,9 @@ export class AssessmentDetailPage implements OnInit {
     });
   }
 
+  getCheckList(aid: string) {
+    return this.assessmentService.getChecklist(aid);
+  }
   // async closeModel() {
   //   const close: string = "Modal Removed";
   //   await this.modalController.dismiss(close);

@@ -19,3 +19,32 @@ ion-accordion-group > ion-accordion:last-of-type ion-item[slot="header"] {
     font-size: small;
   }
 }
+.header-img::part(image) {
+  border-radius: 20px;
+}
+.card {
+  aspect-ratio: 1 / 1;
+  border: solid 1px;
+  border-radius: 10px;
+  color: white;
+  background-color: var(--ion-color-primary);
+  padding: 5px;
+  width: 45%;
+}
+.card-label {
+  float: left;
+  overflow: hidden;
+  width: 80%;
+}
+.card-check {
+  float: right;
+}
+.left {
+  float: left;
+  clear: both;
+  margin: 5px 5px 0 10px;
+}
+.right {
+  float: right;
+  margin: 5px 10px 0 0;
+}

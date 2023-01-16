@@ -22,12 +22,5 @@ export class WelcomePage implements OnInit {
         console.log(usr);
       }
     });
-
-    if (this.auth.isLoggedIn()) {
-      console.log('User is logged in, go to home page');
-      this.router.navigate(['/home']);
-    } else {
-      console.log('Welcome.page: user is not logged in');
-    }
   }
 }

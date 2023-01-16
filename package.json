@@ -34,6 +34,7 @@
     "@capacitor/keyboard": "4.1.0",
     "@capacitor/status-bar": "4.1.1",
     "@ionic/angular": "6.4.1",
+    "@pantrist/capacitor-date-picker": "^1.0.0",
     "angular-oauth2-oidc": "^13.0.1",
     "ngx-skeleton-loader": "^6.0.0",
     "rxjs": "~6.6.0",

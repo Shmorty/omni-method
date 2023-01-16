@@ -6,6 +6,7 @@ import { Category } from '../../store/models/category.model';
 import { IAssessmentService } from './assessment.service.interface';
 import { environment } from '../../../environments/environment';
 import { Score } from '../../store/models/score.model';
+import * as checkList from '../../../assets/data/checkLists.json';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +15,14 @@ export class AssessmentService implements IAssessmentService {
   private _currentAssessment: Assessment;
   private _currentCategory: Category;
   private _currentScores: Score[];
+  private _checkLists; //: Map<string, Array<string>>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this._checkLists = checkList;
+  }
+  getChecklist(aid: string): string[] {
+    return this._checkLists[aid];
+  }
 
   getCategories(): Observable<Category[]> {
     return this.http.get<any>(environment.baseUrl + '/categories');

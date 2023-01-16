@@ -36,7 +36,7 @@ export class AuthService {
         // not logged in
         this.loggedIn.next(false);
         console.log('AuthService: user has logged off');
-        router.navigate(['/login']);
+        router.navigate(['/welcome']);
       }
     });
   }
@@ -63,13 +63,13 @@ export class AuthService {
     this.fireauth.signInWithEmailAndPassword(email, password).then(
       (res) => {
         localStorage.setItem('userId', res.user.uid);
-        if (res.user?.emailVerified == true) {
-          this.saveUser(res);
-          this.router.navigate(['home']);
-        } else {
-          this.sendVerificationMail();
-          this.router.navigate(['verify-email']);
-        }
+        // if (res.user?.emailVerified == true) {
+        this.saveUser(res);
+        this.router.navigate(['home']);
+        // } else {
+        //   this.sendVerificationMail();
+        //   this.router.navigate(['verify-email']);
+        // }
       },
       (err) => {
         console.log(err);
@@ -89,7 +89,7 @@ export class AuthService {
       (res) => {
         this.saveUser(res);
         this.router.navigate(['/new-user']);
-        this.sendVerificationMail();
+        // this.sendVerificationMail();
         // this.currUserId = res.user.uid;
         // this.currUserEmail = res.user.email;
         // this.saveUser(res);
