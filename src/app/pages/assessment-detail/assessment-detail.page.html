@@ -60,21 +60,28 @@
       <p>{{ assessment.description }}</p>
     </ion-item>
   </div>
-  <div *ngIf="assessment.checklist">
-    <div>
-      <span
-        class="card"
-        *ngFor="let item of getCheckList(assessment.aid);  let i = index"
-        [ngClass]="!(i%2) ? 'left' : 'right'"
-      >
-        <ion-img src="{{assessment.icon}}"></ion-img>
-        <span>
-          <ion-text class="card-label">{{item}}</ion-text>
+  <ion-list *ngIf="assessment.checklist">
+    <ion-grid
+      button
+      class="card"
+      *ngFor="let item of getCheckList(assessment.aid);  let i = index"
+      (click)="toggleCheckItem(item)"
+    >
+      <ion-row>
+        <ion-col>
+          <ion-img src="{{assessment.icon}}"></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="9">
+          <ion-label color="primary" class="card-label">{{item}}</ion-label>
+        </ion-col>
+        <ion-col size="3">
           <ion-checkbox class="card-check"></ion-checkbox>
-        </span>
-      </span>
-    </div>
-  </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
 </ion-content>
 
 <!-- <ion-footer>

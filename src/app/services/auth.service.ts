@@ -119,7 +119,7 @@ export class AuthService {
     this.fireauth.signOut().then(
       () => {
         localStorage.removeItem('userId');
-        this.router.navigate(['/login']);
+        this.router.navigate(['/welcome']);
       },
       (err) => {
         alert(err.message);

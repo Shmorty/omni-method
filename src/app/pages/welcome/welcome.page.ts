@@ -15,12 +15,12 @@ export class WelcomePage implements OnInit {
   ngOnInit() {
     this.auth.currentUser().then((usr) => {
       console.log('welcome init got current user');
-      if (usr?.emailVerified) {
-        this.router.navigate(['/home']);
-      } else {
-        console.log('welcome init user');
-        console.log(usr);
-      }
+      // if (usr?.emailVerified) {
+      //   this.router.navigate(['/home']);
+      // } else {
+      //   console.log('welcome init user');
+      //   console.log(usr);
+      // }
     });
   }
 }

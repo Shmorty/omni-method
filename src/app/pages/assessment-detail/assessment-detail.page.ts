@@ -58,6 +58,10 @@ export class AssessmentDetailPage implements OnInit {
   getCheckList(aid: string) {
     return this.assessmentService.getChecklist(aid);
   }
+
+  toggleCheckItem(item) {
+    console.log(item);
+  }
   // async closeModel() {
   //   const close: string = "Modal Removed";
   //   await this.modalController.dismiss(close);
