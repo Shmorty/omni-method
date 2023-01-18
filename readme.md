@@ -16,6 +16,24 @@ need to install
 - capacitor
   npm i -g @ionic/cli
 
+```
+% npm list --global
+/usr/local/lib
+├── @angular/cli@15.1.1
+├── @aws-amplify/cli@10.6.2
+├── @ionic/cli@6.20.8
+├── @nrwl/schematics@8.12.11
+├── cordova-res@0.15.4
+├── corepack@0.15.3
+├── firebase-tools@11.20.0
+├── json-server@0.17.1
+├── n@9.0.1
+├── npm@9.3.1
+├── nx@15.5.2
+├── serverless@3.26.0
+└── typescript@4.9.4
+```
+
 to build locally
 
 1. clone repo
