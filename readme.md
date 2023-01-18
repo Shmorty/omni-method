@@ -1,9 +1,11 @@
-built with
+# Omni Method
 
-- Angular https://angular.io/
+## built with
+
+- Angular <https://angular.io/>
 - Capactor
-  -- https://capacitorjs.com/
-  -- https://capacitorjs.com/solution/angular
+  -- <https://capacitorjs.com/>
+  -- <https://capacitorjs.com/solution/angular>
 - Ionic
 
 need to install
@@ -20,17 +22,70 @@ to build locally
 2. run npm install
 3. ionic serve
 
-Using NgRx
-helpful article https://www.concretepage.com/ngrx/ngrx-effects-example
+## Using NgRx
 
-#Setting up google authentication
-https://developers.google.com/identity/gsi/web/guides/client-library
+helpful article <https://www.concretepage.com/ngrx/ngrx-effects-example>
+<https://eliteionic.com/tutorials/using-ngrx-for-state-management-in-an-ionic-angular-application/>
 
-https://console.cloud.google.com/apis/dashboard
+### App State
+
+```json
+{
+  "Auth": {
+    "email": "fake@email.com",
+    "emailValidate": true,
+    "uid": "123",
+  },
+  "User": {
+    "uid": "123",
+    "email": "test@email.com",
+    "firstName": "John",
+    "lastName": "Doe",
+    "nickName": "Jake",
+    "dob": "2007-08-30",
+    "weight": 129,
+  },
+  "scores": [
+    {
+      "calculatedScore":360,
+      "notes":"",
+      "scoreDate":"1/16/2023",
+      "aid":"BNCH",
+      "rawScore":216,
+      "uid":"anJJeMDX6RTHDNOCPpPIxOObLy92",
+    }
+  ],
+  "Assessments": [
+    {
+      "max":70,
+      "min":20,
+      "icon":"/assets/images/Agility.jpg",
+      "label":"Agility",
+      "aid":"AGLTY",
+      "cid":"NEUR",
+      "description":"Must touch cone with hand. Order of cones must be followed. Feet cannot cross during the left and right cones."
+    },
+  ],
+  "Categories": [],
+}
+```
+
+### Actions
+
+- new user
+- new score
+
+## Setting up google authentication
+
+<https://developers.google.com/identity/gsi/web/guides/client-library>
+
+<https://console.cloud.google.com/apis/dashboard>
 
 Add to index.html
 
+```html
 <script src="https://accounts.google.com/gsi/client" async defer></script>
+```
 
 Then add typescript types
 npm install @types/gapi.auth2
@@ -64,4 +119,4 @@ npm install -g cordova-res
 
 Firebase
 omni-login user
-https://console.firebase.google.com/project/omni-login-63e9f/authentication/users
+<https://console.firebase.google.com/project/omni-login-63e9f/authentication/users>

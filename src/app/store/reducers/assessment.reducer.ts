@@ -3,26 +3,29 @@ import {
   AssessmentAction,
   AssessmentActionType,
 } from '../actions/assessment.actions';
-// create a dummy initial state
-const initialState: Array<Assessment> = [
-  {
-    id: 0,
-    label: '',
-    description: '',
-    min: 0,
-    max: 10,
-    icon: '',
-    scores: [],
-    units: '',
-  },
-];
-export function assessmentReducer(
-  state: Array<Assessment> = initialState,
+
+export interface AssessmentState {
+  assessments: Assessment[];
+}
+
+export const initialState: AssessmentState = {
+  assessments: [],
+};
+
+export function reducer(
+  state = initialState,
   action: AssessmentAction
-) {
+): AssessmentState {
   switch (action.type) {
+    case AssessmentActionType.GET_ASSESSMENTS:
+      return {
+        assessments: [...state.assessments],
+      };
+      break;
     case AssessmentActionType.ADD_ASSESSMENT:
-      return [...state, action.payload];
+      return {
+        assessments: [...state.assessments, action.payload],
+      };
       break;
     default:
       return state;

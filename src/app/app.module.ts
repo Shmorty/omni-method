@@ -9,7 +9,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 // import { storeFreeze } from 'ngrx-store-freeze';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { assessmentReducer } from './store/reducers/assessment.reducer';
 import { FormsModule } from '@angular/forms';
 // import { userReducer } from './store/reducers/user.reducer';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
@@ -28,6 +27,8 @@ import { from } from 'rxjs';
 import { first, take } from 'rxjs/operators';
 import { getAuth, onAuthStateChanged } from '@firebase/auth';
 import { user } from '@angular/fire/auth';
+import { StoreModule } from '@ngrx/store';
+import { metaReducers, reducers } from './store';
 
 // export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
 // export const storeDevTools: ModuleWithProviders[] =
@@ -48,6 +49,7 @@ import { user } from '@angular/fire/auth';
     // provideFirestore(() => getFirestore()),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
   ],
   providers: [
     // ...environment.providers,

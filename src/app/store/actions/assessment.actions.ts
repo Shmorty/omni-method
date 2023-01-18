@@ -1,4 +1,4 @@
-// import { Action } from "@ngrx/store";
+import { Action } from '@ngrx/store';
 import { Assessment } from '../models/assessment.model';
 
 export enum AssessmentActionType {
@@ -6,15 +6,13 @@ export enum AssessmentActionType {
   ADD_ASSESSMENT = '[Assessment] Add User Assessment',
 }
 
-export class GetAssessmentsAction {
-  //implements Action
+export class GetAssessmentsAction implements Action {
   readonly type = AssessmentActionType.GET_ASSESSMENTS;
 
   constructor() {}
 }
 
-export class AddAssessmentsAction {
-  //implements Action
+export class AddAssessmentsAction implements Action {
   readonly type = AssessmentActionType.ADD_ASSESSMENT;
 
   constructor(public payload: Assessment) {}
