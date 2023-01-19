@@ -32,3 +32,9 @@ export function reducer(
       break;
   }
 }
+
+export const getAssessments = (state: AssessmentState) => state.assessments;
+export const getAttributesByCategory = (
+  state: AssessmentState,
+  props: { cid: string }
+) => state.assessments.find((assessment) => assessment.cid === props.cid);
