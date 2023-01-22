@@ -27,3 +27,5 @@ export function reducer(
       break;
   }
 }
+
+export const getCategories = (state: CategoryState) => state.categories;

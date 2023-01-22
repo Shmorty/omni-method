@@ -34,7 +34,7 @@ export function reducer(
 }
 
 export const getAssessments = (state: AssessmentState) => state.assessments;
-export const getAttributesByCategory = (
+export const getAssessmentsByCategory = (
   state: AssessmentState,
   props: { cid: string }
 ) => state.assessments.find((assessment) => assessment.cid === props.cid);

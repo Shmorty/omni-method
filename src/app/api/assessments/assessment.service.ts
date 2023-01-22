@@ -12,6 +12,8 @@ import * as checkList from '../../../assets/data/checkLists.json';
   providedIn: 'root',
 })
 export class AssessmentService implements IAssessmentService {
+  public categories: Observable<Category[]>;
+
   private _currentAssessment: Assessment;
   private _currentCategory: Category;
   private _currentScores: Score[];
