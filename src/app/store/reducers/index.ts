@@ -1,8 +1,13 @@
 import { createSelector } from '@ngrx/store';
 import { State } from '..';
-import { AppState } from '../models/state.model';
+// import { AppState } from '../models/state.model';
 import * as fromAssessment from './assessment.reducer';
 import * as fromCategories from './category.reducer';
+
+export interface AppState {
+  assessments: fromAssessment.AssessmentState;
+  categories: fromCategories.CategoryState;
+}
 
 export const getAssessmentState = (state: State) => state.assessments;
 

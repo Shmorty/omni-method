@@ -66,6 +66,7 @@
       class="card"
       *ngFor="let item of getCheckList(assessment.aid);  let i = index"
       (click)="toggleCheckItem(item)"
+      [ngClass]="!(i%2) ? 'left' : 'right'"
     >
       <ion-row>
         <ion-col>

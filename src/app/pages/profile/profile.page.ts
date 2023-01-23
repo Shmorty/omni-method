@@ -149,7 +149,8 @@ export class ProfilePage implements OnInit {
         });
         this.categoryScores.set(
           cat.cid,
-          Math.round((catTotal / asmts?.length) * 100) / 100
+          // Math.round((catTotal / asmts?.length) * 100) / 100
+          Math.round(catTotal / asmts?.length)
         );
         this.unadjustedScore += this.categoryScores.get(cat.cid);
       });
