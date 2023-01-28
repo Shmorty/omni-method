@@ -1,0 +1,34 @@
+{
+  "categories": [
+    {
+      "cid": "STRG",
+      "label": "Strength",
+      "seq": 0
+    },
+    {
+      "cid": "ENDR",
+      "label": "Endurance",
+      "seq": 1
+    },
+    {
+      "cid": "POWR",
+      "label": "Power",
+      "seq": 2
+    },
+    {
+      "cid": "FLEX",
+      "label": "Flexibility",
+      "seq": 3
+    },
+    {
+      "cid": "META",
+      "label": "Cardiorespiratory",
+      "seq": 4
+    },
+    {
+      "cid": "NEUR",
+      "label": "Neuromotor",
+      "seq": 5
+    }
+  ]
+}
