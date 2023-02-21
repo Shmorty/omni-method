@@ -4,7 +4,7 @@ import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/api/user/user.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/store/models/user.model';
+import { User } from 'src/app/store/user/user.model';
 import { DatePicker, DatePickerOptions } from '@pantrist/capacitor-date-picker';
 import { isPlatform } from '@ionic/angular';
 

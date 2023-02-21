@@ -8,7 +8,7 @@ import {
 } from '@angular/fire/auth';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { UserService } from '../api/user/user.service';
-import { User } from '../store/models/user.model';
+import { User } from '../store/user/user.model';
 // import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 @Injectable({

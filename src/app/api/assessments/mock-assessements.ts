@@ -1,5 +1,5 @@
 import { AngularDelegate } from '@ionic/angular';
-import { Category } from '../../store/models/category.model';
+import { Category } from '../../store/categories/category.model';
 
 export const DATA: Category[] = [
   {

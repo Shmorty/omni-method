@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 // import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Assessment } from './store/models/assessment.model';
-import { User } from './store/models/user.model';
-import { AppState } from './store/models/state.model';
+import { Assessment } from './store/assessments/assessment.model';
+import { User } from './store/user/user.model';
+import { AppState } from './store/app.state';
 import { AuthService } from './services/auth.service';
+import { CategoriesService } from './services/categories.service';
+import { AssessmentService } from './api/assessments/assessment.service';
+import { UserService } from './api/user/user.service';
 
 // import { GoogleSigninService } from './google-signin.service';
 
@@ -24,6 +27,19 @@ export class AppComponent implements OnInit {
 
   // constructor(private readonly google: GoogleSigninService) {}
   // constructor(private store: Store<AppState>) {}
+
+  constructor(
+    private categoryService: CategoriesService,
+    private assessmentService: AssessmentService,
+    private userService: UserService
+  ) {
+    console.log('categoryService.load()');
+    categoryService.load();
+    console.log('assessmentService.load()');
+    assessmentService.load();
+    console.log('userService.load()');
+    userService.load();
+  }
 
   ngOnInit(): void {
     // this.assessments$ = this.store.select((store) => store.assessments);

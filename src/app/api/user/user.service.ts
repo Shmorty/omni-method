@@ -2,10 +2,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { User } from '../../store/models/user.model';
+import { User } from '../../store/user/user.model';
 import { IUserService } from './user.service.interface';
 import { environment } from 'src/environments/environment';
 import { Score } from '../../store/models/score.model';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.state';
+import * as UserActions from '../../store/user/user.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +17,11 @@ export class UserService implements IUserService {
   private _currentUser: User = null;
   private newScore = new Subject<Score>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store<AppState>) {}
+
+  load() {
+    this.store.dispatch(UserActions.loadUserAction());
+  }
 
   getUser(id: string): Observable<User> {
     console.log('GET ' + environment.baseUrl + '/users/' + id);

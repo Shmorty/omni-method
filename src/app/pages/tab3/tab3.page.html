@@ -2,4 +2,10 @@
   <ion-header class="ion-no-border safe-area"> </ion-header>
   <h2>Rankings</h2>
   <ion-button (click)="logout()">logout</ion-button>
+  <ion-text>Categories</ion-text>
+  <ion-list>
+    <ion-item *ngFor="let category of categories$ | async">
+      <ion-label>{{category.label}}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

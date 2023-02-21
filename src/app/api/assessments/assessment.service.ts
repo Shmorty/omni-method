@@ -1,25 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Assessment } from '../../store/models/assessment.model';
-import { Category } from '../../store/models/category.model';
+import { Assessment } from '../../store/assessments/assessment.model';
+import { Category } from '../../store/categories/category.model';
 import { IAssessmentService } from './assessment.service.interface';
 import { environment } from '../../../environments/environment';
 import { Score } from '../../store/models/score.model';
 import * as checkList from '../../../assets/data/checkLists.json';
 import { Store } from '@ngrx/store';
-// import { AppState } from 'src/app/store/models/state.model';
-import {
-  AppState,
-  getCategories,
-  getAssessments,
-} from 'src/app/store/reducers';
+import { AppState } from 'src/app/store/app.state';
+import { selectAllCategories } from 'src/app/store/categories/category.selector';
+import { selectAllAssessments } from 'src/app/store/assessments/assessment.selector';
+import * as AssessmentActions from '../../store/assessments/assessment.actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AssessmentService implements IAssessmentService {
-  public categories: Observable<Category[]>;
+  public categories$: Observable<Category[]>;
   public assessments: Observable<Assessment[]>;
 
   private _currentAssessment: Assessment;
@@ -28,9 +26,17 @@ export class AssessmentService implements IAssessmentService {
   private _checkLists; //: Map<string, Array<string>>;
 
   constructor(private http: HttpClient, private store: Store<AppState>) {
-    this.categories = this.store.select(getCategories);
-    this.assessments = this.store.select(getAssessments);
+    this.categories$ = this.store.select(selectAllCategories);
+    this.assessments = this.store.select(selectAllAssessments);
     this._checkLists = checkList;
+  }
+
+  loadData() {
+    return this.http.get('assets/data/assessments.json');
+  }
+
+  load() {
+    this.store.dispatch(AssessmentActions.loadAssessmentsBegin());
   }
 
   getChecklist(aid: string): string[] {

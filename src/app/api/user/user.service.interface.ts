@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { User } from '../../store/models/user.model';
+import { User } from '../../store/user/user.model';
 
 export interface IUserService {
   // return current user

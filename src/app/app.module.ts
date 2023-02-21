@@ -1,21 +1,15 @@
 import { HttpClientModule } from '@angular/common/http';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, isDevMode, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-// import { StoreModule, MetaReducer } from '@ngrx/store';
-// import { EffectsModule } from '@ngrx/effects';
-// import { storeFreeze } from 'ngrx-store-freeze';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-// import { userReducer } from './store/reducers/user.reducer';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-// import { provideAuth, getAuth } from '@angular/fire/auth';
-// import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ShowHidePasswordModule } from './component/show-hide-password/show-hide-password.module';
@@ -28,7 +22,13 @@ import { first, take } from 'rxjs/operators';
 import { getAuth, onAuthStateChanged } from '@firebase/auth';
 import { user } from '@angular/fire/auth';
 import { StoreModule } from '@ngrx/store';
-import { metaReducers, reducers } from './store';
+import { EffectsModule } from '@ngrx/effects';
+import { categoryReducer } from './store/categories/category.reducer';
+import { CategoryEffects } from './store/categories/category.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers } from './store/app.state';
+import { AssessmentEffects } from './store/assessments/assessment.effects';
+import { UserEffects } from './store/user/user.effect';
 
 // export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
 // export const storeDevTools: ModuleWithProviders[] =
@@ -49,7 +49,15 @@ import { metaReducers, reducers } from './store';
     // provideFirestore(() => getFirestore()),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, {}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: !isDevMode(), // Restrict extension to log-only mode
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+      trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
+      traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
+    }),
+    EffectsModule.forRoot([CategoryEffects, AssessmentEffects, UserEffects]),
   ],
   providers: [
     // ...environment.providers,

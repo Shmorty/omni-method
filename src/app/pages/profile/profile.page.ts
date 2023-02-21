@@ -1,21 +1,22 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { AngularDelegate, IonModal, ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 // import { GoogleSigninService, UserInfo } from '../google-signin.service';
-import { Assessment } from '../../store/models/assessment.model';
-import { Category } from '../../store/models/category.model';
+import { Assessment } from '../../store/assessments/assessment.model';
+import { Category } from '../../store/categories/category.model';
 import { AssessmentService } from '../../api/assessments/assessment.service';
 import { AssessmentDetailPage } from '../assessment-detail/assessment-detail.page';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { User } from '../../store/models/user.model';
+import { User } from '../../store/user/user.model';
 import { Score } from '../../store/models/score.model';
 import { Observable, Subscription } from 'rxjs';
-// import { Store } from '@ngrx/store';
-import { AppState } from '../../store/models/state.model';
+import { AppState } from '../../store/app.state';
 import { UserService } from '../../api/user/user.service';
 import { NewScorePage } from '../new-score/new-score.page';
 import { AuthService } from 'src/app/services/auth.service';
+import { Store } from '@ngrx/store';
+import { selectAllCategories } from 'src/app/store/categories/category.selector';
+import { selectAllAssessments } from 'src/app/store/assessments/assessment.selector';
 
 const API_URL = environment.API_URL;
 
@@ -35,11 +36,16 @@ export class ProfilePage implements OnInit {
   omniScore: number = 0;
   unadjustedScore: number = 0;
 
+  // using global ngrx store
+  public categories$ = this.store.select(selectAllCategories);
+  public assessments$ = this.store.select(selectAllAssessments);
+
   categories: Category[];
   assessments: Assessment[];
   categoryScores: Map<string, number> = new Map<string, number>();
 
   constructor(
+    private store: Store,
     private auth: AuthService,
     private userService: UserService,
     private assessmentService: AssessmentService,
@@ -79,7 +85,7 @@ export class ProfilePage implements OnInit {
   loadData(): void {
     console.log('profilePage loadData');
     this.loadUserData();
-    this.loadAssessments();
+    // this.loadAssessments();
   }
 
   loadUserData(): void {

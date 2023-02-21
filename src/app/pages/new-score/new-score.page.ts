@@ -7,9 +7,9 @@ import {
 } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
-import { User } from '../../store/models/user.model';
+import { User } from '../../store/user/user.model';
 import { UserService } from '../../api/user/user.service';
-import { Assessment } from '../../store/models/assessment.model';
+import { Assessment } from '../../store/assessments/assessment.model';
 import { Score } from '../../store/models/score.model';
 import { Observable, Subject } from 'rxjs';
 

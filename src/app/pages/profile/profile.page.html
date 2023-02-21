@@ -143,11 +143,14 @@
       <ion-card-title>All Assessments</ion-card-title>
     </ion-card-header>
 
-    <ng-container class="card cardStyle" *ngFor="let category of categories">
+    <ng-container
+      class="card cardStyle"
+      *ngFor="let category of categories$ | async"
+    >
       <ion-card-header type="primary" class="cat-header">
         {{category.label}}: {{categoryScores.get(category.cid)}}
       </ion-card-header>
-      <ng-container *ngFor="let assessment of assessments">
+      <ng-container *ngFor="let assessment of assessments$ | async">
         <ng-container *ngIf="assessment.cid == category.cid">
           <ion-item
             (click)="openDetails(assessment, category)"

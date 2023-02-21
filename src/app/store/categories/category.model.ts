@@ -1,4 +1,4 @@
-import { Assessment } from './assessment.model';
+import { Assessment } from '../assessments/assessment.model';
 
 export interface Category {
   // id: number;

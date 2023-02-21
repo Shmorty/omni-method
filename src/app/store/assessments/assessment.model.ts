@@ -1,4 +1,4 @@
-import { Score } from './score.model';
+import { Score } from '../models/score.model';
 
 export interface Assessment {
   id: number;
