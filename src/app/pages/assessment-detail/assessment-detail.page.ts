@@ -5,9 +5,14 @@ import { Score } from '../../store/models/score.model';
 import { AssessmentService } from '../../api/assessments/assessment.service';
 import { Assessment, Category } from '../../store/assessments/assessment.model';
 import { NewScorePage } from '../new-score/new-score.page';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { assessmentScores } from 'src/app/store/user/user.selectors';
+import {
+  selectAssessmentById,
+  selectCategoryById,
+} from 'src/app/store/assessments/assessment.selector';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-assessment-detail',
@@ -19,16 +24,23 @@ export class AssessmentDetailPage implements OnInit {
   @Input() category: Category;
   @Input() scores: Score[];
   public scores$ = this.store.select(assessmentScores);
+  public category$: Observable<Category>;
+  public assessment$: Observable<Assessment>;
 
   constructor(
     private store: Store,
+    private route: ActivatedRoute,
     private modalCtrl: ModalController,
     private navController: NavController,
-    private router: Router,
     private assessmentService: AssessmentService
   ) {}
 
   ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      console.log(params);
+      this.category$ = this.store.select(selectCategoryById(params.cid));
+      this.assessment$ = this.store.select(selectAssessmentById(params.aid));
+    });
     // this.assessmentService.getCurrentCategory().subscribe((data) => {
     //   this.category = data;
     // });

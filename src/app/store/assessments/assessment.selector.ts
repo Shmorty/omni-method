@@ -13,10 +13,15 @@ export const selectAllCategories = createSelector(
   (assessmentState: AssessmentState) => assessmentState.categories
 );
 
-// export const getAssessmentsByCategory = (
-//   state: AssessmentState,
-//   props: { cid: string }
-// ) => state.assessments.find((assessment) => assessment.cid === props.cid);
+export const selectCategoryById = (cid: string) =>
+  createSelector(selectAssessments, (state: AssessmentState) =>
+    state.categories.find((category) => category.cid === cid)
+  );
+
+export const selectAssessmentById = (aid: string) =>
+  createSelector(selectAssessments, (state: AssessmentState) =>
+    state.assessments.find((assessment) => assessment.aid === aid)
+  );
 
 export const assessmentsByCategory = (category: Category) =>
   createSelector(selectAllAssessments, (assessment) => {

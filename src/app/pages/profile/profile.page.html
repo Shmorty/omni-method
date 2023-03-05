@@ -163,7 +163,7 @@
       <ng-container *ngFor="let assessment of assessments$ | async">
         <ng-container *ngIf="assessment.cid == category.cid">
           <ion-item
-            (click)="openDetails(assessment, category)"
+            (click)="openDetails(assessment)"
             style="--inner-border-width: 0"
           >
             <ion-thumbnail slot="start">

@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content *ngIf="(assessment$ | async) as assessment">
   <ion-header class="ion-no-border safe-area"> </ion-header>
 
   <ion-fab vertical="top" horizontal="start" slot="fixed">
@@ -14,20 +14,20 @@
     </ion-button>
   </ion-fab>
 
-  <ion-img class="header-img" src="{{assessment?.icon}}"></ion-img>
+  <ion-img class="header-img" src="{{assessment.icon}}"></ion-img>
 
   <ion-item>
     <ion-label>
       <ion-card-title>
-        <h1>{{ assessment?.label }}</h1>
+        <h1>{{ assessment.label }}</h1>
       </ion-card-title>
       <ion-card-subtitle>
-        <h5>{{ category?.label }}</h5>
+        <h5>{{ (category$ | async).label }}</h5>
       </ion-card-subtitle>
     </ion-label>
   </ion-item>
 
-  <div *ngIf="!assessment?.checklist">
+  <div *ngIf="!assessment.checklist">
     <ion-button expand="block" shape="round" (click)="openNewScore()">
       <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
     </ion-button>
@@ -57,14 +57,14 @@
     </ion-accordion-group>
 
     <ion-item lines="full">
-      <p>{{ assessment?.description }}</p>
+      <p>{{ assessment.description }}</p>
     </ion-item>
   </div>
-  <ion-list *ngIf="assessment?.checklist">
+  <ion-list *ngIf="assessment.checklist">
     <ion-grid
       button
       class="card"
-      *ngFor="let item of getCheckList(assessment?.aid);  let i = index"
+      *ngFor="let item of getCheckList(assessment.aid);  let i = index"
       (click)="toggleCheckItem(item)"
       [ngClass]="!(i%2) ? 'left' : 'right'"
     >

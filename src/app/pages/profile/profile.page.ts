@@ -103,16 +103,13 @@ export class ProfilePage implements OnInit {
     return this.scores?.filter((element) => element.aid == assessment.aid);
   }
 
-  openDetails(assessment, category) {
-    this.assessmentService.setCurrentCategory(category);
-    this.assessmentService.setCurrentAssessment(assessment);
-    this.assessmentService.setCurrentScores(this.getScores(assessment));
-    this.router.navigate([
-      '/home',
-      'profile',
-      'details',
-      { aid: assessment.aid },
-    ]);
+  openDetails(assessment) {
+    // this.assessmentService.setCurrentCategory(category);
+    // this.assessmentService.setCurrentAssessment(assessment);
+    // this.assessmentService.setCurrentScores(this.getScores(assessment));
+    this.router.navigate(['/home', 'profile', 'details'], {
+      queryParams: { aid: assessment.aid, cid: assessment.cid },
+    });
   }
 
   isLoggedIn(): boolean {
