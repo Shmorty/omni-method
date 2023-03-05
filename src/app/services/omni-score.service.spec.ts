@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CategoriesService } from './categories.service';
+import { OmniScoreService } from './omni-score.service';
 
-describe('CategoriesService', () => {
-  let service: CategoriesService;
+describe('OmniScoreService', () => {
+  let service: OmniScoreService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CategoriesService);
+    service = TestBed.inject(OmniScoreService);
   });
 
   it('should be created', () => {

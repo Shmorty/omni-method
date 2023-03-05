@@ -1,5 +1,5 @@
 import { AngularDelegate } from '@ionic/angular';
-import { Category } from '../../store/categories/category.model';
+import { Category } from '../../store/omni-score/omni-score.model';
 
 export const DATA: Category[] = [
   {

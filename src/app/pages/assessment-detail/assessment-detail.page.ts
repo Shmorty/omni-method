@@ -3,8 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { Score } from '../../store/models/score.model';
 import { AssessmentService } from '../../api/assessments/assessment.service';
-import { Assessment } from '../../store/assessments/assessment.model';
-import { Category } from '../../store/categories/category.model';
+import { Assessment, Category } from '../../store/assessments/assessment.model';
 import { NewScorePage } from '../new-score/new-score.page';
 import { Router } from '@angular/router';
 

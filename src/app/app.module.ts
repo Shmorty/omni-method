@@ -23,12 +23,11 @@ import { getAuth, onAuthStateChanged } from '@firebase/auth';
 import { user } from '@angular/fire/auth';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { categoryReducer } from './store/categories/category.reducer';
-import { CategoryEffects } from './store/categories/category.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './store/app.state';
 import { AssessmentEffects } from './store/assessments/assessment.effects';
 import { UserEffects } from './store/user/user.effect';
+import { OmniScoreEffects } from './store/omni-score/omni-score.effects';
 
 // export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
 // export const storeDevTools: ModuleWithProviders[] =
@@ -42,7 +41,6 @@ import { UserEffects } from './store/user/user.effect';
     FormsModule,
     HttpClientModule,
     IonicModule.forRoot(),
-
     NgxSkeletonLoaderModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     // provideAuth(() => getAuth()),
@@ -50,6 +48,7 @@ import { UserEffects } from './store/user/user.effect';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     StoreModule.forRoot(reducers, {}),
+    EffectsModule.forRoot([AssessmentEffects, UserEffects, OmniScoreEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
@@ -57,7 +56,6 @@ import { UserEffects } from './store/user/user.effect';
       trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
     }),
-    EffectsModule.forRoot([CategoryEffects, AssessmentEffects, UserEffects]),
   ],
   providers: [
     // ...environment.providers,

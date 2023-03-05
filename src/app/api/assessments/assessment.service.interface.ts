@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs';
-import { Category } from '../../store/categories/category.model';
-import { Assessment } from '../../store/assessments/assessment.model';
+import { Assessment, Category } from '../../store/assessments/assessment.model';
 
 export interface IAssessmentService {
   // getAssessments(): Observable<Category[]>;

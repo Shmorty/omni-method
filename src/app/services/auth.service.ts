@@ -9,6 +9,8 @@ import {
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { UserService } from '../api/user/user.service';
 import { User } from '../store/user/user.model';
+import { Store } from '@ngrx/store';
+import * as UserActions from '../store/user/user.actions';
 // import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 @Injectable({
@@ -24,13 +26,18 @@ export class AuthService {
   constructor(
     private fireauth: AngularFireAuth,
     private router: Router,
-    private userService: UserService
+    private store: Store
   ) {
     this.fireauth.onAuthStateChanged((user) => {
       if (user) {
         this.loggedIn.next(true);
         console.log('AuthService: user is logged in');
         console.log(user);
+        this.store.dispatch(
+          UserActions.userAuthenticatd({
+            payload: JSON.parse(JSON.stringify(user)),
+          })
+        );
         router.navigate(['/home']);
       } else {
         // not logged in
@@ -63,13 +70,8 @@ export class AuthService {
     this.fireauth.signInWithEmailAndPassword(email, password).then(
       (res) => {
         localStorage.setItem('userId', res.user.uid);
-        // if (res.user?.emailVerified == true) {
         this.saveUser(res);
         this.router.navigate(['home']);
-        // } else {
-        //   this.sendVerificationMail();
-        //   this.router.navigate(['verify-email']);
-        // }
       },
       (err) => {
         console.log(err);

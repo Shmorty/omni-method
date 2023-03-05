@@ -1,9 +1,11 @@
-import { Assessment } from './assessment.model';
+import { Assessment, Category, Checklist } from './assessment.model';
 import * as AssessmentActions from './assessment.actions';
 import { createReducer, on } from '@ngrx/store';
 
 export interface AssessmentState {
   assessments: Assessment[];
+  categories: Category[];
+  checklists: Checklist[];
   loading: boolean;
   error: string;
   status: 'pending' | 'loading' | 'error' | 'success';
@@ -11,6 +13,8 @@ export interface AssessmentState {
 
 export const initialState: AssessmentState = {
   assessments: [],
+  categories: [],
+  checklists: [],
   loading: false,
   error: null,
   status: 'pending',
@@ -26,7 +30,9 @@ export const assessmentReducer = createReducer(
   })),
   on(AssessmentActions.loadAssessmentsSuccess, (state, action) => ({
     ...state,
-    assessments: action.data,
+    assessments: action.data['assessments'],
+    categories: action.data['categories'],
+    checklists: action.data['checklists'],
     loading: false,
     error: null,
     status: 'success',

@@ -1,6 +1,6 @@
 import { User } from '../user/user.model';
 import { Assessment } from '../assessments/assessment.model';
-import { Category } from '../categories/category.model';
+import { Category } from '../omni-score/omni-score.model';
 import { Score } from './score.model';
 import { Standing } from './standing.model';
 

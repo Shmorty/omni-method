@@ -3,21 +3,22 @@ import {
   assessmentReducer,
   AssessmentState,
 } from './assessments/assessment.reducer';
-import { categoryReducer, CategoryState } from './categories/category.reducer';
+import {
+  omniScoreReducer,
+  OmniScoreState,
+} from './omni-score/omni-score.reducer';
 import { userReducer, UserState } from './user/user.reducer';
 
 export interface AppState {
-  categoryState: CategoryState;
   assessmentState: AssessmentState;
   userState: UserState;
-  authenticatedUserId: string | null;
+  omniScoreState: OmniScoreState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  categoryState: categoryReducer,
+  omniScoreState: omniScoreReducer,
   assessmentState: assessmentReducer,
   userState: userReducer,
-  authenticatedUserId: undefined,
 };
 
 // export const metaReducers: MetaReducer<State>[] = !environment.production

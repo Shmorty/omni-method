@@ -13,3 +13,15 @@ export interface Assessment {
   units?: string;
   scores?: Score[];
 }
+
+export interface Category {
+  cid: string;
+  seq?: number;
+  label: string;
+  categoryAverage?: number;
+}
+
+export interface Checklist {
+  aid: string;
+  skills: string[];
+}

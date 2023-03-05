@@ -13,3 +13,8 @@ export interface User {
   };
   weight: number;
 }
+
+export interface AuthenticationUser {
+  uid: string;
+  email: string;
+}

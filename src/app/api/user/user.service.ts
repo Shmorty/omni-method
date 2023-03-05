@@ -20,7 +20,9 @@ export class UserService implements IUserService {
   constructor(private http: HttpClient, private store: Store<AppState>) {}
 
   load() {
-    this.store.dispatch(UserActions.loadUserAction());
+    this.store.dispatch(
+      UserActions.loadUserAction({ uid: 'anJJeMDX6RTHDNOCPpPIxOObLy92' })
+    );
   }
 
   getUser(id: string): Observable<User> {
@@ -54,6 +56,10 @@ export class UserService implements IUserService {
   }
 
   saveScore(score: Score) {
+    this.store.dispatch(UserActions.saveNewScore({ score }));
+  }
+
+  saveScoreToDb(score: Score) {
     console.log('user.service.saveScore ' + JSON.stringify(score));
     // this.newScore.next(score);
     return this.http

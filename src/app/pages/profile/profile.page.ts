@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularDelegate, IonModal, ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 // import { GoogleSigninService, UserInfo } from '../google-signin.service';
-import { Assessment } from '../../store/assessments/assessment.model';
-import { Category } from '../../store/categories/category.model';
+import { Assessment, Category } from '../../store/assessments/assessment.model';
+// import { Category } from '../../store/categories/category.model';
 import { AssessmentService } from '../../api/assessments/assessment.service';
 import { AssessmentDetailPage } from '../assessment-detail/assessment-detail.page';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
@@ -15,8 +15,22 @@ import { UserService } from '../../api/user/user.service';
 import { NewScorePage } from '../new-score/new-score.page';
 import { AuthService } from 'src/app/services/auth.service';
 import { Store } from '@ngrx/store';
-import { selectAllCategories } from 'src/app/store/categories/category.selector';
-import { selectAllAssessments } from 'src/app/store/assessments/assessment.selector';
+// import { selectAllCategories } from 'src/app/store/categories/category.selector';
+import {
+  selectAllAssessments,
+  selectAllCategories,
+} from 'src/app/store/assessments/assessment.selector';
+import {
+  assessmentScores,
+  selectUser,
+  userScores,
+} from 'src/app/store/user/user.selectors';
+import { OmniScoreService } from 'src/app/services/omni-score.service';
+import {
+  selectCategoryScore,
+  selectOmniScore,
+} from 'src/app/store/omni-score/omni-score.selector';
+import { first } from 'rxjs/operators';
 
 const API_URL = environment.API_URL;
 
@@ -32,139 +46,148 @@ export class ProfilePage implements OnInit {
   userId: string;
   user: User;
   scores: Score[];
-  userLoaded: boolean = false;
+  // userLoaded: boolean = false;
   omniScore: number = 0;
   unadjustedScore: number = 0;
 
   // using global ngrx store
   public categories$ = this.store.select(selectAllCategories);
   public assessments$ = this.store.select(selectAllAssessments);
+  public user$ = this.store.select(selectUser);
+  public scores$ = this.store.select(userScores);
+  public omniScore$ = this.store.select(selectOmniScore);
 
-  categories: Category[];
-  assessments: Assessment[];
-  categoryScores: Map<string, number> = new Map<string, number>();
+  // categories: Category[];
+  // assessments: Assessment[];
+  // categoryScores: Map<string, number> = new Map<string, number>();
 
   constructor(
     private store: Store,
-    private auth: AuthService,
     private userService: UserService,
     private assessmentService: AssessmentService,
     private router: Router,
-    private route: ActivatedRoute,
     private modalCtrl: ModalController
   ) {
-    // this.assessments = assessmentService.getAssessments()
-    // googleApi.userProfileSubject.subscribe( info => {
-    //   this.userInfo = info
-    //   console.log("userInfo: ", this.userInfo)
-    // })
     // this.loadData()
   }
 
   ngOnInit(): void {
-    console.log('profilePage ngOnInit');
-    // this.user$ = this.store.select((store) => store.user);
-    this.auth.currentUser().then((usr) => {
-      if (usr == null) {
-        console.log('no session send user to login');
-        this.router.navigate(['/login']);
-        return;
-      }
-      console.log('save user data');
-      this.auth.currUserId = usr.uid;
-      this.auth.currUserEmail = usr.email;
-      console.log(usr);
-      this.userId = usr.uid;
-      this.loadData();
-    });
-    this.subscription = this.userService.onNewScore().subscribe((score) => {
-      this.loadUserData();
-    });
+    // console.log('profilePage ngOnInit');
+    // this.auth.currentUser().then((usr) => {
+    //   if (usr == null) {
+    //     console.log('no session send user to login');
+    //     this.router.navigate(['/login']);
+    //     return;
+    //   }
+    //   console.log('save user data');
+    //   this.auth.currUserId = usr.uid;
+    //   this.auth.currUserEmail = usr.email;
+    //   console.log(usr);
+    //   this.userId = usr.uid;
+    //   this.loadData();
+    // });
+    // this.subscription = this.userService.onNewScore().subscribe((score) => {
+    //   this.loadUserData();
+    // });
   }
 
-  loadData(): void {
-    console.log('profilePage loadData');
-    this.loadUserData();
-    // this.loadAssessments();
+  getCategoryScore(category: Category) {
+    console.log('getCategoryScore() ', category.label);
+    return this.store.select(selectCategoryScore(category));
   }
 
-  loadUserData(): void {
-    // load user data
-    console.log('load user data: ' + this.userId);
-    this.userService.getUser(this.userId).subscribe(
-      async (data) => {
-        console.log(data);
-        // await new Promise((f) => setTimeout(f, 5000));
-        this.user = data['user'];
-        this.scores = data['scores'];
-        if (this.user && Object.keys(this.user).length === 0) {
-          console.log('user not registered, goto new-user');
-          this.router.navigate(['/new-user']);
-          return;
-        }
-        this.userService.setCurrentUser(this.user);
-        this.userLoaded = true;
-        console.log('got user: ' + JSON.stringify(this.user));
-        console.log('got scores: ' + JSON.stringify(this.scores));
-        this.calculateScores();
-      },
-      (err) => {
-        console.log('profilePage getUser error: ' + err.message);
-      }
-    );
+  getScores$(assessment: Assessment) {
+    return this.store.select(assessmentScores(assessment));
   }
 
-  loadAssessments(): void {
-    console.log('load assessments');
-    // load assessments
-    this.assessmentService.getAssessments().subscribe((data) => {
-      this.assessments = data['assessments'];
-      console.log('got assessments: ' + JSON.stringify(this.assessments));
-      this.calculateScores();
-    });
-    // load categories
-    this.assessmentService.getCategories().subscribe((data) => {
-      this.categories = data['categories'];
-      // sort categories
-      this.categories.sort((a, b) => {
-        if (a.seq < b.seq) {
-          return -1;
-        } else if (a.seq > b.seq) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-      console.log('got categories: ' + JSON.stringify(this.categories));
-      this.categories.forEach((cat) => this.categoryScores.set(cat.cid, 0));
-      this.calculateScores();
-    });
+  getScores(assessment: Assessment): Array<Score> {
+    console.log('getScores from ', this.scores);
+    return this.scores?.filter((element) => element.aid == assessment.aid);
   }
 
-  calculateScores() {
-    if (this.user && this.assessments && this.scores) {
-      this.unadjustedScore = 0;
-      this.categories?.forEach((cat) => {
-        let catTotal = 0;
-        const asmts = this.assessments?.filter((asmt) => asmt.cid == cat.cid);
-        asmts?.forEach((a) => {
-          let arr = this.scores.filter((s) => a.aid == s.aid);
-          if (arr.length > 0) {
-            catTotal += arr[0]?.calculatedScore;
-          }
-        });
-        this.categoryScores.set(
-          cat.cid,
-          // Math.round((catTotal / asmts?.length) * 100) / 100
-          Math.round(catTotal / asmts?.length)
-        );
-        this.unadjustedScore += this.categoryScores.get(cat.cid);
-      });
-      this.omniScore = Math.round(
-        Math.pow(this.unadjustedScore / 1500, 2) * 1500
-      );
-    }
-  }
+  // loadData(): void {
+  //   console.log('profilePage loadData');
+  //   this.loadUserData();
+  //   // this.loadAssessments();
+  // }
+
+  // loadUserData(): void {
+  //   // load user data
+  //   console.log('load user data: ' + this.userId);
+  //   this.userService.getUser(this.userId).subscribe(
+  //     async (data) => {
+  //       console.log(data);
+  //       // await new Promise((f) => setTimeout(f, 5000));
+  //       this.user = data['user'];
+  //       this.scores = data['scores'];
+  //       if (this.user && Object.keys(this.user).length === 0) {
+  //         console.log('user not registered, goto new-user');
+  //         this.router.navigate(['/new-user']);
+  //         return;
+  //       }
+  //       this.userService.setCurrentUser(this.user);
+  //       // this.userLoaded = true;
+  //       console.log('got user: ' + JSON.stringify(this.user));
+  //       console.log('got scores: ' + JSON.stringify(this.scores));
+  //       this.calculateScores();
+  //     },
+  //     (err) => {
+  //       console.log('profilePage getUser error: ' + err.message);
+  //     }
+  //   );
+  // }
+
+  // loadAssessments(): void {
+  //   console.log('load assessments');
+  //   // load assessments
+  //   this.assessmentService.getAssessments().subscribe((data) => {
+  //     this.assessments = data['assessments'];
+  //     console.log('got assessments: ' + JSON.stringify(this.assessments));
+  //     this.calculateScores();
+  //   });
+  //   // load categories
+  //   this.assessmentService.getCategories().subscribe((data) => {
+  //     this.categories = data['categories'];
+  //     // sort categories
+  //     this.categories.sort((a, b) => {
+  //       if (a.seq < b.seq) {
+  //         return -1;
+  //       } else if (a.seq > b.seq) {
+  //         return 1;
+  //       } else {
+  //         return 0;
+  //       }
+  //     });
+  //     console.log('got categories: ' + JSON.stringify(this.categories));
+  //     this.categories.forEach((cat) => this.categoryScores.set(cat.cid, 0));
+  //     this.calculateScores();
+  //   });
+  // }
+
+  // calculateScores() {
+  //   if (this.user && this.assessments && this.scores) {
+  //     this.unadjustedScore = 0;
+  //     this.categories?.forEach((cat) => {
+  //       let catTotal = 0;
+  //       const asmts = this.assessments?.filter((asmt) => asmt.cid == cat.cid);
+  //       asmts?.forEach((a) => {
+  //         let arr = this.scores.filter((s) => a.aid == s.aid);
+  //         if (arr.length > 0) {
+  //           catTotal += arr[0]?.calculatedScore;
+  //         }
+  //       });
+  //       this.categoryScores.set(
+  //         cat.cid,
+  //         // Math.round((catTotal / asmts?.length) * 100) / 100
+  //         Math.round(catTotal / asmts?.length)
+  //       );
+  //       this.unadjustedScore += this.categoryScores.get(cat.cid);
+  //     });
+  //     this.omniScore = Math.round(
+  //       Math.pow(this.unadjustedScore / 1500, 2) * 1500
+  //     );
+  //   }
+  // }
 
   openDetails(assessment, category) {
     this.assessmentService.setCurrentCategory(category);
@@ -179,33 +202,32 @@ export class ProfilePage implements OnInit {
   }
 
   // scoreClass(date: Date): string {
-  scoreClass(assessment: Assessment): string {
-    var scores = this.getScores(assessment);
-    var date = new Date();
-    if (scores?.length) {
-      date = new Date(scores[0].scoreDate);
-    }
+  scoreClass(scoreDate: string): string {
+    // var scores = this.getScores(assessment);
+    var date = new Date(scoreDate);
+    // if (scores?.length) {
+    //   date = new Date(scores[0].scoreDate);
+    // }
     const oneDay = 1000 * 3600 * 24;
-    const days = Math.ceil((Date.now().valueOf() - date.valueOf()) / oneDay);
+    let days = Math.ceil((Date.now().valueOf() - date.valueOf()) / oneDay);
 
     if (days > 90) {
       return 'stale';
-    } else if (days > 30) {
+    } else if (days > 60) {
       return 'warn';
+    } else if (days > 30) {
+      return 'caution';
     }
   }
 
-  getScores(assessment: Assessment): Array<Score> {
-    return this.scores?.filter((element) => element.aid == assessment.aid);
-  }
-
-  getRawScore(assessment: Assessment): number {
-    var scores = this.getScores(assessment);
-    if (scores?.length) {
-      return scores[0].rawScore;
-    }
-    return 0;
-  }
+  // old_getRawScore(assessment: Assessment) {
+  //   var scores = this.getScores(assessment);
+  //   console.log('getRawScore ', scores);
+  //   if (scores?.length) {
+  //     return scores[0].rawScore;
+  //   }
+  //   return 0;
+  // }
 
   async openNewScore(e, assessment) {
     e.stopPropagation();
@@ -220,7 +242,7 @@ export class ProfilePage implements OnInit {
     });
     await modal.present();
     modal.onDidDismiss().then(() => {
-      this.loadUserData();
+      // this.loadUserData();
     });
   }
 }

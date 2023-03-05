@@ -33,7 +33,9 @@
               formControlName="rawScore"
               placeholder="{{assessment.units}}"
               type="number"
-              inputmode="decimal"
+              min="{{assessment.min}}"
+              max="{{assessment.max}}"
+              inputmode="{{inputMode(assessment)}}"
             ></ion-input>
           </ion-item>
         </ion-col>

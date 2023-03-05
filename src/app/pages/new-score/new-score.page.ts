@@ -59,18 +59,19 @@ export class NewScorePage implements OnInit {
       scoreDate: this.formData.controls['scoreDate'].value,
       notes: this.formData.controls['notes'].value,
     };
-    console.log('score: ' + JSON.stringify(this.score));
-    this.userService.saveScore(this.score).subscribe(
-      (data) => {
-        console.log('saveScore returned ' + JSON.stringify(data));
-        this.dismiss();
-      },
-      (err) => {
-        console.log('Error: ' + err().message);
-        alert(err().message);
-        this.dismiss();
-      }
-    );
+    console.log('save new score: ' + JSON.stringify(this.score));
+    this.userService.saveScore(this.score);
+    // this.userService.saveScore(this.score).subscribe(
+    //   (data) => {
+    //     console.log('saveScore returned ' + JSON.stringify(data));
+    //     this.dismiss();
+    //   },
+    //   (err) => {
+    //     console.log('Error: ' + err().message);
+    //     alert(err().message);
+    //     this.dismiss();
+    //   }
+    // );
   }
 
   get rawScore() {
@@ -79,5 +80,12 @@ export class NewScorePage implements OnInit {
 
   get scoreDate() {
     return this.formData.get('scoreDate');
+  }
+
+  inputMode(assessment: Assessment): string {
+    if (assessment.min < 0) {
+      return 'text';
+    }
+    return 'decimal';
   }
 }

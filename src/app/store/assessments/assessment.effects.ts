@@ -23,7 +23,7 @@ export class AssessmentEffects {
           tap(console.log),
           map((data) =>
             AssessmentActions.loadAssessmentsSuccess({
-              data: data['assessments'],
+              data: data,
             })
           ),
           tap(console.log),
