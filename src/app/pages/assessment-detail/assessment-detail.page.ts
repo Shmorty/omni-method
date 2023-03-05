@@ -6,6 +6,8 @@ import { AssessmentService } from '../../api/assessments/assessment.service';
 import { Assessment, Category } from '../../store/assessments/assessment.model';
 import { NewScorePage } from '../new-score/new-score.page';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { assessmentScores } from 'src/app/store/user/user.selectors';
 
 @Component({
   selector: 'app-assessment-detail',
@@ -16,7 +18,10 @@ export class AssessmentDetailPage implements OnInit {
   @Input() assessment: Assessment;
   @Input() category: Category;
   @Input() scores: Score[];
+  public scores$ = this.store.select(assessmentScores);
+
   constructor(
+    private store: Store,
     private modalCtrl: ModalController,
     private navController: NavController,
     private router: Router,
@@ -24,15 +29,15 @@ export class AssessmentDetailPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.assessmentService.getCurrentCategory().subscribe((data) => {
-      this.category = data;
-    });
-    this.assessmentService.getCurrentAssessment().subscribe((data) => {
-      this.assessment = data;
-    });
-    this.assessmentService.getCurrentScores().subscribe((data) => {
-      this.scores = data;
-    });
+    // this.assessmentService.getCurrentCategory().subscribe((data) => {
+    //   this.category = data;
+    // });
+    // this.assessmentService.getCurrentAssessment().subscribe((data) => {
+    //   this.assessment = data;
+    // });
+    // this.assessmentService.getCurrentScores().subscribe((data) => {
+    //   this.scores = data;
+    // });
   }
 
   async openNewScore() {

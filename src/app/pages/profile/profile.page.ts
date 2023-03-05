@@ -63,13 +63,10 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private store: Store,
-    private userService: UserService,
     private assessmentService: AssessmentService,
     private router: Router,
     private modalCtrl: ModalController
-  ) {
-    // this.loadData()
-  }
+  ) {}
 
   ngOnInit(): void {
     // console.log('profilePage ngOnInit');
@@ -97,6 +94,7 @@ export class ProfilePage implements OnInit {
   }
 
   getScores$(assessment: Assessment) {
+    console.log('  assessmentScores() ', assessment.label);
     return this.store.select(assessmentScores(assessment));
   }
 
@@ -105,95 +103,16 @@ export class ProfilePage implements OnInit {
     return this.scores?.filter((element) => element.aid == assessment.aid);
   }
 
-  // loadData(): void {
-  //   console.log('profilePage loadData');
-  //   this.loadUserData();
-  //   // this.loadAssessments();
-  // }
-
-  // loadUserData(): void {
-  //   // load user data
-  //   console.log('load user data: ' + this.userId);
-  //   this.userService.getUser(this.userId).subscribe(
-  //     async (data) => {
-  //       console.log(data);
-  //       // await new Promise((f) => setTimeout(f, 5000));
-  //       this.user = data['user'];
-  //       this.scores = data['scores'];
-  //       if (this.user && Object.keys(this.user).length === 0) {
-  //         console.log('user not registered, goto new-user');
-  //         this.router.navigate(['/new-user']);
-  //         return;
-  //       }
-  //       this.userService.setCurrentUser(this.user);
-  //       // this.userLoaded = true;
-  //       console.log('got user: ' + JSON.stringify(this.user));
-  //       console.log('got scores: ' + JSON.stringify(this.scores));
-  //       this.calculateScores();
-  //     },
-  //     (err) => {
-  //       console.log('profilePage getUser error: ' + err.message);
-  //     }
-  //   );
-  // }
-
-  // loadAssessments(): void {
-  //   console.log('load assessments');
-  //   // load assessments
-  //   this.assessmentService.getAssessments().subscribe((data) => {
-  //     this.assessments = data['assessments'];
-  //     console.log('got assessments: ' + JSON.stringify(this.assessments));
-  //     this.calculateScores();
-  //   });
-  //   // load categories
-  //   this.assessmentService.getCategories().subscribe((data) => {
-  //     this.categories = data['categories'];
-  //     // sort categories
-  //     this.categories.sort((a, b) => {
-  //       if (a.seq < b.seq) {
-  //         return -1;
-  //       } else if (a.seq > b.seq) {
-  //         return 1;
-  //       } else {
-  //         return 0;
-  //       }
-  //     });
-  //     console.log('got categories: ' + JSON.stringify(this.categories));
-  //     this.categories.forEach((cat) => this.categoryScores.set(cat.cid, 0));
-  //     this.calculateScores();
-  //   });
-  // }
-
-  // calculateScores() {
-  //   if (this.user && this.assessments && this.scores) {
-  //     this.unadjustedScore = 0;
-  //     this.categories?.forEach((cat) => {
-  //       let catTotal = 0;
-  //       const asmts = this.assessments?.filter((asmt) => asmt.cid == cat.cid);
-  //       asmts?.forEach((a) => {
-  //         let arr = this.scores.filter((s) => a.aid == s.aid);
-  //         if (arr.length > 0) {
-  //           catTotal += arr[0]?.calculatedScore;
-  //         }
-  //       });
-  //       this.categoryScores.set(
-  //         cat.cid,
-  //         // Math.round((catTotal / asmts?.length) * 100) / 100
-  //         Math.round(catTotal / asmts?.length)
-  //       );
-  //       this.unadjustedScore += this.categoryScores.get(cat.cid);
-  //     });
-  //     this.omniScore = Math.round(
-  //       Math.pow(this.unadjustedScore / 1500, 2) * 1500
-  //     );
-  //   }
-  // }
-
   openDetails(assessment, category) {
     this.assessmentService.setCurrentCategory(category);
     this.assessmentService.setCurrentAssessment(assessment);
     this.assessmentService.setCurrentScores(this.getScores(assessment));
-    this.router.navigate(['/home', 'profile', 'details']);
+    this.router.navigate([
+      '/home',
+      'profile',
+      'details',
+      { aid: assessment.aid },
+    ]);
   }
 
   isLoggedIn(): boolean {
@@ -203,11 +122,7 @@ export class ProfilePage implements OnInit {
 
   // scoreClass(date: Date): string {
   scoreClass(scoreDate: string): string {
-    // var scores = this.getScores(assessment);
     var date = new Date(scoreDate);
-    // if (scores?.length) {
-    //   date = new Date(scores[0].scoreDate);
-    // }
     const oneDay = 1000 * 3600 * 24;
     let days = Math.ceil((Date.now().valueOf() - date.valueOf()) / oneDay);
 
@@ -219,15 +134,6 @@ export class ProfilePage implements OnInit {
       return 'caution';
     }
   }
-
-  // old_getRawScore(assessment: Assessment) {
-  //   var scores = this.getScores(assessment);
-  //   console.log('getRawScore ', scores);
-  //   if (scores?.length) {
-  //     return scores[0].rawScore;
-  //   }
-  //   return 0;
-  // }
 
   async openNewScore(e, assessment) {
     e.stopPropagation();

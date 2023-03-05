@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { AppState } from '../app.state';
-import { Category } from '../assessments/assessment.model';
+import { Assessment, Category } from '../assessments/assessment.model';
 import { OmniScoreState } from './omni-score.reducer';
 
 export const selectOmniScoreState = (state: AppState) => state.omniScoreState;
