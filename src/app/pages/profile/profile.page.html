@@ -176,11 +176,6 @@
             <div slot="end">
               <span class="units">{{assessment.units}}</span>
               <br />
-              <!-- <ion-badge
-            ngClass="{{scoreClass(scores?.[0]?.scoreDate)}}"
-            slot="end"
-            >{{scores?.[0]?.rawScore}}</ion-badge
-          > -->
               <span
                 *ngIf="(getScores$(assessment) | async)[0] as score; else zeroScore"
               >
@@ -188,7 +183,7 @@
                   class="score"
                   ngClass="{{scoreClass(score.scoreDate)}}"
                   slot="end"
-                  (click)="openNewScore($event, assessment)"
+                  (click)="openNewScore($event, assessment, user)"
                   >{{score.rawScore || 0}}</ion-badge
                 >
               </span>
@@ -196,7 +191,7 @@
                 <ion-badge
                   class="score"
                   slot="end"
-                  (click)="openNewScore($event, assessment)"
+                  (click)="openNewScore($event, assessment, user)"
                   >0</ion-badge
                 >
               </ng-template>

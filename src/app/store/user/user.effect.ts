@@ -9,6 +9,8 @@ import {
   take,
   first,
   mapTo,
+  concatMap,
+  concatMapTo,
 } from 'rxjs/operators';
 import * as UserActions from './user.actions';
 import { State, Store } from '@ngrx/store';
@@ -61,13 +63,14 @@ export class UserEffects {
     () =>
       this.actions$.pipe(
         ofType(UserActions.saveNewScore),
-        tap(console.log),
-        switchMap(({ data }) =>
-          this.userService.saveScoreToDb(data).pipe(
-            tap(console.log),
-            map((data) =>
-              this.store.dispatch(OmniScoreActions.calculateOmniScore())
-            )
+        switchMap((data) =>
+          this.userService.saveScoreToDb(data.score).pipe(
+            map((data) => {
+              this.store.dispatch(
+                UserActions.saveNewScoreSuccess({ score: data })
+              );
+              this.store.dispatch(OmniScoreActions.calculateOmniScore());
+            })
           )
         )
       ),

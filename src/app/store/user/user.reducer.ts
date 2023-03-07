@@ -57,8 +57,21 @@ export const userReducer = createReducer(
   })),
   on(UserActions.saveNewScore, (state, action) => ({
     ...state,
-    scores: [...state.scores, action.score],
-    loading: false,
+    loading: true,
     error: null,
-  }))
+  })),
+  on(UserActions.saveNewScoreSuccess, (state, action) => {
+    console.log('user reducer');
+    let tmpScores = state.scores.filter(function (obj) {
+      return !(
+        obj.aid == action.score.aid && obj.scoreDate == action.score.scoreDate
+      );
+    });
+    return {
+      ...state,
+      scores: [...tmpScores, action.score],
+      loading: false,
+      error: null,
+    };
+  })
 );

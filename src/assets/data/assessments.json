@@ -137,7 +137,7 @@
       "aid": "PSPR",
       "icon": "/assets/images/100metersprint.png",
       "label": "100 meter sprint",
-      "units": "Seconds",
+      "units": "Time",
       "description": "No starting blocks. No spikes.",
       "min": 9.58,
       "max": 22
@@ -147,6 +147,7 @@
       "aid": "PIKE",
       "icon": "/assets/images/toetouch.png",
       "label": "Pike",
+      "units": "Positions",
       "description": "Position must be held for 30 seconds",
       "min": 0,
       "max": 10
@@ -156,6 +157,7 @@
       "aid": "BKBN",
       "icon": "/assets/images/backbend.png",
       "label": "Backbend",
+      "units": "Positions",
       "description": "Position must be held for 5 seconds",
       "min": 0,
       "max": 10
@@ -165,6 +167,7 @@
       "aid": "STRD",
       "icon": "/assets/images/medial_lateral.png",
       "label": "Straddle",
+      "units": "Degrees",
       "description": "Position must be held for 5 seconds",
       "min": 0,
       "max": 10
@@ -174,6 +177,7 @@
       "aid": "TWOMDST",
       "icon": "/assets/images/2minutedistance.png",
       "label": "2 minute distance",
+      "units": "Miles",
       "description": "Treadmill or track allowed",
       "min": 0,
       "max": 0.5
@@ -183,6 +187,7 @@
       "aid": "ONEHRDST",
       "icon": "/assets/images/onehourrun.png",
       "label": "1 hour distance",
+      "units": "Miles",
       "description": "Road, treadmill, or track allowed",
       "min": 0,
       "max": 13.3

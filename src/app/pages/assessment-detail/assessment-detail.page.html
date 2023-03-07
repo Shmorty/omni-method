@@ -28,18 +28,14 @@
   </ion-item>
 
   <div *ngIf="!assessment.checklist">
-    <ion-button expand="block" shape="round" (click)="openNewScore()">
+    <ion-button expand="block" shape="round" (click)="openNewScore(assessment)">
       <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
     </ion-button>
 
     <ion-accordion-group>
       <ion-accordion toggleIconSlot="start">
-        <!-- *ngIf="assessment.scores"> -->
-
-        <!-- <ion-item button detail-icon="create-outline" lines="full"> -->
-        <!-- <ion-item slot="header">scores</ion-item> -->
         <ion-item
-          *ngFor="let score of scores; first as isFirst"
+          *ngFor="let score of scores$ | async; first as isFirst"
           lines="full"
           slot="{{isFirst ? 'header':'content'}}"
         >
@@ -84,7 +80,3 @@
     </ion-grid>
   </ion-list>
 </ion-content>
-
-<!-- <ion-footer>
-  <ion-text>This is the assessment-detail footer</ion-text>
-</ion-footer> -->
