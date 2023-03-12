@@ -30,11 +30,32 @@ span {
 ion-badge {
   float: right;
 }
+.caution {
+  // background-color: yellow;
+  // background-color: #c0c026;
+  // background-color: #e7e78a;
+  // background-color: #ffd976;
+  background-color: #4d91ca;
+  // color: gray;
+  // color: yellow;
+}
 .warn {
-  background-color: orange;
+  // background-color: orange;
+  // background-color: #c07326;
+  // background-color: #e7b98a;
+  // background-color: #fb943a;
+  // background-color: #ff9432;
+  background-color: #305b7e;
+  // color: orange;
 }
 .stale {
-  background-color: red;
+  // background-color: red;
+  // background-color: #c02626;
+  // background-color: #aa2222;
+  // background-color: #e57f7f;
+  // background-color: #ff3f3f;
+  background-color: #f12323;
+  // color: red;
 }
 ion-avatar img {
   border-radius: 50%;

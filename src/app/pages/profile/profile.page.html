@@ -1,12 +1,6 @@
 <ion-header [translucent]="true">
-  <!-- x-class="ion-no-border safe-area"> -->
   <ion-toolbar color="primary">
-    <ion-title>Omni Score {{omniScore}}</ion-title>
-    <!-- <ion-buttons [collapse]="true" slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" name="Create"></ion-icon>
-      </ion-button>
-    </ion-buttons> -->
+    <ion-title>Omni Score {{omniScore$ | async}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" #scrollarea>
@@ -14,58 +8,74 @@
     <ion-toolbar color="default">
       <ion-card class="card cardStyle topCard">
         <ion-item lines="none" color="primary">
-          <span slot="start" *ngIf="userLoaded">
-            <ion-avatar>
-              <span *ngIf="user.avatar">
-                <img src="{{user?.avatar}}" />
-              </span>
-              <ion-label *ngIf="!user.avatar" class="textAvatar">
-                {{user?.firstName | slice : 0 : 1 }} {{user?.lastName | slice :
-                0 : 1 }}
-              </ion-label>
-            </ion-avatar>
-          </span>
-          <span slot="start" *ngIf="!userLoaded">
-            <ngx-skeleton-loader
-              count="1"
-              appearance="circle"
-              animation="pulse"
-              [theme]="{
-                  'background-color': 'lightgray',
-                  'border-radius': '50%',
-                   height: '64px',
-                   width: '64px'
+          <ng-container *ngIf="user$ | async as user; else loading ">
+            <span slot="start">
+              <ion-avatar>
+                <span *ngIf="user.avatar">
+                  <img src="{{user.avatar}}" />
+                </span>
+                <ion-label *ngIf="!user.avatar" class="textAvatar">
+                  {{user.firstName | slice : 0 : 1 }} {{user.lastName | slice :
+                  0 : 1 }}
+                </ion-label>
+              </ion-avatar>
+            </span>
+            <span class="name">
+              <div>{{user.firstName}}</div>
+              <div>{{user.lastName}}</div>
+            </span>
+            <span slot="end">
+              <div style="font-weight: 400">Omni Score</div>
+              <div
+                style="font-size: 1.4em; font-weight: 600; text-align: center"
+              >
+                {{omniScore$ | async}}
+              </div>
+            </span>
+          </ng-container>
+          <ng-template #loading>
+            <span slot="start">
+              <ngx-skeleton-loader
+                count="1"
+                appearance="circle"
+                animation="pulse"
+                [theme]="{
+                    'background-color': 'lightgray',
+                    'border-radius': '50%',
+                     height: '64px',
+                     width: '64px'
+                  }"
+              ></ngx-skeleton-loader>
+            </span>
+            <span class="name">
+              <ngx-skeleton-loader
+                count="2"
+                appearance="line"
+                animation="pulse"
+                [theme]="{
+                    'background-color': 'lightgray',
+                     height: '20px',
+                     width: '92px'
+                  }"
+              ></ngx-skeleton-loader>
+            </span>
+            <span slot="end">
+              <ngx-skeleton-loader
+                count="2"
+                appearance="line"
+                animation="pulse"
+                [theme]="{
+                  'background-color': 'lightgray'
                 }"
-            ></ngx-skeleton-loader>
-          </span>
-
-          <span class="name" *ngIf="userLoaded">
-            <div>{{user.firstName}}</div>
-            <div>{{user.lastName}}</div>
-          </span>
-          <span *ngIf="!userLoaded">
-            <ngx-skeleton-loader
-              count="2"
-              appearance="line"
-              animation="pulse"
-              [theme]="{
-                  'background-color': 'lightgray',
-                   height: '20px',
-                   width: '92px'
-                }"
-            ></ngx-skeleton-loader>
-          </span>
-          <span slot="end">
-            <div style="font-weight: 400">Omni Score</div>
-            <div style="font-size: 1.4em; font-weight: 600; text-align: center">
-              {{omniScore}}
-            </div>
-          </span>
+              >
+              </ngx-skeleton-loader>
+            </span>
+          </ng-template>
         </ion-item>
         <ion-item lines="none" color="primary">
           <ion-grid class="ion-text-center" color="">
-            <ion-row>
-              <!-- <ion-col>
+            <!-- <ion-row>
+              <ion-col>
                 <span>
                   <div style="font-weight: 400">Omni Score</div>
                   <div
@@ -74,8 +84,8 @@
                     {{omniScore}}
                   </div>
                 </span>
-              </ion-col> -->
-            </ion-row>
+              </ion-col>
+            </ion-row> -->
             <!-- hide weight and height -->
             <!--
             <ion-row>
@@ -148,12 +158,12 @@
       *ngFor="let category of categories$ | async"
     >
       <ion-card-header type="primary" class="cat-header">
-        {{category.label}}: {{categoryScores.get(category.cid)}}
+        {{category.label}}: {{getCategoryScore(category) | async}}
       </ion-card-header>
       <ng-container *ngFor="let assessment of assessments$ | async">
         <ng-container *ngIf="assessment.cid == category.cid">
           <ion-item
-            (click)="openDetails(assessment, category)"
+            (click)="openDetails(assessment)"
             style="--inner-border-width: 0"
           >
             <ion-thumbnail slot="start">
@@ -166,18 +176,33 @@
             <div slot="end">
               <span class="units">{{assessment.units}}</span>
               <br />
-              <!-- <ion-badge
-            ngClass="{{scoreClass(scores?.[0]?.scoreDate)}}"
-            slot="end"
-            >{{scores?.[0]?.rawScore}}</ion-badge
-          > -->
-              <ion-badge
-                class="score"
-                ngClass="{{scoreClass(assessment)}}"
-                slot="end"
-                (click)="openNewScore($event, assessment)"
-                >{{getRawScore(assessment)}}</ion-badge
+              <span
+                *ngIf="(getScores$(assessment) | async)[0] as score; else zeroScore"
               >
+                <ion-badge
+                  class="score"
+                  ngClass="{{scoreClass(score.scoreDate)}}"
+                  slot="end"
+                  (click)="openNewScore($event, assessment, user)"
+                  >{{score.rawScore || 0}}</ion-badge
+                >
+              </span>
+              <ng-template #zeroScore>
+                <ion-badge
+                  class="score"
+                  slot="end"
+                  (click)="openNewScore($event, assessment, user)"
+                  >0</ion-badge
+                >
+              </ng-template>
+              <!-- <ion-badge
+            class="score"
+            ngClass="{{scoreClass(assessment)}}"
+            slot="end"
+            (click)="openNewScore($event, assessment)"
+            >{{(getScores$(assessment) | async)[0]?.rawScore ||
+            0}}</ion-badge
+          > -->
             </div>
           </ion-item>
         </ng-container>

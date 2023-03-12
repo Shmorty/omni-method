@@ -115,6 +115,18 @@ addtypes to tsconfig.app.json
 "types": ["gapi", "gapi.auth2"]
 },
 
+### New user registration
+
+1. capture email and password on register page
+2. call auth service register method
+3. call fireauth createUserWithEmailAndPassword
+4. dispatch registerUserSuccess and navigate to new-user page
+5. reducer sets authUser data in store
+6. new-user page calls userService.saveUser
+7. add authUser id and email to user data
+8. dispatch UserActions.newUser
+9.
+
 ## Try a diagram
 
 ```mermaid

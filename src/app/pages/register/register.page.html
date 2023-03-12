@@ -54,6 +54,7 @@
               ></ion-input>
             </app-show-hide-password>
           </ion-item>
+          <ion-text color="danger">{{ userError$ | async }}</ion-text>
           <ion-button
             type="submit"
             expand="block"

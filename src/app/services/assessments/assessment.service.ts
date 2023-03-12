@@ -1,24 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Assessment } from '../../store/assessments/assessment.model';
-import { Category } from '../../store/categories/category.model';
+import { Assessment, Category } from '../../store/assessments/assessment.model';
+// import { Category } from '../../store/categories/category.model';
 import { IAssessmentService } from './assessment.service.interface';
 import { environment } from '../../../environments/environment';
 import { Score } from '../../store/models/score.model';
 import * as checkList from '../../../assets/data/checkLists.json';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
-import { selectAllCategories } from 'src/app/store/categories/category.selector';
-import { selectAllAssessments } from 'src/app/store/assessments/assessment.selector';
+import {
+  selectAllAssessments,
+  selectAllCategories,
+} from 'src/app/store/assessments/assessment.selector';
 import * as AssessmentActions from '../../store/assessments/assessment.actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AssessmentService implements IAssessmentService {
-  public categories$: Observable<Category[]>;
-  public assessments: Observable<Assessment[]>;
+  // public categories$: Observable<Category[]>;
+  // public assessments: Observable<Assessment[]>;
 
   private _currentAssessment: Assessment;
   private _currentCategory: Category;
@@ -26,8 +28,8 @@ export class AssessmentService implements IAssessmentService {
   private _checkLists; //: Map<string, Array<string>>;
 
   constructor(private http: HttpClient, private store: Store<AppState>) {
-    this.categories$ = this.store.select(selectAllCategories);
-    this.assessments = this.store.select(selectAllAssessments);
+    // this.categories$ = this.store.select(selectAllCategories);
+    // this.assessments = this.store.select(selectAllAssessments);
     this._checkLists = checkList;
   }
 

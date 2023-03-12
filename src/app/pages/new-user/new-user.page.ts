@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/api/user/user.service';
+import { UserService } from 'src/app/services/user/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/store/user/user.model';
 import { DatePicker, DatePickerOptions } from '@pantrist/capacitor-date-picker';
@@ -42,6 +42,7 @@ export class NewUserPage implements OnInit {
 
   ngOnInit() {
     this.userId = this.auth.currUserId;
+    console.log('auth.currUserId: ' + this.userId);
     this.userEmail = this.auth.currUserEmail;
 
     this.formData = new FormGroup({
@@ -81,24 +82,12 @@ export class NewUserPage implements OnInit {
     // this.formData.setValue(dob.substring(0, 10));
     console.log(this.formData.value);
     // create user in database
-    // this.currUser.firstName = 'first';
-    // this.currUser.lastName = 'last';
-    // this.currUser.nickname = 'nickname';
-    // this.userService.addUser(this.currUser).subscribe(
-    //   (data) => {
-    //     console.log('addUser returned ' + JSON.stringify(data));
-    //   },
-    //   (err) => {
-    //     console.log('Error: ' + err().message);
-    //     alert(err().message);
-    //   }
-    // );
-
-    this.userService.setUser(this.formData.value).subscribe((data) => {
-      console.log('setUser returned:');
-      console.log(data);
-      this.router.navigate(['/home']);
-    });
+    this.userService.saveUser(this.formData.value);
+    // this.userService.setUser(this.formData.value).subscribe((data) => {
+    //   console.log('setUser returned:');
+    //   console.log(data);
+    //   this.router.navigate(['/home']);
+    // });
   }
 
   next() {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AssessmentService } from 'src/app/api/assessments/assessment.service';
+import { AssessmentService } from 'src/app/services/assessments/assessment.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { CategoriesService } from 'src/app/services/categories.service';
+// import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
   selector: 'app-welcome',
@@ -14,7 +14,7 @@ export class WelcomePage implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private categoryService: CategoriesService,
+    // private categoryService: CategoriesService,
     private assessmentService: AssessmentService,
     private router: Router
   ) {}
@@ -30,9 +30,9 @@ export class WelcomePage implements OnInit {
       //   console.log(usr);
       // }
     });
-    this.categoryService.getCategories().subscribe((data) => {
-      console.log('got categories from state');
-      console.log(data);
-    });
+    // this.categoryService.getCategories().subscribe((data) => {
+    //   console.log('got categories from state');
+    //   console.log(data);
+    // });
   }
 }
