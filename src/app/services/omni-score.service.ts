@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { of, pipe } from 'rxjs';
-import { first, map, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { Category } from '../store/assessments/assessment.model';
 import {
   assessmentsByCategory,
@@ -54,7 +53,13 @@ export class OmniScoreService {
                   .subscribe((scores) => {
                     // console.log('  - score ' + scores);
                     if (scores?.length > 0) {
-                      catTotal += scores[0].calculatedScore;
+                      let sortedScores = scores.sort(function (a, b) {
+                        return (
+                          new Date(b.scoreDate).getDate() -
+                          new Date(a.scoreDate).getDate()
+                        );
+                      });
+                      catTotal += sortedScores[0].calculatedScore;
                     }
                   });
               })
