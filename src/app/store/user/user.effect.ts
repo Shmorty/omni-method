@@ -70,7 +70,7 @@ export class UserEffects {
   );
 
   // UserActions.newUserSuccess
-  newUserSiuccessEffect$ = createEffect(
+  newUserSuccessEffect$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(UserActions.newUserSuccess),
@@ -87,7 +87,7 @@ export class UserEffects {
         ofType(UserActions.loadUserSuccess),
         tap(console.log),
         tap((data) => {
-          console.log('user loaded test if exist');
+          // user loaded test if exist
           if (Object.keys(data.payload.user).length) {
             this.router.navigate(['home']);
           }
@@ -107,6 +107,25 @@ export class UserEffects {
             map((data) => {
               this.store.dispatch(
                 UserActions.saveNewScoreSuccess({ score: data })
+              );
+              this.store.dispatch(OmniScoreActions.calculateOmniScore());
+            })
+          )
+        )
+      ),
+    { dispatch: false }
+  );
+
+  // UserActions.deleteAssessmentScore
+  deleteScoreEffect$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UserActions.deleteAssessmentScore),
+        switchMap((data) =>
+          this.userService.deleteScoreFromDb(data.score).pipe(
+            map(() => {
+              this.store.dispatch(
+                UserActions.deleteAssessmentScoreSuccess({ score: data.score })
               );
               this.store.dispatch(OmniScoreActions.calculateOmniScore());
             })
