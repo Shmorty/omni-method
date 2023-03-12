@@ -50,6 +50,33 @@ export const userReducer = createReducer(
     loading: false,
     error: action.error,
   })),
+  on(UserActions.registerUserSuccess, (state, action) => ({
+    ...state,
+    authUser: action.payload,
+    loading: false,
+    error: '',
+  })),
+  on(UserActions.registerUserFailure, (state, action) => ({
+    ...state,
+    loading: false,
+    error: action.error,
+  })),
+  on(UserActions.newUser, (state, action) => ({
+    ...state,
+    loading: true,
+    error: '',
+  })),
+  on(UserActions.newUserSuccess, (state, action) => ({
+    ...state,
+    loading: false,
+    user: action.payload,
+    error: '',
+  })),
+  on(UserActions.newUserFailure, (state, action) => ({
+    ...state,
+    loading: false,
+    error: action.error,
+  })),
   on(UserActions.updateUserAction, (state, action) => ({
     ...state,
     loading: false,
@@ -61,7 +88,8 @@ export const userReducer = createReducer(
     error: null,
   })),
   on(UserActions.saveNewScoreSuccess, (state, action) => {
-    console.log('user reducer');
+    console.log('UserActions.saveNewScoreSuccess reducer');
+    // remove old score for activity and date from store if it existed
     let tmpScores = state.scores.filter(function (obj) {
       return !(
         obj.aid == action.score.aid && obj.scoreDate == action.score.scoreDate

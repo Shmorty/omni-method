@@ -1,18 +1,21 @@
 import { createSelector } from '@ngrx/store';
 import { AppState } from '../app.state';
 import { Assessment } from '../assessments/assessment.model';
-import { User } from './user.model';
 import { UserState } from './user.reducer';
 
 export const selectUserState = (state: AppState) => state.userState;
 
-export const authUser = createSelector(
+export const selectAuthUser = createSelector(
   selectUserState,
   (userState: UserState) => userState.authUser
 );
 export const selectUser = createSelector(
   selectUserState,
   (userState: UserState) => userState.user
+);
+export const selectUserError = createSelector(
+  selectUserState,
+  (userState: UserState) => userState.error
 );
 export const userScores = createSelector(
   selectUserState,

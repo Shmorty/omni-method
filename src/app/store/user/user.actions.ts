@@ -1,4 +1,5 @@
 // import { createAction, props } from "@ngrx/store";
+import * as fireAuth from '@angular/fire/auth';
 import { createAction, props } from '@ngrx/store';
 import { Score } from '../models/score.model';
 import { User } from './user.model';
@@ -10,6 +11,11 @@ export enum UserActionType {
   UPDATE_USER = '[User Profile Page] Update User',
   LOAD_USER_SUCCESSFUL = '[User API] Load User Successful',
   LOAD_USER_FAILURE = '[User API] Error Loading User',
+  REGISTER_USER_SUCCESS = '[Auth Service] Register User Success',
+  REGISTER_USER_FAILURE = '[Register Page] Register User Failure',
+  NEW_USER = '[New User] New User',
+  NEW_USER_SUCCESS = '[User API] New User Success',
+  NEW_USER_FAILURE = '[User API] New User Error',
   DELETE_USER_SCORE = '[User Profile Page] Delete User Score',
   SAVE_NEW_SCORE = '[New Score Page] Save New Score',
   SAVE_NEW_SCORE_SUCCESS = '[New Score Page] Save New Score success',
@@ -24,12 +30,32 @@ export const loadUserAction = createAction(
   UserActionType.LOAD_USER,
   props<{ uid: string }>()
 );
+export const registerUserSuccess = createAction(
+  UserActionType.REGISTER_USER_SUCCESS,
+  props<{ payload: fireAuth.User }>()
+);
+export const registerUserFailure = createAction(
+  UserActionType.REGISTER_USER_FAILURE,
+  props<{ error: any }>()
+);
 export const loadUserSuccess = createAction(
   UserActionType.LOAD_USER_SUCCESSFUL,
   props<{ payload: User }>()
 );
 export const loadUserFailure = createAction(
   UserActionType.LOAD_USER_FAILURE,
+  props<{ error: any }>()
+);
+export const newUser = createAction(
+  UserActionType.NEW_USER,
+  props<{ payload: User }>()
+);
+export const newUserSuccess = createAction(
+  UserActionType.NEW_USER_SUCCESS,
+  props<{ payload: User }>()
+);
+export const newUserFailure = createAction(
+  UserActionType.NEW_USER_FAILURE,
   props<{ error: any }>()
 );
 export const updateUserAction = createAction(

@@ -5,34 +5,29 @@ import { of, pipe } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.state';
 import * as OmniScoreActions from './omni-score.actions';
+import { OmniScoreService } from 'src/app/services/omni-score.service';
 
 @Injectable()
 export class OmniScoreEffects {
-  constructor(private actions$: Actions, private store: Store<AppState>) {}
+  constructor(
+    private actions$: Actions,
+    private omniScoreService: OmniScoreService
+  ) {}
 
+  // OmniScoreActions.calculateOmniScore
   calculateOmniScore$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(OmniScoreActions.calculateOmniScore),
         tap({
-          next: () => console.log('calc omni score effect'),
+          next: () => this.omniScoreService.calculateScores(),
           error: (e) => console.log(e),
         })
       ),
     { dispatch: false }
   );
 
-  // readonly getAllMovies = this.effect<void>(
-  //   trigger$ => trigger$.pipe(
-  //     exhaustMap(() => this.moviesService.fetchAllMovies().pipe(
-  //       tapResponse(
-  //         movies => this.addAllMovies(movies),
-  //         (error) => this.logError(error),
-  //       )
-  //     )
-  //   )
-  // ));
-
+  // OmniScoreActions.setCategoryScore
   loadUser$ = createEffect(
     () =>
       this.actions$.pipe(

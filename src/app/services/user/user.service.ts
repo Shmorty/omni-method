@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable, of, pipe, Subject, throwError } from 'rxjs';
+import { catchError, first, map, single, take, tap } from 'rxjs/operators';
 import { User } from '../../store/user/user.model';
 import { IUserService } from './user.service.interface';
 import { environment } from 'src/environments/environment';
@@ -9,6 +9,7 @@ import { Score } from '../../store/models/score.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import * as UserActions from '../../store/user/user.actions';
+import { selectAuthUser } from 'src/app/store/user/user.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -32,11 +33,29 @@ export class UserService implements IUserService {
         this._currentUser = user;
         return user;
       })
+      // catchError((error) => of(UserActions.loadUserFailure({ error })))
     );
   }
 
+  saveUser(user: User) {
+    console.log('userService.saveUser');
+    this.store
+      .select(selectAuthUser)
+      .pipe(first())
+      .subscribe(
+        (authUser) => {
+          user.id = authUser['uid'];
+          user.email = authUser['email'];
+          console.log(user);
+          console.log('do insert');
+          this.store.dispatch(UserActions.newUser({ payload: user }));
+        },
+        (err) => console.error('Observer got an error: ' + err)
+      );
+  }
+
   setUser(user: User): Observable<User> {
-    console.log('add new user');
+    console.log('userService.setUser');
     this._currentUser = user;
     return this.http
       .post<User>(environment.baseUrl + `/users`, user)

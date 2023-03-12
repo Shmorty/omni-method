@@ -29,8 +29,6 @@ export class OmniScoreService {
   }
 
   calculateScores() {
-    let categoryScores: Map<string, number> = new Map<string, number>();
-    let unadjustedScore = 0;
     let omniScore = 0;
 
     console.log('start OmniScoreService.calculateScores()');
@@ -41,7 +39,7 @@ export class OmniScoreService {
         categories.forEach((cat) => {
           let catTotal = 0;
           let assessmentCount = 0;
-          // console.log(cat.label);
+          console.log(cat.label);
           this.store
             .select(assessmentsByCategory(cat))
             .pipe(take(1))
@@ -49,11 +47,13 @@ export class OmniScoreService {
               assessments.forEach((assessment) => {
                 assessmentCount++;
                 // get score for assessment
+                console.log(assessment.label);
                 this.store
                   .select(assessmentScores(assessment))
                   .pipe(take(1))
                   .subscribe((scores) => {
-                    if (scores.length > 0) {
+                    console.log('  - score ' + scores);
+                    if (scores?.length > 0) {
                       catTotal += scores[0].calculatedScore;
                     }
                   });

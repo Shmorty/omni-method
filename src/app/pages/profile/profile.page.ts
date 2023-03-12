@@ -3,7 +3,7 @@ import { IonModal, ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 // import { GoogleSigninService, UserInfo } from '../google-signin.service';
 import { Assessment, Category } from '../../store/assessments/assessment.model';
-import { AssessmentService } from '../../api/assessments/assessment.service';
+import { AssessmentService } from '../../services/assessments/assessment.service';
 import { Router } from '@angular/router';
 import { User } from '../../store/user/user.model';
 import { Score } from '../../store/models/score.model';
@@ -19,7 +19,7 @@ import {
   selectCategoryScore,
   selectOmniScore,
 } from 'src/app/store/omni-score/omni-score.selector';
-import { tap } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -50,7 +50,9 @@ export class ProfilePage implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('profile.page.ngOnInit()');
     this.user$
+      // .pipe(first())
       .subscribe({
         next(user) {
           this.user = user;
@@ -86,7 +88,7 @@ export class ProfilePage implements OnInit {
   getScores$(assessment: Assessment) {
     return this.store.select(UserSelectors.assessmentScores(assessment)).pipe(
       tap((results) => {
-        results.sort(function (a, b) {
+        results?.sort(function (a, b) {
           return Date.parse(b.scoreDate) - Date.parse(a.scoreDate);
         });
       })

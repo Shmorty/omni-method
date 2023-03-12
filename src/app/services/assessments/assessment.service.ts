@@ -19,8 +19,8 @@ import * as AssessmentActions from '../../store/assessments/assessment.actions';
   providedIn: 'root',
 })
 export class AssessmentService implements IAssessmentService {
-  public categories$: Observable<Category[]>;
-  public assessments: Observable<Assessment[]>;
+  // public categories$: Observable<Category[]>;
+  // public assessments: Observable<Assessment[]>;
 
   private _currentAssessment: Assessment;
   private _currentCategory: Category;
@@ -28,8 +28,8 @@ export class AssessmentService implements IAssessmentService {
   private _checkLists; //: Map<string, Array<string>>;
 
   constructor(private http: HttpClient, private store: Store<AppState>) {
-    this.categories$ = this.store.select(selectAllCategories);
-    this.assessments = this.store.select(selectAllAssessments);
+    // this.categories$ = this.store.select(selectAllCategories);
+    // this.assessments = this.store.select(selectAllAssessments);
     this._checkLists = checkList;
   }
 

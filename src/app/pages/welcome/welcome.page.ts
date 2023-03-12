@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AssessmentService } from 'src/app/api/assessments/assessment.service';
+import { AssessmentService } from 'src/app/services/assessments/assessment.service';
 import { AuthService } from 'src/app/services/auth.service';
 // import { CategoriesService } from 'src/app/services/categories.service';
 

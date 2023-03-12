@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AssessmentService } from './api/assessments/assessment.service';
-import { UserService } from './api/user/user.service';
+import { AssessmentService } from './services/assessments/assessment.service';
+import { UserService } from './services/user/user.service';
 
 // import { GoogleSigninService } from './google-signin.service';
 

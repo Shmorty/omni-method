@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { AssessmentService } from '../../api/assessments/assessment.service';
+import { AssessmentService } from '../../services/assessments/assessment.service';
 import * as AssessmentActions from './assessment.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.state';
@@ -15,6 +15,7 @@ export class AssessmentEffects {
     private assessmentService: AssessmentService
   ) {}
 
+  // AssessmentActions.loadAssessmentsBegin
   loadAssessments$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AssessmentActions.loadAssessmentsBegin),

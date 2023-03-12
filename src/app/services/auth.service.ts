@@ -7,10 +7,10 @@ import {
   UserCredential,
 } from '@angular/fire/auth';
 import { BehaviorSubject, from, Observable } from 'rxjs';
-import { UserService } from '../api/user/user.service';
 import { User } from '../store/user/user.model';
 import { Store } from '@ngrx/store';
 import * as UserActions from '../store/user/user.actions';
+import { AppState } from '../store/app.state';
 // import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 @Injectable({
@@ -26,7 +26,7 @@ export class AuthService {
   constructor(
     private fireauth: AngularFireAuth,
     private router: Router,
-    private store: Store
+    private store: Store<AppState>
   ) {
     this.fireauth.onAuthStateChanged((user) => {
       if (user) {
@@ -38,7 +38,7 @@ export class AuthService {
             payload: JSON.parse(JSON.stringify(user)),
           })
         );
-        router.navigate(['/home']);
+        // router.navigate(['/home']);
       } else {
         // not logged in
         this.loggedIn.next(false);
@@ -89,28 +89,21 @@ export class AuthService {
   register(email: string, password: string) {
     this.fireauth.createUserWithEmailAndPassword(email, password).then(
       (res) => {
-        this.saveUser(res);
-        this.router.navigate(['/new-user']);
-        // this.sendVerificationMail();
-        // this.currUserId = res.user.uid;
-        // this.currUserEmail = res.user.email;
+        console.log('register user success: '.concat(res.user.email));
+        const clonedUser = JSON.parse(JSON.stringify(res.user));
+        console.log(clonedUser);
+        this.store.dispatch(
+          UserActions.registerUserSuccess({ payload: clonedUser })
+        );
         // this.saveUser(res);
-        // // create user in database
-        // this.currUser.firstName = 'first';
-        // this.currUser.lastName = 'last';
-        // this.currUser.nickname = 'nickname';
-        // this.userService.setUser(this.currUser).subscribe(
-        //   (data) => {
-        //     console.log('addUser returned ' + JSON.stringify(data));
-        //   },
-        //   (err) => {
-        //     console.log('Error: ' + err().message);
-        //     alert(err().message);
-        //   }
-        // );
+        this.router.navigate(['/new-user']);
       },
       (err) => {
-        alert(err.message);
+        console.log(err['code']);
+        this.store.dispatch(
+          UserActions.registerUserFailure({ error: err['code'] })
+        );
+        // alert(err.message);
         this.router.navigate(['/register']);
       }
     );

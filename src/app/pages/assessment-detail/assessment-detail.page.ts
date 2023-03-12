@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { Score } from '../../store/models/score.model';
-import { AssessmentService } from '../../api/assessments/assessment.service';
+import { AssessmentService } from '../../services/assessments/assessment.service';
 import { Assessment, Category } from '../../store/assessments/assessment.model';
 import { NewScorePage } from '../new-score/new-score.page';
 import { ActivatedRoute } from '@angular/router';
@@ -76,8 +76,6 @@ export class AssessmentDetailPage implements OnInit {
     });
     modal.present();
     modal.onDidDismiss().then((res) => {
-      console.log('new score dismissed');
-      console.log(res);
       this.navController.back();
     });
   }

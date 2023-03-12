@@ -16,7 +16,7 @@ import { ShowHidePasswordModule } from './component/show-hide-password/show-hide
 import { ShowHidePasswordComponent } from './component/show-hide-password/show-hide-password.component';
 import { DatePipe } from '@angular/common';
 import { AuthService } from './services/auth.service';
-import { UserService } from './api/user/user.service';
+import { UserService } from './services/user/user.service';
 import { from } from 'rxjs';
 import { first, take } from 'rxjs/operators';
 import { getAuth, onAuthStateChanged } from '@firebase/auth';
