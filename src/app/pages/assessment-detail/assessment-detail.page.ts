@@ -17,6 +17,7 @@ import {
 import { Observable } from 'rxjs';
 import { User } from 'src/app/store/user/user.model';
 import { tap } from 'rxjs/operators';
+import { deleteAssessmentScore } from 'src/app/store/user/user.actions';
 
 @Component({
   selector: 'app-assessment-detail',
@@ -62,6 +63,12 @@ export class AssessmentDetailPage implements OnInit {
         },
       })
       .unsubscribe();
+  }
+
+  deleteScore(score: Score) {
+    console.log('dispatch deleteAssessmentScore ' + score.scoreDate);
+    this.store.dispatch(deleteAssessmentScore({ score }));
+    this.navController.back();
   }
 
   async openNewScore(assessment: Assessment) {

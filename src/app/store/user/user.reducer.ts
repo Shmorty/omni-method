@@ -101,5 +101,18 @@ export const userReducer = createReducer(
       loading: false,
       error: null,
     };
+  }),
+  on(UserActions.deleteAssessmentScoreSuccess, (state, action) => {
+    console.log('deleteAssessmentScoreSuccess');
+    return {
+      ...state,
+      scores: state.scores.filter(function (obj) {
+        return !(
+          obj.aid == action.score.aid && obj.scoreDate == action.score.scoreDate
+        );
+      }),
+      loading: true,
+      error: null,
+    };
   })
 );

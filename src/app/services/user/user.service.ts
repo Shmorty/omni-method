@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, pipe, Subject, throwError } from 'rxjs';
 import { catchError, first, map, single, take, tap } from 'rxjs/operators';
@@ -78,11 +82,41 @@ export class UserService implements IUserService {
     this.store.dispatch(UserActions.saveNewScore({ score }));
   }
 
+  deleteScore(score: Score) {
+    this.store.dispatch(UserActions.deleteAssessmentScore({ score }));
+  }
+
   saveScoreToDb(score: Score) {
-    console.log('user.service.saveScore ' + JSON.stringify(score));
-    // this.newScore.next(score);
+    console.log('user.service.saveScoreToDb ' + JSON.stringify(score));
     return this.http
       .post<Score>(environment.baseUrl + `/users/${score.uid}/scores`, score)
+      .pipe(catchError(this.handleError))
+      .pipe(
+        tap((m) => {
+          this.newScore.next(m);
+        })
+      );
+  }
+
+  deleteScoreFromDb(score: Score) {
+    // SCORE#DLFT#2023-03-01
+    console.log('user.service.deleteScoreFromDb ' + JSON.stringify(score));
+    let delScoreDate = new Date(score.scoreDate);
+    console.log(delScoreDate.toISOString().split('T')[0]);
+    score = { ...score, scoreDate: delScoreDate.toISOString().split('T')[0] };
+    console.log('scoreDate: ' + score.scoreDate);
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(score),
+    };
+    console.log(options.body);
+    return this.http
+      .delete<Score>(
+        environment.baseUrl + `/users/${score.uid}/scores`,
+        options
+      )
       .pipe(catchError(this.handleError))
       .pipe(
         tap((m) => {
