@@ -55,8 +55,8 @@ export class OmniScoreService {
                     if (scores?.length > 0) {
                       let sortedScores = scores.sort(function (a, b) {
                         return (
-                          new Date(b.scoreDate).getDate() -
-                          new Date(a.scoreDate).getDate()
+                          new Date(b.scoreDate).valueOf() -
+                          new Date(a.scoreDate).valueOf()
                         );
                       });
                       catTotal += sortedScores[0].calculatedScore;
