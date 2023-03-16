@@ -81,6 +81,10 @@ export class ProfilePage implements OnInit {
     // });
   }
 
+  showEditProfile() {
+    console.log('showEditPage');
+  }
+
   getCategoryScore(category: Category) {
     return this.store.select(selectCategoryScore(category));
   }
@@ -119,6 +123,17 @@ export class ProfilePage implements OnInit {
     } else if (days > 30) {
       return 'caution';
     }
+  }
+
+  getAge(user: User) {
+    var today = new Date();
+    var birthDate = new Date(user.dob);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
   }
 
   async openNewScore(e, assessment, user) {
