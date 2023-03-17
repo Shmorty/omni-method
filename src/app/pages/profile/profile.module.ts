@@ -17,7 +17,15 @@ import { NewScorePageModule } from '../new-score/new-score.module';
     FormsModule,
     // ExploreContainerComponentModule,
     ProfilePageRoutingModule,
-    NgxSkeletonLoaderModule,
+    // NgxSkeletonLoaderModule,
+    NgxSkeletonLoaderModule.forRoot({
+      animation: 'pulse',
+      appearance: 'line',
+      theme: {
+        extendsFromRoot: true,
+        'margin-bottom': '0px',
+      },
+    }),
     NewScorePageModule,
   ],
 })

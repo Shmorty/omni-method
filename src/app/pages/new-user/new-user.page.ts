@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/store/user/user.model';
 import { DatePicker, DatePickerOptions } from '@pantrist/capacitor-date-picker';
 import { isPlatform } from '@ionic/angular';
+import { Keyboard } from '@capacitor/keyboard';
 
 @Component({
   selector: 'app-new-user',
@@ -29,15 +30,9 @@ export class NewUserPage implements OnInit {
   ) {
     let calcDate = new Date(); //.setFullYear(2006);
     let curYear = calcDate.getFullYear();
-    console.log('year: ' + curYear);
     calcDate.setFullYear(curYear - 16);
-    this.userDob = datePipe.transform(calcDate, 'MM-dd-yyyy');
+    this.userDob = datePipe.transform(calcDate, 'MM/dd/yyyy');
     // https://stackoverflow.com/questions/65056918/reactive-form-date-picker-in-ionic-5
-    // console.log(datePipe.transform(this.userDob, 'M-d-y'));
-    console.log(this.userDob);
-    // this.formData.get('dob').setValue(this.userDob.toISOString());
-    // .setValue(datePipe.transform(this.startDate, 'M-d-y'));
-    // console.log(datePipe.transform(this.currentDate, 'M-d-y'));
   }
 
   ngOnInit() {
@@ -119,18 +114,21 @@ export class NewUserPage implements OnInit {
   }
 
   async openPicker() {
+    let maxDate = new Date(); //.setFullYear(2006);
+    let curYear = maxDate.getFullYear();
+    maxDate.setFullYear(curYear - 2);
+
     const options: DatePickerOptions = {
-      format: 'MM-dd-yyyy',
+      format: 'MM/dd/yyyy',
       mode: 'date',
       date: this.userDob,
-      max: '01-03-2023',
-      // date: this.userDob.toISOString(),
-      // max: new Date().toISOString(),
+      max: this.datePipe.transform(maxDate, 'MM/dd/yyyy'),
     };
     console.log(options.date);
     console.log(options.max);
     if (isPlatform('mobile')) {
       console.log('is mobile');
+      Keyboard.hide();
       return DatePicker.present(options).then((date) => {
         this.userDob = date.value;
         this.formData.get('dob').setValue(date.value);
