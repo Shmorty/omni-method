@@ -13,7 +13,7 @@ import { Score } from '../../store/models/score.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import * as UserActions from '../../store/user/user.actions';
-import { selectAuthUser } from 'src/app/store/user/user.selectors';
+import { selectAuthUser, selectUser } from 'src/app/store/user/user.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +37,6 @@ export class UserService implements IUserService {
         this._currentUser = user;
         return user;
       })
-      // catchError((error) => of(UserActions.loadUserFailure({ error })))
     );
   }
 
@@ -66,13 +65,17 @@ export class UserService implements IUserService {
       .pipe(catchError(this.handleError));
   }
 
-  setCurrentUser(user: User) {
-    this._currentUser = user;
+  currentUser() {
+    return this.store.select(selectUser);
   }
 
-  getCurrentUser(): User {
-    return this._currentUser;
-  }
+  // setCurrentUser(user: User) {
+  //   this._currentUser = user;
+  // }
+
+  // getCurrentUser(): User {
+  //   return this._currentUser;
+  // }
 
   onNewScore(): Observable<Score> {
     return this.newScore.asObservable();

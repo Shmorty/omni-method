@@ -25,13 +25,12 @@ export class NewScorePage implements OnInit {
   @Output() score: Score;
   formData: FormGroup;
   today = new Date();
-  public user$ = this.store.select(selectUser);
+  public user$ = this.userService.currentUser();
   private user: User;
 
   constructor(
     private modalCtrl: ModalController,
-    private userService: UserService,
-    private store: Store
+    private userService: UserService
   ) {}
 
   ngOnInit() {

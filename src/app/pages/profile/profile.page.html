@@ -1,30 +1,24 @@
-<ion-header [translucent]="false">
+<ion-header [translucent]="false" class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-title>Omni Score {{omniScore$ | async}}</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true" #scrollarea>
+<ion-content [fullscreen]="true" #scrollarea no-bounce>
   <ion-header collapse="condense">
     <ion-toolbar color="default">
       <ion-card class="card cardStyle topCard bg-transparent">
         <ng-container *ngIf="user$ | async as user; else loading ">
           <ion-item lines="none" color="none">
-            <div id="avatar">
-              <ion-avatar>
-                <span *ngIf="user.avatar">
-                  <img src="{{user.avatar}}" />
-                </span>
-                <ion-label *ngIf="!user.avatar" class="textAvatar">
-                  {{user.firstName | slice : 0 : 1 }} {{user.lastName | slice :
-                  0 : 1 }}
-                </ion-label>
-              </ion-avatar>
-            </div>
+            <user-avatar
+              [user]="user"
+              [ngStyle]="{'color': 'white'}"
+            ></user-avatar>
             <span slot="end">
               <ion-button
-                (click)="showEditProfile()"
+                id="open-modal"
                 style="float: right"
                 color="none"
+                (click)="openEditProfile($event, user)"
               >
                 <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
               </ion-button>

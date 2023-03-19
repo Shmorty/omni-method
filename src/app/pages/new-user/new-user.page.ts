@@ -73,16 +73,9 @@ export class NewUserPage implements OnInit {
   }
 
   onSubmit() {
-    // let dob: string = this.formData.get('dob');
-    // this.formData.setValue(dob.substring(0, 10));
     console.log(this.formData.value);
     // create user in database
     this.userService.saveUser(this.formData.value);
-    // this.userService.setUser(this.formData.value).subscribe((data) => {
-    //   console.log('setUser returned:');
-    //   console.log(data);
-    //   this.router.navigate(['/home']);
-    // });
   }
 
   next() {

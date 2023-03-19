@@ -9,12 +9,7 @@ import { WelcomePageRoutingModule } from './welcome-routing.module';
 import { WelcomePage } from './welcome.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    WelcomePageRoutingModule
-  ],
-  declarations: [WelcomePage]
+  imports: [CommonModule, FormsModule, IonicModule, WelcomePageRoutingModule],
+  declarations: [WelcomePage],
 })
 export class WelcomePageModule {}

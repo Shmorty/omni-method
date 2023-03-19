@@ -19,9 +19,8 @@ ion-content ion-header {
     color: white;
   }
 }
-#avatar {
+user-avatar {
   margin: auto;
-  // balance for width of edit button on right
   padding-left: 70px;
 }
 #omniScore {
@@ -68,20 +67,6 @@ ion-badge {
 }
 .stale {
   background-color: #f12323;
-}
-ion-avatar img {
-  border-radius: 50%;
-  aspect-ratio: 1 / 1;
-}
-.textAvatar {
-  color: #35b5ff;
-  // background-color: white;
-  // background-color: black;
-  border-radius: 50%;
-  border: 1px solid white;
-  font-weight: bold;
-  overflow: visible;
-  padding: 10px 6px;
 }
 .topCard {
   background-color: #35b5ff;

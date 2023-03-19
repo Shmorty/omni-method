@@ -1,23 +1,118 @@
-<ng-template>
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-button (click)="cancel()">Cancel</ion-button>
-      </ion-buttons>
-      <ion-title>Edit Profile</ion-title>
-      <ion-buttons slot="end">
-        <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">
-    <ion-item>
-      <ion-label position="stacked">Enter your name</ion-label>
-      <ion-input
-        type="text"
-        placeholder="Your name"
-        [(ngModel)]="name"
-      ></ion-input>
-    </ion-item>
-  </ion-content>
-</ng-template>
+<ion-content class="ion-padding" color="default">
+  <ion-header class="ion-no-border"> </ion-header>
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-button
+      (click)="cancel()"
+      routerDirection="back"
+      type="button"
+      size="small"
+      shape="circle"
+      color="secondary"
+    >
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+  </ion-fab>
+  <div class="ion-text-center">
+    <ion-card-title class="center" color="primary">Edit Profile</ion-card-title>
+  </div>
+
+  <ion-list>
+    <!-- form -->
+    <form [formGroup]="profileForm" (ngSubmit)="submitForm()">
+      <ion-list>
+        <!-- <ion-item>
+          <user-avatar [user]="user"></user-avatar>
+          <ion-label>edit</ion-label>
+        </ion-item> -->
+
+        <ion-item>
+          <ion-label position="fixed">First Name</ion-label>
+          <ion-input
+            formControlName="firstName"
+            placeholder="First"
+          ></ion-input>
+        </ion-item>
+        <!-- <div
+    *ngIf="(first.dirty || first.touched) && first.errors"
+    class="errors"
+  >
+    <span *ngIf="first.errors?.required">First name is required</span>
+  </div> -->
+        <ion-item>
+          <ion-label position="fixed">Last Name</ion-label>
+          <ion-input formControlName="lastName" placeholder="Last"></ion-input>
+        </ion-item>
+        <!-- <div
+    *ngIf="(last.dirty || last.touched) && last.errors"
+    class="errors"
+  >
+    <span *ngIf="last.errors?.required">Last name is required</span>
+  </div> -->
+        <ion-item>
+          <ion-label position="fixed">Nickname</ion-label>
+          <ion-input
+            formControlName="nickname"
+            placeholder="(optional)"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="fixed">Gender</ion-label>
+          <ion-radio-group formControlName="gender">
+            <ion-item>
+              <ion-label>Male</ion-label>
+              <ion-radio slot="end" value="male"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Female</ion-label>
+              <ion-radio slot="end" value="female"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-item>
+
+        <ion-item (click)="openPicker()">
+          <ion-label position="fixed">Date of birth</ion-label>
+          <ion-input formControlName="dob" placeholder="MM/DD/YYYY"></ion-input>
+        </ion-item>
+        <!-- <ion-item lines="full">
+          <ion-label position="floating">DOB</ion-label>
+          <ion-datetime
+            (ionChange)="getDate($event)"
+            formControlName="dob"
+          ></ion-datetime>
+        </ion-item> -->
+
+        <ion-item>
+          <ion-label position="fixed">Height</ion-label>
+          <fieldset formGroupName="height">
+            <ion-item style="text-align: right">
+              <ion-input formControlName="feet" placeholder="Feet"></ion-input>
+              <ion-label>feet</ion-label>
+              <ion-input
+                formControlName="inches"
+                placeholder="Inches"
+              ></ion-input>
+              <ion-label>inches</ion-label>
+            </ion-item>
+          </fieldset>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="fixed">Weight</ion-label>
+          <ion-input formControlName="weight" placeholder="Weight"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-button
+        [disabled]="profileForm.invalid"
+        type="submit"
+        color="primary"
+        shape="round"
+        expand="block"
+        >Save</ion-button
+      >
+    </form>
+    <!-- <ion-button color="warning" shape="round" expand="block"
+      >Change Password</ion-button
+    > -->
+  </ion-list>
+</ion-content>

@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonModal, ModalController } from '@ionic/angular';
-import { environment } from 'src/environments/environment';
 // import { GoogleSigninService, UserInfo } from '../google-signin.service';
 import { Assessment, Category } from '../../store/assessments/assessment.model';
-import { AssessmentService } from '../../services/assessments/assessment.service';
 import { Router } from '@angular/router';
 import { User } from '../../store/user/user.model';
 import { Score } from '../../store/models/score.model';
@@ -20,6 +18,7 @@ import {
   selectOmniScore,
 } from 'src/app/store/omni-score/omni-score.selector';
 import { delay, first, tap } from 'rxjs/operators';
+import { EditProfilePage } from '../edit-profile/edit-profile.page';
 
 @Component({
   selector: 'app-profile',
@@ -44,7 +43,6 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private store: Store,
-    private assessmentService: AssessmentService,
     private router: Router,
     private modalCtrl: ModalController
   ) {}
@@ -63,26 +61,6 @@ export class ProfilePage implements OnInit {
         },
       })
       .unsubscribe();
-    // this.auth.currentUser().then((usr) => {
-    //   if (usr == null) {
-    //     console.log('no session send user to login');
-    //     this.router.navigate(['/login']);
-    //     return;
-    //   }
-    //   console.log('save user data');
-    //   this.auth.currUserId = usr.uid;
-    //   this.auth.currUserEmail = usr.email;
-    //   console.log(usr);
-    //   this.userId = usr.uid;
-    //   this.loadData();
-    // });
-    // this.subscription = this.userService.onNewScore().subscribe((score) => {
-    //   this.loadUserData();
-    // });
-  }
-
-  showEditProfile() {
-    console.log('showEditPage');
   }
 
   getCategoryScore(category: Category) {
@@ -145,6 +123,23 @@ export class ProfilePage implements OnInit {
         user: user,
       },
       cssClass: 'new-score-modal',
+      presentingElement: document.querySelector('ion-router-outlet'),
+      canDismiss: true,
+    });
+    await modal.present();
+    modal.onDidDismiss().then(() => {
+      // this.loadUserData();
+    });
+  }
+
+  async openEditProfile(e, user) {
+    e.stopPropagation();
+    const modal = await this.modalCtrl.create({
+      component: EditProfilePage,
+      componentProps: {
+        user: user,
+      },
+      cssClass: 'edit-user-modal',
       presentingElement: document.querySelector('ion-router-outlet'),
       canDismiss: true,
     });
