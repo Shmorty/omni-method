@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Community</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Community</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-item>
+    <ion-label
+      class="view-label"
+      (click)="setView(View.Rankings)"
+      ngClass="{{viewClass(View.Rankings)}}"
+      >Rankings</ion-label
+    >
+    <ion-label
+      class="view-label"
+      (click)="setView(View.Updates)"
+      ngClass="{{viewClass(View.Updates)}}"
+      >Updates</ion-label
+    >
+    <ion-label
+      class="view-label"
+      (click)="setView(View.People)"
+      ngClass="{{viewClass(View.People)}}"
+      >People</ion-label
+    >
+  </ion-item>
+  <ion-list *ngIf="view===View.Rankings">
+    <ion-list-header>
+      <ion-button class="setting-button">Male</ion-button>
+      <ion-button class="setting-button">National</ion-button>
+      <ion-button class="setting-button">Overall</ion-button>
+    </ion-list-header>
+    <ion-list-header>
+      <ion-label class="rank-header" color="primary">Ranking</ion-label>
+      <ion-label class="rank-header" color="primary">Name</ion-label>
+      <ion-label class="rank-header" color="primary">Score</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let athlete of ranking$ | async">
+      <ion-text slot="start">{{athlete.rank}}</ion-text>
+      <ion-text>{{athlete.name}}</ion-text>
+      <ion-text slot="end">{{athlete.score}}</ion-text>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="view===View.Updates">
+    <ion-card *ngFor="let number of [1,2,3,4,5,6]">
+      <ion-card-header>
+        <ion-card-title>card title</ion-card-title>
+        <ion-card-subtitle>card subtitle</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>{{number}} - card content </ion-card-content>
+    </ion-card>
+  </ion-list>
+  <ion-list *ngIf="view===View.People">
+    <ion-card *ngFor="let number of [1,2,3,4,5,6]">
+      <ion-card-header>
+        <ion-card-title>card title</ion-card-title>
+        <ion-card-subtitle>card subtitle</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>{{number}} - Profile </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

@@ -46,9 +46,11 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'tab3',
+        path: 'community',
         loadChildren: () =>
-          import('../tab3/tab3.module').then((m) => m.Tab3PageModule),
+          import('../community/community.module').then(
+            (m) => m.CommunityPageModule
+          ),
       },
       {
         path: 'tab4',
