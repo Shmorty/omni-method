@@ -60,10 +60,6 @@
                 <ion-label>Female</ion-label>
                 <ion-radio slot="end" value="female"></ion-radio>
               </ion-item>
-              <ion-item>
-                <ion-label>Other</ion-label>
-                <ion-radio slot="end" value="other"></ion-radio>
-              </ion-item>
             </ion-radio-group>
           </ion-list>
         </div>
@@ -74,19 +70,9 @@
             </ion-text>
           </div>
           <ion-item (click)="openPicker()">
-            <!-- <ion-label>DOB</ion-label> -->
-            <!-- <ion-datetime
-              formControlName="dob"
-              id="dob"
-              presentation="date"
-              value="userDob"
-            ></ion-datetime> -->
-            <!-- <ion-button expand="block" (click)="openPicker()"
-              >Open Picker</ion-button
-            > -->
             <ion-input
               formControlName="dob"
-              placeholder="MM-DD-YYYY"
+              placeholder="MM/DD/YYYY"
             ></ion-input>
           </ion-item>
         </div>

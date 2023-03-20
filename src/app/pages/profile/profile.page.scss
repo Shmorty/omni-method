@@ -1,17 +1,46 @@
 .cardStyle {
-  // --ion-background-color: rgb(99, 175, 255);
-  // border-radius: 20px;
   margin: 0;
-  padding: 20px 4px;
+}
+.bg-transparent {
+  // background: transparent;
+  -ion-item-background: transparent;
 }
 span {
   // color: white;
   font-weight: 400;
 }
-
+ion-header {
+  background-color: #b8dfff;
+}
+ion-content ion-header {
+  background: linear-gradient(#b8dfff, #5eb3f9);
+  border-radius: 0 0 20px 20px;
+  ion-label {
+    color: white;
+  }
+}
+user-avatar {
+  margin: auto;
+  padding-left: 70px;
+}
+#omniScore {
+  margin: auto;
+  .omni-label {
+    border-top: 1.5px solid white;
+    font-weight: 700;
+    padding: 10px 40px;
+  }
+  .omni-score {
+    font-size: 1.4em;
+    font-weight: 700;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+}
 .name {
-  // font-size: 1.1em;
+  font-size: 2em;
   font-weight: bold;
+  margin: auto;
 }
 .units {
   color: var(--color);
@@ -31,44 +60,13 @@ ion-badge {
   float: right;
 }
 .caution {
-  // background-color: yellow;
-  // background-color: #c0c026;
-  // background-color: #e7e78a;
-  // background-color: #ffd976;
   background-color: #4d91ca;
-  // color: gray;
-  // color: yellow;
 }
 .warn {
-  // background-color: orange;
-  // background-color: #c07326;
-  // background-color: #e7b98a;
-  // background-color: #fb943a;
-  // background-color: #ff9432;
   background-color: #305b7e;
-  // color: orange;
 }
 .stale {
-  // background-color: red;
-  // background-color: #c02626;
-  // background-color: #aa2222;
-  // background-color: #e57f7f;
-  // background-color: #ff3f3f;
   background-color: #f12323;
-  // color: red;
-}
-ion-avatar img {
-  border-radius: 50%;
-  aspect-ratio: 1 / 1;
-}
-.textAvatar {
-  color: #35b5ff;
-  background-color: white;
-  border-radius: 50%;
-  border: 2px solid lightgray;
-  font-weight: bold;
-  overflow: visible;
-  padding: 10px 6px;
 }
 .topCard {
   background-color: #35b5ff;

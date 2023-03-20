@@ -8,6 +8,8 @@ import { ProfilePage } from './profile.page';
 import { ProfilePageRoutingModule } from './profile-routing.module';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NewScorePageModule } from '../new-score/new-score.module';
+import { EditProfilePageModule } from '../edit-profile/edit-profile.module';
+import { UserAvatarComponent } from 'src/app/component/user-avatar/user-avatar.component';
 
 @NgModule({
   declarations: [ProfilePage],
@@ -17,8 +19,18 @@ import { NewScorePageModule } from '../new-score/new-score.module';
     FormsModule,
     // ExploreContainerComponentModule,
     ProfilePageRoutingModule,
-    NgxSkeletonLoaderModule,
+    // NgxSkeletonLoaderModule,
+    NgxSkeletonLoaderModule.forRoot({
+      animation: 'pulse',
+      appearance: 'line',
+      theme: {
+        extendsFromRoot: true,
+        'margin-bottom': '0px',
+      },
+    }),
     NewScorePageModule,
+    EditProfilePageModule,
+    UserAvatarComponent,
   ],
 })
 export class ProfilePageModule {}
