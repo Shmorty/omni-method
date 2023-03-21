@@ -25,7 +25,7 @@ export class NewScorePage implements OnInit {
   @Output() score: Score;
   formData: FormGroup;
   today = new Date();
-  public user$ = this.userService.currentUser();
+  public user$ = this.userService.getUser();
   private user: User;
 
   constructor(

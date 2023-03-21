@@ -4,7 +4,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, pipe, Subject, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, first, map, single, take, tap } from 'rxjs/operators';
 import { User } from '../../store/user/user.model';
 import { IUserService } from './user.service.interface';
@@ -19,88 +19,39 @@ import { selectAuthUser, selectUser } from 'src/app/store/user/user.selectors';
   providedIn: 'root',
 })
 export class UserService implements IUserService {
-  private _currentUser: User = null;
-  private newScore = new Subject<Score>();
-
   constructor(private http: HttpClient, private store: Store<AppState>) {}
 
-  load() {
-    this.store.dispatch(
-      UserActions.loadUserAction({ uid: 'anJJeMDX6RTHDNOCPpPIxOObLy92' })
-    );
-  }
-
-  getUser(id: string): Observable<User> {
+  // get user and scores from database
+  getUserFromDb(id: string): Observable<User> {
     console.log('GET ' + environment.baseUrl + '/users/' + id);
-    return this.http.get<User>(environment.baseUrl + '/users/' + id).pipe(
-      map((user) => {
-        this._currentUser = user;
-        return user;
-      })
-    );
+    return this.http
+      .get<User>(environment.baseUrl + '/users/' + id)
+      .pipe(
+        map((user) => {
+          // this._currentUser = user;
+          return user;
+        })
+      )
+      .pipe(catchError(this.handleError));
   }
 
-  saveUser(user: User) {
-    console.log('userService.saveUser');
-    this.store
-      .select(selectAuthUser)
-      .pipe(first())
-      .subscribe(
-        (authUser) => {
-          user.id = authUser['uid'];
-          user.email = authUser['email'];
-          console.log(user);
-          console.log('do insert');
-          this.store.dispatch(UserActions.newUser({ payload: user }));
-        },
-        (err) => console.error('Observer got an error: ' + err)
-      );
-  }
-
-  setUser(user: User): Observable<User> {
+  // write user to database
+  saveUserToDb(user: User): Observable<User> {
     console.log('userService.setUser');
-    this._currentUser = user;
     return this.http
       .post<User>(environment.baseUrl + `/users`, user)
       .pipe(catchError(this.handleError));
   }
 
-  currentUser() {
-    return this.store.select(selectUser);
-  }
-
-  // setCurrentUser(user: User) {
-  //   this._currentUser = user;
-  // }
-
-  // getCurrentUser(): User {
-  //   return this._currentUser;
-  // }
-
-  onNewScore(): Observable<Score> {
-    return this.newScore.asObservable();
-  }
-
-  saveScore(score: Score) {
-    this.store.dispatch(UserActions.saveNewScore({ score }));
-  }
-
-  deleteScore(score: Score) {
-    this.store.dispatch(UserActions.deleteAssessmentScore({ score }));
-  }
-
+  // write score to database
   saveScoreToDb(score: Score) {
     console.log('user.service.saveScoreToDb ' + JSON.stringify(score));
     return this.http
       .post<Score>(environment.baseUrl + `/users/${score.uid}/scores`, score)
-      .pipe(catchError(this.handleError))
-      .pipe(
-        tap((m) => {
-          this.newScore.next(m);
-        })
-      );
+      .pipe(catchError(this.handleError));
   }
 
+  //
   deleteScoreFromDb(score: Score) {
     // SCORE#DLFT#2023-03-01
     console.log('user.service.deleteScoreFromDb ' + JSON.stringify(score));
@@ -120,12 +71,40 @@ export class UserService implements IUserService {
         environment.baseUrl + `/users/${score.uid}/scores`,
         options
       )
-      .pipe(catchError(this.handleError))
-      .pipe(
-        tap((m) => {
-          this.newScore.next(m);
-        })
+      .pipe(catchError(this.handleError));
+  }
+
+  // get user from store
+  getUser() {
+    return this.store.select(selectUser);
+  }
+
+  // trigger new user action
+  saveUser(user: User) {
+    console.log('userService.saveUser');
+    this.store
+      .select(selectAuthUser)
+      .pipe(first())
+      .subscribe(
+        (authUser) => {
+          user.id = authUser['uid'];
+          user.email = authUser['email'];
+          console.log(user);
+          console.log('do insert');
+          this.store.dispatch(UserActions.newUser({ payload: user }));
+        },
+        (err) => console.error('Observer got an error: ' + err)
       );
+  }
+
+  // trigger save score event
+  saveScore(score: Score) {
+    this.store.dispatch(UserActions.saveNewScore({ score }));
+  }
+
+  // trigger delete score event
+  deleteScore(score: Score) {
+    this.store.dispatch(UserActions.deleteAssessmentScore({ score }));
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -142,7 +121,7 @@ export class UserService implements IUserService {
     }
     // Return an observable with a user-facing error message.
     return throwError(
-      () => new Error('Something bad happened; please try again later.')
+      () => new Error('Unable to process request; please try again later.')
     );
   }
 }

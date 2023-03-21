@@ -46,7 +46,7 @@ export class UserEffects {
       ofType(UserActions.loadUserAction),
       tap(console.log),
       switchMap(({ uid }) =>
-        this.userService.getUser(uid).pipe(
+        this.userService.getUserFromDb(uid).pipe(
           tap(console.log),
           map((data) => UserActions.loadUserSuccess({ payload: data }))
         )
@@ -60,7 +60,7 @@ export class UserEffects {
       ofType(UserActions.newUser),
       tap(console.log),
       switchMap(({ payload }) =>
-        this.userService.setUser(payload).pipe(
+        this.userService.saveUserToDb(payload).pipe(
           tap(console.log),
           map((data) => UserActions.newUserSuccess({ payload: data })),
           catchError((error) => of(UserActions.newUserFailure({ error })))

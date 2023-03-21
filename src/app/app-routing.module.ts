@@ -57,6 +57,10 @@ const routes: Routes = [
         (m) => m.ForgotPasswordPageModule
       ),
   },
+  {
+    path: 'community',
+    loadChildren: () => import('./pages/community/community.module').then( m => m.CommunityPageModule)
+  },
 ];
 @NgModule({
   imports: [
