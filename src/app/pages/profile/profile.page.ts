@@ -1,5 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonModal, ModalController } from '@ionic/angular';
+import { Component, ContentChild, OnInit, ViewChild } from '@angular/core';
+import {
+  IonAccordionGroup,
+  IonButton,
+  IonModal,
+  ModalController,
+} from '@ionic/angular';
 // import { GoogleSigninService, UserInfo } from '../google-signin.service';
 import { Assessment, Category } from '../../store/assessments/assessment.model';
 import { Router } from '@angular/router';
@@ -26,7 +31,9 @@ import { EditProfilePage } from '../edit-profile/edit-profile.page';
   styleUrls: ['profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  @ViewChild(IonModal) modal: IonModal;
+  // @ViewChild(IonModal) modal: IonModal;
+  @ViewChild('accordionGroup') accordionGroup: IonAccordionGroup;
+  moreOpen: boolean = false;
   subscription: Subscription;
   userId: string;
   user: User;
@@ -147,5 +154,18 @@ export class ProfilePage implements OnInit {
     modal.onDidDismiss().then(() => {
       // this.loadUserData();
     });
+  }
+
+  toggleAccordion(event) {
+    const nativeEl = this.accordionGroup;
+    console.log(nativeEl);
+    console.log(event.target);
+    if (nativeEl.value === 'moreProfile') {
+      nativeEl.value = undefined;
+      this.moreOpen = false;
+    } else {
+      nativeEl.value = 'moreProfile';
+      this.moreOpen = true;
+    }
   }
 }

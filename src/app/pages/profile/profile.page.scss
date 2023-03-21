@@ -33,9 +33,16 @@ user-avatar {
   .omni-score {
     font-size: 2em;
     font-weight: 700;
-    padding-bottom: 10px;
+    // padding-bottom: 10px;
     text-align: center;
   }
+}
+.more-button {
+  background-color: transparent;
+  width: 100%;
+}
+.rotate-button {
+  transform: rotate(180deg);
 }
 .name {
   font-size: 2em;

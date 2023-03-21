@@ -3,9 +3,8 @@
 ## built with
 
 - Angular <https://angular.io/>
-- Capactor
-  -- <https://capacitorjs.com/>
-  -- <https://capacitorjs.com/solution/angular>
+- Capacitor <https://capacitorjs.com/>
+- Capacitor Angular <https://capacitorjs.com/solution/angular>
 - Ionic
 
 need to install
@@ -34,7 +33,9 @@ need to install
 └── typescript@4.9.4
 ```
 
-to build locally
+---
+
+## to build locally
 
 1. clone repo
 2. run npm install
@@ -42,8 +43,10 @@ to build locally
 
 ## Using NgRx
 
-helpful article <https://www.concretepage.com/ngrx/ngrx-effects-example>
-<https://eliteionic.com/tutorials/using-ngrx-for-state-management-in-an-ionic-angular-application/>
+helpful articles
+
+- [NgRx](https://www.concretepage.com/ngrx/ngrx-effects-example)
+- [tutorial](https://eliteionic.com/tutorials/using-ngrx-for-state-management-in-an-ionic-angular-application/)
 
 ### App State
 
@@ -62,15 +65,24 @@ helpful article <https://www.concretepage.com/ngrx/ngrx-effects-example>
     "nickName": "Jake",
     "dob": "2007-08-30",
     "weight": 129,
+    "omniScore": 1234,
+    "categoryScores": {
+      "STRG": 123,
+      "ENDR": 123,
+      "POWR": 123,
+      "FLEX": 123,
+      "META": 123,
+      "NEUR": 123,
+    }
   },
   "scores": [
     {
-      "calculatedScore":360,
-      "notes":"",
-      "scoreDate":"1/16/2023",
-      "aid":"BNCH",
-      "rawScore":216,
-      "uid":"anJJeMDX6RTHDNOCPpPIxOObLy92",
+      "calculatedScore": 360,
+      "notes": "",
+      "scoreDate": "1/16/2023",
+      "aid": "BNCH",
+      "rawScore": 216,
+      "uid": "anJJeMDX6RTHDNOCPpPIxOObLy92",
     }
   ],
   "Assessments": [
@@ -88,6 +100,27 @@ helpful article <https://www.concretepage.com/ngrx/ngrx-effects-example>
 }
 ```
 
+User_data
+PK                SK
+USER#{ User ID }  #META#{ User ID }
+
+User_scores
+PK                SK
+USER#{ User ID }  SCORE#{ Assessment ID }#{ Assessment Date }
+
+Rankings
+???
+
+## Database Services
+
+| Function | End-point |
+| ------ | ------ |
+| addUser | POST /users |
+| getUserScores | GET /users/{id} |
+| addScore | POST /users/{id}/scores |
+| delScore | DELETE /users/{id}/scores |
+|  |  |
+
 ### Actions
 
 - new user
@@ -95,9 +128,9 @@ helpful article <https://www.concretepage.com/ngrx/ngrx-effects-example>
 
 ## Setting up google authentication
 
-<https://developers.google.com/identity/gsi/web/guides/client-library>
+[Google client library](https://developers.google.com/identity/gsi/web/guides/client-library) - Guides
 
-<https://console.cloud.google.com/apis/dashboard>
+[Google cloud console](https://console.cloud.google.com/apis/dashboard) - Dashboard
 
 Add to index.html
 
@@ -138,15 +171,19 @@ graph TD
     C -->|Connect| F[Find Friends]
 ```
 
-setup App Icon for capacitor
-1 install cordova-res
-npm install -g cordova-res
-2 create files
+#### setup App Icon for capacitor
+
+1. install cordova-res
+
+> `npm install -g cordova-res`
+
+2. create files
 
 - resources/icon.png
 - resources/splash.png
-  3
 
-Firebase
-omni-login user
-<https://console.firebase.google.com/project/omni-login-63e9f/authentication/users>
+3.
+
+### Firebase
+
+[omni-login user](https://console.firebase.google.com/project/omni-login-63e9f/authentication/users)

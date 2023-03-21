@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 export enum View {
   Rankings = 'Rankings',
@@ -30,7 +31,7 @@ export class CommunityPage implements OnInit {
     { rank: 7, name: 'Roger Federer', score: 5001 },
   ]);
 
-  constructor() {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit() {}
 
@@ -40,5 +41,9 @@ export class CommunityPage implements OnInit {
 
   viewClass(viewName: View) {
     return this.view === viewName ? 'active' : 'normal';
+  }
+
+  logout() {
+    this.auth.logout();
   }
 }
