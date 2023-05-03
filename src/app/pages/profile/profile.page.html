@@ -4,6 +4,17 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" #scrollarea no-bounce>
+  <ion-refresher
+    slot="fixed"
+    pullMax="200"
+    pullMin="60"
+    (ionRefresh)="handleRefresh($event)"
+  >
+    <ion-refresher-content
+      pullingIcon="none"
+      refreshingSpinner="none"
+    ></ion-refresher-content>
+  </ion-refresher>
   <ion-header collapse="condense">
     <ion-toolbar color="default">
       <ion-card class="card cardStyle topCard bg-transparent">
@@ -55,13 +66,10 @@
             </span>
           </ion-item>
 
-          <ion-item lines="none" color="none" style="--min-height: 0">
+          <!-- <ion-item lines="none" color="none" style="--min-height: 0">
             <ion-accordion-group #accordionGroup>
               <ion-accordion value="moreProfile">
                 <div slot="content" style="height: 44px">
-                  <!-- <ion-item lines="none">
-                    <ion-label> coming soon... </ion-label>
-                  </ion-item> -->
                 </div>
               </ion-accordion>
             </ion-accordion-group>
@@ -73,7 +81,7 @@
               (click)="toggleAccordion($event)"
               ><ion-icon name="chevron-down"></ion-icon
             ></ion-button>
-          </ion-item>
+          </ion-item> -->
         </ng-container>
 
         <!-- Profile Loading template -->

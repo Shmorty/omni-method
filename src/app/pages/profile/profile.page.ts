@@ -24,6 +24,7 @@ import {
 } from 'src/app/store/omni-score/omni-score.selector';
 import { delay, first, tap } from 'rxjs/operators';
 import { EditProfilePage } from '../edit-profile/edit-profile.page';
+import { OmniScoreService, oneDay } from 'src/app/services/omni-score.service';
 
 @Component({
   selector: 'app-profile',
@@ -70,6 +71,13 @@ export class ProfilePage implements OnInit {
       .unsubscribe();
   }
 
+  handleRefresh(event) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+    }, 100);
+  }
+
   getCategoryScore(category: Category) {
     return this.store.select(selectCategoryScore(category));
   }
@@ -97,9 +105,7 @@ export class ProfilePage implements OnInit {
 
   // scoreClass(date: Date): string {
   scoreClass(scoreDate: string): string {
-    var date = new Date(scoreDate);
-    const oneDay = 1000 * 3600 * 24;
-    let days = Math.ceil((Date.now().valueOf() - date.valueOf()) / oneDay);
+    let days = OmniScoreService.calculateDays(scoreDate);
 
     if (days > 90) {
       return 'stale';

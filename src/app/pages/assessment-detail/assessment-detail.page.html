@@ -58,11 +58,21 @@
       </ion-accordion>
     </ion-accordion-group>
 
-    <ion-item lines="full">
+    <ion-item lines="none">
       <p>{{ assessment.description }}</p>
+    </ion-item>
+    <ion-item lines="none">
+      <ol>
+        <li *ngFor="let item of assessment.instruction">{{item}}</li>
+      </ol>
     </ion-item>
   </div>
   <ion-list *ngIf="assessment.checklist">
+    <ion-item lines="none">
+      <ol>
+        <li *ngFor="let item of assessment.instruction">{{item}}</li>
+      </ol>
+    </ion-item>
     <ion-grid
       button
       class="card"

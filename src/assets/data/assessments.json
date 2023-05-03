@@ -34,171 +34,280 @@
   "assessments": [
     {
       "cid": "STRG",
+      "label": "Deadlift",
       "aid": "DLFT",
       "icon": "/assets/images/deadlift.png",
-      "label": "Deadlift",
       "units": "1RM (lbs)",
       "description": "A deadlift is a resistance exercise in which you hinge your hips to lift a loaded barbell off the floor.  The 1RM deadlift assessment tests your maximum force production while lifting a loaded barbell off of the floor. This test is to be performed without equipment including belts, straps, or sleeves.",
+      "instruction": [
+        "Stand with feet at a comfortable width and shins close to the barbell",
+        "Grip the barbell with preferred grip, hands at a comfortable width",
+        "Take a deep breath, brace core muscles, and lift the barbell by driving feet into the floor and standing up, keeping the bar close to the body and pushing hips forward",
+        "Complete the lift by standing up fully, maintaining control of the barbell",
+        "Lower the barbell to the ground in a safe and controlled manner"
+      ],
       "min": 0,
       "max": 939
     },
     {
       "cid": "STRG",
+      "label": "Squat",
       "aid": "BKSQ",
       "icon": "/assets/images/backsquat.png",
-      "label": "Squat",
       "units": "1RM (lbs)",
       "description": "No supportive equipment (Weight lifting belt allowed). Must squat below parallel",
+      "instruction": [
+        "Stand with feet at a comfortable width and barbell on squat rack at shoulder height",
+        "Step up, place bar across upper back with preferred grip and stance",
+        "Squat down until thighs are below parallel, hips below knees",
+        "Drive feet into the ground and stand up, lifting the barbell",
+        "Step forward to re-rack the barbell"
+      ],
       "min": 0,
       "max": 800
     },
     {
       "cid": "STRG",
+      "label": "Weighted Pull-up",
       "aid": "WTPU",
       "icon": "/assets/images/weightedpullup.png",
-      "label": "Weighted Pull-up",
       "units": "1RM (lbs)",
       "description": "No supportive equipment. Weight added below waist. No kipping. Must start in dead-hang position. Must pause in top position for 1 second. Bottom of chin must reach higher than the top of the bar.",
+      "instruction": [
+        "Attach weight to weight belt or vest securely",
+        "Stand under pull-up bar, grip bar with preferred grip",
+        "From a dead hang position, pull yourself up, chin above bar",
+        "Pause briefly at top, then lower yourself back down to starting position"
+      ],
       "min": -100,
       "max": 500
     },
     {
       "cid": "STRG",
+      "label": "Bench",
       "aid": "BNCH",
       "icon": "/assets/images/BenchPress.png",
-      "label": "Bench",
       "units": "1RM (lbs)",
       "description": "No supportive equipment. Barbell must make contact with body in bottom position",
+      "instruction": [
+        "Lie on flat bench with feet flat, eyes below barbell, and head, shoulders, and buttocks in contact with bench",
+        "Position barbell directly above chest with preferred grip (any width)",
+        "Lift barbell off rack, arms fully extended",
+        "Lower barbell to touch chest, without bouncing",
+        "Pause, then press barbell back up, extending arms",
+        "Carefully lower barbell back onto rack"
+      ],
       "min": 0,
       "max": 600
     },
     {
       "cid": "ENDR",
+      "label": "Squats",
       "aid": "SQTS",
       "icon": "/assets/images/backsquat.png",
-      "label": "Squats",
       "units": "Reps",
       "description": "No stopping movement at any point once the test has begun. Top of thighs must be below top of knees in bottom position. Knees must straighten in top position.",
+      "instruction": [
+        "Load the barbell with half of your bodyweight or more",
+        "Position the barbell on your upper back",
+        "Squat down until thighs are below parallel, hips below knees",
+        "Push back up to the starting position",
+        "Repeat for as many reps as possible with proper form",
+        "Record the weight lifted for one rep in your max back squat test"
+      ],
       "min": 0,
       "max": 150
     },
     {
       "cid": "ENDR",
+      "label": "Pushups",
       "aid": "PSHU",
       "icon": "/assets/images/pushup.png",
-      "label": "Pushups",
       "units": "Reps",
       "description": "No stopping movement at any point once the test has begun. Top of elbows must be higher than top of the shoulders in bottom position. Arms must straighten in top position.",
+      "instruction": [
+        "Get into a plank position on your hands and toes, with hands at any preferred width",
+        "Ensure your body maintains a straight line from shoulders to heels",
+        "Lower your body towards the ground by bending your elbows",
+        "Lower your body until your elbows are flexed to 90 degrees or less",
+        "Push back up to starting position by extending your arms",
+        "Repeat for as many reps as possible with proper form and without pausing at any point",
+        "Record the number of reps completed"
+      ],
       "min": 0,
       "max": 150
     },
     {
       "cid": "ENDR",
+      "label": "Pullups",
       "aid": "PLUP",
       "icon": "/assets/images/pull_up.jpg",
-      "label": "Pullups",
       "units": "Reps",
       "description": "No stopping movement at any point once the test has begun. Arms must straighten in bottom position. Bottom of chin must reach higher than the top of the bar. No kipping.",
+      "instruction": [
+        "Grip the pull-up bar with any grip",
+        "Pull yourself up towards the bar, bringing your chin above the bar",
+        "Lower yourself back down without pausing, returning to a dead hang position with fully extended arms",
+        "Repeat for as many reps as possible, maintaining proper form",
+        "Record the number of reps completed for your max pull-up test"
+      ],
       "min": 0,
       "max": 49
     },
     {
       "cid": "POWR",
+      "label": "Standing Long Jump",
       "aid": "STLJ",
       "icon": "/assets/images/Long_Jump.jpg",
-      "label": "Standing Long Jump",
       "units": "Length (in)",
       "description": "Feet must move in tandem. Heel that is furthest back is measured.",
+      "instruction": [
+        "Stand with feet in any stance behind a clear line",
+        "Jump forward",
+        "Fully extend legs, drive hips and knees forward, landing with both feet in tandem.",
+        "Measure distance jumped from starting point to heel landing spot."
+      ],
       "min": 0,
       "max": 147
     },
     {
       "cid": "POWR",
+      "label": "Push Press",
       "aid": "PSHP",
       "icon": "/assets/images/Push_Press.jpg",
-      "label": "Push Press",
       "units": "1RM (lbs)",
       "description": "No supportive equipment. No catch.",
+      "instruction": [
+        "Stand with feet shoulder-width apart, holding a barbell at shoulder height with an overhand grip.",
+        "Dip down and drive the barbell overhead by extending legs and pressing the barbell until arms are fully extended",
+        "Record your successful push press 1RM weight lifted for one rep."
+      ],
       "min": 0,
       "max": 495
     },
     {
       "cid": "POWR",
+      "label": "Clean",
       "aid": "PWCL",
       "icon": "/assets/images/powerclean.png",
-      "label": "Clean",
       "units": "1RM (lbs)",
       "description": "No supportive equipment (Weight lifting belt allowed)",
+      "instruction": [
+        "Stand with feet at your preferred stance width in front of a loaded barbell on the floor.",
+        "Grip the bar and lift by extending hips and knees, shrugging shoulders, and pulling bar towards chest.",
+        "Rotate elbows around and catch the bar on front shoulders in a front squat position.",
+        "Stand up from front squat position to complete the clean",
+        "Record weight lifted for one rep as your clean 1RM test result."
+      ],
       "min": 0,
       "max": 400
     },
     {
       "cid": "POWR",
+      "label": "100 meter sprint",
       "aid": "PSPR",
       "icon": "/assets/images/100metersprint.png",
-      "label": "100 meter sprint",
       "units": "Time",
       "description": "No starting blocks. No spikes.",
+      "instruction": [
+        "Find a flat and clear area for sprinting and mark start/finish lines.",
+        "Stand behind starting line with feet shoulder-width apart.",
+        "Sprint as fast as you can towards finish line",
+        "Record your time once you cross finish line"
+      ],
       "min": 9.58,
       "max": 22
     },
     {
       "cid": "FLEX",
+      "label": "Pike",
       "aid": "PIKE",
       "icon": "/assets/images/toetouch.png",
-      "label": "Pike",
       "units": "Positions",
-      "description": "Position must be held for 30 seconds",
+      "description": "",
+      "instruction": [
+        "Position must be held for a minimum of 10 seconds while maintaining proper form.",
+        "Must be able to perform the test on both sides for balanced results."
+      ],
       "min": 0,
       "max": 10
     },
     {
       "cid": "FLEX",
+      "label": "Backbend",
       "aid": "BKBN",
       "icon": "/assets/images/backbend.png",
-      "label": "Backbend",
       "units": "Positions",
-      "description": "Position must be held for 5 seconds",
+      "description": "",
+      "instruction": [
+        "Position must be held for a minimum of 10 seconds while maintaining proper form.",
+        "Must be able to perform the test on both sides for balanced results."
+      ],
       "min": 0,
       "max": 10
     },
     {
       "cid": "FLEX",
+      "label": "Straddle",
       "aid": "STRD",
       "icon": "/assets/images/medial_lateral.png",
-      "label": "Straddle",
       "units": "Degrees",
       "description": "Position must be held for 5 seconds",
+      "instruction": [
+        "Sit or slide down into a straddle position with legs spread wide apart.",
+        "Measure and record the maximum straddle angle.",
+        "Hold the position for a few seconds for an accurate measurement.",
+        "Use recorded angle to track progress."
+      ],
       "min": 0,
       "max": 10
     },
     {
       "cid": "META",
+      "label": "2 minute distance",
       "aid": "TWOMDST",
       "icon": "/assets/images/2minutedistance.png",
-      "label": "2 minute distance",
       "units": "Miles",
       "description": "Treadmill or track allowed",
+      "instruction": [
+        "Choose a safe and familiar flat route for running.",
+        "Start the clock and run at your desired pace for 2 minutes",
+        "Try to maintain a consistent pace and avoid stopping.",
+        "When 2 minutes are up, stop the clock and record the distance covered."
+      ],
       "min": 0,
       "max": 0.5
     },
     {
       "cid": "META",
+      "label": "1 hour distance",
       "aid": "ONEHRDST",
       "icon": "/assets/images/onehourrun.png",
-      "label": "1 hour distance",
       "units": "Miles",
       "description": "Road, treadmill, or track allowed",
+      "instruction": [
+        "Choose a safe and familiar route for running.",
+        "Start the clock and run at your desired pace for the full hour",
+        "Stay hydrated and take quick breaks if needed, but keep the time running.",
+        "When the hour is up, stop the clock and record the distance covered."
+      ],
       "min": 0,
       "max": 13.3
     },
     {
       "cid": "META",
+      "label": "Static Apnea",
       "aid": "STAPN",
       "icon": "/assets/images/breathhold.png",
-      "label": "Static Apnea",
       "units": "Time",
       "description": "Time stops after inhale",
+      "instruction": [
+        "Find a quiet and safe space to lie down comfortably.",
+        "Lie on your back with head and neck supported.",
+        "Take a deep breath and hold it as long as you can.",
+        "When you need to breathe, exhale slowly and recover with deep breaths.",
+        "Record the duration of your breath-hold, time stops once you inhale."
+      ],
       "min": 0,
       "max": 11.5
     },
@@ -209,15 +318,28 @@
       "label": "Agility",
       "units": "Seconds",
       "description": "Must touch cone with hand. Order of cones must be followed. Feet cannot cross during the left and right cones.",
+      "instruction": [
+        "Start at Home Cone.",
+        "Side shuffle to West Cone and back.",
+        "Sprint to Northwest Cone and back.",
+        "Sprint to North Cone and back.",
+        "Sprint to Northeast Cone and back.",
+        "Side shuffle to East Cone and back.",
+        "Time stops when you touch Home Cone after completing the sequence."
+      ],
       "min": 13,
       "max": 35
     },
     {
       "cid": "NEUR",
       "aid": "BLNC",
-      "icon": "/assets/images/balance.png",
+      "icon": "/assets/images/Balance.png",
       "label": "Balance",
       "description": "(see each skill for specific rules)",
+      "instruction": [
+        "Use the app's checklist to attempt and check off each balance position.",
+        "Follow the time requirements for each position as indicated in the checklist."
+      ],
       "checklist": true,
       "min": 0,
       "max": 10
@@ -228,6 +350,12 @@
       "icon": "/assets/images/Coordination.png",
       "label": "Coordination",
       "description": "(see each skill for specific rules)",
+      "instruction": [
+        "Use the app's checklist to attempt and check off each coordination skill.",
+        "Follow the instructions provided for each skill.",
+        "Try to perform each coordination skill to the best of your ability.",
+        "Check off each skill you were able to successfully perform in the app"
+      ],
       "checklist": true,
       "min": 0,
       "max": 47
