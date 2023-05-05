@@ -76,7 +76,7 @@
     <ion-grid
       button
       class="card"
-      *ngFor="let item of getCheckList(assessment.aid);  let i = index"
+      *ngFor="let item of checklist$ | async; let i = index"
       (click)="toggleCheckItem(item)"
       [ngClass]="!(i%2) ? 'left' : 'right'"
     >

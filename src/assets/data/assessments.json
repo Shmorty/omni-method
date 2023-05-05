@@ -229,6 +229,7 @@
         "Position must be held for a minimum of 10 seconds while maintaining proper form.",
         "Must be able to perform the test on both sides for balanced results."
       ],
+      "checklist": true,
       "min": 0,
       "max": 10
     },
@@ -243,6 +244,7 @@
         "Position must be held for a minimum of 10 seconds while maintaining proper form.",
         "Must be able to perform the test on both sides for balanced results."
       ],
+      "checklist": true,
       "min": 0,
       "max": 10
     },
@@ -447,6 +449,38 @@
         "Two heels blind",
         "1 heel blind",
         "One arm handstand"
+      ]
+    },
+    {
+      "aid": "PIKE",
+      "skills": [
+        "Unable to touch knees",
+        "Touch shins",
+        "Touch ankles",
+        "Touch toes",
+        "Touch knuckles to the ground",
+        "Touch palms to the ground",
+        "Touch center of forearm to the toe (1 arm and one leg)",
+        "Touch opposite center of forearm to toe",
+        "Touch elbow to toe (on the same side)",
+        "Touch opposite elbow to toe",
+        "Touch head to toe"
+      ]
+    },
+    {
+      "aid": "BKBN",
+      "skills": [
+        "Sphinx Pose",
+        "Cobra pose (upper body extended, chest lifted off the ground, arms supporting the upper body)",
+        "Bridge with feet elevated to knee height (hips lifted off the ground, knees bent, feet elevated to knee height)",
+        "Bridge (hips lifted off the ground, knees bent, feet flat on the ground)",
+        "Elbow bridge (similar to bridge, but resting on forearms instead of hands)",
+        "Knee bridge (hips lifted off the ground, knees bent, only heels touching the ground)",
+        "Elbow + knee bridge (combination of elbow bridge and knee bridge)",
+        "Extended bridge (hips lifted off the ground, knees straight, feet flat on the ground)",
+        "Grab ankles while in elbow bridge (holding onto ankles with hands in elbow bridge position)",
+        "Chin stand while grabbing ankles (advanced position where chin touches the ground while grabbing ankles)",
+        "Standing backbend grab ankles"
       ]
     }
   ]

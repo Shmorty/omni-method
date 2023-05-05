@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AssessmentService } from './services/assessments/assessment.service';
-import { UserService } from './services/user/user.service';
 
 // import { GoogleSigninService } from './google-signin.service';
 
@@ -15,10 +14,7 @@ export class AppComponent implements OnInit {
   // constructor(private readonly google: GoogleSigninService) {}
   // constructor(private store: Store<AppState>) {}
 
-  constructor(
-    private assessmentService: AssessmentService,
-    private userService: UserService
-  ) {
+  constructor(private assessmentService: AssessmentService) {
     console.log('assessmentService.load()');
     assessmentService.load();
   }

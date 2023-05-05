@@ -11,9 +11,14 @@ import { IUserService } from './user.service.interface';
 import { environment } from 'src/environments/environment';
 import { Score } from '../../store/models/score.model';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.state';
+import { AppState } from '../../store/app.state';
 import * as UserActions from '../../store/user/user.actions';
-import { selectAuthUser, selectUser } from 'src/app/store/user/user.selectors';
+import {
+  assessmentScores,
+  selectAuthUser,
+  selectUser,
+} from '../../store/user/user.selectors';
+import { Assessment } from '../../store/assessments/assessment.model';
 
 @Injectable({
   providedIn: 'root',
@@ -95,6 +100,17 @@ export class UserService implements IUserService {
         },
         (err) => console.error('Observer got an error: ' + err)
       );
+  }
+
+  // get score from store
+  getScoresForAssessment(assessment: Assessment): Observable<Score[]> {
+    return this.store.select(assessmentScores(assessment)).pipe(
+      tap((results) => {
+        results.sort(function (a, b) {
+          return Date.parse(b.scoreDate) - Date.parse(a.scoreDate);
+        });
+      })
+    );
   }
 
   // trigger save score event
