@@ -38,7 +38,8 @@
       "aid": "DLFT",
       "icon": "/assets/images/deadlift.png",
       "units": "1RM (lbs)",
-      "description": "A deadlift is a resistance exercise in which you hinge your hips to lift a loaded barbell off the floor.  The 1RM deadlift assessment tests your maximum force production while lifting a loaded barbell off of the floor. This test is to be performed without equipment including belts, straps, or sleeves.",
+      "description": "",
+      "descriptionHide": "A deadlift is a resistance exercise in which you hinge your hips to lift a loaded barbell off the floor.  The 1RM deadlift assessment tests your maximum force production while lifting a loaded barbell off of the floor. This test is to be performed without equipment including belts, straps, or sleeves.",
       "instruction": [
         "Stand with feet at a comfortable width and shins close to the barbell",
         "Grip the barbell with preferred grip, hands at a comfortable width",
@@ -55,7 +56,8 @@
       "aid": "BKSQ",
       "icon": "/assets/images/backsquat.png",
       "units": "1RM (lbs)",
-      "description": "No supportive equipment (Weight lifting belt allowed). Must squat below parallel",
+      "description": "",
+      "descriptionHide": "No supportive equipment (Weight lifting belt allowed). Must squat below parallel",
       "instruction": [
         "Stand with feet at a comfortable width and barbell on squat rack at shoulder height",
         "Step up, place bar across upper back with preferred grip and stance",
@@ -72,7 +74,8 @@
       "aid": "WTPU",
       "icon": "/assets/images/weightedpullup.png",
       "units": "1RM (lbs)",
-      "description": "No supportive equipment. Weight added below waist. No kipping. Must start in dead-hang position. Must pause in top position for 1 second. Bottom of chin must reach higher than the top of the bar.",
+      "description": "",
+      "descriptionHide": "No supportive equipment. Weight added below waist. No kipping. Must start in dead-hang position. Must pause in top position for 1 second. Bottom of chin must reach higher than the top of the bar.",
       "instruction": [
         "Attach weight to weight belt or vest securely",
         "Stand under pull-up bar, grip bar with preferred grip",
@@ -88,7 +91,8 @@
       "aid": "BNCH",
       "icon": "/assets/images/BenchPress.png",
       "units": "1RM (lbs)",
-      "description": "No supportive equipment. Barbell must make contact with body in bottom position",
+      "description": "",
+      "descriptionHide": "No supportive equipment. Barbell must make contact with body in bottom position",
       "instruction": [
         "Lie on flat bench with feet flat, eyes below barbell, and head, shoulders, and buttocks in contact with bench",
         "Position barbell directly above chest with preferred grip (any width)",
@@ -106,7 +110,8 @@
       "aid": "SQTS",
       "icon": "/assets/images/backsquat.png",
       "units": "Reps",
-      "description": "No stopping movement at any point once the test has begun. Top of thighs must be below top of knees in bottom position. Knees must straighten in top position.",
+      "description": "",
+      "descriptionHide": "No stopping movement at any point once the test has begun. Top of thighs must be below top of knees in bottom position. Knees must straighten in top position.",
       "instruction": [
         "Load the barbell with half of your bodyweight or more",
         "Position the barbell on your upper back",
@@ -124,7 +129,8 @@
       "aid": "PSHU",
       "icon": "/assets/images/pushup.png",
       "units": "Reps",
-      "description": "No stopping movement at any point once the test has begun. Top of elbows must be higher than top of the shoulders in bottom position. Arms must straighten in top position.",
+      "description": "",
+      "descriptionHide": "No stopping movement at any point once the test has begun. Top of elbows must be higher than top of the shoulders in bottom position. Arms must straighten in top position.",
       "instruction": [
         "Get into a plank position on your hands and toes, with hands at any preferred width",
         "Ensure your body maintains a straight line from shoulders to heels",
@@ -143,7 +149,8 @@
       "aid": "PLUP",
       "icon": "/assets/images/pull_up.jpg",
       "units": "Reps",
-      "description": "No stopping movement at any point once the test has begun. Arms must straighten in bottom position. Bottom of chin must reach higher than the top of the bar. No kipping.",
+      "description": "",
+      "descriptionHide": "No stopping movement at any point once the test has begun. Arms must straighten in bottom position. Bottom of chin must reach higher than the top of the bar. No kipping.",
       "instruction": [
         "Grip the pull-up bar with any grip",
         "Pull yourself up towards the bar, bringing your chin above the bar",
@@ -160,7 +167,8 @@
       "aid": "STLJ",
       "icon": "/assets/images/Long_Jump.jpg",
       "units": "Length (in)",
-      "description": "Feet must move in tandem. Heel that is furthest back is measured.",
+      "description": "",
+      "descriptionHide": "Feet must move in tandem. Heel that is furthest back is measured.",
       "instruction": [
         "Stand with feet in any stance behind a clear line",
         "Jump forward",
@@ -176,7 +184,8 @@
       "aid": "PSHP",
       "icon": "/assets/images/Push_Press.jpg",
       "units": "1RM (lbs)",
-      "description": "No supportive equipment. No catch.",
+      "description": "",
+      "descriptionHide": "No supportive equipment. No catch.",
       "instruction": [
         "Stand with feet shoulder-width apart, holding a barbell at shoulder height with an overhand grip.",
         "Dip down and drive the barbell overhead by extending legs and pressing the barbell until arms are fully extended",
@@ -191,7 +200,8 @@
       "aid": "PWCL",
       "icon": "/assets/images/powerclean.png",
       "units": "1RM (lbs)",
-      "description": "No supportive equipment (Weight lifting belt allowed)",
+      "description": "",
+      "descriptionHide": "No supportive equipment (Weight lifting belt allowed)",
       "instruction": [
         "Stand with feet at your preferred stance width in front of a loaded barbell on the floor.",
         "Grip the bar and lift by extending hips and knees, shrugging shoulders, and pulling bar towards chest.",
@@ -208,7 +218,8 @@
       "aid": "PSPR",
       "icon": "/assets/images/100metersprint.png",
       "units": "Time",
-      "description": "No starting blocks. No spikes.",
+      "description": "",
+      "descriptionHide": "No starting blocks. No spikes.",
       "instruction": [
         "Find a flat and clear area for sprinting and mark start/finish lines.",
         "Stand behind starting line with feet shoulder-width apart.",
@@ -254,7 +265,8 @@
       "aid": "STRD",
       "icon": "/assets/images/medial_lateral.png",
       "units": "Degrees",
-      "description": "Position must be held for 5 seconds",
+      "description": "",
+      "descriptionHide": "Position must be held for 5 seconds",
       "instruction": [
         "Sit or slide down into a straddle position with legs spread wide apart.",
         "Measure and record the maximum straddle angle.",
@@ -270,7 +282,8 @@
       "aid": "TWOMDST",
       "icon": "/assets/images/2minutedistance.png",
       "units": "Miles",
-      "description": "Treadmill or track allowed",
+      "description": "",
+      "descriptionHide": "Treadmill or track allowed",
       "instruction": [
         "Choose a safe and familiar flat route for running.",
         "Start the clock and run at your desired pace for 2 minutes",
@@ -286,7 +299,8 @@
       "aid": "ONEHRDST",
       "icon": "/assets/images/onehourrun.png",
       "units": "Miles",
-      "description": "Road, treadmill, or track allowed",
+      "description": "",
+      "descriptionHide": "Road, treadmill, or track allowed",
       "instruction": [
         "Choose a safe and familiar route for running.",
         "Start the clock and run at your desired pace for the full hour",
@@ -302,7 +316,8 @@
       "aid": "STAPN",
       "icon": "/assets/images/breathhold.png",
       "units": "Time",
-      "description": "Time stops after inhale",
+      "description": "",
+      "descriptionHide": "Time stops after inhale",
       "instruction": [
         "Find a quiet and safe space to lie down comfortably.",
         "Lie on your back with head and neck supported.",
@@ -319,7 +334,8 @@
       "icon": "/assets/images/agility.png",
       "label": "Agility",
       "units": "Seconds",
-      "description": "Must touch cone with hand. Order of cones must be followed. Feet cannot cross during the left and right cones.",
+      "description": "",
+      "descriptionHide": "Must touch cone with hand. Order of cones must be followed. Feet cannot cross during the left and right cones.",
       "instruction": [
         "Start at Home Cone.",
         "Side shuffle to West Cone and back.",
@@ -337,7 +353,8 @@
       "aid": "BLNC",
       "icon": "/assets/images/Balance.png",
       "label": "Balance",
-      "description": "(see each skill for specific rules)",
+      "description": "",
+      "descriptionHide": "(see each skill for specific rules)",
       "instruction": [
         "Use the app's checklist to attempt and check off each balance position.",
         "Follow the time requirements for each position as indicated in the checklist."
@@ -351,7 +368,8 @@
       "aid": "COORD",
       "icon": "/assets/images/Coordination.png",
       "label": "Coordination",
-      "description": "(see each skill for specific rules)",
+      "description": "",
+      "descriptionHide": "(see each skill for specific rules)",
       "instruction": [
         "Use the app's checklist to attempt and check off each coordination skill.",
         "Follow the instructions provided for each skill.",

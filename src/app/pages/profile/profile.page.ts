@@ -1,10 +1,5 @@
-import { Component, ContentChild, OnInit, ViewChild } from '@angular/core';
-import {
-  IonAccordionGroup,
-  IonButton,
-  IonModal,
-  ModalController,
-} from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonAccordionGroup, ModalController } from '@ionic/angular';
 // import { GoogleSigninService, UserInfo } from '../google-signin.service';
 import { Assessment, Category } from '../../store/assessments/assessment.model';
 import { Router } from '@angular/router';
@@ -22,7 +17,7 @@ import {
   selectCategoryScore,
   selectOmniScore,
 } from 'src/app/store/omni-score/omni-score.selector';
-import { delay, first, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { EditProfilePage } from '../edit-profile/edit-profile.page';
 import { OmniScoreService, oneDay } from 'src/app/services/omni-score.service';
 
