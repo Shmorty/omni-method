@@ -1,10 +1,5 @@
-import { Component, ContentChild, OnInit, ViewChild } from '@angular/core';
-import {
-  IonAccordionGroup,
-  IonButton,
-  IonModal,
-  ModalController,
-} from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonAccordionGroup, ModalController } from '@ionic/angular';
 // import { GoogleSigninService, UserInfo } from '../google-signin.service';
 import { Assessment, Category } from '../../store/assessments/assessment.model';
 import { Router } from '@angular/router';
@@ -22,8 +17,9 @@ import {
   selectCategoryScore,
   selectOmniScore,
 } from 'src/app/store/omni-score/omni-score.selector';
-import { delay, first, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { EditProfilePage } from '../edit-profile/edit-profile.page';
+import { OmniScoreService, oneDay } from 'src/app/services/omni-score.service';
 
 @Component({
   selector: 'app-profile',
@@ -70,6 +66,13 @@ export class ProfilePage implements OnInit {
       .unsubscribe();
   }
 
+  handleRefresh(event) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+    }, 100);
+  }
+
   getCategoryScore(category: Category) {
     return this.store.select(selectCategoryScore(category));
   }
@@ -97,9 +100,7 @@ export class ProfilePage implements OnInit {
 
   // scoreClass(date: Date): string {
   scoreClass(scoreDate: string): string {
-    var date = new Date(scoreDate);
-    const oneDay = 1000 * 3600 * 24;
-    let days = Math.ceil((Date.now().valueOf() - date.valueOf()) / oneDay);
+    let days = OmniScoreService.calculateDays(scoreDate);
 
     if (days > 90) {
       return 'stale';

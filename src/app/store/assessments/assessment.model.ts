@@ -7,6 +7,7 @@ export interface Assessment {
   icon: string;
   label: string;
   description?: string;
+  instruction?: string[];
   checklist?: boolean;
   min: number;
   max: number;

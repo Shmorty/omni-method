@@ -12,6 +12,10 @@ span {
 ion-header {
   background-color: #b8dfff;
 }
+ion-content {
+  // background-color: lightgreen;
+  --offset-top: 0px !important;
+}
 ion-content ion-header {
   background: linear-gradient(#b8dfff, #5eb3f9);
   border-radius: 0 0 20px 20px;
@@ -19,6 +23,17 @@ ion-content ion-header {
     color: white;
   }
 }
+
+ion-refresher {
+  background-color: #b8dfff;
+  height: 200px;
+}
+ion-refresher-content {
+  // background-color: #b8dfff;
+  background-color: yellow;
+  height: 0px;
+}
+
 user-avatar {
   margin: auto;
   padding-left: 70px;

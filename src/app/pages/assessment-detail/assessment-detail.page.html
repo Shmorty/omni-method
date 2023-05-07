@@ -58,15 +58,25 @@
       </ion-accordion>
     </ion-accordion-group>
 
-    <ion-item lines="full">
+    <ion-item lines="none">
       <p>{{ assessment.description }}</p>
+    </ion-item>
+    <ion-item lines="none">
+      <ol>
+        <li *ngFor="let item of assessment.instruction">{{item}}</li>
+      </ol>
     </ion-item>
   </div>
   <ion-list *ngIf="assessment.checklist">
+    <ion-item lines="none">
+      <ol>
+        <li *ngFor="let item of assessment.instruction">{{item}}</li>
+      </ol>
+    </ion-item>
     <ion-grid
       button
       class="card"
-      *ngFor="let item of getCheckList(assessment.aid);  let i = index"
+      *ngFor="let item of checklist$ | async; let i = index"
       (click)="toggleCheckItem(item)"
       [ngClass]="!(i%2) ? 'left' : 'right'"
     >

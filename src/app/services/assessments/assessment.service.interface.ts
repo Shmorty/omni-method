@@ -3,16 +3,18 @@ import { Assessment, Category } from '../../store/assessments/assessment.model';
 
 export interface IAssessmentService {
   // getAssessments(): Observable<Category[]>;
-  getCategories(): Observable<Category[]>;
-  getAssessments(): Observable<Assessment[]>;
+  // getCategories(): Observable<Category[]>;
+  // getAssessments(): Observable<Assessment[]>;
 
-  setCurrentAssessment(assessment: Assessment): void;
+  // setCurrentAssessment(assessment: Assessment): void;
 
-  getCurrentAssessment(): Observable<Assessment>;
+  // getCurrentAssessment(): Observable<Assessment>;
 
-  setCurrentCategory(category: Category): void;
+  // setCurrentCategory(category: Category): void;
 
-  getCurrentCategory(): Observable<Category>;
+  // getCurrentCategory(): Observable<Category>;
+  getCategoryById(cid: string): Observable<Category>;
+  getAssessmentById(aid: string): Observable<Assessment>;
 
-  getChecklist(aid: string): Array<string>;
+  getChecklist(aid: string): Observable<string[]>;
 }

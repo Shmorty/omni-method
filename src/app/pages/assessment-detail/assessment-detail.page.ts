@@ -5,19 +5,8 @@ import { AssessmentService } from '../../services/assessments/assessment.service
 import { Assessment, Category } from '../../store/assessments/assessment.model';
 import { NewScorePage } from '../new-score/new-score.page';
 import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
-import {
-  assessmentScores,
-  selectUser,
-} from 'src/app/store/user/user.selectors';
-import {
-  selectAssessmentById,
-  selectCategoryById,
-} from 'src/app/store/assessments/assessment.selector';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/store/user/user.model';
-import { tap } from 'rxjs/operators';
-import { deleteAssessmentScore } from 'src/app/store/user/user.actions';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-assessment-detail',
@@ -28,46 +17,32 @@ export class AssessmentDetailPage implements OnInit {
   public scores$: Observable<Score[]>;
   public category$: Observable<Category>;
   public assessment$: Observable<Assessment>;
-  public user$ = this.store.select(selectUser);
-  public user: User;
+  public checklist$: Observable<string[]>;
 
   constructor(
-    private store: Store,
     private route: ActivatedRoute,
     private modalCtrl: ModalController,
     private navController: NavController,
-    private assessmentService: AssessmentService
+    private assessmentService: AssessmentService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       console.log(params);
-      this.category$ = this.store.select(selectCategoryById(params.cid));
-      this.assessment$ = this.store.select(selectAssessmentById(params.aid));
+      this.category$ = this.assessmentService.getCategoryById(params.cid);
+      this.assessment$ = this.assessmentService.getAssessmentById(params.aid);
+      this.checklist$ = this.assessmentService.getChecklist(params.aid);
     });
 
     this.assessment$.subscribe((assessment) => {
-      this.scores$ = this.store.select(assessmentScores(assessment)).pipe(
-        tap((results) => {
-          results.sort(function (a, b) {
-            return Date.parse(b.scoreDate) - Date.parse(a.scoreDate);
-          });
-        })
-      );
+      this.scores$ = this.userService.getScoresForAssessment(assessment);
     });
-
-    this.user$
-      .subscribe({
-        next(value) {
-          this.user = value;
-        },
-      })
-      .unsubscribe();
   }
 
   deleteScore(score: Score) {
     console.log('dispatch deleteAssessmentScore ' + score.scoreDate);
-    this.store.dispatch(deleteAssessmentScore({ score }));
+    this.userService.deleteScore(score);
     this.navController.back();
   }
 
@@ -85,10 +60,6 @@ export class AssessmentDetailPage implements OnInit {
     modal.onDidDismiss().then((res) => {
       this.navController.back();
     });
-  }
-
-  getCheckList(aid: string) {
-    return this.assessmentService.getChecklist(aid);
   }
 
   toggleCheckItem(item) {

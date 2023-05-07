@@ -10,6 +10,8 @@ import {
 import * as OmniScoreActions from '../store/omni-score/omni-score.actions';
 import { assessmentScores, userScores } from '../store/user/user.selectors';
 
+export const oneDay = 1000 * 3600 * 24;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -25,6 +27,12 @@ export class OmniScoreService {
     this.store.dispatch(
       OmniScoreActions.setCategoryScore({ cid: cat.cid, score: score })
     );
+  }
+
+  public static calculateDays(scoreDate: string) {
+    var date = new Date(scoreDate);
+    let days = Math.ceil((Date.now().valueOf() - date.valueOf()) / oneDay);
+    return days;
   }
 
   calculateScores() {
@@ -59,7 +67,12 @@ export class OmniScoreService {
                           new Date(a.scoreDate).valueOf()
                         );
                       });
-                      catTotal += sortedScores[0].calculatedScore;
+                      let scoreAge = OmniScoreService.calculateDays(
+                        sortedScores[0].scoreDate
+                      );
+                      if (scoreAge < 90) {
+                        catTotal += sortedScores[0].calculatedScore;
+                      }
                     }
                   });
               })

@@ -28,6 +28,18 @@ export const assessmentsByCategory = (category: Category) =>
     return assessment.filter((a) => a.cid === category.cid);
   });
 
+export const selectAllChecklists = createSelector(
+  selectAssessments,
+  (asmtState: AssessmentState) => asmtState.checklists
+);
+
+export const selectChecklist = (aid: string) =>
+  createSelector(
+    selectAssessments,
+    (state: AssessmentState) =>
+      state.checklists.find((checklist) => checklist.aid === aid).skills
+  );
+
 // export const selectChecklist = createSelector(
 //   selectAssessments,
 //   props: { aid: string }) =>
