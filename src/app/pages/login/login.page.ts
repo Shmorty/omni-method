@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
 
   signInWithGoogle() {
     console.log('sign in with google');
-    this.auth.googleSignIn();
+    // this.auth.googleSignIn();
   }
 
   ngOnInit(): void {}

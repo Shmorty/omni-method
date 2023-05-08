@@ -1,26 +1,24 @@
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, isDevMode, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
-
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { ShowHidePasswordModule } from './component/show-hide-password/show-hide-password.module';
-import { ShowHidePasswordComponent } from './component/show-hide-password/show-hide-password.component';
 import { DatePipe } from '@angular/common';
 import { AuthService } from './services/auth.service';
-import { UserService } from './services/user/user.service';
 import { from } from 'rxjs';
-import { first, take } from 'rxjs/operators';
-import { getAuth, onAuthStateChanged } from '@firebase/auth';
-import { user } from '@angular/fire/auth';
+import { take } from 'rxjs/operators';
+import {
+  provideAuth,
+  getAuth,
+  initializeAuth,
+  indexedDBLocalPersistence,
+  browserPopupRedirectResolver,
+} from '@angular/fire/auth';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -28,6 +26,8 @@ import { reducers } from './store/app.state';
 import { AssessmentEffects } from './store/assessments/assessment.effects';
 import { UserEffects } from './store/user/user.effect';
 import { OmniScoreEffects } from './store/omni-score/omni-score.effects';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { Capacitor } from '@capacitor/core';
 
 // export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
 // export const storeDevTools: ModuleWithProviders[] =
@@ -42,11 +42,6 @@ import { OmniScoreEffects } from './store/omni-score/omni-score.effects';
     HttpClientModule,
     IonicModule.forRoot(),
     NgxSkeletonLoaderModule.forRoot(),
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    // provideAuth(() => getAuth()),
-    // provideFirestore(() => getFirestore()),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
     StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([AssessmentEffects, UserEffects, OmniScoreEffects]),
     StoreDevtoolsModule.instrument({
@@ -55,6 +50,20 @@ import { OmniScoreEffects } from './store/omni-score/omni-score.effects';
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
       trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
+    }),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    // provideFirestore(() => getFirestore()),
+    provideAuth(() => {
+      if (Capacitor.isNativePlatform()) {
+        console.log('isNativePlatform');
+        return initializeAuth(getApp(), {
+          persistence: indexedDBLocalPersistence,
+          // popupRedirectResolver: browserPopupRedirectResolver,
+        });
+      } else {
+        console.log('not nativPlatform');
+        return getAuth();
+      }
     }),
   ],
   providers: [
