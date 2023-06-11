@@ -11,6 +11,7 @@ export class LoginPage implements OnInit {
   email: string = '';
   password: string = '';
   showPassword = false;
+  user = null;
 
   // constructor(private signInService: GoogleSigninService, private ref: ChangeDetectorRef) {
   constructor(private auth: AuthService) {}
@@ -20,9 +21,10 @@ export class LoginPage implements OnInit {
     this.email = this.password = '';
   }
 
-  signInWithGoogle() {
+  async signInWithGoogle() {
     console.log('sign in with google');
-    // this.auth.googleSignIn();
+    // this.auth.googleSignIn_firebase();
+    // console.log('signInWithGoogle user, ', this.user);
   }
 
   ngOnInit(): void {}

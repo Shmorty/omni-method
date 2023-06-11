@@ -12,8 +12,14 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
+  signInWithPopup,
+  GoogleAuthProvider,
+  getAdditionalUserInfo,
+  signInWithRedirect,
+  getRedirectResult,
   // signInWithPopup,
 } from '@angular/fire/auth';
+// import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { BehaviorSubject, from, Observable, Subscription } from 'rxjs';
 // import { User } from '../store/user/user.model';
 import * as OmniUser from '../store/user/user.model';
@@ -37,23 +43,23 @@ export class AuthService {
   currUser: OmniUser.User;
 
   constructor(private router: Router, private store: Store<AppState>) {
-    this.userSubscription = this.user$.subscribe((aUser: User | null) => {
-      if (aUser) {
-        this.loggedIn.next(true);
-        console.log('AuthService: user is logged in');
-        console.log(aUser);
-        this.store.dispatch(
-          UserActions.userAuthenticatd({
-            payload: JSON.parse(JSON.stringify(aUser)),
-          })
-        );
-      } else {
-        // not logged in
-        this.loggedIn.next(false);
-        console.log('AuthService: user has logged off');
-        router.navigate(['/welcome']);
-      }
-    });
+    // this.userSubscription = this.user$.subscribe((aUser: User | null) => {
+    //   if (aUser) {
+    //     this.loggedIn.next(true);
+    //     console.log('AuthService: user$ is logged in');
+    //     console.log(aUser);
+    //     this.store.dispatch(
+    //       UserActions.userAuthenticatd({
+    //         payload: JSON.parse(JSON.stringify(aUser)),
+    //       })
+    //     );
+    //   } else {
+    //     // not logged in
+    //     this.loggedIn.next(false);
+    //     console.log('AuthService: user has logged off');
+    //     router.navigate(['/welcome']);
+    //   }
+    // });
   }
 
   // public isLoggedIn(): boolean {
@@ -76,9 +82,14 @@ export class AuthService {
   login(email: string, password: string) {
     signInWithEmailAndPassword(this.auth, email, password).then(
       (res) => {
-        localStorage.setItem('userId', res.user.uid);
+        // localStorage.setItem('userId', res.user.uid);
         this.saveUser(res);
-        this.router.navigate(['home']);
+        this.store.dispatch(
+          UserActions.userAuthenticatd({
+            payload: JSON.parse(JSON.stringify(res)),
+          })
+        );
+        // this.router.navigate(['home']);
       },
       (err) => {
         console.log(err);
@@ -95,8 +106,13 @@ export class AuthService {
         console.log('register user success: '.concat(res.user.email));
         const clonedUser = JSON.parse(JSON.stringify(res.user));
         console.log(clonedUser);
+        // this.store.dispatch(
+        //   UserActions.registerUserSuccess({ payload: clonedUser })
+        // );
         this.store.dispatch(
-          UserActions.registerUserSuccess({ payload: clonedUser })
+          UserActions.userAuthenticatd({
+            payload: JSON.parse(JSON.stringify(res)),
+          })
         );
         // this.saveUser(res);
         this.router.navigate(['/new-user']);
@@ -116,7 +132,7 @@ export class AuthService {
   logout() {
     signOut(this.auth).then(
       () => {
-        localStorage.removeItem('userId');
+        // localStorage.removeItem('userId');
         this.router.navigate(['/welcome']);
       },
       (err) => {
@@ -146,6 +162,67 @@ export class AuthService {
   //       alert('email verification link sent');
   //     });
   // }
+
+  /*  googleSignIn_codetrix() {
+    // this.user = await GoogleAuth.signIn();
+    GoogleAuth.signIn().then(
+      (res) => {
+        console.log('success: ', res);
+        // localStorage.setItem('userId', res.id);
+        this.currUserId = res.id;
+        this.currUserEmail = res.email;
+        // UserActions.signinSuccess should trigger load user
+        // if user not found got to register user
+        // if user found go to home page
+        this.store.dispatch(
+          UserActions.userAuthenticatd({
+            payload: JSON.parse(JSON.stringify(res)),
+          })
+        );
+        // this.router.navigate(['home']);
+      },
+      (error) => {
+        console.log('error ', error);
+      }
+    );
+  } */
+
+  googleSignIn_firebase() {
+    const provider = new GoogleAuthProvider();
+    if (provider) {
+      console.log('signInWithRedirect');
+      signInWithRedirect(this.auth, provider);
+      return getRedirectResult(this.auth).then(
+        (result) => {
+          console.log('redirect successful, ', result);
+        },
+        (error) => {
+          console.log('google redirect login failed, ', error);
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        }
+      );
+    } else {
+      console.log('signInWithPopup');
+      return signInWithPopup(this.auth, provider).then(
+        (result) => {
+          console.log('logged in with google, ', result);
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          console.log('credential, ', credential);
+          const token = credential.accessToken;
+          const user = result.user;
+          const additionaInfo = getAdditionalUserInfo(result);
+          console.log('additionalInfo, ', additionaInfo);
+        },
+        (error) => {
+          console.log('google popup login failed, ', error);
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          const credential = GoogleAuthProvider.credentialFromError(error);
+        }
+      );
+    }
+  }
 
   // sign in with google method
   // googleSignIn() {

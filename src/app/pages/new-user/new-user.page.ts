@@ -8,6 +8,8 @@ import { User } from 'src/app/store/user/user.model';
 import { DatePicker, DatePickerOptions } from '@pantrist/capacitor-date-picker';
 import { isPlatform } from '@ionic/angular';
 import { Keyboard } from '@capacitor/keyboard';
+import { UserFirestoreService } from 'src/app/services/user-firestore.service';
+import { AssessmentService } from 'src/app/services/assessments/assessment.service';
 
 @Component({
   selector: 'app-new-user',
@@ -24,9 +26,11 @@ export class NewUserPage implements OnInit {
 
   constructor(
     private userService: UserService,
+    private firestoreService: UserFirestoreService,
     private router: Router,
     private auth: AuthService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private assessmentService: AssessmentService
   ) {
     let calcDate = new Date(); //.setFullYear(2006);
     let curYear = calcDate.getFullYear();
@@ -73,9 +77,14 @@ export class NewUserPage implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formData.value);
+    console.log('new user onSubmit', this.formData.value);
+    this.assessmentService.getChecklist;
     // create user in database
-    this.userService.saveUser(this.formData.value);
+    this.userService.saveNewUser({
+      ...this.formData.value,
+      omniScore: 0,
+      categoryScore: this.assessmentService.getNewCategoryScores(),
+    });
   }
 
   next() {

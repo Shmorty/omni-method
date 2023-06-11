@@ -85,21 +85,39 @@ export class UserService implements IUserService {
   }
 
   // trigger new user action
-  saveUser(user: User) {
-    console.log('userService.saveUser');
+  saveNewUser(user: User) {
+    console.log('userService.saveNewUser');
     this.store
       .select(selectAuthUser)
       .pipe(first())
       .subscribe(
         (authUser) => {
-          user.id = authUser['uid'];
-          user.email = authUser['email'];
-          console.log(user);
-          console.log('do insert');
+          console.log('got authUser ', authUser);
+          user.id = authUser.user['uid'];
+          user.email = authUser.user['email'];
+          console.log('user', user);
+          // newUser action
+          console.log('dispatch newUser action');
           this.store.dispatch(UserActions.newUser({ payload: user }));
         },
         (err) => console.error('Observer got an error: ' + err)
       );
+  }
+
+  // trigger update user action
+  updateUser(user: User) {
+    console.log('userService.updateUser');
+    this.store
+      .select(selectAuthUser)
+      .pipe(first())
+      .subscribe((authUser) => {
+        console.log('authUser', authUser);
+        user.id = authUser.user['uid'];
+        console.log('user', user);
+        // updateUserAction
+        console.log('dispatch updateUser action');
+        this.store.dispatch(UserActions.updateUserAction({ payload: user }));
+      });
   }
 
   // get score from store

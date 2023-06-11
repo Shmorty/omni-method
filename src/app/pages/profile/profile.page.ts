@@ -13,10 +13,10 @@ import {
   selectAllCategories,
 } from 'src/app/store/assessments/assessment.selector';
 import * as UserSelectors from 'src/app/store/user/user.selectors';
-import {
-  selectCategoryScore,
-  selectOmniScore,
-} from 'src/app/store/omni-score/omni-score.selector';
+// import {
+//   selectCategoryScore,
+//   selectOmniScore,
+// } from 'src/app/store/omni-score/omni-score.selector';
 import { tap } from 'rxjs/operators';
 import { EditProfilePage } from '../edit-profile/edit-profile.page';
 import { OmniScoreService, oneDay } from 'src/app/services/omni-score.service';
@@ -42,7 +42,7 @@ export class ProfilePage implements OnInit {
   public assessments$ = this.store.select(selectAllAssessments);
   public user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(50000));
   public scores$ = this.store.select(UserSelectors.userScores);
-  public omniScore$ = this.store.select(selectOmniScore);
+  // public omniScore$ = this.store.select(selectOmniScore);
 
   constructor(
     private store: Store,
@@ -73,9 +73,9 @@ export class ProfilePage implements OnInit {
     }, 100);
   }
 
-  getCategoryScore(category: Category) {
-    return this.store.select(selectCategoryScore(category));
-  }
+  // getCategoryScore(category: Category) {
+  //   return this.store.select(selectCategoryScore(category));
+  // }
 
   getScores$(assessment: Assessment) {
     return this.store.select(UserSelectors.assessmentScores(assessment)).pipe(

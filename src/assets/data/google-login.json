@@ -1,0 +1,17 @@
+{
+  "payload": {
+    "email": "shmorty@gmail.com",
+    "familyName": "Martel",
+    "givenName": "Paul",
+    "id": "105435612519431770106",
+    "imageUrl": "https://lh3.googleusercontent.com/a/AAcHTtcqYWdMHw0fnX_vesdoG0NStZqC_H5wtmVrVi7hpQ=s96-c",
+    "name": "Paul Martel",
+    "authentication": {
+      "accessToken": "ya29.a0AWY7CknV3SWCdxUzOQiERI-GSJIVTh03ZadHnIysOPvShjFrGVTQz87lwTv_j7ZKU4f6FaJVMZISkCcaKKkNCaO08MizvCHxKXp5MW9aGcwSukX_0ReIY8twuuPGDmSoOM9YSN6BY4YJoFvJrYDI1xFUyqOhaCgYKAeMSARASFQG1tDrp_wzo3b0Y5iSK62NuZeSepg0163",
+      "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjJkOWE1ZWY1YjEyNjIzYzkxNjcxYTcwOTNjYjMyMzMzM2NkMDdkMDkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMTY0MTk3ODQyMDYyLWkyb3FsdWJvcWhsZGVwYjBlbnB0MGhsbm1yb25nc3ZsLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiMTY0MTk3ODQyMDYyLWkyb3FsdWJvcWhsZGVwYjBlbnB0MGhsbm1yb25nc3ZsLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTA1NDM1NjEyNTE5NDMxNzcwMTA2IiwiZW1haWwiOiJzaG1vcnR5QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoid29fNWVvWmhmeHhWWExWbWpTMUtoQSIsIm5hbWUiOiJQYXVsIE1hcnRlbCIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQWNIVHRjcVlXZE1IdzBmblhfdmVzZG9HME5TdFpxQ19INXd0bVZyVmk3aHBRPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IlBhdWwiLCJmYW1pbHlfbmFtZSI6Ik1hcnRlbCIsImxvY2FsZSI6ImVuIiwiaWF0IjoxNjg1MjMyNDU1LCJleHAiOjE2ODUyMzYwNTUsImp0aSI6IjQ0MDA0OGJkMTM4NDk3NGU2MjkwZTkxM2IyNGI0NDUxMjJhOTA4NmQifQ.rkAwJKK7hq4hOlpA0RDp5OigiVkkhaXE3ybRZZ9bRyrH_aEg5IZf_3dW1339Jtf5Lea0EqhpyyKm_ll4yg538Bgz3F8O5ATStN2fQ_gUJxr-s9CX5AFcDHiLpdd6nw2CW9UguuS9gmpTbCKlpOxcuBh-pdyIQC0a1g1lkBeQrzj6zSryygya5z8SeECqrpgKWFQm9Nmwklmw1W9_I8--UvCc9-ILfRcx8B460iikw1BCMKBLxub2dkEa_-7gfh6S1VmpHYD4AAtQS4igVV6WRlhxZ3Q27BpPERKmBJsTiNq2cu7SaLxY2W8f6Jzm-JsTc9BqQhBQtNIVd6xCtpz25A",
+      "refreshToken": ""
+    },
+    "serverAuthCode": "4/0AbUR2VMbaASvVc90_k3SThYePb1rN2OCJdGSbVb-yzgWX4H_j_2TPEhG_Tq2DV-cQ4XqDw"
+  },
+  "type": "[User Login] User Authenticated"
+}

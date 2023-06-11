@@ -62,8 +62,10 @@ export class NewScorePage implements OnInit {
     this.score = {
       aid: this.assessment.aid,
       uid: this.user.id,
+      cid: this.assessment.cid,
       rawScore: this.formData.controls['rawScore'].value,
       scoreDate: this.formData.controls['scoreDate'].value,
+      expired: false,
       notes: this.formData.controls['notes'].value,
     };
     console.log('save new score: ' + JSON.stringify(this.score));

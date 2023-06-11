@@ -49,14 +49,36 @@ Using NgRx
 
 ### OmniScore Effects
 
--
+- calculateOmniScore$
+
+    triggered by calculateOmniScore action
+
+- loadUser$
+
+    triggered by setCategoryScore, this currently doesn't seem to have any affect
 
 ---
 
+Using diagram to workout combination of SSO with registration.
+
 ```mermaid
   graph TD;
-      A-->B;
-      A-->C;
-      B-->D;
-      C-->D;
+      A[Register/Authnticate] --> B[Get User];
+      B -- No --> D[Add User];
+      D --> E[Load Scores];
+      B -- Yes --> E;
+      E --> I[Update Profile];
+      E --> F[Add Score];
+      E --> G[Delete Score];
+      F --> H[Calculate Omni Score];
+      G --> H;
+```
+
+```mermaid
+    graph TD;
+        A(User Authenticated - action) --> B[User Authenticated - effect]
+        B --> C
+        C{{Load User - action}} --> D[Load User - effect]
+        D -. No .-> E(Load User Failure)
+        D -- Yes --> F(Load User Success)
 ```

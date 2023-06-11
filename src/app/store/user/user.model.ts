@@ -1,12 +1,14 @@
 export interface User {
   id: string;
+  avatar?: string;
+  categoryScore: object;
+  dob: Date;
   email: string;
   firstName: string;
+  gender?: string;
   lastName: string;
   nickname?: string;
-  gender?: string;
-  avatar?: string;
-  dob: Date;
+  omniScore: number;
   height?: {
     feet: number;
     inches: number;

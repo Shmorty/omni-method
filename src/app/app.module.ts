@@ -52,7 +52,7 @@ import { Capacitor } from '@capacitor/core';
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
     }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    // provideFirestore(() => getFirestore()),
+    provideFirestore(() => getFirestore()),
     provideAuth(() => {
       if (Capacitor.isNativePlatform()) {
         console.log('isNativePlatform');

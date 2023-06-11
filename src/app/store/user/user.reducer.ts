@@ -41,8 +41,8 @@ export const userReducer = createReducer(
   on(UserActions.loadUserSuccess, (state, action) => ({
     ...state,
     loading: false,
-    user: action.payload['user'],
-    scores: action.payload['scores'],
+    user: action.payload, //['user'],
+    scores: [], //action.payload['scores'],
     error: '',
   })),
   on(UserActions.loadUserFailure, (state, action) => ({
@@ -114,5 +114,16 @@ export const userReducer = createReducer(
       loading: true,
       error: null,
     };
-  })
+  }),
+  on(UserActions.loadUserScoresAction, (state) => ({
+    ...state,
+    loading: true,
+    error: '',
+  })),
+  on(UserActions.loadUserScoresSuccessAction, (state, action) => ({
+    ...state,
+    loading: false,
+    scores: action.scores,
+    error: '',
+  }))
 );

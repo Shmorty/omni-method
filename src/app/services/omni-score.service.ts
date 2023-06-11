@@ -22,12 +22,12 @@ export class OmniScoreService {
 
   constructor(private store: Store) {}
 
-  setCategoryScore(cat: Category, score: number) {
-    console.log('setCategoryScore ', cat.label, ' = ', score);
-    this.store.dispatch(
-      OmniScoreActions.setCategoryScore({ cid: cat.cid, score: score })
-    );
-  }
+  // setCategoryScore(cat: Category, score: number) {
+  //   console.log('setCategoryScore ', cat.label, ' = ', score);
+  //   this.store.dispatch(
+  //     OmniScoreActions.setCategoryScore({ cid: cat.cid, score: score })
+  //   );
+  // }
 
   public static calculateDays(scoreDate: string) {
     var date = new Date(scoreDate);
@@ -78,13 +78,13 @@ export class OmniScoreService {
               })
             );
           let curScore = Math.round(catTotal / assessmentCount);
-          this.setCategoryScore(cat, curScore);
+          // this.setCategoryScore(cat, curScore);
           unadjustedScore += curScore;
         })
       );
       omniScore = Math.round(Math.pow(unadjustedScore / 1500, 2) * 1500);
       console.log('setOmniScore: ', omniScore);
-      this.store.dispatch(OmniScoreActions.setOmniScore({ score: omniScore }));
+      // this.store.dispatch(OmniScoreActions.setOmniScore({ score: omniScore }));
     }
   }
 }

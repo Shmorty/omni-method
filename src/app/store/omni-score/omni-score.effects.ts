@@ -15,28 +15,28 @@ export class OmniScoreEffects {
   ) {}
 
   // OmniScoreActions.calculateOmniScore
-  calculateOmniScore$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(OmniScoreActions.calculateOmniScore),
-        tap({
-          next: () => this.omniScoreService.calculateScores(),
-          error: (e) => console.log(e),
-        })
-      ),
-    { dispatch: false }
-  );
+  // calculateOmniScore$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(OmniScoreActions.calculateOmniScore),
+  //       tap({
+  //         next: () => this.omniScoreService.calculateScores(),
+  //         error: (e) => console.log(e),
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   // OmniScoreActions.setCategoryScore
-  loadUser$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(OmniScoreActions.setCategoryScore),
-        tap(console.log)
-        // switchMap(({ cid, score }) =>
+  // loadUser$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(OmniScoreActions.setCategoryScore),
+  //       tap(console.log)
+  //       // switchMap(({ cid, score }) =>
 
-        // )
-      ),
-    { dispatch: false }
-  );
+  //       // )
+  //     ),
+  //   { dispatch: false }
+  // );
 }
