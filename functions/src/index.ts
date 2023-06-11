@@ -13,14 +13,38 @@
 // import { onRequest } from "firebase-functions/v2/https";
 import { onDocumentCreated } from "firebase-functions/v2/firestore";
 import * as logger from "firebase-functions/logger";
+import { initializeApp } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
+import * as data from "./assessments.json";
 
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
 
+initializeApp();
+const db = getFirestore();
+export const oneDay = 1000 * 3600 * 24;
+
+// interface User {
+//   id: string;
+//   firstName: string;
+//   lastName: string;
+//   nickname: string;
+//   gender: string;
+//   height: {
+//     feet: number;
+//     inches: number;
+//   };
+//   weight: number;
+//   omniScore: number;
+//   categoryScore: [];
+// }
+
 interface Score {
   uid: string;
   aid: string;
+  cid: string;
   scoreDate: string;
+  expired: boolean;
   rawScore: number;
   calculatedScore?: number;
   notes?: string;
@@ -55,14 +79,29 @@ const WR = new Map(Object.entries(wrValues));
  * @return {Promise} with user's bodyweight
  */
 async function getBodyWeight(uid: string): Promise<number> {
-  const weight = 172;
   logger.info("lookup weight for", uid);
+  const userSnapshot = await db.doc(`user/${uid}`).get();
+  const userData = userSnapshot.data();
+  const weight = userData["weight"];
+  logger.info("weight", weight);
   return Promise.resolve(weight);
 }
+
+/**
+ * calculates number of days since scoreDate
+ * @param {string} scoreDate
+ * @return {number}
+ */
+// function calculateDays(scoreDate: string) {
+//   const date = new Date(scoreDate);
+//   const days = Math.ceil((Date.now().valueOf() - date.valueOf()) / oneDay);
+//   return days;
+// }
 
 export const calculateScore = onDocumentCreated(
   "user/{uid}/score/{sid}",
   (event) => {
+    // calculate assessment score
     logger.info("user score documentCreated event", event);
     const snapshot = event.data;
     if (!snapshot) {
@@ -70,29 +109,131 @@ export const calculateScore = onDocumentCreated(
       return null;
     }
     const data = snapshot.data();
+    logger.info("data", JSON.stringify(data));
     if (data.calculatedScore) {
       logger.info("calculatedScore already set");
       return null;
     }
-    logger.info("data", data);
-    return calcScore(data as Score).then(async (score) => {
-      logger.info("calcScore", score);
-      await snapshot.ref.set(
-        {
-          calculatedScore: score,
-        },
-        { merge: true }
-      );
-    });
+    return (
+      // calculate assessment score
+      calcAssessmentScore(data as Score)
+        .then((score) => {
+          logger.info("calcScore", score);
+          // write calculated score to db
+          return snapshot.ref.set(
+            {
+              calculatedScore: score,
+            },
+            { merge: true }
+          );
+        })
+        // calculate category score
+        .then(() => calcCategoryScore(event.params.uid, event.params.sid))
+        // update Omni Score data:{uid: val, cid: val, score: val}
+        .then((res) => updateOmniScore(res))
+    );
   }
 );
 
 /**
- * Calculate the assessement score
+ * Updates category score for given user and category
+ * @param {string} uid
+ * @param {string} sid
+ * @return {Promise}
+ */
+async function calcCategoryScore(uid: string, sid: string): Promise<unknown> {
+  let catScore = 0;
+  let assessmentCount = 0;
+  // get assessment ID
+  const aid = sid.split("#", 2)[0];
+  // get category ID
+  const cid = data.assessments.filter((obj) => obj.aid === aid)[0].cid;
+  //  getAssessmentsByCategory();
+  const collectionRef = await db.collection(`user/${uid}/score`);
+  logger.info("got collectionRef", collectionRef.path);
+  // loop through assessments for current category
+  const p: Promise<number>[] = [];
+  data.assessments
+    .filter((assessment) => assessment.cid === cid)
+    // eslint-disable-next-line space-before-function-paren
+    .forEach(async (assessmentMeta) => {
+      logger.info(assessmentMeta.aid);
+      assessmentCount++;
+      // collect promise for each assessment in category
+      p.push(
+        collectionRef
+          .where("aid", "==", assessmentMeta.aid)
+          .where("expired", "!=", true)
+          .get()
+          .then((snap) => {
+            // pop the most recent score
+            if (!snap.empty) {
+              return snap.docs.pop().get("calculatedScore");
+            }
+            return null;
+          })
+          .catch((err) => logger.info(err))
+      );
+    });
+  // add assessment scores for category
+  catScore = await Promise.all(p).then((arr) =>
+    arr.reduce((partialSum, a) => partialSum + a, 0)
+  );
+  catScore = Math.round(catScore / assessmentCount);
+  logger.info("set category score", cid, catScore);
+  //   categoryScorePromise.then(() => {
+  //     catScore /= assessmentCount;
+  //     logger.info("return", catScore);
+  //   });
+  //   db.collection(`user/${id}/score/`)
+  // Now set it back into the user table
+  return Promise.resolve({ uid: uid, cid: cid, catScore: catScore });
+}
+
+/**
+ * Updates Omni score for given user
+ * @param {unknown} req
+ * @return {Promise}
+ */
+async function updateOmniScore(req: unknown): Promise<unknown> {
+  // {uid: string, cid: string, catScore: number}
+  logger.info("updateOmniScore", JSON.stringify(req));
+  // get user from db
+  logger.info(`user/${req["uid"]}`);
+  const userSnapshot = await db.doc(`user/${req["uid"]}`).get();
+  const userData = userSnapshot.data();
+  logger.info("userData", JSON.stringify(userData));
+  logger.info("catScore from db", userData.categoryScore[req["cid"]]);
+  if (userData.categoryScore[req["cid"]] !== req["catScore"]) {
+    // update scores
+    logger.info("update user scores");
+    Object.defineProperty(userData.categoryScore, req["cid"], {
+      value: req["catScore"],
+    });
+    // userData.categoryScore[req["cid"]] = req["catScore"];
+    let unadjustedScore = 0;
+    // eslint-disable-next-line guard-for-in
+    for (const element in userData.categoryScore) {
+      logger.info(`${element}: ${userData.categoryScore[element]}`);
+      unadjustedScore += userData.categoryScore[element];
+    }
+    logger.info("unadjustedScore", unadjustedScore);
+    const omniScore = Math.round(Math.pow(unadjustedScore / 1500, 2) * 1500);
+    logger.info("omniScore", omniScore);
+    userData.omniScore = omniScore;
+    // write updated record to db
+    return userSnapshot.ref.update(userData);
+    // return Promise.resolve(omniScore);
+  }
+  return null;
+}
+
+/**
+ * Calculate the assessment score
  * @param {Score} req request parameter with the new score
  * @return {Promise} returns propmis containing the calculated score
  */
-async function calcScore(req: Score): Promise<number> {
+async function calcAssessmentScore(req: Score): Promise<number> {
   const wr = WR.get(req.aid) || 0;
   let result = req.rawScore;
   switch (req.aid) {
