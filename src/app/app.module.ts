@@ -17,7 +17,6 @@ import {
   getAuth,
   initializeAuth,
   indexedDBLocalPersistence,
-  browserPopupRedirectResolver,
 } from '@angular/fire/auth';
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -98,17 +97,17 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
     //   deps: [AuthService],
     //   multi: true,
     // },
-    {
-      provide: APP_INITIALIZER,
-      multi: true,
-      useFactory: (auth: AuthService) => {
-        return () => {
-          var user = from(auth.currentUser());
-          return user.pipe(take(1));
-        };
-      },
-      deps: [AuthService],
-    },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   multi: true,
+    //   useFactory: (auth: AuthService) => {
+    //     return () => {
+    //       var user = from(auth.currentUser());
+    //       return user.pipe(take(1));
+    //     };
+    //   },
+    //   deps: [AuthService],
+    // },
     // {
     //   provide: APP_INITIALIZER,
     //   multi: true,
