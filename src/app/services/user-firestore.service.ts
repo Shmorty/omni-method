@@ -1,5 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import {
+  DocumentData,
+  DocumentReference,
   Firestore,
   addDoc,
   collection,
@@ -21,6 +23,7 @@ import { Score } from '../store/models/score.model';
 })
 export class UserFirestoreService {
   private firestore: Firestore = inject(Firestore);
+  private userDocRef: DocumentReference<DocumentData>;
 
   constructor() {}
 
@@ -35,11 +38,26 @@ export class UserFirestoreService {
 
   getUserById(id: string): Observable<User> {
     console.log('getUser from firestore ', id);
-
-    const userDocRef = doc(this.firestore, `user/${id}`);
-    return docData(userDocRef, {
+    this.userDocRef = doc(this.firestore, `user/${id}`);
+    const userDocSnap = docData(this.userDocRef, {
       idField: 'id',
-    }) as Observable<User>;
+    });
+    return userDocSnap as Observable<User>;
+  }
+
+  // unsubscribeUser() {
+  //   if (this.userDocRef) {
+  //     console.log("unsubscribe userDocRef");
+  //     this.userDocRef();
+  //     // this.userDocRef.unsubscribe();
+  //   }
+  // }
+
+  getAllUsers(): Observable<User[]> {
+    console.log('getAllUsers from firestore');
+
+    const userCollection = collection(this.firestore, "user");
+    return collectionData(userCollection) as Observable<User[]>;
   }
 
   addUser(user: User): Observable<any> {

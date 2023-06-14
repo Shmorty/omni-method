@@ -11,7 +11,7 @@
  */
 
 // import { onRequest } from "firebase-functions/v2/https";
-import { onDocumentCreated } from "firebase-functions/v2/firestore";
+import { onDocumentCreated, onDocumentDeleted } from "firebase-functions/v2/firestore";
 import * as logger from "firebase-functions/logger";
 import { initializeApp } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
@@ -98,11 +98,25 @@ async function getBodyWeight(uid: string): Promise<number> {
 //   return days;
 // }
 
-export const calculateScore = onDocumentCreated(
+export const scoreDeleted = onDocumentDeleted("user/{uid}/score/{sid}", (event) => {
+  logger.info("scoreDeleted event");
+  const snapshot = event.data;
+  logger.info("event.data snapshot", snapshot);
+  if (!snapshot) {
+    logger.info("no data with event scoreDeleted");
+    return null;
+  }
+  const data = snapshot.data();
+  logger.info("scoreDeleted recalc category", data["cid"]);
+  return calcCategoryScore(event.params.uid, data["cid"])
+  .then((res) => updateOmniScore(res));
+});
+
+export const newScore = onDocumentCreated(
   "user/{uid}/score/{sid}",
   (event) => {
     // calculate assessment score
-    logger.info("user score documentCreated event", event);
+    logger.info("newScore event", event);
     const snapshot = event.data;
     if (!snapshot) {
       logger.info("no data associated with event");
@@ -118,7 +132,7 @@ export const calculateScore = onDocumentCreated(
       // calculate assessment score
       calcAssessmentScore(data as Score)
         .then((score) => {
-          logger.info("calcScore", score);
+          logger.info("new assessment score", score);
           // write calculated score to db
           return snapshot.ref.set(
             {
@@ -128,7 +142,7 @@ export const calculateScore = onDocumentCreated(
           );
         })
         // calculate category score
-        .then(() => calcCategoryScore(event.params.uid, event.params.sid))
+        .then(() => calcCategoryScore(event.params.uid, data["cid"]))
         // update Omni Score data:{uid: val, cid: val, score: val}
         .then((res) => updateOmniScore(res))
     );
@@ -138,21 +152,15 @@ export const calculateScore = onDocumentCreated(
 /**
  * Updates category score for given user and category
  * @param {string} uid
- * @param {string} sid
+ * @param {string} cid
  * @return {Promise}
  */
-async function calcCategoryScore(uid: string, sid: string): Promise<unknown> {
+async function calcCategoryScore(uid: string, cid: string): Promise<unknown> {
   let catScore = 0;
   let assessmentCount = 0;
-  // get assessment ID
-  const aid = sid.split("#", 2)[0];
-  // get category ID
-  const cid = data.assessments.filter((obj) => obj.aid === aid)[0].cid;
-  //  getAssessmentsByCategory();
-  const collectionRef = await db.collection(`user/${uid}/score`);
-  logger.info("got collectionRef", collectionRef.path);
-  // loop through assessments for current category
   const p: Promise<number>[] = [];
+  const collectionRef = await db.collection(`user/${uid}/score`);
+  // loop through assessments for current category
   data.assessments
     .filter((assessment) => assessment.cid === cid)
     // eslint-disable-next-line space-before-function-paren
@@ -181,11 +189,6 @@ async function calcCategoryScore(uid: string, sid: string): Promise<unknown> {
   );
   catScore = Math.round(catScore / assessmentCount);
   logger.info("set category score", cid, catScore);
-  //   categoryScorePromise.then(() => {
-  //     catScore /= assessmentCount;
-  //     logger.info("return", catScore);
-  //   });
-  //   db.collection(`user/${id}/score/`)
   // Now set it back into the user table
   return Promise.resolve({ uid: uid, cid: cid, catScore: catScore });
 }

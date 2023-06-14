@@ -11,6 +11,7 @@ export interface IUserService {
 
   // NgRx global store interactions (called by components)
   getUser(): Observable<User>;
+  getUserRankings(): Observable<User[]>;
   saveNewUser(user: User): void;
   updateUser(user: User): void;
   saveScore(score: Score): void;

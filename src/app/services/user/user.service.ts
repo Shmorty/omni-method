@@ -4,7 +4,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, first, map, single, take, tap } from 'rxjs/operators';
 import { User } from '../../store/user/user.model';
 import { IUserService } from './user.service.interface';
@@ -19,12 +19,15 @@ import {
   selectUser,
 } from '../../store/user/user.selectors';
 import { Assessment } from '../../store/assessments/assessment.model';
+import {UserFirestoreService} from '../user-firestore.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService implements IUserService {
-  constructor(private http: HttpClient, private store: Store<AppState>) {}
+  constructor(private http: HttpClient,
+    private store: Store<AppState>,
+    private firestoreService: UserFirestoreService) {}
 
   // get user and scores from database
   getUserFromDb(id: string): Observable<User> {
@@ -82,6 +85,14 @@ export class UserService implements IUserService {
   // get user from store
   getUser() {
     return this.store.select(selectUser);
+  }
+
+  getUserRankings(): Observable<User[]> {
+    // get from firestore
+    const sortFn = (a,b) => {
+      return (a.omniScore < b.omniScore) ? 1 : (a.omniScore > b.omniScore) ? -1 : 0;
+    }
+    return this.firestoreService.getAllUsers().pipe(map((data) => data.sort(sortFn)));
   }
 
   // trigger new user action

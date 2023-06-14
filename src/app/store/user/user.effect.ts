@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { UserService } from '../../services/user/user.service';
-import { map, switchMap, tap, catchError, finalize } from 'rxjs/operators';
+import { map, switchMap, tap, catchError, finalize, take, takeWhile, takeUntil } from 'rxjs/operators';
 import * as UserActions from './user.actions';
 import { Store } from '@ngrx/store';
-import { OmniScoreService } from 'src/app/services/omni-score.service';
 import { of } from 'rxjs';
-import * as OmniScoreActions from '../omni-score/omni-score.actions';
 import { Router } from '@angular/router';
 import { UserFirestoreService } from 'src/app/services/user-firestore.service';
 
@@ -14,10 +11,8 @@ import { UserFirestoreService } from 'src/app/services/user-firestore.service';
 export class UserEffects {
   constructor(
     private actions$: Actions,
-    private userService: UserService,
     private firestoreService: UserFirestoreService,
     private store: Store,
-    private omniScoreService: OmniScoreService,
     private router: Router
   ) {}
 
@@ -31,14 +26,25 @@ export class UserEffects {
     { dispatch: false }
   );
 
+  // UserActions.logoutAction
+  logout$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UserActions.logoutAction),
+        map(() => {
+          this.router.navigate(['login']);
+        })
+      ),
+    { dispatch: false }
+  );
+
   // UserActions.userAuthenticatd
   userAuthenticated$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.userAuthenticatd),
-      tap((payload) => {
-        console.log('user effect userAuthenticatd');
-        console.log(JSON.stringify(payload));
-      }),
+      tap((payload) => 
+        console.log('userAuthenticatd effect', JSON.stringify(payload))
+      ),
       map((payload) =>
         UserActions.loadUserAction({ uid: payload.payload.user.uid })
       )
@@ -50,23 +56,24 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(UserActions.loadUserAction),
       tap(console.log),
-      switchMap(({ uid }) =>
-        this.firestoreService.getUserById(uid).pipe(
-          // this.userService.getUserFromDb(uid).pipe(
-          tap((res) => console.log('getUserById ', res)),
-          map((res) => {
-            if (res) {
-              return UserActions.loadUserSuccess({ payload: res });
-            } else {
-              return UserActions.loadUserFailure({ error: 'not found' });
-            }
-          }),
-          catchError(async (err) =>
-            UserActions.loadUserFailure({ error: err })
-          ),
-          finalize(() => console.log('load  user  effect finalize'))
-        )
-      )
+      switchMap(({ uid }) => {
+        return this.firestoreService.getUserById(uid)
+          .pipe(takeUntil(this.logout$))
+          .pipe(
+            tap((res) => console.log('firestore getUserById response', res)),
+            map((res) => {
+              if (res) {
+                return UserActions.loadUserSuccess({ payload: res });
+              } else {
+                return UserActions.loadUserFailure({ error: 'not found' });
+              }
+            }),
+            catchError(async (err) =>
+              UserActions.loadUserFailure({ error: err })
+            ),
+            finalize(() => console.log('getUserById finalize'))
+          );
+      })
     )
   );
 
@@ -76,12 +83,12 @@ export class UserEffects {
       ofType(UserActions.newUser),
       tap(console.log),
       switchMap(({ payload }) => {
-        console.log('effect newUser call firestoreService addUser');
+        console.log('newUser effect calling firestoreService addUser');
         return this.firestoreService.addUser(payload).pipe(
-          // this.userService.saveUserToDb(payload).pipe(
           tap(console.log),
           map((data) => UserActions.newUserSuccess({ payload: data })),
-          catchError((error) => of(UserActions.newUserFailure({ error })))
+          catchError((error) => of(UserActions.newUserFailure({ error }))),
+          finalize(() => console.log('addUser finalize'))
         );
       })
     )
@@ -134,16 +141,11 @@ export class UserEffects {
     () =>
       this.actions$.pipe(
         ofType(UserActions.loadUserSuccess),
-        // tap((data) => {
-        //   console.log('loadUserSuccess data.type ', data.type);
-        //   console.log('loadUserSuccess data.payload ', data.payload);
-        // }),
         tap((data) => {
           // user loaded test if exist
           if (data.payload) {
             console.log('loadUserSuccess navigate home');
             this.router.navigate(['home']);
-            // this.omniScoreService.calculateScores();
           } else {
             console.log('loadUserSuccess navigate new-user');
             this.router.navigate(['new-user']);
@@ -215,22 +217,16 @@ export class UserEffects {
       ),
       switchMap((param) => {
         console.log('calling getUserScores');
-        return this.firestoreService.getUserScores(param.uid).pipe(
-          tap((res) => console.log('getUserScores res ', res)),
-          map((res) => UserActions.loadUserScoresSuccessAction({ scores: res }))
-          // catchError(async (err) => UserActions.loadUserScoresFailure({ error: err }))
-        );
+        return this.firestoreService.getUserScores(param.uid)
+        .pipe(takeUntil(this.logout$))
+        .pipe(
+            tap((res) => console.log('getUserScores res ', res)),
+            map((res) => UserActions.loadUserScoresSuccessAction({ scores: res })),
+            // catchError(async (err) => UserActions.loadUserScoresFailure({ error: err }))
+            finalize(() => console.log('getUserScores unsubscribed'))
+          );
       })
     )
   );
 
-  loadUserScoresSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(UserActions.loadUserScoresSuccessAction),
-        tap((data) => console.log('loadUserScoresSuccess effect'))
-        // map(() => this.omniScoreService.calculateScores())
-      ),
-    { dispatch: false }
-  );
 }

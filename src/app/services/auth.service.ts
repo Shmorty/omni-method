@@ -17,6 +17,7 @@ import {
   getAdditionalUserInfo,
   signInWithRedirect,
   getRedirectResult,
+  onAuthStateChanged,
   // signInWithPopup,
 } from '@angular/fire/auth';
 // import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
@@ -43,35 +44,18 @@ export class AuthService {
   currUser: OmniUser.User;
 
   constructor(private router: Router, private store: Store<AppState>) {
-    // this.userSubscription = this.user$.subscribe((aUser: User | null) => {
-    //   if (aUser) {
-    //     this.loggedIn.next(true);
-    //     console.log('AuthService: user$ is logged in');
-    //     console.log(aUser);
-    //     this.store.dispatch(
-    //       UserActions.userAuthenticatd({
-    //         payload: JSON.parse(JSON.stringify(aUser)),
-    //       })
-    //     );
-    //   } else {
-    //     // not logged in
-    //     this.loggedIn.next(false);
-    //     console.log('AuthService: user has logged off');
-    //     router.navigate(['/welcome']);
-    //   }
-    // });
-  }
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        this.store.dispatch(
+          UserActions.userAuthenticatd({payload: JSON.parse(JSON.stringify({user: user}))})
+        );
 
-  // public isLoggedIn(): boolean {
-  //   // if (!!this.fireauth.currentUser) {
-  //   this.currUserId = localStorage.getItem('userId');
-  //   console.log('auth.isLoggedIn: ' + this.currUserId);
-  //   if (this.loggedIn.value) {
-  //     console.log('currUserId: ' + this.currUserId);
-  //     return true;
-  //   }
-  //   return false;
-  // }
+      } else {
+        console.log("User is signed out");
+        this.router.navigate(['/login']);
+      }
+    });
+  }
 
   currentUser(): Promise<any> {
     return Promise.resolve(this.currUser);
@@ -133,7 +117,8 @@ export class AuthService {
     signOut(this.auth).then(
       () => {
         // localStorage.removeItem('userId');
-        this.router.navigate(['/welcome']);
+        this.store.dispatch(UserActions.logoutAction())
+        this.router.navigate(['/login']);
       },
       (err) => {
         alert(err.message);

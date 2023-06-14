@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { FirebaseApp, getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { DatePipe } from '@angular/common';
 import { AuthService } from './services/auth.service';
@@ -19,7 +19,7 @@ import {
   indexedDBLocalPersistence,
   browserPopupRedirectResolver,
 } from '@angular/fire/auth';
-import { StoreModule } from '@ngrx/store';
+import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './store/app.state';
@@ -28,8 +28,33 @@ import { UserEffects } from './store/user/user.effect';
 import { OmniScoreEffects } from './store/omni-score/omni-score.effects';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { Capacitor } from '@capacitor/core';
+import {UserActionType} from './store/user/user.actions';
 
-// export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
+// console.log all actions
+export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
+  return function(state, action) {
+    console.log('state', state);
+    console.log('action', action);
+ 
+    return reducer(state, action);
+  };
+}
+
+function clearState(reducer) {
+  return function(state, action) {
+    if (action.type === UserActionType.USER_LOGOUT) {
+      state = undefined;
+    }
+    return reducer(state, action);
+  }
+}
+function logout(reducer) {
+  return function (state, action) {
+    return reducer(action.type === UserActionType.USER_LOGOUT ? undefined : state, action);
+  }
+}
+
+export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
 // export const storeDevTools: ModuleWithProviders[] =
 //     !environment.production ? [StoreDevtoolsModule.instrument()] : [];
 
@@ -42,7 +67,7 @@ import { Capacitor } from '@capacitor/core';
     HttpClientModule,
     IonicModule.forRoot(),
     NgxSkeletonLoaderModule.forRoot(),
-    StoreModule.forRoot(reducers, {}),
+    StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([AssessmentEffects, UserEffects, OmniScoreEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
@@ -58,7 +83,6 @@ import { Capacitor } from '@capacitor/core';
         console.log('isNativePlatform');
         return initializeAuth(getApp(), {
           persistence: indexedDBLocalPersistence,
-          // popupRedirectResolver: browserPopupRedirectResolver,
         });
       } else {
         console.log('not nativPlatform');

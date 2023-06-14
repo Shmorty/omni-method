@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import {UserService} from 'src/app/services/user/user.service';
 
 export enum View {
   Rankings = 'Rankings',
@@ -21,17 +22,9 @@ export interface Athlete {
 export class CommunityPage implements OnInit {
   View = View;
   public view: View = View.Rankings;
-  public ranking$: Observable<Athlete[]> = of([
-    { rank: 1, name: 'Adam Apple', score: 6578 },
-    { rank: 2, name: 'John Ellard', score: 6533 },
-    { rank: 3, name: 'Raymond Platteel', score: 6098 },
-    { rank: 4, name: 'Steven Cigar', score: 5784 },
-    { rank: 5, name: 'Anthony', score: 5267 },
-    { rank: 6, name: 'Tom Brady', score: 5233 },
-    { rank: 7, name: 'Roger Federer', score: 5001 },
-  ]);
+  public ranking$ = this.userService.getUserRankings();
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private userService: UserService) {}
 
   ngOnInit() {}
 
