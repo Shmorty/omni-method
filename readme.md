@@ -16,21 +16,20 @@ need to install
   npm i -g @ionic/cli
 
 ```
-% npm list --global
+% npm -g list
 /usr/local/lib
-├── @angular/cli@15.1.1
+├── @angular/cli@15.2.4
 ├── @aws-amplify/cli@10.6.2
-├── @ionic/cli@6.20.8
-├── @nrwl/schematics@8.12.11
+├── @ionic/cli@6.20.6
 ├── cordova-res@0.15.4
 ├── corepack@0.15.3
-├── firebase-tools@11.20.0
+├── firebase-tools@12.3.1
 ├── json-server@0.17.1
 ├── n@9.0.1
-├── npm@9.3.1
-├── nx@15.5.2
+├── npm@9.6.2
+├── nx@15.8.8
 ├── serverless@3.26.0
-└── typescript@4.9.4
+└── typescript@5.0.2
 ```
 
 ---
