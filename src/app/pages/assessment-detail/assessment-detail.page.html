@@ -74,29 +74,19 @@
           <li *ngFor="let item of assessment.instruction">{{item}}</li>
         </ol>
       </ion-item>
-      <ion-grid
-        button
-        class="card"
-        *ngFor="let item of checklist$ | async; let i = index"
-        (click)="toggleCheckItem(item)"
-        [ngClass]="!(i%2) ? 'left' : 'right'"
-      >
-        <ion-row>
-          <ion-col>
-            <ion-img src="{{assessment.icon}}"></ion-img>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="9">
-            <ion-label color="primary" class="card-label">{{item["label"]}}</ion-label>
-          </ion-col>
-          <ion-col size="3">
-            <ion-checkbox class="card-check"></ion-checkbox>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-list>
-  </ion-content>
+      <ion-card
+      class="card"
+      *ngFor="let item of checklist$ | async; let i = index"
+      (click)="toggleCheckItem(item)"
+      [ngClass]="!(i%2) ? 'left' : 'right'"
+    >
+      <ion-img src="{{assessment.icon}}"></ion-img>
+      <ion-checkbox labelPlacement="start">
+        <ion-label>{{item["label"]}}</ion-label>
+      </ion-checkbox>
+    </ion-card>
+      </ion-list>
+</ion-content>
   <ion-fab
     *ngIf="!assessment.checklist"
     slot="fixed"

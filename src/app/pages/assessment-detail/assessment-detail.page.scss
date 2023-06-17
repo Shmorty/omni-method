@@ -31,12 +31,12 @@ ion-accordion-group > ion-accordion:last-of-type ion-item[slot="header"] {
   // color: white;
   display: inline-flex;
   margin: 0 5px 5px 0;
-  padding: 5px;
+  // padding: 5px;
   width: 45%;
 }
 .card-label {
-  display: block;
-  // float: left;
+  // display: block;
+  float: left;
   height: 2.5em;
   // text-overflow: ellipsis;
   white-space: inherit;
