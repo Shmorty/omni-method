@@ -144,6 +144,7 @@ export class UserService implements IUserService {
 
   // trigger save score event
   saveScore(score: Score) {
+    console.log("dispatch saveNewScore event", score);
     this.store.dispatch(UserActions.saveNewScore({ score }));
   }
 

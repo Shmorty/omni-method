@@ -77,12 +77,12 @@
       <ion-card
       class="card"
       *ngFor="let item of checklist$ | async; let i = index"
-      (click)="toggleCheckItem(item)"
+      (click)="toggleCheckItem(i)"
       [ngClass]="!(i%2) ? 'left' : 'right'"
     >
-      <ion-img src="{{assessment.icon}}"></ion-img>
-      <ion-checkbox labelPlacement="start">
-        <ion-label>{{item["label"]}}</ion-label>
+    <ion-label>{{item["label"]}}</ion-label>
+    <!-- <ion-img src="{{assessment.icon}}"></ion-img> -->
+      <ion-checkbox [checked]="getCheckedItem(i)" labelPlacement="start">
       </ion-checkbox>
     </ion-card>
       </ion-list>
@@ -101,6 +101,20 @@
       (click)="openNewScore(assessment)"
     >
       <ion-icon name="pencil-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab
+    *ngIf="assessment.checklist"
+    slot="fixed"
+    horizontal="end"
+    vertical="bottom"
+  >
+    <ion-fab-button
+      expand="block"
+      type="full"
+      (click)="saveChecklist()"
+    >
+      <ion-icon name="save-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ng-container>

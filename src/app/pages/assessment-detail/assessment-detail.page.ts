@@ -7,6 +7,9 @@ import { NewScorePage } from '../new-score/new-score.page';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from '../../services/user/user.service';
+import {selectAuthUser} from 'src/app/store/user/user.selectors';
+import {first, take} from 'rxjs/operators';
+import {User} from 'src/app/store/user/user.model';
 
 @Component({
   selector: 'app-assessment-detail',
@@ -18,6 +21,12 @@ export class AssessmentDetailPage implements OnInit {
   public category$: Observable<Category>;
   public assessment$: Observable<Assessment>;
   public checklist$: Observable<string[]>;
+  private displayChecked: boolean[] = [];
+  private aid: string;
+  private cid: string;
+  private today = new Date().toLocaleDateString();
+  public user$ = this.userService.getUser();
+  private user: User;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +38,9 @@ export class AssessmentDetailPage implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      console.log(params);
+      console.log("assessmentDetailPage.ngOnInit", params);
+      this.aid =params.aid;
+      this.cid =params.cid;
       this.category$ = this.assessmentService.getCategoryById(params.cid);
       this.assessment$ = this.assessmentService.getAssessmentById(params.aid);
       this.checklist$ = this.assessmentService.getChecklist(params.aid);
@@ -38,6 +49,18 @@ export class AssessmentDetailPage implements OnInit {
     this.assessment$.subscribe((assessment) => {
       this.scores$ = this.userService.getScoresForAssessment(assessment);
     });
+    this.scores$.subscribe((score) => {
+      if (score.length > 0) {
+        // assuming most recent on top or only store one
+        this.displayChecked = Array.from(score[0].checklist);
+      }
+      console.log("score", score);
+    });
+    this.user$
+      .subscribe((value) => {
+        this.user = value;
+      })
+      .unsubscribe();
   }
 
   deleteScore(score: Score) {
@@ -62,15 +85,36 @@ export class AssessmentDetailPage implements OnInit {
     });
   }
 
-  toggleCheckItem(item) {
-    console.log(item);
+  getCheckedItem(item): boolean {
+    return this.displayChecked[item];
   }
-  // async closeModel() {
-  //   const close: string = "Modal Removed";
-  //   await this.modalController.dismiss(close);
-  // }
 
-  // back(): void {
-  //   this._location.historyGo(-1);
-  // }
+  toggleCheckItem(item) {
+    this.displayChecked[item] = !this.displayChecked[item];
+    console.log("toggleCheckItem", item, this.displayChecked[item]);
+  }
+
+  async saveChecklist() {
+    console.log("saveChecklist", this.displayChecked);
+    console.log("count set", this.displayChecked.filter(i => i).length);
+    console.log("user", this.user);
+    console.log("today", this.today);
+    // fill missing values in arrray
+    for (var i=0; i < this.displayChecked.length; i++) {
+      console.log("displayChecked", i, this.displayChecked[i]);
+      this.displayChecked[i] = this.displayChecked[i] ? true : false;
+    }
+    const score: Score = {
+      aid: this.aid,
+      uid: this.user.id,
+      checklist: this.displayChecked,
+      cid: this.cid,
+      rawScore: this.displayChecked.filter(item => item).length,
+      scoreDate: this.today,
+      expired: false,
+    };
+    console.log('save new score: ' + JSON.stringify(score));
+    this.userService.saveScore(score);
+    this.navController.back();
+  }
 }
