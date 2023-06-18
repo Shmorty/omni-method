@@ -11,7 +11,7 @@
  */
 
 // import { onRequest } from "firebase-functions/v2/https";
-import { onDocumentCreated, onDocumentDeleted } from "firebase-functions/v2/firestore";
+import { onDocumentCreated, onDocumentDeleted, onDocumentUpdated } from "firebase-functions/v2/firestore";
 import * as logger from "firebase-functions/logger";
 import { initializeApp } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
@@ -98,20 +98,6 @@ async function getBodyWeight(uid: string): Promise<number> {
 //   return days;
 // }
 
-export const scoreDeleted = onDocumentDeleted("user/{uid}/score/{sid}", (event) => {
-  logger.info("scoreDeleted event");
-  const snapshot = event.data;
-  logger.info("event.data snapshot", snapshot);
-  if (!snapshot) {
-    logger.info("no data with event scoreDeleted");
-    return null;
-  }
-  const data = snapshot.data();
-  logger.info("scoreDeleted recalc category", data["cid"]);
-  return calcCategoryScore(event.params.uid, data["cid"])
-  .then((res) => updateOmniScore(res));
-});
-
 export const newScore = onDocumentCreated(
   "user/{uid}/score/{sid}",
   (event) => {
@@ -149,6 +135,61 @@ export const newScore = onDocumentCreated(
   }
 );
 
+export const updatedScore = onDocumentUpdated(
+  "user/{uid}/score/{sid}",
+  (event) => {
+    // calculate assessment score
+    logger.info("updatedScore event", event);
+    const snapshot = event.data;
+    if (!snapshot) {
+      logger.info("no data associated with event");
+      return null;
+    }
+    const data = snapshot.after.data();
+    logger.info("data", JSON.stringify(data));
+    if (snapshot.after.data().rawScore === snapshot.before.data().rawScore) {
+      logger.info("rawScore unchanged");
+      return null;
+    }
+    if (data.calculatedScore) {
+      logger.info("calculatedScore already set");
+      return null;
+    }
+    return (
+      // calculate assessment score
+      calcAssessmentScore(data as Score)
+        .then((score) => {
+          logger.info("new assessment score", score);
+          // write calculated score to db
+          return snapshot.after.ref.set(
+            {
+              calculatedScore: score,
+            },
+            { merge: true }
+          );
+        })
+        // calculate category score
+        .then(() => calcCategoryScore(event.params.uid, data["cid"]))
+        // update Omni Score data:{uid: val, cid: val, score: val}
+        .then((res) => updateOmniScore(res))
+    );
+  }
+);
+
+export const scoreDeleted = onDocumentDeleted("user/{uid}/score/{sid}", (event) => {
+  logger.info("scoreDeleted event");
+  const snapshot = event.data;
+  logger.info("event.data snapshot", snapshot);
+  if (!snapshot) {
+    logger.info("no data with event scoreDeleted");
+    return null;
+  }
+  const data = snapshot.data();
+  logger.info("scoreDeleted recalc category", data["cid"]);
+  return calcCategoryScore(event.params.uid, data["cid"])
+    .then((res) => updateOmniScore(res));
+});
+
 /**
  * Updates category score for given user and category
  * @param {string} uid
@@ -158,7 +199,7 @@ export const newScore = onDocumentCreated(
 async function calcCategoryScore(uid: string, cid: string): Promise<unknown> {
   let catScore = 0;
   let assessmentCount = 0;
-  const p: Promise<number>[] = [];
+  const promiseArray: Promise<number>[] = [];
   const collectionRef = await db.collection(`user/${uid}/score`);
   // loop through assessments for current category
   data.assessments
@@ -168,7 +209,7 @@ async function calcCategoryScore(uid: string, cid: string): Promise<unknown> {
       logger.info(assessmentMeta.aid);
       assessmentCount++;
       // collect promise for each assessment in category
-      p.push(
+      promiseArray.push(
         collectionRef
           .where("aid", "==", assessmentMeta.aid)
           .where("expired", "!=", true)
@@ -184,7 +225,7 @@ async function calcCategoryScore(uid: string, cid: string): Promise<unknown> {
       );
     });
   // add assessment scores for category
-  catScore = await Promise.all(p).then((arr) =>
+  catScore = await Promise.all(promiseArray).then((arr) =>
     arr.reduce((partialSum, a) => partialSum + a, 0)
   );
   catScore = Math.round(catScore / assessmentCount);
