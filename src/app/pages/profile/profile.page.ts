@@ -124,6 +124,9 @@ export class ProfilePage implements OnInit {
 
   async openNewScore(e, assessment, user) {
     e.stopPropagation();
+    if (assessment.checklist) {
+      return this.openDetails(assessment);
+    }
     const modal = await this.modalCtrl.create({
       component: NewScorePage,
       componentProps: {
@@ -136,7 +139,6 @@ export class ProfilePage implements OnInit {
     });
     await modal.present();
     modal.onDidDismiss().then(() => {
-      // this.loadUserData();
     });
   }
 

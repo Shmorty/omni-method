@@ -26,6 +26,10 @@
           <h5>{{ (category$ | async).label }}</h5>
         </ion-card-subtitle>
       </ion-label>
+      <ion-label *ngIf="assessment.checklist" slot="end">
+        <ion-card-title><h1>{{ curScore.rawScore }}</h1></ion-card-title>
+        <ion-card-subtitle><h5>{{ curScore.scoreDate }}</h5></ion-card-subtitle>
+      </ion-label>
     </ion-item>
 
     <div *ngIf="!assessment.checklist">

@@ -273,6 +273,17 @@ async function updateOmniScore(req: unknown): Promise<unknown> {
 }
 
 /**
+ * calculate score for checklist assessment
+ * @param {Score} req
+ * @return {number}
+ */
+function calcChecklistScore(req: Score): number {
+  const max = data.checklists.filter((list) => list.aid === req.aid)[0]["skills"].length;
+  logger.info("max", max);
+  return Math.round(req.rawScore / max * 1000);
+}
+
+/**
  * Calculate the assessment score
  * @param {Score} req request parameter with the new score
  * @return {Promise} returns propmis containing the calculated score
@@ -305,9 +316,12 @@ async function calcAssessmentScore(req: Score): Promise<number> {
       break;
     case "PIKE": // Pike
     case "BKBN": // Backbend
-    case "STRD": // Straddle
     case "BLNC": // Balance
     case "COORD": // Coordination
+      // result = req.rawScore * 100;
+      result = calcChecklistScore(req);
+      break;
+    case "STRD": // Straddle
       result = req.rawScore * 100;
       break;
     case "PSPR": // 100 meter sprint

@@ -27,6 +27,7 @@ export class AssessmentDetailPage implements OnInit {
   private today = new Date().toLocaleDateString();
   public user$ = this.userService.getUser();
   private user: User;
+  public curScore: Score;
 
   constructor(
     private route: ActivatedRoute,
@@ -52,9 +53,9 @@ export class AssessmentDetailPage implements OnInit {
     this.scores$.subscribe((score) => {
       if (score.length > 0) {
         // assuming most recent on top or only store one
-        this.displayChecked = Array.from(score[0].checklist);
+        this.curScore = score[0];
+        this.displayChecked = Array.from(this.curScore.checklist);
       }
-      console.log("score", score);
     });
     this.user$
       .subscribe((value) => {
@@ -83,6 +84,10 @@ export class AssessmentDetailPage implements OnInit {
     modal.onDidDismiss().then((res) => {
       this.navController.back();
     });
+  }
+
+  countCheckedItems(): number {
+    return this.displayChecked.filter(item => item).length;
   }
 
   getCheckedItem(item): boolean {
