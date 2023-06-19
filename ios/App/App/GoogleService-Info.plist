@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>164197842062-b7mq09444k5r7j12di0g9oc1988fdbn9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.164197842062-b7mq09444k5r7j12di0g9oc1988fdbn9</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBWYqNPmvyoCE6T_bZ9rQy46LvZ0j7A-pU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>164197842062</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.shmorty.omni-method.app</string>
+	<key>PROJECT_ID</key>
+	<string>omni-login-63e9f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>omni-login-63e9f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:164197842062:ios:e529f523779465b66e5ddf</string>
+</dict>
+</plist>
