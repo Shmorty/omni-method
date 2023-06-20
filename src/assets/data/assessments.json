@@ -246,8 +246,7 @@
       "units": "Positions",
       "description": "",
       "instruction": [
-        "Position must be held for a minimum of 10 seconds while maintaining proper form.",
-        "Must be able to perform the test on both sides for balanced results."
+        "Position must be held for a minimum of 10 seconds while maintaining proper form."
       ],
       "checklist": true,
       "min": 0,
@@ -265,27 +264,10 @@
         "Sit or slide down into a straddle position with legs spread wide apart.",
         "Measure and record the maximum straddle angle.",
         "Hold the position for a few seconds for an accurate measurement.",
-        "Use recorded angle to track progress."
+        "Use the recorded angle to track progress."
       ],
       "min": 0,
       "max": 10
-    },
-    {
-      "cid": "META",
-      "label": "2 minute distance",
-      "aid": "TWOMDST",
-      "icon": "/assets/images/2minutedistance.png",
-      "units": "Miles",
-      "description": "",
-      "descriptionHide": "Treadmill or track allowed",
-      "instruction": [
-        "Choose a safe and familiar flat route for running.",
-        "Start the clock and run at your desired pace for 2 minutes",
-        "Try to maintain a consistent pace and avoid stopping.",
-        "When 2 minutes are up, stop the clock and record the distance covered."
-      ],
-      "min": 0,
-      "max": 0.5
     },
     {
       "cid": "META",
@@ -296,13 +278,30 @@
       "description": "",
       "descriptionHide": "Road, treadmill, or track allowed",
       "instruction": [
-        "Choose a safe and familiar route for running.",
+        "Choose a safe and familiar route for running",
         "Start the clock and run at your desired pace for the full hour",
-        "Stay hydrated and take quick breaks if needed, but keep the time running.",
-        "When the hour is up, stop the clock and record the distance covered."
+        "Stay hydrated and take quick breaks if needed, but keep the time running",
+        "When the hour is up, stop the clock and record the distance covered"
       ],
       "min": 0,
       "max": 13.3
+    },
+    {
+      "cid": "META",
+      "label": "2 minute distance",
+      "aid": "TWOMDST",
+      "icon": "/assets/images/2minutedistance.png",
+      "units": "Miles",
+      "description": "",
+      "descriptionHide": "Treadmill or track allowed",
+      "instruction": [
+        "Choose a safe and familiar flat route for running",
+        "Start the clock and run at your desired pace for 2 minutes",
+        "Try to maintain a consistent pace and avoid stopping",
+        "When 2 minutes are up, stop the clock and record the distance covered"
+      ],
+      "min": 0,
+      "max": 0.5
     },
     {
       "cid": "META",
@@ -313,11 +312,11 @@
       "description": "",
       "descriptionHide": "Time stops after inhale",
       "instruction": [
-        "Find a quiet and safe space to lie down comfortably.",
-        "Lie on your back with head and neck supported.",
-        "Take a deep breath and hold it as long as you can.",
-        "When you need to breathe, exhale slowly and recover with deep breaths.",
-        "Record the duration of your breath-hold, time stops once you inhale."
+        "Find a quiet and safe space to lie down comfortably",
+        "Lie on your back with the head and neck supported.",
+        "Take a deep breath and hold as long as you can",
+        "When you need to breathe, exhale slowly and recover with deep breaths",
+        "Record the duration of your breath-hold, stopping the time once you inhale"
       ],
       "min": 0,
       "max": 11.5
@@ -328,8 +327,7 @@
       "icon": "/assets/images/agility.png",
       "label": "Agility",
       "units": "Seconds",
-      "description": "",
-      "descriptionHide": "Must touch cone with hand. Order of cones must be followed. Feet cannot cross during the left and right cones.",
+      "description": "Layout of Cones:\n - Home Cone: Center\n - West Cone: 13.5 ft to the left of Home Cone\n - East Cone: 13.5 ft to the right of Home Cone\n - Northwest Cone: 21 ft in front of West Cone\n - North Cone: 21 ft in front of Home Cone\n - Northeast Cone: 21 ft in front of East Cone",
       "instruction": [
         "Start at Home Cone.",
         "Side shuffle to West Cone and back.",
@@ -348,10 +346,9 @@
       "icon": "/assets/images/Balance.png",
       "label": "Balance",
       "description": "",
-      "descriptionHide": "(see each skill for specific rules)",
       "instruction": [
-        "Use the app's checklist to attempt and check off each balance position.",
-        "Follow the time requirements for each position as indicated in the checklist."
+        "Follow the instructions provided for each position",
+        "Check off each position you were able to successfully hold for the required time"
       ],
       "checklist": true,
       "min": 0,
@@ -365,10 +362,9 @@
       "description": "",
       "descriptionHide": "(see each skill for specific rules)",
       "instruction": [
-        "Use the app's checklist to attempt and check off each coordination skill.",
-        "Follow the instructions provided for each skill.",
-        "Try to perform each coordination skill to the best of your ability.",
-        "Check off each skill you were able to successfully perform in the app"
+        "Follow the instructions provided for each skill",
+        "Try to perform each coordination skill to the best of your ability",
+        "Check off each skill you were able to successfully perform"
       ],
       "checklist": true,
       "min": 0,
