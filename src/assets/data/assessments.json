@@ -41,9 +41,9 @@
       "description": "",
       "descriptionHide": "A deadlift is a resistance exercise in which you hinge your hips to lift a loaded barbell off the floor.  The 1RM deadlift assessment tests your maximum force production while lifting a loaded barbell off of the floor. This test is to be performed without equipment including belts, straps, or sleeves.",
       "instruction": [
-        "Stand with feet at a comfortable width and shins close to the barbell",
-        "Grip the barbell with preferred grip, hands at a comfortable width",
-        "Take a deep breath, brace core muscles, and lift the barbell by driving feet into the floor and standing up, keeping the bar close to the body and pushing hips forward",
+        "Stand with the feet at a comfortable width and shins close to the barbell",
+        "Grip the barbell with the preferred grip",
+        "Lift the barbell by driving the feet into the floor and standing up, pushing the hips forward",
         "Complete the lift by standing up fully, maintaining control of the barbell",
         "Lower the barbell to the ground in a safe and controlled manner"
       ],
@@ -59,14 +59,32 @@
       "description": "",
       "descriptionHide": "No supportive equipment (Weight lifting belt allowed). Must squat below parallel",
       "instruction": [
-        "Stand with feet at a comfortable width and barbell on squat rack at shoulder height",
-        "Step up, place bar across upper back with preferred grip and stance",
+        "Place bar across upper back and step back into preferred stance",
         "Squat down until thighs are below parallel, hips below knees",
         "Drive feet into the ground and stand up, lifting the barbell",
         "Step forward to re-rack the barbell"
       ],
       "min": 0,
       "max": 800
+    },
+    {
+      "cid": "STRG",
+      "label": "Bench",
+      "aid": "BNCH",
+      "icon": "/assets/images/BenchPress.png",
+      "units": "1RM (lbs)",
+      "description": "",
+      "descriptionHide": "No supportive equipment. Barbell must make contact with body in bottom position",
+      "instruction": [
+        "Lie on a flat bench with the feet flat on the floor",
+        "Grip the barbell with the preferred grip (any width)",
+        "Lift barbell off the rack, fully extending the arms",
+        "Lower barbell to touch the body",
+        "Press barbell back up, extending arms",
+        "Carefully re-rack the barbell"
+      ],
+      "min": 0,
+      "max": 600
     },
     {
       "cid": "STRG",
@@ -86,44 +104,6 @@
       "max": 500
     },
     {
-      "cid": "STRG",
-      "label": "Bench",
-      "aid": "BNCH",
-      "icon": "/assets/images/BenchPress.png",
-      "units": "1RM (lbs)",
-      "description": "",
-      "descriptionHide": "No supportive equipment. Barbell must make contact with body in bottom position",
-      "instruction": [
-        "Lie on flat bench with feet flat, eyes below barbell, and head, shoulders, and buttocks in contact with bench",
-        "Position barbell directly above chest with preferred grip (any width)",
-        "Lift barbell off rack, arms fully extended",
-        "Lower barbell to touch chest, without bouncing",
-        "Pause, then press barbell back up, extending arms",
-        "Carefully lower barbell back onto rack"
-      ],
-      "min": 0,
-      "max": 600
-    },
-    {
-      "cid": "ENDR",
-      "label": "Squats",
-      "aid": "SQTS",
-      "icon": "/assets/images/backsquat.png",
-      "units": "Reps",
-      "description": "",
-      "descriptionHide": "No stopping movement at any point once the test has begun. Top of thighs must be below top of knees in bottom position. Knees must straighten in top position.",
-      "instruction": [
-        "Load the barbell with half of your bodyweight or more",
-        "Position the barbell on your upper back",
-        "Squat down until thighs are below parallel, hips below knees",
-        "Push back up to the starting position",
-        "Repeat for as many reps as possible with proper form",
-        "Record the weight lifted for one rep in your max back squat test"
-      ],
-      "min": 0,
-      "max": 150
-    },
-    {
       "cid": "ENDR",
       "label": "Pushups",
       "aid": "PSHU",
@@ -133,9 +113,7 @@
       "descriptionHide": "No stopping movement at any point once the test has begun. Top of elbows must be higher than top of the shoulders in bottom position. Arms must straighten in top position.",
       "instruction": [
         "Get into a plank position on your hands and toes, with hands at any preferred width",
-        "Ensure your body maintains a straight line from shoulders to heels",
-        "Lower your body towards the ground by bending your elbows",
-        "Lower your body until your elbows are flexed to 90 degrees or less",
+        "Lower your body towards the ground by bending your elbows to 90 degrees or less",
         "Push back up to starting position by extending your arms",
         "Repeat for as many reps as possible with proper form and without pausing at any point",
         "Record the number of reps completed"
@@ -155,11 +133,29 @@
         "Grip the pull-up bar with any grip",
         "Pull yourself up towards the bar, bringing your chin above the bar",
         "Lower yourself back down without pausing, returning to a dead hang position with fully extended arms",
-        "Repeat for as many reps as possible, maintaining proper form",
-        "Record the number of reps completed for your max pull-up test"
+        "Repeat for as many reps as possible with proper form and without pausing at any point",
+        "Record the number of reps completed"
       ],
       "min": 0,
       "max": 49
+    },
+    {
+      "cid": "ENDR",
+      "label": "Squats",
+      "aid": "SQTS",
+      "icon": "/assets/images/backsquat.png",
+      "units": "Reps",
+      "description": "",
+      "descriptionHide": "No stopping movement at any point once the test has begun. Top of thighs must be below top of knees in bottom position. Knees must straighten in top position.",
+      "instruction": [
+        "Load the barbell with half of your bodyweight or more",
+        "Position the barbell on your upper back",
+        "Squat down until thighs are below parallel, hips below knees",
+        "Push back up to the starting position",
+        "Repeat for as many reps as possible with proper form and without pausing at any point"
+      ],
+      "min": 0,
+      "max": 150
     },
     {
       "cid": "POWR",
@@ -168,12 +164,11 @@
       "icon": "/assets/images/Long_Jump.jpg",
       "units": "Length (in)",
       "description": "",
-      "descriptionHide": "Feet must move in tandem. Heel that is furthest back is measured.",
       "instruction": [
         "Stand with feet in any stance behind a clear line",
         "Jump forward",
-        "Fully extend legs, drive hips and knees forward, landing with both feet in tandem.",
-        "Measure distance jumped from starting point to heel landing spot."
+        "Land with both feet in tandem",
+        "Measure distance from the starting point to whichever heel is furthest back"
       ],
       "min": 0,
       "max": 147
@@ -187,30 +182,12 @@
       "description": "",
       "descriptionHide": "No supportive equipment. No catch.",
       "instruction": [
-        "Stand with feet shoulder-width apart, holding a barbell at shoulder height with an overhand grip.",
+        "Stand with feet shoulder-width apart, holding a barbell at shoulder height with an overhand grip",
         "Dip down and drive the barbell overhead by extending legs and pressing the barbell until arms are fully extended",
-        "Record your successful push press 1RM weight lifted for one rep."
+        "Record your successful push press 1RM weight lifted for one rep"
       ],
       "min": 0,
       "max": 495
-    },
-    {
-      "cid": "POWR",
-      "label": "Clean",
-      "aid": "PWCL",
-      "icon": "/assets/images/powerclean.png",
-      "units": "1RM (lbs)",
-      "description": "",
-      "descriptionHide": "No supportive equipment (Weight lifting belt allowed)",
-      "instruction": [
-        "Stand with feet at your preferred stance width in front of a loaded barbell on the floor.",
-        "Grip the bar and lift by extending hips and knees, shrugging shoulders, and pulling bar towards chest.",
-        "Rotate elbows around and catch the bar on front shoulders in a front squat position.",
-        "Stand up from front squat position to complete the clean",
-        "Record weight lifted for one rep as your clean 1RM test result."
-      ],
-      "min": 0,
-      "max": 400
     },
     {
       "cid": "POWR",
@@ -221,13 +198,30 @@
       "description": "",
       "descriptionHide": "No starting blocks. No spikes.",
       "instruction": [
-        "Find a flat and clear area for sprinting and mark start/finish lines.",
-        "Stand behind starting line with feet shoulder-width apart.",
+        "Find a flat and clear area for sprinting and mark start/finish lines",
+        "Stand behind the starting line",
         "Sprint as fast as you can towards finish line",
         "Record your time once you cross finish line"
       ],
       "min": 9.58,
       "max": 22
+    },
+    {
+      "cid": "POWR",
+      "label": "Clean",
+      "aid": "PWCL",
+      "icon": "/assets/images/powerclean.png",
+      "units": "1RM (lbs)",
+      "description": "",
+      "instruction": [
+        "Stand with feet at your preferred stance width in front of a loaded barbell on the floor",
+        "Grip the bar and lift by extending hips and knees, shrugging shoulders, and pulling the bar towards the chest",
+        "Rotate elbows around and catch the bar on front shoulders in a front squat position",
+        "Stand up from front squat position to complete the clean",
+        "Record weight lifted for one rep as your clean 1RM test result"
+      ],
+      "min": 0,
+      "max": 400
     },
     {
       "cid": "FLEX",
