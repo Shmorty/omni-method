@@ -139,6 +139,11 @@
         "Repeat for as many reps as possible with proper form and without pausing at any point",
         "Record the number of reps completed"
       ],
+      "rules":[
+        "No stopping movement at any point once the test has begun",
+        "Top of elbows must be higher than top of the shoulders in bottom position",
+        "Arms must straighten in top position"
+      ],
       "min": 0,
       "max": 150
     },
@@ -156,6 +161,12 @@
         "Lower yourself back down without pausing, returning to a dead hang position with fully extended arms",
         "Repeat for as many reps as possible with proper form and without pausing at any point",
         "Record the number of reps completed"
+      ],
+      "rules": [
+        "No stopping movement at any point once the test has begun",
+        "Arms must straighten in bottom position",
+        "Bottom of chin must reach higher than the top of the bar",
+        "No kipping"
       ],
       "min": 0,
       "max": 49
@@ -175,6 +186,11 @@
         "Push back up to the starting position",
         "Repeat for as many reps as possible with proper form and without pausing at any point"
       ],
+      "rules":[
+        "No stopping movement at any point once the test has begun",
+        "Top of thighs must be below top of knees in bottom position",
+        "Knees must straighten in top position"
+      ],
       "min": 0,
       "max": 150
     },
@@ -191,6 +207,10 @@
         "Land with both feet in tandem",
         "Measure distance from the starting point to whichever heel is furthest back"
       ],
+      "rules":[
+        "Feet must move in tandem",
+        "Heel that is furthest back is measured"
+      ],
       "min": 0,
       "max": 147
     },
@@ -206,6 +226,10 @@
         "Stand with feet shoulder-width apart, holding a barbell at shoulder height with an overhand grip",
         "Dip down and drive the barbell overhead by extending legs and pressing the barbell until arms are fully extended",
         "Record your successful push press 1RM weight lifted for one rep"
+      ],
+      "rules":[
+        "No supportive equipment",
+        "No catch"
       ],
       "min": 0,
       "max": 495
@@ -224,6 +248,10 @@
         "Sprint as fast as you can towards finish line",
         "Record your time once you cross finish line"
       ],
+      "rules":[
+        "No starting blocks",
+        "No spikes"
+      ],
       "min": 9.58,
       "max": 22
     },
@@ -241,6 +269,9 @@
         "Stand up from front squat position to complete the clean",
         "Record weight lifted for one rep as your clean 1RM test result"
       ],
+      "rules":[
+        "No supportive equipment"
+      ],
       "min": 0,
       "max": 400
     },
@@ -255,6 +286,9 @@
         "Position must be held for a minimum of 10 seconds while maintaining proper form",
         "Must be able to perform the test on both sides for balanced results"
       ],
+      "rules":[
+        "Position must be held for 30 seconds "
+      ],
       "checklist": true,
       "min": 0,
       "max": 10
@@ -268,6 +302,9 @@
       "description": "",
       "instruction": [
         "Position must be held for a minimum of 10 seconds while maintaining proper form."
+      ],
+      "rules":[
+        "Position must be held for 5 seconds"
       ],
       "checklist": true,
       "min": 0,
@@ -287,6 +324,9 @@
         "Hold the position for a few seconds for an accurate measurement.",
         "Use the recorded angle to track progress."
       ],
+      "rules":[
+        "Position must be held for 5 seconds"
+      ],
       "min": 0,
       "max": 10
     },
@@ -303,6 +343,9 @@
         "Start the clock and run at your desired pace for the full hour",
         "Stay hydrated and take quick breaks if needed, but keep the time running",
         "When the hour is up, stop the clock and record the distance covered"
+      ],
+      "rules":[
+        "Road, treadmill, or track allowed"
       ],
       "min": 0,
       "max": 13.3
@@ -321,6 +364,9 @@
         "Try to maintain a consistent pace and avoid stopping",
         "When 2 minutes are up, stop the clock and record the distance covered"
       ],
+      "rules":[
+        "Treadmill or track allowed"
+      ],
       "min": 0,
       "max": 0.5
     },
@@ -338,6 +384,9 @@
         "Take a deep breath and hold as long as you can",
         "When you need to breathe, exhale slowly and recover with deep breaths",
         "Record the duration of your breath-hold, stopping the time once you inhale"
+      ],
+      "rules":[
+        "Time stops after inhale"
       ],
       "min": 0,
       "max": 11.5
@@ -358,6 +407,11 @@
         "Side shuffle to East Cone and back.",
         "Time stops when you touch Home Cone after completing the sequence."
       ],
+      "rules":[
+        "Must touch cone/marker with hand",
+        "Order of cones/markers must be followed",
+        "Feet cannot cross while side shuffling"
+      ],
       "min": 13,
       "max": 35
     },
@@ -370,6 +424,9 @@
       "instruction": [
         "Follow the instructions provided for each position",
         "Check off each position you were able to successfully hold for the required time"
+      ],
+      "rules":[
+        "(see each position for specific rules)"
       ],
       "checklist": true,
       "min": 0,
@@ -386,6 +443,9 @@
         "Follow the instructions provided for each skill",
         "Try to perform each coordination skill to the best of your ability",
         "Check off each skill you were able to successfully perform"
+      ],
+      "rules":[
+        "(see each skill for specific rules)"
       ],
       "checklist": true,
       "min": 0,

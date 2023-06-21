@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import {AlertController} from '@ionic/angular';
 
 @Component({
   selector: 'app-training',
@@ -7,8 +8,12 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./training.page.scss'],
 })
 export class TrainingPage implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private alertController: AlertController) {}
 
+  buttonList = [
+    {label: 'Workout Log', class: 'blue'},
+    {label: 'Goals', class: 'green'}
+  ];
   trainingCategories: String[];
 
   ngOnInit() {
@@ -26,6 +31,18 @@ export class TrainingPage implements OnInit {
       'Sleep',
       'Nutrition',
     ];
+
+  }
+
+  async commingSoon(feature: string) {
+    const alert = await this.alertController.create({
+      header: feature,
+      message: 'Coming Soon',
+      // subHeader: 'Important message',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 
   openVideos(index) {

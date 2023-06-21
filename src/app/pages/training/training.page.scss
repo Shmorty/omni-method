@@ -1,56 +1,23 @@
-.section-head {
-  margin-left: 10px;
-  width: 90%;
+ion-toolbar {
+  --background: white;
+  ion-title {
+    font-size: 24px;
+  }
 }
-.card {
-  aspect-ratio: 2 / 1;
-  border: solid 1px;
-  border-radius: 10px;
-  color: white;
-  padding: 5px;
-  width: 45%;
+ion-button {
+  height: 217px;
+  ion-label {
+    position: fixed;
+    left: 50px;
+    bottom: 20px;
+  }
 }
-.left {
-  float: left;
-  margin: 5px 5px 0 10px;
+.blue {
+  --background: linear-gradient(#b8dfff, #5eb3f9);
+  --background-activated: #5eb3f9;
 }
-.right {
-  float: right;
-  margin: 5px 10px 0 0;
+.green {
+  --background: linear-gradient(#b8ffdd, #5eddf9);
+  --background-activated: #5eddf9;
 }
-.color-0 {
-  background-color: skyblue;
-}
-.color-1 {
-  background-color: red;
-}
-.color-2 {
-  background-color: orange;
-}
-.color-3 {
-  background-color: gold;
-}
-.color-4 {
-  background-color: magenta;
-}
-.color-5 {
-  background-color: lime;
-}
-.color-6 {
-  background-color: dodgerblue;
-}
-.color-7 {
-  background-color: salmon;
-}
-.color-8 {
-  background-color: plum;
-}
-.color-9 {
-  background-color: forestgreen;
-}
-.color-10 {
-  background-color: maroon;
-}
-.color-11 {
-  background-color: darkgray;
-}
+

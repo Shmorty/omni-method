@@ -1,18 +1,27 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title>Community</ion-title>
     <ion-button slot="end" (click)="logout()">
-      logout
-      <!-- <ion-icon name="log-out-outline"></ion-icon> -->
+      <ion-icon name="log-out-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>
-</ion-header>
-
+  <ion-segment value="rankings">
+    <ion-segment-button value="rankings">
+      <ion-label>Rankings</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [disabled]="true">
+      <ion-label>Updates</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [disabled]="true">
+      <ion-label>People</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  </ion-header>
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
+  <ion-header class="safe-area">
+    <!-- <ion-toolbar>
       <ion-title>Community</ion-title>
-    </ion-toolbar>
+    </ion-toolbar> -->
   </ion-header>
   <!-- <ion-item>
     <ion-label
