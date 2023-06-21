@@ -91,34 +91,10 @@
     </ion-card>
       </ion-list>
 </ion-content>
-  <ion-fab
-    *ngIf="!assessment.checklist"
-    slot="fixed"
-    horizontal="end"
-    vertical="bottom"
-  >
-    <ion-fab-button
-      expand="block"
-      shape="round"
-      size="small"
-      type="full"
-      (click)="openNewScore(assessment)"
-    >
-      <ion-icon name="pencil-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  <ion-fab
-    *ngIf="assessment.checklist"
-    slot="fixed"
-    horizontal="end"
-    vertical="bottom"
-  >
-    <ion-fab-button
-      expand="block"
-      type="full"
-      (click)="saveChecklist()"
-    >
-      <ion-icon name="save-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  <ion-button *ngIf="!assessment.checklist" shape="round" expand="full" (click)="openNewScore(assessment)">
+    <ion-icon name="pencil-outline"></ion-icon>
+  </ion-button>
+  <ion-button *ngIf="assessment.checklist" shape="round" expand="full" (click)="saveChecklist()">
+    <ion-icon name="save-outline"></ion-icon>
+  </ion-button>
 </ng-container>
