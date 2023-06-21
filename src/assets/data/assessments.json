@@ -47,6 +47,11 @@
         "Complete the lift by standing up fully, maintaining control of the barbell",
         "Lower the barbell to the ground in a safe and controlled manner"
       ],
+      "rules": [
+        "No supportive equipment",
+        "Any stance allowed",
+        "Must pause in top position for 1 second "
+      ],
       "min": 0,
       "max": 939
     },
@@ -63,6 +68,10 @@
         "Squat down until thighs are below parallel, hips below knees",
         "Drive feet into the ground and stand up, lifting the barbell",
         "Step forward to re-rack the barbell"
+      ],
+      "rules": [
+        "No supportive equipment",
+        "Must squat below parallel"
       ],
       "min": 0,
       "max": 800
@@ -83,6 +92,10 @@
         "Press barbell back up, extending arms",
         "Carefully re-rack the barbell"
       ],
+      "rules": [
+        "No supportive equipment",
+        "Barbell must make contact with body in bottom position"
+      ],
       "min": 0,
       "max": 600
     },
@@ -99,6 +112,14 @@
         "Stand under pull-up bar, grip bar with preferred grip",
         "From a dead hang position, pull yourself up, chin above bar",
         "Pause briefly at top, then lower yourself back down to starting position"
+      ],
+      "rules": [
+        "No supportive equipment",
+        "Weight added below waist",
+        "No kipping",
+        "Must start in dead-hang position",
+        "Must pause in top position for 1 second",
+        "Bottom of chin must reach higher than the top of the bar"
       ],
       "min": -100,
       "max": 500
