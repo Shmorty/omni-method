@@ -1,7 +1,6 @@
 <ion-header [translucent]="false" class="ion-no-border">
   <ion-toolbar color="primary">
-    <!-- <ion-title>Omni Score {{omniScore$ | async}}</ion-title> -->
-    <ion-title>Omni Score {{(user$ | async).omniScore}}</ion-title>
+    <ion-title>Omni Score {{(user$ | async)?.omniScore}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" #scrollarea no-bounce>
@@ -63,7 +62,6 @@
           <ion-item id="omniScore" lines="none" color="none">
             <span>
               <ion-label class="omni-label">Omni Score</ion-label>
-              <!-- <ion-label class="omni-score">{{omniScore$ | async}}</ion-label> -->
               <ion-label class="omni-score">{{user.omniScore}}</ion-label>
             </span>
           </ion-item>
@@ -174,7 +172,7 @@
         {{category.label}}: {{getCategoryScore(category) | async}}
       </ion-card-header> -->
       <ion-card-header type="primary" class="cat-header">
-        {{category.label}}: {{(user$ | async).categoryScore[category.cid]}}
+        {{category.label}}: {{(user$ | async)?.categoryScore[category.cid]}}
       </ion-card-header>
       <ng-container *ngFor="let assessment of assessments$ | async">
         <ng-container *ngIf="assessment.cid == category.cid">
