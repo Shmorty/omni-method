@@ -62,11 +62,12 @@ export class ProfilePage implements OnInit {
         error(message) {
           console.log(message);
         },
-      })
-      .unsubscribe();
+      });
+      // .unsubscribe();
   }
 
   handleRefresh(event) {
+    console.log("profile page pullToRefresh");
     setTimeout(() => {
       // Any calls to load data go here
       event.target.complete();
