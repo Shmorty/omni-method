@@ -3,9 +3,10 @@
     <ion-header class="ion-no-border safe-area"> </ion-header>
 
     <ion-fab vertical="top" horizontal="start" slot="fixed">
-      <ion-button
-        routerLink="/home/profile"
-        routerDirection="back"
+      <!-- routerLink="/home/profile"
+      routerDirection="back" -->
+    <ion-button
+        (click)="goBack()"
         type="button"
         size="small"
         shape="circle"
