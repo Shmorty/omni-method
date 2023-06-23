@@ -135,9 +135,9 @@ export class AssessmentDetailPage implements OnInit {
   promptToSave(): Promise<boolean> {
     return new Promise((resolve, reject) => {
       let alert = this.alertController.create({
-        header: 'Warning',
+        header: 'Unsaved changes',
+        // subHeader: 'Warning',
         message: "Are you sure?",
-        subHeader: 'Unsaved changes',
         buttons: [
           {
             text: 'Leave without saving',
