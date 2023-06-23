@@ -328,7 +328,7 @@
         "Position must be held for 5 seconds"
       ],
       "min": 0,
-      "max": 360
+      "max": 200
     },
     {
       "cid": "META",
