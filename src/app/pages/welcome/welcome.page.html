@@ -20,7 +20,7 @@
     <ion-row>
       <ion-col>
         <ion-button
-          routerLink="/home"
+          routerLink="/register"
           shape="round"
           color="light"
           expand="block"
@@ -33,10 +33,10 @@
     <ion-row>
       <ion-col>
         <ion-button
-          routerLink="/home"
           shape="round"
           color="light"
           expand="block"
+          (click)="registerWithGoogle()"
         >
           <ion-icon slot="start" color="dark" name="logo-google">
             <!-- <svg aria-hidden="true" class="native svg-icon iconGoogle" width="18" height="18" viewBox="0 0 18 18">
@@ -53,7 +53,7 @@
     <ion-row>
       <ion-col>
         <ion-button
-          routerLink="/home"
+          routerLink="/register"
           shape="round"
           color="light"
           expand="block"

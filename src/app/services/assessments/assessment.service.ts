@@ -50,6 +50,18 @@ export class AssessmentService implements IAssessmentService {
     return this.store.select(selectChecklist(aid));
   }
 
+  getNewCategoryScores() {
+    const obj = {};
+    const categories$ = this.store.select(selectAllCategories);
+    categories$.subscribe((cat) => {
+      cat.forEach((c) => {
+        console.log('addCategoryScore', c.cid);
+        obj[c.cid] = 0;
+      });
+    });
+    console.log('obj', obj);
+    return obj;
+  }
   // getCategories(): Observable<Category[]> {
   //   return this.http.get<any>(environment.baseUrl + '/categories');
   // }

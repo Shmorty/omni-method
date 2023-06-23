@@ -1,0 +1,40 @@
+{
+  "payload": {
+    "user": {
+      "uid": "TC3i8RZl5Re4eObctrv8Bd4Mrh63",
+      "email": "pm@pm.com",
+      "emailVerified": false,
+      "isAnonymous": false,
+      "providerData": [
+        {
+          "providerId": "password",
+          "uid": "pm@pm.com",
+          "displayName": null,
+          "email": "pm@pm.com",
+          "phoneNumber": null,
+          "photoURL": null
+        }
+      ],
+      "stsTokenManager": {
+        "refreshToken": "APZUo0RedxgF7uPWEP1GcF1DhtW4eh2ce3iuVtc_QwAOWIVzC6aMRmaUKzNZzCiheTjR-9OcP_7uClSk5ShxNPIXQK5u4VVVMKaoc53iOorEXINAwelFJBOaRgLy8dM7v6G6i3MiGsb2sIm6dgAXFSJ416wQFYiZ02MoF0wPI_4rKWAn6VVokWbJu43EV-puCkCtZSO0veMY",
+        "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjJkM2E0YTllYjY0OTk0YzUxM2YyYzhlMGMwMTY1MzEzN2U5NTg3Y2EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vb21uaS1sb2dpbi02M2U5ZiIsImF1ZCI6Im9tbmktbG9naW4tNjNlOWYiLCJhdXRoX3RpbWUiOjE2ODUyMzM0NjIsInVzZXJfaWQiOiJUQzNpOFJabDVSZTRlT2JjdHJ2OEJkNE1yaDYzIiwic3ViIjoiVEMzaThSWmw1UmU0ZU9iY3RydjhCZDRNcmg2MyIsImlhdCI6MTY4NTIzMzQ2MiwiZXhwIjoxNjg1MjM3MDYyLCJlbWFpbCI6InBtQHBtLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJwbUBwbS5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.FdrB6MA86rwMONr9nx83515wL5i_U2_TnTWKdWqfWkqTv7uv8Nt08qcrJThOziUfG2nkoaNjzEv8p-7a8aL8uQD8Iiq_U3ZzZAgONpNJXl4G8wmbirRWKzwdaGxkGle4QalYJmki5ZGffhCycmWlIFSDiFUdPMrt3pa_ZQox3GpZkL0QmgIKO63QbDhtO1jYvE8oUeq3CDaW-bJNxue4Tgr1JXukcYTjfqjLDWf4HLEkNB7QTiHizoCYadgx2iRMWCDFCFgt2_JbZWkoFOEJDkYS65lAFlr03Mxeq4sm02oUpIv_r5kvb9cdcfsZWJvOGRjc6eFd0BuJraqz_QjsTA",
+        "expirationTime": 1685237062600
+      },
+      "createdAt": "1685233462364",
+      "lastLoginAt": "1685233462364",
+      "apiKey": "AIzaSyAEY7uvt7JvWOtvxTP46sU1wZuZ7PfcWps",
+      "appName": "[DEFAULT]"
+    },
+    "providerId": null,
+    "_tokenResponse": {
+      "kind": "identitytoolkit#SignupNewUserResponse",
+      "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjJkM2E0YTllYjY0OTk0YzUxM2YyYzhlMGMwMTY1MzEzN2U5NTg3Y2EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vb21uaS1sb2dpbi02M2U5ZiIsImF1ZCI6Im9tbmktbG9naW4tNjNlOWYiLCJhdXRoX3RpbWUiOjE2ODUyMzM0NjIsInVzZXJfaWQiOiJUQzNpOFJabDVSZTRlT2JjdHJ2OEJkNE1yaDYzIiwic3ViIjoiVEMzaThSWmw1UmU0ZU9iY3RydjhCZDRNcmg2MyIsImlhdCI6MTY4NTIzMzQ2MiwiZXhwIjoxNjg1MjM3MDYyLCJlbWFpbCI6InBtQHBtLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJwbUBwbS5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.FdrB6MA86rwMONr9nx83515wL5i_U2_TnTWKdWqfWkqTv7uv8Nt08qcrJThOziUfG2nkoaNjzEv8p-7a8aL8uQD8Iiq_U3ZzZAgONpNJXl4G8wmbirRWKzwdaGxkGle4QalYJmki5ZGffhCycmWlIFSDiFUdPMrt3pa_ZQox3GpZkL0QmgIKO63QbDhtO1jYvE8oUeq3CDaW-bJNxue4Tgr1JXukcYTjfqjLDWf4HLEkNB7QTiHizoCYadgx2iRMWCDFCFgt2_JbZWkoFOEJDkYS65lAFlr03Mxeq4sm02oUpIv_r5kvb9cdcfsZWJvOGRjc6eFd0BuJraqz_QjsTA",
+      "email": "pm@pm.com",
+      "refreshToken": "APZUo0RedxgF7uPWEP1GcF1DhtW4eh2ce3iuVtc_QwAOWIVzC6aMRmaUKzNZzCiheTjR-9OcP_7uClSk5ShxNPIXQK5u4VVVMKaoc53iOorEXINAwelFJBOaRgLy8dM7v6G6i3MiGsb2sIm6dgAXFSJ416wQFYiZ02MoF0wPI_4rKWAn6VVokWbJu43EV-puCkCtZSO0veMY",
+      "expiresIn": "3600",
+      "localId": "TC3i8RZl5Re4eObctrv8Bd4Mrh63"
+    },
+    "operationType": "signIn"
+  },
+  "type": "[User Login] User Authenticated"
+}

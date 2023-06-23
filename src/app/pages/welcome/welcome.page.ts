@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AssessmentService } from 'src/app/services/assessments/assessment.service';
+import { Component, Inject, OnInit, inject } from '@angular/core';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-// import { CategoriesService } from 'src/app/services/categories.service';
+
+interface Item {
+  hello: string;
+}
 
 @Component({
   selector: 'app-welcome',
@@ -12,27 +15,15 @@ import { AuthService } from 'src/app/services/auth.service';
 export class WelcomePage implements OnInit {
   title = 'Welcome to Omni Method';
 
-  constructor(
-    private auth: AuthService,
-    // private categoryService: CategoriesService,
-    private assessmentService: AssessmentService,
-    private router: Router
-  ) {}
+  // private firestore: Firestore = inject(Firestore);
+  // private user$: Observable<Item[]>;
 
-  ngOnInit() {
-    this.auth.currentUser().then((usr) => {
-      console.log('welcome init got current user');
-      console.log(usr);
-      // if (usr?.emailVerified) {
-      //   this.router.navigate(['/home']);
-      // } else {
-      //   console.log('welcome init user');
-      //   console.log(usr);
-      // }
-    });
-    // this.categoryService.getCategories().subscribe((data) => {
-    //   console.log('got categories from state');
-    //   console.log(data);
-    // });
+  constructor(private auth: AuthService) {}
+
+  ngOnInit() {}
+
+  registerWithGoogle() {
+    console.log('registerWithGoogle');
+    // this.auth.googleSignIn_codetrix();
   }
 }

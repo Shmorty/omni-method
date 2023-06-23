@@ -1,14 +1,16 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Training</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-  <ion-header class="ion-no-border safe-area"> </ion-header>
-  <ion-searchbar></ion-searchbar>
-  <ion-header class="section-head">Browse All</ion-header>
-  <!-- <ng-container *ngFor="let cat of trainingCategories; let i = index">
-    <span
-      (click)="openVideos(i)"
-      class="card color-{{(i%12)}}"
-      [ngClass]="!(i%2) ? 'left' : 'right'"
-    >
-      <span>{{cat}}</span>
-    </span>
-  </ng-container> -->
+  <!-- <ion-header class="ion-no-border safe-area">
+  </ion-header> -->
+  <!-- <ion-searchbar></ion-searchbar> -->
+  <ng-container>
+    <ion-button *ngFor="let button of buttonList" [ngClass]="button.class" shape="round" expand="full" 
+      (click)="commingSoon(button.label)">
+      <ion-label>{{button.label}}</ion-label>
+    </ion-button>
+  </ng-container>
 </ion-content>

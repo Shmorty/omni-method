@@ -21,13 +21,13 @@ export class AssessmentEffects {
       ofType(AssessmentActions.loadAssessmentsBegin),
       switchMap(() =>
         this.assessmentService.loadData().pipe(
-          tap(console.log),
+          // tap(console.log),
           map((data) =>
             AssessmentActions.loadAssessmentsSuccess({
               data: data,
             })
           ),
-          tap(console.log),
+          // tap(console.log),
           catchError((error) =>
             of(AssessmentActions.loadAssessmentsFailure({ error }))
           )

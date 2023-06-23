@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -23,6 +23,7 @@ import { selectUser } from 'src/app/store/user/user.selectors';
 export class NewScorePage implements OnInit {
   @Input() assessment: Assessment;
   @Output() score: Score;
+  @ViewChild('rawScore') scoreInput;
   formData: FormGroup;
   today = new Date();
   public user$ = this.userService.getUser();
@@ -34,6 +35,7 @@ export class NewScorePage implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log("newScore ngOnInit");
     // prefill date
     var today = new Date().toLocaleDateString();
     this.formData = new FormGroup({
@@ -50,6 +52,15 @@ export class NewScorePage implements OnInit {
         this.user = value;
       })
       .unsubscribe();
+      console.log("ngOnInit scoreInput", this.scoreInput);
+  }
+
+  ionViewDidEnter() {
+    console.log("newScore ionViewDidEnter scoreInput", this.scoreInput);
+    setTimeout(() => {
+      console.log("set form focus");
+      this.scoreInput?.setFocus();
+    }, 150);
   }
 
   dismiss() {
@@ -62,8 +73,10 @@ export class NewScorePage implements OnInit {
     this.score = {
       aid: this.assessment.aid,
       uid: this.user.id,
+      cid: this.assessment.cid,
       rawScore: this.formData.controls['rawScore'].value,
       scoreDate: this.formData.controls['scoreDate'].value,
+      expired: false,
       notes: this.formData.controls['notes'].value,
     };
     console.log('save new score: ' + JSON.stringify(this.score));

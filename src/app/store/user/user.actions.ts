@@ -21,6 +21,8 @@ export enum UserActionType {
   SAVE_NEW_SCORE_SUCCESS = '[New Score Page] Save New Score Success',
   DELETE_ASSESSMENT_SCORE = '[Assessment Detail Page] Delete Score',
   DELETE_ASSESSMENT_SCORE_SUCCESS = '[User Service] Delete Score Success',
+  LOAD_USER_SCORES = '[User API] Load User Scores',
+  LOAD_USER_SCORES_SUCCESS = '[User API] Load User Scores Successful',
 }
 
 export const userAuthenticatd = createAction(
@@ -83,4 +85,12 @@ export const deleteAssessmentScore = createAction(
 export const deleteAssessmentScoreSuccess = createAction(
   UserActionType.DELETE_ASSESSMENT_SCORE_SUCCESS,
   props<{ score: Score }>()
+);
+export const loadUserScoresAction = createAction(
+  UserActionType.LOAD_USER_SCORES,
+  props<{ uid: string }>()
+);
+export const loadUserScoresSuccessAction = createAction(
+  UserActionType.LOAD_USER_SCORES_SUCCESS,
+  props<{ scores: Score[] }>()
 );

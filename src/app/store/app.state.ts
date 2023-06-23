@@ -3,20 +3,20 @@ import {
   assessmentReducer,
   AssessmentState,
 } from './assessments/assessment.reducer';
-import {
-  omniScoreReducer,
-  OmniScoreState,
-} from './omni-score/omni-score.reducer';
+// import {
+//   omniScoreReducer,
+//   OmniScoreState,
+// } from './omni-score/omni-score.reducer';
 import { userReducer, UserState } from './user/user.reducer';
 
 export interface AppState {
   assessmentState: AssessmentState;
   userState: UserState;
-  omniScoreState: OmniScoreState;
+  // omniScoreState: OmniScoreState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  omniScoreState: omniScoreReducer,
+  // omniScoreState: omniScoreReducer,
   assessmentState: assessmentReducer,
   userState: userReducer,
 };

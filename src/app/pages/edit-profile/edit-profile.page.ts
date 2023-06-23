@@ -58,15 +58,15 @@ export class EditProfilePage implements OnInit {
   }
 
   submitForm() {
-    console.log(this.profileForm.value);
-    this.userService.saveUser(this.profileForm.value);
+    console.log('edit profile submitForm', this.profileForm.value);
+    this.userService.updateUser(this.profileForm.value);
     this.modalCtrl.dismiss();
   }
 
   onSubmit() {
-    console.log(this.profileForm.value);
+    console.log('edit profile onSubmit', this.profileForm.value);
     // create user in database
-    this.userService.saveUser(this.profileForm.value);
+    this.userService.updateUser(this.profileForm.value);
     this.modalCtrl.dismiss();
   }
 

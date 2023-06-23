@@ -16,21 +16,20 @@ need to install
   npm i -g @ionic/cli
 
 ```
-% npm list --global
+% npm -g list
 /usr/local/lib
-├── @angular/cli@15.1.1
+├── @angular/cli@15.2.4
 ├── @aws-amplify/cli@10.6.2
-├── @ionic/cli@6.20.8
-├── @nrwl/schematics@8.12.11
+├── @ionic/cli@6.20.6
 ├── cordova-res@0.15.4
 ├── corepack@0.15.3
-├── firebase-tools@11.20.0
+├── firebase-tools@12.3.1
 ├── json-server@0.17.1
 ├── n@9.0.1
-├── npm@9.3.1
-├── nx@15.5.2
+├── npm@9.6.2
+├── nx@15.8.8
 ├── serverless@3.26.0
-└── typescript@4.9.4
+└── typescript@5.0.2
 ```
 
 ---
@@ -186,4 +185,44 @@ graph TD
 
 ### Firebase
 
+[Simon Grimm - Google login tutorial](https://www.youtube.com/watch?v=GwtpoWZ_78E)
+
 [omni-login user](https://console.firebase.google.com/project/omni-login-63e9f/authentication/users)
+
+### authentication plugins
+
+Firebase authentication for capacitor
+[github](https://github.com/chemerisuk/cordova-plugin-firebase-authentication)
+
+```
+npm install cordova-plugin-firebase-authentication 
+npm install @awesome-cordova-plugins/firebase-authentication 
+ionic cap sync
+```
+
+GooglePlus for capacitor
+[github](https://github.com/EddyVerbruggen/cordova-plugin-googleplus)
+
+```
+npm install cordova-plugin-googleplus 
+npm install @awesome-cordova-plugins/google-plus 
+ionic cap sync
+```
+
+CodetrixStudio CapacitorGoogleAuth
+[github](https://github.com/CodetrixStudio/CapacitorGoogleAuth)
+[youtube tutorial](https://www.youtube.com/watch?v=GwtpoWZ_78E)
+
+Google login with iOS but doesn't integrate with Firebase
+
+login wiht google
+
+```json
+{email: 'shmorty@gmail.com', familyName: 'Martel', givenName: 'Paul', id: '105435612519431770106', imageUrl: 'https://lh3.googleusercontent.com/a/AAcHTtcqYWdMHw0fnX_vesdoG0NStZqC_H5wtmVrVi7hpQ=s96-c', …}
+```
+
+login with email
+
+```json
+{payload: {…}, type: '[User Login] User Authenticated'}
+```

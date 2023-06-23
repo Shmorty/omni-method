@@ -18,26 +18,26 @@ export const initialState: OmniScoreState = {
   status: 'pending',
 };
 
-export const omniScoreReducer = createReducer(
-  initialState,
-  on(OmniScoreActions.calculateOmniScore, (state) => ({
-    ...state,
-    error: null,
-    status: 'loading',
-  })),
-  on(OmniScoreActions.setCategoryScore, (state, action) => ({
-    ...state,
-    categoryScores: {
-      ...state.categoryScores,
-      [action.cid]: action.score,
-    },
-    error: null,
-    status: 'loading',
-  })),
-  on(OmniScoreActions.setOmniScore, (state, action) => ({
-    ...state,
-    omniScore: action.score,
-    error: null,
-    status: 'success',
-  }))
-);
+// export const omniScoreReducer = createReducer(
+//   initialState,
+//   on(OmniScoreActions.calculateOmniScore, (state) => ({
+//     ...state,
+//     error: null,
+//     status: 'loading',
+//   })),
+//   on(OmniScoreActions.setCategoryScore, (state, action) => ({
+//     ...state,
+//     categoryScores: {
+//       ...state.categoryScores,
+//       [action.cid]: action.score,
+//     },
+//     error: null,
+//     status: 'loading',
+//   })),
+//   on(OmniScoreActions.setOmniScore, (state, action) => ({
+//     ...state,
+//     omniScore: action.score,
+//     error: null,
+//     status: 'success',
+//   }))
+// );
