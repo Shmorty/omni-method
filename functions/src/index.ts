@@ -225,6 +225,7 @@ async function calcCategoryScore(uid: string, cid: string): Promise<unknown> {
       );
     });
   // add assessment scores for category
+  // this code needs review
   catScore = await Promise.all(promiseArray).then((arr) =>
     arr.reduce((partialSum, a) => partialSum + a, 0)
   );
@@ -322,7 +323,14 @@ async function calcAssessmentScore(req: Score): Promise<number> {
       result = calcChecklistScore(req);
       break;
     case "STRD": // Straddle
-      result = req.rawScore * 100;
+      // result = req.rawScore * 100;
+      if (req.rawScore < 80) {
+        result = 0;
+      } else if (req.rawScore > 180) {
+        result = 1000;
+      } else {
+        result = (req.rawScore - 80) * 10;
+      }
       break;
     case "PSPR": // 100 meter sprint
       // result = Math.round((Math.sqrt((req.rawScore - wr) / 0.125) * -1 + 10) * 10000) / 100;
@@ -343,7 +351,7 @@ async function calcAssessmentScore(req: Score): Promise<number> {
           (Math.sqrt((wr - req.rawScore) / 0.1325) * -1 + 10) * 100
         );
       } else {
-        result = Math.round((req.rawScore / 13.25) * 1000);
+        result = Math.round((req.rawScore / wr) * 1000);
       }
       break;
     case "AGLTY": // Agility
