@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {AlertController} from '@ionic/angular';
+import {Observable, of} from 'rxjs';
+import {AuthService} from 'src/app/services/auth.service';
 import {UserService} from 'src/app/services/user/user.service';
+import {User} from 'src/app/store/user/user.model';
 
 export enum View {
   Rankings = 'Rankings',
@@ -24,7 +26,8 @@ export class CommunityPage implements OnInit {
   public view: View = View.Rankings;
   public ranking$ = this.userService.getUserRankings();
 
-  constructor(private auth: AuthService, private userService: UserService) {}
+  constructor(private auth: AuthService, private userService: UserService,
+    private alertController: AlertController) {}
 
   ngOnInit() {}
 
@@ -38,5 +41,16 @@ export class CommunityPage implements OnInit {
 
   logout() {
     this.auth.logout();
+  }
+
+  showDetail(athlete: User) {
+    const header = athlete.nickname ? athlete.nickname : athlete.firstName + ' ' + athlete.lastName;
+    const message = "Omni Score: " + athlete.omniScore.toLocaleString();
+    this.alertController.create({
+      header: header,
+      subHeader: message,
+      message: athlete.categoryScore.toLocaleString(),
+      buttons: ['OK'],
+    }).then((res) => res.present());
   }
 }

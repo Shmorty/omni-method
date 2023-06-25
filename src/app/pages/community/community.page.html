@@ -54,7 +54,8 @@
       <ion-label class="rank-header" color="primary">Name</ion-label>
       <ion-label class="rank-header" color="primary">Score</ion-label>
     </ion-list-header>
-    <ion-item *ngFor="let athlete of ranking$ | async; let i = index">
+    <ion-item *ngFor="let athlete of ranking$ | async; let i = index"
+      (click)="showDetail(athlete)">
       <ion-text slot="start">{{i+1}}</ion-text>
       <ion-text *ngIf="athlete.nickname">{{athlete.nickname}}</ion-text>
       <ion-text *ngIf="!athlete.nickname">{{athlete.firstName}} {{athlete.lastName}}</ion-text>
