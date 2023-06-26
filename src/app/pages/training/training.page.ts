@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {NavigationExtras, Router} from '@angular/router';
 import {AlertController} from '@ionic/angular';
 
 @Component({
@@ -11,8 +11,8 @@ export class TrainingPage implements OnInit {
   constructor(private router: Router, private alertController: AlertController) {}
 
   buttonList = [
-    {label: 'Workout Log', class: 'blue'},
-    {label: 'Goals', class: 'green'}
+    {label: 'Workout Log', class: 'blue-button'},
+    {label: 'Goals', class: 'green-button'}
   ];
   trainingCategories: String[];
 
@@ -51,7 +51,7 @@ export class TrainingPage implements OnInit {
     // this.assessmentService.setCurrentScores(this.getScores(assessment));
     // alert('openVideos ' + this.trainingCategories[index]);
     let navigationExtras: NavigationExtras = {
-      state: { title: this.trainingCategories[index] },
+      state: {title: this.trainingCategories[index]},
     };
     this.router.navigate(['/home', 'training', 'videos'], navigationExtras);
   }

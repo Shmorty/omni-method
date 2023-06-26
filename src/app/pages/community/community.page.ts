@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {AlertController} from '@ionic/angular';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {AlertController, IonModal, ModalController} from '@ionic/angular';
 import {Observable, of} from 'rxjs';
 import {AuthService} from 'src/app/services/auth.service';
 import {UserService} from 'src/app/services/user/user.service';
 import {User} from 'src/app/store/user/user.model';
+import {OverlayEventDetail} from '@ionic/core/components';
+import {RankingDetailPage} from '../ranking-detail/ranking-detail.page';
 
 export enum View {
   Rankings = 'Rankings',
@@ -25,9 +27,14 @@ export class CommunityPage implements OnInit {
   View = View;
   public view: View = View.Rankings;
   public ranking$ = this.userService.getUserRankings();
+  @ViewChild(IonModal) modal: IonModal;
+
+  name: string;
+  message: string;
 
   constructor(private auth: AuthService, private userService: UserService,
-    private alertController: AlertController) {}
+    private alertController: AlertController,
+    private modalCtrl: ModalController) {}
 
   ngOnInit() {}
 
@@ -35,22 +42,47 @@ export class CommunityPage implements OnInit {
     this.view = viewName;
   }
 
-  viewClass(viewName: View) {
-    return this.view === viewName ? 'active' : 'normal';
+  athleteClass(athlete: User) {
+    return this.userService.getUser().subscribe((user) => user.id === athlete.id ? 'active' : '');
   }
 
   logout() {
     this.auth.logout();
   }
 
-  showDetail(athlete: User) {
-    const header = athlete.nickname ? athlete.nickname : athlete.firstName + ' ' + athlete.lastName;
-    const message = "Omni Score: " + athlete.omniScore.toLocaleString();
-    this.alertController.create({
-      header: header,
-      subHeader: message,
-      message: athlete.categoryScore.toLocaleString(),
-      buttons: ['OK'],
-    }).then((res) => res.present());
+  // interface SegmentChangeEventDetail {
+  //   value?: string;
+  // }
+  segmentChange(event) {
+    console.log("segmentChange", event);
   }
+
+  async showDetail(athlete: User) {
+    // const header = athlete.nickname ? athlete.nickname : athlete.firstName + ' ' + athlete.lastName;
+    // const message = "Omni Score: " + athlete.omniScore.toLocaleString();
+    // this.alertController.create({
+    //   header: header,
+    //   subHeader: message,
+    //   message: athlete.categoryScore.toLocaleString(),
+    //   buttons: ['OK'],
+    // }).then((res) => res.present());
+    const modal = await this.modalCtrl.create({
+      component: RankingDetailPage,
+      componentProps: {athlete: athlete},
+      breakpoints: [0, 1],
+      initialBreakpoint: 1
+    });
+    modal.present();
+
+    const {data, role} = await modal.onWillDismiss();
+  }
+
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    if (ev.detail.role === 'confirm') {
+      this.message = `Hello, ${ev.detail.data}!`;
+    }
+  }
+
+
 }

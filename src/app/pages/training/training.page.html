@@ -8,7 +8,7 @@
   </ion-header> -->
   <!-- <ion-searchbar></ion-searchbar> -->
   <ng-container>
-    <ion-button *ngFor="let button of buttonList" [ngClass]="button.class" shape="round" expand="full" 
+    <ion-button *ngFor="let button of buttonList" [ngClass]="button.class" expand="full" shape="round"
       (click)="commingSoon(button.label)">
       <ion-label>{{button.label}}</ion-label>
     </ion-button>
