@@ -61,6 +61,10 @@ const routes: Routes = [
     path: 'community',
     loadChildren: () => import('./pages/community/community.module').then( m => m.CommunityPageModule)
   },
+  {
+    path: 'ranking-detail',
+    loadChildren: () => import('./pages/ranking-detail/ranking-detail.module').then( m => m.RankingDetailPageModule)
+  },
 ];
 @NgModule({
   imports: [
