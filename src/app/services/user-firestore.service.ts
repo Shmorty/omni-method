@@ -1,22 +1,23 @@
-import { Injectable, inject } from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {
   DocumentData,
   DocumentReference,
   Firestore,
-  addDoc,
   collection,
   collectionData,
   deleteDoc,
   doc,
   docData,
   getDocs,
-  onSnapshot,
+  query,
   setDoc,
   updateDoc,
+  where,
 } from '@angular/fire/firestore';
-import { User } from '../store/user/user.model';
-import { Observable, from, of } from 'rxjs';
-import { Score } from '../store/models/score.model';
+import {User} from '../store/user/user.model';
+import {Observable, from, of} from 'rxjs';
+import {Score} from '../store/models/score.model';
+import {take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -29,9 +30,9 @@ export class UserFirestoreService {
 
   scoreDate(score: Score): string {
     let d = new Date(score.scoreDate);
-    let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
-    let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
-    let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+    let ye = new Intl.DateTimeFormat('en', {year: 'numeric'}).format(d);
+    let mo = new Intl.DateTimeFormat('en', {month: '2-digit'}).format(d);
+    let da = new Intl.DateTimeFormat('en', {day: '2-digit'}).format(d);
     const scoreDate = `${ye}-${mo}-${da}`;
     return scoreDate;
   }
@@ -86,6 +87,18 @@ export class UserFirestoreService {
       'score'
     );
     return collectionData(scoresCollection) as Observable<Score[]>;
+  }
+
+  getUserAssessmentScores(id: string, aid: string): Observable<Score[]> {
+    console.log("getUserAssessmentScores from firestore", id, aid);
+    const scoresCollection = collection(this.firestore, 'user', `${id}`, 'score');
+    const scoreQuery = query(scoresCollection, where("aid", "==", aid));
+    getDocs(scoreQuery).then(console.log, console.warn);
+    // .forEach((doc) => {
+    //   console.log(doc.id, " => ", doc.data());
+    // });
+    // return collectionData(scoreQuery).pipe(take(1)) as Observable<Score[]>;
+    return null;
   }
 
   saveScoreToDb(score: Score): Observable<Score> {

@@ -69,8 +69,8 @@ export class CommunityPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: RankingDetailPage,
       componentProps: {athlete: athlete},
-      breakpoints: [0, 1],
-      initialBreakpoint: 1
+      breakpoints: [0, 0.97],
+      initialBreakpoint: 0.97
     });
     modal.present();
 

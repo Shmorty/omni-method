@@ -6,15 +6,20 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>All Assessments
-  </ion-item>
+  <ion-card style="box-shadow: none; margin-bottom: 0">
+    <ion-card-header>
+      <ion-card-title>All Assessments</ion-card-title>
+    </ion-card-header>
+
+  <!-- <ion-item>All Assessments
+  </ion-item> -->
   <ng-container *ngFor="let cat of categories$ | async">
     <ion-card-header type="primary" class="cat-header">
       {{cat.label}}: {{getCategoryScore(cat.cid)}}
     </ion-card-header>
     <ng-container *ngFor="let assessment of assessments$ | async">
       <ng-container *ngIf="assessment.cid == cat.cid">
-        <ion-item lines="none">
+        <ion-item lines="none" style="--inner-border-width: 0">
           <ion-thumbnail slot="start">
             <ion-img
               class="fit-thumbnail"
@@ -26,7 +31,7 @@
             <span class="units">{{assessment.units}}</span>
             <br />
             <span
-              *ngIf="(getScores$(assessment) | async)[0] as score; else zeroScore"
+              *ngIf="(getScores$(athlete.id, assessment.aid) | async)[0] as score; else zeroScore"
             >
               <ion-badge
                 class="score"
@@ -47,4 +52,6 @@
       </ng-container>
     </ng-container>
   </ng-container>
+  </ion-card>
+  <div class="bottom-padding"></div>
 </ion-content>

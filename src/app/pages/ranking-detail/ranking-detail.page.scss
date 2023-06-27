@@ -1,0 +1,48 @@
+ion-card-header {
+    padding: 0px 0px 0px 8px;
+}
+ion-thumbnail[slot="start"] {
+    // default is 16px
+    margin-inline-start: -13px;
+}
+.name {
+    font-size: 2em;
+    font-weight: bold;
+    margin: auto;
+}
+.units {
+    color: var(--color);
+    float: right;
+    font-size: smaller;
+}
+.score {
+    color: white;
+    background-color: #35b5ff;
+    border-radius: 12px;
+    float: right;
+    font-size: larger;
+    font-weight: bold;
+    padding: 0.1em 1em;
+}
+ion-badge {
+    float: right;
+}
+.caution {
+    background-color: #4d91ca;
+}
+.warn {
+    background-color: #305b7e;
+}
+.stale {
+    background-color: #f12323;
+}
+.fit-thumbnail::part(image) {
+    border-radius: 5px;
+    object-fit: contain;
+}
+.cat-header {
+    border-top: 0.5px solid lightgray;
+}
+.bottom-padding {
+    min-height: 3%;
+}
