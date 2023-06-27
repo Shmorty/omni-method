@@ -2,10 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {tap} from 'rxjs/operators';
 import {OmniScoreService} from 'src/app/services/omni-score.service';
-import {Assessment} from 'src/app/store/assessments/assessment.model';
+import {UserFirestoreService} from 'src/app/services/user-firestore.service';
 import {selectAllAssessments, selectAllCategories} from 'src/app/store/assessments/assessment.selector';
 import {User} from 'src/app/store/user/user.model';
-import * as UserSelectors from 'src/app/store/user/user.selectors';
 
 @Component({
   selector: 'app-ranking-detail',
@@ -18,7 +17,7 @@ export class RankingDetailPage implements OnInit {
   public categories$ = this.store.select(selectAllCategories);
   public assessments$ = this.store.select(selectAllAssessments);
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private userFirestoreService: UserFirestoreService) {}
 
   ngOnInit() {
     console.log("athlete", this.athlete);
@@ -41,13 +40,22 @@ export class RankingDetailPage implements OnInit {
     }
   }
 
-  getScores$(assessment: Assessment) {
-    return this.store.select(UserSelectors.assessmentScores(assessment)).pipe(
+  getScores$(uid: string, aid: string) {
+    console.log("getScores", uid, aid);
+    this.userFirestoreService.getUserAssessmentScores(uid, aid).subscribe().unsubscribe();
+    return this.userFirestoreService.getUserAssessmentScores(uid, aid).pipe(
       tap((results) => {
         results?.sort(function (a, b) {
           return Date.parse(b.scoreDate) - Date.parse(a.scoreDate);
-        });
+        })
       })
     );
+    // return this.store.select(UserSelectors.assessmentScores(assessment)).pipe(
+    //   tap((results) => {
+    //     results?.sort(function (a, b) {
+    //       return Date.parse(b.scoreDate) - Date.parse(a.scoreDate);
+    //     });
+    //   })
+    // );
   }
 }
