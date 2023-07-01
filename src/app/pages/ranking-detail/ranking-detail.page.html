@@ -30,7 +30,12 @@
           <div slot="end">
             <span class="units">{{assessment.units}}</span>
             <br />
-            <span
+            <ion-badge
+                class="score"
+                slot="end"
+                >{{0}}</ion-badge
+              >
+            <!-- <span
               *ngIf="(getScores$(athlete.id, assessment.aid) | async)[0] as score; else zeroScore"
             >
               <ion-badge
@@ -46,7 +51,7 @@
                 slot="end"
                 >0</ion-badge
               >
-            </ng-template>
+            </ng-template> -->
           </div>
       </ion-item>
       </ng-container>

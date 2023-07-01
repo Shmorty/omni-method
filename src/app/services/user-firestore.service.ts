@@ -89,16 +89,14 @@ export class UserFirestoreService {
     return collectionData(scoresCollection) as Observable<Score[]>;
   }
 
-  getUserAssessmentScores(id: string, aid: string): Observable<Score[]> {
+  async getUserAssessmentScores(id: string, aid: string) {
     console.log("getUserAssessmentScores from firestore", id, aid);
     const scoresCollection = collection(this.firestore, 'user', `${id}`, 'score');
+    // console.log("collection", scoresCollection);
     const scoreQuery = query(scoresCollection, where("aid", "==", aid));
-    getDocs(scoreQuery).then(console.log, console.warn);
-    // .forEach((doc) => {
-    //   console.log(doc.id, " => ", doc.data());
-    // });
-    // return collectionData(scoreQuery).pipe(take(1)) as Observable<Score[]>;
-    return null;
+    // console.log("scoreQuery", scoreQuery);
+    const res = await collectionData(scoreQuery).toPromise();
+    return res;
   }
 
   saveScoreToDb(score: Score): Observable<Score> {

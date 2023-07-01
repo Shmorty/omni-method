@@ -58,6 +58,7 @@ export class CommunityPage implements OnInit {
   }
 
   async showDetail(athlete: User) {
+    console.log("showDetail athlete", athlete);
     // const header = athlete.nickname ? athlete.nickname : athlete.firstName + ' ' + athlete.lastName;
     // const message = "Omni Score: " + athlete.omniScore.toLocaleString();
     // this.alertController.create({
@@ -74,7 +75,7 @@ export class CommunityPage implements OnInit {
     });
     modal.present();
 
-    const {data, role} = await modal.onWillDismiss();
+    // const {data, role} = await modal.onWillDismiss();
   }
 
   onWillDismiss(event: Event) {
