@@ -20,7 +20,7 @@ export class RankingDetailPage implements OnInit {
   constructor(private store: Store, private userFirestoreService: UserFirestoreService) {}
 
   ngOnInit() {
-    console.log("athlete", this.athlete);
+    // console.log("athlete", this.athlete);
     this.title = this.athlete.nickname ? this.athlete.nickname : this.athlete.firstName + ' ' + this.athlete.lastName;
   }
 
@@ -42,14 +42,14 @@ export class RankingDetailPage implements OnInit {
 
   getScores$(uid: string, aid: string) {
     console.log("getScores", uid, aid);
-    this.userFirestoreService.getUserAssessmentScores(uid, aid).subscribe().unsubscribe();
-    return this.userFirestoreService.getUserAssessmentScores(uid, aid).pipe(
-      tap((results) => {
-        results?.sort(function (a, b) {
-          return Date.parse(b.scoreDate) - Date.parse(a.scoreDate);
-        })
-      })
-    );
+    return this.userFirestoreService.getUserAssessmentScores(uid, aid); //.subscribe().unsubscribe();
+    // return this.userFirestoreService.getUserAssessmentScores(uid, aid).pipe(
+    //   tap((results) => {
+    //     results?.sort(function (a, b) {
+    //       return Date.parse(b.scoreDate) - Date.parse(a.scoreDate);
+    //     })
+    //   })
+    // );
     // return this.store.select(UserSelectors.assessmentScores(assessment)).pipe(
     //   tap((results) => {
     //     results?.sort(function (a, b) {
