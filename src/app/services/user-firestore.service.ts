@@ -90,13 +90,37 @@ export class UserFirestoreService {
   }
 
   async getUserAssessmentScores(id: string, aid: string) {
+    let res = null;
     console.log("getUserAssessmentScores from firestore", id, aid);
     const scoresCollection = collection(this.firestore, 'user', `${id}`, 'score');
-    // console.log("collection", scoresCollection);
+    console.log("collection", scoresCollection);
     const scoreQuery = query(scoresCollection, where("aid", "==", aid));
-    // console.log("scoreQuery", scoreQuery);
-    const res = await collectionData(scoreQuery).toPromise();
-    return res;
+    console.log("scoreQuery", scoreQuery);
+    let querySnapshot;
+    try {
+      console.log("await getDocs");
+      querySnapshot = await getDocs(scoreQuery);
+      console.log("finshed getDocs", querySnapshot);
+    } catch (error) {
+      console.log("error", error);
+      querySnapshot = undefined;
+    }
+    // querySnapshot.forEach((doc) => {
+    //   console.log(doc.id, " => ", doc.data());
+    // });
+    console.log("querySnapshot size", querySnapshot?.size);
+    if (querySnapshot.empty) {
+      console.log("return empty array");
+      return [];
+    }
+    console.log("return querySnapshot", querySnapshot.docs.entries())
+    return querySnapshot.docs;
+    // const sub = collectionData(scoreQuery).subscribe((scores) => {
+    //   console.log("scores", scores);
+    //   res = scores;
+    // });
+    // sub.unsubscribe();
+    // return res;
   }
 
   saveScoreToDb(score: Score): Observable<Score> {

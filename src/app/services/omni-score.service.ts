@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { take } from 'rxjs/operators';
-import { Category } from '../store/assessments/assessment.model';
+import {Injectable} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {take} from 'rxjs/operators';
+import {Category} from '../store/assessments/assessment.model';
 import {
   assessmentsByCategory,
   selectAllAssessments,
   selectAllCategories,
 } from '../store/assessments/assessment.selector';
 import * as OmniScoreActions from '../store/omni-score/omni-score.actions';
-import { assessmentScores, userScores } from '../store/user/user.selectors';
+import {assessmentScores, userScores} from '../store/user/user.selectors';
 
 export const oneDay = 1000 * 3600 * 24;
 
@@ -30,6 +30,7 @@ export class OmniScoreService {
   // }
 
   public static calculateDays(scoreDate: string) {
+    console.log("scoreDate", scoreDate);
     var date = new Date(scoreDate);
     let days = Math.ceil((Date.now().valueOf() - date.valueOf()) / oneDay);
     return days;
