@@ -4,6 +4,7 @@ import {tap} from 'rxjs/operators';
 import {OmniScoreService} from 'src/app/services/omni-score.service';
 import {UserFirestoreService} from 'src/app/services/user-firestore.service';
 import {selectAllAssessments, selectAllCategories} from 'src/app/store/assessments/assessment.selector';
+import {Score} from 'src/app/store/models/score.model';
 import {User} from 'src/app/store/user/user.model';
 
 @Component({
@@ -22,6 +23,10 @@ export class RankingDetailPage implements OnInit {
   ngOnInit() {
     // console.log("athlete", this.athlete);
     this.title = this.athlete.nickname ? this.athlete.nickname : this.athlete.firstName + ' ' + this.athlete.lastName;
+    // const score = this.getScore(this.athlete.id, "DLFT");
+    // score.then((scr) => {
+    //   console.log("DLFT score", scr);
+    // });
   }
 
   getCategoryScore(cid: string): number {
@@ -30,7 +35,7 @@ export class RankingDetailPage implements OnInit {
 
   scoreClass(scoreDate: string): string {
     let days = OmniScoreService.calculateDays(scoreDate);
-
+    console.log("soreDays", days);
     if (days > 90) {
       return 'stale';
     } else if (days > 60) {
@@ -40,9 +45,18 @@ export class RankingDetailPage implements OnInit {
     }
   }
 
-  getScores$(uid: string, aid: string) {
-    console.log("getScores", uid, aid);
-    return this.userFirestoreService.getUserAssessmentScores(uid, aid); //.subscribe().unsubscribe();
+  async getScore(uid: string, aid: string) {
+    console.log("getScore", uid, aid);
+    let res = null;
+    const scores = await this.userFirestoreService.getUserAssessmentScores(uid, aid);
+    // return scores;
+    console.log(aid, "scores.length", scores.length)
+    return scores[0].data();
+    // scores.then((s) => {
+    //   console.log("s", s[0]);
+    //   res = s[0];
+    // })
+    // return res;
     // return this.userFirestoreService.getUserAssessmentScores(uid, aid).pipe(
     //   tap((results) => {
     //     results?.sort(function (a, b) {

@@ -36,7 +36,7 @@
       <ion-text slot="start">{{i+1}}</ion-text>
       <ion-text *ngIf="athlete.nickname">{{athlete.nickname}}</ion-text>
       <ion-text *ngIf="!athlete.nickname">{{athlete.firstName}} {{athlete.lastName}}</ion-text>
-      <ion-text slot="end">{{athlete.omniScore}}</ion-text>
+      <ion-text slot="end">{{athlete.omniScore | number}}</ion-text>
     </ion-item>
   </ion-list>
   <ion-list *ngIf="view===View.Updates">
