@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{title}}</ion-title>
+    <ion-label >Omni Score:&nbsp;{{athlete.omniScore}}</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card style="box-shadow: none; margin-bottom: 0">
+    <ion-card-header>
+      <ion-card-title>All Assessments</ion-card-title>
+    </ion-card-header>
+
+    <ng-container *ngIf="{
+      categories: categories$ | async,
+      assessments: assessments$ | async
+    } as data; else loading">
+      <ng-container *ngFor="let category of data.categories">
+        <ion-card-header type="primary" class="cat-header">
+          {{category.label}}: {{getCategoryScore(category.cid)}}
+        </ion-card-header>
+        <ng-container *ngFor="let assessment of getCategoryAssessments(data.assessments, category.cid)">
+          <ion-item lines="none" style="--inner-border-width: 0">
+            <ion-thumbnail slot="start">
+              <ion-img
+                class="fit-thumbnail"
+                src="{{assessment.icon}}"
+              ></ion-img>
+            </ion-thumbnail>
+            <ion-label>{{assessment.label}}</ion-label>
+            <div slot="end">
+              <span class="units">{{assessment.units}}</span>
+              <br />
+              <ng-container *ngIf="getScore(assessment.aid) as score; else zeroScore">
+                <ion-badge
+                  class="score"
+                  ngClass="{{scoreClass(score['scoreDate'])}}"
+                  slot="end"
+                  >{{score['rawScore']}}</ion-badge
+                >
+              </ng-container>
+              <ng-template #zeroScore>
+                <ion-badge
+                  class="score"
+                  slot="end"
+                  >0</ion-badge
+                >
+              </ng-template>
+              </div>
+          </ion-item>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <ng-template #loading>Loading...</ng-template>
+
+  </ion-card>
+  <div class="bottom-padding"></div>
+</ion-content>

@@ -5,18 +5,21 @@ ion-toolbar {
   }
 }
 ion-button {
+  --border-radius: 12pt;
+  padding: 10px;
   height: 217px;
   ion-label {
+    font-size: 24px;
     position: fixed;
     left: 50px;
     bottom: 20px;
   }
 }
-.blue {
+.blue-button {
   --background: linear-gradient(#b8dfff, #5eb3f9);
   --background-activated: #5eb3f9;
 }
-.green {
+.green-button {
   --background: linear-gradient(#b8ffdd, #5eddf9);
   --background-activated: #5eddf9;
 }

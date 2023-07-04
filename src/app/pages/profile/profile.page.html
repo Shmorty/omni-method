@@ -168,9 +168,6 @@
       class="card cardStyle"
       *ngFor="let category of categories$ | async"
     >
-      <!-- <ion-card-header type="primary" class="cat-header">
-        {{category.label}}: {{getCategoryScore(category) | async}}
-      </ion-card-header> -->
       <ion-card-header type="primary" class="cat-header">
         {{category.label}}: {{(user$ | async)?.categoryScore[category.cid]}}
       </ion-card-header>
@@ -209,14 +206,6 @@
                   >0</ion-badge
                 >
               </ng-template>
-              <!-- <ion-badge
-            class="score"
-            ngClass="{{scoreClass(assessment)}}"
-            slot="end"
-            (click)="openNewScore($event, assessment)"
-            >{{(getScores$(assessment) | async)[0]?.rawScore ||
-            0}}</ion-badge
-          > -->
             </div>
           </ion-item>
         </ng-container>

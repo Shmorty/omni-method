@@ -2,7 +2,7 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { UserService } from 'src/app/services/user/user.service';
+import {UserService} from 'src/app/services/user/user.service';
 // import { UserService as MockUserService } from 'src/app/api/user/user.mock.service';
 
 export const environment = {
@@ -24,7 +24,7 @@ export const environment = {
   // dev
   // baseUrl: 'https://7crsalgmhk.execute-api.us-east-1.amazonaws.com',
   // uat/pre-prod
-  baseUrl: 'https://4aupny9zf2.execute-api.us-east-1.amazonaws.com',
+  // baseUrl: 'https://4aupny9zf2.execute-api.us-east-1.amazonaws.com',
 
   gapi_client_id:
     '677058047401-jf9aa0tuvobl14v8u07lvfa5ef7a3tct.apps.googleusercontent.com',

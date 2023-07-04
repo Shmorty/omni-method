@@ -5,11 +5,11 @@
       <ion-icon name="log-out-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>
-  <ion-segment value="rankings">
+  <ion-segment value="rankings" (ionChange)="segmentChange($event)">
     <ion-segment-button value="rankings">
       <ion-label>Rankings</ion-label>
     </ion-segment-button>
-    <ion-segment-button [disabled]="true">
+    <ion-segment-button >
       <ion-label>Updates</ion-label>
     </ion-segment-button>
     <ion-segment-button [disabled]="true">
@@ -19,30 +19,7 @@
   </ion-header>
 <ion-content [fullscreen]="true">
   <ion-header class="safe-area">
-    <!-- <ion-toolbar>
-      <ion-title>Community</ion-title>
-    </ion-toolbar> -->
   </ion-header>
-  <!-- <ion-item>
-    <ion-label
-      class="view-label"
-      (click)="setView(View.Rankings)"
-      ngClass="{{viewClass(View.Rankings)}}"
-      >Rankings</ion-label
-    >
-    <ion-label
-      class="view-label"
-      (click)="setView(View.Updates)"
-      ngClass="{{viewClass(View.Updates)}}"
-      >Updates</ion-label
-    >
-    <ion-label
-      class="view-label"
-      (click)="setView(View.People)"
-      ngClass="{{viewClass(View.People)}}"
-      >People</ion-label
-    >
-  </ion-item> -->
   <ion-list *ngIf="view===View.Rankings">
     <!-- <ion-list-header>
       <ion-button class="setting-button">Male</ion-button>
@@ -54,11 +31,12 @@
       <ion-label class="rank-header" color="primary">Name</ion-label>
       <ion-label class="rank-header" color="primary">Score</ion-label>
     </ion-list-header>
-    <ion-item *ngFor="let athlete of ranking$ | async; let i = index">
+    <ion-item *ngFor="let athlete of ranking$ | async; let i = index"
+      (click)="showDetail(athlete)" ngClass="viewClass">
       <ion-text slot="start">{{i+1}}</ion-text>
       <ion-text *ngIf="athlete.nickname">{{athlete.nickname}}</ion-text>
       <ion-text *ngIf="!athlete.nickname">{{athlete.firstName}} {{athlete.lastName}}</ion-text>
-      <ion-text slot="end">{{athlete.omniScore}}</ion-text>
+      <ion-text slot="end">{{athlete.omniScore | number}}</ion-text>
     </ion-item>
   </ion-list>
   <ion-list *ngIf="view===View.Updates">
