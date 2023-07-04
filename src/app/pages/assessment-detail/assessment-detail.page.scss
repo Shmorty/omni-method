@@ -21,7 +21,8 @@ ion-accordion-group > ion-accordion:last-of-type ion-item[slot="header"] {
 }
 .header-img::part(image) {
   border-radius: 20px;
-  border: 1pt solid black;
+  border: 3px solid #8CA1B6;
+  background-image: linear-gradient(to bottom, rgba(229, 243, 255, 0), rgba(207, 233, 255, 1));
 }
 .card {
   aspect-ratio: 1 / 1;

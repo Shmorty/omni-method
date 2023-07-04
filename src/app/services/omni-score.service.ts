@@ -30,10 +30,22 @@ export class OmniScoreService {
   // }
 
   public static calculateDays(scoreDate: string) {
-    console.log("scoreDate", scoreDate);
+    // console.log("scoreDate", scoreDate);
     var date = new Date(scoreDate);
     let days = Math.ceil((Date.now().valueOf() - date.valueOf()) / oneDay);
     return days;
+  }
+
+  public static scoreClass(scoreDate: string): string {
+    let days = OmniScoreService.calculateDays(scoreDate);
+    // console.log("soreDays", days);
+    if (days > 90) {
+      return 'stale';
+    } else if (days > 60) {
+      return 'warn';
+    } else if (days > 30) {
+      return 'caution';
+    }
   }
 
   calculateScores() {
