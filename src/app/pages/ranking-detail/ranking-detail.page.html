@@ -31,7 +31,7 @@
             <div slot="end">
               <span class="units">{{assessment.units}}</span>
               <br />
-              <ng-container *ngIf="(getScore(assessment.aid) | async) as score; else zeroScore">
+              <ng-container *ngIf="getScore(assessment.aid) as score; else zeroScore">
                 <ion-badge
                   class="score"
                   ngClass="{{scoreClass(score['scoreDate'])}}"

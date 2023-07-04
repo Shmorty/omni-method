@@ -19,6 +19,7 @@ export class RankingDetailPage implements OnInit {
   public categories$ = this.store.select(selectAllCategories);
   public assessments$ = this.store.select(selectAllAssessments);
   public scores$: Observable<Score[]>;
+  public userScores: Score[];
 
   constructor(private store: Store,
     private userFirestoreService: UserFirestoreService) {}
@@ -32,7 +33,10 @@ export class RankingDetailPage implements OnInit {
     //   console.log("DLFT score", scr);
     // });
     this.scores$ = await this.userFirestoreService.getUserScores(this.athlete.id);
-    this.scores$.subscribe((sc) => console.log("sc", sc),
+    this.scores$.subscribe((sc) => {
+      console.log("sc", sc);
+      this.userScores = sc;
+    },
       (err) => console.error("error", err),
       () => console.log("scores$ observer complete")
     );
@@ -60,11 +64,9 @@ export class RankingDetailPage implements OnInit {
 
   getScore(aid: string) {
     console.log("getScore", aid);
-    // console.log("scores$", this.scores$);
-    return this.scores$.pipe(map(scores => {
-      let fl = scores.filter(scr => scr.aid === aid);
-      return (fl.length > 0) ? fl[0] : undefined;
-    }));
+    console.log("userScores", this.userScores);
+    let fl = this.userScores.filter(sc => sc.aid === aid)
+    return (fl.length > 0) ? fl[0] : undefined;
   }
   /*
     async getScore(uid: string, aid: string) {
