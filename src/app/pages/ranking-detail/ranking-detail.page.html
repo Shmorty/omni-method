@@ -11,50 +11,48 @@
       <ion-card-title>All Assessments</ion-card-title>
     </ion-card-header>
 
-  <!-- <ion-item>All Assessments
-  </ion-item> -->
-  <ng-container *ngFor="let cat of categories$ | async">
-    <ion-card-header type="primary" class="cat-header">
-      {{cat.label}}: {{getCategoryScore(cat.cid)}}
-    </ion-card-header>
-    <ng-container *ngFor="let assessment of assessments$ | async">
-      <ng-container *ngIf="assessment.cid == cat.cid">
-        <ion-item lines="none" style="--inner-border-width: 0">
-          <ion-thumbnail slot="start">
-            <ion-img
-              class="fit-thumbnail"
-              src="{{assessment.icon}}"
-            ></ion-img>
-          </ion-thumbnail>
-          <ion-label>{{assessment.label}}</ion-label>
-          <div slot="end">
-            <span class="units">{{assessment.units}}</span>
-            <br />
-            <ng-container *ngIf="getScore(athlete.id, assessment.aid)[0]; else zeroScore let score">
-              <ion-badge
-                class="score"
-                ngClass="{{scoreClass(score['scoreDate'])}}"
-                slot="end"
-                >{{score['rawScore']}}</ion-badge
-              >
-              <!-- <ion-badge
-                class="score"
-                slot="end"
-                >{{score}}</ion-badge
-              > -->
-            </ng-container>
-            <ng-template #zeroScore>
-              <ion-badge
-                class="score"
-                slot="end"
-                >10</ion-badge
-              >
-            </ng-template>
-          </div>
-      </ion-item>
+    <ng-container *ngIf="{
+      categories: categories$ | async,
+      assessments: assessments$ | async
+    } as data; else loading">
+      <ng-container *ngFor="let category of data.categories">
+        <ion-card-header type="primary" class="cat-header">
+          {{category.label}}: {{getCategoryScore(category.cid)}}
+        </ion-card-header>
+        <ng-container *ngFor="let assessment of getCategoryAssessments(data.assessments, category.cid)">
+          <ion-item lines="none" style="--inner-border-width: 0">
+            <ion-thumbnail slot="start">
+              <ion-img
+                class="fit-thumbnail"
+                src="{{assessment.icon}}"
+              ></ion-img>
+            </ion-thumbnail>
+            <ion-label>{{assessment.label}}</ion-label>
+            <div slot="end">
+              <span class="units">{{assessment.units}}</span>
+              <br />
+              <ng-container *ngIf="(getScore(assessment.aid) | async) as score; else zeroScore">
+                <ion-badge
+                  class="score"
+                  ngClass="{{scoreClass(score['scoreDate'])}}"
+                  slot="end"
+                  >{{score['rawScore']}}</ion-badge
+                >
+              </ng-container>
+              <ng-template #zeroScore>
+                <ion-badge
+                  class="score"
+                  slot="end"
+                  >0</ion-badge
+                >
+              </ng-template>
+              </div>
+          </ion-item>
+        </ng-container>
       </ng-container>
     </ng-container>
-  </ng-container>
+    <ng-template #loading>Loading...</ng-template>
+
   </ion-card>
   <div class="bottom-padding"></div>
 </ion-content>
