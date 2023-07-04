@@ -101,15 +101,7 @@ export class ProfilePage implements OnInit {
 
   // scoreClass(date: Date): string {
   scoreClass(scoreDate: string): string {
-    let days = OmniScoreService.calculateDays(scoreDate);
-
-    if (days > 90) {
-      return 'stale';
-    } else if (days > 60) {
-      return 'warn';
-    } else if (days > 30) {
-      return 'caution';
-    }
+    return OmniScoreService.scoreClass(scoreDate);
   }
 
   getAge(user: User) {
