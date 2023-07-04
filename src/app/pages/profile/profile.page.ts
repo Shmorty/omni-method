@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonAccordionGroup, ModalController } from '@ionic/angular';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {IonAccordionGroup, ModalController} from '@ionic/angular';
 // import { GoogleSigninService, UserInfo } from '../google-signin.service';
-import { Assessment, Category } from '../../store/assessments/assessment.model';
-import { Router } from '@angular/router';
-import { User } from '../../store/user/user.model';
-import { Score } from '../../store/models/score.model';
-import { Subscription } from 'rxjs';
-import { NewScorePage } from '../new-score/new-score.page';
-import { Store } from '@ngrx/store';
+import {Assessment, Category} from '../../store/assessments/assessment.model';
+import {Router} from '@angular/router';
+import {User} from '../../store/user/user.model';
+import {Score} from '../../store/models/score.model';
+import {Subscription} from 'rxjs';
+import {NewScorePage} from '../new-score/new-score.page';
+import {Store} from '@ngrx/store';
 import {
   selectAllAssessments,
   selectAllCategories,
@@ -17,9 +17,9 @@ import * as UserSelectors from 'src/app/store/user/user.selectors';
 //   selectCategoryScore,
 //   selectOmniScore,
 // } from 'src/app/store/omni-score/omni-score.selector';
-import { tap } from 'rxjs/operators';
-import { EditProfilePage } from '../edit-profile/edit-profile.page';
-import { OmniScoreService, oneDay } from 'src/app/services/omni-score.service';
+import {tap} from 'rxjs/operators';
+import {EditProfilePage} from '../edit-profile/edit-profile.page';
+import {OmniScoreService, oneDay} from 'src/app/services/omni-score.service';
 
 @Component({
   selector: 'app-profile',
@@ -63,7 +63,7 @@ export class ProfilePage implements OnInit {
           console.log(message);
         },
       });
-      // .unsubscribe();
+    // .unsubscribe();
   }
 
   handleRefresh(event) {
@@ -90,7 +90,7 @@ export class ProfilePage implements OnInit {
 
   openDetails(assessment) {
     this.router.navigate(['/home', 'profile', 'details'], {
-      queryParams: { aid: assessment.aid, cid: assessment.cid },
+      queryParams: {aid: assessment.aid, cid: assessment.cid},
     });
   }
 

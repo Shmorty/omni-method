@@ -59,14 +59,6 @@ export class CommunityPage implements OnInit {
 
   async showDetail(athlete: User) {
     console.log("showDetail athlete", athlete);
-    // const header = athlete.nickname ? athlete.nickname : athlete.firstName + ' ' + athlete.lastName;
-    // const message = "Omni Score: " + athlete.omniScore.toLocaleString();
-    // this.alertController.create({
-    //   header: header,
-    //   subHeader: message,
-    //   message: athlete.categoryScore.toLocaleString(),
-    //   buttons: ['OK'],
-    // }).then((res) => res.present());
     const modal = await this.modalCtrl.create({
       component: RankingDetailPage,
       componentProps: {athlete: athlete},
@@ -74,7 +66,6 @@ export class CommunityPage implements OnInit {
       initialBreakpoint: 0.97
     });
     modal.present();
-
     // const {data, role} = await modal.onWillDismiss();
   }
 
