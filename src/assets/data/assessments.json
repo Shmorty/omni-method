@@ -151,7 +151,7 @@
       "cid": "ENDR",
       "label": "Pullups",
       "aid": "PLUP",
-      "icon": "/assets/images/pull_up.jpg",
+      "icon": "/assets/images/pull_up.png",
       "units": "Reps",
       "description": "",
       "descriptionHide": "No stopping movement at any point once the test has begun. Arms must straighten in bottom position. Bottom of chin must reach higher than the top of the bar. No kipping.",
@@ -198,7 +198,7 @@
       "cid": "POWR",
       "label": "Standing Long Jump",
       "aid": "STLJ",
-      "icon": "/assets/images/Long_Jump.jpg",
+      "icon": "/assets/images/Long_Jump.png",
       "units": "Length (in)",
       "description": "",
       "instruction": [
