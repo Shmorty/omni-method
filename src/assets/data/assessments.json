@@ -218,7 +218,7 @@
       "cid": "POWR",
       "label": "Push Press",
       "aid": "PSHP",
-      "icon": "/assets/images/Push_Press.jpg",
+      "icon": "/assets/images/ChestLaunch.png",
       "units": "1RM (lbs)",
       "description": "",
       "descriptionHide": "No supportive equipment. No catch.",
