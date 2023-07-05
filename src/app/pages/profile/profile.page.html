@@ -160,17 +160,17 @@
   </ion-header>
 
   <ion-card style="box-shadow: none; margin-bottom: 0">
-    <ion-card-header>
+    <ion-item lines="none">
       <ion-card-title>All Assessments</ion-card-title>
-    </ion-card-header>
+    </ion-item>
 
     <ng-container
       class="card cardStyle"
       *ngFor="let category of categories$ | async"
     >
-      <ion-card-header type="primary" class="cat-header">
+      <ion-item class="cat-header" lines="none">
         {{category.label}}: {{(user$ | async)?.categoryScore[category.cid]}}
-      </ion-card-header>
+      </ion-item>
       <ng-container *ngFor="let assessment of assessments$ | async">
         <ng-container *ngIf="assessment.cid == category.cid">
           <ion-item

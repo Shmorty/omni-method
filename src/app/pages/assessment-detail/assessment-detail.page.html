@@ -38,20 +38,24 @@
       <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
     </ion-button> -->
 
-      <ion-accordion-group>
-        <ion-accordion toggleIconSlot="start">
-          <ion-item-sliding
-            *ngFor="let score of scores$ | async; first as isFirst"
-            slot="{{isFirst ? 'header':'content'}}"
-          >
+
+    <ion-accordion-group>
+      <ion-accordion toggleIconSlot="none">
+        <ng-container *ngFor="let score of scores$ | async; index as i; first as isFirst">
+          <ion-item *ngIf="isFirst" class="header" slot="header" lines="none">
+            <ion-label position="fixed" class="fixed-width" slot="start">Date</ion-label>
+            <ion-label position="fixed" style="margin: auto;">{{assessment.units}}</ion-label>
+            <ion-label position="fixed" slot="end">score/1000</ion-label>
+          </ion-item>
+          <ion-item-sliding slot="{{i < 4 ? 'header':'content'}}">
             <ion-item lines="full">
-              <ion-label slot="start">
-                <div>{{ assessment.units }}</div>
-                <div style="font-weight: bold">{{ score.rawScore }}</div>
+              <ion-label position="fixed" class="fixed-width" slot="start">
                 <div>{{score.scoreDate | date:'mediumDate' }}</div>
               </ion-label>
-              <ion-label slot="end">
-                <div class="score-label">Exercise Score:</div>
+              <ion-label position="fixed">
+                <div style="font-weight: bold">{{ score.rawScore }}</div>
+              </ion-label>
+              <ion-label color="primary" position="fixed" slot="end">
                 <div class="score">{{ score.calculatedScore }}</div>
               </ion-label>
             </ion-item>
@@ -61,19 +65,59 @@
               ></ion-item-option>
             </ion-item-options>
           </ion-item-sliding>
-        </ion-accordion>
-      </ion-accordion-group>
+        </ng-container>
+      </ion-accordion>
+    </ion-accordion-group>
 
-      <ion-item lines="none">
-        <p>{{ assessment.description }}</p>
-      </ion-item>
-      <ion-item lines="none">
-        <ol>
-          <li *ngFor="let item of assessment.instruction">{{item}}</li>
-        </ol>
-      </ion-item>
+      <ng-container *ngIf="assessment.description">
+        <ion-item lines="none">
+          <ion-label>
+            <ion-card-title>
+              <h1>Description</h1>
+            </ion-card-title>
+          </ion-label>
+          </ion-item>
+        <ion-item lines="full">
+          <p>{{ assessment.description }}</p>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngIf="assessment.instruction.length > 0">
+        <ion-item lines="none">
+          <ion-label>
+            <ion-card-title>
+              <h1>Instructions</h1>
+            </ion-card-title>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="full">
+          <ol>
+            <li *ngFor="let item of assessment.instruction">{{item}}</li>
+          </ol>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngIf="assessment.rules.length > 0">
+        <ion-item lines="none">
+          <ion-label>
+            <ion-card-title>
+              <h1>Rules</h1>
+            </ion-card-title>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ol>
+            <li *ngFor="let item of assessment.rules">{{item}}</li>
+          </ol>
+        </ion-item>
+      </ng-container>
     </div>
     <ion-list *ngIf="assessment.checklist">
+      <ion-item lines="none">
+        <ion-label>
+          <ion-card-title>
+            <h1>Instructions</h1>
+          </ion-card-title>
+        </ion-label>
+      </ion-item>
       <ion-item lines="none">
         <ol>
           <li *ngFor="let item of assessment.instruction">{{item}}</li>
@@ -92,10 +136,10 @@
     </ion-card>
       </ion-list>
 </ion-content>
-  <ion-button *ngIf="!assessment.checklist" shape="round" expand="full" (click)="openNewScore(assessment)">
+  <ion-button *ngIf="!assessment.checklist" class="footer-button" shape="round" (click)="openNewScore(assessment)">
     <ion-icon name="pencil-outline"></ion-icon>
   </ion-button>
-  <ion-button *ngIf="assessment.checklist" shape="round" expand="full" (click)="saveChecklist()">
+  <ion-button *ngIf="assessment.checklist" class="footer-button" shape="round" (click)="saveChecklist()">
     <ion-icon name="save-outline"></ion-icon>
   </ion-button>
 </ng-container>

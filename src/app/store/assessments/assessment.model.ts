@@ -1,4 +1,4 @@
-import { Score } from '../models/score.model';
+import {Score} from '../models/score.model';
 
 export interface Assessment {
   id: number;
@@ -8,6 +8,7 @@ export interface Assessment {
   label: string;
   description?: string;
   instruction?: string[];
+  rules?: string[];
   checklist?: boolean;
   min: number;
   max: number;

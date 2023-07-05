@@ -59,3 +59,16 @@ ion-accordion-group > ion-accordion:last-of-type ion-item[slot="header"] {
   float: right;
   margin: 5px 10px 0 0;
 }
+.footer-button {
+  width: 90%;
+  margin: auto;
+}
+.fixed-width {
+  min-width: 30%;
+  max-width: 30%;
+}
+.header {
+  color: rgba(118, 118, 118, 1);
+  font-size: 11px;
+  height: 30px;
+}
