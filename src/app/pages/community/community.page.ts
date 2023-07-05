@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AlertController, IonModal, ModalController} from '@ionic/angular';
-import {Observable, of} from 'rxjs';
 import {AuthService} from 'src/app/services/auth.service';
 import {UserService} from 'src/app/services/user/user.service';
 import {User} from 'src/app/store/user/user.model';
@@ -33,7 +32,6 @@ export class CommunityPage implements OnInit {
   message: string;
 
   constructor(private auth: AuthService, private userService: UserService,
-    private alertController: AlertController,
     private modalCtrl: ModalController) {}
 
   ngOnInit() {}
@@ -62,8 +60,8 @@ export class CommunityPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: RankingDetailPage,
       componentProps: {athlete: athlete},
-      breakpoints: [0, 0.97],
-      initialBreakpoint: 0.97
+      // breakpoints: [0, 0.97],
+      // initialBreakpoint: 0.97
     });
     modal.present();
     // const {data, role} = await modal.onWillDismiss();

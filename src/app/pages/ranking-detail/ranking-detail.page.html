@@ -2,7 +2,10 @@
   <ion-toolbar color="primary">
     <ion-title>{{title}}</ion-title>
     <ion-label >Omni Score:&nbsp;{{athlete.omniScore}}</ion-label>
-  </ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="medium" (click)="dismiss()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+    </ion-buttons>
+</ion-toolbar>
 </ion-header>
 
 <ion-content>

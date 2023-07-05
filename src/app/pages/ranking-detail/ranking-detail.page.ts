@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {ModalController} from '@ionic/angular';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
@@ -22,7 +23,8 @@ export class RankingDetailPage implements OnInit {
   public userScores: Score[];
 
   constructor(private store: Store,
-    private userFirestoreService: UserFirestoreService) {}
+    private userFirestoreService: UserFirestoreService,
+    private modalCtrl: ModalController) {}
 
   async ngOnInit() {
     this.title = this.athlete.nickname ? this.athlete.nickname :
@@ -58,4 +60,7 @@ export class RankingDetailPage implements OnInit {
     return (fl?.length > 0) ? fl[0] : undefined;
   }
 
+  dismiss() {
+    this.modalCtrl.dismiss();
+  }
 }
