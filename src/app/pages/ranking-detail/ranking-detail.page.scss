@@ -5,6 +5,9 @@ ion-thumbnail[slot="start"] {
     // default is 16px
     margin-inline-start: -13px;
 }
+ion-header ion-toolbar ion-list ion-item {
+    text-align: center;
+}
 .name {
     font-size: 2em;
     font-weight: bold;
@@ -42,6 +45,8 @@ ion-badge {
 }
 .cat-header {
     border-top: 0.5px solid lightgray;
+    color: #8A8A8A;
+    font-weight: 500;
 }
 .bottom-padding {
     min-height: 3%;
