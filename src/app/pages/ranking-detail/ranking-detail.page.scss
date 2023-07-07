@@ -8,6 +8,9 @@ ion-thumbnail[slot="start"] {
 ion-header ion-toolbar ion-list ion-item {
     text-align: center;
 }
+.bg-transparent {
+  --ion-item-background: transparent;
+}
 .name {
     font-size: 2em;
     font-weight: bold;

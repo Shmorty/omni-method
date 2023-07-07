@@ -26,11 +26,12 @@
       <ion-button class="setting-button">National</ion-button>
       <ion-button class="setting-button">Overall</ion-button>
     </ion-list-header> -->
-    <ion-list-header>
-      <ion-label class="rank-header" color="primary">Ranking</ion-label>
-      <ion-label class="rank-header" color="primary">Name</ion-label>
-      <ion-label class="rank-header" color="primary">Score</ion-label>
-    </ion-list-header>
+    <ion-item color="default" class="rank-header" ngClass="viewClass">
+      <ion-text slot="start">&nbsp;</ion-text>
+      <ion-text class="rank-header">Ranking</ion-text>
+      <ion-text class="rank-header" style="padding-left: 24px;">Name</ion-text>
+      <ion-text slot="end">Score</ion-text>
+    </ion-item>
     <ion-item *ngFor="let athlete of ranking$ | async; let i = index"
       (click)="showDetail(athlete)" ngClass="viewClass">
       <ion-text slot="start">{{i+1}}</ion-text>
