@@ -1,22 +1,22 @@
 <ion-header>
-  <ion-toolbar color="default">
-    <ion-list>
-      <ion-item lines="none" color="none">
+  <ion-toolbar color="primary">
+    <ion-list style="background-color: transparent;">
+      <ion-item class="name" lines="none" color="none">
         {{title}}
       </ion-item>
       <ion-item lines="none" color="none">
-        Omni Score&nbsp;{{athlete.omniScore}}
+        Omni Score&nbsp;{{athlete.omniScore | number}}
       </ion-item>
     </ion-list>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">
-        <ion-icon name="close-circle-outline"></ion-icon>
+        <ion-icon name="close-circle-outline" size="large"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="false" #scrollarea no-bounce>
+<ion-content [fullscreen]="false" #scrollarea no-bounce  class="bg-transparent">
   <!-- <ion-header>
     <ion-toolbar color="default">
       <ion-list>
@@ -35,7 +35,7 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header> -->
-  <ion-card style="box-shadow: none; margin-bottom: 0">
+  <ion-card class="bg-transparent" style="box-shadow: none; margin-bottom: 0">
     <ion-item lines="none">
       <ion-card-title>All Assessments</ion-card-title>
     </ion-item>
