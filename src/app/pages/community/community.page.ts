@@ -5,16 +5,12 @@ import {UserService} from 'src/app/services/user/user.service';
 import {User} from 'src/app/store/user/user.model';
 import {OverlayEventDetail} from '@ionic/core/components';
 import {RankingDetailPage} from '../ranking-detail/ranking-detail.page';
+import {Observable} from 'rxjs';
 
 export enum View {
   Rankings = 'Rankings',
   Updates = 'Updates',
   People = 'People',
-}
-export interface Athlete {
-  rank: number;
-  name: string;
-  score: number;
 }
 
 @Component({
@@ -25,23 +21,30 @@ export interface Athlete {
 export class CommunityPage implements OnInit {
   View = View;
   public view: View = View.Rankings;
-  public ranking$ = this.userService.getUserRankings();
+  public ranking$: Observable<User[]>;
   @ViewChild(IonModal) modal: IonModal;
-
+  curUserId: string;
   name: string;
   message: string;
 
   constructor(private auth: AuthService, private userService: UserService,
-    private modalCtrl: ModalController) {}
+    private modalCtrl: ModalController) {
+    this.userService.getUser().subscribe((usr) => {
+      this.curUserId = usr.id;
+      this.ranking$ = this.userService.getUserRankings();
+    });
+  }
 
   ngOnInit() {}
 
-  setView(viewName: View) {
-    this.view = viewName;
+  highlightUser(athlete: User) {
+    // return athlete.id == this.curUserId ? "highlight" : "";
+    // return athlete.id == this.curUserId ? "tertiary" : "";
+    return athlete.id == this.curUserId ? "light" : "";
   }
 
-  athleteClass(athlete: User) {
-    return this.userService.getUser().subscribe((user) => user.id === athlete.id ? 'active' : '');
+  setView(viewName: View) {
+    this.view = viewName;
   }
 
   logout() {

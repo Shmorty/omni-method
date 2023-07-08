@@ -20,20 +20,22 @@
 <ion-content [fullscreen]="true">
   <ion-header class="safe-area">
   </ion-header>
-  <ion-list *ngIf="view===View.Rankings">
+  <ion-list style="margin: 8px;" *ngIf="view===View.Rankings">
     <!-- <ion-list-header>
       <ion-button class="setting-button">Male</ion-button>
       <ion-button class="setting-button">National</ion-button>
       <ion-button class="setting-button">Overall</ion-button>
     </ion-list-header> -->
-    <ion-item color="default" class="rank-header" ngClass="viewClass">
-      <ion-text slot="start">&nbsp;</ion-text>
-      <ion-text class="rank-header">Ranking</ion-text>
-      <ion-text class="rank-header" style="padding-left: 24px;">Name</ion-text>
-      <ion-text slot="end">Score</ion-text>
+    <ion-item class="rank-header" lines="full">
+      <!-- <ion-text slot="start">&nbsp;</ion-text> -->
+      <ion-text color="medium" slot="start">Ranking</ion-text>
+      <ion-text color="medium" style="padding-left: 24px;">Name</ion-text>
+      <ion-text color="medium" slot="end">Score</ion-text>
     </ion-item>
     <ion-item *ngFor="let athlete of ranking$ | async; let i = index"
-      (click)="showDetail(athlete)" ngClass="viewClass">
+      (click)="showDetail(athlete)" ngClass="{{highlightUser(athlete)}}"
+      color="{{highlightUser(athlete)}}"
+      lines="full">
       <ion-text slot="start">{{i+1}}</ion-text>
       <ion-text *ngIf="athlete.nickname">{{athlete.nickname}}</ion-text>
       <ion-text *ngIf="!athlete.nickname">{{athlete.firstName}} {{athlete.lastName}}</ion-text>
