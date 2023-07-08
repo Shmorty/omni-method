@@ -46,7 +46,9 @@
     } as data; else loading">
       <ng-container *ngFor="let category of data.categories">
         <ion-item class="cat-header" lines="none">
-          {{category.label}}: {{getCategoryScore(category.cid)}}
+          <ion-text>
+            {{category.label}}: {{getCategoryScore(category.cid)}}
+          </ion-text>
         </ion-item>
         <ng-container *ngFor="let assessment of getCategoryAssessments(data.assessments, category.cid)">
           <ion-item lines="none" style="--inner-border-width: 0">
