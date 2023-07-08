@@ -16,8 +16,12 @@ ion-segment {
   text-align: center;
 }
 .rank-header {
+  --min-height: content;
   font-size: smaller;
+  font-weight: 300;
 }
-.active {
-  font-weight: bold;
+.highlight {
+  // --background: #b8dfff;
+  --color: #b8dfff;
+  // color: var(--ion-color-tertiary);
 }
