@@ -33,9 +33,9 @@
   ],
   "assessments": [
     {
+      "aid": "DLFT",
       "cid": "STRG",
       "label": "Deadlift",
-      "aid": "DLFT",
       "icon": "/assets/images/deadlift.png",
       "units": "1RM (lbs)",
       "description": "",
@@ -47,18 +47,21 @@
         "Complete the lift by standing up fully, maintaining control of the barbell",
         "Lower the barbell to the ground in a safe and controlled manner"
       ],
+      "min": 0,
+      "max": 939,
+      "onboarding": {
+        "prompt": "What is your maximum Deadlift for 1 repetition?"
+      },
       "rules": [
         "No supportive equipment",
         "Any stance allowed",
         "Must pause in top position for 1 second "
-      ],
-      "min": 0,
-      "max": 939
+      ]
     },
     {
+      "aid": "BKSQ",
       "cid": "STRG",
       "label": "Squat",
-      "aid": "BKSQ",
       "icon": "/assets/images/backsquat.png",
       "units": "1RM (lbs)",
       "description": "",
@@ -69,17 +72,20 @@
         "Drive feet into the ground and stand up, lifting the barbell",
         "Step forward to re-rack the barbell"
       ],
+      "min": 0,
+      "max": 800,
+      "onboarding": {
+        "prompt": "What is your maximum Back Squat for 1 repetition?"
+      },
       "rules": [
         "No supportive equipment",
         "Must squat below parallel"
-      ],
-      "min": 0,
-      "max": 800
+      ]
     },
     {
+      "aid": "BNCH",
       "cid": "STRG",
       "label": "Bench",
-      "aid": "BNCH",
       "icon": "/assets/images/BenchPress.png",
       "units": "1RM (lbs)",
       "description": "",
@@ -92,17 +98,20 @@
         "Press barbell back up, extending arms",
         "Carefully re-rack the barbell"
       ],
+      "min": 0,
+      "max": 600,
+      "onboarding": {
+        "prompt": "What is your maximum Bench Press for 1 repetition?"
+      },
       "rules": [
         "No supportive equipment",
         "Barbell must make contact with body in bottom position"
-      ],
-      "min": 0,
-      "max": 600
+      ]
     },
     {
+      "aid": "WTPU",
       "cid": "STRG",
       "label": "Weighted Pull-up",
-      "aid": "WTPU",
       "icon": "/assets/images/weightedpullup.png",
       "units": "1RM (lbs)",
       "description": "",
@@ -113,6 +122,11 @@
         "From a dead hang position, pull yourself up, chin above bar",
         "Pause briefly at top, then lower yourself back down to starting position"
       ],
+      "min": -100,
+      "max": 500,
+      "onboarding": {
+        "prompt": "What is your maximum Weighted Pull-up for 1 repetition?"
+      },
       "rules": [
         "No supportive equipment",
         "Weight added below waist",
@@ -120,14 +134,12 @@
         "Must start in dead-hang position",
         "Must pause in top position for 1 second",
         "Bottom of chin must reach higher than the top of the bar"
-      ],
-      "min": -100,
-      "max": 500
+      ]
     },
     {
+      "aid": "PSHU",
       "cid": "ENDR",
       "label": "Pushups",
-      "aid": "PSHU",
       "icon": "/assets/images/pushup.png",
       "units": "Reps",
       "description": "",
@@ -139,18 +151,21 @@
         "Repeat for as many reps as possible with proper form and without pausing at any point",
         "Record the number of reps completed"
       ],
+      "min": 0,
+      "max": 150,
+      "onboarding": {
+        "prompt": "How many Pushups can you do?"
+      },
       "rules":[
         "No stopping movement at any point once the test has begun",
         "Top of elbows must be higher than top of the shoulders in bottom position",
         "Arms must straighten in top position"
-      ],
-      "min": 0,
-      "max": 150
+      ]
     },
     {
+      "aid": "PLUP",
       "cid": "ENDR",
       "label": "Pullups",
-      "aid": "PLUP",
       "icon": "/assets/images/pull_up.png",
       "units": "Reps",
       "description": "",
@@ -162,19 +177,22 @@
         "Repeat for as many reps as possible with proper form and without pausing at any point",
         "Record the number of reps completed"
       ],
+      "min": 0,
+      "max": 49,
+      "onboarding": {
+        "prompt": "How many Pull-ups can you do?"
+      },
       "rules": [
         "No stopping movement at any point once the test has begun",
         "Arms must straighten in bottom position",
         "Bottom of chin must reach higher than the top of the bar",
         "No kipping"
-      ],
-      "min": 0,
-      "max": 49
+      ]
     },
     {
+      "aid": "SQTS",
       "cid": "ENDR",
       "label": "Squats",
-      "aid": "SQTS",
       "icon": "/assets/images/backsquat.png",
       "units": "Reps",
       "description": "",
@@ -186,18 +204,21 @@
         "Push back up to the starting position",
         "Repeat for as many reps as possible with proper form and without pausing at any point"
       ],
+      "min": 0,
+      "max": 150,
+      "onboarding": {
+        "prompt": "How many Back Squats with 100lbs can you do?"
+      },
       "rules":[
         "No stopping movement at any point once the test has begun",
         "Top of thighs must be below top of knees in bottom position",
         "Knees must straighten in top position"
-      ],
-      "min": 0,
-      "max": 150
+      ]
     },
     {
+      "aid": "STLJ",
       "cid": "POWR",
       "label": "Standing Long Jump",
-      "aid": "STLJ",
       "icon": "/assets/images/Long_Jump.png",
       "units": "Length (in)",
       "description": "",
@@ -207,17 +228,20 @@
         "Land with both feet in tandem",
         "Measure distance from the starting point to whichever heel is furthest back"
       ],
+      "min": 0,
+      "max": 147,
+      "onboarding": {
+        "prompt": "How far can you Standing Long Jump?"
+      },
       "rules":[
         "Feet must move in tandem",
         "Heel that is furthest back is measured"
-      ],
-      "min": 0,
-      "max": 147
+      ]
     },
     {
+      "aid": "PSHP",
       "cid": "POWR",
       "label": "Push Press",
-      "aid": "PSHP",
       "icon": "/assets/images/ChestLaunch.png",
       "units": "1RM (lbs)",
       "description": "",
@@ -227,17 +251,20 @@
         "Dip down and drive the barbell overhead by extending legs and pressing the barbell until arms are fully extended",
         "Record your successful push press 1RM weight lifted for one rep"
       ],
+      "min": 0,
+      "max": 495,
+      "onboarding": {
+        "prompt": "What is your maximum Push Press for 1 repetition?"
+      },
       "rules":[
         "No supportive equipment",
         "No catch"
-      ],
-      "min": 0,
-      "max": 495
+      ]
     },
     {
+      "aid": "PSPR",
       "cid": "POWR",
       "label": "100 meter sprint",
-      "aid": "PSPR",
       "icon": "/assets/images/100metersprint.png",
       "units": "Time",
       "description": "",
@@ -248,17 +275,20 @@
         "Sprint as fast as you can towards finish line",
         "Record your time once you cross finish line"
       ],
+      "min": 9.58,
+      "max": 22,
+      "onboarding": {
+        "prompt": "How long does it take you to sprint 100 meters?"
+      },
       "rules":[
         "No starting blocks",
         "No spikes"
-      ],
-      "min": 9.58,
-      "max": 22
+      ]
     },
     {
+      "aid": "PWCL",
       "cid": "POWR",
       "label": "Clean",
-      "aid": "PWCL",
       "icon": "/assets/images/powerclean.png",
       "units": "1RM (lbs)",
       "description": "",
@@ -269,16 +299,20 @@
         "Stand up from front squat position to complete the clean",
         "Record weight lifted for one rep as your clean 1RM test result"
       ],
+      "min": 0,
+      "max": 400,
+      "onboarding": {
+        "prompt": "What is your maximum Clean for 1 repetition?"
+      },
       "rules":[
         "No supportive equipment"
-      ],
-      "min": 0,
-      "max": 400
+      ]
     },
     {
+      "aid": "PIKE",
+      "checklist": true,
       "cid": "FLEX",
       "label": "Pike",
-      "aid": "PIKE",
       "icon": "/assets/images/toetouch.png",
       "units": "Positions",
       "description": "",
@@ -286,34 +320,39 @@
         "Position must be held for a minimum of 10 seconds while maintaining proper form",
         "Must be able to perform the test on both sides for balanced results"
       ],
+      "min": 0,
+      "max": 10,
+      "onboarding": {
+        "prompt": "Use the checklist to assess your Pike Flexibility"
+      },
       "rules":[
         "Position must be held for 30 seconds "
-      ],
-      "checklist": true,
-      "min": 0,
-      "max": 10
+      ]
     },
     {
+      "aid": "BKBN",
+      "checklist": true,
       "cid": "FLEX",
       "label": "Backbend",
-      "aid": "BKBN",
       "icon": "/assets/images/backbend.png",
       "units": "Positions",
       "description": "",
       "instruction": [
         "Position must be held for a minimum of 10 seconds while maintaining proper form."
       ],
+      "min": 0,
+      "max": 10,
+      "onboarding": {
+        "prompt": "Use the checklist to assess your Backbend Flexibility"
+      },
       "rules":[
         "Position must be held for 5 seconds"
-      ],
-      "checklist": true,
-      "min": 0,
-      "max": 10
+      ]
     },
     {
+      "aid": "STRD",
       "cid": "FLEX",
       "label": "Straddle",
-      "aid": "STRD",
       "icon": "/assets/images/medial_lateral.png",
       "units": "Degrees",
       "description": "",
@@ -324,11 +363,14 @@
         "Hold the position for a few seconds for an accurate measurement.",
         "Use the recorded angle to track progress."
       ],
+      "min": 0,
+      "max": 200,
+      "onboarding": {
+        "prompt": "What is the angle of your Straddle?"
+      },
       "rules":[
         "Position must be held for 5 seconds"
-      ],
-      "min": 0,
-      "max": 200
+      ]
     },
     {
       "cid": "META",
@@ -344,16 +386,19 @@
         "Stay hydrated and take quick breaks if needed, but keep the time running",
         "When the hour is up, stop the clock and record the distance covered"
       ],
+      "min": 0,
+      "max": 13.3,
+      "onboarding": {
+        "prompt": "How far can you run in 1 hour?"
+      },
       "rules":[
         "Road, treadmill, or track allowed"
-      ],
-      "min": 0,
-      "max": 13.3
+      ]
     },
     {
+      "aid": "TWOMDST",
       "cid": "META",
       "label": "2 minute distance",
-      "aid": "TWOMDST",
       "icon": "/assets/images/2minutedistance.png",
       "units": "Miles",
       "description": "",
@@ -364,11 +409,14 @@
         "Try to maintain a consistent pace and avoid stopping",
         "When 2 minutes are up, stop the clock and record the distance covered"
       ],
+      "min": 0,
+      "max": 0.5,
+      "onboarding": {
+        "prompt": "How far can you run in 2 minutes?"
+      },
       "rules":[
         "Treadmill or track allowed"
-      ],
-      "min": 0,
-      "max": 0.5
+      ]
     },
     {
       "cid": "META",
@@ -385,15 +433,18 @@
         "When you need to breathe, exhale slowly and recover with deep breaths",
         "Record the duration of your breath-hold, stopping the time once you inhale"
       ],
+      "min": 0,
+      "max": 11.5,
+      "onboarding": {
+        "prompt": "How long can you hold your breath?"
+      },
       "rules":[
         "Time stops after inhale"
-      ],
-      "min": 0,
-      "max": 11.5
+      ]
     },
     {
-      "cid": "NEUR",
       "aid": "AGLTY",
+      "cid": "NEUR",
       "icon": "/assets/images/agility.png",
       "label": "Agility",
       "units": "Seconds",
@@ -407,17 +458,21 @@
         "Side shuffle to East Cone and back.",
         "Time stops when you touch Home Cone after completing the sequence."
       ],
+      "min": 13,
+      "max": 35,
+      "onboarding": {
+        "prompt": "How quickly can you perform the half spider web agility test?"
+      },
       "rules":[
         "Must touch cone/marker with hand",
         "Order of cones/markers must be followed",
         "Feet cannot cross while side shuffling"
-      ],
-      "min": 13,
-      "max": 35
+      ]
     },
     {
-      "cid": "NEUR",
       "aid": "BLNC",
+      "checklist": true,
+      "cid": "NEUR",
       "icon": "/assets/images/Balance.png",
       "label": "Balance",
       "description": "",
@@ -425,16 +480,19 @@
         "Follow the instructions provided for each position",
         "Check off each position you were able to successfully hold for the required time"
       ],
+      "min": 0,
+      "max": 10,
+      "onboarding": {
+        "prompt": "Use the checklist to assess your Balance"
+      },
       "rules":[
         "(see each position for specific rules)"
-      ],
-      "checklist": true,
-      "min": 0,
-      "max": 10
+      ]
     },
     {
-      "cid": "NEUR",
       "aid": "COORD",
+      "checklist": true,
+      "cid": "NEUR",
       "icon": "/assets/images/Coordination.png",
       "label": "Coordination",
       "description": "",
@@ -444,12 +502,14 @@
         "Try to perform each coordination skill to the best of your ability",
         "Check off each skill you were able to successfully perform"
       ],
+      "min": 0,
+      "max": 47,
+      "onboarding": {
+        "prompt": "Use the checklist to assess your Coordination"
+      },
       "rules":[
         "(see each skill for specific rules)"
-      ],
-      "checklist": true,
-      "min": 0,
-      "max": 47
+      ]
     }
   ],
   "checklists": [
