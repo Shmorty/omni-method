@@ -169,7 +169,9 @@
       *ngFor="let category of categories$ | async"
     >
       <ion-item class="cat-header" lines="none">
-        {{category.label}}: {{(user$ | async)?.categoryScore[category.cid]}}
+        <ion-text>
+          {{category.label}}: {{(user$ | async)?.categoryScore[category.cid]}}
+        </ion-text>
       </ion-item>
       <ng-container *ngFor="let assessment of assessments$ | async">
         <ng-container *ngIf="assessment.cid == category.cid">
