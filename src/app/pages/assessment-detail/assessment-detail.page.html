@@ -47,7 +47,7 @@
             <ion-label position="fixed" style="margin: auto;">{{assessment.units}}</ion-label>
             <ion-label position="fixed" slot="end">score/1000</ion-label>
           </ion-item>
-          <ion-item-sliding slot="{{i < 4 ? 'header':'content'}}">
+          <ion-item-sliding slot="{{i < 3 ? 'header':'content'}}">
             <ion-item lines="full">
               <ion-label position="fixed" class="fixed-width" slot="start">
                 <div>{{score.scoreDate | date:'mediumDate' }}</div>
