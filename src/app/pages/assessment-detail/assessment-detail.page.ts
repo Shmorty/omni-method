@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {AlertController, ModalController, NavController} from '@ionic/angular';
+import {Component, Input, OnInit, AfterViewChecked} from '@angular/core';
+import {AlertController, IonRouterOutlet, ModalController, NavController} from '@ionic/angular';
 import {Score} from '../../store/models/score.model';
 import {AssessmentService} from '../../services/assessments/assessment.service';
 import {Assessment, Category} from '../../store/assessments/assessment.model';
@@ -34,7 +34,8 @@ export class AssessmentDetailPage implements OnInit {
     private navController: NavController,
     private assessmentService: AssessmentService,
     private userService: UserService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private routerOutlet: IonRouterOutlet
   ) {}
 
   ngOnInit() {
@@ -45,6 +46,7 @@ export class AssessmentDetailPage implements OnInit {
       this.category$ = this.assessmentService.getCategoryById(params.cid);
       this.assessment$ = this.assessmentService.getAssessmentById(params.aid);
       this.checklist$ = this.assessmentService.getChecklist(params.aid);
+      this.routerOutlet.swipeGesture = true;
     });
 
     this.assessment$.subscribe((assessment) => {
@@ -97,6 +99,7 @@ export class AssessmentDetailPage implements OnInit {
   toggleCheckItem(item) {
     this.displayChecked[item] = !this.displayChecked[item];
     this.checklistChanged = true;
+    this.routerOutlet.swipeGesture = false;
     console.log("toggleCheckItem", item, this.displayChecked[item]);
   }
 

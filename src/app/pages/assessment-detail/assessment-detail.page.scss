@@ -2,7 +2,7 @@ ion-content {
   --padding: 10px;
   --padding-end: 10px;
   --padding-start: 10px;
-  --padding-top: 10px;
+  --padding-top: 14px;
   // ion-card {
   //   margin-top: 0;
   // }
@@ -23,6 +23,8 @@ ion-accordion-group > ion-accordion:last-of-type ion-item[slot="header"] {
   border-radius: 20px;
   border: 3px solid #8CA1B6;
   background-image: linear-gradient(to bottom, rgba(229, 243, 255, 0), rgba(207, 233, 255, 1));
+  margin:auto;
+  width: 97%;
 }
 .card {
   aspect-ratio: 1 / 1;
@@ -58,4 +60,17 @@ ion-accordion-group > ion-accordion:last-of-type ion-item[slot="header"] {
 .right {
   float: right;
   margin: 5px 10px 0 0;
+}
+.footer-button {
+  width: 90%;
+  margin: auto;
+}
+.fixed-width {
+  min-width: 30%;
+  max-width: 30%;
+}
+.header {
+  color: rgba(118, 118, 118, 1);
+  font-size: 11px;
+  height: 30px;
 }

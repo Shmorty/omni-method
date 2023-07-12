@@ -62,7 +62,7 @@
           <ion-item id="omniScore" lines="none" color="none">
             <span>
               <ion-label class="omni-label">Omni Score</ion-label>
-              <ion-label class="omni-score">{{user.omniScore}}</ion-label>
+              <ion-label class="omni-score">{{user.omniScore | number}}</ion-label>
             </span>
           </ion-item>
 
@@ -160,17 +160,19 @@
   </ion-header>
 
   <ion-card style="box-shadow: none; margin-bottom: 0">
-    <ion-card-header>
+    <ion-item lines="none">
       <ion-card-title>All Assessments</ion-card-title>
-    </ion-card-header>
+    </ion-item>
 
     <ng-container
       class="card cardStyle"
       *ngFor="let category of categories$ | async"
     >
-      <ion-card-header type="primary" class="cat-header">
-        {{category.label}}: {{(user$ | async)?.categoryScore[category.cid]}}
-      </ion-card-header>
+      <ion-item class="cat-header" lines="none">
+        <ion-text>
+          {{category.label}}: {{(user$ | async)?.categoryScore[category.cid]}}
+        </ion-text>
+      </ion-item>
       <ng-container *ngFor="let assessment of assessments$ | async">
         <ng-container *ngIf="assessment.cid == category.cid">
           <ion-item
