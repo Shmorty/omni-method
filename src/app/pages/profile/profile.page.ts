@@ -20,6 +20,8 @@ import * as UserSelectors from 'src/app/store/user/user.selectors';
 import {tap} from 'rxjs/operators';
 import {EditProfilePage} from '../edit-profile/edit-profile.page';
 import {OmniScoreService, oneDay} from 'src/app/services/omni-score.service';
+import {loadUserAction} from 'src/app/store/user/user.actions';
+import {UserService} from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -47,7 +49,8 @@ export class ProfilePage implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -68,6 +71,7 @@ export class ProfilePage implements OnInit {
 
   handleRefresh(event) {
     console.log("profile page pullToRefresh");
+    this.userService.reloadUser();
     setTimeout(() => {
       // Any calls to load data go here
       event.target.complete();
