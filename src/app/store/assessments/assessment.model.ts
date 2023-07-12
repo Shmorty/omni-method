@@ -12,6 +12,7 @@ export interface Assessment {
   checklist?: boolean;
   min: number;
   max: number;
+  onboarding: {prompt: string};
   units?: string;
   scores?: Score[];
 }

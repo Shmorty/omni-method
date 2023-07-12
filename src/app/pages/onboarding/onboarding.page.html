@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>onboarding</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ng-container *ngFor="let assessment of assessments$ | async">
+    <div>
+      <ion-text>{{assessment.onboarding.prompt}}</ion-text>
+    </div>
+  </ng-container>
+
+</ion-content>

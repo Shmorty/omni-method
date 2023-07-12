@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap, tap, catchError, finalize, take, takeWhile, takeUntil } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {map, switchMap, tap, catchError, finalize, take, takeWhile, takeUntil} from 'rxjs/operators';
 import * as UserActions from './user.actions';
-import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
-import { Router } from '@angular/router';
-import { UserFirestoreService } from 'src/app/services/user-firestore.service';
+import {Store} from '@ngrx/store';
+import {of} from 'rxjs';
+import {Router} from '@angular/router';
+import {UserFirestoreService} from 'src/app/services/user-firestore.service';
 
 @Injectable()
 export class UserEffects {
@@ -23,7 +23,7 @@ export class UserEffects {
         ofType(UserActions.registerUserSuccess),
         tap(() => this.router.navigate(['new-user']))
       ),
-    { dispatch: false }
+    {dispatch: false}
   );
 
   // UserActions.logoutAction
@@ -35,18 +35,18 @@ export class UserEffects {
           this.router.navigate(['login']);
         })
       ),
-    { dispatch: false }
+    {dispatch: false}
   );
 
   // UserActions.userAuthenticatd
   userAuthenticated$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.userAuthenticatd),
-      tap((payload) => 
+      tap((payload) =>
         console.log('userAuthenticatd effect', JSON.stringify(payload))
       ),
       map((payload) =>
-        UserActions.loadUserAction({ uid: payload.payload.user.uid })
+        UserActions.loadUserAction({uid: payload.payload.user.uid})
       )
     )
   );
@@ -56,20 +56,20 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(UserActions.loadUserAction),
       tap(console.log),
-      switchMap(({ uid }) => {
+      switchMap(({uid}) => {
         return this.firestoreService.getUserById(uid)
           .pipe(takeUntil(this.logout$))
           .pipe(
             tap((res) => console.log('firestore getUserById response', res)),
             map((res) => {
               if (res) {
-                return UserActions.loadUserSuccess({ payload: res });
+                return UserActions.loadUserSuccess({payload: res});
               } else {
-                return UserActions.loadUserFailure({ error: 'not found' });
+                return UserActions.loadUserFailure({error: 'not found'});
               }
             }),
             catchError(async (err) =>
-              UserActions.loadUserFailure({ error: err })
+              UserActions.loadUserFailure({error: err})
             ),
             finalize(() => console.log('getUserById finalize'))
           );
@@ -82,12 +82,12 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(UserActions.newUser),
       tap(console.log),
-      switchMap(({ payload }) => {
+      switchMap(({payload}) => {
         console.log('newUser effect calling firestoreService addUser');
         return this.firestoreService.addUser(payload).pipe(
           tap(console.log),
-          map((data) => UserActions.newUserSuccess({ payload: data })),
-          catchError((error) => of(UserActions.newUserFailure({ error }))),
+          map((data) => UserActions.newUserSuccess({payload: data})),
+          catchError((error) => of(UserActions.newUserFailure({error}))),
           finalize(() => console.log('addUser finalize'))
         );
       })
@@ -100,9 +100,10 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(UserActions.newUserSuccess),
         tap(console.log),
-        tap(() => this.router.navigate(['home']))
+        // tap(() => this.router.navigate(['home']))
+        tap(() => this.router.navigate(['onboarding']))
       ),
-    { dispatch: false }
+    {dispatch: false}
   );
 
   // UserActions.newUser
@@ -111,7 +112,7 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(UserActions.updateUserAction),
         tap(console.log),
-        switchMap(({ payload }) => {
+        switchMap(({payload}) => {
           console.log(
             'effect updateUserAction call firestoreService updateUser',
             payload
@@ -124,7 +125,7 @@ export class UserEffects {
           );
         })
       ),
-    { dispatch: false }
+    {dispatch: false}
   );
 
   // UserActions.loadUserSuccess
@@ -132,7 +133,7 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(UserActions.loadUserSuccess),
       tap((res) => console.log('loadUserSuccess effect ', res)),
-      map((res) => UserActions.loadUserScoresAction({ uid: res.payload.id }))
+      map((res) => UserActions.loadUserScoresAction({uid: res.payload.id}))
     )
   );
 
@@ -152,7 +153,7 @@ export class UserEffects {
           }
         })
       ),
-    { dispatch: false }
+    {dispatch: false}
   );
 
   // new user effect
@@ -165,7 +166,7 @@ export class UserEffects {
           this.router.navigate(['new-user']);
         })
       ),
-    { dispatch: false }
+    {dispatch: false}
   );
 
   // UserActions.saveNewScore
@@ -178,14 +179,14 @@ export class UserEffects {
             // this.userService.saveScoreToDb(data.score).pipe(
             map((data) => {
               this.store.dispatch(
-                UserActions.saveNewScoreSuccess({ score: data })
+                UserActions.saveNewScoreSuccess({score: data})
               );
               // this.store.dispatch(OmniScoreActions.calculateOmniScore());
             })
           )
         )
       ),
-    { dispatch: false }
+    {dispatch: false}
   );
 
   // UserActions.deleteAssessmentScore
@@ -198,14 +199,14 @@ export class UserEffects {
             // this.userService.deleteScoreFromDb(data.score).pipe(
             map(() => {
               this.store.dispatch(
-                UserActions.deleteAssessmentScoreSuccess({ score: data.score })
+                UserActions.deleteAssessmentScoreSuccess({score: data.score})
               );
               // this.store.dispatch(OmniScoreActions.calculateOmniScore());
             })
           )
         )
       ),
-    { dispatch: false }
+    {dispatch: false}
   );
 
   // UserActions.loadUserScoresAction
@@ -218,10 +219,10 @@ export class UserEffects {
       switchMap((param) => {
         console.log('calling getUserScores');
         return this.firestoreService.getUserScores(param.uid)
-        .pipe(takeUntil(this.logout$))
-        .pipe(
+          .pipe(takeUntil(this.logout$))
+          .pipe(
             tap((res) => console.log('getUserScores res ', res)),
-            map((res) => UserActions.loadUserScoresSuccessAction({ scores: res })),
+            map((res) => UserActions.loadUserScoresSuccessAction({scores: res})),
             // catchError(async (err) => UserActions.loadUserScoresFailure({ error: err }))
             finalize(() => console.log('getUserScores unsubscribed'))
           );
