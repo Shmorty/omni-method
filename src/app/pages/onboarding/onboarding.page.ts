@@ -10,6 +10,7 @@ import {Store} from '@ngrx/store';
 export class OnboardingPage implements OnInit {
 
   public assessments$ = this.store.select(selectAllAssessments);
+  public step = 1;
 
   constructor(
     private store: Store
@@ -18,4 +19,11 @@ export class OnboardingPage implements OnInit {
   ngOnInit() {
   }
 
+  previous() {
+    console.log("previous", --this.step);
+  }
+
+  next() {
+    console.log("next", ++this.step);
+  }
 }

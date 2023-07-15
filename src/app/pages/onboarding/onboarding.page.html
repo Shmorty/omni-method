@@ -6,10 +6,25 @@
 
 <ion-content>
 
-  <ng-container *ngFor="let assessment of assessments$ | async">
-    <div>
-      <ion-text>{{assessment.onboarding.prompt}}</ion-text>
-    </div>
+  <ng-container *ngFor="let assessment of assessments$ | async; index as i">
+    <div id="{{assessment.aid}}" class="ion-text-center" *ngIf="step == i">
+      <ion-text color="primary">
+        <h1 class="center">{{assessment.onboarding.prompt}}</h1>
+      </ion-text>
+      <ion-item *ngIf="!assessment.checklist">
+        <!-- <ion-picker color="primary" type="number" name="{{assessment.label}}" id="{{assessment.aid}}"
+                min="{{assessment.min}}" max="{{assessment.max}}" step="1"
+                value="{{assessment.min}}"></ion-picker> -->
+        <ion-input
+          placeholder="{{assessment.label}}"
+        ></ion-input>
+      </ion-item>
+      </div>
+
   </ng-container>
+  <ion-button type="button" (click)="previous()" [disabled]="step == 1"
+  >Back</ion-button
+>
+<ion-button type="button" (click)="next()">Continue</ion-button>
 
 </ion-content>
