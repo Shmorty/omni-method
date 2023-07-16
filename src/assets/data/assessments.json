@@ -218,7 +218,7 @@
     {
       "aid": "STLJ",
       "cid": "POWR",
-      "label": "Standing Long Jump",
+      "label": "Long Jump",
       "icon": "/assets/images/Long_Jump.png",
       "units": "Length (in)",
       "description": "",
