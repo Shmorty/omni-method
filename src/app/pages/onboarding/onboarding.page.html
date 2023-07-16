@@ -24,9 +24,9 @@
         <!-- <ion-picker color="primary" type="number" name="{{assessment.label}}" id="{{assessment.aid}}"
                 min="{{assessment.min}}" max="{{assessment.max}}" step="1"
                 value="{{assessment.min}}"></ion-picker> -->
-        <ion-input id="{{assessment.aid}}" class="assessment-input"
+        <!-- <ion-input id="{{assessment.aid}}" class="assessment-input"
           placeholder="{{assessment.label}}" [(ngModel)]="values[assessment.aid]"
-        ></ion-input>
+        ></ion-input> -->
         <app-number-picker></app-number-picker>
       </ion-item>
       <ion-button type="button" expand="block" (click)="save(assessment)"
