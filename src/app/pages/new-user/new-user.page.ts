@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DatePipe } from '@angular/common';
-import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user/user.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/store/user/user.model';
-import { DatePicker, DatePickerOptions } from '@pantrist/capacitor-date-picker';
-import { isPlatform } from '@ionic/angular';
-import { Keyboard } from '@capacitor/keyboard';
-import { UserFirestoreService } from 'src/app/services/user-firestore.service';
-import { AssessmentService } from 'src/app/services/assessments/assessment.service';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {DatePipe} from '@angular/common';
+import {Router} from '@angular/router';
+import {UserService} from 'src/app/services/user/user.service';
+import {AuthService} from 'src/app/services/auth.service';
+import {User} from 'src/app/store/user/user.model';
+import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
+import {isPlatform} from '@ionic/angular';
+import {Keyboard} from '@capacitor/keyboard';
+import {UserFirestoreService} from 'src/app/services/user-firestore.service';
+import {AssessmentService} from 'src/app/services/assessments/assessment.service';
 
 @Component({
   selector: 'app-new-user',
@@ -26,8 +26,6 @@ export class NewUserPage implements OnInit {
 
   constructor(
     private userService: UserService,
-    private firestoreService: UserFirestoreService,
-    private router: Router,
     private auth: AuthService,
     private datePipe: DatePipe,
     private assessmentService: AssessmentService
