@@ -1,12 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { OnboardingPageRoutingModule } from './onboarding-routing.module';
+import {OnboardingPageRoutingModule} from './onboarding-routing.module';
 
-import { OnboardingPage } from './onboarding.page';
+import {OnboardingPage} from './onboarding.page';
+import {NumberPickerComponent} from 'src/app/component/number-picker/number-picker.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { OnboardingPage } from './onboarding.page';
     IonicModule,
     OnboardingPageRoutingModule
   ],
-  declarations: [OnboardingPage]
+  declarations: [
+    OnboardingPage,
+    NumberPickerComponent
+  ]
 })
 export class OnboardingPageModule {}
