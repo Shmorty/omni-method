@@ -3,7 +3,7 @@
   <form [formGroup]="formData" (ngSubmit)="onSubmit()">
     <div>
       <ion-list>
-        <ion-progress-bar [value]="step / 5"></ion-progress-bar>
+        <ion-progress-bar class="progress" [value]="step / 5"></ion-progress-bar>
         <div *ngIf="step == 1">
           <div class="ion-text-center">
             <ion-text color="primary">
