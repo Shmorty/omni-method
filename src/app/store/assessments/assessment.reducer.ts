@@ -1,6 +1,6 @@
-import { Assessment, Category, Checklist } from './assessment.model';
+import {Assessment, Category, Checklist} from './assessment.model';
 import * as AssessmentActions from './assessment.actions';
-import { createReducer, on } from '@ngrx/store';
+import {createReducer, on} from '@ngrx/store';
 
 export interface AssessmentState {
   assessments: Assessment[];
@@ -8,7 +8,7 @@ export interface AssessmentState {
   checklists: Checklist[];
   loading: boolean;
   error: string;
-  status: 'pending' | 'loading' | 'error' | 'success';
+  // status: 'pending' | 'loading' | 'error' | 'success';
 }
 
 export const initialState: AssessmentState = {
@@ -17,7 +17,7 @@ export const initialState: AssessmentState = {
   checklists: [],
   loading: false,
   error: null,
-  status: 'pending',
+  // status: 'pending',
 };
 
 export const assessmentReducer = createReducer(
@@ -26,7 +26,7 @@ export const assessmentReducer = createReducer(
     ...state,
     loading: true,
     error: null,
-    status: 'loading',
+    // status: 'loading',
   })),
   on(AssessmentActions.loadAssessmentsSuccess, (state, action) => ({
     ...state,
@@ -35,12 +35,12 @@ export const assessmentReducer = createReducer(
     checklists: action.data['checklists'],
     loading: false,
     error: null,
-    status: 'success',
+    // status: 'success',
   })),
   on(AssessmentActions.loadAssessmentsFailure, (state, action) => ({
     ...state,
     loading: false,
     error: action.error,
-    status: 'error',
+    // status: 'error',
   }))
 );
