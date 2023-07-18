@@ -1,9 +1,13 @@
 import {Component, OnInit} from '@angular/core';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-number-picker',
   templateUrl: './number-picker.component.html',
   styleUrls: ['./number-picker.component.scss'],
+  standalone: true,
+  imports: [ScrollingModule, CommonModule],
 })
 export class NumberPickerComponent implements OnInit {
   min = 0;
@@ -14,7 +18,7 @@ export class NumberPickerComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.range = [0, 1, 2, 3, 4];
+    this.range = Array.from({length: 100}).map((_, i) => `Item #${i}`);
   }
 
 }

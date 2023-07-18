@@ -1,46 +1,46 @@
-import { HttpClientModule } from '@angular/common/http';
-import { APP_INITIALIZER, isDevMode, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { IonicModule } from '@ionic/angular';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { FirebaseApp, getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { environment } from '../environments/environment';
-import { DatePipe } from '@angular/common';
-import { AuthService } from './services/auth.service';
-import { from } from 'rxjs';
-import { take } from 'rxjs/operators';
+import {HttpClientModule} from '@angular/common/http';
+import {APP_INITIALIZER, isDevMode, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {IonicModule, IonVirtualScroll} from '@ionic/angular';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {FormsModule} from '@angular/forms';
+import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
+import {FirebaseApp, getApp, initializeApp, provideFirebaseApp} from '@angular/fire/app';
+import {environment} from '../environments/environment';
+import {DatePipe} from '@angular/common';
+import {AuthService} from './services/auth.service';
+import {from} from 'rxjs';
+import {take} from 'rxjs/operators';
 import {
   provideAuth,
   getAuth,
   initializeAuth,
   indexedDBLocalPersistence,
 } from '@angular/fire/auth';
-import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { reducers } from './store/app.state';
-import { AssessmentEffects } from './store/assessments/assessment.effects';
-import { UserEffects } from './store/user/user.effect';
-import { OmniScoreEffects } from './store/omni-score/omni-score.effects';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { Capacitor } from '@capacitor/core';
+import {ActionReducer, MetaReducer, StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {reducers} from './store/app.state';
+import {AssessmentEffects} from './store/assessments/assessment.effects';
+import {UserEffects} from './store/user/user.effect';
+import {OmniScoreEffects} from './store/omni-score/omni-score.effects';
+import {provideFirestore, getFirestore} from '@angular/fire/firestore';
+import {Capacitor} from '@capacitor/core';
 import {UserActionType} from './store/user/user.actions';
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
-  return function(state, action) {
+  return function (state, action) {
     console.log('state', state);
     console.log('action', action);
- 
+
     return reducer(state, action);
   };
 }
 
 function clearState(reducer) {
-  return function(state, action) {
+  return function (state, action) {
     if (action.type === UserActionType.USER_LOGOUT) {
       state = undefined;
     }
@@ -66,7 +66,7 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
     HttpClientModule,
     IonicModule.forRoot(),
     NgxSkeletonLoaderModule.forRoot(),
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([AssessmentEffects, UserEffects, OmniScoreEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
