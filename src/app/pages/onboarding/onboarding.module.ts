@@ -14,11 +14,11 @@ import {NumberPickerComponent} from 'src/app/component/number-picker/number-pick
     CommonModule,
     FormsModule,
     IonicModule,
-    OnboardingPageRoutingModule
+    OnboardingPageRoutingModule,
+    NumberPickerComponent
   ],
   declarations: [
-    OnboardingPage,
-    NumberPickerComponent
+    OnboardingPage
   ]
 })
 export class OnboardingPageModule {}

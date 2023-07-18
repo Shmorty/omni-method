@@ -1,5 +1,14 @@
-<div class="picker">
-  <button *ngFor="let value of range;index as i" class="picker-opt">
+<!-- <div class="highlight"></div>
+<cdk-virtual-scroll-viewport itemSize="42"  class="picker">
+  <div class="spacing-top"></div>
+  <div *cdkVirtualFor="let value of range;index as i" class="picker-opt">
     {{value}}
-  </button>
+  </div>
+</cdk-virtual-scroll-viewport> -->
+<div class="listbox-container">
+  <ul cdkListbox class="listbox">
+    <li *ngFor="let value of range" class="option">
+      {{value}}
+    </li>
+  </ul>
 </div>

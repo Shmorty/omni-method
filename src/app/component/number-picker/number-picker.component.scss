@@ -1,6 +1,43 @@
 .picker {
-    line-height: 42px;
+    border: 0px solid gray;
+    border-radius: 5px;
+    height: 210px;
+    margin: auto;
+    overflow-y: scroll;
+    padding: 3px;
+    width: 90%;
 }
 .picker-opt {
     line-height: 42px;
+    text-align: center;
+}
+.spacing-top {
+    height: 84px;
+}
+.highlight {
+    background-color: rgb(119, 157, 251, 50%);
+    border-radius: 21px;
+    height: 42px;
+    margin: auto;
+    position: relative;
+    top: 126px;
+    width: 90%;
+    z-index: 1;
+}
+
+.listbox-container {
+    display: block;
+    width: 250px;
+    border: 1px solid black;
+}
+.listbox {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 200px;
+    overflow: auto;
+}
+.option {
+    position: relative;
+    padding: 5px 5px 5px 25px;
 }
