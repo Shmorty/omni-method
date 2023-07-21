@@ -5,7 +5,11 @@ ion-toolbar {
   }
 }
 ion-segment {
-  --background: #b8dfff;
+  // --background: #b8dfff;
+  --background: white;
+  margin: auto;
+    margin-top: 5px;
+    width: 97%;
 }
 .setting-button {
   border: 1px solid;
