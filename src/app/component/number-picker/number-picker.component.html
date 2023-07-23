@@ -1,9 +1,11 @@
-<div class="highlight"></div>
+<div class="highlight" [class.mat-elevation-z8]="true"></div>
 <cdk-virtual-scroll-viewport itemSize="42"  class="picker">
-  <div class="spacing-top"></div>
-  <div *cdkVirtualFor="let value of range;index as i" class="picker-opt">
+  <div class="spacer"></div>
+  <div *cdkVirtualFor="let value of range;index as i" class="picker-opt"
+    (click)="click(i)">
     {{value}}
   </div>
+  <div class="spacer"></div>
 </cdk-virtual-scroll-viewport>
 <!-- <div class="listbox-container">
   <ul cdkListbox class="listbox">
@@ -12,3 +14,9 @@
     </li>
   </ul>
 </div> -->
+
+<!-- <mat-form-field>
+  <mat-select>
+    <mat-option *ngFor="let value of range" [value]="value">{{value}}</mat-option>
+  </mat-select>
+</mat-form-field> -->

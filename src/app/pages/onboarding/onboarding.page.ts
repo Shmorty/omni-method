@@ -16,6 +16,7 @@ export class OnboardingPage implements OnInit {
   public assessmentCount = 0;
   public curAssessment: Assessment;
   public values = [];
+  public theNumber: number;
 
   constructor(
     private store: Store,
@@ -24,6 +25,11 @@ export class OnboardingPage implements OnInit {
 
   ngOnInit() {
     this.assessments$.subscribe((arr) => this.assessmentCount = arr.length);
+  }
+
+  newValue(event) {
+    // console.log("newValue", event);
+    this.theNumber = event;
   }
 
   previous() {
@@ -39,8 +45,8 @@ export class OnboardingPage implements OnInit {
   }
 
   save(assessment: Assessment) {
-    console.log("save", assessment);
-    console.log("value", this.values[assessment.aid]);
+    console.log("save", assessment.aid);
+    console.log("value", this.theNumber);
     this.next();
   }
 
