@@ -69,7 +69,9 @@ export class UserService implements IUserService {
           console.log('dispatch newUser action');
           this.store.dispatch(UserActions.newUser({payload: user}));
         },
-        (err) => console.error('Observer got an error: ' + err)
+        (err) => {
+          console.error('Observer got an error: ' + err);
+        }
       );
   }
 

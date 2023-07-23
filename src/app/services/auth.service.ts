@@ -1,5 +1,5 @@
-import { Injectable, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import {Injectable, inject} from '@angular/core';
+import {Router} from '@angular/router';
 import {
   Auth,
   // GoogleAuthProvider,
@@ -21,12 +21,12 @@ import {
   // signInWithPopup,
 } from '@angular/fire/auth';
 // import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
-import { BehaviorSubject, from, Observable, Subscription } from 'rxjs';
+import {BehaviorSubject, from, Observable, Subscription} from 'rxjs';
 // import { User } from '../store/user/user.model';
 import * as OmniUser from '../store/user/user.model';
-import { Store } from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import * as UserActions from '../store/user/user.actions';
-import { AppState } from '../store/app.state';
+import {AppState} from '../store/app.state';
 
 @Injectable({
   providedIn: 'root',
@@ -50,9 +50,9 @@ export class AuthService {
           UserActions.userAuthenticatd({payload: JSON.parse(JSON.stringify({user: user}))})
         );
 
-      } else {
-        console.log("User is signed out");
-        this.router.navigate(['/login']);
+        // } else {
+        //   console.log("User is signed out");
+        //   this.router.navigate(['/login']);
       }
     });
   }
@@ -104,7 +104,7 @@ export class AuthService {
       (err) => {
         console.log(err['code']);
         this.store.dispatch(
-          UserActions.registerUserFailure({ error: err['code'] })
+          UserActions.registerUserFailure({error: err['code']})
         );
         // alert(err.message);
         this.router.navigate(['/register']);
