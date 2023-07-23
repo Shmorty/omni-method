@@ -3,6 +3,8 @@ import {selectAllAssessments} from '../../store/assessments/assessment.selector'
 import {Store} from '@ngrx/store';
 import {Assessment} from 'src/app/store/assessments/assessment.model';
 import {Router} from '@angular/router';
+import {UserService} from 'src/app/services/user/user.service';
+import {Score} from 'src/app/store/models/score.model';
 
 @Component({
   selector: 'app-onboarding',
@@ -16,20 +18,20 @@ export class OnboardingPage implements OnInit {
   public assessmentCount = 0;
   public curAssessment: Assessment;
   public values = [];
-  public theNumber: number;
+  public curValue: number;
 
   constructor(
     private store: Store,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
     this.assessments$.subscribe((arr) => this.assessmentCount = arr.length);
   }
 
-  newValue(event) {
-    // console.log("newValue", event);
-    this.theNumber = event;
+  newValue(val) {
+    this.curValue = val;
   }
 
   previous() {
@@ -45,8 +47,20 @@ export class OnboardingPage implements OnInit {
   }
 
   save(assessment: Assessment) {
-    console.log("save", assessment.aid);
-    console.log("value", this.theNumber);
+    var today = new Date().toLocaleDateString();
+    // console.log("save", assessment.aid, this.curValue);
+    const score: Score = {
+      aid: assessment.aid,
+      uid: 'this.user.id',
+      cid: assessment.cid,
+      rawScore: this.curValue,
+      scoreDate: today,
+      expired: false,
+      notes: 'onboarding',
+    };
+    console.log('save new score: ' + JSON.stringify(score));
+    // missing user id
+    // this.userService.saveScore(score);
     this.next();
   }
 
