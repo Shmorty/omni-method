@@ -34,8 +34,13 @@ export class NumberPickerComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.viewPort.scrolledIndexChange.subscribe(index => {
+      console.log("indexChange scrollToIndex", index);
+      this.viewPort.scrollToIndex(index);
       this.value.emit(this.range[index]);
-    })
+      // setTimeout(() => {
+      //   this.viewPort.scrollToIndex(index);
+      // }, 500);
+    });
     // this.viewPort.scrolledIndexChange
     //   .subscribe(event => {
     //     console.log("indexChanged");
