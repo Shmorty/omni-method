@@ -51,7 +51,7 @@ export class OnboardingPage implements OnInit {
     // console.log("save", assessment.aid, this.curValue);
     const score: Score = {
       aid: assessment.aid,
-      uid: 'this.user.id',
+      uid: null,
       cid: assessment.cid,
       rawScore: this.curValue,
       scoreDate: today,

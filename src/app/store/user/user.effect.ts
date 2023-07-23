@@ -101,12 +101,15 @@ export class UserEffects {
         ofType(UserActions.newUserSuccess),
         tap(console.log),
         // tap(() => this.router.navigate(['home']))
-        tap(() => this.router.navigate(['onboarding']))
+        tap((newUser) => {
+          console.log("route newUser to onboarding", newUser);
+          this.router.navigate(['onboarding']);
+        })
       ),
     {dispatch: false}
   );
 
-  // UserActions.newUser
+  // UserActions.updateUserAction
   updateUser$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -162,7 +165,7 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(UserActions.loadUserFailure),
         tap((err) => {
-          console.log('newUserEffect ', err);
+          console.log('loadUserFailure ', err);
           this.router.navigate(['new-user']);
         })
       ),
