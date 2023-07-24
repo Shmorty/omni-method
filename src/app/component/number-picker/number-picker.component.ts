@@ -18,6 +18,7 @@ export class NumberPickerComponent implements OnInit {
   @Input() max = 100;
   @Input() increment = 1;
   @Input() units = "";
+  @Input() direction = 1;
   @Output() value = new EventEmitter<number>;
   @ViewChild(CdkVirtualScrollViewport) viewPort: CdkVirtualScrollViewport;
   range: number[] = [];
@@ -32,7 +33,9 @@ export class NumberPickerComponent implements OnInit {
     this.range = Array.from(
       {length: len},
       (_, index) => this.min + index * this.increment);
-
+    if (this.direction == -1) {
+      this.range = this.range.reverse();
+    }
   }
 
   ngAfterViewInit(): void {
