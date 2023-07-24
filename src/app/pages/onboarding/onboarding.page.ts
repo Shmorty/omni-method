@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {selectAllAssessments} from '../../store/assessments/assessment.selector';
 import {Store} from '@ngrx/store';
-import {Assessment} from 'src/app/store/assessments/assessment.model';
+import {Assessment} from '../../store/assessments/assessment.model';
 import {Router} from '@angular/router';
-import {UserService} from 'src/app/services/user/user.service';
-import {Score} from 'src/app/store/models/score.model';
+import {UserService} from '../../services/user/user.service';
+import {Score} from '../../store/models/score.model';
+import {User} from '../../store/user/user.model';
 
 @Component({
   selector: 'app-onboarding',
@@ -14,11 +15,12 @@ import {Score} from 'src/app/store/models/score.model';
 export class OnboardingPage implements OnInit {
   isInfoOpen = false;
   public assessments$ = this.store.select(selectAllAssessments);
-  public step = 1;
+  public step = 0;
   public assessmentCount = 0;
   public curAssessment: Assessment;
   public values = [];
   public curValue: number;
+  private user: User;
 
   constructor(
     private store: Store,
@@ -27,6 +29,11 @@ export class OnboardingPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    const user$ = this.userService.getUser();
+    user$.subscribe((value) => {
+      this.user = value;
+      console.log("user", this.user);
+    }).unsubscribe();
     this.assessments$.subscribe((arr) => this.assessmentCount = arr.length);
   }
 

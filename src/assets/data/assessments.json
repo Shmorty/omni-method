@@ -230,6 +230,7 @@
       ],
       "min": 0,
       "max": 147,
+      "increment": 0.5,
       "onboarding": {
         "prompt": "How far can you Standing Long Jump?"
       },
@@ -277,6 +278,7 @@
       ],
       "min": 9.58,
       "max": 22,
+      "increment": 0.01,
       "onboarding": {
         "prompt": "How long does it take you to sprint 100 meters?"
       },
@@ -388,6 +390,7 @@
       ],
       "min": 0,
       "max": 13.3,
+      "increment": 0.01,
       "onboarding": {
         "prompt": "How far can you run in 1 hour?"
       },
@@ -411,6 +414,7 @@
       ],
       "min": 0,
       "max": 0.5,
+      "increment": 0.001,
       "onboarding": {
         "prompt": "How far can you run in 2 minutes?"
       },
@@ -435,6 +439,7 @@
       ],
       "min": 0,
       "max": 11.5,
+      "increment": 0.01,
       "onboarding": {
         "prompt": "How long can you hold your breath?"
       },
@@ -460,6 +465,7 @@
       ],
       "min": 13,
       "max": 35,
+      "increment": 0.01,
       "onboarding": {
         "prompt": "How quickly can you perform the half spider web agility test?"
       },

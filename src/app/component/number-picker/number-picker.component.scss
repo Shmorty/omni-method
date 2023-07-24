@@ -1,5 +1,5 @@
 .picker {
-    border: 0.5px solid gray;
+    border: 0px solid gray;
     border-radius: 5px;
     height: 210px;
     margin: auto;
@@ -11,18 +11,24 @@
     line-height: 42px;
     text-align: center;
 }
+.current {
+    color: white;
+    font-weight: bold;
+}
 .spacer {
     height: 84px;
 }
 .highlight {
-    background-color: rgb(119, 157, 251, 50%);
+    // background-color: rgb(64, 159, 251);
+    background-color: rgb(77, 171, 252);
     border-radius: 21px;
     height: 42px;
     margin: auto;
+    pointer-events: none;
     position: relative;
     top: 126px;
     width: 90%;
-    z-index: 1;
+    z-index: -1;
 }
 
 .listbox-container {

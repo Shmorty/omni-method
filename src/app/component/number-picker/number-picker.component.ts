@@ -17,9 +17,12 @@ export class NumberPickerComponent implements OnInit {
   @Input() min = 0;
   @Input() max = 100;
   @Input() increment = 1;
+  @Input() units = "";
   @Output() value = new EventEmitter<number>;
   @ViewChild(CdkVirtualScrollViewport) viewPort: CdkVirtualScrollViewport;
   range: number[] = [];
+  public curIndex = 0;
+  private timeoutId = undefined;
 
   constructor(private scrollDispatcher: ScrollDispatcher) {}
 
@@ -34,12 +37,17 @@ export class NumberPickerComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.viewPort.scrolledIndexChange.subscribe(index => {
-      console.log("indexChange scrollToIndex", index);
-      this.viewPort.scrollToIndex(index);
+      if (typeof this.timeoutId == "number") {
+        clearTimeout(this.timeoutId);
+      }
+      // console.log("indexChange scrollToIndex", index);
+      this.curIndex = index;
+      // this.viewPort.scrollToIndex(index);
       this.value.emit(this.range[index]);
-      // setTimeout(() => {
-      //   this.viewPort.scrollToIndex(index);
-      // }, 500);
+      this.timeoutId = setTimeout(() => {
+        this.viewPort.scrollToIndex(index, 'smooth');
+        this.timeoutId = undefined;
+      }, 350);
     });
     // this.viewPort.scrolledIndexChange
     //   .subscribe(event => {
@@ -51,8 +59,14 @@ export class NumberPickerComponent implements OnInit {
     //   });
   }
 
+  curClass(index) {
+    if (index == this.curIndex) {
+      return "current"
+    }
+  }
+
   click(item) {
     // console.log("click", item);
-    this.viewPort.scrollToIndex(item);
+    this.viewPort.scrollToIndex(item, 'smooth');
   }
 }
