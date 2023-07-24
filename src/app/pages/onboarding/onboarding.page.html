@@ -29,7 +29,7 @@
         ></ion-input> -->
         <app-number-picker [min]="assessment.min" [max]="assessment.max"
           [increment]="(assessment.increment ? assessment.increment : 1)"
-          [units]="assessment.units"
+          [units]="assessment.units" [direction]="direction(assessment)"
           (value)="newValue($event)">pick a number</app-number-picker>
       </div>
       <ion-button type="button" expand="block" (click)="save(assessment)"

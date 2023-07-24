@@ -76,6 +76,14 @@ export class OnboardingPage implements OnInit {
     this.setOpen(true);
   }
 
+  direction(assessment: Assessment) {
+    const reverse = ["PSPR", "TWOMDST", "AGLTY"];
+    if (reverse.includes(assessment.aid)) {
+      return -1;
+    }
+    return 1;
+  }
+
   setOpen(isOpen: boolean) {
     this.isInfoOpen = isOpen;
   }
