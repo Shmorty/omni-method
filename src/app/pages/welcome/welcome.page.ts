@@ -1,7 +1,5 @@
-import { Component, Inject, OnInit, inject } from '@angular/core';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
+import {Component, Inject, OnInit, inject} from '@angular/core';
+import {AuthService} from 'src/app/services/auth.service';
 
 interface Item {
   hello: string;
