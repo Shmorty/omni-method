@@ -2,3 +2,12 @@ user-avatar {
   background: -primary;
   margin: 12px auto;
 }
+ion-content {
+  --background: linear-gradient(#D0EAFF, #fff);
+}
+ion-list {
+  --ion-item-background: transparent;
+}
+ion-item {
+  --ion-item-background: transparent;
+}
