@@ -141,23 +141,23 @@ export class UserEffects {
   );
 
   // UserActions.loadUserSuccess
-  loadScoresEffect$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(UserActions.loadUserSuccess),
-        tap((data) => {
-          // user loaded test if exist
-          if (data.payload) {
-            console.log('loadUserSuccess navigate home');
-            this.router.navigate(['home']);
-          } else {
-            console.log('loadUserSuccess navigate new-user');
-            this.router.navigate(['new-user']);
-          }
-        })
-      ),
-    {dispatch: false}
-  );
+  // loadScoresEffect$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(UserActions.loadUserSuccess),
+  //       tap((data) => {
+  //         // user loaded test if exist
+  //         if (data.payload) {
+  //           console.log('loadUserSuccess navigate home');
+  //           this.router.navigate(['home']);
+  //         } else {
+  //           console.log('loadUserSuccess navigate new-user');
+  //           this.router.navigate(['new-user']);
+  //         }
+  //       })
+  //     ),
+  //   {dispatch: false}
+  // );
 
   // new user effect
   newUserEffect$ = createEffect(
