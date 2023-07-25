@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../../services/user/user.service';
 import {Score} from '../../store/models/score.model';
 import {User} from '../../store/user/user.model';
+import {AuthService} from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-onboarding',
@@ -25,7 +26,8 @@ export class OnboardingPage implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -58,7 +60,7 @@ export class OnboardingPage implements OnInit {
     // console.log("save", assessment.aid, this.curValue);
     const score: Score = {
       aid: assessment.aid,
-      uid: null,
+      uid: this.authService.currUserId,
       cid: assessment.cid,
       rawScore: this.curValue,
       scoreDate: today,
@@ -66,8 +68,7 @@ export class OnboardingPage implements OnInit {
       notes: 'onboarding',
     };
     console.log('save new score: ' + JSON.stringify(score));
-    // missing user id
-    // this.userService.saveScore(score);
+    this.userService.saveScore(score);
     this.next();
   }
 
