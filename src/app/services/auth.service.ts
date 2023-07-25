@@ -73,7 +73,7 @@ export class AuthService {
             payload: JSON.parse(JSON.stringify(res)),
           })
         );
-        // this.router.navigate(['home']);
+        this.router.navigate(['home']);
       },
       (err) => {
         console.log(err);
