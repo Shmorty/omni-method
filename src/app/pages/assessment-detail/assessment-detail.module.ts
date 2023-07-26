@@ -1,19 +1,21 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { AssessmentDetailPageRoutingModule } from './assessment-detail-routing.module';
+import {AssessmentDetailPageRoutingModule} from './assessment-detail-routing.module';
 
-import { AssessmentDetailPage } from './assessment-detail.page';
+import {AssessmentDetailPage} from './assessment-detail.page';
+import {EditChecklistComponent} from 'src/app/component/edit-checklist/edit-checklist.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AssessmentDetailPageRoutingModule
+    AssessmentDetailPageRoutingModule,
+    EditChecklistComponent
   ],
   declarations: [AssessmentDetailPage]
 })
