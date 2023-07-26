@@ -1,9 +1,7 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {CdkVirtualScrollViewport, ScrollDispatcher, ScrollingModule} from '@angular/cdk/scrolling';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
-import {Observable, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-number-picker',
