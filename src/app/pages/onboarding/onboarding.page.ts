@@ -7,6 +7,7 @@ import {UserService} from '../../services/user/user.service';
 import {Score} from '../../store/models/score.model';
 import {User} from '../../store/user/user.model';
 import {AuthService} from 'src/app/services/auth.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-onboarding',
@@ -22,6 +23,8 @@ export class OnboardingPage implements OnInit {
   public values = [];
   public curValue: number;
   private user: User;
+  public scores$: Observable<Score[]>;
+  public displayChecked: boolean[] = [];
 
   constructor(
     private store: Store,
@@ -37,6 +40,8 @@ export class OnboardingPage implements OnInit {
       console.log("user", this.user);
     }).unsubscribe();
     this.assessments$.subscribe((arr) => this.assessmentCount = arr.length);
+    // this.scores$ = this.userService.getScoresForAssessment(assessment);
+    this.scores$ = undefined;
   }
 
   newValue(val) {
@@ -53,6 +58,14 @@ export class OnboardingPage implements OnInit {
     } else {
       this.router.navigate(['home']);
     }
+  }
+
+  updateChecked(checked) {
+    // if (this.displayChecked.length) {
+    //   this.checklistChanged = true;
+    //   this.routerOutlet.swipeGesture = false;
+    // }
+    this.displayChecked = checked;
   }
 
   save(assessment: Assessment) {
