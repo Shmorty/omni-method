@@ -8,6 +8,7 @@ import {OnboardingPageRoutingModule} from './onboarding-routing.module';
 
 import {OnboardingPage} from './onboarding.page';
 import {NumberPickerComponent} from 'src/app/component/number-picker/number-picker.component';
+import {EditChecklistComponent} from 'src/app/component/edit-checklist/edit-checklist.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import {NumberPickerComponent} from 'src/app/component/number-picker/number-pick
     FormsModule,
     IonicModule,
     OnboardingPageRoutingModule,
-    NumberPickerComponent
+    NumberPickerComponent,
+    EditChecklistComponent
   ],
   declarations: [
     OnboardingPage

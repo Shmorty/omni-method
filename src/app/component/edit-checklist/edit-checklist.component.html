@@ -12,8 +12,8 @@
     </ol>
   </ion-item>
   <ion-card
-    class="card"
     *ngFor="let item of checklist$ | async; let i = index"
+    class="card"
     (click)="toggleCheckItem(i)"
     [ngClass]="!(i%2) ? 'left' : 'right'">
     <ion-label>{{item["label"]}}</ion-label>
