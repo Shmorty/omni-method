@@ -34,16 +34,16 @@ export class EditChecklistComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    // this.checklist$ = this.assessmentService.getChecklist(this.assessment.aid);
-    // this.scores$?.subscribe((score) => {
-    //   console.log("score", score);
-    //   if (score.length > 0) {
-    //     // assuming most recent on top or only store one
-    //     this.curScore = score[0];
-    //     this.displayChecked = Array.from(this.curScore.checklist);
-    //     this.checked.emit(this.displayChecked);
-    //   }
-    // });
+    this.checklist$ = this.assessmentService.getChecklist(this.assessment.aid);
+    this.scores$?.subscribe((score) => {
+      console.log("score", score);
+      if (score.length > 0) {
+        // assuming most recent on top or only store one
+        this.curScore = score[0];
+        this.displayChecked = Array.from(this.curScore.checklist);
+        this.checked.emit(this.displayChecked);
+      }
+    });
 
   }
 

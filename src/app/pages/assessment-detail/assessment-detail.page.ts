@@ -50,8 +50,10 @@ export class AssessmentDetailPage implements OnInit {
     });
 
     this.assessment$.subscribe((assessment) => {
+      console.log("getScoresForAssessment", assessment);
       this.scores$ = this.userService.getScoresForAssessment(assessment);
       this.scores$?.subscribe((score) => {
+        console.log("score", score);
         if (score.length > 0) {
           // assuming most recent on top or only store one
           this.curScore = score[0];
