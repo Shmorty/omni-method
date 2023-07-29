@@ -98,7 +98,7 @@ export class AuthService {
             payload: JSON.parse(JSON.stringify(res)),
           })
         );
-        // this.saveUser(res);
+        this.saveUser(res);
         this.router.navigate(['/new-user']);
       },
       (err) => {
