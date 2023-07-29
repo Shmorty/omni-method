@@ -69,8 +69,15 @@ export class OnboardingPage implements OnInit {
   }
 
   save(assessment: Assessment) {
+    // if userId not set return to login
+    const userId = this.authService.currUserId;
+    if (!userId) {
+      alert("userId missing please return to login");
+      this.router.navigate(['login']);
+      return;
+    }
+    // save assessment score
     var today = new Date().toLocaleDateString();
-    // console.log("save", assessment.aid, this.curValue);
     const score: Score = {
       aid: assessment.aid,
       uid: this.authService.currUserId,
@@ -80,7 +87,10 @@ export class OnboardingPage implements OnInit {
       expired: false,
       notes: 'onboarding',
     };
-    console.log('save new score: ' + JSON.stringify(score));
+    if (assessment.checklist) {
+      score.checklist = this.displayChecked;
+      score.rawScore = this.displayChecked.filter(item => item).length;
+    }
     this.userService.saveScore(score);
     this.next();
   }
