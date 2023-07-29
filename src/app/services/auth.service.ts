@@ -44,17 +44,18 @@ export class AuthService {
   currUser: OmniUser.User;
 
   constructor(private router: Router, private store: Store<AppState>) {
-    // onAuthStateChanged(this.auth, (user) => {
-    //   if (user) {
-    //     this.store.dispatch(
-    //       UserActions.userAuthenticatd({payload: JSON.parse(JSON.stringify({user: user}))})
-    //     );
-
-    //     // } else {
-    //     //   console.log("User is signed out");
-    //     //   this.router.navigate(['/login']);
-    //   }
-    // });
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        // this.saveUser(user);
+        console.log("User is authenticated, save user", user);
+        this.store.dispatch(
+          UserActions.userAuthenticatd({payload: JSON.parse(JSON.stringify({user: user}))})
+        );
+      } else {
+        console.log("User is signed out");
+        this.router.navigate(['/welcome']);
+      }
+    });
   }
 
   currentUser(): Promise<any> {
