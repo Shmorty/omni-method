@@ -1,7 +1,7 @@
-import { AuthenticationUser, User } from './user.model';
+import {AuthenticationUser, User} from './user.model';
 import * as UserActions from './user.actions';
-import { createReducer, on } from '@ngrx/store';
-import { Score } from '../models/score.model';
+import {createReducer, on} from '@ngrx/store';
+import {Score} from '../models/score.model';
 
 export interface UserState {
   isAuthenticated: boolean;
@@ -23,7 +23,7 @@ const initialState: UserState = {
 
 export const userReducer = createReducer(
   initialState,
-  on(UserActions.userAuthenticatd, (state, action) => ({
+  on(UserActions.userAuthenticated, (state, action) => ({
     ...state,
     isAuthenticated: true,
     authUser: action.payload,

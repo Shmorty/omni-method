@@ -16,6 +16,7 @@ export interface Assessment {
   onboarding: {prompt: string};
   units?: string;
   scores?: Score[];
+  warning?: string;
 }
 
 export interface Category {

@@ -69,6 +69,12 @@
         </ion-accordion>
       </ion-accordion-group>
 
+      <ng-container *ngIf="assessment.warning">
+        <ion-item lines="full">
+          <ion-icon slot="start" name="warning" color="warning" size="large"></ion-icon>
+          <p>{{ assessment.warning }}</p>
+        </ion-item>
+      </ng-container>
       <ng-container *ngIf="assessment.description">
         <ion-item lines="none">
           <ion-label>

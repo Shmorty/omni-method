@@ -445,7 +445,8 @@
       },
       "rules":[
         "Time stops after inhale"
-      ]
+      ],
+      "warning": "Not to be done in water or anything like that"
     },
     {
       "aid": "AGLTY",
