@@ -6,7 +6,7 @@ Using NgRx
 
 ### User Actions
 
-- userAuthenticatd
+- userAuthenticated
 - logoutAction
 - loadUserAction
 - loadUserSuccess

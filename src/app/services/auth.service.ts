@@ -49,7 +49,7 @@ export class AuthService {
         // this.saveUser(user);
         console.log("User is authenticated, save user", user);
         this.store.dispatch(
-          UserActions.userAuthenticatd({payload: JSON.parse(JSON.stringify({user: user}))})
+          UserActions.userAuthenticated({payload: JSON.parse(JSON.stringify({user: user}))})
         );
       } else {
         console.log("User is signed out");
@@ -70,7 +70,7 @@ export class AuthService {
         // localStorage.setItem('userId', res.user.uid);
         this.saveUser(res);
         this.store.dispatch(
-          UserActions.userAuthenticatd({
+          UserActions.userAuthenticated({
             payload: JSON.parse(JSON.stringify(res)),
           })
         );
@@ -95,7 +95,7 @@ export class AuthService {
         //   UserActions.registerUserSuccess({ payload: clonedUser })
         // );
         this.store.dispatch(
-          UserActions.userAuthenticatd({
+          UserActions.userAuthenticated({
             payload: JSON.parse(JSON.stringify(res)),
           })
         );
@@ -161,7 +161,7 @@ export class AuthService {
         // if user not found got to register user
         // if user found go to home page
         this.store.dispatch(
-          UserActions.userAuthenticatd({
+          UserActions.userAuthenticated({
             payload: JSON.parse(JSON.stringify(res)),
           })
         );

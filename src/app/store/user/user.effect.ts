@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {map, switchMap, tap, catchError, finalize, take, takeWhile, takeUntil} from 'rxjs/operators';
+import {map, switchMap, tap, catchError, finalize, take, takeWhile, takeUntil, first} from 'rxjs/operators';
 import * as UserActions from './user.actions';
 import {Store} from '@ngrx/store';
-import {of} from 'rxjs';
+import {EMPTY, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {UserFirestoreService} from 'src/app/services/user-firestore.service';
 
@@ -38,12 +38,12 @@ export class UserEffects {
     {dispatch: false}
   );
 
-  // UserActions.userAuthenticatd
+  // UserActions.userAuthenticated
   userAuthenticated$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UserActions.userAuthenticatd),
+      ofType(UserActions.userAuthenticated),
       tap((payload) =>
-        console.log('userAuthenticatd effect', JSON.stringify(payload))
+        console.log('userAuthenticated effect', JSON.stringify(payload))
       ),
       map((payload) =>
         UserActions.loadUserAction({uid: payload.payload.user.uid})
@@ -57,12 +57,15 @@ export class UserEffects {
       ofType(UserActions.loadUserAction),
       tap(console.log),
       switchMap(({uid}) => {
+        // 
         return this.firestoreService.getUserById(uid)
           .pipe(takeUntil(this.logout$))
+          // .pipe(first())
           .pipe(
             tap((res) => console.log('firestore getUserById response', res)),
             map((res) => {
               if (res) {
+                // 
                 return UserActions.loadUserSuccess({payload: res});
               } else {
                 return UserActions.loadUserFailure({error: 'not found'});
@@ -146,14 +149,19 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(UserActions.loadUserSuccess),
         tap((data) => {
+          console.log("loadUserSuccess router.url", this.router.url);
           // user loaded test if exist
           if (data.payload) {
             if (data.payload.omniScore) {
               // go to home page
-              this.router.navigate(['home']);
+              if (this.router.url !== "/onboarding") {
+                this.router.navigate(['home']);
+              }
             } else {
-              // go to onboarding
-              this.router.navigate(['onboarding']);
+              if (this.router.url !== "/home/profile") {
+                // go to onboarding
+                this.router.navigate(['onboarding']);
+              }
             }
           } else {
             console.log('loadUserSuccess navigate new-user');

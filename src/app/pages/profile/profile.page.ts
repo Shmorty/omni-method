@@ -19,9 +19,8 @@ import * as UserSelectors from 'src/app/store/user/user.selectors';
 // } from 'src/app/store/omni-score/omni-score.selector';
 import {tap} from 'rxjs/operators';
 import {EditProfilePage} from '../edit-profile/edit-profile.page';
-import {OmniScoreService, oneDay} from 'src/app/services/omni-score.service';
-import {loadUserAction} from 'src/app/store/user/user.actions';
-import {UserService} from 'src/app/services/user/user.service';
+import {OmniScoreService, oneDay} from '../../services/omni-score.service';
+import {UserService} from '../../services/user/user.service';
 
 @Component({
   selector: 'app-profile',

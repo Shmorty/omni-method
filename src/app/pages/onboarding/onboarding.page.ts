@@ -56,6 +56,7 @@ export class OnboardingPage implements OnInit {
     if ((this.step + 1) < this.assessmentCount) {
       ++this.step;
     } else {
+      this.userService.reloadUser();
       this.router.navigate(['home']);
     }
   }
