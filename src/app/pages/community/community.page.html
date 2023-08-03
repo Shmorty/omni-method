@@ -1,63 +1,68 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="light">
     <ion-title>Community</ion-title>
     <ion-button slot="end" (click)="logout()">
       <ion-icon name="log-out-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>
-  <ion-segment value="rankings" (ionChange)="segmentChange($event)">
-    <ion-segment-button value="rankings">
-      <ion-label>Rankings</ion-label>
-    </ion-segment-button>
-    <ion-segment-button [disabled]="false">
-      <ion-label>Updates</ion-label>
-    </ion-segment-button>
-    <ion-segment-button [disabled]="false">
-      <ion-label>People</ion-label>
-    </ion-segment-button>
-  </ion-segment>
 </ion-header>
 <ion-content [fullscreen]="true">
   <ion-header class="safe-area">
   </ion-header>
-  <ion-list style="margin: 8px;" *ngIf="view===View.Rankings">
-    <!-- <ion-list-header>
-      <ion-button class="setting-button">Male</ion-button>
-      <ion-button class="setting-button">National</ion-button>
-      <ion-button class="setting-button">Overall</ion-button>
-    </ion-list-header> -->
-    <ion-item class="rank-header" lines="full">
-      <!-- <ion-text slot="start">&nbsp;</ion-text> -->
-      <ion-text color="medium" slot="start">Ranking</ion-text>
-      <ion-text color="medium" style="padding-left: 24px;">Name</ion-text>
-      <ion-text color="medium" slot="end">Score</ion-text>
-    </ion-item>
-    <ion-item *ngFor="let athlete of ranking$ | async; let i = index"
-      (click)="showDetail(athlete)" ngClass="{{highlightUser(athlete)}}"
-      color="{{highlightUser(athlete)}}"
-      lines="full">
-      <ion-text slot="start">{{i+1}}</ion-text>
-      <ion-text *ngIf="athlete.nickname">{{athlete.nickname}}</ion-text>
-      <ion-text *ngIf="!athlete.nickname">{{athlete.firstName}} {{athlete.lastName}}</ion-text>
-      <ion-text slot="end">{{athlete.omniScore | number}}</ion-text>
-    </ion-item>
-  </ion-list>
-  <ion-list *ngIf="view===View.Updates">
-    <ion-card *ngFor="let number of [1,2,3,4,5,6]">
-      <ion-card-header>
-        <ion-card-title>card title</ion-card-title>
-        <ion-card-subtitle>card subtitle</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>{{number}} - card content </ion-card-content>
-    </ion-card>
-  </ion-list>
-  <ion-list *ngIf="view===View.People">
-    <ion-card *ngFor="let number of [1,2,3,4,5,6]">
-      <ion-card-header>
-        <ion-card-title>card title</ion-card-title>
-        <ion-card-subtitle>card subtitle</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>{{number}} - Profile </ion-card-content>
-    </ion-card>
-  </ion-list>
+  <!-- (ionChange)="segmentChange($event)" -->
+  <ion-segment value="rankings"
+  [(ngModel)]="type"
+   color="primary">
+    <ion-segment-button value="rankings">
+      <ion-label>Rankings</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="updates">
+      <ion-label>Updates</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="people">
+      <ion-label>People</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ng-container [ngSwitch]="type">
+    <ion-list style="margin: 8px;" *ngSwitchCase="'rankings'">
+      <!-- <ion-list-header>
+        <ion-button class="setting-button">Male</ion-button>
+        <ion-button class="setting-button">National</ion-button>
+        <ion-button class="setting-button">Overall</ion-button>
+      </ion-list-header> -->
+      <ion-item class="rank-header" lines="full">
+        <!-- <ion-text slot="start">&nbsp;</ion-text> -->
+        <ion-text color="medium" slot="start">Ranking</ion-text>
+        <ion-text color="medium" style="padding-left: 24px;">Name</ion-text>
+        <ion-text color="medium" slot="end">Score</ion-text>
+      </ion-item>
+      <ion-item *ngFor="let athlete of ranking$ | async; let i = index"
+        (click)="showDetail(athlete)" ngClass="{{highlightUser(athlete)}}"
+        color="{{highlightUser(athlete)}}"
+        lines="full">
+        <ion-text slot="start">{{i+1}}</ion-text>
+        <ion-text *ngIf="athlete.nickname">{{athlete.nickname}}</ion-text>
+        <ion-text *ngIf="!athlete.nickname">{{athlete.firstName}} {{athlete.lastName}}</ion-text>
+        <ion-text slot="end">{{athlete.omniScore | number}}</ion-text>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'updates'">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title></ion-card-title>
+          <ion-card-subtitle>Community Updates</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>coming soon</ion-card-content>
+      </ion-card>
+    </ion-list>
+    <ion-list *ngSwitchCase="'people'">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title></ion-card-title>
+          <ion-card-subtitle>People</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>coming soon</ion-card-content>
+      </ion-card>
+    </ion-list>
+  </ng-container>
 </ion-content>
