@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content scroll-y="false">
   <ion-progress-bar class="progress" [value]="step / (assessments$ | async).length"></ion-progress-bar>
 
   <ng-container *ngFor="let assessment of assessments$ | async; index as i">
