@@ -1,7 +1,7 @@
-import { createSelector } from '@ngrx/store';
-import { AppState } from '../app.state';
-import { Category } from './assessment.model';
-import { AssessmentState } from './assessment.reducer';
+import {createSelector} from '@ngrx/store';
+import {AppState} from '../app.state';
+import {Category} from './assessment.model';
+import {AssessmentState} from './assessment.reducer';
 
 export const selectAssessments = (state: AppState) => state.assessmentState;
 export const selectAllAssessments = createSelector(
@@ -21,6 +21,11 @@ export const selectCategoryById = (cid: string) =>
 export const selectAssessmentById = (aid: string) =>
   createSelector(selectAssessments, (state: AssessmentState) =>
     state.assessments.find((assessment) => assessment.aid === aid)
+  );
+
+export const selectAssessmentByIndex = (index: number) =>
+  createSelector(selectAssessments, (state: AssessmentState) =>
+    state.assessments[index]
   );
 
 export const assessmentsByCategory = (category: Category) =>
