@@ -23,8 +23,8 @@
       <div *ngIf="!assessment.checklist">
         <app-number-picker [min]="assessment.min" [max]="assessment.max"
           [increment]="(assessment.increment ? assessment.increment : 1)"
-          [units]="assessment.units" [direction]="direction(assessment)"
-          (value)="newValue($event)">pick a number</app-number-picker>
+          [units]="assessment.entryUnits" [direction]="direction(assessment)"
+          (value)="newValue($event)"></app-number-picker>
       </div>
       <div *ngIf="assessment.checklist">
         <app-edit-checklist [assessment]="assessment" [scores$]="scores$"

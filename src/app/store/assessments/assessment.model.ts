@@ -15,6 +15,7 @@ export interface Assessment {
   increment?: number;
   onboarding: {prompt: string};
   units?: string;
+  entryUnits?: string;
   scores?: Score[];
   warning?: string;
 }

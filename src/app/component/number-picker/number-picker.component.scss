@@ -20,7 +20,7 @@
 }
 .highlight {
     // background-color: rgb(64, 159, 251);
-    background-color: rgb(77, 171, 252);
+    background-color: #4dabfc;
     border-radius: 21px;
     height: 42px;
     margin: auto;
@@ -30,7 +30,11 @@
     width: 90%;
     z-index: -1;
 }
-
+.units {
+    position: absolute;
+    right: 20px;
+    top: 9px;
+}
 .listbox-container {
     display: block;
     width: 250px;
