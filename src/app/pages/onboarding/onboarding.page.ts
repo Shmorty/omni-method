@@ -8,6 +8,7 @@ import {Score} from '../../store/models/score.model';
 import {User} from '../../store/user/user.model';
 import {AuthService} from 'src/app/services/auth.service';
 import {Observable} from 'rxjs';
+import {AssessmentService} from 'src/app/services/assessments/assessment.service';
 
 @Component({
   selector: 'app-onboarding',
@@ -16,7 +17,7 @@ import {Observable} from 'rxjs';
 })
 export class OnboardingPage implements OnInit {
   isInfoOpen = false;
-  public assessments$ = this.store.select(selectAllAssessments);
+  public assessments$ = this.assessmentService.getAllAssessments();
   public step = 0;
   public assessmentCount = 0;
   public curAssessment: Assessment;
@@ -25,9 +26,10 @@ export class OnboardingPage implements OnInit {
   private user: User;
   public scores$: Observable<Score[]>;
   public displayChecked: boolean[] = [];
+  public isChecklist = false;
 
   constructor(
-    private store: Store,
+    private assessmentService: AssessmentService,
     private router: Router,
     private userService: UserService,
     private authService: AuthService
@@ -50,11 +52,17 @@ export class OnboardingPage implements OnInit {
 
   previous() {
     --this.step;
+    this.assessmentService.getAssessmentByIndex(this.step).pipe().subscribe((assessment) => {
+      this.isChecklist = assessment.checklist;
+    });
   }
 
   next() {
     if ((this.step + 1) < this.assessmentCount) {
       ++this.step;
+      this.assessmentService.getAssessmentByIndex(this.step).pipe().subscribe((assessment) => {
+        this.isChecklist = assessment.checklist;
+      });
     } else {
       this.userService.reloadUser();
       this.router.navigate(['home']);
