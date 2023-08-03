@@ -1,10 +1,14 @@
-<div class="highlight"></div>
+<div class="highlight">
+  <span class="units current" slot="right">
+    {{units}}
+  </span>
+</div>
 <cdk-virtual-scroll-viewport itemSize="42"  class="picker">
   <div class="spacer"></div>
   <div *cdkVirtualFor="let value of range;index as i" class="picker-opt"
     [ngClass]="curClass(i)"
     (click)="click(i)">
-    {{value | number: '1.0-3'}}&nbsp;{{units}}
+    {{value | number: '1.0-3'}}
   </div>
   <div class="spacer"></div>
 </cdk-virtual-scroll-viewport>
