@@ -38,18 +38,22 @@ export class NewScorePage implements OnInit {
     console.log("newScore ngOnInit");
     // prefill date
     var today = new Date().toLocaleDateString();
-    this.formData = new FormGroup({
-      rawScore: new FormControl('', [
-        Validators.required,
-        Validators.min(this.assessment.min),
-        Validators.max(this.assessment.max),
-      ]),
-      scoreDate: new FormControl(today, Validators.required),
-      notes: new FormControl(''),
-    });
+    
     this.user$
       .subscribe((value) => {
         this.user = value;
+        this.formData = new FormGroup({
+          rawScore: new FormControl('', [
+            Validators.required,
+            Validators.min(this.assessment.min),
+            Validators.max(this.assessment.max),
+          ]),
+          scoreDate: new FormControl(today, Validators.required),
+          notes: new FormControl(''),
+          currentWeight: new FormControl(value.weight, [
+            Validators.required,
+          ]),
+        });
       })
       .unsubscribe();
       console.log("ngOnInit scoreInput", this.scoreInput);
@@ -76,6 +80,7 @@ export class NewScorePage implements OnInit {
       cid: this.assessment.cid,
       rawScore: this.formData.controls['rawScore'].value,
       scoreDate: this.formData.controls['scoreDate'].value,
+      currentWeight: this.formData.controls['currentWeight'].value,
       expired: false,
       notes: this.formData.controls['notes'].value,
     };
