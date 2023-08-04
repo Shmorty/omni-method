@@ -4,9 +4,10 @@ import {FormsModule} from '@angular/forms';
 
 import {IonicModule} from '@ionic/angular';
 
-import {AssessmentDetailPageRoutingModule} from './assessment-detail-routing.module';
+import {OnboardingPageRoutingModule} from './onboarding-routing.module';
 
-import {AssessmentDetailPage} from './assessment-detail.page';
+import {OnboardingPage} from './onboarding.page';
+import {NumberPickerComponent} from 'src/app/component/number-picker/number-picker.component';
 import {EditChecklistComponent} from 'src/app/component/edit-checklist/edit-checklist.component';
 
 @NgModule({
@@ -14,9 +15,12 @@ import {EditChecklistComponent} from 'src/app/component/edit-checklist/edit-chec
     CommonModule,
     FormsModule,
     IonicModule,
-    AssessmentDetailPageRoutingModule,
+    OnboardingPageRoutingModule,
+    NumberPickerComponent,
     EditChecklistComponent
   ],
-  declarations: [AssessmentDetailPage]
+  declarations: [
+    OnboardingPage
+  ]
 })
-export class AssessmentDetailPageModule {}
+export class OnboardingPageModule {}

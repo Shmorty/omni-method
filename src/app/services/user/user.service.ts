@@ -18,6 +18,7 @@ import {
 } from '../../store/user/user.selectors';
 import {Assessment} from '../../store/assessments/assessment.model';
 import {UserFirestoreService} from '../user-firestore.service';
+import {AuthService} from '../auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -25,11 +26,23 @@ import {UserFirestoreService} from '../user-firestore.service';
 export class UserService implements IUserService {
   constructor(private http: HttpClient,
     private store: Store<AppState>,
-    private firestoreService: UserFirestoreService) {}
+    private firestoreService: UserFirestoreService,
+    private authService: AuthService) {}
 
   // get user from store
   getUser() {
     return this.store.select(selectUser);
+  }
+
+  reloadUser() {
+    this.store.select(selectAuthUser).subscribe((authUser) => {
+      // console.log("selectAuthUser authUser", authUser.user.uid);
+      this.store.dispatch(UserActions.loadUserAction({uid: authUser?.user.uid}));
+    });
+    // this.authService.currentUser().then((authUser) => {
+    //   console.log("authService authUser", authUser);
+    // });
+    // console.log("authService currUserId", this.authService.currUserId);
   }
 
   getUserRankings(): Observable<User[]> {
@@ -56,7 +69,9 @@ export class UserService implements IUserService {
           console.log('dispatch newUser action');
           this.store.dispatch(UserActions.newUser({payload: user}));
         },
-        (err) => console.error('Observer got an error: ' + err)
+        (err) => {
+          console.error('Observer got an error: ' + err);
+        }
       );
   }
 

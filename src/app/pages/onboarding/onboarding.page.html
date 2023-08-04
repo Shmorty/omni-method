@@ -1,0 +1,95 @@
+<ion-header collapse="fade">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()" [disabled]="step == 0">back</ion-button>
+    </ion-buttons>
+    <ion-title>Onboarding</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="next()">skip</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [attr.scroll-y]="isChecklist">
+  <ion-progress-bar class="progress" [value]="step / (assessments$ | async).length"></ion-progress-bar>
+
+  <ng-container *ngFor="let assessment of assessments$ | async; index as i">
+    <div id="{{assessment.aid}}" *ngIf="step == i">
+      <ion-item color="default">
+        <ion-text class="ion-text-center prompt">{{assessment.onboarding.prompt}}</ion-text>
+        <ion-icon slot="end" name="information-circle-outline" size="large" color="primary"
+        (click)="openInfo(assessment)"></ion-icon>
+      </ion-item>
+      <div *ngIf="!assessment.checklist">
+        <app-number-picker [min]="assessment.min" [max]="assessment.max"
+          [increment]="(assessment.increment ? assessment.increment : 1)"
+          [units]="assessment.entryUnits" [direction]="direction(assessment)"
+          (value)="newValue($event)"></app-number-picker>
+      </div>
+      <div *ngIf="assessment.checklist">
+        <app-edit-checklist [assessment]="assessment" [scores$]="scores$"
+        (checked)="updateChecked($event)"
+          ></app-edit-checklist>
+      </div>
+      <div class="footer">
+        <ion-button type="button" class="footer-button" expand="block" (click)="save(assessment)"
+        class="footer-button"><ion-icon name="save-outline"></ion-icon></ion-button>
+      </div>
+    </div>
+  </ng-container>
+
+  <ion-modal [isOpen]="isInfoOpen" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{curAssessment.label}}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ng-container *ngIf="curAssessment.description">
+          <ion-item lines="none">
+          <ion-label>
+            <ion-card-title>
+              <h1>Description</h1>
+            </ion-card-title>
+          </ion-label>
+          </ion-item>
+        <ion-item lines="full">
+          <p>{{ curAssessment.description }}</p>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngIf="curAssessment.instruction.length > 0">
+        <ion-item lines="none">
+          <ion-label>
+            <ion-card-title>
+              <h1>Instructions</h1>
+            </ion-card-title>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="full">
+          <ol>
+            <li *ngFor="let item of curAssessment.instruction">{{item}}</li>
+          </ol>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngIf="curAssessment.rules.length > 0">
+        <ion-item lines="none">
+          <ion-label>
+            <ion-card-title>
+              <h1>Rules</h1>
+            </ion-card-title>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ol>
+            <li *ngFor="let item of curAssessment.rules">{{item}}</li>
+          </ol>
+        </ion-item>
+        </ng-container>
+    </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

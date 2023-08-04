@@ -6,7 +6,7 @@ Using NgRx
 
 ### User Actions
 
-- userAuthenticatd
+- userAuthenticated
 - logoutAction
 - loadUserAction
 - loadUserSuccess
@@ -65,7 +65,8 @@ Using diagram to workout combination of SSO with registration.
   graph TD;
       A[Register/Authnticate] --> B[Get User];
       B -- No --> D[Add User];
-      D --> E[Load Scores];
+      D --> C[Onboarding];
+      C --> E[Load Scores];
       B -- Yes --> E;
       E --> I[Update Profile];
       E --> F[Add Score];

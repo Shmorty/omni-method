@@ -1,8 +1,8 @@
 // import { createAction, props } from "@ngrx/store";
 import * as fireAuth from '@angular/fire/auth';
-import { createAction, props } from '@ngrx/store';
-import { Score } from '../models/score.model';
-import { User } from './user.model';
+import {createAction, props} from '@ngrx/store';
+import {Score} from '../models/score.model';
+import {User} from './user.model';
 
 export enum UserActionType {
   USER_AUTHENTICATED = '[User Login] User Authenticated',
@@ -25,72 +25,72 @@ export enum UserActionType {
   LOAD_USER_SCORES_SUCCESS = '[User API] Load User Scores Successful',
 }
 
-export const userAuthenticatd = createAction(
+export const userAuthenticated = createAction(
   UserActionType.USER_AUTHENTICATED,
-  props<{ payload: any }>()
+  props<{payload: any}>()
 );
 export const logoutAction = createAction(UserActionType.USER_LOGOUT);
 export const loadUserAction = createAction(
   UserActionType.LOAD_USER,
-  props<{ uid: string }>()
+  props<{uid: string}>()
 );
 export const registerUserSuccess = createAction(
   UserActionType.REGISTER_USER_SUCCESS,
-  props<{ payload: fireAuth.User }>()
+  props<{payload: fireAuth.User}>()
 );
 export const registerUserFailure = createAction(
   UserActionType.REGISTER_USER_FAILURE,
-  props<{ error: any }>()
+  props<{error: any}>()
 );
 export const loadUserSuccess = createAction(
   UserActionType.LOAD_USER_SUCCESSFUL,
-  props<{ payload: User }>()
+  props<{payload: User}>()
 );
 export const loadUserFailure = createAction(
   UserActionType.LOAD_USER_FAILURE,
-  props<{ error: any }>()
+  props<{error: any}>()
 );
 export const newUser = createAction(
   UserActionType.NEW_USER,
-  props<{ payload: User }>()
+  props<{payload: User}>()
 );
 export const newUserSuccess = createAction(
   UserActionType.NEW_USER_SUCCESS,
-  props<{ payload: User }>()
+  props<{payload: User}>()
 );
 export const newUserFailure = createAction(
   UserActionType.NEW_USER_FAILURE,
-  props<{ error: any }>()
+  props<{error: any}>()
 );
 export const updateUserAction = createAction(
   UserActionType.UPDATE_USER,
-  props<{ payload: User }>()
+  props<{payload: User}>()
 );
 export const deleteUserScore = createAction(
   UserActionType.DELETE_USER_SCORE,
-  props<{ payload: Score }>()
+  props<{payload: Score}>()
 );
 export const saveNewScore = createAction(
   UserActionType.SAVE_NEW_SCORE,
-  props<{ score: Score }>()
+  props<{score: Score}>()
 );
 export const saveNewScoreSuccess = createAction(
   UserActionType.SAVE_NEW_SCORE_SUCCESS,
-  props<{ score: Score }>()
+  props<{score: Score}>()
 );
 export const deleteAssessmentScore = createAction(
   UserActionType.DELETE_ASSESSMENT_SCORE,
-  props<{ score: Score }>()
+  props<{score: Score}>()
 );
 export const deleteAssessmentScoreSuccess = createAction(
   UserActionType.DELETE_ASSESSMENT_SCORE_SUCCESS,
-  props<{ score: Score }>()
+  props<{score: Score}>()
 );
 export const loadUserScoresAction = createAction(
   UserActionType.LOAD_USER_SCORES,
-  props<{ uid: string }>()
+  props<{uid: string}>()
 );
 export const loadUserScoresSuccessAction = createAction(
   UserActionType.LOAD_USER_SCORES_SUCCESS,
-  props<{ scores: Score[] }>()
+  props<{scores: Score[]}>()
 );

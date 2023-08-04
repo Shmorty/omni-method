@@ -38,6 +38,7 @@
       "label": "Deadlift",
       "icon": "/assets/images/deadlift.png",
       "units": "1RM (lbs)",
+      "entryUnits": "lbs",
       "description": "",
       "descriptionHide": "A deadlift is a resistance exercise in which you hinge your hips to lift a loaded barbell off the floor.  The 1RM deadlift assessment tests your maximum force production while lifting a loaded barbell off of the floor. This test is to be performed without equipment including belts, straps, or sleeves.",
       "instruction": [
@@ -64,6 +65,7 @@
       "label": "Squat",
       "icon": "/assets/images/backsquat.png",
       "units": "1RM (lbs)",
+      "entryUnits": "lbs",
       "description": "",
       "descriptionHide": "No supportive equipment (Weight lifting belt allowed). Must squat below parallel",
       "instruction": [
@@ -88,6 +90,7 @@
       "label": "Bench",
       "icon": "/assets/images/BenchPress.png",
       "units": "1RM (lbs)",
+      "entryUnits": "lbs",
       "description": "",
       "descriptionHide": "No supportive equipment. Barbell must make contact with body in bottom position",
       "instruction": [
@@ -114,6 +117,7 @@
       "label": "Weighted Pull-up",
       "icon": "/assets/images/weightedpullup.png",
       "units": "1RM (lbs)",
+      "entryUnits": "lbs",
       "description": "",
       "descriptionHide": "No supportive equipment. Weight added below waist. No kipping. Must start in dead-hang position. Must pause in top position for 1 second. Bottom of chin must reach higher than the top of the bar.",
       "instruction": [
@@ -142,6 +146,7 @@
       "label": "Pushups",
       "icon": "/assets/images/pushup.png",
       "units": "Reps",
+      "entryUnits": "Reps",
       "description": "",
       "descriptionHide": "No stopping movement at any point once the test has begun. Top of elbows must be higher than top of the shoulders in bottom position. Arms must straighten in top position.",
       "instruction": [
@@ -168,6 +173,7 @@
       "label": "Pullups",
       "icon": "/assets/images/pull_up.png",
       "units": "Reps",
+      "entryUnits": "Reps",
       "description": "",
       "descriptionHide": "No stopping movement at any point once the test has begun. Arms must straighten in bottom position. Bottom of chin must reach higher than the top of the bar. No kipping.",
       "instruction": [
@@ -195,6 +201,7 @@
       "label": "Squats",
       "icon": "/assets/images/backsquat.png",
       "units": "Reps",
+      "entryUnits": "Reps",
       "description": "",
       "descriptionHide": "No stopping movement at any point once the test has begun. Top of thighs must be below top of knees in bottom position. Knees must straighten in top position.",
       "instruction": [
@@ -218,9 +225,10 @@
     {
       "aid": "STLJ",
       "cid": "POWR",
-      "label": "Standing Long Jump",
+      "label": "Long Jump",
       "icon": "/assets/images/Long_Jump.png",
       "units": "Length (in)",
+      "entryUnits": "inches",
       "description": "",
       "instruction": [
         "Stand with feet in any stance behind a clear line",
@@ -230,6 +238,7 @@
       ],
       "min": 0,
       "max": 147,
+      "increment": 0.5,
       "onboarding": {
         "prompt": "How far can you Standing Long Jump?"
       },
@@ -244,6 +253,7 @@
       "label": "Push Press",
       "icon": "/assets/images/ChestLaunch.png",
       "units": "1RM (lbs)",
+      "entryUnits": "lbs",
       "description": "",
       "descriptionHide": "No supportive equipment. No catch.",
       "instruction": [
@@ -267,6 +277,7 @@
       "label": "100 meter sprint",
       "icon": "/assets/images/100metersprint.png",
       "units": "Time",
+      "entryUnits": "seconds",
       "description": "",
       "descriptionHide": "No starting blocks. No spikes.",
       "instruction": [
@@ -277,6 +288,7 @@
       ],
       "min": 9.58,
       "max": 22,
+      "increment": 0.01,
       "onboarding": {
         "prompt": "How long does it take you to sprint 100 meters?"
       },
@@ -291,6 +303,7 @@
       "label": "Clean",
       "icon": "/assets/images/powerclean.png",
       "units": "1RM (lbs)",
+      "entryUnits": "lbs",
       "description": "",
       "instruction": [
         "Stand with feet at your preferred stance width in front of a loaded barbell on the floor",
@@ -315,6 +328,7 @@
       "label": "Pike",
       "icon": "/assets/images/toetouch.png",
       "units": "Positions",
+      "entryUnits": "",
       "description": "",
       "instruction": [
         "Position must be held for a minimum of 10 seconds while maintaining proper form",
@@ -336,6 +350,7 @@
       "label": "Backbend",
       "icon": "/assets/images/backbend.png",
       "units": "Positions",
+      "entryUnits": "",
       "description": "",
       "instruction": [
         "Position must be held for a minimum of 10 seconds while maintaining proper form."
@@ -355,6 +370,7 @@
       "label": "Straddle",
       "icon": "/assets/images/medial_lateral.png",
       "units": "Degrees",
+      "entryUnits": "Degrees",
       "description": "",
       "descriptionHide": "Position must be held for 5 seconds",
       "instruction": [
@@ -378,6 +394,7 @@
       "aid": "ONEHRDST",
       "icon": "/assets/images/onehourrun.png",
       "units": "Miles",
+      "entryUnits": "Miles",
       "description": "",
       "descriptionHide": "Road, treadmill, or track allowed",
       "instruction": [
@@ -388,6 +405,7 @@
       ],
       "min": 0,
       "max": 13.3,
+      "increment": 0.01,
       "onboarding": {
         "prompt": "How far can you run in 1 hour?"
       },
@@ -401,6 +419,7 @@
       "label": "2 minute distance",
       "icon": "/assets/images/2minutedistance.png",
       "units": "Miles",
+      "entryUnits": "Miles",
       "description": "",
       "descriptionHide": "Treadmill or track allowed",
       "instruction": [
@@ -411,6 +430,7 @@
       ],
       "min": 0,
       "max": 0.5,
+      "increment": 0.001,
       "onboarding": {
         "prompt": "How far can you run in 2 minutes?"
       },
@@ -424,8 +444,8 @@
       "aid": "STAPN",
       "icon": "/assets/images/breathhold.png",
       "units": "Time",
+      "entryUnits": "Time",
       "description": "",
-      "descriptionHide": "Time stops after inhale",
       "instruction": [
         "Find a quiet and safe space to lie down comfortably",
         "Lie on your back with the head and neck supported.",
@@ -435,12 +455,14 @@
       ],
       "min": 0,
       "max": 11.5,
+      "increment": 0.01,
       "onboarding": {
         "prompt": "How long can you hold your breath?"
       },
       "rules":[
         "Time stops after inhale"
-      ]
+      ],
+      "warning": "Not to be done in water or anything like that"
     },
     {
       "aid": "AGLTY",
@@ -448,6 +470,7 @@
       "icon": "/assets/images/agility.png",
       "label": "Agility",
       "units": "Seconds",
+      "entryUnits": "Seconds",
       "description": "Layout of Cones:\n - Home Cone: Center\n - West Cone: 13.5 ft to the left of Home Cone\n - East Cone: 13.5 ft to the right of Home Cone\n - Northwest Cone: 21 ft in front of West Cone\n - North Cone: 21 ft in front of Home Cone\n - Northeast Cone: 21 ft in front of East Cone",
       "instruction": [
         "Start at Home Cone.",
@@ -460,6 +483,7 @@
       ],
       "min": 13,
       "max": 35,
+      "increment": 0.01,
       "onboarding": {
         "prompt": "How quickly can you perform the half spider web agility test?"
       },

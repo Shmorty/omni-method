@@ -12,8 +12,12 @@ export interface Assessment {
   checklist?: boolean;
   min: number;
   max: number;
+  increment?: number;
+  onboarding: {prompt: string};
   units?: string;
+  entryUnits?: string;
   scores?: Score[];
+  warning?: string;
 }
 
 export interface Category {

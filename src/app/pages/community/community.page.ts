@@ -19,7 +19,8 @@ export enum View {
   styleUrls: ['./community.page.scss'],
 })
 export class CommunityPage implements OnInit {
-  View = View;
+  type: string = 'rankings';
+  // View = View;
   public view: View = View.Rankings;
   public ranking$: Observable<User[]>;
   @ViewChild(IonModal) modal: IonModal;

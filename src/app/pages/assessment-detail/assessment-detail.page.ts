@@ -19,7 +19,7 @@ export class AssessmentDetailPage implements OnInit {
   public category$: Observable<Category>;
   public assessment$: Observable<Assessment>;
   public checklist$: Observable<string[]>;
-  private displayChecked: boolean[] = [];
+  public displayChecked: boolean[] = [];
   private aid: string;
   private cid: string;
   private today = new Date().toLocaleDateString();
@@ -50,8 +50,10 @@ export class AssessmentDetailPage implements OnInit {
     });
 
     this.assessment$.subscribe((assessment) => {
+      console.log("getScoresForAssessment", assessment);
       this.scores$ = this.userService.getScoresForAssessment(assessment);
-      this.scores$.subscribe((score) => {
+      this.scores$?.subscribe((score) => {
+        console.log("score", score);
         if (score.length > 0) {
           // assuming most recent on top or only store one
           this.curScore = score[0];
@@ -64,6 +66,14 @@ export class AssessmentDetailPage implements OnInit {
         this.user = value;
       })
       .unsubscribe();
+  }
+
+  updateChecked(checked) {
+    if (this.displayChecked.length) {
+      this.checklistChanged = true;
+      this.routerOutlet.swipeGesture = false;
+    }
+    this.displayChecked = checked;
   }
 
   deleteScore(score: Score) {
@@ -92,23 +102,18 @@ export class AssessmentDetailPage implements OnInit {
     return this.displayChecked.filter(item => item).length;
   }
 
-  getCheckedItem(item): boolean {
-    return this.displayChecked[item];
-  }
+  // getCheckedItem(item): boolean {
+  //   return this.displayChecked[item];
+  // }
 
-  toggleCheckItem(item) {
-    this.displayChecked[item] = !this.displayChecked[item];
-    this.checklistChanged = true;
-    this.routerOutlet.swipeGesture = false;
-    console.log("toggleCheckItem", item, this.displayChecked[item]);
-  }
+  // toggleCheckItem(item) {
+  //   this.displayChecked[item] = !this.displayChecked[item];
+  //   this.checklistChanged = true;
+  //   this.routerOutlet.swipeGesture = false;
+  //   console.log("toggleCheckItem", item, this.displayChecked[item]);
+  // }
 
   async saveChecklist() {
-    // console.log("saveChecklist", this.displayChecked);
-    // console.log("count set", this.displayChecked.filter(i => i).length);
-    // console.log("user", this.user);
-    // console.log("today", this.today);
-    // fill missing values in arrray
     for (var i = 0; i < this.displayChecked.length; i++) {
       console.log("displayChecked", i, this.displayChecked[i]);
       this.displayChecked[i] = this.displayChecked[i] ? true : false;
