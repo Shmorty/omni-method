@@ -7,5 +7,6 @@ export interface Score {
   rawScore: number;
   checklist?: boolean[];
   calculatedScore?: number;
+  currentWeight?: number;
   notes?: string;
 }
