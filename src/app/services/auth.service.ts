@@ -53,7 +53,7 @@ export class AuthService {
         );
       } else {
         console.log("User is signed out");
-        this.router.navigate(['/welcome']);
+        // this.router.navigate(['/welcome']);
       }
     });
   }
@@ -118,8 +118,8 @@ export class AuthService {
     signOut(this.auth).then(
       () => {
         // localStorage.removeItem('userId');
-        this.store.dispatch(UserActions.logoutAction())
-        this.router.navigate(['/login']);
+        this.store.dispatch(UserActions.logoutAction());
+        // this.router.navigate(['/login']);
       },
       (err) => {
         alert(err.message);
