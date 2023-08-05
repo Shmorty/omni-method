@@ -1,6 +1,11 @@
-<ion-content [fullscreen]="true">
-  <ion-header class="ion-no-border safe-area"> </ion-header>
-  <h2>Rankings</h2>
-  <ion-button (click)="logout()">logout</ion-button>
-  <br />
+<ion-header>Outside Header</ion-header>
+<ion-content [scrollY]="false">
+  <div id="container">
+    <ion-header>Inside Header</ion-header>
+    <cdk-virtual-scroll-viewport itemSize="42" class="ion-content-scroll-host">
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem voluptatibus, beatae voluptatum commodi ut id, saepe nam a, exercitationem atque voluptate nihil magni. Voluptates cupiditate obcaecati laudantium quo porro repudiandae!
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </div>
 </ion-content>
