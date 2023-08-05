@@ -57,25 +57,26 @@ export class UserEffects {
       ofType(UserActions.loadUserAction),
       tap(console.log),
       switchMap(({uid}) => {
-        // 
-        return this.firestoreService.getUserById(uid)
-          .pipe(takeUntil(this.logout$))
-          // .pipe(first())
-          .pipe(
-            tap((res) => console.log('firestore getUserById response', res)),
-            map((res) => {
-              if (res) {
-                // 
-                return UserActions.loadUserSuccess({payload: res});
-              } else {
-                return UserActions.loadUserFailure({error: 'not found'});
-              }
-            }),
-            catchError(async (err) =>
-              UserActions.loadUserFailure({error: err})
-            ),
-            finalize(() => console.log('getUserById finalize'))
-          );
+        if (uid) {
+          return this.firestoreService.getUserById(uid)
+            .pipe(takeUntil(this.logout$))
+            // .pipe(first())
+            .pipe(
+              tap((res) => console.log('firestore getUserById response', res)),
+              map((res) => {
+                if (res) {
+                  // 
+                  return UserActions.loadUserSuccess({payload: res});
+                } else {
+                  return UserActions.loadUserFailure({error: 'not found'});
+                }
+              }),
+              catchError(async (err) =>
+                UserActions.loadUserFailure({error: err})
+              ),
+              finalize(() => console.log('getUserById finalize'))
+            );
+        }
       })
     )
   );

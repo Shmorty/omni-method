@@ -1,19 +1,19 @@
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {Component, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
-import { User } from '../../store/user/user.model';
-import { UserService } from '../../services/user/user.service';
-import { Assessment } from '../../store/assessments/assessment.model';
-import { Score } from '../../store/models/score.model';
-import { Observable, Subject } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { selectUser } from 'src/app/store/user/user.selectors';
+import {ModalController} from '@ionic/angular';
+import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
+import {User} from '../../store/user/user.model';
+import {UserService} from '../../services/user/user.service';
+import {Assessment} from '../../store/assessments/assessment.model';
+import {Score} from '../../store/models/score.model';
+import {Observable, Subject} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {selectUser} from 'src/app/store/user/user.selectors';
 
 @Component({
   selector: 'app-new-score',
@@ -52,7 +52,7 @@ export class NewScorePage implements OnInit {
         this.user = value;
       })
       .unsubscribe();
-      console.log("ngOnInit scoreInput", this.scoreInput);
+    console.log("ngOnInit scoreInput", this.scoreInput);
   }
 
   ionViewDidEnter() {
