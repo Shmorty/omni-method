@@ -1,4 +1,10 @@
-import {Component, ElementRef, HostListener, Input, OnInit, Renderer2} from '@angular/core';
+import {Component, Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
+
+@Directive({
+  selector: 'shrinking-header-fading-content',
+  standalone: true,
+})
+export class FadingContent {}
 
 @Component({
   selector: 'app-shrinking-header',
@@ -7,10 +13,11 @@ import {Component, ElementRef, HostListener, Input, OnInit, Renderer2} from '@an
   standalone: true,
 })
 export class ShrinkingHeaderComponent implements OnInit {
-  @Input() headerHeight: number;
+  @Input() headerHeight = 200;
+  @Input() minHeight = 50;
+  @Input() color: string;
   header: any;
   content: any;
-  newHeight: any;
 
 
   constructor(public element: ElementRef, public renderer: Renderer2) {
@@ -18,15 +25,10 @@ export class ShrinkingHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.header = document.getElementById('header');
-    console.log("header", this.header);
-    // this.content = document.getElementById('#content');
-    // this.content = this.renderer.nextSibling(this.header);
-    const parent = this.renderer.parentNode(this.header);
-    this.header = parent;
-    this.content = this.renderer.nextSibling(parent);
-    console.log("content", this.content);
+    this.header = this.renderer.parentNode(document.getElementById('header'));
+    this.content = this.renderer.nextSibling(this.header);
   }
+
   ngAfterViewInit() {
     this.renderer.setStyle(this.element.nativeElement, 'height', this.headerHeight + 'px');
 
@@ -42,25 +44,17 @@ export class ShrinkingHeaderComponent implements OnInit {
   // }
 
   resizeHeader(ev) {
-    console.log("resizeHeader", ev);
-    // console.log("headerHeight", this.headerHeight);
-    console.log("currentY", ev.detail.currentY);
-    // this.newHeight = this.headerHeight - window.pageYOffset / 2;
-    this.newHeight = this.headerHeight - ev.detail.currentY / 2;
-
-    if (this.newHeight < 50) {
-      this.newHeight = 50;
+    let newHeight = this.headerHeight - ev.detail.currentY / 2;
+    if (newHeight < this.minHeight) {
+      newHeight = this.minHeight;
     }
 
-    let fontsize = this.newHeight / this.headerHeight;
+    let fontsize = newHeight / this.headerHeight;
     if (fontsize >= 0.5) {
       this.header.style.fontSize = fontsize + 'em';
     }
-    console.log("newHeight", this.newHeight);
-    // if (this.newHeight >= this.headerHeight) {
-    this.header.style.height = this.newHeight + 'px';
-    // }
 
+    this.header.style.height = newHeight + 'px';
   }
 
 }
