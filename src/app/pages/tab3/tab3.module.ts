@@ -8,7 +8,7 @@ import {Tab3Page} from './tab3.page';
 
 import {Tab3PageRoutingModule} from './tab3-routing.module';
 import {ScrollingModule} from '@angular/cdk/scrolling';
-import {ShrinkingHeaderComponent} from 'src/app/component/shrinking-header/shrinking-header.component';
+import {FadingContent, ShrinkingHeaderComponent} from 'src/app/component/shrinking-header/shrinking-header.component';
 
 @NgModule({
   imports: [
@@ -18,7 +18,8 @@ import {ShrinkingHeaderComponent} from 'src/app/component/shrinking-header/shrin
     // ExploreContainerComponentModule,
     RouterModule.forChild([{path: '', component: Tab3Page}]),
     Tab3PageRoutingModule,
-    ShrinkingHeaderComponent
+    ShrinkingHeaderComponent,
+    FadingContent
   ],
   declarations: [Tab3Page]
 })
