@@ -1,19 +1,77 @@
-<app-shrinking-header
-  [headerHeight]="200"
-  [minHeight]="100"
-  color="primary">
-  <shrinking-header-fading-content>
-    <p>fading content</p>
-  </shrinking-header-fading-content>
-  <ion-header>
-    <ion-toolbar color="primary">
-      <ion-card class="bg-transparent">
-        <ion-item lines="none" color="none">
-          <span slot="end">menu</span>
-        </ion-item>
-      </ion-card>
-    </ion-toolbar>
-  </ion-header>
+<app-shrinking-header [headerHeight]="300" [minHeight]="48" color="primary">
+  <ng-container *ngIf="undefined | async as user; else loading ">
+    {{user}}
+    </ng-container>
+    <ng-template #loading>
+    <ion-item href="#" lines="none" color="none">
+      <div id="avatar">
+        <ngx-skeleton-loader
+          count="1"
+          appearance="circle"
+          [theme]="{ height: '44px', width: '44px' }"
+        ></ngx-skeleton-loader>
+      </div>
+      <span slot="end">
+        <ion-button style="float: right" color="none">
+          <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+        </ion-button>
+      </span>
+    </ion-item>
+    <ion-item lines="none" color="none" text-center class="name">
+      <ngx-skeleton-loader
+        count="2"
+        [theme]="{ height: '24px', width: '94px', margin: '6px' }"
+      ></ngx-skeleton-loader>
+    </ion-item>
+    <ion-item lines="none" color="none">
+      <ion-grid class="ion-text-center">
+        <ion-row>
+          <ion-col>
+            <ngx-skeleton-loader
+              [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
+            ></ngx-skeleton-loader>
+            <br />
+            <ngx-skeleton-loader
+              [theme]="{ width: '20px', height: '12px', 'bottom-margin': '0px' }"
+            ></ngx-skeleton-loader>
+          </ion-col>
+          <ion-col>
+            <ngx-skeleton-loader
+              [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
+            ></ngx-skeleton-loader>
+            <br />
+            <ngx-skeleton-loader
+              [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
+            ></ngx-skeleton-loader>
+          </ion-col>
+          <ion-col>
+            <ngx-skeleton-loader
+              [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
+            ></ngx-skeleton-loader>
+            <br />
+            <ngx-skeleton-loader
+              [theme]="{ width: '60px', height: '12px', 'bottom-margin': '0px' }"
+            ></ngx-skeleton-loader>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item id="omniScore" lines="none" color="none">
+      <div style="text-align: center">
+        <ngx-skeleton-loader
+          [theme]="{ width: '128px', height: '1px' }"
+        ></ngx-skeleton-loader>
+        <br />
+        <ngx-skeleton-loader
+          [theme]="{ width: '64px', height: '12px' }"
+        ></ngx-skeleton-loader>
+        <br />
+        <ngx-skeleton-loader
+          [theme]="{ width: '48px', height: '32px' }"
+        ></ngx-skeleton-loader>
+      </div>
+    </ion-item>
+  </ng-template>
 </app-shrinking-header>
 <ion-content #content 
   [scrollEvents]="true">
