@@ -9,7 +9,7 @@ import {Tab3Page} from './tab3.page';
 import {Tab3PageRoutingModule} from './tab3-routing.module';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
-import {FadingContent, ShrinkingHeaderComponent} from 'src/app/component/shrinking-header/shrinking-header.component';
+import {ShrinkingHeaderContent, ShrinkingHeaderComponent} from 'src/app/component/shrinking-header/shrinking-header.component';
 
 @NgModule({
   imports: [
@@ -28,7 +28,7 @@ import {FadingContent, ShrinkingHeaderComponent} from 'src/app/component/shrinki
       },
     }),
     ShrinkingHeaderComponent,
-    FadingContent
+    ShrinkingHeaderContent
   ],
   declarations: [Tab3Page]
 })
