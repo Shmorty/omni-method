@@ -3,72 +3,76 @@
     {{user}}
     </ng-container>
     <ng-template #loading>
-      <ion-list style="background: transparent; width: inherit;">
-        <ion-item lines="none" color="none" class="ion-text-center">
-          <ngx-skeleton-loader
-            count="1"
-            appearance="circle"
-            [theme]="{ height: '44px', width: '44px' }"
-          ></ngx-skeleton-loader>
-          <ion-button style="float: right" color="none">
-            <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
-          </ion-button>
-      </ion-item>
-        <ion-item lines="none" color="none" text-center class="name">
-          <ngx-skeleton-loader
-            count="2"
-            [theme]="{ height: '24px', width: '94px', margin: '6px' }"
-          ></ngx-skeleton-loader>
+      <shrinking-header-content [fade]=true>Fade</shrinking-header-content>
+      <shrinking-header-content [shrink]=true>Shrink</shrinking-header-content>
+      <shrinking-header-content [fade]=false [shrink]=false style="display: flex; height: inherit; align-items: flex-end;">
+        <ion-list style="background: transparent; width: inherit;">
+          <ion-item lines="none" color="none" class="ion-text-center">
+            <ngx-skeleton-loader
+              count="1"
+              appearance="circle"
+              [theme]="{ height: '44px', width: '44px' }"
+            ></ngx-skeleton-loader>
+            <ion-button style="float: right" color="none">
+              <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <ion-item lines="none" color="none" text-center class="name">
+            <ngx-skeleton-loader
+              count="2"
+              [theme]="{ height: '24px', width: '94px', margin: '6px' }"
+            ></ngx-skeleton-loader>
+          </ion-item>
+          <ion-item lines="none" color="none">
+          <ion-grid class="ion-text-center">
+            <ion-row>
+              <ion-col>
+                <ngx-skeleton-loader
+                  [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
+                ></ngx-skeleton-loader>
+                <br />
+                <ngx-skeleton-loader
+                  [theme]="{ width: '20px', height: '12px', 'bottom-margin': '0px' }"
+                ></ngx-skeleton-loader>
+              </ion-col>
+              <ion-col>
+                <ngx-skeleton-loader
+                  [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
+                ></ngx-skeleton-loader>
+                <br />
+                <ngx-skeleton-loader
+                  [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
+                ></ngx-skeleton-loader>
+              </ion-col>
+              <ion-col>
+                <ngx-skeleton-loader
+                  [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
+                ></ngx-skeleton-loader>
+                <br />
+                <ngx-skeleton-loader
+                  [theme]="{ width: '60px', height: '12px', 'bottom-margin': '0px' }"
+                ></ngx-skeleton-loader>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </ion-item>
-        <ion-item lines="none" color="none">
-        <ion-grid class="ion-text-center">
-          <ion-row>
-            <ion-col>
-              <ngx-skeleton-loader
-                [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
-              ></ngx-skeleton-loader>
-              <br />
-              <ngx-skeleton-loader
-                [theme]="{ width: '20px', height: '12px', 'bottom-margin': '0px' }"
-              ></ngx-skeleton-loader>
-            </ion-col>
-            <ion-col>
-              <ngx-skeleton-loader
-                [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
-              ></ngx-skeleton-loader>
-              <br />
-              <ngx-skeleton-loader
-                [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
-              ></ngx-skeleton-loader>
-            </ion-col>
-            <ion-col>
-              <ngx-skeleton-loader
-                [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
-              ></ngx-skeleton-loader>
-              <br />
-              <ngx-skeleton-loader
-                [theme]="{ width: '60px', height: '12px', 'bottom-margin': '0px' }"
-              ></ngx-skeleton-loader>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-      <ion-item id="omniScore" lines="none" color="none">
-        <div style="text-align: center">
-          <ngx-skeleton-loader
-            [theme]="{ width: '128px', height: '1px' }"
-          ></ngx-skeleton-loader>
-          <br />
-          <ngx-skeleton-loader
-            [theme]="{ width: '64px', height: '12px' }"
-          ></ngx-skeleton-loader>
-          <br />
-          <ngx-skeleton-loader
-            [theme]="{ width: '48px', height: '32px' }"
-          ></ngx-skeleton-loader>
-        </div>
-      </ion-item>
-        </ion-list>
+        <ion-item id="omniScore" lines="none" color="none">
+          <div style="text-align: center">
+            <ngx-skeleton-loader
+              [theme]="{ width: '128px', height: '1px' }"
+            ></ngx-skeleton-loader>
+            <br />
+            <ngx-skeleton-loader
+              [theme]="{ width: '64px', height: '12px' }"
+            ></ngx-skeleton-loader>
+            <br />
+            <ngx-skeleton-loader
+              [theme]="{ width: '48px', height: '32px' }"
+            ></ngx-skeleton-loader>
+          </div>
+        </ion-item>
+      </ion-list>
+        </shrinking-header-content>
   </ng-template>
 </app-shrinking-header>
 <ion-content #content 

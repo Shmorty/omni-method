@@ -1,10 +1,15 @@
-import {Component, Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
+import {Component, ContentChild, ContentChildren, Directive, ElementRef, Input, OnInit, QueryList, Renderer2, ViewChild, ViewContainerRef} from '@angular/core';
 
 @Directive({
-  selector: 'shrinking-header-fading-content',
+  selector: 'shrinking-header-content',
   standalone: true,
 })
-export class FadingContent {}
+export class ShrinkingHeaderContent {
+  @Input() fade = false;
+  @Input() shrink = false;
+  constructor(public elementRef: ElementRef) {}
+}
+
 
 @Component({
   selector: 'app-shrinking-header',
@@ -18,6 +23,8 @@ export class ShrinkingHeaderComponent implements OnInit {
   @Input() color: string;
   header: any;
   content: any;
+  // @ViewChild('shrinking-header-content') hdrContent: ElementRef<any>;
+  @ContentChildren(ShrinkingHeaderContent) hdrContent: QueryList<ShrinkingHeaderContent>;
 
 
   constructor(public element: ElementRef, public renderer: Renderer2) {
@@ -35,6 +42,10 @@ export class ShrinkingHeaderComponent implements OnInit {
     this.content.addEventListener('ionScroll', (ev) => {
       this.resizeHeader(ev);
     });
+
+    // this.hdrContent.forEach((content) => {
+    //   content.elementRef.nativeElement.style.background = "red";
+    // });
   }
 
   // @HostListener('ionScroll', ['$event']) // for scroll events of the current element
@@ -49,12 +60,35 @@ export class ShrinkingHeaderComponent implements OnInit {
       newHeight = this.minHeight;
     }
 
-    let fontsize = newHeight / this.headerHeight;
-    if (fontsize >= 0.5) {
-      this.header.style.fontSize = fontsize + 'em';
-    }
+    const percent = this.convertRange(newHeight);
+    this.hdrContent.forEach((content) => {
+      if (content.fade) {
+        content.elementRef.nativeElement.style.opacity = percent;
+      }
+      if (content.shrink) {
+        if (percent >= 0.5) {
+          content.elementRef.nativeElement.style.fontSize = percent + 'em';
+        }
+      }
+    });
+    // console.log("percent", percent);
+    // this.header.style.opacity = percent;
+
+    // let fontsize = newHeight / this.headerHeight;
+    // let fontsize = percent;
+    // if (fontsize >= 0.5) {
+    //   this.header.style.fontSize = fontsize + 'em';
+    // }
 
     this.header.style.height = newHeight + 'px';
+  }
+
+  convertRange(value: number) {
+    // OldRange = (OldMax - OldMin)  
+    // NewRange = (NewMax - NewMin)  
+    // NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin
+    const range = (this.headerHeight - this.minHeight);
+    return ((value - this.minHeight) / range);
   }
 
 }
