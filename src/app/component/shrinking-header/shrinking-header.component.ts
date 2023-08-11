@@ -1,4 +1,4 @@
-import {Component, ContentChild, ContentChildren, Directive, ElementRef, Input, OnInit, QueryList, Renderer2, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, ContentChild, ContentChildren, Directive, ElementRef, Input, OnInit, QueryList, Renderer2, ViewChild, ViewChildren, ViewContainerRef} from '@angular/core';
 
 @Directive({
   selector: 'shrinking-header-content',
@@ -7,6 +7,7 @@ import {Component, ContentChild, ContentChildren, Directive, ElementRef, Input, 
 export class ShrinkingHeaderContent {
   @Input() fade = false;
   @Input() shrink = false;
+
   constructor(public elementRef: ElementRef) {}
 }
 
@@ -23,8 +24,8 @@ export class ShrinkingHeaderComponent implements OnInit {
   @Input() color: string;
   header: any;
   content: any;
-  // @ViewChild('shrinking-header-content') hdrContent: ElementRef<any>;
-  @ContentChildren(ShrinkingHeaderContent) hdrContent: QueryList<ShrinkingHeaderContent>;
+  @ViewChildren('shrinking-header-content') hdrContent: QueryList<any>;
+  // @ContentChildren(ShrinkingHeaderContent) hdrContent: QueryList<ShrinkingHeaderContent>;
 
 
   constructor(public element: ElementRef, public renderer: Renderer2) {
@@ -32,7 +33,8 @@ export class ShrinkingHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.header = this.renderer.parentNode(document.getElementById('header'));
+    // this.header = this.renderer.parentNode(document.getElementById('header'));
+    this.header = this.element.nativeElement;
     this.content = this.renderer.nextSibling(this.header);
   }
 
@@ -67,10 +69,20 @@ export class ShrinkingHeaderComponent implements OnInit {
       }
       if (content.shrink) {
         if (percent >= 0.5) {
-          content.elementRef.nativeElement.style.fontSize = percent + 'em';
+          // content.elementRef.nativeElement.style.scale = percent;
+          content.elementRef.nativeElement.style.height = percent + '%';
         }
       }
     });
+
+    if (percent < 0.1) {
+      this.renderer.setStyle(document.getElementById('header'), 'border-bottom-right-radius', '0');
+    }
+
+    // this.renderer.setStyle(this.hdrContent.first.elementRef.nativeElement, 'transform', `rotateX(${360 * percent}deg)`);
+    // this.renderer.setStyle(this.hdrContent.last.elementRef.nativeElement, 'transform', `rotate(${360 * percent}deg)`);
+    // console.log("transform rotate", (360 * percent));
+
     // console.log("percent", percent);
     // this.header.style.opacity = percent;
 
