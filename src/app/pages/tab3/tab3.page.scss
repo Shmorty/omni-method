@@ -3,15 +3,15 @@
 //     height: 84px;
 //     margin: 1px;
 // }
-.profile-header {
-    container-type: size;
-    container: size;
-}
-@container (min-height: 100px) {
-    .profile-header {
-        border: 2px solid blueviolet;
-    }    
-}
+// .profile-header {
+//     container-type: size;
+//     container: size;
+// }
+// @container (min-height: 100px) {
+//     .profile-header {
+//         border: 2px solid blueviolet;
+//     }    
+// }
 .profile-header {
     background: linear-gradient(#b8dfff, #5eb3f9);
     border-radius: 0 0 16px 16px;
@@ -23,12 +23,13 @@
     // position: relative;
     // right: 0;
     // left: 0;
-    width: 100%;
+    // width: 100%;
+    // height: 100px;
 }
 .header-first {
     // background-color: lightgrey;
     // min-height: 0px;
-    height: 100px;
+    // height: 100px;
     // perspective: 75px;
     // transform-origin: bottom center;
     // transform-style: preserve-3d;
@@ -37,7 +38,7 @@
 .header-last {
     // align-items: flex-end;
     // background-color: cadetblue;
-    height: 100px;
+    // height: 100px;
     // display: flex;
     // height: inherit; 
     // bottom: 0;
