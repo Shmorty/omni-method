@@ -1,21 +1,7 @@
-<app-shrinking-header class="profile-header" [headerHeight]="300" [minHeight]="48" color="primary">
-  <shrinking-header-content class="header-section" [fade]=true [shrink]=false>
-    <!-- <ion-header>
-      <ion-toolbar color="default"> -->
-        <ion-button slot="end"><ion-icon name="menu"></ion-icon></ion-button>
-        <ion-label>1. header text</ion-label>
-      <!-- </ion-toolbar>
-    </ion-header> -->
-  </shrinking-header-content>
-  <shrinking-header-content class="header-section" [fade]="true" [shrink]=false>
-    2. header content
-  </shrinking-header-content>
-  <shrinking-header-content class="header-section" [fade]=false [shrink]=false>
-    <p>3. Omni Score number</p>
-  </shrinking-header-content>
+<app-shrinking-header class="profile-header" [headerHeight]="350" [minHeight]="48">
+  <app-profile-header></app-profile-header>
 </app-shrinking-header>
 <ion-content #content  [scrollEvents]="true">
-  <!-- (ionScroll)="handleScroll($any($event))"> -->
   <div *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]" class="item">
     <ion-item>
       <!-- <ion-label slot="start">{{i}}</ion-label> -->

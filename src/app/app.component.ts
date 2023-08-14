@@ -30,21 +30,6 @@ export class AppComponent implements OnInit {
 
   initializeApp() {}
 
-  async openEditProfile(e, user) {
-    e.stopPropagation();
-    const modal = await this.modalCtrl.create({
-      component: EditProfilePage,
-      componentProps: {
-        user: user,
-      },
-      cssClass: 'edit-user-modal',
-      presentingElement: document.querySelector('ion-router-outlet'),
-      canDismiss: true,
-    });
-    await modal.present();
-    modal.onDidDismiss().then(() => {
-      // this.loadUserData();
-    });
-  }
+
 
 }

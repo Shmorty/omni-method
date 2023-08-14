@@ -1,3 +1,79 @@
+<div class="container">
+  <ng-container class="container" *ngIf="user$ | async as user; else skeleton ">
+    <!-- avatar -->
+    <user-avatar
+      class="avatar"
+      [user]="user"
+      [ngStyle]="{'color': 'white'}"
+      ></user-avatar>
+    <!-- menu button -->
+    <ion-button
+      class="menu-button"
+      id="open-modal"
+      color="none"
+      (click)="userService.openEditProfile($event, user)"
+      >
+      <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+      <!-- <ion-icon slot="icon-only" name="pencil-outline"></ion-icon> -->
+    </ion-button>
+    <ion-label class="full-name"> {{user.firstName}} {{user.lastName}} </ion-label>
+    <div class="col-one">
+      <ion-label>Age</ion-label>
+      <ion-label>{{userService.getAge(user)}}</ion-label>
+    </div>
+    <div class="col-two">
+      <ion-label>Body Weight</ion-label>
+      <ion-label>{{user.weight}}</ion-label>
+    </div>
+    <div class="col-three">
+      <ion-label>Height</ion-label>
+      <ion-label
+        >{{user.height?.feet}}' {{user.height?.inches}}"</ion-label
+      >
+    </div>
+</ng-container>
+  <ng-template #skeleton>
+    <div class="avatar">
+      <ngx-skeleton-loader
+        count="1"
+        appearance="circle"
+        [theme]="{ height: '44px', width: '44px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <ion-button class="menu-button" color="none">
+      <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+    </ion-button>
+    <ngx-skeleton-loader
+    class="full-name"
+    count="2"
+    [theme]="{ height: '24px', width: '94px', margin: '6px' }"
+  ></ngx-skeleton-loader>
+  <div class="col-one">
+    <ngx-skeleton-loader
+      [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
+    ></ngx-skeleton-loader>
+    <ngx-skeleton-loader
+      [theme]="{ width: '20px', height: '12px', 'bottom-margin': '0px' }"
+    ></ngx-skeleton-loader>
+  </div>
+  <div class="col-two">
+    <ngx-skeleton-loader
+      [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
+    ></ngx-skeleton-loader>
+    <ngx-skeleton-loader
+      [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
+    ></ngx-skeleton-loader>
+  </div>
+  <div class="col-three">
+    <ngx-skeleton-loader
+      [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
+    ></ngx-skeleton-loader>
+    <ngx-skeleton-loader
+      [theme]="{ width: '60px', height: '12px', 'bottom-margin': '0px' }"
+    ></ngx-skeleton-loader>
+  </div>
+</ng-template>
+</div>
 <ion-card class="card cardStyle topCard bg-transparent">
   <ng-container *ngIf="user$ | async as user; else loading ">
     <ion-item lines="none" color="none">
@@ -8,9 +84,8 @@
       <span slot="end">
         <ion-button
           id="open-modal"
-          style="float: right"
           color="none"
-          (click)="openEditProfile($event, user)"
+          (click)="userService.openEditProfile($event, user)"
         >
         <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
           <!-- <ion-icon slot="icon-only" name="pencil-outline"></ion-icon> -->
@@ -25,7 +100,7 @@
         <ion-row>
           <ion-col>
             <ion-label>Age</ion-label>
-            <ion-label>{{getAge(user)}}</ion-label>
+            <ion-label>{{userService.getAge(user)}}</ion-label>
           </ion-col>
           <ion-col>
             <ion-label>Body Weight</ion-label>
