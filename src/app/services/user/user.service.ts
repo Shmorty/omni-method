@@ -19,6 +19,8 @@ import {
 import {Assessment} from '../../store/assessments/assessment.model';
 import {UserFirestoreService} from '../user-firestore.service';
 import {AuthService} from '../auth.service';
+import {ModalController} from '@ionic/angular';
+import {EditProfilePage} from 'src/app/pages/edit-profile/edit-profile.page';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +29,7 @@ export class UserService implements IUserService {
   constructor(private http: HttpClient,
     private store: Store<AppState>,
     private firestoreService: UserFirestoreService,
+    private modalCtrl: ModalController,
     private authService: AuthService) {}
 
   // get user from store
@@ -130,4 +133,33 @@ export class UserService implements IUserService {
       () => new Error('Unable to process request; please try again later.')
     );
   }
+
+  async openEditProfile(e, user) {
+    e.stopPropagation();
+    const modal = await this.modalCtrl.create({
+      component: EditProfilePage,
+      componentProps: {
+        user: user,
+      },
+      cssClass: 'edit-user-modal',
+      presentingElement: document.querySelector('ion-router-outlet'),
+      canDismiss: true,
+    });
+    await modal.present();
+    modal.onDidDismiss().then(() => {
+      // this.loadUserData();
+    });
+  }
+
+  getAge(user: User) {
+    var today = new Date();
+    var birthDate = new Date(user.dob);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
 }

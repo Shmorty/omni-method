@@ -10,6 +10,7 @@ import {Tab3PageRoutingModule} from './tab3-routing.module';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {ShrinkingHeaderContent, ShrinkingHeaderComponent} from 'src/app/component/shrinking-header/shrinking-header.component';
+import {ProfileHeaderComponent} from 'src/app/component/profile-header/profile-header.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import {ShrinkingHeaderContent, ShrinkingHeaderComponent} from 'src/app/componen
       },
     }),
     ShrinkingHeaderComponent,
-    ShrinkingHeaderContent
+    ShrinkingHeaderContent,
+    ProfileHeaderComponent
   ],
   declarations: [Tab3Page]
 })

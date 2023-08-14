@@ -1,0 +1,41 @@
+.cardStyle {
+    margin: 0;
+  }
+  .bg-transparent {
+    // background: transparent;
+    --ion-item-background: transparent;
+}
+.container {
+    display: flex;
+    flex: 1 2 0;
+    flex-wrap: wrap;
+    // grid-template-columns: 1fr 1fr 1fr;
+}
+.avatar {
+    display: flex;
+    grid-column: 2;
+    justify-content: center;
+}
+.menu-button {
+    justify-self: end;
+}
+.full-name {
+    display: flex;
+    grid-column: 2;
+    justify-content: center;
+}
+.col-one {
+    display: flex;
+    grid-column: 1;
+    align-content: space-between;
+}
+.col-two {
+    display: grid;
+    grid-column: 2;
+    align-content: space-around;
+}
+.col-three {
+    display: grid;
+    grid-column: 3;
+    align-content: space-around;
+}
