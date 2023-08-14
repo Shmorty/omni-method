@@ -6,14 +6,18 @@
     --ion-item-background: transparent;
 }
 .container {
+    align-content: flex-end;
+    align-items: flex-start;
     display: flex;
     flex: 1 2 0;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     // grid-template-columns: 1fr 1fr 1fr;
 }
 .avatar {
-    display: flex;
-    grid-column: 2;
+    // display: flex;
+    // grid-column: 2;
+    flex-basis: 50%;
+    // flex-grow: 2;
     justify-content: center;
 }
 .menu-button {
