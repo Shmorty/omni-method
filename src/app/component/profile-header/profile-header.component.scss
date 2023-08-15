@@ -5,7 +5,7 @@
     // background: transparent;
     --ion-item-background: transparent;
 }
-.container {
+.container-flex {
     align-content: flex-end;
     align-items: flex-start;
     display: flex;
@@ -13,12 +13,18 @@
     flex-flow: row wrap;
     // grid-template-columns: 1fr 1fr 1fr;
 }
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    // grid-template-areas: ;
+}
 .avatar {
     // display: flex;
-    // grid-column: 2;
+    grid-column: 2;
     flex-basis: 50%;
     // flex-grow: 2;
-    justify-content: center;
+    // justify-content: center;
+    justify-self: center;
 }
 .menu-button {
     justify-self: end;
@@ -27,6 +33,12 @@
     display: flex;
     grid-column: 2;
     justify-content: center;
+}
+.user-properties {
+    display: flex;
+    grid-column: 3 / 1;
+    justify-content: space-evenly;
+    justify-self: center;
 }
 .col-one {
     display: flex;
