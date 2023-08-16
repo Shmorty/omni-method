@@ -32,8 +32,8 @@
           >{{user.height?.feet}}' {{user.height?.inches}}"</ion-label
         >
       </div>
-      </div>
-</ng-container>
+    </div>
+  </ng-container>
   <ng-template #skeleton>
     <div class="avatar">
       <ngx-skeleton-loader
@@ -46,39 +46,39 @@
       <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
     </ion-button>
     <ngx-skeleton-loader
-    class="full-name"
-    count="2"
-    [theme]="{ height: '24px', width: '94px', margin: '6px' }"
-  ></ngx-skeleton-loader>
-  <div class="user-properties">
-    <div class="col-one">
-      <ngx-skeleton-loader
-        [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
-      ></ngx-skeleton-loader>
-      <ngx-skeleton-loader
-        [theme]="{ width: '20px', height: '12px', 'bottom-margin': '0px' }"
-      ></ngx-skeleton-loader>
+      class="full-name"
+      count="2"
+      [theme]="{ height: '24px', width: '94px', margin: '6px' }"
+    ></ngx-skeleton-loader>
+    <div class="user-properties">
+      <div class="col-one">
+        <ngx-skeleton-loader
+          [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
+        ></ngx-skeleton-loader>
+        <ngx-skeleton-loader
+          [theme]="{ width: '20px', height: '12px', 'bottom-margin': '0px' }"
+        ></ngx-skeleton-loader>
+      </div>
+      <div class="col-two">
+        <ngx-skeleton-loader
+          [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
+        ></ngx-skeleton-loader>
+        <ngx-skeleton-loader
+          [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
+        ></ngx-skeleton-loader>
+      </div>
+      <div class="col-three">
+        <ngx-skeleton-loader
+          [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
+        ></ngx-skeleton-loader>
+        <ngx-skeleton-loader
+          [theme]="{ width: '60px', height: '12px', 'bottom-margin': '0px' }"
+        ></ngx-skeleton-loader>
+      </div>
     </div>
-    <div class="col-two">
-      <ngx-skeleton-loader
-        [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
-      ></ngx-skeleton-loader>
-      <ngx-skeleton-loader
-        [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
-      ></ngx-skeleton-loader>
-    </div>
-    <div class="col-three">
-      <ngx-skeleton-loader
-        [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
-      ></ngx-skeleton-loader>
-      <ngx-skeleton-loader
-        [theme]="{ width: '60px', height: '12px', 'bottom-margin': '0px' }"
-      ></ngx-skeleton-loader>
-    </div>
-  </div>
-</ng-template>
+  </ng-template>
 </div>
-<ion-card class="card cardStyle topCard bg-transparent">
+<ion-card style="display: none;" class="card cardStyle topCard bg-transparent">
   <ng-container *ngIf="user$ | async as user; else loading ">
     <ion-item lines="none" color="none">
       <user-avatar
