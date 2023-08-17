@@ -15,7 +15,7 @@
 }
 .container {
     display: grid;
-    gap: 2em 1em;
+    gap: 2em 0.5em;
     grid-template-columns: repeat(3, 1fr);
     // grid-template-areas: ;
     overflow: hidden;
@@ -34,30 +34,21 @@
 }
 .full-name {
     display: flex;
-    grid-column: 2;
+    grid-column: 1/4;
     justify-content: center;
 }
 .user-properties {
+    align-items: center;
     display: flex;
-    grid-column: 3 / 1;
+    grid-column: 1 / 4;
     justify-content: space-evenly;
-    justify-self: center;
+    // justify-self: center;
+    min-width: 240px;
 }
-.col-one {
+.user-property {
     display: flex;
     flex-direction: column;
-    grid-column: 1;
-    align-content: space-between;
-}
-.col-two {
-    display: flex;
-    flex-direction: column;
-    grid-column: 2;
-    align-content: space-around;
-}
-.col-three {
-    display: flex;
-    flex-direction: column;
-    grid-column: 3;
-    align-content: space-around;
+    // align-content: center;
+    justify-content: center;
+    // justify-self: center;
 }

@@ -18,15 +18,15 @@
     </ion-button>
     <ion-label class="full-name"> {{user.firstName}} {{user.lastName}} </ion-label>
     <div class="user-properties">
-      <div class="col-one">
+      <div class="user-property">
         <ion-label>Age</ion-label>
         <ion-label>{{userService.getAge(user)}}</ion-label>
       </div>
-      <div class="col-two">
+      <div class="user-property">
         <ion-label>Body Weight</ion-label>
         <ion-label>{{user.weight}}</ion-label>
       </div>
-      <div class="col-three">
+      <div class="user-property">
         <ion-label>Height</ion-label>
         <ion-label
           >{{user.height?.feet}}' {{user.height?.inches}}"</ion-label
@@ -51,7 +51,7 @@
       [theme]="{ height: '24px', width: '94px', margin: '6px' }"
     ></ngx-skeleton-loader>
     <div class="user-properties">
-      <div class="col-one">
+      <div class="user-property">
         <ngx-skeleton-loader
           [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
         ></ngx-skeleton-loader>
@@ -59,7 +59,7 @@
           [theme]="{ width: '20px', height: '12px', 'bottom-margin': '0px' }"
         ></ngx-skeleton-loader>
       </div>
-      <div class="col-two">
+      <div class="user-property">
         <ngx-skeleton-loader
           [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
         ></ngx-skeleton-loader>
@@ -67,7 +67,7 @@
           [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
         ></ngx-skeleton-loader>
       </div>
-      <div class="col-three">
+      <div class="user-property">
         <ngx-skeleton-loader
           [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
         ></ngx-skeleton-loader>
