@@ -33,13 +33,19 @@
         >
       </div>
     </div>
+    <ion-item id="omniScore" lines="none" color="none">
+      <span>
+        <ion-label class="omni-label">Omni Score</ion-label>
+        <ion-label class="omni-score">{{user.omniScore | number}}</ion-label>
+      </span>
+    </ion-item>
   </ng-container>
   <ng-template #skeleton>
     <div class="avatar">
       <ngx-skeleton-loader
         count="1"
         appearance="circle"
-        [theme]="{ height: '44px', width: '44px' }"
+        [theme]="{ height: '48px', width: '48px' }"
       ></ngx-skeleton-loader>
     </div>
     <ion-button class="menu-button" color="none">
@@ -76,6 +82,21 @@
         ></ngx-skeleton-loader>
       </div>
     </div>
+    <ion-item id="omniScore" lines="none" color="none">
+      <div style="text-align: center">
+        <ngx-skeleton-loader
+          [theme]="{ width: '128px', height: '1px' }"
+        ></ngx-skeleton-loader>
+        <br />
+        <ngx-skeleton-loader class="omni-label"
+          [theme]="{ width: '64px', height: '12px' }"
+        ></ngx-skeleton-loader>
+        <br />
+        <ngx-skeleton-loader class="omni-score"
+          [theme]="{ width: '48px', height: '32px' }"
+        ></ngx-skeleton-loader>
+      </div>
+    </ion-item>
   </ng-template>
 </div>
 <ion-card style="display: none;" class="card cardStyle topCard bg-transparent">

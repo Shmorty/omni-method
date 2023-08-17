@@ -15,7 +15,7 @@
 }
 .container {
     display: grid;
-    gap: 2em 0.5em;
+    gap: 1em 0.5em;
     grid-template-columns: repeat(3, 1fr);
     // grid-template-areas: ;
     overflow: hidden;
@@ -41,7 +41,7 @@
     align-items: center;
     display: flex;
     grid-column: 1 / 4;
-    justify-content: space-evenly;
+    justify-content: space-between;
     // justify-self: center;
     min-width: 240px;
 }
@@ -49,6 +49,17 @@
     display: flex;
     flex-direction: column;
     // align-content: center;
+    align-items: center;
     justify-content: center;
     // justify-self: center;
+}
+#omniScore {
+    // display: flex;
+    grid-column: 1 / 4;
+    .omni-label {
+        background-color: transparent;
+    }
+    .omni-score {
+        background-color: transparent;
+    }
 }
