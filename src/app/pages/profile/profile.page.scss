@@ -19,6 +19,9 @@ ion-content {
   --offset-top: 0px;
   position: absolute;
 }
+.safe-area {
+  background: #b8dfff;
+}
 ion-content ion-header {
   background: linear-gradient(#b8dfff, #5eb3f9);
   border-radius: 0 0 20px 20px;
