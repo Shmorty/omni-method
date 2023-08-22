@@ -3,7 +3,9 @@
     <ion-title>Omni Score {{(user$ | async)?.omniScore}}</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true" #scrollarea no-bounce>
+<ion-content [fullscreen]="true" #scrollarea no-bounce class="ion-content-scroll-host">
+  <div class="safe-area">
+  </div>
   <ion-refresher
     slot="fixed"
     pullMax="200"
@@ -19,22 +21,27 @@
     <ion-toolbar color="default">
       <ion-card class="card cardStyle topCard bg-transparent">
         <ng-container *ngIf="user$ | async as user; else loading ">
+          <ion-item id="omniScore" lines="none" color="none">
+            <span>
+              <ion-label class="omni-label">Omni Score</ion-label>
+              <ion-label class="omni-score">{{user.omniScore | number}}</ion-label>
+            </span>
+          </ion-item>
           <ion-item lines="none" color="none">
-            <user-avatar
-              [user]="user"
-              [ngStyle]="{'color': 'white'}"
-            ></user-avatar>
-            <span slot="end">
+            <user-avatar [user]="user" [ngStyle]="{'color': 'white'}"
+            (click)="openEditProfile($event, user)"
+            >
+            </user-avatar>
+            <!-- <span slot="end">
               <ion-button
                 id="open-modal"
                 style="float: right"
                 color="none"
                 (click)="openEditProfile($event, user)"
               >
-              <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
-                <!-- <ion-icon slot="icon-only" name="pencil-outline"></ion-icon> -->
+                <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
               </ion-button>
-            </span>
+            </span> -->
           </ion-item>
           <ion-item lines="none" color="none" text-center class="name">
             <ion-label> {{user.firstName}} {{user.lastName}} </ion-label>
@@ -60,12 +67,6 @@
             </ion-grid>
           </ion-item>
 
-          <ion-item id="omniScore" lines="none" color="none">
-            <span>
-              <ion-label class="omni-label">Omni Score</ion-label>
-              <ion-label class="omni-score">{{user.omniScore | number}}</ion-label>
-            </span>
-          </ion-item>
 
           <!-- <ion-item lines="none" color="none" style="--min-height: 0">
             <ion-accordion-group #accordionGroup>

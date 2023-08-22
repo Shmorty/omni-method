@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
 import {IonicModule} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {User} from '../../store/user/user.model';
@@ -29,10 +29,21 @@ import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 })
 export class ProfileHeaderComponent implements OnInit {
 
+  @Input() background: any;
   user$: Observable<User>;
 
-  constructor(public userService: UserService) {}
+  constructor(
+    public userService: UserService,
+    public element: ElementRef,
+    public renderer: Renderer2
+  ) {}
 
   ngOnInit() {}
+
+  ngAfterViewInit() {
+    console.log("set backgroune", this.background);
+    console.log("element", this.element);
+    this.renderer.setStyle(this.element.nativeElement, 'background', this.background);
+  }
 
 }

@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, Input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { User } from 'src/app/store/user/user.model';
+import {CommonModule} from '@angular/common';
+import {Component, OnInit, Input} from '@angular/core';
+import {IonicModule} from '@ionic/angular';
+import {User} from 'src/app/store/user/user.model';
 
 @Component({
   imports: [CommonModule, IonicModule],
@@ -16,6 +16,7 @@ import { User } from 'src/app/store/user/user.model';
         {{ user.firstName | slice : 0 : 1 }}
         {{ user.lastName | slice : 0 : 1 }}
       </ion-label>
+      <ion-icon name="pencil-outline"></ion-icon>
     </ion-avatar>
   `,
   styles: [
@@ -25,8 +26,17 @@ import { User } from 'src/app/store/user/user.model';
         padding-left: 0px;
         border-radius: 50%;
         aspect-ratio: 1 / 1;
-        overflow: hidden;
+        /* overflow: hidden; */
       }
+      ion-icon {
+          color: white;
+          position: relative;
+          bottom: 24px;
+          right: -40px;
+          background: lightgrey;
+          border-radius: 50%;
+          padding: 4px;
+        }
       .textAvatar {
         border: 1px solid;
         border-radius: 50%;
