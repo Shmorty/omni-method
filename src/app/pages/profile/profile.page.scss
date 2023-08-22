@@ -10,11 +10,14 @@ span {
   font-weight: 400;
 }
 ion-header {
-  background-color: #b8dfff;
+  // background-color: #b8dfff;
+  --background: transparent;
+  --border-color: transparent;
 }
 ion-content {
   // background-color: lightgreen;
-  --offset-top: 0px !important;
+  --offset-top: 0px;
+  position: absolute;
 }
 ion-content ion-header {
   background: linear-gradient(#b8dfff, #5eb3f9);
@@ -36,12 +39,12 @@ ion-refresher-content {
 
 user-avatar {
   margin: auto;
-  padding-left: 70px;
+  // padding-left: 70px;
 }
 #omniScore {
   margin: auto;
   .omni-label {
-    border-top: 1.5px solid white;
+    // border-top: 1.5px solid white;
     font-weight: 700;
     padding: 10px 40px;
   }
@@ -92,7 +95,7 @@ ion-badge {
 }
 .topCard {
   background-color: #35b5ff;
-  border-radius: 20px;
+  border-radius: inherit;
   border-width: 0pt;
   box-shadow: 0px 4px 8px #5eb2ff80;
 }

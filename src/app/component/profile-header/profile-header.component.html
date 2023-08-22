@@ -1,5 +1,5 @@
 <div class="container">
-  <ng-container class="container" *ngIf="user$ | async as user; else skeleton ">
+  <ng-container *ngIf="user$ | async as user; else skeleton ">
     <!-- avatar -->
     <user-avatar
       class="avatar"
