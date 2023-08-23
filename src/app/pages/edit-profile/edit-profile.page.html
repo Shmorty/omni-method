@@ -72,7 +72,8 @@
 
         <ion-item (click)="openPicker()">
           <ion-label position="fixed">Date of birth</ion-label>
-          <ion-input formControlName="dob" placeholder="MM/DD/YYYY"></ion-input>
+          <!-- <ion-input formControlName="dob" placeholder="MM/DD/YYYY"></ion-input> -->
+          <ion-datetime formControlName="dob" presentation="date" [preferWheel]="true"></ion-datetime>
         </ion-item>
         <!-- <ion-item lines="full">
           <ion-label position="floating">DOB</ion-label>
