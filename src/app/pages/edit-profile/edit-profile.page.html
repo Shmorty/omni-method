@@ -70,10 +70,10 @@
           </ion-radio-group>
         </ion-item>
 
-        <ion-item (click)="openPicker()">
+        <!-- <ion-item (click)="openPicker()"> -->
+        <ion-item button id="open-modal">
           <ion-label position="fixed">Date of birth</ion-label>
           <!-- <ion-input formControlName="dob" placeholder="MM/DD/YYYY"></ion-input> -->
-          <ion-datetime formControlName="dob" presentation="date" [preferWheel]="true"></ion-datetime>
         </ion-item>
         <!-- <ion-item lines="full">
           <ion-label position="floating">DOB</ion-label>
@@ -111,6 +111,25 @@
         expand="block"
         >Save</ion-button
       >
+      <ion-modal trigger="open-modal" class="custom-popover" (willDismiss)="onWillDismiss($event)">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button (click)="cancel()">Cancel</ion-button>
+              </ion-buttons>
+              <ion-title>Date of birth</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+            <ion-datetime formControlName="dob" presentation="date" [preferWheel]="true"></ion-datetime>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+    
     </form>
     <!-- <ion-button color="warning" shape="round" expand="block"
       >Change Password</ion-button
