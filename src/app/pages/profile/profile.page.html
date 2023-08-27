@@ -1,6 +1,8 @@
 <ion-header [translucent]="false" class="ion-no-border">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="primary" class="profile-header">
     <ion-title>Omni Score {{(user$ | async)?.omniScore}}</ion-title>
+    <!-- <ion-title>Omni Score</ion-title>
+    <ion-title>{{(user$ | async)?.omniScore}}</ion-title> -->
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" #scrollarea no-bounce class="ion-content-scroll-host">
