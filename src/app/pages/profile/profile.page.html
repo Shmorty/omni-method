@@ -17,16 +17,17 @@
       refreshingSpinner="none"
     ></ion-refresher-content>
   </ion-refresher>
-  <ion-header collapse="condense">
+  <!-- <ion-header collapse="condense"> -->
+  <ion-header style="padding-top: 44px;">
     <ion-toolbar color="default">
       <ion-card class="card cardStyle topCard bg-transparent">
         <ng-container *ngIf="user$ | async as user; else loading ">
-          <ion-item id="omniScore" lines="none" color="none">
+          <!-- <ion-item id="omniScore" lines="none" color="none">
             <span>
               <ion-label class="omni-label">Omni Score</ion-label>
               <ion-label class="omni-score">{{user.omniScore | number}}</ion-label>
             </span>
-          </ion-item>
+          </ion-item> -->
           <ion-item lines="none" color="none">
             <user-avatar [user]="user" [ngStyle]="{'color': 'white'}"
             (click)="openEditProfile($event, user)"
