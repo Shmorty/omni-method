@@ -73,6 +73,7 @@
         <!-- <ion-item (click)="openPicker()"> -->
         <ion-item button id="open-modal">
           <ion-label position="fixed">Date of birth</ion-label>
+          <ion-text slot="end"> {{user.dob | date}}</ion-text>
           <!-- <ion-input formControlName="dob" placeholder="MM/DD/YYYY"></ion-input> -->
         </ion-item>
         <!-- <ion-item lines="full">
@@ -115,16 +116,18 @@
         <ng-template>
           <ion-header>
             <ion-toolbar>
-              <ion-buttons slot="start">
-                <ion-button (click)="cancel()">Cancel</ion-button>
+              <ion-buttons slot="end">
+                <ion-button (click)="cancel()">
+                  <ion-icon name="close-circle-outline"></ion-icon>
+                </ion-button>
               </ion-buttons>
               <ion-title>Date of birth</ion-title>
-              <ion-buttons slot="end">
+              <!-- <ion-buttons slot="end">
                 <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
-              </ion-buttons>
+              </ion-buttons> -->
             </ion-toolbar>
           </ion-header>
-          <ion-content class="ion-padding">
+          <ion-content>
             <ion-datetime formControlName="dob" presentation="date" [preferWheel]="true"></ion-datetime>
           </ion-content>
         </ng-template>

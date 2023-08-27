@@ -14,6 +14,10 @@ ion-header {
   --background: transparent;
   --border-color: transparent;
 }
+.profile-header {
+  display: flexbox;
+  flex-direction: column;
+}
 ion-content {
   // background-color: lightgreen;
   --offset-top: 0px;
