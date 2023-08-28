@@ -9,6 +9,8 @@ import {User} from '../../store/user/user.model';
 import {AuthService} from 'src/app/services/auth.service';
 import {Observable} from 'rxjs';
 import {AssessmentService} from 'src/app/services/assessments/assessment.service';
+import {isPlatform} from '@ionic/angular';
+import {StatusBar, Style} from '@capacitor/status-bar';
 
 @Component({
   selector: 'app-onboarding',
@@ -44,6 +46,19 @@ export class OnboardingPage implements OnInit {
     this.assessments$.subscribe((arr) => this.assessmentCount = arr.length);
     // this.scores$ = this.userService.getScoresForAssessment(assessment);
     this.scores$ = undefined;
+  }
+
+  ionViewWillEnter() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    if (isPlatform('mobile')) {
+      // StatusBar.setStyle({style: Style.Dark});
+      if (prefersDark.matches) {
+        StatusBar.setStyle({style: Style.Dark});
+      } else {
+        StatusBar.setStyle({style: Style.Light});
+      }
+    }
   }
 
   newValue(val) {

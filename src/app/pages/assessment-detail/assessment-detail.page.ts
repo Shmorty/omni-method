@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, AfterViewChecked} from '@angular/core';
-import {AlertController, IonRouterOutlet, ModalController, NavController} from '@ionic/angular';
+import {AlertController, IonRouterOutlet, ModalController, NavController, isPlatform} from '@ionic/angular';
 import {Score} from '../../store/models/score.model';
 import {AssessmentService} from '../../services/assessments/assessment.service';
 import {Assessment, Category} from '../../store/assessments/assessment.model';
@@ -8,6 +8,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {UserService} from '../../services/user/user.service';
 import {User} from 'src/app/store/user/user.model';
+import {StatusBar, Style} from '@capacitor/status-bar';
 
 @Component({
   selector: 'app-assessment-detail',
@@ -66,6 +67,19 @@ export class AssessmentDetailPage implements OnInit {
         this.user = value;
       })
       .unsubscribe();
+  }
+
+  ionViewWillEnter() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    if (isPlatform('mobile')) {
+      // StatusBar.setStyle({style: Style.Dark});
+      if (prefersDark.matches) {
+        StatusBar.setStyle({style: Style.Dark});
+      } else {
+        StatusBar.setStyle({style: Style.Light});
+      }
+    }
   }
 
   updateChecked(checked) {

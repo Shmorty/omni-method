@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AuthService } from 'src/app/services/auth.service';
-import { selectUserError } from 'src/app/store/user/user.selectors';
+import {Component, OnInit} from '@angular/core';
+import {StatusBar, Style} from '@capacitor/status-bar';
+import {isPlatform} from '@ionic/angular';
+import {Store} from '@ngrx/store';
+import {AuthService} from 'src/app/services/auth.service';
+import {selectUserError} from 'src/app/store/user/user.selectors';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +21,19 @@ export class RegisterPage implements OnInit {
   constructor(private auth: AuthService, private store: Store) {}
 
   ngOnInit() {}
+
+  ionViewWillEnter() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    if (isPlatform('mobile')) {
+      // StatusBar.setStyle({style: Style.Dark});
+      if (prefersDark.matches) {
+        StatusBar.setStyle({style: Style.Dark});
+      } else {
+        StatusBar.setStyle({style: Style.Light});
+      }
+    }
+  }
 
   doRegister() {
     this.auth.register(this.email, this.password);

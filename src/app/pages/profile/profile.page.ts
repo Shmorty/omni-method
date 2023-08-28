@@ -71,8 +71,15 @@ export class ProfilePage implements OnInit {
   }
 
   ionViewWillEnter() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
     if (isPlatform('mobile')) {
-      StatusBar.setStyle({style: Style.Dark});
+      // StatusBar.setStyle({style: Style.Dark});
+      if (prefersDark.matches) {
+        StatusBar.setStyle({style: Style.Dark});
+      } else {
+        StatusBar.setStyle({style: Style.Light});
+      }
     }
   }
 
