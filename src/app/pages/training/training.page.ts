@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NavigationExtras, Router} from '@angular/router';
-import {AlertController} from '@ionic/angular';
+import {StatusBar, Style} from '@capacitor/status-bar';
+import {AlertController, isPlatform} from '@ionic/angular';
 
 @Component({
   selector: 'app-training',
@@ -32,6 +33,19 @@ export class TrainingPage implements OnInit {
       'Nutrition',
     ];
 
+  }
+
+  ionViewWillEnter() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    if (isPlatform('mobile')) {
+      StatusBar.setStyle({style: Style.Dark});
+      // if (prefersDark.matches) {
+      //   StatusBar.setStyle({style: Style.Dark});
+      // } else {
+      //   StatusBar.setStyle({style: Style.Light});
+      // }
+    }
   }
 
   async commingSoon(feature: string) {

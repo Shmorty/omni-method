@@ -1,14 +1,14 @@
-<ion-header collapse="fade" class="ion-no-border">
-  <ion-toolbar>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
     <ion-title>Community</ion-title>
     <ion-button slot="end" (click)="logout()">
       <ion-icon name="log-out-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
-  <ion-header class="safe-area">
-  </ion-header>
+<ion-content [fullscreen]="false">
+  <!-- <ion-header class="safe-area">
+  </ion-header> -->
   <!-- (ionChange)="segmentChange($event)" -->
   <ion-segment value="rankings"
   [(ngModel)]="type"

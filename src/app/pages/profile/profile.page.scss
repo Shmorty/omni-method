@@ -24,7 +24,9 @@ ion-content {
   position: absolute;
 }
 .safe-area {
-  background: #b8dfff;
+  // background: #b8dfff;
+  background-color: var(--ion-color-primary);
+  height: var(--ion-safe-area-top, 0);
 }
 ion-content ion-header {
   background: linear-gradient(#b8dfff, #5eb3f9);
@@ -32,6 +34,7 @@ ion-content ion-header {
   ion-label {
     color: white;
   }
+  padding: 0px !important;
 }
 
 ion-refresher {
