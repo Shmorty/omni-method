@@ -1,13 +1,11 @@
-<ion-header [translucent]="false" class="ion-no-border">
-  <ion-toolbar color="primary" class="profile-header">
+<ion-header [translucent]="false" class="ion-no-border safe-area">
+  <!-- <ion-toolbar color="primary" class="profile-header">
     <ion-title>Omni Score {{(user$ | async)?.omniScore}}</ion-title>
-    <!-- <ion-title>Omni Score</ion-title>
-    <ion-title>{{(user$ | async)?.omniScore}}</ion-title> -->
-  </ion-toolbar>
+  </ion-toolbar> -->
 </ion-header>
 <ion-content [fullscreen]="true" #scrollarea no-bounce class="ion-content-scroll-host">
-  <div class="safe-area">
-  </div>
+  <!-- <div class="safe-area">
+  </div> -->
   <ion-refresher
     slot="fixed"
     pullMax="200"
@@ -20,16 +18,16 @@
     ></ion-refresher-content>
   </ion-refresher>
   <!-- <ion-header collapse="condense"> -->
-  <ion-header style="padding-top: 44px;">
+  <ion-header>
     <ion-toolbar color="default">
       <ion-card class="card cardStyle topCard bg-transparent">
         <ng-container *ngIf="user$ | async as user; else loading ">
-          <!-- <ion-item id="omniScore" lines="none" color="none">
+          <ion-item id="omniScore" lines="none" color="none">
             <span>
               <ion-label class="omni-label">Omni Score</ion-label>
               <ion-label class="omni-score">{{user.omniScore | number}}</ion-label>
             </span>
-          </ion-item> -->
+          </ion-item>
           <ion-item lines="none" color="none">
             <user-avatar [user]="user" [ngStyle]="{'color': 'white'}"
             (click)="openEditProfile($event, user)"
