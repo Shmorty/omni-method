@@ -19,7 +19,7 @@
   </ion-refresher>
   <!-- <ion-header collapse="condense"> -->
   <ion-header>
-    <ion-toolbar color="default">
+    <!-- <ion-toolbar color="default"> -->
       <ion-card class="card cardStyle topCard bg-transparent">
         <ng-container *ngIf="user$ | async as user; else loading ">
           <ion-item id="omniScore" lines="none" color="none">
@@ -159,7 +159,7 @@
           </ion-item>
         </ng-template>
       </ion-card>
-    </ion-toolbar>
+    <!-- </ion-toolbar> -->
   </ion-header>
 
   <ion-card style="box-shadow: none; margin-bottom: 0">
