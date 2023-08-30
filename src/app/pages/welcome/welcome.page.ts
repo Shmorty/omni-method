@@ -1,4 +1,6 @@
 import {Component, Inject, OnInit, inject} from '@angular/core';
+import {StatusBar, Style} from '@capacitor/status-bar';
+import {isPlatform} from '@ionic/angular';
 import {AuthService} from 'src/app/services/auth.service';
 
 interface Item {
@@ -19,6 +21,19 @@ export class WelcomePage implements OnInit {
   constructor(private auth: AuthService) {}
 
   ngOnInit() {}
+
+  ionViewWillEnter() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    if (isPlatform('mobile')) {
+      // StatusBar.setStyle({style: Style.Dark});
+      if (prefersDark.matches) {
+        StatusBar.setStyle({style: Style.Dark});
+      } else {
+        StatusBar.setStyle({style: Style.Light});
+      }
+    }
+  }
 
   registerWithGoogle() {
     console.log('registerWithGoogle');

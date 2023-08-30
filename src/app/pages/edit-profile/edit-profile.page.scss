@@ -11,3 +11,24 @@ ion-list {
 ion-item {
   --ion-item-background: transparent;
 }
+ion-datetime::part(wheel-item active) {
+  color: rgb(128, 30, 171);
+}
+
+.custom-popover {
+  --background: #0000005c; 
+  --ion-backdrop-color: teal;
+  --ion-safe-area-top: 0;
+  backdrop-filter: blur(12px);
+  // &::part(backdrop) {
+  //   background-color: teal;
+  // }
+  &::part(content) {
+    border-radius: 10px;
+    // height: 50%;
+    height: 244px;
+    margin: auto;
+    // width: 80%;
+    width: 350px;
+  }
+}

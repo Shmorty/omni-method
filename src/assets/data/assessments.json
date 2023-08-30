@@ -439,32 +439,6 @@
       ]
     },
     {
-      "cid": "META",
-      "label": "Static Apnea",
-      "aid": "STAPN",
-      "icon": "/assets/images/breathhold.png",
-      "units": "Time",
-      "entryUnits": "Time",
-      "description": "",
-      "instruction": [
-        "Find a quiet and safe space to lie down comfortably",
-        "Lie on your back with the head and neck supported.",
-        "Take a deep breath and hold as long as you can",
-        "When you need to breathe, exhale slowly and recover with deep breaths",
-        "Record the duration of your breath-hold, stopping the time once you inhale"
-      ],
-      "min": 0,
-      "max": 11.5,
-      "increment": 0.01,
-      "onboarding": {
-        "prompt": "How long can you hold your breath?"
-      },
-      "rules":[
-        "Time stops after inhale"
-      ],
-      "warning": "Not to be done in water or anything like that"
-    },
-    {
       "aid": "AGLTY",
       "cid": "NEUR",
       "icon": "/assets/images/agility.png",
@@ -574,7 +548,7 @@
       {"label": "Basketball Dribbling x30", "category": "Equipment"},
       {"label": "Soccer Ball Juggling x30", "category": "Equipment"},
       {"label": "Muscle Up", "category": "Equipment"},
-      {"label": "Kong Vaule", "category": "Equipment"},
+      {"label": "Kong Vault", "category": "Equipment"},
 
       {"label": "Front Tuck", "category": "Forward"},
       {"label": "Front Pike", "category": "Forward"},
@@ -585,7 +559,7 @@
       {"label": "Back Extension Roll", "category": "Backward"},
       {"label": "Back Layout", "category": "Backward"},
       {"label": "Double Back Tuck", "category": "Backward"},
-      {"label": "Bar Backflip", "category": "Backward"},
+      {"label": "Flyaway", "category": "Backward"},
 
       {"label": "Back Full", "category": "Twisting"},
       {"label": "Front Full", "category": "Twisting"},
