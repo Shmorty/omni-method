@@ -56,7 +56,7 @@ user-avatar {
   .omni-label {
     // border-top: 1.5px solid white;
     font-weight: 700;
-    padding: 10px 40px;
+    padding: 10px 40px 0;
   }
   .omni-score {
     font-size: 2em;
@@ -108,6 +108,7 @@ ion-badge {
   border-radius: inherit;
   border-width: 0pt;
   box-shadow: 0px 4px 8px #5eb2ff80;
+  padding-top: var(--ion-safe-area-top);
 }
 ion-card-header {
   padding: 0px 0px 0px 8px;
