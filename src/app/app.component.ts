@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AssessmentService} from './services/assessments/assessment.service';
 import {ModalController, Platform} from '@ionic/angular';
 import {EditProfilePage} from './pages/edit-profile/edit-profile.page';
+import { TextZoom } from '@capacitor/text-zoom';
+import { App } from '@capacitor/app';
 
 // import { GoogleSigninService } from './google-signin.service';
 
@@ -21,7 +23,11 @@ export class AppComponent implements OnInit {
     private modalCtrl: ModalController,
     public platform: Platform
   ) {
-    console.log('assessmentService.load()');
+    App.addListener('appStateChange', ({ isActive }) => {
+      TextZoom.getPreferred().then(value => {
+        TextZoom.set(value);
+      })
+    });
     assessmentService.load();
     this.initializeApp();
   }
