@@ -14,7 +14,8 @@
     "cap-build": "ionic capacitor build",
     "cap-run": "ionic capacitor run",
     "cap-sync": "ionic capacitor sync",
-    "cap-open": "ionic capacitor open"
+    "cap-open": "ionic capacitor open",
+    "live-reload-ios": "ionic capacitor run ios -l --external"
   },
   "private": true,
   "dependencies": {

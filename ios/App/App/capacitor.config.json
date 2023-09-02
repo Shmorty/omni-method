@@ -16,5 +16,8 @@
 			"launchAutoHide": true,
 			"launchShowDuration": 1000
 		}
+	},
+	"server": {
+		"url": "http://10.0.0.150:8100"
 	}
 }
