@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {UserService} from 'src/app/services/user/user.service';
 import {AuthService} from 'src/app/services/auth.service';
 import {User} from 'src/app/store/user/user.model';
-import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
+// import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
 import {isPlatform} from '@ionic/angular';
 import {Keyboard} from '@capacitor/keyboard';
 import {UserFirestoreService} from 'src/app/services/user-firestore.service';
@@ -118,21 +118,21 @@ export class NewUserPage implements OnInit {
     let curYear = maxDate.getFullYear();
     maxDate.setFullYear(curYear - 2);
 
-    const options: DatePickerOptions = {
-      format: 'MM/dd/yyyy',
-      mode: 'date',
-      date: this.userDob,
-      max: this.datePipe.transform(maxDate, 'MM/dd/yyyy'),
-    };
-    console.log(options.date);
-    console.log(options.max);
-    if (isPlatform('mobile')) {
-      console.log('is mobile');
-      Keyboard.hide();
-      return DatePicker.present(options).then((date) => {
-        this.userDob = date.value;
-        this.formData.get('dob').setValue(date.value);
-      });
-    }
+    // const options: DatePickerOptions = {
+    //   format: 'MM/dd/yyyy',
+    //   mode: 'date',
+    //   date: this.userDob,
+    //   max: this.datePipe.transform(maxDate, 'MM/dd/yyyy'),
+    // };
+    // console.log(options.date);
+    // console.log(options.max);
+    // if (isPlatform('mobile')) {
+    //   console.log('is mobile');
+    //   Keyboard.hide();
+    //   return DatePicker.present(options).then((date) => {
+    //     this.userDob = date.value;
+    //     this.formData.get('dob').setValue(date.value);
+    //   });
+    // }
   }
 }
