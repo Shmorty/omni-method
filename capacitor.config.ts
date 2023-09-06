@@ -1,4 +1,4 @@
-import { CapacitorConfig } from '@capacitor/cli';
+import {CapacitorConfig} from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.shmorty.omni-method.app',
@@ -13,9 +13,9 @@ const config: CapacitorConfig = {
         '164197842062-i2oqluboqhldepb0enpt0hlnmrongsvl.apps.googleusercontent.com',
       forceCodeForRefreshToken: true,
     },
-    Splashscreen: {
+    SplashScreen: {
       launchAutoHide: true,
-      launchShowDuration: 1000,
+      launchShowDuration: 2000,
     },
   },
 };
