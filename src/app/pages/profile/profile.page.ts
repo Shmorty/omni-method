@@ -19,7 +19,7 @@ import * as UserSelectors from 'src/app/store/user/user.selectors';
 //   selectCategoryScore,
 //   selectOmniScore,
 // } from 'src/app/store/omni-score/omni-score.selector';
-import {tap} from 'rxjs/operators';
+import {delay, tap} from 'rxjs/operators';
 import {EditProfilePage} from '../edit-profile/edit-profile.page';
 import {OmniScoreService, oneDay} from '../../services/omni-score.service';
 import {UserService} from '../../services/user/user.service';
@@ -43,7 +43,7 @@ export class ProfilePage implements OnInit {
   // using global ngrx store
   public categories$ = this.store.select(selectAllCategories);
   public assessments$ = this.store.select(selectAllAssessments);
-  public user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(50000));
+  public user$ = this.store.select(UserSelectors.selectUser).pipe(delay(5000));
   public scores$ = this.store.select(UserSelectors.userScores);
   // public omniScore$ = this.store.select(selectOmniScore);
 
