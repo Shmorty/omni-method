@@ -1,121 +1,16 @@
-<div class="container">
-  <ng-container *ngIf="user$ | async as user; else skeleton ">
-    <!-- avatar -->
-    <user-avatar
-      class="avatar"
-      [user]="user"
-      [ngStyle]="{'color': 'white'}"
-      ></user-avatar>
-    <!-- menu button -->
-    <ion-button
-      class="menu-button"
-      id="open-modal"
-      color="none"
-      (click)="userService.openEditProfile($event, user)"
-      >
-      <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
-      <!-- <ion-icon slot="icon-only" name="pencil-outline"></ion-icon> -->
-    </ion-button>
-    <ion-label class="full-name"> {{user.firstName}} {{user.lastName}} </ion-label>
-    <div class="user-properties">
-      <div class="user-property">
-        <ion-label>Age</ion-label>
-        <ion-label>{{userService.getAge(user)}}</ion-label>
-      </div>
-      <div class="user-property">
-        <ion-label>Body Weight</ion-label>
-        <ion-label>{{user.weight}}</ion-label>
-      </div>
-      <div class="user-property">
-        <ion-label>Height</ion-label>
-        <ion-label
-          >{{user.height?.feet}}' {{user.height?.inches}}"</ion-label
-        >
-      </div>
-    </div>
+<ion-card class="card cardStyle topCard">
+  <ng-container *ngIf="user$ | async as user; else loading ">
     <ion-item id="omniScore" lines="none" color="none">
       <span>
         <ion-label class="omni-label">Omni Score</ion-label>
         <ion-label class="omni-score">{{user.omniScore | number}}</ion-label>
       </span>
     </ion-item>
-  </ng-container>
-  <ng-template #skeleton>
-    <div class="avatar">
-      <ngx-skeleton-loader
-        count="1"
-        appearance="circle"
-        [theme]="{ height: '48px', width: '48px' }"
-      ></ngx-skeleton-loader>
-    </div>
-    <ion-button class="menu-button" color="none">
-      <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
-    </ion-button>
-    <ngx-skeleton-loader
-      class="full-name"
-      count="2"
-      [theme]="{ height: '24px', width: '94px', margin: '6px' }"
-    ></ngx-skeleton-loader>
-    <div class="user-properties">
-      <div class="user-property">
-        <ngx-skeleton-loader
-          [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
-        ></ngx-skeleton-loader>
-        <ngx-skeleton-loader
-          [theme]="{ width: '20px', height: '12px', 'bottom-margin': '0px' }"
-        ></ngx-skeleton-loader>
-      </div>
-      <div class="user-property">
-        <ngx-skeleton-loader
-          [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
-        ></ngx-skeleton-loader>
-        <ngx-skeleton-loader
-          [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
-        ></ngx-skeleton-loader>
-      </div>
-      <div class="user-property">
-        <ngx-skeleton-loader
-          [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
-        ></ngx-skeleton-loader>
-        <ngx-skeleton-loader
-          [theme]="{ width: '60px', height: '12px', 'bottom-margin': '0px' }"
-        ></ngx-skeleton-loader>
-      </div>
-    </div>
-    <ion-item id="omniScore" lines="none" color="none">
-      <div style="text-align: center">
-        <ngx-skeleton-loader
-          [theme]="{ width: '128px', height: '1px' }"
-        ></ngx-skeleton-loader>
-        <br />
-        <ngx-skeleton-loader class="omni-label"
-          [theme]="{ width: '64px', height: '12px' }"
-        ></ngx-skeleton-loader>
-        <br />
-        <ngx-skeleton-loader class="omni-score"
-          [theme]="{ width: '48px', height: '32px' }"
-        ></ngx-skeleton-loader>
-      </div>
-    </ion-item>
-  </ng-template>
-</div>
-<ion-card style="display: none;" class="card cardStyle topCard bg-transparent">
-  <ng-container *ngIf="user$ | async as user; else loading ">
     <ion-item lines="none" color="none">
-      <user-avatar
-        [user]="user"
-        [ngStyle]="{'color': 'white'}"
-      ></user-avatar>
-      <span slot="end">
-        <ion-button
-          id="open-modal"
-          color="none"
-          (click)="userService.openEditProfile($event, user)"
-        >
-        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
-          <!-- <ion-icon slot="icon-only" name="pencil-outline"></ion-icon> -->
-        </ion-button>
-      </span>
+      <user-avatar [user]="user" [ngStyle]="{'color': 'white'}"
+      (click)="userService.openEditProfile($event, user)"
+      >
+      </user-avatar>
     </ion-item>
     <ion-item lines="none" color="none" text-center class="name">
       <ion-label> {{user.firstName}} {{user.lastName}} </ion-label>
@@ -141,14 +36,7 @@
       </ion-grid>
     </ion-item>
 
-    <ion-item id="omniScore" lines="none" color="none">
-      <span>
-        <ion-label class="omni-label">Omni Score</ion-label>
-        <ion-label class="omni-score">{{user.omniScore | number}}</ion-label>
-      </span>
-    </ion-item>
-
-    <!-- <ion-item lines="none" color="none" style="--min-height: 0">
+    <ion-item lines="none" color="none" style="--min-height: 0">
       <ion-accordion-group #accordionGroup>
         <ion-accordion value="moreProfile">
           <div slot="content" style="height: 44px">
@@ -156,7 +44,7 @@
         </ion-accordion>
       </ion-accordion-group>
     </ion-item>
-    <ion-item lines="none" color="none">
+    <!-- <ion-item lines="none" color="none">
       <ion-button
         class="more-button"
         [ngClass]="moreOpen ? 'rotate-button' : ''"
@@ -166,75 +54,43 @@
     </ion-item> -->
   </ng-container>
 
-  <!-- Profile Loading template -->
   <ng-template #loading>
-    <ion-item lines="none" color="none">
-      <div id="avatar">
-        <ngx-skeleton-loader
-          count="1"
-          appearance="circle"
-          [theme]="{ height: '44px', width: '44px' }"
-        ></ngx-skeleton-loader>
-      </div>
-      <span slot="end">
-        <ion-button style="float: right" color="none">
-          <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
-        </ion-button>
-      </span>
-    </ion-item>
-    <ion-item lines="none" color="none" text-center class="name">
-      <ngx-skeleton-loader
-        count="2"
-        [theme]="{ height: '24px', width: '94px', margin: '6px' }"
-      ></ngx-skeleton-loader>
-    </ion-item>
-    <ion-item lines="none" color="none">
-      <ion-grid class="ion-text-center">
-        <ion-row>
-          <ion-col>
-            <ngx-skeleton-loader
-              [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
-            ></ngx-skeleton-loader>
-            <br />
-            <ngx-skeleton-loader
-              [theme]="{ width: '20px', height: '12px', 'bottom-margin': '0px' }"
-            ></ngx-skeleton-loader>
-          </ion-col>
-          <ion-col>
-            <ngx-skeleton-loader
-              [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
-            ></ngx-skeleton-loader>
-            <br />
-            <ngx-skeleton-loader
-              [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
-            ></ngx-skeleton-loader>
-          </ion-col>
-          <ion-col>
-            <ngx-skeleton-loader
-              [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
-            ></ngx-skeleton-loader>
-            <br />
-            <ngx-skeleton-loader
-              [theme]="{ width: '60px', height: '12px', 'bottom-margin': '0px' }"
-            ></ngx-skeleton-loader>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-    <ion-item id="omniScore" lines="none" color="none">
-      <div style="text-align: center">
-        <ngx-skeleton-loader
-          [theme]="{ width: '128px', height: '1px' }"
-        ></ngx-skeleton-loader>
-        <br />
-        <ngx-skeleton-loader
-          [theme]="{ width: '64px', height: '12px' }"
-        ></ngx-skeleton-loader>
-        <br />
-        <ngx-skeleton-loader
-          [theme]="{ width: '48px', height: '32px' }"
-        ></ngx-skeleton-loader>
-      </div>
-    </ion-item>
+    <ion-card class="card cardStyle topCard bg-transparent">
+      <ion-item id="omniScore" lines="none" color="none">
+        <ion-skeleton-text animated style="width: 8em; height: 1em;"></ion-skeleton-text>
+      </ion-item>
+      <ion-item id="omniScore" lines="none" color="none">
+        <ion-skeleton-text animated style="width: 5em; height: 2em;"></ion-skeleton-text>
+      </ion-item>
+      <ion-item lines="none" color="none">
+        <ion-avatar style="height: 48px;width: 48px; margin: auto;"><ion-skeleton-text animated></ion-skeleton-text></ion-avatar>
+      </ion-item>
+      <ion-item lines="none" color="none" text-center class="name">
+        <ion-skeleton-text [animated]="true" style="width: 4em; height: 1em;"></ion-skeleton-text>
+        &nbsp;
+        <ion-skeleton-text [animated]="true" style="width: 4em; height: 1em;"></ion-skeleton-text>
+      </ion-item>
+      <ion-item lines="none" color="none">
+        <ion-grid class="ion-text-center">
+          <ion-row>
+            <ion-col>
+              <ion-skeleton-text [animated]="true" style="margin: auto; width: 3em;"></ion-skeleton-text>
+              <br />
+              <ion-skeleton-text [animated]="true" style="margin: auto; width: 2em;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col>
+              <ion-skeleton-text [animated]="true" style="margin: auto; width: 5em;"></ion-skeleton-text>
+              <br />
+              <ion-skeleton-text [animated]="true" style="margin: auto; width: 3em;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col>
+              <ion-skeleton-text [animated]="true" style="margin: auto; width: 3em;"></ion-skeleton-text>
+              <br />
+              <ion-skeleton-text [animated]="true" style="margin: auto; width: 3em;"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-card>
   </ng-template>
 </ion-card>

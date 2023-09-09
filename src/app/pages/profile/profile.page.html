@@ -17,8 +17,8 @@
       refreshingSpinner="none"
     ></ion-refresher-content>
   </ion-refresher>
-  <!-- <ion-header collapse="condense"> -->
-  <ion-header>
+  <app-profile-header></app-profile-header>
+  <!-- <ion-header>
     <ion-card class="card cardStyle topCard bg-transparent">
       <ng-container *ngIf="user$ | async as user; else loading ">
         <ion-item id="omniScore" lines="none" color="none">
@@ -29,19 +29,9 @@
         </ion-item>
         <ion-item lines="none" color="none">
           <user-avatar [user]="user" [ngStyle]="{'color': 'white'}"
-          (click)="openEditProfile($event, user)"
+          (click)="userService.openEditProfile($event, user)"
           >
           </user-avatar>
-          <!-- <span slot="end">
-            <ion-button
-              id="open-modal"
-              style="float: right"
-              color="none"
-              (click)="openEditProfile($event, user)"
-            >
-              <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
-            </ion-button>
-          </span> -->
         </ion-item>
         <ion-item lines="none" color="none" text-center class="name">
           <ion-label> {{user.firstName}} {{user.lastName}} </ion-label>
@@ -51,7 +41,7 @@
             <ion-row>
               <ion-col>
                 <ion-label>Age</ion-label>
-                <ion-label>{{getAge(user)}}</ion-label>
+                <ion-label>{{userService.getAge(user)}}</ion-label>
               </ion-col>
               <ion-col>
                 <ion-label>Body Weight</ion-label>
@@ -67,8 +57,7 @@
           </ion-grid>
         </ion-item>
 
-
-        <!-- <ion-item lines="none" color="none" style="--min-height: 0">
+        <ion-item lines="none" color="none" style="--min-height: 0">
           <ion-accordion-group #accordionGroup>
             <ion-accordion value="moreProfile">
               <div slot="content" style="height: 44px">
@@ -76,17 +65,8 @@
             </ion-accordion>
           </ion-accordion-group>
         </ion-item>
-        <ion-item lines="none" color="none">
-          <ion-button
-            class="more-button"
-            [ngClass]="moreOpen ? 'rotate-button' : ''"
-            (click)="toggleAccordion($event)"
-            ><ion-icon name="chevron-down"></ion-icon
-          ></ion-button>
-        </ion-item> -->
       </ng-container>
 
-      <!-- Profile Loading template -->
       <ng-template #loading>
         <ion-card class="card cardStyle topCard bg-transparent">
           <ion-item id="omniScore" lines="none" color="none">
@@ -107,31 +87,19 @@
             <ion-grid class="ion-text-center">
               <ion-row>
                 <ion-col>
-                  <ngx-skeleton-loader
-                    [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
-                  ></ngx-skeleton-loader>
+                  <ion-skeleton-text [animated]="true" style="margin: auto; width: 3em;"></ion-skeleton-text>
                   <br />
-                  <ngx-skeleton-loader
-                    [theme]="{ width: '20px', height: '12px', 'bottom-margin': '0px' }"
-                  ></ngx-skeleton-loader>
+                  <ion-skeleton-text [animated]="true" style="margin: auto; width: 2em;"></ion-skeleton-text>
                 </ion-col>
                 <ion-col>
-                  <ngx-skeleton-loader
-                    [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
-                  ></ngx-skeleton-loader>
+                  <ion-skeleton-text [animated]="true" style="margin: auto; width: 5em;"></ion-skeleton-text>
                   <br />
-                  <ngx-skeleton-loader
-                    [theme]="{ width: '30px', height: '12px', 'bottom-margin': '0px' }"
-                  ></ngx-skeleton-loader>
+                  <ion-skeleton-text [animated]="true" style="margin: auto; width: 3em;"></ion-skeleton-text>
                 </ion-col>
                 <ion-col>
-                  <ngx-skeleton-loader
-                    [theme]="{ width: '64px', height: '12px', 'bottom-margin': '0px' }"
-                  ></ngx-skeleton-loader>
+                  <ion-skeleton-text [animated]="true" style="margin: auto; width: 4em;"></ion-skeleton-text>
                   <br />
-                  <ngx-skeleton-loader
-                    [theme]="{ width: '60px', height: '12px', 'bottom-margin': '0px' }"
-                  ></ngx-skeleton-loader>
+                  <ion-skeleton-text [animated]="true" style="margin: auto; width: 3em;"></ion-skeleton-text>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -139,9 +107,9 @@
         </ion-card>
       </ng-template>
     </ion-card>
-  </ion-header>
+  </ion-header> -->
 
-  <ion-card style="box-shadow: none; margin-bottom: 0">
+  <ion-card class="contentCard">
     <ion-item lines="none">
       <ion-card-title>All Assessments</ion-card-title>
     </ion-item>

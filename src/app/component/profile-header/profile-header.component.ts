@@ -4,8 +4,10 @@ import {IonicModule} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {User} from '../../store/user/user.model';
 import {UserAvatarComponent} from '../user-avatar/user-avatar.component';
+import * as UserSelectors from 'src/app/store/user/user.selectors';
 import {UserService} from 'src/app/services/user/user.service';
-import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
+import {Store} from '@ngrx/store';
+import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile-header',
@@ -16,23 +18,16 @@ import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
     CommonModule,
     IonicModule,
     UserAvatarComponent,
-    NgxSkeletonLoaderModule,
-    // NgxSkeletonLoaderModule.forRoot({
-    //   animation: 'pulse',
-    //   appearance: 'line',
-    //   theme: {
-    //     extendsFromRoot: true,
-    //     'margin-bottom': '0px',
-    //   },
-    // })
   ],
 })
 export class ProfileHeaderComponent implements OnInit {
 
   @Input() background: any;
-  user$: Observable<User>;
+  // user$: Observable<User>;
+  public user$ = this.store.select(UserSelectors.selectUser).pipe(delay(5000));
 
   constructor(
+    private store: Store,
     public userService: UserService,
     public element: ElementRef,
     public renderer: Renderer2

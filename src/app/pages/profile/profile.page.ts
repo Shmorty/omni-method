@@ -51,7 +51,7 @@ export class ProfilePage implements OnInit {
     private store: Store,
     private router: Router,
     private modalCtrl: ModalController,
-    private userService: UserService
+    public userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -153,22 +153,22 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  async openEditProfile(e, user) {
-    e.stopPropagation();
-    const modal = await this.modalCtrl.create({
-      component: EditProfilePage,
-      componentProps: {
-        user: user,
-      },
-      cssClass: 'edit-user-modal',
-      presentingElement: document.querySelector('ion-router-outlet'),
-      canDismiss: true,
-    });
-    await modal.present();
-    modal.onDidDismiss().then(() => {
-      // this.loadUserData();
-    });
-  }
+  // async openEditProfile(e, user) {
+  //   e.stopPropagation();
+  //   const modal = await this.modalCtrl.create({
+  //     component: EditProfilePage,
+  //     componentProps: {
+  //       user: user,
+  //     },
+  //     cssClass: 'edit-user-modal',
+  //     presentingElement: document.querySelector('ion-router-outlet'),
+  //     canDismiss: true,
+  //   });
+  //   await modal.present();
+  //   modal.onDidDismiss().then(() => {
+  //     // this.loadUserData();
+  //   });
+  // }
 
   toggleAccordion(event) {
     const nativeEl = this.accordionGroup;

@@ -1,15 +1,15 @@
-import { IonicModule } from '@ionic/angular';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ProfilePage } from './profile.page';
+import {IonicModule} from '@ionic/angular';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {ProfilePage} from './profile.page';
 // import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
-import { ProfilePageRoutingModule } from './profile-routing.module';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { NewScorePageModule } from '../new-score/new-score.module';
-import { EditProfilePageModule } from '../edit-profile/edit-profile.module';
-import { UserAvatarComponent } from 'src/app/component/user-avatar/user-avatar.component';
+import {ProfilePageRoutingModule} from './profile-routing.module';
+import {NewScorePageModule} from '../new-score/new-score.module';
+import {EditProfilePageModule} from '../edit-profile/edit-profile.module';
+import {UserAvatarComponent} from 'src/app/component/user-avatar/user-avatar.component';
+import {ProfileHeaderComponent} from 'src/app/component/profile-header/profile-header.component';
 
 @NgModule({
   declarations: [ProfilePage],
@@ -19,18 +19,10 @@ import { UserAvatarComponent } from 'src/app/component/user-avatar/user-avatar.c
     FormsModule,
     // ExploreContainerComponentModule,
     ProfilePageRoutingModule,
-    // NgxSkeletonLoaderModule,
-    NgxSkeletonLoaderModule.forRoot({
-      animation: 'pulse',
-      appearance: 'line',
-      theme: {
-        extendsFromRoot: true,
-        'margin-bottom': '0px',
-      },
-    }),
     NewScorePageModule,
     EditProfilePageModule,
     UserAvatarComponent,
+    ProfileHeaderComponent
   ],
 })
 export class ProfilePageModule {}
