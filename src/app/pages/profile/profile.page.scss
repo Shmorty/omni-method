@@ -19,6 +19,7 @@ ion-content {
   position: absolute;
 }
 .safe-area {
+  background-color: #b8dfff;
   height: var(--ion-safe-area-top, 0);
 }
 ion-refresher {
