@@ -20,7 +20,7 @@ ion-datetime::part(wheel-item active) {
 
 .custom-popover {
   --background: #0000005c; 
-  --ion-backdrop-color: teal;
+  --ion-backdrop-color: #b8dfff;
   --ion-safe-area-top: 0;
   backdrop-filter: blur(12px);
   // &::part(backdrop) {
@@ -34,4 +34,16 @@ ion-datetime::part(wheel-item active) {
     // width: 80%;
     width: 350px;
   }
+}
+ion-datetime {
+  // --background: #5eb3f9;
+  // --background-rgb: 94, 179, 249;
+  --wheel-highlight-background: #5eb3f9;
+  --wheel-fade-background-rgb: 94, 179, 249;
+}
+ion-datetime::part(wheel-item) {
+  color: rgb(0, 0, 0);
+}
+ion-datetime::part(wheel-item active) {
+  color: rgb(255, 255, 255);
 }
