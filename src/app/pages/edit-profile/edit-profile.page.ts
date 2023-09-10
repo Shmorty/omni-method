@@ -9,6 +9,7 @@ import {
 import {Keyboard} from '@capacitor/keyboard';
 import {IonModal, isPlatform, ModalController} from '@ionic/angular';
 import {OverlayEventDetail} from '@ionic/core/components';
+import {AuthService} from 'src/app/services/auth.service';
 // import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
 import {UserService} from 'src/app/services/user/user.service';
 import {User} from 'src/app/store/user/user.model';
@@ -29,8 +30,8 @@ export class EditProfilePage implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
-    private userService: UserService,
-    private datePipe: DatePipe,
+    public userService: UserService,
+    private auth: AuthService,
     public formBuilder: FormBuilder
   ) {}
 
@@ -55,6 +56,11 @@ export class EditProfilePage implements OnInit {
       }),
       weight: new FormControl(this.user.weight),
     });
+  }
+
+  logout() {
+    this.modalCtrl.dismiss(null, 'logout');
+    this.auth.logout();
   }
 
   submitForm() {

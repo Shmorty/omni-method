@@ -23,8 +23,7 @@ import {delay} from 'rxjs/operators';
 export class ProfileHeaderComponent implements OnInit {
 
   @Input() background: any;
-  // user$: Observable<User>;
-  public user$ = this.store.select(UserSelectors.selectUser).pipe(delay(5000));
+  public user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
 
   constructor(
     private store: Store,

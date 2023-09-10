@@ -43,7 +43,7 @@ export class ProfilePage implements OnInit {
   // using global ngrx store
   public categories$ = this.store.select(selectAllCategories);
   public assessments$ = this.store.select(selectAllAssessments);
-  public user$ = this.store.select(UserSelectors.selectUser).pipe(delay(5000));
+  public user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
   public scores$ = this.store.select(UserSelectors.userScores);
   // public omniScore$ = this.store.select(selectOmniScore);
 

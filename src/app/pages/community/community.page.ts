@@ -29,7 +29,7 @@ export class CommunityPage implements OnInit {
   name: string;
   message: string;
 
-  constructor(private auth: AuthService, private userService: UserService,
+  constructor(private userService: UserService,
     private modalCtrl: ModalController) {
     this.userService.getUser().subscribe((usr) => {
       this.curUserId = usr.id;
@@ -60,10 +60,6 @@ export class CommunityPage implements OnInit {
 
   setView(viewName: View) {
     this.view = viewName;
-  }
-
-  logout() {
-    this.auth.logout();
   }
 
   // interface SegmentChangeEventDetail {
