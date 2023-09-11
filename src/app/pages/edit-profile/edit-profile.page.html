@@ -80,13 +80,11 @@
                 </ion-button>
               </ion-buttons>
               <ion-title>Date of birth</ion-title>
-              <!-- <ion-buttons slot="end">
-                <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
-              </ion-buttons> -->
             </ion-toolbar>
           </ion-header>
           <ion-content>
             <ion-datetime formControlName="dob" presentation="date" [preferWheel]="true"></ion-datetime>
+            <ion-button (click)="save()" expand="block">Save</ion-button>
           </ion-content>
         </ng-template>
       </ion-modal>

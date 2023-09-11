@@ -83,8 +83,8 @@ export class EditProfilePage implements OnInit {
     this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  confirm() {
-    this.modalCtrl.dismiss(this.name, 'confirm');
+  save() {
+    this.modalCtrl.dismiss(this.name, 'save');
   }
 
   onWillDismiss(event: Event) {
