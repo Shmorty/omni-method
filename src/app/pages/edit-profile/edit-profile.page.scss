@@ -3,7 +3,7 @@ user-avatar {
   margin: 12px auto;
 }
 ion-content {
-  --background: linear-gradient(#D0EAFF, #fff);
+  --background: linear-gradient(rgba(19, 122, 173, 0.2), rgba(0, 0, 0, 0));
 }
 ion-list {
   --ion-item-background: transparent;
@@ -31,4 +31,12 @@ ion-datetime::part(wheel-item active) {
     // width: 80%;
     width: 350px;
   }
+}
+
+ion-button {
+  // position: fixed;
+  --ion-border-radius: 20%;
+  padding-left: 20px;
+  padding-right: 20px;
+  bottom: 0;
 }
