@@ -5,7 +5,6 @@ import {IonicModule, IonVirtualScroll} from '@ionic/angular';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FormsModule} from '@angular/forms';
-import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {FirebaseApp, getApp, initializeApp, provideFirebaseApp} from '@angular/fire/app';
 import {environment} from '../environments/environment';
 import {DatePipe} from '@angular/common';
@@ -65,7 +64,6 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
     FormsModule,
     HttpClientModule,
     IonicModule.forRoot(),
-    NgxSkeletonLoaderModule.forRoot(),
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([AssessmentEffects, UserEffects, OmniScoreEffects]),
     StoreDevtoolsModule.instrument({
