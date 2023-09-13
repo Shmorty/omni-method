@@ -17,13 +17,13 @@
   </div>
 
   <ion-list>
-        <user-avatar [user]="user" class="avatar"></user-avatar>
-        <br>
-        <ion-label>Edit</ion-label>
-        <!-- <user-avatar [user]="user" [ngStyle]="{'color': 'white'}"
-        (click)="userService.openEditProfile($event, user)"
-        >
-        </user-avatar> -->
+    <div class="avatar">
+      <user-avatar [user]="user" class="avatar"></user-avatar>
+      <!-- <user-avatar [user]="user" [ngStyle]="{'color': 'white'}"
+      (click)="userService.openEditProfile($event, user)"
+      >
+      </user-avatar> -->
+  </div>
   
         <ion-item button>
           <ion-label>Name</ion-label>
