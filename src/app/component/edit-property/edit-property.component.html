@@ -1,0 +1,21 @@
+<ng-template let-targetProperty>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-button (click)="cancel()">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>{{targetProperty}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ng-container *ngTemplateOutlet="targetProperty"></ng-container>
+    <ion-button (click)="save()" expand="block">Save</ion-button>
+  </ion-content>
+</ng-template>
+
+<ng-template #dob>
+  <ion-datetime formControlName="dob" presentation="date" [preferWheel]="true"></ion-datetime>
+</ng-template>

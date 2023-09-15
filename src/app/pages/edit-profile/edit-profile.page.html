@@ -25,27 +25,27 @@
       </user-avatar> -->
   </div>
   
-        <ion-item button>
+        <ion-item button (click)="openModal('name')">
           <ion-label>Name</ion-label>
           <ion-text slot="end">{{user.firstName}}&nbsp;{{user.lastName}}</ion-text>
         </ion-item>
-        <ion-item button>
+        <ion-item button (click)="openModal('nickname')">
           <ion-label>Display Name</ion-label>
           <ion-text slot="end">{{user.nickname}}</ion-text>
         </ion-item>
-        <ion-item button id="open-modal">
+        <ion-item button (click)="openModal('dob')">
           <ion-label>Age</ion-label>
           <ion-text slot="end">{{userService.getAge(user)}}</ion-text>
         </ion-item>
-        <ion-item button>
+        <ion-item button (click)="openModal('sex')">
           <ion-label>Sex</ion-label>
           <ion-text slot="end">{{user.gender}}</ion-text>
         </ion-item>
-        <ion-item button>
+        <ion-item button (click)="openModal('weight')">
           <ion-label>Weight</ion-label>
           <ion-text slot="end">{{user.weight}}</ion-text>
         </ion-item>
-        <ion-item button>
+        <ion-item button (click)="openModal('height')">
           <ion-label>Height</ion-label>
           <ion-text slot="end">{{user.height.feet}}' {{user.height.inches}}"</ion-text>
         </ion-item>
