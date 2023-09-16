@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
+import {isPlatform} from '@ionic/angular';
+import {StatusBar, Style} from '@capacitor/status-bar';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +17,19 @@ export class LoginPage implements OnInit {
 
   // constructor(private signInService: GoogleSigninService, private ref: ChangeDetectorRef) {
   constructor(private auth: AuthService) {}
+
+  ionViewWillEnter() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    if (isPlatform('mobile')) {
+      // StatusBar.setStyle({style: Style.Dark});
+      if (prefersDark.matches) {
+        StatusBar.setStyle({style: Style.Dark});
+      } else {
+        StatusBar.setStyle({style: Style.Light});
+      }
+    }
+  }
 
   doLogin() {
     this.auth.login(this.email, this.password);

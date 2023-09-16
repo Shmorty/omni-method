@@ -1,17 +1,17 @@
-import { DatePipe } from '@angular/common';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {DatePipe} from '@angular/common';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Keyboard } from '@capacitor/keyboard';
-import { IonModal, isPlatform, ModalController } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
-import { DatePicker, DatePickerOptions } from '@pantrist/capacitor-date-picker';
-import { UserService } from 'src/app/services/user/user.service';
-import { User } from 'src/app/store/user/user.model';
+import {Keyboard} from '@capacitor/keyboard';
+import {IonModal, isPlatform, ModalController} from '@ionic/angular';
+import {OverlayEventDetail} from '@ionic/core/components';
+// import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
+import {UserService} from 'src/app/services/user/user.service';
+import {User} from 'src/app/store/user/user.model';
 
 @Component({
   selector: 'edit-profile-page',
@@ -71,6 +71,9 @@ export class EditProfilePage implements OnInit {
   }
 
   cancel() {
+    // let dob = this.profileForm.get('dob');
+    // console.log("dob", dob);
+    // this.profileForm.get('dob').setValue(dob);
     this.modalCtrl.dismiss(null, 'cancel');
   }
 
@@ -97,21 +100,21 @@ export class EditProfilePage implements OnInit {
     let curYear = maxDate.getFullYear();
     maxDate.setFullYear(curYear - 2);
 
-    const options: DatePickerOptions = {
-      format: 'MM/dd/yyyy',
-      mode: 'date',
-      date: this.datePipe.transform(this.user.dob, 'MM/dd/yyyy'),
-      max: this.datePipe.transform(maxDate, 'MM/dd/yyyy'),
-    };
-    console.log(options.date);
-    console.log(options.max);
-    if (isPlatform('mobile')) {
-      console.log('is mobile');
-      Keyboard.hide();
-      return DatePicker.present(options).then((date) => {
-        console.log('set dob: ' + date.value);
-        this.profileForm.get('dob').setValue(date.value);
-      });
-    }
+    // const options: DatePickerOptions = {
+    //   format: 'MM/dd/yyyy',
+    //   mode: 'date',
+    //   date: this.datePipe.transform(this.user.dob, 'MM/dd/yyyy'),
+    //   max: this.datePipe.transform(maxDate, 'MM/dd/yyyy'),
+    // };
+    // console.log(options.date);
+    // console.log(options.max);
+    // if (isPlatform('mobile')) {
+    //   console.log('is mobile');
+    //   Keyboard.hide();
+    //   return DatePicker.present(options).then((date) => {
+    //     console.log('set dob: ' + date.value);
+    //     this.profileForm.get('dob').setValue(date.value);
+    //   });
+    // }
   }
 }

@@ -1,15 +1,16 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Assessment, Category } from '../../store/assessments/assessment.model';
-import { IAssessmentService } from './assessment.service.interface';
-import { Score } from '../../store/models/score.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../store/app.state';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Assessment, Category} from '../../store/assessments/assessment.model';
+import {IAssessmentService} from './assessment.service.interface';
+import {Score} from '../../store/models/score.model';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../store/app.state';
 import {
   selectAllAssessments,
   selectAllCategories,
   selectAssessmentById,
+  selectAssessmentByIndex,
   selectCategoryById,
   selectChecklist,
 } from '../../store/assessments/assessment.selector';
@@ -36,6 +37,12 @@ export class AssessmentService implements IAssessmentService {
   }
   getAssessmentById(aid: string): Observable<Assessment> {
     return this.store.select(selectAssessmentById(aid));
+  }
+  getAssessmentByIndex(i: number): Observable<Assessment> {
+    return this.store.select(selectAssessmentByIndex(i));
+  }
+  getAllAssessments(): Observable<Assessment[]> {
+    return this.store.select(selectAllAssessments);
   }
 
   loadData() {

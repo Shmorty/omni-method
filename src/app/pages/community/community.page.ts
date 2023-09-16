@@ -1,11 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AlertController, IonModal, ModalController} from '@ionic/angular';
+import {AlertController, IonModal, ModalController, isPlatform} from '@ionic/angular';
 import {AuthService} from 'src/app/services/auth.service';
 import {UserService} from 'src/app/services/user/user.service';
 import {User} from 'src/app/store/user/user.model';
 import {OverlayEventDetail} from '@ionic/core/components';
 import {RankingDetailPage} from '../ranking-detail/ranking-detail.page';
 import {Observable} from 'rxjs';
+import {StatusBar, Style} from '@capacitor/status-bar';
 
 export enum View {
   Rankings = 'Rankings',
@@ -19,7 +20,8 @@ export enum View {
   styleUrls: ['./community.page.scss'],
 })
 export class CommunityPage implements OnInit {
-  View = View;
+  type: string = 'rankings';
+  // View = View;
   public view: View = View.Rankings;
   public ranking$: Observable<User[]>;
   @ViewChild(IonModal) modal: IonModal;
@@ -36,6 +38,19 @@ export class CommunityPage implements OnInit {
   }
 
   ngOnInit() {}
+
+  ionViewWillEnter() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    if (isPlatform('mobile')) {
+      StatusBar.setStyle({style: Style.Dark});
+      // if (prefersDark.matches) {
+      //   StatusBar.setStyle({style: Style.Dark});
+      // } else {
+      //   StatusBar.setStyle({style: Style.Light});
+      // }
+    }
+  }
 
   highlightUser(athlete: User) {
     // return athlete.id == this.curUserId ? "highlight" : "";

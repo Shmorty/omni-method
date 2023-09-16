@@ -18,6 +18,9 @@ import {
 } from '../../store/user/user.selectors';
 import {Assessment} from '../../store/assessments/assessment.model';
 import {UserFirestoreService} from '../user-firestore.service';
+import {AuthService} from '../auth.service';
+import {ModalController} from '@ionic/angular';
+import {EditProfilePage} from 'src/app/pages/edit-profile/edit-profile.page';
 
 @Injectable({
   providedIn: 'root',
@@ -25,11 +28,24 @@ import {UserFirestoreService} from '../user-firestore.service';
 export class UserService implements IUserService {
   constructor(private http: HttpClient,
     private store: Store<AppState>,
-    private firestoreService: UserFirestoreService) {}
+    private firestoreService: UserFirestoreService,
+    private modalCtrl: ModalController,
+    private authService: AuthService) {}
 
   // get user from store
   getUser() {
     return this.store.select(selectUser);
+  }
+
+  reloadUser() {
+    this.store.select(selectAuthUser).subscribe((authUser) => {
+      // console.log("selectAuthUser authUser", authUser.user.uid);
+      this.store.dispatch(UserActions.loadUserAction({uid: authUser?.user.uid}));
+    });
+    // this.authService.currentUser().then((authUser) => {
+    //   console.log("authService authUser", authUser);
+    // });
+    // console.log("authService currUserId", this.authService.currUserId);
   }
 
   getUserRankings(): Observable<User[]> {
@@ -56,7 +72,9 @@ export class UserService implements IUserService {
           console.log('dispatch newUser action');
           this.store.dispatch(UserActions.newUser({payload: user}));
         },
-        (err) => console.error('Observer got an error: ' + err)
+        (err) => {
+          console.error('Observer got an error: ' + err);
+        }
       );
   }
 
@@ -115,4 +133,33 @@ export class UserService implements IUserService {
       () => new Error('Unable to process request; please try again later.')
     );
   }
+
+  async openEditProfile(e, user) {
+    e.stopPropagation();
+    const modal = await this.modalCtrl.create({
+      component: EditProfilePage,
+      componentProps: {
+        user: user,
+      },
+      cssClass: 'edit-user-modal',
+      presentingElement: document.querySelector('ion-router-outlet'),
+      canDismiss: true,
+    });
+    await modal.present();
+    modal.onDidDismiss().then(() => {
+      // this.loadUserData();
+    });
+  }
+
+  getAge(user: User) {
+    var today = new Date();
+    var birthDate = new Date(user.dob);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
 }

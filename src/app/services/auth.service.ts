@@ -1,5 +1,5 @@
-import { Injectable, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import {Injectable, inject} from '@angular/core';
+import {Router} from '@angular/router';
 import {
   Auth,
   // GoogleAuthProvider,
@@ -21,12 +21,12 @@ import {
   // signInWithPopup,
 } from '@angular/fire/auth';
 // import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
-import { BehaviorSubject, from, Observable, Subscription } from 'rxjs';
+import {BehaviorSubject, from, Observable, Subscription} from 'rxjs';
 // import { User } from '../store/user/user.model';
 import * as OmniUser from '../store/user/user.model';
-import { Store } from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import * as UserActions from '../store/user/user.actions';
-import { AppState } from '../store/app.state';
+import {AppState} from '../store/app.state';
 
 @Injectable({
   providedIn: 'root',
@@ -46,13 +46,14 @@ export class AuthService {
   constructor(private router: Router, private store: Store<AppState>) {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
+        // this.saveUser(user);
+        console.log("User is authenticated, save user", user);
         this.store.dispatch(
-          UserActions.userAuthenticatd({payload: JSON.parse(JSON.stringify({user: user}))})
+          UserActions.userAuthenticated({payload: JSON.parse(JSON.stringify({user: user}))})
         );
-
       } else {
         console.log("User is signed out");
-        this.router.navigate(['/login']);
+        // this.router.navigate(['/welcome']);
       }
     });
   }
@@ -69,11 +70,11 @@ export class AuthService {
         // localStorage.setItem('userId', res.user.uid);
         this.saveUser(res);
         this.store.dispatch(
-          UserActions.userAuthenticatd({
+          UserActions.userAuthenticated({
             payload: JSON.parse(JSON.stringify(res)),
           })
         );
-        // this.router.navigate(['home']);
+        this.router.navigate(['home']);
       },
       (err) => {
         console.log(err);
@@ -94,17 +95,17 @@ export class AuthService {
         //   UserActions.registerUserSuccess({ payload: clonedUser })
         // );
         this.store.dispatch(
-          UserActions.userAuthenticatd({
+          UserActions.userAuthenticated({
             payload: JSON.parse(JSON.stringify(res)),
           })
         );
-        // this.saveUser(res);
+        this.saveUser(res);
         this.router.navigate(['/new-user']);
       },
       (err) => {
         console.log(err['code']);
         this.store.dispatch(
-          UserActions.registerUserFailure({ error: err['code'] })
+          UserActions.registerUserFailure({error: err['code']})
         );
         // alert(err.message);
         this.router.navigate(['/register']);
@@ -117,8 +118,8 @@ export class AuthService {
     signOut(this.auth).then(
       () => {
         // localStorage.removeItem('userId');
-        this.store.dispatch(UserActions.logoutAction())
-        this.router.navigate(['/login']);
+        this.store.dispatch(UserActions.logoutAction());
+        // this.router.navigate(['/login']);
       },
       (err) => {
         alert(err.message);
@@ -160,7 +161,7 @@ export class AuthService {
         // if user not found got to register user
         // if user found go to home page
         this.store.dispatch(
-          UserActions.userAuthenticatd({
+          UserActions.userAuthenticated({
             payload: JSON.parse(JSON.stringify(res)),
           })
         );

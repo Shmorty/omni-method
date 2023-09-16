@@ -1,19 +1,19 @@
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {Component, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
-import { User } from '../../store/user/user.model';
-import { UserService } from '../../services/user/user.service';
-import { Assessment } from '../../store/assessments/assessment.model';
-import { Score } from '../../store/models/score.model';
-import { Observable, Subject } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { selectUser } from 'src/app/store/user/user.selectors';
+import {ModalController} from '@ionic/angular';
+import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
+import {User} from '../../store/user/user.model';
+import {UserService} from '../../services/user/user.service';
+import {Assessment} from '../../store/assessments/assessment.model';
+import {Score} from '../../store/models/score.model';
+import {Observable, Subject} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {selectUser} from 'src/app/store/user/user.selectors';
 
 @Component({
   selector: 'app-new-score',
@@ -38,21 +38,25 @@ export class NewScorePage implements OnInit {
     console.log("newScore ngOnInit");
     // prefill date
     var today = new Date().toLocaleDateString();
-    this.formData = new FormGroup({
-      rawScore: new FormControl('', [
-        Validators.required,
-        Validators.min(this.assessment.min),
-        Validators.max(this.assessment.max),
-      ]),
-      scoreDate: new FormControl(today, Validators.required),
-      notes: new FormControl(''),
-    });
+    
     this.user$
       .subscribe((value) => {
         this.user = value;
+        this.formData = new FormGroup({
+          rawScore: new FormControl('', [
+            Validators.required,
+            Validators.min(this.assessment.min),
+            Validators.max(this.assessment.max),
+          ]),
+          scoreDate: new FormControl(today, Validators.required),
+          notes: new FormControl(''),
+          currentWeight: new FormControl(value.weight, [
+            Validators.required,
+          ]),
+        });
       })
       .unsubscribe();
-      console.log("ngOnInit scoreInput", this.scoreInput);
+    console.log("ngOnInit scoreInput", this.scoreInput);
   }
 
   ionViewDidEnter() {
@@ -76,6 +80,7 @@ export class NewScorePage implements OnInit {
       cid: this.assessment.cid,
       rawScore: this.formData.controls['rawScore'].value,
       scoreDate: this.formData.controls['scoreDate'].value,
+      currentWeight: this.formData.controls['currentWeight'].value,
       expired: false,
       notes: this.formData.controls['notes'].value,
     };

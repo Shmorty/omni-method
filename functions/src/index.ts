@@ -11,10 +11,10 @@
  */
 
 // import { onRequest } from "firebase-functions/v2/https";
-import { onDocumentCreated, onDocumentDeleted, onDocumentUpdated } from "firebase-functions/v2/firestore";
+import {onDocumentCreated, onDocumentDeleted, onDocumentUpdated} from "firebase-functions/v2/firestore";
 import * as logger from "firebase-functions/logger";
-import { initializeApp } from "firebase-admin/app";
-import { getFirestore } from "firebase-admin/firestore";
+import {initializeApp} from "firebase-admin/app";
+import {getFirestore} from "firebase-admin/firestore";
 import * as data from "./assessments.json";
 
 // Start writing functions
@@ -124,7 +124,7 @@ export const newScore = onDocumentCreated(
             {
               calculatedScore: score,
             },
-            { merge: true }
+            {merge: true}
           );
         })
         // calculate category score
@@ -165,7 +165,7 @@ export const updatedScore = onDocumentUpdated(
             {
               calculatedScore: score,
             },
-            { merge: true }
+            {merge: true}
           );
         })
         // calculate category score
@@ -232,7 +232,7 @@ async function calcCategoryScore(uid: string, cid: string): Promise<unknown> {
   catScore = Math.round(catScore / assessmentCount);
   logger.info("set category score", cid, catScore);
   // Now set it back into the user table
-  return Promise.resolve({ uid: uid, cid: cid, catScore: catScore });
+  return Promise.resolve({uid: uid, cid: cid, catScore: catScore});
 }
 
 /**
@@ -247,28 +247,30 @@ async function updateOmniScore(req: unknown): Promise<unknown> {
   logger.info(`user/${req["uid"]}`);
   const userSnapshot = await db.doc(`user/${req["uid"]}`).get();
   const userData = userSnapshot.data();
-  logger.info("userData", JSON.stringify(userData));
-  logger.info("catScore from db", userData.categoryScore[req["cid"]]);
-  if (userData.categoryScore[req["cid"]] !== req["catScore"]) {
-    // update scores
-    logger.info("update user scores");
-    Object.defineProperty(userData.categoryScore, req["cid"], {
-      value: req["catScore"],
-    });
-    // userData.categoryScore[req["cid"]] = req["catScore"];
-    let unadjustedScore = 0;
-    // eslint-disable-next-line guard-for-in
-    for (const element in userData.categoryScore) {
-      logger.info(`${element}: ${userData.categoryScore[element]}`);
-      unadjustedScore += userData.categoryScore[element];
+  if (userData) {
+    logger.info("userData", JSON.stringify(userData));
+    logger.info("catScore from db", userData.categoryScore[req["cid"]]);
+    if (userData.categoryScore[req["cid"]] !== req["catScore"]) {
+      // update scores
+      logger.info("update user scores");
+      Object.defineProperty(userData.categoryScore, req["cid"], {
+        value: req["catScore"],
+      });
+      // userData.categoryScore[req["cid"]] = req["catScore"];
+      let unadjustedScore = 0;
+      // eslint-disable-next-line guard-for-in
+      for (const element in userData.categoryScore) {
+        logger.info(`${element}: ${userData.categoryScore[element]}`);
+        unadjustedScore += userData.categoryScore[element];
+      }
+      logger.info("unadjustedScore", unadjustedScore);
+      const omniScore = Math.round(Math.pow(unadjustedScore / 1500, 2) * 1500);
+      logger.info("omniScore", omniScore);
+      userData.omniScore = omniScore;
+      // write updated record to db
+      return userSnapshot.ref.update(userData);
+      // return Promise.resolve(omniScore);
     }
-    logger.info("unadjustedScore", unadjustedScore);
-    const omniScore = Math.round(Math.pow(unadjustedScore / 1500, 2) * 1500);
-    logger.info("omniScore", omniScore);
-    userData.omniScore = omniScore;
-    // write updated record to db
-    return userSnapshot.ref.update(userData);
-    // return Promise.resolve(omniScore);
   }
   return null;
 }

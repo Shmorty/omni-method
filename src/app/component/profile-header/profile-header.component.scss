@@ -1,0 +1,65 @@
+.cardStyle {
+    margin: 0;
+  }
+  .bg-transparent {
+    // background: transparent;
+    --ion-item-background: transparent;
+}
+.container-flex {
+    align-content: flex-end;
+    align-items: flex-start;
+    display: flex;
+    flex: 1 2 0;
+    flex-flow: row wrap;
+    // grid-template-columns: 1fr 1fr 1fr;
+}
+.container {
+    display: grid;
+    gap: 1em 0.5em;
+    grid-template-columns: repeat(3, 1fr);
+    // grid-template-areas: ;
+    overflow: hidden;
+    place-items: center;
+}
+.avatar {
+    // display: flex;
+    grid-column: 2;
+    flex-basis: 50%;
+    // flex-grow: 2;
+    // justify-content: center;
+    justify-self: center;
+}
+.menu-button {
+    justify-self: end;
+}
+.full-name {
+    display: flex;
+    grid-column: 1/4;
+    justify-content: center;
+}
+.user-properties {
+    align-items: center;
+    display: flex;
+    grid-column: 1 / 4;
+    justify-content: space-between;
+    // justify-self: center;
+    min-width: 240px;
+}
+.user-property {
+    display: flex;
+    flex-direction: column;
+    // align-content: center;
+    align-items: center;
+    justify-content: center;
+    // justify-self: center;
+}
+#omniScore {
+    // display: flex;
+    grid-column: 1 / 4;
+    .omni-label {
+        background-color: transparent;
+    }
+    .omni-score {
+        background-color: transparent;
+    }
+}

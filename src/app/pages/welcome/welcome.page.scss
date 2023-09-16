@@ -1,16 +1,20 @@
 ion-content {
-  // --ion-background-color:black;
-  // --ion-text-color: white;
+  --ion-background-color:linear-gradient(rgba(19, 122, 173, 0.2), rgba(0, 0, 0, 0));
+  --ion-text-color: white;
   --padding-top: 32px;
 }
 
 ion-button {
   --ion-border-radius: 20%;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 img.center {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 40%;
+  width: 20%;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }

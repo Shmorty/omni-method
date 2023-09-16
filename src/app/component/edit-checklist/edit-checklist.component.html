@@ -1,0 +1,24 @@
+<ion-list *ngIf="assessment.checklist">
+  <ion-item lines="none">
+    <ion-label>
+      <ion-card-title>
+        <h1>Instructions</h1>
+      </ion-card-title>
+    </ion-label>
+  </ion-item>
+  <ion-item lines="none">
+    <ol>
+      <li *ngFor="let item of assessment.instruction">{{item}}</li>
+    </ol>
+  </ion-item>
+  <ion-card
+    *ngFor="let item of checklist$ | async; let i = index"
+    class="card"
+    (click)="toggleCheckItem(i)"
+    [ngClass]="!(i%2) ? 'left' : 'right'">
+    <ion-label>{{item["label"]}}</ion-label>
+    <!-- <ion-img src="{{assessment.icon}}"></ion-img> -->
+    <ion-checkbox [checked]="getCheckedItem(i)" labelPlacement="start">
+    </ion-checkbox>
+  </ion-card>
+</ion-list>

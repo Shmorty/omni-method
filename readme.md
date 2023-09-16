@@ -32,6 +32,25 @@ need to install
 └── typescript@5.0.2
 ```
 
+July 16, 2023
+
+```
+% npm -g list         
+/usr/local/lib
+├── @angular/cli@16.1.4
+├── @aws-amplify/cli@12.1.1
+├── @ionic/cli@7.1.1
+├── cordova-res@0.15.4
+├── corepack@0.19.0
+├── firebase-tools@12.4.4
+├── json-server@0.17.3
+├── n@9.1.0
+├── npm@9.8.0
+├── nx@16.5.2
+├── serverless@3.33.0
+└── typescript@5.1.6
+```
+
 ---
 
 ## to build locally
