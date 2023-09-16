@@ -1,5 +1,7 @@
-<ng-template let-targetProperty>
 
+<!-- <ng-container *ngTemplateOutlet="modalContainer"></ng-container> -->
+
+<ion-content #modalContainer>
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="end">
@@ -7,14 +9,14 @@
           <ion-icon name="close-circle-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title>{{targetProperty}}</ion-title>
+      <ion-title>{{titleMap[targetProperty]}}</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ng-container *ngTemplateOutlet="targetProperty"></ng-container>
+    <!-- <ng-container *ngTemplateOutlet="{{targetProperty}}"></ng-container> -->
     <ion-button (click)="save()" expand="block">Save</ion-button>
   </ion-content>
-</ng-template>
+</ion-content>
 
 <ng-template #dob>
   <ion-datetime formControlName="dob" presentation="date" [preferWheel]="true"></ion-datetime>
