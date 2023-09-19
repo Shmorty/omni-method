@@ -1,7 +1,7 @@
 
 <!-- <ng-container *ngTemplateOutlet="modalContainer"></ng-container> -->
 
-<ion-content #modalContainer>
+<ion-content #modalContainer class="custom-popover">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="end">
@@ -9,15 +9,81 @@
           <ion-icon name="close-circle-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title>{{titleMap[targetProperty]}}</ion-title>
+      <ion-title>{{title}}</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <!-- <ng-container *ngTemplateOutlet="{{targetProperty}}"></ng-container> -->
+    <ng-container *ngTemplateOutlet="template"></ng-container>
     <ion-button (click)="save()" expand="block">Save</ion-button>
   </ion-content>
 </ion-content>
 
+<ng-template #name>
+  <ion-list>
+    <ion-item>
+      <ion-label position="fixed">First name</ion-label>
+      <ion-input
+        formControlName="firstName"
+        placeholder="First"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Last name</ion-label>
+      <ion-input formControlName="lastName" placeholder="Last"></ion-input>
+    </ion-item>
+  </ion-list>
+</ng-template>
+
+<ng-template #nickname>
+  <ion-item>
+    <ion-label x-position="fixed">Display name</ion-label>
+    <ion-input
+      formControlName="nickname"
+      placeholder="(optional)"
+    ></ion-input>
+  </ion-item>
+</ng-template>
+
 <ng-template #dob>
   <ion-datetime formControlName="dob" presentation="date" [preferWheel]="true"></ion-datetime>
+</ng-template>
+
+<ng-template #sex>
+  <ion-item>
+    <ion-label position="fixed">Gender</ion-label>
+    <ion-radio-group formControlName="gender">
+      <ion-item>
+        <ion-label>Male</ion-label>
+        <ion-radio slot="end" value="male"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Female</ion-label>
+        <ion-radio slot="end" value="female"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-item>
+</ng-template>
+
+<ng-template #height>
+  <ion-item>
+    <ion-label position="fixed">Height</ion-label>
+    <fieldset formGroupName="height">
+      <ion-item style="text-align: right">
+        <ion-input formControlName="feet" placeholder="Feet"></ion-input>
+        <ion-label>feet</ion-label>
+        <ion-input
+          formControlName="inches"
+          placeholder="Inches"
+        ></ion-input>
+        <ion-label>inches</ion-label>
+      </ion-item>
+    </fieldset>
+  </ion-item>
+</ng-template>
+
+<ng-template #weight>
+  <ion-item>
+    <ion-label position="fixed">Weight</ion-label>
+    <ion-input formControlName="weight" placeholder="Weight"></ion-input>
+  </ion-item>
 </ng-template>
