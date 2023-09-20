@@ -13,13 +13,16 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ng-container *ngTemplateOutlet="template"></ng-container>
-    <ion-button (click)="save()" expand="block">Save</ion-button>
+    <ion-list>
+      <ng-container *ngTemplateOutlet="template"></ng-container>
+      <ion-item lines="none">
+        <ion-button (click)="save()" expand="block">Save</ion-button>
+      </ion-item>
+      </ion-list>
   </ion-content>
 </ion-content>
 
 <ng-template #name>
-  <ion-list>
     <ion-item>
       <ion-label position="fixed">First name</ion-label>
       <ion-input
@@ -31,7 +34,6 @@
       <ion-label position="fixed">Last name</ion-label>
       <ion-input formControlName="lastName" placeholder="Last"></ion-input>
     </ion-item>
-  </ion-list>
 </ng-template>
 
 <ng-template #nickname>

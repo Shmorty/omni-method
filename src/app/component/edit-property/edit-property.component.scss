@@ -4,3 +4,12 @@ ion-button [expand=block]{
     position: fixed;
     width: 80%;
 }
+ion-list {
+    display: table;
+    table-layout: fixed;
+    height: calc(320px - 44px);
+    ion-item {
+        display: table-row;
+        text-align: center;
+    }
+}
