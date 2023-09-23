@@ -1,7 +1,7 @@
 
 <!-- <ng-container *ngTemplateOutlet="modalContainer"></ng-container> -->
 
-<ion-content #modalContainer class="custom-popover">
+<ion-content #modalContainer class="custom-popover" scrollY="false">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="end">
@@ -16,7 +16,7 @@
     <ion-list>
       <ng-container *ngTemplateOutlet="template"></ng-container>
       <ion-item lines="none">
-        <ion-button (click)="save()" expand="block">Save</ion-button>
+        <ion-button (click)="save()" shape="round">Save</ion-button>
       </ion-item>
       </ion-list>
   </ion-content>
@@ -28,21 +28,36 @@
       <ion-input
         formControlName="firstName"
         placeholder="First"
+        [value]="user.firstName"
       ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="fixed">Last name</ion-label>
-      <ion-input formControlName="lastName" placeholder="Last"></ion-input>
+      <ion-input
+        formControlName="lastName"
+        placeholder="Last"
+        [value]="user.lastName"
+      ></ion-input>
     </ion-item>
 </ng-template>
 
 <ng-template #nickname>
-  <ion-item>
+  <ion-item fill="shade">
     <ion-label x-position="fixed">Display name</ion-label>
     <ion-input
       formControlName="nickname"
-      placeholder="(optional)"
+      [value]="user.nickname"
+      counter="true"
+      [maxlength]="30"
     ></ion-input>
+    <!-- <ion-input
+      label="Display Name"
+      labelPlacement="floating"
+      fill="outline"
+      formControlName="nickname"
+      [(ngModel)]=user.nickname
+      [maxlength]="20"
+    ></ion-input> -->
   </ion-item>
 </ng-template>
 

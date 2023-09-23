@@ -4,12 +4,22 @@ ion-button [expand=block]{
     position: fixed;
     width: 80%;
 }
+:host {
+    --padding-end: var(--padding-start);
+}
 ion-list {
-    display: table;
-    table-layout: fixed;
-    height: calc(320px - 44px);
+    // display: table;
+    // table-layout: fixed;
+    // height: calc(320px - 44px);
     ion-item {
-        display: table-row;
+        // display: table-row;
         text-align: center;
+        --min-height: 64px;
+        --border-style: none;
+        ion-button {
+            margin: auto;
+            height: 50%;
+            width: 100%;
+        }
     }
 }

@@ -1,6 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {IonicModule, ModalController} from '@ionic/angular';
+import {User} from 'src/app/store/user/user.model';
 
 @Component({
   selector: 'app-edit-property',
@@ -12,6 +13,7 @@ import {IonicModule, ModalController} from '@ionic/angular';
 export class EditPropertyComponent implements OnInit {
 
   @Input() targetProperty: string;
+  @Input() user: User;
   @ViewChild('name') nameTemplate: TemplateRef<any>;
   @ViewChild('nickname') nicknameTemplate: TemplateRef<any>;
   @ViewChild('dob') dobTemplate: TemplateRef<any>;
@@ -25,6 +27,7 @@ export class EditPropertyComponent implements OnInit {
 
   ngOnInit() {
     console.log("targetProperty", this.targetProperty);
+    console.log("user", this.user);
     // this.template = document.getElementById(this.targetProperty);
   }
 
@@ -101,7 +104,7 @@ export class EditPropertyComponent implements OnInit {
         break;
       }
     }
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss(this.user, "save");
   }
 
 }

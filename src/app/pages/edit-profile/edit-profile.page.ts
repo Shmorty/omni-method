@@ -91,9 +91,9 @@ export class EditProfilePage implements OnInit {
 
   onWillDismiss(event: Event) {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    // if (ev.detail.role === 'confirm') {
-    //   this.message = `Hello, ${ev.detail.data}!`;
-    // }
+    if (ev.detail.role === 'save') {
+      console.log("onWillDismiss save", ev.detail.data);
+    }
   }
 
   getDate(e) {
@@ -103,26 +103,29 @@ export class EditProfilePage implements OnInit {
     });
   }
 
-  async openPicker() {
-    let maxDate = new Date(); //.setFullYear(2006);
-    let curYear = maxDate.getFullYear();
-    maxDate.setFullYear(curYear - 2);
-  }
+  // async openPicker() {
+  //   let maxDate = new Date(); //.setFullYear(2006);
+  //   let curYear = maxDate.getFullYear();
+  //   maxDate.setFullYear(curYear - 2);
+  // }
 
   async openModal(targetProperty: string) {
     const modal = await this.modalCtrl.create({
       backdropDismiss: false,
       component: EditPropertyComponent,
-      componentProps: {targetProperty: targetProperty},
+      componentProps: {
+        targetProperty: targetProperty,
+        user: this.user
+      },
       cssClass: "custom-popover",
     });
     modal.present();
 
     const {data, role} = await modal.onWillDismiss();
 
-    // if (role === 'confirm') {
-    //   this.message = `Hello, ${data}!`;
-    // }
+    if (role === 'save') {
+      console.log("openModal save", data);
+    }
   }
 
   // async presentAlert() {
