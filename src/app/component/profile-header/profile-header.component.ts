@@ -46,13 +46,13 @@ export class ProfileHeaderComponent implements OnInit {
     const nativeEl = this.accordionGroup;
     console.log(nativeEl);
     console.log(event.target);
-    if (nativeEl.value === 'moreProfile') {
-      nativeEl.value = undefined;
-      this.moreOpen = false;
-    } else {
-      nativeEl.value = 'moreProfile';
-      this.moreOpen = true;
-    }
+    // if (nativeEl.value === 'moreProfile') {
+    //   nativeEl.value = undefined;
+    //   this.moreOpen = false;
+    // } else {
+    //   nativeEl.value = 'moreProfile';
+    //   this.moreOpen = true;
+    // }
   }
 
 }

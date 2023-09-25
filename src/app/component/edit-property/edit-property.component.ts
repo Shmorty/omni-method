@@ -1,6 +1,8 @@
 import {CommonModule} from '@angular/common';
 import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {IonicModule, ModalController} from '@ionic/angular';
+import {first} from 'rxjs';
 import {User} from 'src/app/store/user/user.model';
 
 @Component({
@@ -8,7 +10,7 @@ import {User} from 'src/app/store/user/user.model';
   templateUrl: './edit-property.component.html',
   styleUrls: ['./edit-property.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule],
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule],
 })
 export class EditPropertyComponent implements OnInit {
 
@@ -22,6 +24,7 @@ export class EditPropertyComponent implements OnInit {
   @ViewChild('height') heightTemplate: TemplateRef<any>;
   public title = "loading...";
   public template: TemplateRef<any>;
+  public firstName: string;
 
   constructor(private modalCtrl: ModalController) {}
 
@@ -76,7 +79,8 @@ export class EditPropertyComponent implements OnInit {
     console.log("save", this.targetProperty);
     switch (this.targetProperty) {
       case 'name': {
-        console.log("save name");
+        console.log("firsName", this.user.firstName);
+        console.log("lastName", this.user.lastName);
         break;
       }
       case 'nickname': {

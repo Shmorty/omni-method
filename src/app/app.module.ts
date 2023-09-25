@@ -1,16 +1,13 @@
 import {HttpClientModule} from '@angular/common/http';
 import {APP_INITIALIZER, isDevMode, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {IonicModule, IonVirtualScroll} from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FormsModule} from '@angular/forms';
-import {FirebaseApp, getApp, initializeApp, provideFirebaseApp} from '@angular/fire/app';
+import {getApp, initializeApp, provideFirebaseApp} from '@angular/fire/app';
 import {environment} from '../environments/environment';
 import {DatePipe} from '@angular/common';
-import {AuthService} from './services/auth.service';
-import {from} from 'rxjs';
-import {take} from 'rxjs/operators';
 import {
   provideAuth,
   getAuth,

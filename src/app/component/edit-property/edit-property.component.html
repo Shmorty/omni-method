@@ -15,38 +15,56 @@
   <ion-content>
     <ion-list>
       <ng-container *ngTemplateOutlet="template"></ng-container>
+      <!-- <div *ngIf="targetProperty == 'name'">
+        <ion-item lines="none">
+          <ion-label position="fixed">First name</ion-label>
+          <ion-input
+            formControlName="firstName"
+            placeholder="First"
+            [value]="user.firstName"
+          ></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label position="fixed">Last name</ion-label>
+          <ion-input
+            formControlName="lastName"
+            placeholder="Last"
+            [value]="user.lastName"
+          ></ion-input>
+        </ion-item>
+      </div> -->
       <ion-item lines="none">
         <ion-button (click)="save()" shape="round">Save</ion-button>
       </ion-item>
-      </ion-list>
+    </ion-list>
   </ion-content>
 </ion-content>
 
 <ng-template #name>
-    <ion-item>
+    <ion-item lines="none">
       <ion-label position="fixed">First name</ion-label>
       <ion-input
-        formControlName="firstName"
         placeholder="First"
-        [value]="user.firstName"
+        [(ngModel)]="user.firstName"
       ></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item lines="none">
       <ion-label position="fixed">Last name</ion-label>
       <ion-input
-        formControlName="lastName"
         placeholder="Last"
-        [value]="user.lastName"
+        [(ngModel)]="user.lastName"
       ></ion-input>
     </ion-item>
 </ng-template>
 
 <ng-template #nickname>
-  <ion-item fill="shade">
-    <ion-label x-position="fixed">Display name</ion-label>
+  <ion-item lines="none">
     <ion-input
+      label="Display Name"
+      labelPlacement="fixed"
+      fill="solid"
       formControlName="nickname"
-      [value]="user.nickname"
+      value="user.nickname"
       counter="true"
       [maxlength]="30"
     ></ion-input>

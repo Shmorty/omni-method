@@ -12,10 +12,11 @@ ion-list {
     // table-layout: fixed;
     // height: calc(320px - 44px);
     ion-item {
+        // --border-style: none;
         // display: table-row;
         text-align: center;
         --min-height: 64px;
-        --border-style: none;
+        // --border-style: none;
         ion-button {
             margin: auto;
             height: 50%;
