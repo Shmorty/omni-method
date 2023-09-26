@@ -25,6 +25,7 @@ export class EditPropertyComponent implements OnInit {
   public title = "loading...";
   public template: TemplateRef<any>;
   public firstName: string;
+  public updUser: User;
 
   constructor(private modalCtrl: ModalController) {}
 
@@ -32,6 +33,8 @@ export class EditPropertyComponent implements OnInit {
     console.log("targetProperty", this.targetProperty);
     console.log("user", this.user);
     // this.template = document.getElementById(this.targetProperty);
+    this.updUser = JSON.parse(JSON.stringify(this.user));
+    console.log("updUser", JSON.stringify(this.updUser));
   }
 
   ngAfterViewInit() {
@@ -79,12 +82,12 @@ export class EditPropertyComponent implements OnInit {
     console.log("save", this.targetProperty);
     switch (this.targetProperty) {
       case 'name': {
-        console.log("firsName", this.user.firstName);
-        console.log("lastName", this.user.lastName);
+        console.log("firsName", this.updUser.firstName);
+        console.log("lastName", this.updUser.lastName);
         break;
       }
       case 'nickname': {
-        console.log("save nickname");
+        console.log("nickname", this.updUser.nickname);
         break;
       }
       case 'dob': {

@@ -15,24 +15,6 @@
   <ion-content>
     <ion-list>
       <ng-container *ngTemplateOutlet="template"></ng-container>
-      <!-- <div *ngIf="targetProperty == 'name'">
-        <ion-item lines="none">
-          <ion-label position="fixed">First name</ion-label>
-          <ion-input
-            formControlName="firstName"
-            placeholder="First"
-            [value]="user.firstName"
-          ></ion-input>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label position="fixed">Last name</ion-label>
-          <ion-input
-            formControlName="lastName"
-            placeholder="Last"
-            [value]="user.lastName"
-          ></ion-input>
-        </ion-item>
-      </div> -->
       <ion-item lines="none">
         <ion-button (click)="save()" shape="round">Save</ion-button>
       </ion-item>
@@ -45,14 +27,14 @@
       <ion-label position="fixed">First name</ion-label>
       <ion-input
         placeholder="First"
-        [(ngModel)]="user.firstName"
+        [(ngModel)]="updUser.firstName"
       ></ion-input>
     </ion-item>
     <ion-item lines="none">
       <ion-label position="fixed">Last name</ion-label>
       <ion-input
         placeholder="Last"
-        [(ngModel)]="user.lastName"
+        [(ngModel)]="updUser.lastName"
       ></ion-input>
     </ion-item>
 </ng-template>
@@ -63,8 +45,7 @@
       label="Display Name"
       labelPlacement="fixed"
       fill="solid"
-      formControlName="nickname"
-      value="user.nickname"
+      [(ngModel)]="updUser.nickname"
       counter="true"
       [maxlength]="30"
     ></ion-input>
@@ -86,7 +67,7 @@
 <ng-template #sex>
   <ion-item>
     <ion-label position="fixed">Gender</ion-label>
-    <ion-radio-group formControlName="gender">
+    <ion-radio-group [(ngModel)]="updUser.gender">
       <ion-item>
         <ion-label>Male</ion-label>
         <ion-radio slot="end" value="male"></ion-radio>
@@ -102,15 +83,17 @@
 <ng-template #height>
   <ion-item>
     <ion-label position="fixed">Height</ion-label>
-    <fieldset formGroupName="height">
+    <fieldset [(ngModel)]="updUser.height">
       <ion-item style="text-align: right">
-        <ion-input formControlName="feet" placeholder="Feet"></ion-input>
-        <ion-label>feet</ion-label>
         <ion-input
-          formControlName="inches"
+          [(ngModel)]="updUser.height.feet" 
+          placeholder="Feet"></ion-input>
+        <ion-label>'</ion-label>
+        <ion-input
+          [(ngModel)]="updUser.height.inches"
           placeholder="Inches"
         ></ion-input>
-        <ion-label>inches</ion-label>
+        <ion-label>"</ion-label>
       </ion-item>
     </fieldset>
   </ion-item>
