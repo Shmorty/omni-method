@@ -59,7 +59,7 @@
     "@capacitor/assets": "^2.0.4",
     "@capacitor/cli": "^5.0.0",
     "@ionic/angular-toolkit": "^9.0.0",
-    "@ionic/cli": "6.20.6",
+    "@ionic/cli": "^7.1.1",
     "@ngrx/eslint-plugin": "^16.1.0",
     "@types/jasmine": "3.10.7",
     "@types/jasminewd2": "~2.0.3",
