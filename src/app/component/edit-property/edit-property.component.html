@@ -67,6 +67,7 @@
         <ion-radio slot="end" value="female"></ion-radio>
       </ion-item>
     </ion-radio-group>
+    <!-- <ion-picker [columns]="['male','female']"></ion-picker> -->
   </ion-item>
 </ng-template>
 
@@ -91,7 +92,10 @@
 
 <ng-template #weight>
   <ion-item>
-    <ion-label position="fixed">Weight</ion-label>
-    <ion-input [(ngModel)]="updUser.weight" placeholder="Weight"></ion-input>
+    <!-- <ion-label position="fixed">Weight</ion-label> -->
+    <!-- <app-number-picker></app-number-picker> -->
+    <app-number-picker style="width: 100%;" [min]="65" [max]="325" [units]="'lbs'"
+          (value)="newWeight($event)"></app-number-picker>
+    <!-- <ion-input [(ngModel)]="updUser.weight" placeholder="Weight"></ion-input> -->
   </ion-item>
 </ng-template>

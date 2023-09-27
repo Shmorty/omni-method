@@ -4,13 +4,20 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {IonicModule, ModalController} from '@ionic/angular';
 import {first} from 'rxjs';
 import {User} from 'src/app/store/user/user.model';
+import {NumberPickerComponent} from '../number-picker/number-picker.component';
 
 @Component({
   selector: 'app-edit-property',
   templateUrl: './edit-property.component.html',
   styleUrls: ['./edit-property.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    IonicModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NumberPickerComponent,
+  ],
 })
 export class EditPropertyComponent implements OnInit {
 
@@ -71,6 +78,10 @@ export class EditPropertyComponent implements OnInit {
       }
     }
     console.log("template", this.template);
+  }
+
+  newWeight(val) {
+    this.updUser.weight = val;
   }
 
   cancel() {

@@ -43,7 +43,7 @@
       <ion-text slot="end">{{userService.getAge(user)}}</ion-text>
     </ion-item>
     <ion-item button (click)="openModal('sex')">
-      <ion-label>Sex</ion-label>
+      <ion-label>Gender</ion-label>
       <ion-text slot="end">{{user.gender}}</ion-text>
     </ion-item>
     <ion-item button (click)="openModal('weight')">
@@ -69,7 +69,7 @@
   </ion-list>
 
   <ng-template #loading>
-    <ion-spinner></ion-spinner>
+    <ion-spinner color="primary"></ion-spinner>
   </ng-template>
 
       <ion-modal trigger="open-modal" class="custom-popover" (willDismiss)="onWillDismiss($event)">
