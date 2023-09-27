@@ -16,64 +16,62 @@
     <ion-card-title class="center" color="default">Edit Profile</ion-card-title>
   </div>
 
-  <ion-list>
+
+  <ion-list *ngIf="user$ | async as user; else loading ">
     <div class="avatar">
       <user-avatar [user]="user" class="avatar"></user-avatar>
       <!-- <user-avatar [user]="user" [ngStyle]="{'color': 'white'}"
       (click)="userService.openEditProfile($event, user)"
       >
       </user-avatar> -->
-  </div>
+    </div>
   
-        <ion-item button (click)="openModal('name')">
-          <ion-label>Name</ion-label>
-          <ion-text slot="end">{{user.firstName}}&nbsp;{{user.lastName}}</ion-text>
-        </ion-item>
-        <!-- <ion-item button (click)="presentAlert()">
-          <ion-label>Display Alert</ion-label>
-          <ion-text slot="end">hello world</ion-text>
-        </ion-item> -->
-        <ion-item button (click)="openModal('nickname')">
-          <ion-label>Display Name</ion-label>
-          <ion-text slot="end">{{user.nickname}}</ion-text>
-        </ion-item>
-        <ion-item button (click)="openModal('dob')">
-          <ion-label>Age</ion-label>
-          <ion-text slot="end">{{userService.getAge(user)}}</ion-text>
-        </ion-item>
-        <ion-item button (click)="openModal('sex')">
-          <ion-label>Sex</ion-label>
-          <ion-text slot="end">{{user.gender}}</ion-text>
-        </ion-item>
-        <ion-item button (click)="openModal('weight')">
-          <ion-label>Weight</ion-label>
-          <ion-text slot="end">{{user.weight}}</ion-text>
-        </ion-item>
-        <ion-item button (click)="openModal('height')">
-          <ion-label>Height</ion-label>
-          <ion-text slot="end">{{user.height.feet}}' {{user.height.inches}}"</ion-text>
-        </ion-item>
-        <ion-list-header>Settings</ion-list-header>
-        <ion-item>
-          <ion-label>Email</ion-label>
-          <ion-text slot="end">{{user.email}}</ion-text>
-        </ion-item>
-        <ion-item button>
-          <ion-label>Change Password</ion-label>
-          <ion-text slot="end">******</ion-text>
-        </ion-item>
-        <ion-item button (click)="logout()">
-          <ion-label>Log Out</ion-label>
-        </ion-item>
-      </ion-list>
-      <!-- <ion-button
-        [disabled]="profileForm.invalid"
-        type="submit"
-        color="primary"
-        shape="round"
-        expand="block"
-        >Save</ion-button
-      > -->
+    <ion-item button (click)="openModal('name')">
+      <ion-label>Name</ion-label>
+      <ion-text slot="end">{{user.firstName}}&nbsp;{{user.lastName}}</ion-text>
+    </ion-item>
+    <!-- <ion-item button (click)="presentAlert()">
+      <ion-label>Display Alert</ion-label>
+      <ion-text slot="end">hello world</ion-text>
+    </ion-item> -->
+    <ion-item button (click)="openModal('nickname')">
+      <ion-label>Display Name</ion-label>
+      <ion-text slot="end">{{user.nickname}}</ion-text>
+    </ion-item>
+    <ion-item button (click)="openModal('dob')">
+      <ion-label>Age</ion-label>
+      <ion-text slot="end">{{userService.getAge(user)}}</ion-text>
+    </ion-item>
+    <ion-item button (click)="openModal('sex')">
+      <ion-label>Sex</ion-label>
+      <ion-text slot="end">{{user.gender}}</ion-text>
+    </ion-item>
+    <ion-item button (click)="openModal('weight')">
+      <ion-label>Weight</ion-label>
+      <ion-text slot="end">{{user.weight}}</ion-text>
+    </ion-item>
+    <ion-item button (click)="openModal('height')">
+      <ion-label>Height</ion-label>
+      <ion-text slot="end">{{user.height.feet}}' {{user.height.inches}}"</ion-text>
+    </ion-item>
+    <ion-list-header>Settings</ion-list-header>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-text slot="end">{{user.email}}</ion-text>
+    </ion-item>
+    <ion-item button>
+      <ion-label>Change Password</ion-label>
+      <ion-text slot="end">******</ion-text>
+    </ion-item>
+    <ion-item button (click)="logout()">
+      <ion-label>Log Out</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #loading>
+    <ion-spinner></ion-spinner>
+  </ng-template>
+
       <ion-modal trigger="open-modal" class="custom-popover" (willDismiss)="onWillDismiss($event)">
         <ng-template>
           <ion-header>

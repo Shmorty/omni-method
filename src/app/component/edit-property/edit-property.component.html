@@ -12,14 +12,12 @@
       <ion-title>{{title}}</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content>
-    <ion-list>
-      <ng-container *ngTemplateOutlet="template"></ng-container>
-      <ion-item lines="none">
-        <ion-button (click)="save()" shape="round">Save</ion-button>
-      </ion-item>
-    </ion-list>
-  </ion-content>
+  <ion-list>
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+    <ion-item lines="none">
+      <ion-button (click)="save()" shape="round">Save</ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>
 
 <ng-template #name>
@@ -49,19 +47,11 @@
       counter="true"
       [maxlength]="30"
     ></ion-input>
-    <!-- <ion-input
-      label="Display Name"
-      labelPlacement="floating"
-      fill="outline"
-      formControlName="nickname"
-      [(ngModel)]=user.nickname
-      [maxlength]="20"
-    ></ion-input> -->
   </ion-item>
 </ng-template>
 
 <ng-template #dob>
-  <ion-datetime formControlName="dob" presentation="date" [preferWheel]="true"></ion-datetime>
+  <ion-datetime [(ngModel)]="updUser.dob" presentation="date" [preferWheel]="true"></ion-datetime>
 </ng-template>
 
 <ng-template #sex>
@@ -102,6 +92,6 @@
 <ng-template #weight>
   <ion-item>
     <ion-label position="fixed">Weight</ion-label>
-    <ion-input formControlName="weight" placeholder="Weight"></ion-input>
+    <ion-input [(ngModel)]="updUser.weight" placeholder="Weight"></ion-input>
   </ion-item>
 </ng-template>

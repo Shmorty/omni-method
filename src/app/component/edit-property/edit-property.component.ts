@@ -91,19 +91,19 @@ export class EditPropertyComponent implements OnInit {
         break;
       }
       case 'dob': {
-        console.log("save dob");
+        console.log("dob", this.updUser.dob);
         break;
       }
       case 'sex': {
-        console.log("save sex");
+        console.log("sex", this.updUser.gender);
         break;
       }
       case 'weight': {
-        console.log("save weight");
+        console.log("weight", this.updUser.weight);
         break;
       }
       case 'height': {
-        console.log("save height");
+        console.log("height", this.updUser.height);
         break;
       }
       default: {
@@ -111,7 +111,7 @@ export class EditPropertyComponent implements OnInit {
         break;
       }
     }
-    this.modalCtrl.dismiss(this.user, "save");
+    this.modalCtrl.dismiss(this.updUser, "save");
   }
 
 }

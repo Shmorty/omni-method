@@ -9,11 +9,14 @@ import {
 import {Keyboard} from '@capacitor/keyboard';
 import {AlertController, IonModal, isPlatform, ModalController} from '@ionic/angular';
 import {OverlayEventDetail} from '@ionic/core/components';
+import {Store} from '@ngrx/store';
+import {delay} from 'rxjs';
 import {EditPropertyComponent} from 'src/app/component/edit-property/edit-property.component';
 import {AuthService} from 'src/app/services/auth.service';
 // import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
 import {UserService} from 'src/app/services/user/user.service';
 import {User} from 'src/app/store/user/user.model';
+import * as UserSelectors from 'src/app/store/user/user.selectors';
 
 @Component({
   selector: 'edit-profile-page',
@@ -28,8 +31,10 @@ export class EditProfilePage implements OnInit {
   // message =
   //   'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string;
+  public user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
 
   constructor(
+    private store: Store,
     private modalCtrl: ModalController,
     public userService: UserService,
     private auth: AuthService,
@@ -124,7 +129,8 @@ export class EditProfilePage implements OnInit {
     const {data, role} = await modal.onWillDismiss();
 
     if (role === 'save') {
-      console.log("openModal save", data);
+      console.log("openModal.save updateUser", data);
+      this.userService.updateUser(data);
     }
   }
 
