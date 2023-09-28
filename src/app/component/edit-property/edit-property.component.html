@@ -42,7 +42,6 @@
     <ion-input
       label="Display Name"
       labelPlacement="fixed"
-      fill="solid"
       [(ngModel)]="updUser.nickname"
       counter="true"
       [maxlength]="30"
@@ -55,14 +54,14 @@
 </ng-template>
 
 <ng-template #sex>
-  <ion-item>
+  <ion-item lines="none">
     <ion-label position="fixed">Gender</ion-label>
     <ion-radio-group [(ngModel)]="updUser.gender">
-      <ion-item>
+      <ion-item lines="none">
         <ion-label>Male</ion-label>
         <ion-radio slot="end" value="male"></ion-radio>
       </ion-item>
-      <ion-item>
+      <ion-item lines="none">
         <ion-label>Female</ion-label>
         <ion-radio slot="end" value="female"></ion-radio>
       </ion-item>
@@ -72,8 +71,8 @@
 </ng-template>
 
 <ng-template #height>
-  <ion-item>
-    <ion-label position="fixed">Height</ion-label>
+  <ion-item lines="none">
+    <!-- <ion-label position="fixed">Height</ion-label>
     <fieldset [(ngModel)]="updUser.height">
       <ion-item style="text-align: right">
         <ion-input
@@ -86,12 +85,16 @@
         ></ion-input>
         <ion-label>"</ion-label>
       </ion-item>
-    </fieldset>
+    </fieldset> -->
+    <app-number-picker style="width: 50%;" [min]="3" [max]="7" [units]="'ft'"
+    [(value)]="updUser.height.feet"></app-number-picker>
+    <app-number-picker style="width: 50%;" [min]="0" [max]="11" [units]="'in'"
+    [(value)]="updUser.height.inches"></app-number-picker>
   </ion-item>
 </ng-template>
 
 <ng-template #weight>
-  <ion-item>
+  <ion-item lines="none">
     <!-- <ion-label position="fixed">Weight</ion-label> -->
     <app-number-picker style="width: 100%;" [min]="65" [max]="325" [units]="'lbs'"
       [(value)]="updUser.weight"></app-number-picker>
