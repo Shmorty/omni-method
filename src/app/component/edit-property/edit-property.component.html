@@ -93,9 +93,7 @@
 <ng-template #weight>
   <ion-item>
     <!-- <ion-label position="fixed">Weight</ion-label> -->
-    <!-- <app-number-picker></app-number-picker> -->
     <app-number-picker style="width: 100%;" [min]="65" [max]="325" [units]="'lbs'"
-          (value)="newWeight($event)"></app-number-picker>
-    <!-- <ion-input [(ngModel)]="updUser.weight" placeholder="Weight"></ion-input> -->
+      [(value)]="updUser.weight"></app-number-picker>
   </ion-item>
 </ng-template>
