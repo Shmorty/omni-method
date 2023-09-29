@@ -2,8 +2,14 @@ user-avatar {
   background: -primary;
   margin: 12px auto;
 }
+.avatar {
+  margin: 24px auto 0;
+  ion-label {
+    margin:auto;
+  }
+}
 ion-content {
-  --background: linear-gradient(#D0EAFF, #fff);
+  --background: linear-gradient(var(--ion-color-tertiary), var(--ion-color-light));
 }
 ion-list {
   --ion-item-background: transparent;
@@ -16,8 +22,7 @@ ion-datetime::part(wheel-item active) {
 }
 
 .custom-popover {
-  --background: #0000005c; 
-  --ion-backdrop-color: teal;
+  --ion-backdrop-color: #b8dfff;
   --ion-safe-area-top: 0;
   backdrop-filter: blur(12px);
   // &::part(backdrop) {
@@ -26,9 +31,28 @@ ion-datetime::part(wheel-item active) {
   &::part(content) {
     border-radius: 10px;
     // height: 50%;
-    height: 244px;
+    height: 296px;
     margin: auto;
     // width: 80%;
     width: 350px;
   }
+}
+ion-datetime {
+  // --background: #5eb3f9;
+  // --background-rgb: 94, 179, 249;
+  --wheel-highlight-background: #5eb3f9;
+  --wheel-fade-background-rgb: 94, 179, 249;
+  &::part(wheel-item) {
+    color: rgb(0, 0, 0);
+  }
+  &::part(wheel-item active) {
+    color: rgb(255, 255, 255);
+  }
+}
+ion-spinner {
+  display: block;
+  margin: auto;
+  margin-top: 30%;
+  width: 44px;
+  height: 44px;
 }

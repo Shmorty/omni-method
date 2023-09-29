@@ -70,3 +70,25 @@ ion-button[shape="circle"] {
   // width: 44px;
   height: 44px;
 }
+
+.custom-popover {
+  --border-radius: 10px;
+  --ion-backdrop-color: #b8dfff;
+  --ion-safe-area-top: 0;
+  --height: 365px;
+  --width:80%;
+  backdrop-filter: blur(10px);
+  // &::part(backdrop) {
+  //   background-color: teal;
+  // }
+  // &::part(content) {
+  //   border-radius: 10px;
+  //   height: 50%;
+  //   margin: auto;
+  //   width: 80%;
+  //   width: 350px;
+  //   position: relative;
+  //   display: block;
+  //   contain: content;
+  // }
+}
