@@ -37,6 +37,14 @@ ion-datetime::part(wheel-item active) {
     width: 350px;
   }
 }
+
+ion-button {
+  // position: fixed;
+  --ion-border-radius: 20%;
+  padding-left: 20px;
+  padding-right: 20px;
+  bottom: 0;
+
 ion-datetime {
   // --background: #5eb3f9;
   // --background-rgb: 94, 179, 249;
