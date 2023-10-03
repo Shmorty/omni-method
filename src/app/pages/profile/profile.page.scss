@@ -1,81 +1,33 @@
-.cardStyle {
-  margin: 0;
-}
-.bg-transparent {
-  // background: transparent;
-  --ion-item-background: transparent;
+.contentCard {
+  box-shadow: none;
+  margin-bottom: 0;
 }
 span {
   // color: white;
   font-weight: 400;
 }
 ion-header {
-  // background-color: #b8dfff;
   --background: transparent;
   --border-color: transparent;
 }
-.profile-header {
-  display: flexbox;
-  flex-direction: column;
-}
+// .profile-header {
+//   display: flexbox;
+//   flex-direction: column;
+// }
 ion-content {
-  // background-color: lightgreen;
   --offset-top: 0px;
   position: absolute;
 }
 .safe-area {
-  // background: #b8dfff;
-  // background-color: var(--ion-color-primary);
+  background-color: #b8dfff;
   height: var(--ion-safe-area-top, 0);
 }
-ion-content ion-header {
-  background: linear-gradient(#b8dfff, #5eb3f9);
-  border-radius: 0 0 20px 20px;
-  ion-label {
-    color: white;
-  }
-  padding: 0px !important;
-}
-
 ion-refresher {
   background-color: #b8dfff;
   height: 200px;
 }
 ion-refresher-content {
-  // background-color: #b8dfff;
-  background-color: yellow;
   height: 0px;
-}
-
-user-avatar {
-  margin: auto;
-  // padding-left: 70px;
-}
-#omniScore {
-  margin: auto;
-  .omni-label {
-    // border-top: 1.5px solid white;
-    font-weight: 700;
-    padding: 10px 40px 0;
-  }
-  .omni-score {
-    font-size: 2em;
-    font-weight: 700;
-    // padding-bottom: 10px;
-    text-align: center;
-  }
-}
-.more-button {
-  background-color: transparent;
-  width: 100%;
-}
-.rotate-button {
-  transform: rotate(180deg);
-}
-.name {
-  font-size: 2em;
-  font-weight: bold;
-  margin: auto;
 }
 .units {
   color: var(--color);
@@ -103,22 +55,6 @@ ion-badge {
 .stale {
   background-color: #f12323;
 }
-.topCard {
-  background-color: #35b5ff;
-  border-radius: inherit;
-  border-width: 0pt;
-  box-shadow: 0px 4px 8px #5eb2ff80;
-  padding-top: var(--ion-safe-area-top);
-}
-ion-card-header {
-  padding: 0px 0px 0px 8px;
-}
-// .pageLabel {
-//   text-align: center;
-//   margin: 15px;
-//   font-weight: 400;
-//   font-size: 1.5em;
-// }
 ion-thumbnail[slot="start"] {
   // default is 16px
   margin-inline-start: -13px;
