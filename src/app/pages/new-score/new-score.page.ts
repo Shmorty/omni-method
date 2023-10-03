@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import {ModalController} from '@ionic/angular';
-import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
+// import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
 import {User} from '../../store/user/user.model';
 import {UserService} from '../../services/user/user.service';
 import {Assessment} from '../../store/assessments/assessment.model';
@@ -38,7 +38,7 @@ export class NewScorePage implements OnInit {
     console.log("newScore ngOnInit");
     // prefill date
     var today = new Date().toLocaleDateString();
-    
+
     this.user$
       .subscribe((value) => {
         this.user = value;

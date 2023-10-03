@@ -1,0 +1,102 @@
+
+<!-- <ng-container *ngTemplateOutlet="modalContainer"></ng-container> -->
+
+<ion-content #modalContainer class="custom-popover" scrollY="false">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-button (click)="cancel()">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>{{title}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list>
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+    <ion-item lines="none">
+      <ion-button (click)="save()" shape="round">Save</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ng-template #name>
+    <ion-item lines="none">
+      <ion-label position="fixed">First name</ion-label>
+      <ion-input
+        placeholder="First"
+        [(ngModel)]="updUser.firstName"
+      ></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="fixed">Last name</ion-label>
+      <ion-input
+        placeholder="Last"
+        [(ngModel)]="updUser.lastName"
+      ></ion-input>
+    </ion-item>
+</ng-template>
+
+<ng-template #nickname>
+  <ion-item lines="none">
+    <ion-input
+      label="Display Name"
+      labelPlacement="fixed"
+      [(ngModel)]="updUser.nickname"
+      counter="true"
+      [maxlength]="30"
+    ></ion-input>
+  </ion-item>
+</ng-template>
+
+<ng-template #dob>
+  <ion-datetime [(ngModel)]="updUser.dob" presentation="date" [preferWheel]="true"></ion-datetime>
+</ng-template>
+
+<ng-template #sex>
+  <ion-item lines="none">
+    <ion-label position="fixed">Gender</ion-label>
+    <ion-radio-group [(ngModel)]="updUser.gender">
+      <ion-item lines="none">
+        <ion-label>Male</ion-label>
+        <ion-radio slot="end" value="male"></ion-radio>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>Female</ion-label>
+        <ion-radio slot="end" value="female"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    <!-- <ion-picker [columns]="['male','female']"></ion-picker> -->
+  </ion-item>
+</ng-template>
+
+<ng-template #height>
+  <ion-item lines="none">
+    <!-- <ion-label position="fixed">Height</ion-label>
+    <fieldset [(ngModel)]="updUser.height">
+      <ion-item style="text-align: right">
+        <ion-input
+          [(ngModel)]="updUser.height.feet" 
+          placeholder="Feet"></ion-input>
+        <ion-label>'</ion-label>
+        <ion-input
+          [(ngModel)]="updUser.height.inches"
+          placeholder="Inches"
+        ></ion-input>
+        <ion-label>"</ion-label>
+      </ion-item>
+    </fieldset> -->
+    <app-number-picker style="width: 50%;" [min]="3" [max]="7" [units]="'ft'"
+    [(value)]="updUser.height.feet"></app-number-picker>
+    <app-number-picker style="width: 50%;" [min]="0" [max]="11" [units]="'in'"
+    [(value)]="updUser.height.inches"></app-number-picker>
+  </ion-item>
+</ng-template>
+
+<ng-template #weight>
+  <ion-item lines="none">
+    <!-- <ion-label position="fixed">Weight</ion-label> -->
+    <app-number-picker style="width: 100%;" [min]="65" [max]="325" [units]="'lbs'"
+      [(value)]="updUser.weight"></app-number-picker>
+  </ion-item>
+</ng-template>

@@ -7,11 +7,16 @@ import {
   Validators,
 } from '@angular/forms';
 import {Keyboard} from '@capacitor/keyboard';
-import {IonModal, isPlatform, ModalController} from '@ionic/angular';
+import {AlertController, IonModal, isPlatform, ModalController} from '@ionic/angular';
 import {OverlayEventDetail} from '@ionic/core/components';
-import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
+import {Store} from '@ngrx/store';
+import {delay} from 'rxjs';
+import {EditPropertyComponent} from 'src/app/component/edit-property/edit-property.component';
+import {AuthService} from 'src/app/services/auth.service';
+// import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
 import {UserService} from 'src/app/services/user/user.service';
 import {User} from 'src/app/store/user/user.model';
+import * as UserSelectors from 'src/app/store/user/user.selectors';
 
 @Component({
   selector: 'edit-profile-page',
@@ -23,15 +28,18 @@ export class EditProfilePage implements OnInit {
   @Input() user: User;
   profileForm: FormGroup;
 
-  message =
-    'This modal example uses triggers to automatically open a modal when the button is clicked.';
+  // message =
+  //   'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string;
+  public user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
 
   constructor(
+    private store: Store,
     private modalCtrl: ModalController,
-    private userService: UserService,
-    private datePipe: DatePipe,
-    public formBuilder: FormBuilder
+    public userService: UserService,
+    private auth: AuthService,
+    public formBuilder: FormBuilder,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
@@ -57,6 +65,11 @@ export class EditProfilePage implements OnInit {
     });
   }
 
+  logout() {
+    this.modalCtrl.dismiss(null, 'logout');
+    this.auth.logout();
+  }
+
   submitForm() {
     console.log('edit profile submitForm', this.profileForm.value);
     this.userService.updateUser(this.profileForm.value);
@@ -77,14 +90,14 @@ export class EditProfilePage implements OnInit {
     this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  confirm() {
-    this.modalCtrl.dismiss(this.name, 'confirm');
+  save() {
+    this.modalCtrl.dismiss(this.name, 'save');
   }
 
   onWillDismiss(event: Event) {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
-      this.message = `Hello, ${ev.detail.data}!`;
+    if (ev.detail.role === 'save') {
+      console.log("onWillDismiss save", ev.detail.data);
     }
   }
 
@@ -95,26 +108,40 @@ export class EditProfilePage implements OnInit {
     });
   }
 
-  async openPicker() {
-    let maxDate = new Date(); //.setFullYear(2006);
-    let curYear = maxDate.getFullYear();
-    maxDate.setFullYear(curYear - 2);
+  // async openPicker() {
+  //   let maxDate = new Date(); //.setFullYear(2006);
+  //   let curYear = maxDate.getFullYear();
+  //   maxDate.setFullYear(curYear - 2);
+  // }
 
-    const options: DatePickerOptions = {
-      format: 'MM/dd/yyyy',
-      mode: 'date',
-      date: this.datePipe.transform(this.user.dob, 'MM/dd/yyyy'),
-      max: this.datePipe.transform(maxDate, 'MM/dd/yyyy'),
-    };
-    console.log(options.date);
-    console.log(options.max);
-    if (isPlatform('mobile')) {
-      console.log('is mobile');
-      Keyboard.hide();
-      return DatePicker.present(options).then((date) => {
-        console.log('set dob: ' + date.value);
-        this.profileForm.get('dob').setValue(date.value);
-      });
+  async openModal(targetProperty: string) {
+    const modal = await this.modalCtrl.create({
+      backdropDismiss: false,
+      component: EditPropertyComponent,
+      componentProps: {
+        targetProperty: targetProperty,
+        user: this.user
+      },
+      cssClass: "custom-popover",
+    });
+    modal.present();
+
+    const {data, role} = await modal.onWillDismiss();
+
+    if (role === 'save') {
+      console.log("openModal.save updateUser", data);
+      this.userService.updateUser(data);
     }
   }
+
+  // async presentAlert() {
+  //   const alert = await this.alertController.create({
+  //     header: 'Name',
+  //     buttons: ['OK'],
+  //     inputs: [],
+  //   });
+
+  //   await alert.present();
+  // }
+
 }
