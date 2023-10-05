@@ -25,7 +25,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="rounded-input">
-            <ion-input
+            <!-- <ion-input
               #rawScore
               formControlName="rawScore"
               placeholder="{{assessment.units}}"
@@ -33,7 +33,9 @@
               min="{{assessment.min}}"
               max="{{assessment.max}}"
               inputmode="{{inputMode(assessment)}}"
-            ></ion-input>
+            ></ion-input> -->
+            <!-- <ion-button color="light" (click)="showInput(assessment)">{{assessment.units}}</ion-button> -->
+            <ion-button id="edit-score" color="light">{{assessment.units}}</ion-button>
           </ion-item>
         </ion-col>
         <ion-col size="5">
@@ -54,31 +56,6 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <!-- </ion-list> -->
-      <!-- <ion-label slot="end">Strength Score</ion-label> -->
-      <!-- <ion-list class="score-form" slot="start"> -->
-      <!-- <ion-row>
-        <ion-col size="8">
-          <ion-item class="rounded-input">
-            <ion-input
-              formControlName="scoreDate"
-              placeholder="YYYY-MM-DD"
-            ></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col size="4">
-          <ion-label color="secondary">Total Score</ion-label>
-        </ion-col>
-      </ion-row> -->
-      <!-- <ion-row>
-        <ion-col size="12">
-          <ion-datetime formControlName="scoreDate"> </ion-datetime>
-          <ion-datetime-button datetime="YYYY-MM-DD"></ion-datetime-button>
-        </ion-col>
-      </ion-row> -->
-      <!-- </ion-list> -->
-      <!-- <ion-label slot="end">Total Score</ion-label> -->
-      <!-- <ion-list class="score-form" slot="start"> -->
       <ion-row>
         <ion-col size="11">
           <ion-textarea
@@ -99,4 +76,20 @@
       </ion-toolbar>
     </ion-footer>
   </form>
+  <ion-modal trigger="edit-score" class="custom-popover">
+    <ion-content>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="dismiss()">
+              <ion-icon name="close-circle-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>Edit Score</ion-title>
+        </ion-toolbar>
+      </ion-header>
+    </ion-content>
+
+  </ion-modal>
 </ion-content>
+

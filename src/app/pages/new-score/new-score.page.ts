@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import {ModalController} from '@ionic/angular';
+import {AlertController, ModalController} from '@ionic/angular';
 // import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
 import {User} from '../../store/user/user.model';
 import {UserService} from '../../services/user/user.service';
@@ -14,6 +14,7 @@ import {Score} from '../../store/models/score.model';
 import {Observable, Subject} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {selectUser} from 'src/app/store/user/user.selectors';
+import {EditPropertyComponent} from 'src/app/component/edit-property/edit-property.component';
 
 @Component({
   selector: 'app-new-score',
@@ -31,7 +32,8 @@ export class NewScorePage implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
-    private userService: UserService
+    private userService: UserService,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
@@ -102,5 +104,24 @@ export class NewScorePage implements OnInit {
       return 'text';
     }
     return 'decimal';
+  }
+
+  async showInput(assessment: Assessment) {
+    const modal = await this.modalCtrl.create({
+      component: EditPropertyComponent,
+      componentProps: {
+        // targetProperty: assessment.aid,
+        targetProperty: 'weight',
+        user: this.user
+      },
+      cssClass: "custom-popover",
+    });
+    modal.present();
+
+    const {data, role} = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      console.log("closed modal", data);
+    }
   }
 }
