@@ -76,8 +76,9 @@
       </ion-toolbar>
     </ion-footer>
   </form>
+
   <ion-modal trigger="edit-score" class="custom-popover">
-    <ion-content>
+    <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="end">
@@ -85,11 +86,22 @@
               <ion-icon name="close-circle-outline"></ion-icon>
             </ion-button>
           </ion-buttons>
-          <ion-title>Edit Score</ion-title>
+          <ion-title>{{assessment.label}}</ion-title>
         </ion-toolbar>
       </ion-header>
-    </ion-content>
-
+      <ion-list>
+        <ion-item>
+          <ion-text>Hello</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-text>Hello</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-text>Hello</ion-text>
+        </ion-item>
+      </ion-list>
+    </ng-template>
   </ion-modal>
+
 </ion-content>
 
