@@ -8,11 +8,17 @@
 .rounded-input {
   --border-radius: 20pt;
 }
-ion-grid {
+ion-segment {
   margin-top: 26px;
 }
-ion-row {
-  width: 100%;
+ion-grid {
+  margin-top: 0px;
+  ion-row {
+    width: 100%;
+    ion-col {
+      text-align: center;
+    }
+  }
 }
 ion-textarea.custom-textarea {
   --background: #fff;

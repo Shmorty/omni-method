@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import {AlertController, ModalController} from '@ionic/angular';
+import {ModalController} from '@ionic/angular';
 // import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
 import {User} from '../../store/user/user.model';
 import {UserService} from '../../services/user/user.service';
@@ -22,6 +22,7 @@ import {EditPropertyComponent} from 'src/app/component/edit-property/edit-proper
   styleUrls: ['./new-score.page.scss'],
 })
 export class NewScorePage implements OnInit {
+  inputField: string = 'score';
   @Input() assessment: Assessment;
   @Output() score: Score;
   @ViewChild('rawScore') scoreInput;
@@ -33,7 +34,6 @@ export class NewScorePage implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private userService: UserService,
-    private alertController: AlertController
   ) {}
 
   ngOnInit() {
@@ -59,6 +59,20 @@ export class NewScorePage implements OnInit {
       })
       .unsubscribe();
     console.log("ngOnInit scoreInput", this.scoreInput);
+  }
+
+  newScore(val) {
+    // this.formData.rawScore = val;
+    console.log("newScore", val);
+    this.formData.setValue({'rawScore': val});
+  }
+
+  direction(assessment: Assessment) {
+    const reverse = ["PSPR", "TWOMDST", "AGLTY"];
+    if (reverse.includes(assessment.aid)) {
+      return -1;
+    }
+    return 1;
   }
 
   ionViewDidEnter() {

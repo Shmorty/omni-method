@@ -58,16 +58,13 @@ export class CommunityPage implements OnInit {
     return athlete.id == this.curUserId ? "light" : "";
   }
 
-  setView(viewName: View) {
-    this.view = viewName;
-  }
-
-  // interface SegmentChangeEventDetail {
-  //   value?: string;
+  // setView(viewName: View) {
+  //   this.view = viewName;
   // }
-  segmentChange(event) {
-    console.log("segmentChange", event);
-  }
+
+  // segmentChange(event) {
+  //   console.log("segmentChange", event);
+  // }
 
   async showDetail(athlete: User) {
     console.log("showDetail athlete", athlete);
