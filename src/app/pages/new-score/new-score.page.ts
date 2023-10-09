@@ -61,10 +61,10 @@ export class NewScorePage implements OnInit {
     console.log("ngOnInit scoreInput", this.scoreInput);
   }
 
-  newScore(val) {
+  newValue(val) {
     // this.formData.rawScore = val;
     console.log("newScore", val);
-    this.formData.setValue({'rawScore': val});
+    // this.score.rawScore = val;
   }
 
   direction(assessment: Assessment) {

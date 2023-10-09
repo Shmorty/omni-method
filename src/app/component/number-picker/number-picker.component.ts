@@ -40,13 +40,16 @@ export class NumberPickerComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
+    console.log("NumberPickerComponent ngAfterViewInit");
     this.viewPort.scrolledIndexChange.subscribe(index => {
+      console.log("scrolledIndexChange", index);
       if (typeof this.timeoutId == "number") {
         clearTimeout(this.timeoutId);
       }
       // console.log("indexChange scrollToIndex", index);
       this.curIndex = index;
       // this.viewPort.scrollToIndex(index);
+      console.log("emit", this.range[index]);
       this.valueChange.emit(this.range[index]);
       this.timeoutId = setTimeout(() => {
         this.viewPort.scrollToIndex(index, 'smooth');
