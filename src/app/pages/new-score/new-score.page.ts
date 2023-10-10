@@ -30,6 +30,7 @@ export class NewScorePage implements OnInit {
   today = new Date();
   public user$ = this.userService.getUser();
   private user: User;
+  bodyWeight: number;
 
   constructor(
     private modalCtrl: ModalController,
@@ -44,6 +45,7 @@ export class NewScorePage implements OnInit {
     this.user$
       .subscribe((value) => {
         this.user = value;
+        this.bodyWeight = this.user.weight;
         this.formData = new FormGroup({
           rawScore: new FormControl('', [
             Validators.required,
@@ -65,6 +67,7 @@ export class NewScorePage implements OnInit {
     // this.formData.rawScore = val;
     console.log("newScore", val);
     // this.score.rawScore = val;
+    this.formData.controls['rawScore'].setValue(val);
   }
 
   direction(assessment: Assessment) {

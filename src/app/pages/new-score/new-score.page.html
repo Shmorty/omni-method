@@ -18,9 +18,9 @@
     >
   </div>
 
-  <ion-segment value="score" 
-  [(ngModel)]="inputField"
-  color="primary">
+  <ion-segment value="score"
+    [(ngModel)]="inputField"
+    color="primary">
     <ion-segment-button value="scoreDate">
       <ion-label>Score Date</ion-label>
     </ion-segment-button>
@@ -34,7 +34,18 @@
   <ion-grid>
     <ion-row>
       <ion-col>{{'00/00/00'}}</ion-col>
-      <ion-col>{{score?.rawScore}} {{assessment.entryUnits}}</ion-col>
+      <ion-col>
+        <ion-input
+              #rawScore
+              formControlName="rawScore"
+              placeholder="{{assessment.units}}"
+              type="number"
+              min="{{assessment.min}}"
+              max="{{assessment.max}}"
+              inputmode="{{inputMode(assessment)}}"
+            ></ion-input>
+        {{assessment.entryUnits}}
+      </ion-col>
       <ion-col>{{currentWeight.value}}</ion-col>
     </ion-row>
   </ion-grid>
@@ -49,7 +60,11 @@
         (valueChange)="newValue($event)"></app-number-picker>
       </ion-list>
     <ion-list *ngSwitchCase="'bodyWeight'">
-      <ion-label>Body Weight</ion-label>
+      <app-number-picker [min]="assessment.min" [max]="assessment.max"
+        [increment]="(assessment.increment ? assessment.increment : 1)"
+        [units]="assessment.entryUnits" [direction]="direction(assessment)"
+        [value]="bodyWeight"
+        (valueChange)="newValue($event)"></app-number-picker>
     </ion-list>
   </ng-container>
 

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {CdkVirtualScrollViewport, ScrollDispatcher, ScrollingModule} from '@angular/cdk/scrolling';
 import {CommonModule} from '@angular/common';
 import {IonicModule} from '@ionic/angular';
@@ -11,7 +11,7 @@ import {IonicModule} from '@ionic/angular';
   standalone: true,
   imports: [ScrollingModule, CommonModule, IonicModule],
 })
-export class NumberPickerComponent implements OnInit {
+export class NumberPickerComponent implements OnInit, OnChanges {
   @Input() min = 0;
   @Input() max = 100;
   @Input() increment = 1;
@@ -60,6 +60,10 @@ export class NumberPickerComponent implements OnInit {
     setTimeout(() => {
       this.viewPort.scrollToIndex(this.startIndex);
     }, 200);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("changes", changes);
   }
 
   curClass(index) {
