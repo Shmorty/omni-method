@@ -1,7 +1,8 @@
+$row-height: 34px;
 .picker {
     border: 0px solid gray;
     border-radius: 5px;
-    height: 210px;
+    height: ($row-height * 5);
     margin: auto;
     overflow-y: scroll;
     padding: 3px;
@@ -10,9 +11,11 @@
 .picker-opt {
     // background-color: rgba(77, 171, 252, 0.5);
     // margin: 1px;
-    height: 42px;
-    line-height: 42px;
+    height: $row-height;
+    line-height: $row-height;
     text-align: center;
+    scroll-snap-type: y mandatory;
+    scroll-snap-align: center;
 }
 .current {
     color: white;
@@ -25,11 +28,11 @@
     // background-color: rgb(64, 159, 251);
     background-color: #4dabfc;
     border-radius: 21px;
-    height: 42px;
+    height: $row-height;
     margin: auto;
     pointer-events: none;
     position: relative;
-    bottom: 126px;
+    bottom: ($row-height * 3);
     width: 90%;
     z-index: -1;
 }

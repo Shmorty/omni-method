@@ -51,7 +51,7 @@
   </ion-grid>
   <ng-container [ngSwitch]="inputField">
     <ion-list *ngSwitchCase="'scoreDate'">
-      <ion-datetime preferWheel="true"></ion-datetime>
+      <ion-datetime presentation="date" [preferWheel]="true"></ion-datetime>
     </ion-list>
     <ion-list *ngSwitchCase="'score'">
       <app-number-picker [min]="assessment.min" [max]="assessment.max"
