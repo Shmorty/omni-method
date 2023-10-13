@@ -1,4 +1,4 @@
-<ion-content color="default">
+<ion-content color="default" >
   <ion-header class="ion-no-border safe-area"> </ion-header>
   <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-button
@@ -44,26 +44,25 @@
               max="{{assessment.max}}"
               inputmode="{{inputMode(assessment)}}"
             ></ion-input>
-        {{assessment.entryUnits}}
       </ion-col>
       <ion-col>{{currentWeight.value}}</ion-col>
     </ion-row>
   </ion-grid>
   <ng-container [ngSwitch]="inputField">
     <ion-list *ngSwitchCase="'scoreDate'">
-      <ion-datetime presentation="date" [preferWheel]="true"></ion-datetime>
+      <ion-datetime  class="date-picker" presentation="date" [preferWheel]="true"></ion-datetime>
     </ion-list>
     <ion-list *ngSwitchCase="'score'">
       <app-number-picker [min]="assessment.min" [max]="assessment.max"
         [increment]="(assessment.increment ? assessment.increment : 1)"
         [units]="assessment.entryUnits" [direction]="direction(assessment)"
         (valueChange)="newValue($event)"></app-number-picker>
-      </ion-list>
+    </ion-list>
     <ion-list *ngSwitchCase="'bodyWeight'">
       <app-number-picker [min]="assessment.min" [max]="assessment.max"
         [increment]="(assessment.increment ? assessment.increment : 1)"
         [units]="assessment.entryUnits" [direction]="direction(assessment)"
-        [value]="bodyWeight"
+        [value]="(user$ | async).weight"
         (valueChange)="newValue($event)"></app-number-picker>
     </ion-list>
   </ng-container>

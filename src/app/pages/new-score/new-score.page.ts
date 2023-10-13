@@ -24,7 +24,7 @@ import {EditPropertyComponent} from 'src/app/component/edit-property/edit-proper
 export class NewScorePage implements OnInit {
   inputField: string = 'score';
   @Input() assessment: Assessment;
-  @Output() score: Score;
+  newScore: Score;
   @ViewChild('rawScore') scoreInput;
   formData: FormGroup;
   today = new Date();
@@ -93,7 +93,7 @@ export class NewScorePage implements OnInit {
   onSubmit() {
     console.log('this.assessment.aid: ' + this.assessment.aid);
     console.log('this.user.id: ' + this.user.id);
-    this.score = {
+    this.newScore = {
       aid: this.assessment.aid,
       uid: this.user.id,
       cid: this.assessment.cid,
@@ -103,8 +103,8 @@ export class NewScorePage implements OnInit {
       expired: false,
       notes: this.formData.controls['notes'].value,
     };
-    console.log('save new score: ' + JSON.stringify(this.score));
-    this.userService.saveScore(this.score);
+    console.log('save new score: ' + JSON.stringify(this.newScore));
+    this.userService.saveScore(this.newScore);
     this.dismiss();
   }
 
