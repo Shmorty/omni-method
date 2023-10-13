@@ -1,4 +1,4 @@
-<cdk-virtual-scroll-viewport itemSize="34"  class="picker">
+<cdk-virtual-scroll-viewport itemSize="{{rowHeight}}"  class="picker">
   <div class="picker-opt"></div>
   <div class="picker-opt"></div>
   <div *cdkVirtualFor="let value of range;index as i" class="picker-opt"
@@ -9,11 +9,15 @@
   <div class="picker-opt"></div>
   <div class="picker-opt"></div>
 </cdk-virtual-scroll-viewport>
-<div class="highlight">
-  <span class="units current" slot="right">
-    {{units}}
-  </span>
-</div>
+<div>
+  <div class="highlight-above"></div>
+  <div class="highlight">
+    <span class="units current" slot="right">
+      {{units}}
+    </span>
+  </div>
+  <div class="highlight-below"></div>
+  </div>
 <!-- <div class="listbox-container">
   <ul cdkListbox class="listbox">
     <li *ngFor="let value of range" class="option">

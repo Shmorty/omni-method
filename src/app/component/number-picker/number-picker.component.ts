@@ -18,6 +18,7 @@ export class NumberPickerComponent implements OnInit, OnChanges {
   @Input() units = "";
   @Input() direction = 1;
   @Input() value: number;
+  @Input() rowHeight = 34;
   @Output() valueChange = new EventEmitter<number>;
   @ViewChild(CdkVirtualScrollViewport) viewPort: CdkVirtualScrollViewport;
   range: number[] = [];

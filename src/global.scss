@@ -76,7 +76,7 @@ ion-button[shape="circle"] {
   --ion-backdrop-color: #b8dfff;
   --ion-safe-area-top: 0;
   --height: 365px;
-  --width:80%;
+  --width:90%;
   backdrop-filter: blur(10px);
   // &::part(backdrop) {
   //   background-color: teal;
@@ -91,4 +91,19 @@ ion-button[shape="circle"] {
   //   display: block;
   //   contain: content;
   // }
+}
+
+ion-datetime {
+  --background: rgba(var(--ion-color-primary-rgb), 0.4);
+  --background-rgb: 245, 235, 247;
+  --wheel-highlight-background: rgb(var(--ion-color-primary-rgb));
+  // --wheel-fade-background-rgb: var(--ion-color-primary-rgb);
+}
+
+// ion-datetime::part(wheel-item) {
+//   color: var(--ion-color-primary);
+// }
+
+ion-datetime::part(wheel-item active) {
+  color: black;
 }

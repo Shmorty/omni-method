@@ -94,6 +94,10 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+    // --wheel-highlight-background: #5eb3f9;
+    --wheel-highlight-background: rgba(var(--ion-color-primary), 0.4);
+    --wheel-fade-background-rgb: var(--ion-color-light-rgb);
 }
 
 @media (prefers-color-scheme: dark) {

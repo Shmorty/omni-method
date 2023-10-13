@@ -1,7 +1,13 @@
 $row-height: 34px;
+// --wheel-fade-background-rgb: #222222;
+// --background-rgb
+// --ion-background-color-rgb
+
 .picker {
+    background: rgba(var(--ion-color-primary-rgb), 0.4);
     border: 0px solid gray;
     border-radius: 5px;
+    font-size: 22px;
     height: ($row-height * 5);
     margin: auto;
     overflow-y: scroll;
@@ -18,15 +24,15 @@ $row-height: 34px;
     scroll-snap-align: center;
 }
 .current {
-    color: white;
+    // color: white;
     font-weight: bold;
 }
 .spacer {
     height: 84px;
 }
 .highlight {
-    // background-color: rgb(64, 159, 251);
     background-color: #4dabfc;
+    // background-color: rgba(var(--ion-color-light), 0.4);
     border-radius: 21px;
     height: $row-height;
     margin: auto;
@@ -35,6 +41,34 @@ $row-height: 34px;
     bottom: ($row-height * 3);
     width: 90%;
     z-index: -1;
+}
+.highlight-above {
+    // background: linear-gradient(to bottom, rgba(var(--wheel-fade-background-rgb, var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255))), 1) 20%, rgba(var(--wheel-fade-background-rgb, var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255))), 0.8) 100%);
+    // background: linear-gradient(to bottom, rgba(var(--ion-color-primary-rgb), 1) 20%, rgba(var(--ion-color-primary-rgb), 0.4) 100%);
+    background: linear-gradient(to bottom, rgba(var(--ion-color-light-rgb), 1) 20%, rgba(var(--ion-color-light-rgb), 0.4) 100%);
+    border-radius: 8px 8px 0 0;
+    inset-inline-start: 0px;
+    top: 0px;
+    height: ($row-height * 2);
+    margin: 0 5%;
+    position: absolute;
+    pointer-events: none;
+    width: 90%;
+    z-index: 0;
+}
+.highlight-below {
+    // background: linear-gradient(to top, rgba(var(--wheel-fade-background-rgb, var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255))), 1) 20%, rgba(var(--wheel-fade-background-rgb, var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255))), 0.8) 100%);
+    // background: linear-gradient(to top, rgba(var(--ion-color-primary-rgb), 1) 20%, rgba(var(--ion-color-primary-rgb), 0.4) 100%);
+    background: linear-gradient(to top, rgba(var(--ion-color-light-rgb), 1) 20%, rgba(var(--ion-color-light-rgb), 0.4) 100%);
+    border-radius: 0 0 8px 8px;
+    inset-inline-start: 0px;
+    top: ($row-height * 3);
+    height: ($row-height * 2);
+    margin: 0 5%;
+    position: absolute;
+    pointer-events: none;
+    width: 90%;
+    z-index: 0;
 }
 .units {
     position: absolute;
