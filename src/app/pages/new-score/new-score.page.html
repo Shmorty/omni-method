@@ -13,13 +13,13 @@
     </ion-button>
   </ion-fab>
   <div class="ion-text-center">
-    <ion-card-title class="center" color="primary" style="padding-top: 20px;"
+    <ion-card-title class="center" style="padding: 20px 0;"
       >{{assessment.label}}</ion-card-title
     >
   </div>
 
-  <ion-segment value="score"
-    [(ngModel)]="inputField"
+  <!-- <ion-segment value="score"
+    [(ngModel)]="activeField"
     color="primary">
     <ion-segment-button value="scoreDate">
       <ion-label>Score Date</ion-label>
@@ -30,9 +30,54 @@
     <ion-segment-button value="bodyWeight">
       <ion-label>Body Weight</ion-label>
     </ion-segment-button>
-  </ion-segment>
+  </ion-segment> -->
+
   <ion-grid>
     <ion-row>
+      <ion-col size="5">
+        <ion-item class="rounded-tab" [ngClass]="tabClass('scoreDate')" lines="none" (click)="activate('scoreDate')">
+          <!-- <ion-label position="stacked">Score Date</ion-label> -->
+          <ion-input
+            formControlName="scoreDate"
+            label="Score Date"
+            labelPlacement="stacked"
+            placeholder="YYYY-MM-DD"
+            value="{{newScore.scoreDate}}"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="3">
+        <ion-item class="rounded-tab" [ngClass]="tabClass('score')" lines="none" (click)="activate('score')">
+          <!-- <ion-label position="stacked">Score</ion-label> -->
+          <ion-input
+            #rawScore
+            label="Score"
+            labelPlacement="stacked"
+            formControlName="rawScore"
+            placeholder="{{assessment.units}}"
+            type="number"
+            min="{{assessment.min}}"
+            max="{{assessment.max}}"
+            inputmode="{{inputMode(assessment)}}"
+            value="{{newScore.rawScore}}"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4">
+        <ion-item class="rounded-tab" [ngClass]="tabClass('bodyWeight')" lines="none" (click)="activate('bodyWeight')">
+          <!-- <ion-label position="stacked">Body Weight</ion-label> -->
+          <ion-input
+            #currentWeight
+            formControlName="currentWeight"
+            label="Body Weight"
+            labelPlacement="stacked"
+            type="number"
+            value="{{newScore.currentWeight}}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row>
       <ion-col>{{'00/00/00'}}</ion-col>
       <ion-col>
         <ion-input
@@ -46,75 +91,41 @@
             ></ion-input>
       </ion-col>
       <ion-col>{{currentWeight.value}}</ion-col>
-    </ion-row>
+    </ion-row> -->
   </ion-grid>
-  <ng-container [ngSwitch]="inputField">
-    <ion-list *ngSwitchCase="'scoreDate'">
+  <ng-container [ngSwitch]="activeField">
+    <ion-list *ngSwitchCase="'scoreDate'" style="background-color: transparent;">
       <ion-datetime  class="date-picker" presentation="date" [preferWheel]="true"></ion-datetime>
     </ion-list>
-    <ion-list *ngSwitchCase="'score'">
+    <ion-list *ngSwitchCase="'score'" style="background-color: transparent;">
       <app-number-picker [min]="assessment.min" [max]="assessment.max"
         [increment]="(assessment.increment ? assessment.increment : 1)"
         [units]="assessment.entryUnits" [direction]="direction(assessment)"
-        (valueChange)="newValue($event)"></app-number-picker>
+        (valueChange)="setScore($event)"></app-number-picker>
     </ion-list>
-    <ion-list *ngSwitchCase="'bodyWeight'">
+    <ion-list *ngSwitchCase="'bodyWeight'" style="background-color: transparent;">
       <app-number-picker [min]="assessment.min" [max]="assessment.max"
         [increment]="(assessment.increment ? assessment.increment : 1)"
         [units]="assessment.entryUnits" [direction]="direction(assessment)"
         [value]="(user$ | async).weight"
-        (valueChange)="newValue($event)"></app-number-picker>
+        (valueChange)="setWeight($event)"></app-number-picker>
     </ion-list>
   </ng-container>
 
   <form [formGroup]="formData" (ngSubmit)="onSubmit()">
-
-    <!-- <div class="input-group"> -->
     <ion-grid class="input-group" [fixed]="true">
-      <!-- <ion-list class="score-form" slot="start"> -->
       <ion-row>
-        <ion-col size="4">
-          <ion-item class="rounded-input">
-            <ion-input
-              formControlName="scoreDate"
-              placeholder="YYYY-MM-DD"
-            ></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col size="4">
-          <ion-item class="rounded-input">
-            <ion-input
-              #rawScore
-              formControlName="rawScore"
-              placeholder="{{assessment.units}}"
-              type="number"
-              min="{{assessment.min}}"
-              max="{{assessment.max}}"
-              inputmode="{{inputMode(assessment)}}"
-            ></ion-input>
-            <!-- <ion-button color="light" (click)="showInput(assessment)">{{assessment.units}}</ion-button> -->
-            <!-- <ion-button id="edit-score" color="light">{{assessment.units}}</ion-button> -->
-          </ion-item>
-        </ion-col>
-        <ion-col size="4">
-          <ion-item>
-            <ion-label position="floating">Body Weight</ion-label>
-            <ion-input #currentWeight formControlName="currentWeight" type="number"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="11">
+        <ion-col size="12">
           <ion-textarea
             class="custom-textarea"
             formControlName="notes"
-            placeholder="Notes"
+            label="Notes"
+            labelPlacement="floating"
+            fill="outline"
           ></ion-textarea>
         </ion-col>
       </ion-row>
-      <!-- </ion-list> -->
     </ion-grid>
-    <!-- </div> -->
     <ion-footer>
       <ion-toolbar color="deffault">
         <ion-button [disabled]="formData.invalid" type="submit" color="primary" shape="round" expand="block">
@@ -123,32 +134,6 @@
       </ion-toolbar>
     </ion-footer>
   </form>
-
-  <ion-modal trigger="edit-score" class="custom-popover">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="end">
-            <ion-button (click)="dismiss()">
-              <ion-icon name="close-circle-outline"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-          <ion-title>{{assessment.label}}</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-list>
-        <ion-item>
-          <ion-text>Hello</ion-text>
-        </ion-item>
-        <ion-item>
-          <ion-text>Hello</ion-text>
-        </ion-item>
-        <ion-item>
-          <ion-text>Hello</ion-text>
-        </ion-item>
-      </ion-list>
-    </ng-template>
-  </ion-modal>
 
 </ion-content>
 

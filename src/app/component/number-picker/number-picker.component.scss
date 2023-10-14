@@ -6,7 +6,7 @@ $row-height: 34px;
 .picker {
     background: rgba(var(--ion-color-primary-rgb), 0.4);
     border: 0px solid gray;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 22px;
     height: ($row-height * 5);
     margin: auto;
@@ -33,13 +33,13 @@ $row-height: 34px;
 .highlight {
     background-color: #4dabfc;
     // background-color: rgba(var(--ion-color-light), 0.4);
-    border-radius: 21px;
+    border-radius: 8px;
     height: $row-height;
     margin: auto;
     pointer-events: none;
     position: relative;
     bottom: ($row-height * 3);
-    width: 90%;
+    width: calc(90% - 16px);
     z-index: -1;
 }
 .highlight-above {

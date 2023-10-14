@@ -5,12 +5,26 @@
     --color: initial;
   }
 }
-.rounded-input {
-  --border-radius: 20pt;
+.rounded-tab {
+  --background: transparent;
+  // --border-radius: 10pt 10pt 0 0;
+  // --border-color: white;
+  // --border-width: 1px;
+  border: 1px solid var(--ion-color-primary);
+  border-bottom: 0 solid transparent;
+  border-radius: 10pt 10pt 0 0;
+}
+.active-tab {
+  box-shadow: -1px -1px var(--ion-color-primary-shade);
+  font-weight: bold;
 }
 .date-picker {
+  border-radius: 8px;
   margin: auto;
   min-width: 90%;
+}
+ion-content {
+  --background: linear-gradient(var(--ion-color-tertiary), var(--ion-color-light));
 }
 ion-segment {
   margin-top: 26px;
@@ -30,5 +44,5 @@ ion-textarea.custom-textarea {
   --padding-end: 10px;
   --padding-start: 10px;
   border-radius: 10pt;
-  width: 100%;
+  width: 90%;
 }

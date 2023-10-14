@@ -22,7 +22,7 @@ import {EditPropertyComponent} from 'src/app/component/edit-property/edit-proper
   styleUrls: ['./new-score.page.scss'],
 })
 export class NewScorePage implements OnInit {
-  inputField: string = 'score';
+  activeField: string = 'score';
   @Input() assessment: Assessment;
   newScore: Score;
   @ViewChild('rawScore') scoreInput;
@@ -60,14 +60,35 @@ export class NewScorePage implements OnInit {
         });
       })
       .unsubscribe();
+
+    this.newScore = {
+      aid: this.assessment.aid,
+      uid: this.user.id,
+      cid: this.assessment.cid,
+      rawScore: 0,
+      scoreDate: today,
+      currentWeight: this.bodyWeight,
+      expired: false,
+      notes: '',
+    };
+
     console.log("ngOnInit scoreInput", this.scoreInput);
   }
 
-  newValue(val) {
-    // this.formData.rawScore = val;
-    console.log("newScore", val);
-    // this.score.rawScore = val;
-    this.formData.controls['rawScore'].setValue(val);
+  activate(tab: string) {
+    this.activeField = tab;
+  }
+
+  tabClass(tab: string) {
+    return (this.activeField === tab ? "active-tab" : "");
+  }
+
+  setScore(val) {
+    this.newScore.rawScore = val;
+  }
+
+  setWeight(val) {
+    this.newScore.currentWeight = val;
   }
 
   direction(assessment: Assessment) {
