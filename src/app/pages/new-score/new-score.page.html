@@ -71,21 +71,6 @@
       </ion-col>
     </ion-row>
 
-    <!-- <ion-row>
-      <ion-col>{{'00/00/00'}}</ion-col>
-      <ion-col>
-        <ion-input
-              #rawScore
-              formControlName="rawScore"
-              placeholder="{{assessment.units}}"
-              type="number"
-              min="{{assessment.min}}"
-              max="{{assessment.max}}"
-              inputmode="{{inputMode(assessment)}}"
-            ></ion-input>
-      </ion-col>
-      <ion-col>{{currentWeight.value}}</ion-col>
-    </ion-row> -->
   </ion-grid>
   <ng-container [ngSwitch]="activeField">
     <ion-list *ngSwitchCase="'scoreDate'" style="background-color: transparent;">
@@ -102,37 +87,31 @@
       <app-number-picker [min]="assessment.min" [max]="assessment.max"
         [increment]="(assessment.increment ? assessment.increment : 1)"
         [units]="assessment.entryUnits" [direction]="direction(assessment)"
-        [value]="newScore.currentWeight"
+        [value]="bodyWeight"
         (valueChange)="setWeight($event)"></app-number-picker>
     </ion-list>
   </ng-container>
 
-  <!-- <form [formGroup]="formData" (ngSubmit)="onSubmit()"> -->
     <ion-grid class="input-group" [fixed]="true">
       <ion-row>
         <ion-col size="12">
           <ion-textarea
             #notes
-            class="custom-textarea"
+            class="notes-textarea"
             label="Notes"
             labelPlacement="floating"
             fill="outline"
-            [value]="newScore.notes"
+            maxlength="128"
+            [(ngModel)]="newScore.notes"
           ></ion-textarea>
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-footer>
-      <ion-toolbar color="deffault">
-        <!-- <ion-button [disabled]="formData.invalid" type="submit" color="primary" shape="round" expand="block">
-          Submit
-        </ion-button> -->
-        <ion-button type="submit" color="primary" shape="round" expand="block" (click)="onSubmit()">
-          Submit
-        </ion-button>
-      </ion-toolbar>
-    </ion-footer>
-  <!-- </form> -->
+    <ion-toolbar color="deffault">
+      <ion-button type="submit" color="primary" shape="round" expand="block" (click)="onSubmit()">
+        Submit
+      </ion-button>
+    </ion-toolbar>
 
 </ion-content>
 

@@ -43,18 +43,6 @@ export class NewScorePage implements OnInit {
       .subscribe((value) => {
         this.user = value;
         this.bodyWeight = this.user.weight;
-        // this.formData = new FormGroup({
-        //   rawScore: new FormControl('', [
-        //     Validators.required,
-        //     Validators.min(this.assessment.min),
-        //     Validators.max(this.assessment.max),
-        //   ]),
-        //   scoreDate: new FormControl(today, Validators.required),
-        //   notes: new FormControl(''),
-        //   currentWeight: new FormControl(value.weight, [
-        //     Validators.required,
-        //   ]),
-        // });
       })
       .unsubscribe();
 
@@ -89,6 +77,11 @@ export class NewScorePage implements OnInit {
     this.newScore.currentWeight = val;
   }
 
+  setNotes(val) {
+    console.log("setNotes", val);
+    this.newScore.notes = val;
+  }
+
   direction(assessment: Assessment) {
     const reverse = ["PSPR", "TWOMDST", "AGLTY"];
     if (reverse.includes(assessment.aid)) {
@@ -112,27 +105,10 @@ export class NewScorePage implements OnInit {
   onSubmit() {
     console.log('this.assessment.aid: ' + this.assessment.aid);
     console.log('this.user.id: ' + this.user.id);
-    // this.newScore = {
-    //   aid: this.assessment.aid,
-    //   uid: this.user.id,
-    //   cid: this.assessment.cid,
-    //   rawScore: this.rawScore,
-    //   scoreDate: this.scoreDate,
-    //   currentWeight: this.bodyWeight,
-    //   expired: false,
-    // };
     console.log('save new score: ', this.newScore);
-    // this.userService.saveScore(this.newScore);
+    this.userService.saveScore(this.newScore);
     this.dismiss();
   }
-
-  // get rawScore() {
-  //   return this.formData.get('rawScore');
-  // }
-
-  // get scoreDate() {
-  //   return this.formData.get('scoreDate');
-  // }
 
   inputMode(assessment: Assessment): string {
     if (assessment.min < 0) {
@@ -141,22 +117,22 @@ export class NewScorePage implements OnInit {
     return 'decimal';
   }
 
-  async showInput(assessment: Assessment) {
-    const modal = await this.modalCtrl.create({
-      component: EditPropertyComponent,
-      componentProps: {
-        // targetProperty: assessment.aid,
-        targetProperty: 'weight',
-        user: this.user
-      },
-      cssClass: "custom-popover",
-    });
-    modal.present();
+  // async showInput(assessment: Assessment) {
+  //   const modal = await this.modalCtrl.create({
+  //     component: EditPropertyComponent,
+  //     componentProps: {
+  //       // targetProperty: assessment.aid,
+  //       targetProperty: 'weight',
+  //       user: this.user
+  //     },
+  //     cssClass: "custom-popover",
+  //   });
+  //   modal.present();
 
-    const {data, role} = await modal.onWillDismiss();
+  //   const {data, role} = await modal.onWillDismiss();
 
-    if (role === 'confirm') {
-      console.log("closed modal", data);
-    }
-  }
+  //   if (role === 'confirm') {
+  //     console.log("closed modal", data);
+  //   }
+  // }
 }
