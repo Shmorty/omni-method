@@ -18,7 +18,7 @@ import {EditPropertyComponent} from 'src/app/component/edit-property/edit-proper
 export class NewScorePage implements OnInit {
   activeField: string = 'score';
   @Input() assessment: Assessment;
-  newScore: Score;
+  public newScore: Score;
   // @ViewChild('rawScore') scoreInput;
   // formData: FormGroup;
   today = new Date();
@@ -37,6 +37,7 @@ export class NewScorePage implements OnInit {
     console.log("newScore ngOnInit");
     // prefill date
     var today = new Date().toLocaleDateString();
+    // var today = new Date();
 
     this.user$
       .subscribe((value) => {
@@ -111,21 +112,17 @@ export class NewScorePage implements OnInit {
   onSubmit() {
     console.log('this.assessment.aid: ' + this.assessment.aid);
     console.log('this.user.id: ' + this.user.id);
-    this.newScore = {
-      aid: this.assessment.aid,
-      uid: this.user.id,
-      cid: this.assessment.cid,
-      rawScore: this.rawScore,
-      scoreDate: this.scoreDate,
-      currentWeight: this.bodyWeight,
-      // rawScore: this.formData.controls['rawScore'].value,
-      // scoreDate: this.formData.controls['scoreDate'].value,
-      // currentWeight: this.formData.controls['currentWeight'].value,
-      expired: false,
-      // notes: this.formData.controls['notes'].value,
-    };
-    console.log('save new score: ' + JSON.stringify(this.newScore));
-    this.userService.saveScore(this.newScore);
+    // this.newScore = {
+    //   aid: this.assessment.aid,
+    //   uid: this.user.id,
+    //   cid: this.assessment.cid,
+    //   rawScore: this.rawScore,
+    //   scoreDate: this.scoreDate,
+    //   currentWeight: this.bodyWeight,
+    //   expired: false,
+    // };
+    console.log('save new score: ', this.newScore);
+    // this.userService.saveScore(this.newScore);
     this.dismiss();
   }
 

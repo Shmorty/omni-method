@@ -40,8 +40,13 @@ ion-content {
 ion-segment {
   margin-top: 26px;
 }
+// :host {
+// --padding-start: 4px;
+//   --padding-end: 0;
+// }
 ion-grid {
   margin-top: 0px;
+  padding: 0 16px;
   ion-row {
     width: 100%;
     ion-col {
