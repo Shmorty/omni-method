@@ -1,10 +1,4 @@
 import {Component, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
 import {ModalController} from '@ionic/angular';
 // import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
 import {User} from '../../store/user/user.model';
@@ -25,11 +19,13 @@ export class NewScorePage implements OnInit {
   activeField: string = 'score';
   @Input() assessment: Assessment;
   newScore: Score;
-  @ViewChild('rawScore') scoreInput;
-  formData: FormGroup;
+  // @ViewChild('rawScore') scoreInput;
+  // formData: FormGroup;
   today = new Date();
   public user$ = this.userService.getUser();
   private user: User;
+  scoreDate: string;
+  rawScore: number;
   bodyWeight: number;
 
   constructor(
@@ -46,18 +42,18 @@ export class NewScorePage implements OnInit {
       .subscribe((value) => {
         this.user = value;
         this.bodyWeight = this.user.weight;
-        this.formData = new FormGroup({
-          rawScore: new FormControl('', [
-            Validators.required,
-            Validators.min(this.assessment.min),
-            Validators.max(this.assessment.max),
-          ]),
-          scoreDate: new FormControl(today, Validators.required),
-          notes: new FormControl(''),
-          currentWeight: new FormControl(value.weight, [
-            Validators.required,
-          ]),
-        });
+        // this.formData = new FormGroup({
+        //   rawScore: new FormControl('', [
+        //     Validators.required,
+        //     Validators.min(this.assessment.min),
+        //     Validators.max(this.assessment.max),
+        //   ]),
+        //   scoreDate: new FormControl(today, Validators.required),
+        //   notes: new FormControl(''),
+        //   currentWeight: new FormControl(value.weight, [
+        //     Validators.required,
+        //   ]),
+        // });
       })
       .unsubscribe();
 
@@ -72,7 +68,8 @@ export class NewScorePage implements OnInit {
       notes: '',
     };
 
-    console.log("ngOnInit scoreInput", this.scoreInput);
+    console.log("ngInit", this.newScore);
+    // console.log("ngOnInit scoreInput", this.scoreInput);
   }
 
   activate(tab: string) {
@@ -99,13 +96,13 @@ export class NewScorePage implements OnInit {
     return 1;
   }
 
-  ionViewDidEnter() {
-    console.log("newScore ionViewDidEnter scoreInput", this.scoreInput);
-    setTimeout(() => {
-      console.log("set form focus");
-      this.scoreInput?.setFocus();
-    }, 150);
-  }
+  // ionViewDidEnter() {
+  //   console.log("newScore ionViewDidEnter scoreInput", this.scoreInput);
+  //   setTimeout(() => {
+  //     console.log("set form focus");
+  //     this.scoreInput?.setFocus();
+  //   }, 150);
+  // }
 
   dismiss() {
     this.modalCtrl.dismiss();
@@ -118,24 +115,27 @@ export class NewScorePage implements OnInit {
       aid: this.assessment.aid,
       uid: this.user.id,
       cid: this.assessment.cid,
-      rawScore: this.formData.controls['rawScore'].value,
-      scoreDate: this.formData.controls['scoreDate'].value,
-      currentWeight: this.formData.controls['currentWeight'].value,
+      rawScore: this.rawScore,
+      scoreDate: this.scoreDate,
+      currentWeight: this.bodyWeight,
+      // rawScore: this.formData.controls['rawScore'].value,
+      // scoreDate: this.formData.controls['scoreDate'].value,
+      // currentWeight: this.formData.controls['currentWeight'].value,
       expired: false,
-      notes: this.formData.controls['notes'].value,
+      // notes: this.formData.controls['notes'].value,
     };
     console.log('save new score: ' + JSON.stringify(this.newScore));
     this.userService.saveScore(this.newScore);
     this.dismiss();
   }
 
-  get rawScore() {
-    return this.formData.get('rawScore');
-  }
+  // get rawScore() {
+  //   return this.formData.get('rawScore');
+  // }
 
-  get scoreDate() {
-    return this.formData.get('scoreDate');
-  }
+  // get scoreDate() {
+  //   return this.formData.get('scoreDate');
+  // }
 
   inputMode(assessment: Assessment): string {
     if (assessment.min < 0) {

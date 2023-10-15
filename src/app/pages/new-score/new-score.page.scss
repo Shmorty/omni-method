@@ -7,16 +7,27 @@
 }
 .rounded-tab {
   --background: transparent;
-  // --border-radius: 10pt 10pt 0 0;
-  // --border-color: white;
-  // --border-width: 1px;
-  border: 1px solid var(--ion-color-primary);
-  border-bottom: 0 solid transparent;
-  border-radius: 10pt 10pt 0 0;
+  // border: 1px solid var(--ion-color-primary);
+  // border-bottom: 0 solid transparent;
+  // border-radius: 10pt 10pt 0 0;
+  ion-label {
+    color: var(--ion-color-medium);
+    overflow: visible;
+  }
+  ion-input {
+    --background: white;
+    border-radius: 5px;
+    text-align: center;
+  }
 }
 .active-tab {
-  box-shadow: -1px -1px var(--ion-color-primary-shade);
-  font-weight: bold;
+  // box-shadow: -1px -1px var(--ion-color-primary-shade);
+  ion-label {
+    color: var(--ion-color-dark);
+  }
+  ion-input {
+    --background: var(--ion-color-primary);
+  }
 }
 .date-picker {
   border-radius: 8px;
@@ -39,10 +50,12 @@ ion-grid {
   }
 }
 ion-textarea.custom-textarea {
-  --background: #fff;
-  --color: #373737;
+  --background: var(--ion-color-light);
+  --color: black;
   --padding-end: 10px;
   --padding-start: 10px;
   border-radius: 10pt;
+  box-shadow: inset 1px 1px #373737;
+  margin: auto;
   width: 90%;
 }

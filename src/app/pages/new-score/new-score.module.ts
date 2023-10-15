@@ -12,7 +12,7 @@ import {NumberPickerComponent} from 'src/app/component/number-picker/number-pick
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    // FormsModule,
     ReactiveFormsModule,
     IonicModule,
     NewScorePageRoutingModule,
