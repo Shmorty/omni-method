@@ -117,22 +117,4 @@ export class NewScorePage implements OnInit {
     return 'decimal';
   }
 
-  // async showInput(assessment: Assessment) {
-  //   const modal = await this.modalCtrl.create({
-  //     component: EditPropertyComponent,
-  //     componentProps: {
-  //       // targetProperty: assessment.aid,
-  //       targetProperty: 'weight',
-  //       user: this.user
-  //     },
-  //     cssClass: "custom-popover",
-  //   });
-  //   modal.present();
-
-  //   const {data, role} = await modal.onWillDismiss();
-
-  //   if (role === 'confirm') {
-  //     console.log("closed modal", data);
-  //   }
-  // }
 }

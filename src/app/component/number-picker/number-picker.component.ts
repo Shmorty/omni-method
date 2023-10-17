@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnIn
 import {CdkVirtualScrollViewport, ScrollDispatcher, ScrollingModule} from '@angular/cdk/scrolling';
 import {CommonModule} from '@angular/common';
 import {IonicModule} from '@ionic/angular';
+import {Haptics} from '@capacitor/haptics';
 
 @Component({
   selector: 'app-number-picker',
@@ -44,8 +45,10 @@ export class NumberPickerComponent implements OnInit, OnChanges {
     console.log("NumberPickerComponent ngAfterViewInit");
     this.viewPort.scrolledIndexChange.subscribe(index => {
       // console.log("scrolledIndexChange", index);
+      this.hapticsSelectionChanged();
       if (typeof this.timeoutId == "number") {
         clearTimeout(this.timeoutId);
+        Haptics.selectionStart();
       }
       // console.log("indexChange scrollToIndex", index);
       this.curIndex = index;
@@ -66,6 +69,10 @@ export class NumberPickerComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     console.log("changes", changes);
   }
+
+  hapticsSelectionChanged = async () => {
+    await Haptics.selectionChanged();
+  };
 
   curClass(index) {
     if (index == this.curIndex) {
