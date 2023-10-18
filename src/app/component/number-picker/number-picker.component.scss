@@ -4,7 +4,7 @@ $row-height: 34px;
 // --ion-background-color-rgb
 
 .picker {
-    background: rgba(var(--ion-color-primary-rgb), 0.4);
+    background: rgba(var(--ion-color-light-rgb), 0.4);
     border: 0px solid gray;
     border-radius: 8px;
     font-size: 22px;
@@ -17,14 +17,14 @@ $row-height: 34px;
     width: 90%;
 }
 .picker-opt {
-    // background-color: rgba(77, 171, 252, 0.5);
+    // background-color: var(--ion-color-light);
     // margin: 1px;
     height: $row-height;
     line-height: $row-height;
     text-align: center;
 }
 .current {
-    // color: white;
+    // background-color: unset;
     font-weight: bold;
 }
 .spacer {

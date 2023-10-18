@@ -145,7 +145,7 @@ export class ProfilePage implements OnInit {
         user: user,
       },
       cssClass: 'new-score-modal',
-      presentingElement: document.querySelector('ion-router-outlet'),
+      // presentingElement: document.querySelector('ion-router-outlet'),
       canDismiss: true,
     });
     await modal.present();
