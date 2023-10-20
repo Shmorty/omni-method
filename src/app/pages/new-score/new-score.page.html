@@ -46,9 +46,7 @@
       </ion-col>
       <ion-col size="3">
         <div class="rounded-tab" [ngClass]="tabClass('score')" lines="none" (click)="activate('score')">
-          <ion-label position="stacked">Score</ion-label>
-          <!-- label="Score"
-          labelPlacement="stacked" -->
+        <ion-label position="stacked">Score</ion-label>
         <ion-input
             #rawScore
             placeholder="{{assessment.units}}"
@@ -86,8 +84,7 @@
     <ion-list *ngSwitchCase="'bodyWeight'" style="background-color: transparent;">
       <app-number-picker [min]="assessment.min" [max]="assessment.max"
         [increment]="(assessment.increment ? assessment.increment : 1)"
-        [units]="assessment.entryUnits" [direction]="direction(assessment)"
-        [value]="bodyWeight"
+        [units]="assessment.entryUnits" [value]="bodyWeight"
         (valueChange)="setWeight($event)"></app-number-picker>
     </ion-list>
   </ng-container>

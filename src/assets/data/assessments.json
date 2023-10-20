@@ -277,7 +277,7 @@
       "label": "100 meter sprint",
       "icon": "/assets/images/100metersprint.png",
       "units": "Time",
-      "entryUnits": "seconds",
+      "entryUnits": "Secs",
       "description": "",
       "descriptionHide": "No starting blocks. No spikes.",
       "instruction": [
@@ -443,7 +443,7 @@
       "cid": "NEUR",
       "icon": "/assets/images/agility.png",
       "label": "Half Spider Web",
-      "units": "Seconds",
+      "units": "Secs",
       "entryUnits": "Seconds",
       "description": "Layout of Cones:\n - Home Cone: Center\n - West Cone: 13.5 ft to the left of Home Cone\n - East Cone: 13.5 ft to the right of Home Cone\n - Northwest Cone: 21 ft in front of West Cone\n - North Cone: 21 ft in front of Home Cone\n - Northeast Cone: 21 ft in front of East Cone",
       "instruction": [

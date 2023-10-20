@@ -1,10 +1,3 @@
-.score-form {
-  margin: 20px;
-  border-radius: 12pt;
-  ion-textarea {
-    --color: initial;
-  }
-}
 .rounded-tab {
   --background: transparent;
   // border: 1px solid var(--ion-color-primary);
@@ -15,8 +8,8 @@
     overflow: visible;
   }
   ion-input {
-    --background: white;
-    --border-radius: 5px;
+    --background: var(--ion-color-light);
+    --border-radius: 8px;
     text-align: center;
   }
 }
@@ -56,11 +49,11 @@ ion-grid {
 }
 ion-textarea.notes-textarea {
   --background: var(--ion-color-light);
-  --color: black;
+  --color: var(--ion-color-dark);
   --padding-end: 10px;
   --padding-start: 10px;
   --border-color: var(--ion-color-medium);
-  --border-radius: 10pt;
+  --border-radius: 8px;
   // border: 1px solid var(--ion-color-medium);
   // box-shadow: inset 1px 1px #373737;
   margin: 10px auto;

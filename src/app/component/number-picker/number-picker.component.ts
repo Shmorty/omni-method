@@ -67,7 +67,7 @@ export class NumberPickerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes", changes);
+    // console.log("changes", changes);
   }
 
   hapticsSelectionChanged = async () => {
