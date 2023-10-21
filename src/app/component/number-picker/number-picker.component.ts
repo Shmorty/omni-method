@@ -22,7 +22,7 @@ export class NumberPickerComponent implements OnInit, OnChanges {
   @Input() value: number;
   @Output() valueChange = new EventEmitter<number>;
   @ViewChild(CdkVirtualScrollViewport) viewPort: CdkVirtualScrollViewport;
-  range: number[] = [];
+  range: number[];
   public curIndex = 0;
   private startIndex = 0;
   private timeoutId = undefined;
@@ -39,10 +39,10 @@ export class NumberPickerComponent implements OnInit, OnChanges {
       console.log("reverse");
       this.range = this.range.reverse();
     }
-    console.log("ngOnInit value", this.value);
-    console.log("ngOnInit range", this.range);
+    // console.log("ngOnInit value", this.value);
+    // console.log("ngOnInit range", this.range);
     this.startIndex = this.range.indexOf(this.value);
-    console.log("ngOnInit startIndex", this.startIndex);
+    // console.log("ngOnInit startIndex", this.startIndex);
   }
 
   ngAfterViewInit(): void {
@@ -55,9 +55,11 @@ export class NumberPickerComponent implements OnInit, OnChanges {
         Haptics.selectionStart();
       }
       // console.log("indexChange scrollToIndex", index);
-      this.curIndex = index;
-      console.log("viewPort.scrolledIndexChange emit", this.range[index]);
-      this.valueChange.emit(this.range[index]);
+      if (this.curIndex != index) {
+        this.curIndex = index;
+        // console.log("viewPort.scrolledIndexChange emit", this.range[index]);
+        this.valueChange.emit(this.range[index]);
+      }
       this.timeoutId = setTimeout(() => {
         this.viewPort.scrollToIndex(index, 'smooth');
         this.timeoutId = undefined;
