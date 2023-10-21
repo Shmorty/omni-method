@@ -36,9 +36,13 @@ export class NumberPickerComponent implements OnInit, OnChanges {
       {length: len},
       (_, index) => this.min + index * this.increment);
     if (this.direction == -1) {
+      console.log("reverse");
       this.range = this.range.reverse();
     }
+    console.log("ngOnInit value", this.value);
+    console.log("ngOnInit range", this.range);
     this.startIndex = this.range.indexOf(this.value);
+    console.log("ngOnInit startIndex", this.startIndex);
   }
 
   ngAfterViewInit(): void {
@@ -52,8 +56,7 @@ export class NumberPickerComponent implements OnInit, OnChanges {
       }
       // console.log("indexChange scrollToIndex", index);
       this.curIndex = index;
-      // this.viewPort.scrollToIndex(index);
-      // console.log("emit", this.range[index]);
+      console.log("viewPort.scrolledIndexChange emit", this.range[index]);
       this.valueChange.emit(this.range[index]);
       this.timeoutId = setTimeout(() => {
         this.viewPort.scrollToIndex(index, 'smooth');
@@ -67,7 +70,11 @@ export class NumberPickerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // console.log("changes", changes);
+    console.log("changes", changes);
+    // if (!changes.value.firstChange) {
+    //   console.log("ngOnChanges emit", changes.value.currentValue);
+    //   this.valueChange.emit(changes.value.currentValue);
+    // }
   }
 
   hapticsSelectionChanged = async () => {

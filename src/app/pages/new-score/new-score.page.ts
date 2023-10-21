@@ -43,6 +43,9 @@ export class NewScorePage implements OnInit {
       .subscribe((value) => {
         this.user = value;
         this.bodyWeight = this.user.weight;
+        if (this.newScore) {
+          this.newScore.currentWeight = this.bodyWeight;
+        }
       })
       .unsubscribe();
 
