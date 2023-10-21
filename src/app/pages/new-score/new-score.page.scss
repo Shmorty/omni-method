@@ -29,6 +29,7 @@
 }
 ion-content {
   --background: linear-gradient(var(--ion-color-tertiary), var(--ion-color-light));
+  --overflow: hidden;
 }
 ion-segment {
   margin-top: 26px;

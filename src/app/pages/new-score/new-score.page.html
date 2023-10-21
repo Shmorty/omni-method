@@ -54,7 +54,7 @@
             min="{{assessment.min}}"
             max="{{assessment.max}}"
             inputmode="{{inputMode(assessment)}}"
-            value="{{newScore.rawScore}}"
+            value="{{newScore.rawScore | number: '1.0-3'}}"
           ></ion-input>
         </div>
       </ion-col>
