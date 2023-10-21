@@ -82,9 +82,8 @@
         (valueChange)="setScore($event)"></app-number-picker>
     </ion-list>
     <ion-list *ngSwitchCase="'bodyWeight'" style="background-color: transparent;">
-      <app-number-picker [min]="assessment.min" [max]="assessment.max"
-        [increment]="(assessment.increment ? assessment.increment : 1)"
-        [units]="assessment.entryUnits" [value]="bodyWeight"
+      <app-number-picker [min]="65" [max]="325"
+        [units]="'lbs'" [value]="newScore.currentWeight"
         (valueChange)="setWeight($event)"></app-number-picker>
     </ion-list>
   </ng-container>

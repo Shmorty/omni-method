@@ -74,6 +74,7 @@ export class NewScorePage implements OnInit {
   }
 
   setWeight(val) {
+    console.log("setWeight", val);
     this.newScore.currentWeight = val;
   }
 
