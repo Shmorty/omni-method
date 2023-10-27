@@ -68,11 +68,15 @@
         </div>
       </ion-col>
     </ion-row>
-
   </ion-grid>
+
   <ng-container [ngSwitch]="activeField">
-    <ion-list *ngSwitchCase="'scoreDate'" style="background-color: transparent;">
-      <ion-datetime [(ngModel)]="newScore.scoreDate" class="date-picker" presentation="date" [preferWheel]="true"></ion-datetime>
+    <!-- <ion-list *ngSwitchCase="'scoreDate'" style="background-color: transparent;"> -->
+    <ion-list [hidden]="activeField !== 'scoreDate'" style="background-color: transparent;">
+        <ion-datetime [(ngModel)]="newScore.scoreDate"
+        class="date-picker"
+        presentation="date"
+        [preferWheel]="true"></ion-datetime>
     </ion-list>
     <ion-list *ngSwitchCase="'score'" style="background-color: transparent;">
       <app-number-picker [min]="assessment.min" [max]="assessment.max"
