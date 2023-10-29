@@ -133,7 +133,7 @@ export class ProfilePage implements OnInit {
     return age;
   }
 
-  async openNewScore(e, assessment, user) {
+  async openNewScore(e, assessment, user, curScore) {
     e.stopPropagation();
     if (assessment.checklist) {
       return this.openDetails(assessment);
@@ -143,6 +143,7 @@ export class ProfilePage implements OnInit {
       componentProps: {
         assessment: assessment,
         user: user,
+        curScore: curScore,
       },
       cssClass: 'new-score-modal',
       // presentingElement: document.querySelector('ion-router-outlet'),

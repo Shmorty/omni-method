@@ -18,6 +18,7 @@ import {EditPropertyComponent} from 'src/app/component/edit-property/edit-proper
 export class NewScorePage implements OnInit {
   activeField: string = 'score';
   @Input() assessment: Assessment;
+  @Input() curScore: Score;
   public newScore: Score;
   // @ViewChild('rawScore') scoreInput;
   // formData: FormGroup;
@@ -48,11 +49,13 @@ export class NewScorePage implements OnInit {
       })
       .unsubscribe();
 
+    console.log("prevScore", this.curScore.rawScore);
+
     this.newScore = {
       aid: this.assessment.aid,
       uid: this.user.id,
       cid: this.assessment.cid,
-      rawScore: 0,
+      rawScore: this.curScore?.rawScore,
       scoreDate: today,
       currentWeight: this.bodyWeight,
       expired: false,

@@ -101,6 +101,7 @@ export class AssessmentDetailPage implements OnInit {
       component: NewScorePage,
       componentProps: {
         assessment: assessment,
+        curScore: this.curScore,
       },
       cssClass: 'new-score-modal',
       // presentingElement: document.querySelector('ion-router-outlet'),
