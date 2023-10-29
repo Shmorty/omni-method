@@ -1,4 +1,6 @@
-<cdk-virtual-scroll-viewport itemSize="{{rowHeight}}"  class="picker ion-content-scroll-host">
+<cdk-virtual-scroll-viewport
+  itemSize="{{rowHeight}}"
+  class="picker ion-content-scroll-host">
   <div class="picker-opt"></div>
   <div class="picker-opt"></div>
   <div *cdkVirtualFor="let value of range;index as i" class="picker-opt"

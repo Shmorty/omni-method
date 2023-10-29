@@ -78,14 +78,16 @@
         presentation="date"
         [preferWheel]="true"></ion-datetime>
     </ion-list>
-    <ion-list *ngSwitchCase="'score'" style="background-color: transparent;">
+    <!-- <ion-list *ngSwitchCase="'score'" style="background-color: transparent;"> -->
+    <ion-list [hidden]="activeField !== 'score'" style="background-color: transparent;">
       <app-number-picker [min]="assessment.min" [max]="assessment.max"
         [increment]="(assessment.increment ? assessment.increment : 1)"
         [units]="assessment.entryUnits" [direction]="direction(assessment)"
         [value]="newScore.rawScore"
         (valueChange)="setScore($event)"></app-number-picker>
     </ion-list>
-    <ion-list *ngSwitchCase="'bodyWeight'" style="background-color: transparent;">
+    <!-- <ion-list *ngSwitchCase="'bodyWeight'" style="background-color: transparent;"> -->
+    <ion-list [hidden]="activeField !== 'bodyWeight'" style="background-color: transparent;">
       <app-number-picker [min]="65" [max]="325"
         [units]="'lbs'" [value]="newScore.currentWeight"
         (valueChange)="setWeight($event)"></app-number-picker>
@@ -107,7 +109,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-toolbar color="deffault">
+    <ion-toolbar color="default">
       <ion-button type="submit" color="primary" shape="round" expand="block" (click)="onSubmit()">
         Submit
       </ion-button>

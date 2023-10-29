@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 // import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
 import {User} from '../../store/user/user.model';
@@ -35,9 +35,8 @@ export class NewScorePage implements OnInit {
 
   ngOnInit() {
     console.log("newScore ngOnInit");
-    // prefill date
-    var today = new Date().toLocaleDateString();
-    // var today = new Date();
+    // prefill with local date in iso format 
+    var today = new Date().toLocaleString('sv').replace(' ', 'T');
 
     this.user$
       .subscribe((value) => {
@@ -60,11 +59,22 @@ export class NewScorePage implements OnInit {
       notes: '',
     };
 
-    console.log("ngInit", this.newScore);
+    console.log("ngOnInit", this.newScore);
     // console.log("ngOnInit scoreInput", this.scoreInput);
   }
 
+  @HostListener('document:visibilitychange', ['$event'])
+  visibilitychange() {
+    console.log("visibilitychange");
+    if (document.hidden) {
+      console.log("hidden");
+    } else {
+      console.log("visible");
+    }
+  }
+
   activate(tab: string) {
+    console.log("activate", tab);
     this.activeField = tab;
   }
 
