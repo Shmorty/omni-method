@@ -54,7 +54,7 @@
                   class="score"
                   ngClass="{{scoreClass(score.scoreDate)}}"
                   slot="end"
-                  (click)="openNewScore($event, assessment, user)"
+                  (click)="openNewScore($event, assessment, user, score)"
                   >{{score.rawScore || 0}}</ion-badge
                 >
               </span>
@@ -62,7 +62,7 @@
                 <ion-badge
                   class="score"
                   slot="end"
-                  (click)="openNewScore($event, assessment, user)"
+                  (click)="openNewScore($event, assessment, user, 0)"
                   >0</ion-badge
                 >
               </ng-template>

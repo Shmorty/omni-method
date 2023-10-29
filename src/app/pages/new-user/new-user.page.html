@@ -6,7 +6,7 @@
         <ion-progress-bar class="progress" [value]="step / 5"></ion-progress-bar>
         <div *ngIf="step == 1">
           <div class="ion-text-center">
-            <ion-text color="default">
+            <ion-text color="dark">
               <h1 class="center">Create Account</h1>
             </ion-text>
           </div>
@@ -15,6 +15,7 @@
             <ion-input
               formControlName="firstName"
               placeholder="First"
+              [maxlength]="30"
             ></ion-input>
           </ion-item>
           <div
@@ -28,6 +29,7 @@
             <ion-input
               formControlName="lastName"
               placeholder="Last"
+              [maxlength]="30"
             ></ion-input>
           </ion-item>
           <div
@@ -41,12 +43,13 @@
             <ion-input
               formControlName="nickname"
               placeholder="Display name"
+              [maxlength]="30"
             ></ion-input>
           </ion-item>
         </div>
         <div *ngIf="step == 2">
           <div class="ion-text-center">
-            <ion-text color="default">
+            <ion-text color="dark">
               <h1 class="center">What is your gender?</h1>
             </ion-text>
           </div>
@@ -65,7 +68,7 @@
         </div>
         <div *ngIf="step == 3">
           <div class="ion-text-center">
-            <ion-text color="default">
+            <ion-text color="dark">
               <h1 class="center">What is your date of birth?</h1>
             </ion-text>
           </div>
@@ -78,7 +81,7 @@
         </div>
         <div *ngIf="step == 4">
           <div class="ion-text-center">
-            <ion-text color="default">
+            <ion-text color="dark">
               <h1 class="center">What is your height?</h1>
             </ion-text>
           </div>
@@ -97,7 +100,7 @@
         </div>
         <div *ngIf="step == 5">
           <div class="ion-text-center">
-            <ion-text color="default">
+            <ion-text color="dark">
               <h1 class="center">What is your body weight?</h1>
             </ion-text>
           </div>

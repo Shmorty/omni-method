@@ -4,6 +4,10 @@ ion-button [expand=block]{
     position: fixed;
     width: 80%;
 }
+.date-picker {
+    margin: auto;
+    min-width: unset;
+}
 :host {
     --padding-end: var(--padding-start);
 }

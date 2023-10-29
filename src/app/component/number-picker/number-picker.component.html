@@ -1,27 +1,22 @@
-<div class="highlight">
-  <span class="units current" slot="right">
-    {{units}}
-  </span>
-</div>
-<cdk-virtual-scroll-viewport itemSize="42"  class="picker">
-  <div class="spacer"></div>
+<cdk-virtual-scroll-viewport
+  itemSize="{{rowHeight}}"
+  class="picker ion-content-scroll-host">
+  <div class="picker-opt"></div>
+  <div class="picker-opt"></div>
   <div *cdkVirtualFor="let value of range;index as i" class="picker-opt"
     [ngClass]="curClass(i)"
     (click)="click(i)">
     {{value | number: '1.0-3'}}
   </div>
-  <div class="spacer"></div>
+  <div class="picker-opt"></div>
+  <div class="picker-opt"></div>
 </cdk-virtual-scroll-viewport>
-<!-- <div class="listbox-container">
-  <ul cdkListbox class="listbox">
-    <li *ngFor="let value of range" class="option">
-      {{value}}
-    </li>
-  </ul>
-</div> -->
-
-<!-- <mat-form-field>
-  <mat-select>
-    <mat-option *ngFor="let value of range" [value]="value">{{value}}</mat-option>
-  </mat-select>
-</mat-form-field> -->
+<div style="height: 0;">
+  <div class="highlight-above"></div>
+  <div class="highlight">
+    <span class="units current" slot="right">
+      {{units}}
+    </span>
+  </div>
+  <div class="highlight-below"></div>
+</div>

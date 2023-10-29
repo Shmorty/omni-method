@@ -15,17 +15,17 @@
 
   <ng-container *ngFor="let assessment of assessments$ | async; index as i">
     <div id="{{assessment.aid}}" *ngIf="step == i">
-      <ion-item color="default">
+      <ion-item color="default" lines="none">
         <ion-text class="ion-text-center prompt">{{assessment.onboarding.prompt}}</ion-text>
         <ion-icon slot="end" name="information-circle-outline" size="large" color="primary"
         (click)="openInfo(assessment)"></ion-icon>
       </ion-item>
-      <div *ngIf="!assessment.checklist">
+      <ion-list *ngIf="!assessment.checklist">
         <app-number-picker [min]="assessment.min" [max]="assessment.max"
           [increment]="(assessment.increment ? assessment.increment : 1)"
           [units]="assessment.entryUnits" [direction]="direction(assessment)"
           (value)="newValue($event)"></app-number-picker>
-      </div>
+      </ion-list>
       <div *ngIf="assessment.checklist">
         <app-edit-checklist [assessment]="assessment" [scores$]="scores$"
         (checked)="updateChecked($event)"

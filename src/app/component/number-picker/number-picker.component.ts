@@ -1,7 +1,8 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {CdkVirtualScrollViewport, ScrollDispatcher, ScrollingModule} from '@angular/cdk/scrolling';
 import {CommonModule} from '@angular/common';
 import {IonicModule} from '@ionic/angular';
+import {Haptics} from '@capacitor/haptics';
 
 @Component({
   selector: 'app-number-picker',
@@ -11,16 +12,17 @@ import {IonicModule} from '@ionic/angular';
   standalone: true,
   imports: [ScrollingModule, CommonModule, IonicModule],
 })
-export class NumberPickerComponent implements OnInit {
+export class NumberPickerComponent implements OnInit, OnChanges {
   @Input() min = 0;
   @Input() max = 100;
   @Input() increment = 1;
   @Input() units = "";
   @Input() direction = 1;
+  @Input() rowHeight = 34;
   @Input() value: number;
   @Output() valueChange = new EventEmitter<number>;
   @ViewChild(CdkVirtualScrollViewport) viewPort: CdkVirtualScrollViewport;
-  range: number[] = [];
+  range: number[];
   public curIndex = 0;
   private startIndex = 0;
   private timeoutId = undefined;
@@ -34,20 +36,30 @@ export class NumberPickerComponent implements OnInit {
       {length: len},
       (_, index) => this.min + index * this.increment);
     if (this.direction == -1) {
+      console.log("reverse");
       this.range = this.range.reverse();
     }
+    // console.log("ngOnInit value", this.value);
+    // console.log("ngOnInit range", this.range);
     this.startIndex = this.range.indexOf(this.value);
+    console.log("ngOnInit startIndex", this.startIndex);
   }
 
   ngAfterViewInit(): void {
+    console.log("NumberPickerComponent ngAfterViewInit");
     this.viewPort.scrolledIndexChange.subscribe(index => {
+      // console.log("scrolledIndexChange", index);
+      this.hapticsSelectionChanged();
       if (typeof this.timeoutId == "number") {
         clearTimeout(this.timeoutId);
+        Haptics.selectionStart();
       }
       // console.log("indexChange scrollToIndex", index);
-      this.curIndex = index;
-      // this.viewPort.scrollToIndex(index);
-      this.valueChange.emit(this.range[index]);
+      if (this.curIndex !== index) {
+        this.curIndex = index;
+        // console.log("viewPort.scrolledIndexChange emit", this.range[index]);
+        this.valueChange.emit(this.range[index]);
+      }
       this.timeoutId = setTimeout(() => {
         this.viewPort.scrollToIndex(index, 'smooth');
         this.timeoutId = undefined;
@@ -55,9 +67,27 @@ export class NumberPickerComponent implements OnInit {
     });
     // set initial value
     setTimeout(() => {
+      var currentRange = this.viewPort.getRenderedRange();
+      console.log("currentRange", currentRange);
+      this.viewPort.checkViewportSize();
+      console.log("scrollTo startIndex", this.startIndex);
       this.viewPort.scrollToIndex(this.startIndex);
+      currentRange = this.viewPort.getRenderedRange();
+      console.log("currentRange", currentRange);
     }, 200);
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("changes", changes);
+    // if (!changes.value.firstChange) {
+    //   console.log("ngOnChanges emit", changes.value.currentValue);
+    //   this.valueChange.emit(changes.value.currentValue);
+    // }
+  }
+
+  hapticsSelectionChanged = async () => {
+    await Haptics.selectionChanged();
+  };
 
   curClass(index) {
     if (index == this.curIndex) {

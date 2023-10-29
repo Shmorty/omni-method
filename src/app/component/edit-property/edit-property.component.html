@@ -25,6 +25,7 @@
       <ion-label position="fixed">First name</ion-label>
       <ion-input
         placeholder="First"
+        [maxlength]="30"
         [(ngModel)]="updUser.firstName"
       ></ion-input>
     </ion-item>
@@ -32,6 +33,7 @@
       <ion-label position="fixed">Last name</ion-label>
       <ion-input
         placeholder="Last"
+        [maxlength]="30"
         [(ngModel)]="updUser.lastName"
       ></ion-input>
     </ion-item>
@@ -50,7 +52,9 @@
 </ng-template>
 
 <ng-template #dob>
-  <ion-datetime [(ngModel)]="updUser.dob" presentation="date" [preferWheel]="true"></ion-datetime>
+  <ion-item lines="none">
+    <ion-datetime [(ngModel)]="updUser.dob" presentation="date" [preferWheel]="true" class="date-picker"></ion-datetime>
+  </ion-item>
 </ng-template>
 
 <ng-template #sex>
@@ -72,20 +76,6 @@
 
 <ng-template #height>
   <ion-item lines="none">
-    <!-- <ion-label position="fixed">Height</ion-label>
-    <fieldset [(ngModel)]="updUser.height">
-      <ion-item style="text-align: right">
-        <ion-input
-          [(ngModel)]="updUser.height.feet" 
-          placeholder="Feet"></ion-input>
-        <ion-label>'</ion-label>
-        <ion-input
-          [(ngModel)]="updUser.height.inches"
-          placeholder="Inches"
-        ></ion-input>
-        <ion-label>"</ion-label>
-      </ion-item>
-    </fieldset> -->
     <app-number-picker style="width: 50%;" [min]="3" [max]="7" [units]="'ft'"
     [(value)]="updUser.height.feet"></app-number-picker>
     <app-number-picker style="width: 50%;" [min]="0" [max]="11" [units]="'in'"

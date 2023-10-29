@@ -30,10 +30,6 @@
       <ion-label>Name</ion-label>
       <ion-text slot="end">{{user.firstName}}&nbsp;{{user.lastName}}</ion-text>
     </ion-item>
-    <!-- <ion-item button (click)="presentAlert()">
-      <ion-label>Display Alert</ion-label>
-      <ion-text slot="end">hello world</ion-text>
-    </ion-item> -->
     <ion-item button (click)="openModal('nickname')">
       <ion-label>Display Name</ion-label>
       <ion-text slot="end">{{user.nickname}}</ion-text>
@@ -72,7 +68,7 @@
     <ion-spinner color="primary"></ion-spinner>
   </ng-template>
 
-      <ion-modal trigger="open-modal" class="custom-popover" (willDismiss)="onWillDismiss($event)">
+      <!-- <ion-modal trigger="open-modal" class="custom-popover" (willDismiss)="onWillDismiss($event)">
         <ng-template>
           <ion-header>
             <ion-toolbar>
@@ -89,7 +85,7 @@
             <ion-button (click)="save()" expand="block">Save</ion-button>
           </ion-content>
         </ng-template>
-      </ion-modal>
+      </ion-modal> -->
     
     <!-- <ion-button color="warning" shape="round" expand="block"
       >Change Password</ion-button
