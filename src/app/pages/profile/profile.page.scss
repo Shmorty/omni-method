@@ -37,7 +37,7 @@ ion-refresher-content {
 }
 .score {
   color: white;
-  background-color: "primary";
+  background-color: var(--ion-color-primary);
   border-radius: 12px;
   float: right;
   font-size: larger;
@@ -48,13 +48,16 @@ ion-badge {
   float: right;
 }
 .caution {
-  background-color: #4d91ca;
+  background-color: var(--ion-color-caution);
+  color: white;
 }
 .warn {
-  background-color: #305b7e;
+  background-color: var(--ion-color-warn);
+  color: white;
 }
 .stale {
-  background-color: #ff3e3e;
+  background-color: var(--ion-color-stale);
+  color: white;
 }
 ion-thumbnail[slot="start"] {
   // default is 16px
