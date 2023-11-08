@@ -1,3 +1,9 @@
+ion-content {
+  --ion-background-color: linear-gradient(rgba(var(--ion-color-primary-rgb), 0.1), rgba(0, 0, 0, 0));
+  --padding-top: 32px;
+  color: var(--ion-text-color);
+}
+
 img.center {
   display: block;
   margin-left: auto;
@@ -11,3 +17,4 @@ hr {
   margin: 10px 0;
   width: 100%;
 }
+

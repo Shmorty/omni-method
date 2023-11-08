@@ -9,7 +9,7 @@ user-avatar {
   }
 }
 ion-content {
-  --background: linear-gradient(var(--ion-color-tertiary), var(--ion-color-light));
+  --background: var(--ion-background-color);
 }
 ion-list {
   --ion-item-background: transparent;
@@ -22,7 +22,7 @@ ion-datetime::part(wheel-item active) {
 }
 
 .custom-popover {
-  --ion-backdrop-color: #b8dfff;
+  --ion-backdrop-color: #ff0000;
   --ion-safe-area-top: 0;
   backdrop-filter: blur(12px);
   // &::part(backdrop) {
