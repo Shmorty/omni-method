@@ -14,7 +14,11 @@ $row-height: 34px;
     padding: 3px;
     scroll-snap-type: y mandatory;
     scroll-snap-align: center;
+    // scrollbar-width: none;
     width: 90%;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 .picker-opt {
     // background-color: var(--ion-color-light);
@@ -30,8 +34,8 @@ $row-height: 34px;
     height: 84px;
 }
 .highlight {
-    background-color: #4dabfc;
-    // background-color: rgba(var(--ion-color-light), 0.4);
+    // background-color: #4dabfc;
+    background-color: var(--ion-color-primary);
     border-radius: 8px;
     height: $row-height;
     margin: auto;
