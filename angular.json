@@ -31,7 +31,7 @@
               }
             ],
             "styles": [
-              "src/theme/variables.scss",
+              "src/theme/blue-theme.scss",
               "src/global.scss"
             ],
             "scripts": [],

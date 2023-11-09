@@ -1,3 +1,9 @@
+ion-content {
+  --ion-background-color: linear-gradient(rgba(var(--ion-color-primary-rgb), 0.1), rgba(0, 0, 0, 0));
+  --padding-top: 32px;
+  color: var(--ion-text-color);
+}
+
 .input-group {
   background: #fff;
   border-radius: 10px;

@@ -8,6 +8,7 @@ $row-height: 34px;
     border: 0px solid gray;
     border-radius: 8px;
     font-size: 22px;
+    color: var(--ion-color-primary-contrast);
     height: ($row-height * 5);
     margin: auto;
     overflow-y: scroll;
@@ -17,21 +18,22 @@ $row-height: 34px;
     width: 90%;
 }
 .picker-opt {
-    // background-color: var(--ion-color-light);
-    // margin: 1px;
+    color: var(--ion-text-color);
     height: $row-height;
     line-height: $row-height;
     text-align: center;
 }
-// .current {
-//     font-weight: bold;
-// }
+
+.current {
+    font-weight: bold;
+    color: var(--ion-color-primary-contrast);
+}
 .spacer {
     height: 84px;
 }
 .highlight {
-    background-color: #4dabfc;
-    // background-color: rgba(var(--ion-color-light), 0.4);
+    background-color: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);
     border-radius: 8px;
     height: $row-height;
     margin: auto;
@@ -44,7 +46,8 @@ $row-height: 34px;
 .highlight-above {
     // background: linear-gradient(to bottom, rgba(var(--wheel-fade-background-rgb, var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255))), 1) 20%, rgba(var(--wheel-fade-background-rgb, var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255))), 0.8) 100%);
     // background: linear-gradient(to bottom, rgba(var(--ion-color-primary-rgb), 1) 20%, rgba(var(--ion-color-primary-rgb), 0.4) 100%);
-    background: linear-gradient(to bottom, rgba(var(--ion-color-light-rgb), 0.95) 20%, rgba(var(--ion-color-light-rgb), 0.4) 100%);
+    background: linear-gradient(to bottom, var(--ion-background-color) 20%, transparent 100%);
+    // background: linear-gradient(to bottom, red 0%, transparent 100%);
     border-radius: 8px 8px 0 0;
     inset-inline-start: 0px;
     top: 0px;
@@ -58,7 +61,7 @@ $row-height: 34px;
 .highlight-below {
     // background: linear-gradient(to top, rgba(var(--wheel-fade-background-rgb, var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255))), 1) 20%, rgba(var(--wheel-fade-background-rgb, var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255))), 0.8) 100%);
     // background: linear-gradient(to top, rgba(var(--ion-color-primary-rgb), 1) 20%, rgba(var(--ion-color-primary-rgb), 0.4) 100%);
-    background: linear-gradient(to top, rgba(var(--ion-color-light-rgb), 0.95) 20%, rgba(var(--ion-color-light-rgb), 0.4) 100%);
+    background: linear-gradient(to top, var(--ion-background-color) 20%, transparent 100%);
     border-radius: 0 0 8px 8px;
     inset-inline-start: 0px;
     top: ($row-height * 3);

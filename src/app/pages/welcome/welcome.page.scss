@@ -1,7 +1,7 @@
 ion-content {
-  --ion-background-color:linear-gradient(rgba(19, 122, 173, 0.2), rgba(0, 0, 0, 0));
-  // --ion-text-color: white;
+  --ion-background-color: linear-gradient(rgba(var(--ion-color-primary-rgb), 0.1), rgba(0, 0, 0, 0));
   --padding-top: 32px;
+  color: var(--ion-text-color);
 }
 
 ion-button {
@@ -17,4 +17,5 @@ img.center {
   width: 20%;
   padding-top: 30px;
   padding-bottom: 30px;
+  filter: hue-rotate(var(--hue-rotation)) saturate(var(--saturate)) brightness(var(--brightness)) contrast(var(--contrast));
 }

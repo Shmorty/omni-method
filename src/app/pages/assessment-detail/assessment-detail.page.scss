@@ -21,10 +21,11 @@ ion-accordion-group > ion-accordion:last-of-type ion-item[slot="header"] {
 }
 .header-img::part(image) {
   border-radius: 20px;
-  border: 3px solid #8CA1B6;
+  border: 3px solid #abb7c4;
   background-image: linear-gradient(to bottom, rgba(229, 243, 255, 0), rgba(207, 233, 255, 1));
   margin:auto;
   width: 97%;
+  filter: hue-rotate(var(--hue-rotation)) saturate(var(--saturate)) brightness(var(--brightness)) contrast(var(--contrast));
 }
 .card {
   aspect-ratio: 1 / 1;

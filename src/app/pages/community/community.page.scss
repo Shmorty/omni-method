@@ -6,7 +6,7 @@ ion-toolbar {
 }
 ion-segment {
   // --background: #b8dfff;
-  --background: white;
+  --background: var(--ion-background-color);
   margin: auto;
     margin-top: 5px;
     width: 97%;
@@ -25,7 +25,7 @@ ion-segment {
   font-weight: 300;
 }
 .highlight {
-  // --background: #b8dfff;
-  --color: #b8dfff;
+  
+  --color: var(--ion-color-tertiary);
   // color: var(--ion-color-tertiary);
 }

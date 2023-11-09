@@ -3,7 +3,7 @@
     --background: transparent;
     --border-color: transparent;
     // --ion-item-background: transparent;
-    background: linear-gradient(#b8dfff, #5eb3f9);
+    background: linear-gradient(var(--ion-color-tertiary),var(--ion-color-secondary),var(--ion-color-primary));
     border: none;
     border-radius: 0 0 20px 20px;
     box-shadow: none;

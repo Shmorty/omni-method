@@ -89,7 +89,7 @@ export class ProfilePage implements OnInit {
     setTimeout(() => {
       // Any calls to load data go here
       event.target.complete();
-    }, 100);
+    }, 1000);
   }
 
   // getCategoryScore(category: Category) {
