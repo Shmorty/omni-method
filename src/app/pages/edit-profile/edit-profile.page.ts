@@ -130,6 +130,7 @@ export class EditProfilePage implements OnInit {
 
     if (role === 'save') {
       console.log("openModal.save updateUser", data);
+      this.user = data;
       this.userService.updateUser(data);
     }
   }
