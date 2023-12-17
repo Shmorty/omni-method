@@ -31,10 +31,12 @@ export class NumberPickerComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     const len = (this.max - this.min) / this.increment + 1;
-    console.log("len", len);
+    // force integer math avoid floating point issues
+    const multiplier = 1 / this.increment;
+    console.log("increment", this.increment, "multiplier", multiplier, "len", len);
     this.range = Array.from(
       {length: len},
-      (_, index) => this.min + index * this.increment);
+      (_, index) => (this.min + index * multiplier * this.increment) / multiplier);
     if (this.direction == -1) {
       console.log("reverse");
       this.range = this.range.reverse();
