@@ -15,7 +15,10 @@
     "cap-run": "ionic capacitor run",
     "cap-sync": "ionic capacitor sync",
     "cap-open": "ionic capacitor open",
-    "live-reload-ios": "ionic capacitor run ios -l --external"
+    "live-reload-ios": "ionic capacitor run ios -l --external",
+    "deploy": "npm run build && firebase use dev && firebase deploy",
+    "deploy:prod": "ng build --prod && firebase use prod && firebase deploy",
+    "build:prod": "ionic capacitor build --prod"
   },
   "private": true,
   "dependencies": {

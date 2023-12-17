@@ -9,6 +9,8 @@
     }
   },
   "projects": {
-    "default": "omni-login-63e9f"
+    "default": "omni-login-63e9f",
+    "dev": "omni-login-63e9f",
+    "prod": "omni-method"
   }
 }
