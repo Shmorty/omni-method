@@ -30,6 +30,11 @@ def capacitor_pods
   pod 'CapacitorTextZoom', :path => '../../node_modules/@capacitor/text-zoom'
 end
 
+target 'AppDev' do
+  capacitor_pods
+  # Add your Pods here
+end
+
 target 'App' do
   capacitor_pods
   # Add your Pods here
