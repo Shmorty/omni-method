@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DA674AD52B30AB0E00A397A1"
+               BuildableName = "OmniMethod.app"
+               BlueprintName = "OmniMethod"
+               ReferencedContainer = "container:App.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "504EC3031FED79650016851F"
-               BuildableName = "AppDev.app"
-               BlueprintName = "AppDev"
+               BuildableName = "OmniMethodDev.app"
+               BlueprintName = "OmniMethodDev"
                ReferencedContainer = "container:App.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -43,21 +57,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DA674AD52B30AB0E00A397A1"
-            BuildableName = "App.app"
-            BlueprintName = "App"
+            BlueprintIdentifier = "504EC3031FED79650016851F"
+            BuildableName = "OmniMethodDev.app"
+            BlueprintName = "OmniMethodDev"
             ReferencedContainer = "container:App.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "504EC3031FED79650016851F"
-            BuildableName = "AppDev.app"
-            BlueprintName = "AppDev"
-            ReferencedContainer = "container:App.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -69,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DA674AD52B30AB0E00A397A1"
-            BuildableName = "App.app"
-            BlueprintName = "App"
+            BlueprintIdentifier = "504EC3031FED79650016851F"
+            BuildableName = "OmniMethodDev.app"
+            BlueprintName = "OmniMethodDev"
             ReferencedContainer = "container:App.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

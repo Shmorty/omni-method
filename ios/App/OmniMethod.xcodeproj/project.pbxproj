@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,8 +26,6 @@
 		DA674AE22B30AB0E00A397A1 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2FAD9762203C412B000D30F8 /* config.xml */; };
 		DA674AE32B30AB0E00A397A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA7E69B12A0A75610032C51F /* GoogleService-Info.plist */; };
 		DA7E69B22A0A75620032C51F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA7E69B12A0A75610032C51F /* GoogleService-Info.plist */; };
-		DAA2F8FD2B30BFC2004AA438 /* AppDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAA2F8FC2B30BFC2004AA438 /* AppDev-Info.plist */; };
-		DAA2F8FE2B30BFC2004AA438 /* AppDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAA2F8FC2B30BFC2004AA438 /* AppDev-Info.plist */; };
 		DACDF59B29C795AD0009AFA7 /* NoBounce.m in Sources */ = {isa = PBXBuildFile; fileRef = DACDF59A29C795AD0009AFA7 /* NoBounce.m */; };
 		FC8ED05168887195A4DD6EDD /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE8D30C096EFE28CF04AFE6 /* Pods_App.framework */; };
 /* End PBXBuildFile section */
@@ -35,7 +33,7 @@
 /* Begin PBXFileReference section */
 		2FAD9762203C412B000D30F8 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
 		50379B222058CBB4000EE86E /* capacitor.config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = capacitor.config.json; sourceTree = "<group>"; };
-		504EC3041FED79650016851F /* AppDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		504EC3041FED79650016851F /* OmniMethodDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmniMethodDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504EC3071FED79650016851F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		504EC30C1FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		504EC30E1FED79650016851F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,7 +47,7 @@
 		BB08E94CA6E7188A1E706D29 /* Pods-App Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-App Dev/Pods-App Dev.release.xcconfig"; sourceTree = "<group>"; };
 		C4D43381D8EE81590400AFA6 /* Pods-AppDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppDev.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppDev/Pods-AppDev.release.xcconfig"; sourceTree = "<group>"; };
 		C963488F032B7C651E8B6AEB /* Pods-App Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App Dev/Pods-App Dev.debug.xcconfig"; sourceTree = "<group>"; };
-		DA674AE82B30AB0E00A397A1 /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA674AE82B30AB0E00A397A1 /* OmniMethod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmniMethod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA7E69B12A0A75610032C51F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DAA2F8FC2B30BFC2004AA438 /* AppDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppDev-Info.plist"; sourceTree = "<group>"; };
 		DACDF59929C795AD0009AFA7 /* App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "App-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -100,8 +98,8 @@
 		504EC3051FED79650016851F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				504EC3041FED79650016851F /* AppDev.app */,
-				DA674AE82B30AB0E00A397A1 /* App.app */,
+				504EC3041FED79650016851F /* OmniMethodDev.app */,
+				DA674AE82B30AB0E00A397A1 /* OmniMethod.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,9 +139,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		504EC3031FED79650016851F /* AppDev */ = {
+		504EC3031FED79650016851F /* OmniMethodDev */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 504EC3161FED79650016851F /* Build configuration list for PBXNativeTarget "AppDev" */;
+			buildConfigurationList = 504EC3161FED79650016851F /* Build configuration list for PBXNativeTarget "OmniMethodDev" */;
 			buildPhases = (
 				6634F4EFEBD30273BCE97C65 /* [CP] Check Pods Manifest.lock */,
 				504EC3001FED79650016851F /* Sources */,
@@ -155,14 +153,14 @@
 			);
 			dependencies = (
 			);
-			name = AppDev;
+			name = OmniMethodDev;
 			productName = App;
-			productReference = 504EC3041FED79650016851F /* AppDev.app */;
+			productReference = 504EC3041FED79650016851F /* OmniMethodDev.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DA674AD52B30AB0E00A397A1 /* App */ = {
+		DA674AD52B30AB0E00A397A1 /* OmniMethod */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA674AE52B30AB0E00A397A1 /* Build configuration list for PBXNativeTarget "App" */;
+			buildConfigurationList = DA674AE52B30AB0E00A397A1 /* Build configuration list for PBXNativeTarget "OmniMethod" */;
 			buildPhases = (
 				DA674AD62B30AB0E00A397A1 /* [CP] Check Pods Manifest.lock */,
 				DA674AD72B30AB0E00A397A1 /* Sources */,
@@ -174,9 +172,9 @@
 			);
 			dependencies = (
 			);
-			name = App;
+			name = OmniMethod;
 			productName = App;
-			productReference = DA674AE82B30AB0E00A397A1 /* App.app */;
+			productReference = DA674AE82B30AB0E00A397A1 /* OmniMethod.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -185,8 +183,10 @@
 		504EC2FC1FED79650016851F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 920;
-				LastUpgradeCheck = 920;
+				LastUpgradeCheck = 1430;
+				ORGANIZATIONNAME = "Omni Method LLC";
 				TargetAttributes = {
 					504EC3031FED79650016851F = {
 						CreatedOnToolsVersion = 9.2;
@@ -198,7 +198,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 504EC2FF1FED79650016851F /* Build configuration list for PBXProject "App" */;
+			buildConfigurationList = 504EC2FF1FED79650016851F /* Build configuration list for PBXProject "OmniMethod" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -211,8 +211,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				504EC3031FED79650016851F /* AppDev */,
-				DA674AD52B30AB0E00A397A1 /* App */,
+				504EC3031FED79650016851F /* OmniMethodDev */,
+				DA674AD52B30AB0E00A397A1 /* OmniMethod */,
 			);
 		};
 /* End PBXProject section */
@@ -226,7 +226,6 @@
 				50B271D11FEDC1A000F3C39B /* public in Resources */,
 				504EC30F1FED79650016851F /* Assets.xcassets in Resources */,
 				50379B232058CBB4000EE86E /* capacitor.config.json in Resources */,
-				DAA2F8FD2B30BFC2004AA438 /* AppDev-Info.plist in Resources */,
 				504EC30D1FED79650016851F /* Main.storyboard in Resources */,
 				2FAD9763203C412B000D30F8 /* config.xml in Resources */,
 				DA7E69B22A0A75620032C51F /* GoogleService-Info.plist in Resources */,
@@ -241,7 +240,6 @@
 				DA674ADE2B30AB0E00A397A1 /* public in Resources */,
 				DA674ADF2B30AB0E00A397A1 /* Assets.xcassets in Resources */,
 				DA674AE02B30AB0E00A397A1 /* capacitor.config.json in Resources */,
-				DAA2F8FE2B30BFC2004AA438 /* AppDev-Info.plist in Resources */,
 				DA674AE12B30AB0E00A397A1 /* Main.storyboard in Resources */,
 				DA674AE22B30AB0E00A397A1 /* config.xml in Resources */,
 				DA674AE32B30AB0E00A397A1 /* GoogleService-Info.plist in Resources */,
@@ -374,6 +372,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -381,8 +380,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -431,6 +432,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -438,8 +440,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -462,7 +466,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -478,7 +483,10 @@
 				INFOPLIST_FILE = "App/AppDev-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Omni Dev";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.shmorty.omni-method.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -504,7 +512,10 @@
 				INFOPLIST_FILE = "App/AppDev-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Omni Dev";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.shmorty.omni-method.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -528,7 +539,10 @@
 				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Omni Method";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
 				PRODUCT_BUNDLE_IDENTIFIER = app.omnimethod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -554,7 +568,10 @@
 				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Omni Method";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = app.omnimethod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -570,7 +587,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		504EC2FF1FED79650016851F /* Build configuration list for PBXProject "App" */ = {
+		504EC2FF1FED79650016851F /* Build configuration list for PBXProject "OmniMethod" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				504EC3141FED79650016851F /* Debug */,
@@ -579,7 +596,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		504EC3161FED79650016851F /* Build configuration list for PBXNativeTarget "AppDev" */ = {
+		504EC3161FED79650016851F /* Build configuration list for PBXNativeTarget "OmniMethodDev" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				504EC3171FED79650016851F /* Debug */,
@@ -588,7 +605,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA674AE52B30AB0E00A397A1 /* Build configuration list for PBXNativeTarget "App" */ = {
+		DA674AE52B30AB0E00A397A1 /* Build configuration list for PBXNativeTarget "OmniMethod" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA674AE62B30AB0E00A397A1 /* Debug */,
