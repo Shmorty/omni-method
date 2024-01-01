@@ -23,22 +23,24 @@
       <ion-col>
         <form>
           <ion-item>
-            <ion-label position="floating">Email</ion-label>
             <ion-input
               [(ngModel)]="email"
               [ngModelOptions]="{standalone: true}"
               type="email"
               required
+              labelPlacement="floating"
+              label="Email"
             ></ion-input>
           </ion-item>
           <ion-item lines="full">
-            <ion-label position="floating">Password</ion-label>
             <app-show-hide-password>
               <ion-input
                 [(ngModel)]="password"
                 [ngModelOptions]="{standalone: true}"
                 type="password"
                 required
+                labelPlacement="floating"
+                label="Password"
               ></ion-input>
             </app-show-hide-password>
           </ion-item>

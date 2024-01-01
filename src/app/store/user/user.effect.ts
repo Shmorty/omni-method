@@ -6,6 +6,7 @@ import {Store} from '@ngrx/store';
 import {EMPTY, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {UserFirestoreService} from 'src/app/services/user-firestore.service';
+import {AuthService} from 'src/app/services/auth.service';
 
 @Injectable()
 export class UserEffects {
@@ -13,7 +14,8 @@ export class UserEffects {
     private actions$: Actions,
     private firestoreService: UserFirestoreService,
     private store: Store,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   // UserActions.registerUserSuccess
@@ -234,6 +236,7 @@ export class UserEffects {
         switchMap((data) =>
           this.firestoreService.deleteUserFromDb(data.user).pipe(
             map(() => {
+              this.authService.deleteUser();
               this.store.dispatch(
                 UserActions.deleteUserSuccess({user: data.user})
               );

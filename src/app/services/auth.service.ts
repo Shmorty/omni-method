@@ -11,6 +11,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
+  deleteUser,
   sendPasswordResetEmail,
   signInWithPopup,
   GoogleAuthProvider,
@@ -137,6 +138,14 @@ export class AuthService {
         alert(err.message);
       }
     );
+  }
+
+  deleteUser() {
+    deleteUser(this.auth.currentUser).then(() => {
+      console.log('auth user deleted');
+    }).catch((error) => {
+      console.log('failed to delete auth user', error);
+    })
   }
 
   // email verification
