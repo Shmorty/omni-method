@@ -226,6 +226,24 @@ export class UserEffects {
     {dispatch: false}
   );
 
+  // UserActions.deleteAssessmentScore
+  deleteUserEffect$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UserActions.deleteUser),
+        switchMap((data) =>
+          this.firestoreService.deleteUserFromDb(data.user).pipe(
+            map(() => {
+              this.store.dispatch(
+                UserActions.deleteUserSuccess({user: data.user})
+              );
+            })
+          )
+        )
+      ),
+    {dispatch: false}
+  );
+
   // UserActions.loadUserScoresAction
   loadUserScores$ = createEffect(() =>
     this.actions$.pipe(

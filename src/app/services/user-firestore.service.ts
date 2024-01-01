@@ -151,4 +151,17 @@ export class UserFirestoreService {
     );
     return of(score);
   }
+
+  deleteUserFromDb(user: User) {
+    console.log('deleteUser', user);
+    deleteDoc(
+      doc(
+        this.firestore,
+        'user',
+        `${user.id}`,
+      )
+    );
+    return of(user);
+  }
+
 }

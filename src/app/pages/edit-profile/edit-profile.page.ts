@@ -27,6 +27,25 @@ export class EditProfilePage implements OnInit {
   // @ViewChild(IonModal) modal: IonModal;
   @Input() user: User;
   profileForm: FormGroup;
+  public deleteAccountButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        console.log('Delete account canceled');
+      },
+    },
+    {
+      text: 'Delete',
+      role: 'confirm',
+      handler: () => {
+        console.log('Delete account confirmed');
+        this.userService.deleteUser(this.user);
+        this.modalCtrl.dismiss(null, 'logout');
+        this.auth.logout();
+      },
+    },
+  ];
 
   // message =
   //   'This modal example uses triggers to automatically open a modal when the button is clicked.';
@@ -64,6 +83,24 @@ export class EditProfilePage implements OnInit {
       weight: new FormControl(this.user.weight),
     });
   }
+
+  deleteAccountResult(ev) {
+    console.log(`Dismissed with role: ${ev.detail.role}`);
+  }
+
+  // async deleteAccount() {
+  //   const alert = await this.alertController.create({
+  //     header: 'Delete Account Data',
+  //     subHeader: 'This action can not be undone.',
+  //     message: 'If you would like to permanently delete all your data tap "Delete" buttons, otherwise tap "Cancel".',
+  //     buttons: ['Cancel', 'Delete'],
+  //   });
+
+  //   await alert.present();
+  //   console.log("deleteAccount await alert returned");
+  //   this.modalCtrl.dismiss(null, 'logout');
+  //   // this.auth.logout();
+  // }
 
   logout() {
     this.modalCtrl.dismiss(null, 'logout');
