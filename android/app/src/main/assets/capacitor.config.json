@@ -1,6 +1,6 @@
 {
 	"ios": {
-		"scheme": "AppDev"
+		"scheme": "OmniMethodDev"
 	},
 	"appId": "com.shmorty.omni-method.app",
 	"appName": "omni-method",

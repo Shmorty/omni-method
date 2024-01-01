@@ -30,12 +30,12 @@ def capacitor_pods
   pod 'CapacitorTextZoom', :path => '../../node_modules/@capacitor/text-zoom'
 end
 
-target 'AppDev' do
+target 'OmniMethodDev' do
   capacitor_pods
   # Add your Pods here
 end
 
-target 'App' do
+target 'OmniMethod' do
   capacitor_pods
   # Add your Pods here
 end
