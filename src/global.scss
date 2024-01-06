@@ -96,8 +96,9 @@ ion-button[shape="circle"] {
 ion-datetime {
   // --background: rgba(var(--ion-color-primary-rgb), 0.4);
   // --background-rgb: 245, 235, 247;
-  --wheel-highlight-background: #4dabfc;
-  // --wheel-fade-background-rgb: var(--ion-color-primary-rgb);
+  --wheel-highlight-background: var(--ion-color-primary);
+  --wheel-fade-background-rgb: var(--ion-color-medium-contrast-rgb);
+  // --wheel-fade-background-rgb: red(var(--ion-item-background, #fff)), green(var(--ion-item-background, #fff)), blue(var(--ion-item-background, #fff));
 }
 
 // ion-datetime::part(wheel-item) {

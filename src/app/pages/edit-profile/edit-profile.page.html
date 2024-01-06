@@ -59,6 +59,10 @@
       <ion-label>Change Password</ion-label>
       <ion-text slot="end">******</ion-text>
     </ion-item>
+    <ion-item button (click)="deleteAccount()">
+      <ion-label>Delete Account</ion-label>
+      <ion-text slot="end"></ion-text>
+    </ion-item>
     <ion-item button (click)="logout()">
       <ion-label>Log Out</ion-label>
     </ion-item>
@@ -68,26 +72,12 @@
     <ion-spinner color="primary"></ion-spinner>
   </ng-template>
 
-      <!-- <ion-modal trigger="open-modal" class="custom-popover" (willDismiss)="onWillDismiss($event)">
-        <ng-template>
-          <ion-header>
-            <ion-toolbar>
-              <ion-buttons slot="end">
-                <ion-button (click)="cancel()">
-                  <ion-icon name="close-circle-outline"></ion-icon>
-                </ion-button>
-              </ion-buttons>
-              <ion-title>Date of birth</ion-title>
-            </ion-toolbar>
-          </ion-header>
-          <ion-content>
-            <ion-datetime formControlName="dob" presentation="date" [preferWheel]="true"></ion-datetime>
-            <ion-button (click)="save()" expand="block">Save</ion-button>
-          </ion-content>
-        </ng-template>
-      </ion-modal> -->
-    
-    <!-- <ion-button color="warning" shape="round" expand="block"
-      >Change Password</ion-button
-    > -->
+  <!-- <ion-alert
+    trigger="delete-account"
+    header="Delete Account"
+    subHeader="This action cannot be undone."
+    [buttons]="deleteAccountButtons"
+    (didDismiss)="deleteAccountResult($event)">
+  </ion-alert> -->
+
 </ion-content>

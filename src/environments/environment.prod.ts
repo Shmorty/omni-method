@@ -1,14 +1,15 @@
-import { UserService } from 'src/app/services/user/user.service';
+import {UserService} from 'src/app/services/user/user.service';
 // import { UserService as MockUserService } from "src/app/api/user/user.mock.service";
 
 export const environment = {
   firebase: {
-    projectId: 'omni-login-63e9f',
-    appId: '1:164197842062:web:46db489e022b2d686e5ddf',
-    storageBucket: 'omni-login-63e9f.appspot.com',
-    apiKey: 'AIzaSyAEY7uvt7JvWOtvxTP46sU1wZuZ7PfcWps',
-    authDomain: 'omni-login-63e9f.firebaseapp.com',
-    messagingSenderId: '164197842062',
+    projectId: "omni-method",
+    appId: "1:93730997469:web:ebe8daccb9dd7c6ae88734",
+    storageBucket: "omni-method.appspot.com",
+    apiKey: "AIzaSyCpMl6OQngvZmYTZW3MasJ4jbQvLJYGSNI",
+    authDomain: "omni-method.firebaseapp.com",
+    messagingSenderId: "93730997469",
+    measurementId: "G-G67RVQF0RX"
   },
   production: true,
   // providers: [{ provide: UserService, useClass: MockUserService }],

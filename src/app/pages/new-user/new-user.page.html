@@ -1,9 +1,17 @@
 <ion-content color="default">
   <ion-header class="ion-no-border safe-area"> </ion-header>
+ 
   <form [formGroup]="formData" (ngSubmit)="onSubmit()">
     <div>
       <ion-list>
-        <ion-progress-bar class="progress" [value]="step / 5"></ion-progress-bar>
+        <ion-item>
+          <!-- slot="start" fill="clear" -->
+          <ion-button type="button" shape="circle"
+            (click)="previous()" [disabled]="step == 1">
+            <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+          </ion-button>
+          <ion-progress-bar class="progress" [value]="step / 6"></ion-progress-bar>
+        </ion-item>
         <div *ngIf="step == 1">
           <div class="ion-text-center">
             <ion-text color="dark">
@@ -16,6 +24,7 @@
               formControlName="firstName"
               placeholder="First"
               [maxlength]="30"
+              aria-label="First Name"
             ></ion-input>
           </ion-item>
           <div
@@ -30,6 +39,7 @@
               formControlName="lastName"
               placeholder="Last"
               [maxlength]="30"
+              aria-label="Last Name"
             ></ion-input>
           </ion-item>
           <div
@@ -44,6 +54,7 @@
               formControlName="nickname"
               placeholder="Display name"
               [maxlength]="30"
+              aria-label="Nickname"
             ></ion-input>
           </ion-item>
         </div>
@@ -107,19 +118,35 @@
           <ion-item>
             <!-- <ion-label>Weight</ion-label> -->
             <ion-input
+              aria-label="body weight"
               formControlName="weight"
               placeholder="Weight"
             ></ion-input>
           </ion-item>
         </div>
+        <div *ngIf="step == 6">
+          <div class="ion-text-center">
+            <ion-text color="dark">
+              <h1 class="center">What is your fitness experience level?</h1>
+            </ion-text>
+          </div>
+          <ion-item>
+            <ion-radio-group
+              formControlName="fitnessLevel"
+              value="none">
+              <ion-radio value="none">No Experience</ion-radio>
+              <ion-radio value="beginner">Beginner</ion-radio>
+              <ion-radio value="intermediate">Intermediate</ion-radio>
+              <ion-radio value="advanced">Advanced</ion-radio>
+            </ion-radio-group>
+          </ion-item>
+        </div>
       </ion-list>
     </div>
-    <ion-button type="button" (click)="previous()" [disabled]="step == 1"
-      >Back</ion-button
-    >
-    <ion-button type="button" (click)="next()">Continue</ion-button>
-    <!-- <ion-button [disabled]="formData.invalid" type="submit">Submit</ion-button> -->
+    <!-- <ion-button type="button" (click)="previous()" [disabled]="step == 1"
+        >Back</ion-button> -->
 
-    <!-- <pre>{{formData.value | json}}</pre> -->
+      <!-- <pre>{{formData.value | json}}</pre> -->
   </form>
+  <ion-button class="continue-button" (click)="next()">Continue</ion-button>
 </ion-content>

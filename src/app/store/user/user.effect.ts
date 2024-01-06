@@ -6,6 +6,7 @@ import {Store} from '@ngrx/store';
 import {EMPTY, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {UserFirestoreService} from 'src/app/services/user-firestore.service';
+import {AuthService} from 'src/app/services/auth.service';
 
 @Injectable()
 export class UserEffects {
@@ -13,7 +14,8 @@ export class UserEffects {
     private actions$: Actions,
     private firestoreService: UserFirestoreService,
     private store: Store,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   // UserActions.registerUserSuccess
@@ -153,17 +155,18 @@ export class UserEffects {
           console.log("loadUserSuccess router.url", this.router.url);
           // user loaded test if exist
           if (data.payload) {
-            if (data.payload.omniScore) {
-              // go to home page
-              if (this.router.url !== "/onboarding") {
-                this.router.navigate(['home']);
-              }
-            } else {
-              if (this.router.url !== "/home/profile") {
-                // go to onboarding
-                this.router.navigate(['onboarding']);
-              }
-            }
+            this.router.navigate(['home']);
+            // if (data.payload.omniScore) {
+            //   // go to home page
+            //   if (this.router.url !== "/onboarding") {
+            //     this.router.navigate(['home']);
+            //   }
+            // } else {
+            //   if (this.router.url !== "/home/profile") {
+            //     // go to onboarding
+            //     this.router.navigate(['onboarding']);
+            //   }
+            // }
           } else {
             console.log('loadUserSuccess navigate new-user');
             this.router.navigate(['new-user']);
@@ -219,6 +222,25 @@ export class UserEffects {
                 UserActions.deleteAssessmentScoreSuccess({score: data.score})
               );
               // this.store.dispatch(OmniScoreActions.calculateOmniScore());
+            })
+          )
+        )
+      ),
+    {dispatch: false}
+  );
+
+  // UserActions.deleteAssessmentScore
+  deleteUserEffect$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UserActions.deleteUser),
+        switchMap((data) =>
+          this.firestoreService.deleteUserFromDb(data.user).pipe(
+            map(() => {
+              this.authService.deleteUser();
+              this.store.dispatch(
+                UserActions.deleteUserSuccess({user: data.user})
+              );
             })
           )
         )

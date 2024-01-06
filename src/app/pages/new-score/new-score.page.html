@@ -88,7 +88,7 @@
     </ion-list>
     <!-- <ion-list *ngSwitchCase="'bodyWeight'" style="background-color: transparent;"> -->
     <ion-list [hidden]="activeField !== 'bodyWeight'" style="background-color: transparent;">
-      <app-number-picker [min]="65" [max]="325"
+      <app-number-picker [min]="0" [max]="325"
         [units]="'lbs'" [value]="newScore.currentWeight"
         (valueChange)="setWeight($event)"></app-number-picker>
     </ion-list>

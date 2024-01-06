@@ -1,6 +1,9 @@
 import {CapacitorConfig} from '@capacitor/cli';
 
 const config: CapacitorConfig = {
+  ios: {
+    scheme: 'OmniMethodDev'
+  },
   appId: 'com.shmorty.omni-method.app',
   appName: 'omni-method',
   webDir: 'www',

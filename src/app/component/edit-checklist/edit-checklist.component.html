@@ -16,7 +16,7 @@
     class="card"
     (click)="toggleCheckItem(i)"
     [ngClass]="!(i%2) ? 'left' : 'right'">
-    <ion-label>{{item["label"]}}</ion-label>
+    <ion-label class="card-label">{{item["label"]}}</ion-label>
     <!-- <ion-img src="{{assessment.icon}}"></ion-img> -->
     <ion-checkbox [checked]="getCheckedItem(i)" labelPlacement="start">
     </ion-checkbox>
