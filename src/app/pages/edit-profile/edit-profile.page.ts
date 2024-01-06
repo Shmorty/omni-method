@@ -34,6 +34,9 @@ export class EditProfilePage implements OnInit {
       handler: () => {
         console.log('Delete account canceled');
       },
+      htmlAttributes: {
+        'aria-label': 'cancel',
+      }
     },
     {
       text: 'Delete',
@@ -44,6 +47,9 @@ export class EditProfilePage implements OnInit {
         this.modalCtrl.dismiss(null, 'logout');
         this.auth.logout();
       },
+      htmlAttributes: {
+        'aria-label': 'delete',
+      }
     },
   ];
 
@@ -88,19 +94,19 @@ export class EditProfilePage implements OnInit {
     console.log(`Dismissed with role: ${ev.detail.role}`);
   }
 
-  // async deleteAccount() {
-  //   const alert = await this.alertController.create({
-  //     header: 'Delete Account Data',
-  //     subHeader: 'This action can not be undone.',
-  //     message: 'If you would like to permanently delete all your data tap "Delete" buttons, otherwise tap "Cancel".',
-  //     buttons: ['Cancel', 'Delete'],
-  //   });
+  async deleteAccount() {
+    const alert = await this.alertController.create({
+      header: 'Delete Account Data',
+      subHeader: 'This action can not be undone.',
+      // message: 'If you would like to permanently delete all your data tap "Delete" buttons, otherwise tap "Cancel".',
+      buttons: this.deleteAccountButtons,
+    });
 
-  //   await alert.present();
-  //   console.log("deleteAccount await alert returned");
-  //   this.modalCtrl.dismiss(null, 'logout');
-  //   // this.auth.logout();
-  // }
+    await alert.present();
+    console.log("deleteAccount await alert returned");
+    // this.modalCtrl.dismiss(null, 'logout');
+    // this.auth.logout();
+  }
 
   logout() {
     this.modalCtrl.dismiss(null, 'logout');

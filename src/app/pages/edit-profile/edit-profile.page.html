@@ -59,7 +59,7 @@
       <ion-label>Change Password</ion-label>
       <ion-text slot="end">******</ion-text>
     </ion-item>
-    <ion-item button id="delete-account">
+    <ion-item button (click)="deleteAccount()">
       <ion-label>Delete Account</ion-label>
       <ion-text slot="end"></ion-text>
     </ion-item>
@@ -72,12 +72,12 @@
     <ion-spinner color="primary"></ion-spinner>
   </ng-template>
 
-  <ion-alert
-  trigger="delete-account"
-  header="Delete Account"
-  subHeader="This action cannot be undone."
-  [buttons]="deleteAccountButtons"
-  (didDismiss)="deleteAccountResult($event)">
-</ion-alert>
+  <!-- <ion-alert
+    trigger="delete-account"
+    header="Delete Account"
+    subHeader="This action cannot be undone."
+    [buttons]="deleteAccountButtons"
+    (didDismiss)="deleteAccountResult($event)">
+  </ion-alert> -->
 
 </ion-content>
