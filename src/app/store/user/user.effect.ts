@@ -155,17 +155,18 @@ export class UserEffects {
           console.log("loadUserSuccess router.url", this.router.url);
           // user loaded test if exist
           if (data.payload) {
-            if (data.payload.omniScore) {
-              // go to home page
-              if (this.router.url !== "/onboarding") {
-                this.router.navigate(['home']);
-              }
-            } else {
-              if (this.router.url !== "/home/profile") {
-                // go to onboarding
-                this.router.navigate(['onboarding']);
-              }
-            }
+            this.router.navigate(['home']);
+            // if (data.payload.omniScore) {
+            //   // go to home page
+            //   if (this.router.url !== "/onboarding") {
+            //     this.router.navigate(['home']);
+            //   }
+            // } else {
+            //   if (this.router.url !== "/home/profile") {
+            //     // go to onboarding
+            //     this.router.navigate(['onboarding']);
+            //   }
+            // }
           } else {
             console.log('loadUserSuccess navigate new-user');
             this.router.navigate(['new-user']);

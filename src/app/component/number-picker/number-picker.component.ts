@@ -30,14 +30,19 @@ export class NumberPickerComponent implements OnInit, OnChanges {
   constructor(private scrollDispatcher: ScrollDispatcher) {}
 
   ngOnInit() {
-    const len = (this.max - this.min) / this.increment + 1;
-    // force integer math avoid floating point issues
-    const reciprocal = 1 / this.increment;
-    console.log("increment", this.increment, "reciprocal", reciprocal, "len", len);
-    this.range = Array.from(
-      {length: len},
-      (_, index) => (this.min + index) / reciprocal);
-    //(this.min + index * multiplier * this.increment) / multiplier
+    /*
+        const len = (this.max - this.min) / this.increment + 1;
+        // force integer math avoid floating point issues
+        const reciprocal = 1 / this.increment;
+        console.log("number-picker increment", this.increment, "reciprocal", reciprocal, "len", len);
+        this.range = Array.from(
+          {length: len},
+          (_, index) => this.min + index * this.increment);
+        // (_, index) => (this.min + index) / reciprocal);
+        //(this.min + index * multiplier * this.increment) / multiplier
+    */
+    this.range = this.createRange();
+    console.log("number-picker range", this.range);
     if (this.direction == -1) {
       console.log("reverse");
       this.range = this.range.reverse();
@@ -68,7 +73,8 @@ export class NumberPickerComponent implements OnInit, OnChanges {
         this.timeoutId = undefined;
       }, 350);
     });
-    // set initial value
+
+    // set initial value after delay
     setTimeout(() => {
       var currentRange = this.viewPort.getRenderedRange();
       console.log("currentRange", currentRange);
@@ -78,6 +84,19 @@ export class NumberPickerComponent implements OnInit, OnChanges {
       currentRange = this.viewPort.getRenderedRange();
       console.log("currentRange", currentRange);
     }, 200);
+  }
+
+  private createRange(): number[] {
+    const len = (this.max - this.min) / this.increment + 1;
+    // force integer math avoid floating point issues
+    const reciprocal = 1 / this.increment;
+    console.log("number-picker increment", this.increment, "reciprocal", reciprocal, "len", len);
+
+    return Array.from(
+      {length: len},
+      (_, index) => this.min + index * this.increment);
+    // (_, index) => (this.min + index) / reciprocal);
+    //(this.min + index * multiplier * this.increment) / multiplier
   }
 
   ngOnChanges(changes: SimpleChanges): void {

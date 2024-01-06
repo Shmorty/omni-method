@@ -71,6 +71,7 @@ export class NewUserPage implements OnInit {
         Validators.min(50),
         Validators.max(500),
       ]),
+      fitnessLevel: new FormControl('none', Validators.required),
     });
   }
 
@@ -86,7 +87,8 @@ export class NewUserPage implements OnInit {
   }
 
   next() {
-    if (this.step < 5) {
+    console.log('next', this.formData.value);
+    if (this.step < 6) {
       this.step = this.step + 1;
     } else {
       this.onSubmit();
@@ -94,6 +96,7 @@ export class NewUserPage implements OnInit {
   }
 
   previous() {
+    console.log('previous', this.formData.value);
     this.step = this.step - 1;
   }
 
