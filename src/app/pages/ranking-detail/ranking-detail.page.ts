@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
-import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
+import {AssessmentService} from 'src/app/services/assessments/assessment.service';
 import {OmniScoreService} from 'src/app/services/omni-score.service';
 import {UserFirestoreService} from 'src/app/services/user-firestore.service';
 import {selectAllAssessments, selectAllCategories} from 'src/app/store/assessments/assessment.selector';
@@ -17,14 +17,16 @@ import {User} from 'src/app/store/user/user.model';
 export class RankingDetailPage implements OnInit {
   public athlete: User;
   public title: string;
-  public categories$ = this.store.select(selectAllCategories);
-  public assessments$ = this.store.select(selectAllAssessments);
+  public categories$ = this.assessmentService.getAllCategories();
+  public assessments$ = this.assessmentService.getAllAssessments();
   public scores$: Observable<Score[]>;
   public userScores: Score[];
 
-  constructor(private store: Store,
+  constructor(
+    private assessmentService: AssessmentService,
     private userFirestoreService: UserFirestoreService,
-    private modalCtrl: ModalController) {}
+    private modalCtrl: ModalController
+  ) {}
 
   async ngOnInit() {
     this.title = this.athlete.nickname ? this.athlete.nickname :
