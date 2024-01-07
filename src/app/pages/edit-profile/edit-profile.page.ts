@@ -9,7 +9,6 @@ import {
 import {Keyboard} from '@capacitor/keyboard';
 import {AlertController, IonModal, isPlatform, ModalController} from '@ionic/angular';
 import {OverlayEventDetail} from '@ionic/core/components';
-import {Store} from '@ngrx/store';
 import {delay} from 'rxjs';
 import {EditPropertyComponent} from 'src/app/component/edit-property/edit-property.component';
 import {AuthService} from 'src/app/services/auth.service';
@@ -45,7 +44,7 @@ export class EditProfilePage implements OnInit {
         console.log('Delete account confirmed');
         this.userService.deleteUser(this.user);
         this.modalCtrl.dismiss(null, 'logout');
-        this.auth.logout();
+        this.authService.logout();
       },
       htmlAttributes: {
         'aria-label': 'delete',
@@ -56,13 +55,12 @@ export class EditProfilePage implements OnInit {
   // message =
   //   'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string;
-  public user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
+  public user$ = this.userService.getUser(); // .pipe(delay(5000));
 
   constructor(
-    private store: Store,
     private modalCtrl: ModalController,
     public userService: UserService,
-    private auth: AuthService,
+    private authService: AuthService,
     public formBuilder: FormBuilder,
     private alertController: AlertController
   ) {}
@@ -110,7 +108,7 @@ export class EditProfilePage implements OnInit {
 
   logout() {
     this.modalCtrl.dismiss(null, 'logout');
-    this.auth.logout();
+    this.authService.logout();
   }
 
   submitForm() {
