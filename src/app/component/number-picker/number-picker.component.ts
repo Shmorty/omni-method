@@ -90,8 +90,18 @@ export class NumberPickerComponent implements OnInit, OnChanges {
     const len = (this.max - this.min) / this.increment + 1;
     // force integer math avoid floating point issues
     const reciprocal = 1 / this.increment;
-    console.log("number-picker increment", this.increment, "reciprocal", reciprocal, "len", len);
+    console.log("number-picker min", this.min, "max", this.max, "increment", this.increment, "reciprocal", reciprocal, "len", len);
 
+    if (reciprocal < 1) {
+      console.log("reciprocal less than one");
+    } else {
+      console.log("reciprocal greater than or equal to one");
+    }
+    if (this.increment < 1) {
+      console.log("increment less than one");
+    } else {
+      console.log("increment greater than or equal to one");
+    }
     return Array.from(
       {length: len},
       (_, index) => this.min + index * this.increment);

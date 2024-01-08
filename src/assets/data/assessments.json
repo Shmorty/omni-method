@@ -49,7 +49,7 @@
         "Lower the barbell to the ground in a safe and controlled manner"
       ],
       "min": 0,
-      "max": 939,
+      "max": 940,
       "increment": 5,
       "onboarding": {
         "prompt": "What is your maximum Deadlift for 1 repetition?"
@@ -411,7 +411,7 @@
       ],
       "min": 0,
       "max": 13.3,
-      "increment": 0.01,
+      "increment": 0.05,
       "onboarding": {
         "prompt": "How far can you run in 1 hour?"
       },
