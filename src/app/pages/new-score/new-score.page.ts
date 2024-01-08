@@ -100,7 +100,8 @@ export class NewScorePage implements OnInit {
   }
 
   direction(assessment: Assessment) {
-    const reverse = ["PSPR", "TWOMDST", "AGLTY"];
+    // const reverse = ["PSPR", "TWOMDST", "AGLTY"];
+    const reverse = ["PSPR", "AGLTY"];
     if (reverse.includes(assessment.aid)) {
       return -1;
     }
