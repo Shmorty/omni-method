@@ -11,6 +11,7 @@ def assertDeploymentTarget(installer)
   end
 end
 
+project './OmniMethod.xcodeproj'
 platform :ios, '13.0'
 use_frameworks!
 
