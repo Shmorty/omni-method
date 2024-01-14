@@ -19,11 +19,40 @@
   height: 4px;
   margin: 12px auto;
 }
-
+.date-picker {
+  margin: auto;
+  min-width: unset;
+}
 .continue-button {
-  margin-left: 25%;
+  margin-left: 15%;
   margin-top: 50px;
   // position: absolute;
   // bottom: 50px;
-  width: 50%;
+  width: 70%;
+}
+
+ion-radio {
+  --border-radius: 4px;
+  --inner-border-radius: 4px;
+}
+ion-radio::part(container) {
+  width: 24px;
+  height: 24px;
+
+  border-radius: 5px;
+  border: 3px solid #ddd;
+}
+ion-radio.radio-checked::part(container) {
+  background: var(--ion-color-primary);
+  border-color: transparent;
+}
+ion-radio.radio-checked::part(mark) {
+  width: 8px;
+  height: 14px;
+
+  border-width: 0px 3px 3px 0px;
+  border-style: solid;
+  border-color: #fff;
+
+  transform: rotate(45deg);
 }

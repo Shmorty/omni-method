@@ -19,7 +19,9 @@ import {AssessmentService} from 'src/app/services/assessments/assessment.service
 export class NewUserPage implements OnInit {
   userId: string;
   userEmail: string;
+  public newUser: User;
   formData: FormGroup;
+
   userDob: string;
   step = 1;
   isApp = false;
@@ -30,11 +32,17 @@ export class NewUserPage implements OnInit {
     private datePipe: DatePipe,
     private assessmentService: AssessmentService
   ) {
-    let calcDate = new Date(); //.setFullYear(2006);
+    let calcDate = new Date();
     let curYear = calcDate.getFullYear();
     calcDate.setFullYear(curYear - 16);
-    this.userDob = datePipe.transform(calcDate, 'MM/dd/yyyy');
+    this.userDob = datePipe.transform(calcDate, 'yyyy-MM-dd');
     // https://stackoverflow.com/questions/65056918/reactive-form-date-picker-in-ionic-5
+    console.log("new user default dob", this.userDob);
+    // set default values for new user
+    // this.newUser.dob = calcDate;
+    // this.newUser.weight = 100;
+    // this.newUser.height.feet = 4;
+    // this.newUser.height.inches = 6;
   }
 
   ngOnInit() {
@@ -52,27 +60,29 @@ export class NewUserPage implements OnInit {
       ]),
       nickname: new FormControl(),
       gender: new FormControl(),
-      dob: new FormControl(this.userDob),
+      dob: new FormControl(),
+      // dob: new FormControl(this.newUser.dob),
       height: new FormGroup({
-        feet: new FormControl('', [
+        feet: new FormControl(this.newUser.height.feet, [
           Validators.required,
           Validators.pattern('[0-9]'),
         ]),
-        inches: new FormControl('', [
+        inches: new FormControl(this.newUser.height.inches, [
           Validators.required,
           Validators.pattern('[0-9]{1,2}'),
           Validators.min(0),
           Validators.max(11),
         ]),
       }),
-      weight: new FormControl('', [
+      weight: new FormControl(this.newUser.weight, [
         Validators.required,
         Validators.pattern('[0-9]*'),
-        Validators.min(50),
+        Validators.min(0),
         Validators.max(500),
       ]),
       fitnessLevel: new FormControl('none', Validators.required),
     });
+    console.log("ngOnInit formData", this.formData);
   }
 
   onSubmit() {
@@ -120,22 +130,6 @@ export class NewUserPage implements OnInit {
     let maxDate = new Date(); //.setFullYear(2006);
     let curYear = maxDate.getFullYear();
     maxDate.setFullYear(curYear - 2);
-
-    // const options: DatePickerOptions = {
-    //   format: 'MM/dd/yyyy',
-    //   mode: 'date',
-    //   date: this.userDob,
-    //   max: this.datePipe.transform(maxDate, 'MM/dd/yyyy'),
-    // };
-    // console.log(options.date);
-    // console.log(options.max);
-    // if (isPlatform('mobile')) {
-    //   console.log('is mobile');
-    //   Keyboard.hide();
-    //   return DatePicker.present(options).then((date) => {
-    //     this.userDob = date.value;
-    //     this.formData.get('dob').setValue(date.value);
-    //   });
-    // }
   }
+
 }

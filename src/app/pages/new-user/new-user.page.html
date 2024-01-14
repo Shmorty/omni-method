@@ -5,7 +5,6 @@
     <div>
       <ion-list>
         <ion-item>
-          <!-- slot="start" fill="clear" -->
           <ion-button type="button" shape="circle"
             (click)="previous()" [disabled]="step == 1">
             <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
@@ -67,12 +66,12 @@
           <ion-list>
             <ion-radio-group formControlName="gender" value="other">
               <ion-item>
-                <ion-label>Male</ion-label>
-                <ion-radio slot="end" value="male"></ion-radio>
+                <!-- <ion-label>Male</ion-label> -->
+                <ion-radio justify="start"  value="male">Male</ion-radio>
               </ion-item>
               <ion-item>
-                <ion-label>Female</ion-label>
-                <ion-radio slot="end" value="female"></ion-radio>
+                <!-- <ion-label>Female</ion-label> -->
+                <ion-radio justify="start"  value="female">Female</ion-radio>
               </ion-item>
             </ion-radio-group>
           </ion-list>
@@ -83,12 +82,11 @@
               <h1 class="center">What is your date of birth?</h1>
             </ion-text>
           </div>
-          <ion-item (click)="openPicker()">
-            <ion-input
-              formControlName="dob"
-              placeholder="MM/DD/YYYY"
-            ></ion-input>
-          </ion-item>
+          <ion-datetime class="date-picker"
+            [(ngModel)]="formData.value.dob"
+            value={{userDob}}
+            presentation="date"
+            [preferWheel]="true"></ion-datetime>
         </div>
         <div *ngIf="step == 4">
           <div class="ion-text-center">
@@ -97,17 +95,21 @@
             </ion-text>
           </div>
           <fieldset formGroupName="height">
-            <ion-item>
+            <!-- <ion-item>
               <ion-label>Height</ion-label>
-              <!-- <ion-label>feet</ion-label> -->
               <ion-input formControlName="feet" placeholder="Feet"></ion-input>
-              <!-- <ion-label>inches</ion-label> -->
               <ion-input
                 formControlName="inches"
                 placeholder="Inches"
               ></ion-input>
+            </ion-item> -->
+            <ion-item lines="none">
+              <app-number-picker style="width: 50%;" [min]="3" [max]="7" [value]="4" [units]="'ft'"
+              [(value)]="formData.value.height.feet"></app-number-picker>
+              <app-number-picker style="width: 50%;" [min]="0" [max]="11" [value]="5" [units]="'in'"
+              [(value)]="formData.value.height.inches"></app-number-picker>
             </ion-item>
-          </fieldset>
+                    </fieldset>
         </div>
         <div *ngIf="step == 5">
           <div class="ion-text-center">
@@ -117,12 +119,14 @@
           </div>
           <ion-item>
             <!-- <ion-label>Weight</ion-label> -->
-            <ion-input
+            <!-- <ion-input
               aria-label="body weight"
               formControlName="weight"
               placeholder="Weight"
-            ></ion-input>
-          </ion-item>
+            ></ion-input> -->
+            <app-number-picker style="width: 100%;" [min]="0" [max]="325" [value]="100" [units]="'lbs'"
+            [(value)]="formData.value.weight"></app-number-picker>
+                </ion-item>
         </div>
         <div *ngIf="step == 6">
           <div class="ion-text-center">
