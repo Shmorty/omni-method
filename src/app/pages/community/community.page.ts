@@ -6,6 +6,7 @@ import {OverlayEventDetail} from '@ionic/core/components';
 import {RankingDetailPage} from '../ranking-detail/ranking-detail.page';
 import {Observable} from 'rxjs';
 import {StatusBar, Style} from '@capacitor/status-bar';
+import {Capacitor} from '@capacitor/core';
 
 export enum View {
   Rankings = 'Rankings',
@@ -41,7 +42,8 @@ export class CommunityPage implements OnInit {
   ionViewWillEnter() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-    if (isPlatform('mobile')) {
+    if (Capacitor.isNativePlatform()) {
+      // if (isPlatform('mobile')) {
       StatusBar.setStyle({style: Style.Dark});
       // if (prefersDark.matches) {
       //   StatusBar.setStyle({style: Style.Dark});

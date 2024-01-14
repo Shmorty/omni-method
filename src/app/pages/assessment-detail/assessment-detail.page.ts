@@ -9,6 +9,7 @@ import {Observable} from 'rxjs';
 import {UserService} from '../../services/user/user.service';
 import {User} from 'src/app/store/user/user.model';
 import {StatusBar, Style} from '@capacitor/status-bar';
+import {Capacitor} from '@capacitor/core';
 
 @Component({
   selector: 'app-assessment-detail',
@@ -72,7 +73,8 @@ export class AssessmentDetailPage implements OnInit {
   ionViewWillEnter() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-    if (isPlatform('mobile')) {
+    if (Capacitor.isNativePlatform()) {
+      // if (isPlatform('mobile')) {
       // StatusBar.setStyle({style: Style.Dark});
       if (prefersDark.matches) {
         StatusBar.setStyle({style: Style.Dark});

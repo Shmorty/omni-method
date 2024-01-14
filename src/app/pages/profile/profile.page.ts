@@ -23,6 +23,7 @@ import {delay, tap} from 'rxjs/operators';
 import {EditProfilePage} from '../edit-profile/edit-profile.page';
 import {OmniScoreService, oneDay} from '../../services/omni-score.service';
 import {UserService} from '../../services/user/user.service';
+import {Capacitor} from '@capacitor/core';
 
 @Component({
   selector: 'app-profile',
@@ -73,7 +74,8 @@ export class ProfilePage implements OnInit {
   ionViewWillEnter() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-    if (isPlatform('mobile')) {
+    if (Capacitor.isNativePlatform()) {
+      // if (isPlatform('mobile')) {
       // StatusBar.setStyle({style: Style.Dark});
       if (prefersDark.matches) {
         StatusBar.setStyle({style: Style.Dark});

@@ -1,4 +1,5 @@
 import {Component, Inject, OnInit, inject} from '@angular/core';
+import {Capacitor} from '@capacitor/core';
 import {StatusBar, Style} from '@capacitor/status-bar';
 import {isPlatform} from '@ionic/angular';
 import {AuthService} from 'src/app/services/auth.service';
@@ -25,7 +26,8 @@ export class WelcomePage implements OnInit {
   ionViewWillEnter() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-    if (isPlatform('mobile')) {
+    if (Capacitor.isNativePlatform()) {
+      // if (isPlatform('mobile')) {
       // StatusBar.setStyle({style: Style.Dark});
       if (prefersDark.matches) {
         StatusBar.setStyle({style: Style.Dark});
