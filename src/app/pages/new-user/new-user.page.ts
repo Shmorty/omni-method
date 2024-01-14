@@ -73,18 +73,18 @@ export class NewUserPage implements OnInit {
       gender: new FormControl(),
       dob: new FormControl(this.userDob, [Validators.required]),
       height: new FormGroup({
-        feet: new FormControl(this.newUser.height.feet, [
+        feet: new FormControl(4, [
           Validators.required,
           Validators.pattern('[0-9]'),
         ]),
-        inches: new FormControl(this.newUser.height.inches, [
+        inches: new FormControl(8, [
           Validators.required,
           Validators.pattern('[0-9]{1,2}'),
           Validators.min(0),
           Validators.max(11),
         ]),
       }),
-      weight: new FormControl(this.newUser.weight, [
+      weight: new FormControl(95, [
         Validators.required,
         Validators.pattern('[0-9]*'),
         Validators.min(0),

@@ -98,9 +98,9 @@
           <fieldset formGroupName="height">
             <ion-item lines="none">
               <app-number-picker style="width: 50%;" [min]="3" [max]="7" [value]="4" [units]="'ft'"
-              [(value)]="newUser.height.feet"></app-number-picker>
+              [(value)]="formData.value.height.feet"></app-number-picker>
               <app-number-picker style="width: 50%;" [min]="0" [max]="11" [value]="5" [units]="'in'"
-              [(value)]="newUser.height.inches"></app-number-picker>
+              [(value)]="formData.value.height.inches"></app-number-picker>
             </ion-item>
                     </fieldset>
         </div>
@@ -112,7 +112,7 @@
           </div>
           <ion-item>
             <app-number-picker style="width: 100%;" [min]="0" [max]="325" [value]="100" [units]="'lbs'"
-            [(value)]="newUser.weight"></app-number-picker>
+            [(value)]="formData.value.weight"></app-number-picker>
                 </ion-item>
         </div>
         <div *ngIf="step == 6">
