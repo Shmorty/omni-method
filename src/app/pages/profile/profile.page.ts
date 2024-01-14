@@ -56,13 +56,12 @@ export class ProfilePage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('profile.page.ngOnInit()');
     this.user$
       // .pipe(first())
       .subscribe({
         next(user) {
           this.user = user;
-          console.log(user);
+          console.log("profile.page ngOnInit", user);
         },
         error(message) {
           console.log(message);

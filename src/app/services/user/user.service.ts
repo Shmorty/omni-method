@@ -65,8 +65,8 @@ export class UserService implements IUserService {
       .subscribe(
         (authUser) => {
           console.log('got authUser ', authUser);
-          user.id = authUser.user['uid'];
-          user.email = authUser.user['email'];
+          user.id = authUser['uid'];
+          user.email = authUser['email'];
           console.log('user', user);
           // newUser action
           console.log('dispatch newUser action');

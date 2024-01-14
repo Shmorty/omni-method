@@ -46,13 +46,17 @@ export class AuthService {
   constructor(private router: Router, private store: Store<AppState>) {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
-        // this.saveUser(user);
-        console.log("User is authenticated, save user", user);
+        console.log("auth.service onAuthStateChanged user", user);
+        console.log("auth.service onAuthStateChanged check user saved", this.currUserId, this.currUserEmail);
+        this.saveUser(user);
+        console.log("dispatch UserActions.userAuthenticated");
         this.store.dispatch(
           UserActions.userAuthenticated({payload: JSON.parse(JSON.stringify({user: user}))})
         );
       } else {
-        console.log("User is signed out");
+        console.log("auth.service onAuthStateChanged User is signed out");
+        this.currUserId = this.currUserEmail = undefined;
+        console.log("auth.service onAuthStateChanged check user saved", this.currUserId, this.currUserEmail);
         // this.router.navigate(['/welcome']);
       }
     });
@@ -65,14 +69,16 @@ export class AuthService {
 
   // login method
   login(email: string, password: string) {
+    console.log("auth.service login");
     signInWithEmailAndPassword(this.auth, email, password).then(
       (res) => {
         // localStorage.setItem('userId', res.user.uid);
-        this.saveUser(res);
+        console.log("auth.service login res", res.user);
+        console.log("auth.service login check user saved", this.currUserId, this.currUserEmail);
+        this.saveUser(res.user);
+        console.log("dispatch UserActions.userAuthenticated");
         this.store.dispatch(
-          UserActions.userAuthenticated({
-            payload: JSON.parse(JSON.stringify(res)),
-          })
+          UserActions.userAuthenticated({payload: JSON.parse(JSON.stringify(res.user))})
         );
         this.router.navigate(['home']);
       },
@@ -247,8 +253,20 @@ export class AuthService {
   // }
 
   private saveUser(res) {
-    console.log('user authenticated, user id: '.concat(res.user.uid));
-    this.currUserId = res.user.uid;
-    this.currUserEmail = res.user.email;
+    console.log('auth.service saveUser', res);
+    if (res) {
+      if (res.user) {
+        console.log('auth.service saveUser res.user');
+        this.currUserId = res.user.uid;
+        this.currUserEmail = res.user.email;
+      } else {
+        console.log('auth.service saveUser res');
+        this.currUserId = res.uid;
+        this.currUserEmail = res.email;
+      }
+      console.log("saveUser", this.currUserId, this.currUserEmail);
+    } else {
+      this.logout();
+    }
   }
 }

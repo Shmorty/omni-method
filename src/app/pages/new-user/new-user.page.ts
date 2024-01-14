@@ -19,7 +19,16 @@ import {AssessmentService} from 'src/app/services/assessments/assessment.service
 export class NewUserPage implements OnInit {
   userId: string;
   userEmail: string;
-  public newUser: User;
+  public newUser: User = {
+    id: this.auth.currUserId,
+    categoryScore: undefined,
+    dob: undefined,
+    email: this.auth.currUserEmail,
+    firstName: '',
+    lastName: '',
+    omniScore: 0,
+    weight: 70
+  };
   formData: FormGroup;
 
   userDob: string;
@@ -37,18 +46,20 @@ export class NewUserPage implements OnInit {
     calcDate.setFullYear(curYear - 16);
     this.userDob = datePipe.transform(calcDate, 'yyyy-MM-dd');
     // https://stackoverflow.com/questions/65056918/reactive-form-date-picker-in-ionic-5
-    console.log("new user default dob", this.userDob);
+    console.log("newUser userDob", this.userDob);
+    console.log("newUser", this.newUser);
     // set default values for new user
-    // this.newUser.dob = calcDate;
+    this.newUser.dob = calcDate;
     // this.newUser.weight = 100;
     // this.newUser.height.feet = 4;
     // this.newUser.height.inches = 6;
+    this.newUser.height = {feet: 4, inches: 6};
   }
 
   ngOnInit() {
     this.userId = this.auth.currUserId;
-    console.log('auth.currUserId: ' + this.userId);
     this.userEmail = this.auth.currUserEmail;
+    console.log("newUser ngOnInit", this.userId, this.userEmail);
 
     this.formData = new FormGroup({
       id: new FormControl(this.userId, Validators.required),
@@ -60,8 +71,7 @@ export class NewUserPage implements OnInit {
       ]),
       nickname: new FormControl(),
       gender: new FormControl(),
-      dob: new FormControl(),
-      // dob: new FormControl(this.newUser.dob),
+      dob: new FormControl(this.userDob, [Validators.required]),
       height: new FormGroup({
         feet: new FormControl(this.newUser.height.feet, [
           Validators.required,
@@ -82,7 +92,8 @@ export class NewUserPage implements OnInit {
       ]),
       fitnessLevel: new FormControl('none', Validators.required),
     });
-    console.log("ngOnInit formData", this.formData);
+    // console.log("ngOnInit formData", this.formData);
+    console.log("ngOnInit newUser", this.newUser);
   }
 
   onSubmit() {
