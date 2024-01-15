@@ -21,13 +21,13 @@ export class NewUserPage implements OnInit {
   userEmail: string;
   public newUser: User = {
     id: this.auth.currUserId,
-    categoryScore: undefined,
-    dob: undefined,
     email: this.auth.currUserEmail,
     firstName: '',
     lastName: '',
+    dob: undefined,
+    weight: 75,
     omniScore: 0,
-    weight: 70
+    categoryScore: undefined,
   };
   formData: FormGroup;
 
@@ -135,6 +135,10 @@ export class NewUserPage implements OnInit {
 
   get dob() {
     return this.formData.get('dob');
+  }
+
+  get weight() {
+    return this.formData.get('weight');
   }
 
   async openPicker() {

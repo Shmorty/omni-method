@@ -110,7 +110,7 @@ export class UserEffects {
         // tap(() => this.router.navigate(['home']))
         tap((newUser) => {
           console.log("route newUser to onboarding", newUser);
-          this.router.navigate(['onboarding']);
+          this.router.navigate(['home']);
         })
       ),
     {dispatch: false}

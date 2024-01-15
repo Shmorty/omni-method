@@ -18,7 +18,6 @@
             </ion-text>
           </div>
           <ion-item>
-            <!-- <ion-label>First Name</ion-label> -->
             <ion-input
               formControlName="firstName"
               placeholder="First"
@@ -33,7 +32,6 @@
             <span *ngIf="first.errors?.required">First name is required</span>
           </div>
           <ion-item>
-            <!-- <ion-label>Last Name</ion-label> -->
             <ion-input
               formControlName="lastName"
               placeholder="Last"
@@ -48,7 +46,6 @@
             <span *ngIf="last.errors?.required">Last name is required</span>
           </div>
           <ion-item>
-            <!-- <ion-label>Nickname</ion-label> -->
             <ion-input
               formControlName="nickname"
               placeholder="Display name"
@@ -63,18 +60,12 @@
               <h1 class="center">What is your gender?</h1>
             </ion-text>
           </div>
-          <ion-list>
+          <ion-item>
             <ion-radio-group formControlName="gender" value="other">
-              <ion-item>
-                <!-- <ion-label>Male</ion-label> -->
-                <ion-radio justify="start" value="male" labelPlacement="end">Male</ion-radio>
-              </ion-item>
-              <ion-item>
-                <!-- <ion-label>Female</ion-label> -->
-                <ion-radio justify="start" value="female" labelPlacement="end">Female</ion-radio>
-              </ion-item>
+              <ion-radio justify="start" value="male" labelPlacement="end">Male</ion-radio>
+              <ion-radio justify="start" value="female" labelPlacement="end">Female</ion-radio>
             </ion-radio-group>
-          </ion-list>
+          </ion-item>
         </div>
         <div *ngIf="step == 3">
           <div class="ion-text-center">
@@ -111,9 +102,9 @@
             </ion-text>
           </div>
           <ion-item>
-            <app-number-picker style="width: 100%;" [min]="0" [max]="325" [value]="100" [units]="'lbs'"
+            <app-number-picker style="width: 100%;" [min]="0" [max]="325" [value]="0" [units]="'lbs'"
             [(value)]="formData.value.weight"></app-number-picker>
-                </ion-item>
+          </ion-item>
         </div>
         <div *ngIf="step == 6">
           <div class="ion-text-center">
@@ -134,10 +125,6 @@
         </div>
       </ion-list>
     </div>
-    <!-- <ion-button type="button" (click)="previous()" [disabled]="step == 1"
-        >Back</ion-button> -->
-
-      <!-- <pre>{{formData.value | json}}</pre> -->
   </form>
   <ion-button class="continue-button" (click)="next()">Continue</ion-button>
 </ion-content>
