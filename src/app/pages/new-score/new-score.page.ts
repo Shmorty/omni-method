@@ -52,7 +52,7 @@ export class NewScorePage implements OnInit {
       })
       .unsubscribe();
 
-    console.log("prevScore", this.curScore.rawScore);
+    console.log("prevScore", this.curScore?.rawScore);
 
     this.newScore = {
       aid: this.assessment.aid,
