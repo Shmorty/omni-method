@@ -11,7 +11,8 @@
           </ion-button>
           <ion-progress-bar class="progress" [value]="step / 6"></ion-progress-bar>
         </ion-item>
-        <div *ngIf="step == 1">
+        <!-- <div *ngIf="step == 1"> -->
+        <div [hidden]="step !== 1">
           <div class="ion-text-center">
             <ion-text color="dark">
               <h1 class="center">Create Account</h1>
@@ -54,7 +55,8 @@
             ></ion-input>
           </ion-item>
         </div>
-        <div *ngIf="step == 2">
+        <!-- <div *ngIf="step == 2"> -->
+        <div [hidden]="step !== 2">
           <div class="ion-text-center">
             <ion-text color="dark">
               <h1 class="center">What is your gender?</h1>
@@ -67,7 +69,8 @@
             </ion-radio-group>
           </ion-item>
         </div>
-        <div *ngIf="step == 3">
+        <!-- <div *ngIf="step == 3"> -->
+        <div [hidden]="step !== 3">
           <div class="ion-text-center">
             <ion-text color="dark">
               <h1 class="center">What is your date of birth?</h1>
@@ -80,7 +83,8 @@
             presentation="date"
             [preferWheel]="true"></ion-datetime>
         </div>
-        <div *ngIf="step == 4">
+        <!-- <div *ngIf="step == 4"> -->
+        <div [hidden]="step !== 4">
           <div class="ion-text-center">
             <ion-text color="dark">
               <h1 class="center">What is your height?</h1>
@@ -95,7 +99,8 @@
             </ion-item>
                     </fieldset>
         </div>
-        <div *ngIf="step == 5">
+        <!-- <div *ngIf="step == 5"> -->
+        <div [hidden]="step !== 5">
           <div class="ion-text-center">
             <ion-text color="dark">
               <h1 class="center">What is your body weight?</h1>
@@ -106,7 +111,8 @@
             [(value)]="formData.value.weight"></app-number-picker>
           </ion-item>
         </div>
-        <div *ngIf="step == 6">
+        <!-- <div *ngIf="step == 6"> -->
+        <div [hidden]="step !== 6">
           <div class="ion-text-center">
             <ion-text color="dark">
               <h1 class="center">What is your fitness experience level?</h1>

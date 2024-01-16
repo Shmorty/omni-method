@@ -19,6 +19,9 @@ import {
   getRedirectResult,
   onAuthStateChanged,
   // signInWithPopup,
+  reauthenticateWithCredential,
+  AuthCredential,
+  EmailAuthProvider,
 } from '@angular/fire/auth';
 // import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import {BehaviorSubject, from, Observable, Subscription} from 'rxjs';
@@ -88,6 +91,12 @@ export class AuthService {
         this.router.navigate(['/login']);
       }
     );
+  }
+
+  verifyPassword(password: string) {
+    console.log("verifyPassword", password);
+    var credential = EmailAuthProvider.credential(this.auth.currentUser.email, password);
+    return reauthenticateWithCredential(this.auth.currentUser, credential);
   }
 
   // register method

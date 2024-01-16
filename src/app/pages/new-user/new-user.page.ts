@@ -25,11 +25,12 @@ export class NewUserPage implements OnInit {
     firstName: '',
     lastName: '',
     dob: undefined,
+    height: {feet: 4, inches: 6},
     weight: 75,
     omniScore: 0,
     categoryScore: undefined,
   };
-  formData: FormGroup;
+  formData: FormGroup;// = new FormGroup({});
 
   userDob: string;
   step = 1;
@@ -53,14 +54,26 @@ export class NewUserPage implements OnInit {
     // this.newUser.weight = 100;
     // this.newUser.height.feet = 4;
     // this.newUser.height.inches = 6;
-    this.newUser.height = {feet: 4, inches: 6};
+    // this.newUser.height = {feet: 4, inches: 6};
+    this.userId = this.auth.currUserId;
+    this.userEmail = this.auth.currUserEmail;
+    this.initFormData();
   }
 
   ngOnInit() {
-    this.userId = this.auth.currUserId;
-    this.userEmail = this.auth.currUserEmail;
     console.log("newUser ngOnInit", this.userId, this.userEmail);
 
+    // console.log("ngOnInit formData", this.formData);
+    console.log("ngOnInit newUser", this.newUser);
+  }
+
+  private initFormData() {
+    // this.formData.addControl('id', new FormControl(this.newUser.id, Validators.required));
+    // this.formData.addControl('email', new FormControl(this.newUser.email, [Validators.required, Validators.email]));
+    // this.formData.addControl('firstName', new FormControl('', Validators.required));
+    // this.formData.addControl('lastName', new FormControl('', Validators.required));
+    // this.formData.addControl('nickname', new FormControl());
+    // this.formData.addControl('gender', new FormControl());
     this.formData = new FormGroup({
       id: new FormControl(this.userId, Validators.required),
       firstName: new FormControl('', Validators.required),
@@ -92,8 +105,6 @@ export class NewUserPage implements OnInit {
       ]),
       fitnessLevel: new FormControl('none', Validators.required),
     });
-    // console.log("ngOnInit formData", this.formData);
-    console.log("ngOnInit newUser", this.newUser);
   }
 
   onSubmit() {

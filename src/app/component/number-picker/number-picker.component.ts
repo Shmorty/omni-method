@@ -30,17 +30,6 @@ export class NumberPickerComponent implements OnInit, OnChanges {
   constructor(private scrollDispatcher: ScrollDispatcher) {}
 
   ngOnInit() {
-    /*
-        const len = (this.max - this.min) / this.increment + 1;
-        // force integer math avoid floating point issues
-        const reciprocal = 1 / this.increment;
-        console.log("number-picker increment", this.increment, "reciprocal", reciprocal, "len", len);
-        this.range = Array.from(
-          {length: len},
-          (_, index) => this.min + index * this.increment);
-        // (_, index) => (this.min + index) / reciprocal);
-        //(this.min + index * multiplier * this.increment) / multiplier
-    */
     this.range = this.createRange();
     console.log("number-picker range", this.range);
     if (this.direction == -1) {
@@ -51,12 +40,26 @@ export class NumberPickerComponent implements OnInit, OnChanges {
     // console.log("ngOnInit range", this.range);
     this.startIndex = this.range.indexOf(this.value);
     console.log("ngOnInit startIndex", this.startIndex);
+    // this.viewPort.scrollToIndex(this.startIndex);
   }
 
   ngAfterViewInit(): void {
     console.log("NumberPickerComponent ngAfterViewInit");
-    this.viewPort.scrolledIndexChange.subscribe(index => {
-      // console.log("scrolledIndexChange", index);
+
+    // set initial value after delay
+    setTimeout(() => {
+      var currentRange = this.viewPort.getRenderedRange();
+      console.log("currentRange before", currentRange);
+      this.viewPort.checkViewportSize();
+      console.log("scrollTo startIndex", this.startIndex);
+      this.viewPort.scrollToIndex(this.startIndex);
+      currentRange = this.viewPort.getRenderedRange();
+      console.log("currentRange after", currentRange);
+    }, 200);
+
+    // subscribe to updates
+    this.viewPort.scrolledIndexChange.subscribe((index) => {
+      console.log("scrolledIndexChange", index);
       this.hapticsSelectionChanged();
       if (typeof this.timeoutId == "number") {
         clearTimeout(this.timeoutId);
@@ -68,22 +71,15 @@ export class NumberPickerComponent implements OnInit, OnChanges {
         // console.log("viewPort.scrolledIndexChange emit", this.range[index]);
         this.valueChange.emit(this.range[index]);
       }
+      // center selection
+      console.log("schedule align to", index);
       this.timeoutId = setTimeout(() => {
-        this.viewPort.scrollToIndex(index, 'smooth');
+        console.log("align to", index, "should equal", this.curIndex)
+        this.viewPort.scrollToIndex(this.curIndex, 'smooth');
         this.timeoutId = undefined;
       }, 350);
     });
 
-    // set initial value after delay
-    setTimeout(() => {
-      var currentRange = this.viewPort.getRenderedRange();
-      console.log("currentRange", currentRange);
-      this.viewPort.checkViewportSize();
-      console.log("scrollTo startIndex", this.startIndex);
-      this.viewPort.scrollToIndex(this.startIndex);
-      currentRange = this.viewPort.getRenderedRange();
-      console.log("currentRange", currentRange);
-    }, 200);
   }
 
   private createRange(): number[] {

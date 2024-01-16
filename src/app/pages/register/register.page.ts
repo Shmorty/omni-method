@@ -39,7 +39,6 @@ export class RegisterPage implements OnInit {
 
   doRegister() {
     this.auth.register(this.email, this.password);
-    // this.email =
     this.password = this.confirmPassword = '';
   }
 
