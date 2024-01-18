@@ -65,9 +65,9 @@ export class EditProfilePage implements OnInit {
           this.userService.deleteUser(this.user);
           this.modalCtrl.dismiss(null, 'logout');
           this.authService.logout();
-        }), (error) => {
+        }, (error) => {
           console.log("verifyPassword error", error);
-        }
+        });
       },
       htmlAttributes: {
         'aria-label': 'delete',
