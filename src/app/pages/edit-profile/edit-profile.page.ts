@@ -58,7 +58,6 @@ export class EditProfilePage implements OnInit {
       text: 'Delete',
       role: 'confirm',
       handler: (alertData) => {
-        console.log("call verifyPassword");
         this.authService.verifyPassword(alertData.password).then((success) => {
           console.log("verifyPassword success", success);
           // do delete user
@@ -67,6 +66,7 @@ export class EditProfilePage implements OnInit {
           this.authService.logout();
         }, (error) => {
           console.log("verifyPassword error", error);
+          alert("failed to verify password");
         });
       },
       htmlAttributes: {
