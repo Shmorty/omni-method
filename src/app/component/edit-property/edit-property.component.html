@@ -53,7 +53,10 @@
 
 <ng-template #dob>
   <ion-item lines="none">
-    <ion-datetime [(ngModel)]="updUser.dob" presentation="date" [preferWheel]="true" class="date-picker"></ion-datetime>
+    <ion-datetime class="date-picker"
+      [(ngModel)]="updUser.dob"
+      presentation="date"
+      [preferWheel]="true"></ion-datetime>
   </ion-item>
 </ng-template>
 

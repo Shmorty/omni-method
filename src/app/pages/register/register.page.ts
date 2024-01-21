@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Capacitor} from '@capacitor/core';
 import {StatusBar, Style} from '@capacitor/status-bar';
 import {isPlatform} from '@ionic/angular';
 import {Store} from '@ngrx/store';
@@ -25,7 +26,8 @@ export class RegisterPage implements OnInit {
   ionViewWillEnter() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-    if (isPlatform('mobile')) {
+    if (Capacitor.isNativePlatform()) {
+      // if (isPlatform('mobile')) {
       // StatusBar.setStyle({style: Style.Dark});
       if (prefersDark.matches) {
         StatusBar.setStyle({style: Style.Dark});
@@ -37,7 +39,6 @@ export class RegisterPage implements OnInit {
 
   doRegister() {
     this.auth.register(this.email, this.password);
-    // this.email =
     this.password = this.confirmPassword = '';
   }
 

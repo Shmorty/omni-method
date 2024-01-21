@@ -44,7 +44,9 @@ export class AssessmentService implements IAssessmentService {
   getAllAssessments(): Observable<Assessment[]> {
     return this.store.select(selectAllAssessments);
   }
-
+  getAllCategories(): Observable<Category[]> {
+    return this.store.select(selectAllCategories);
+  }
   loadData() {
     return this.http.get('assets/data/assessments.json');
   }

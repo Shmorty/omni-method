@@ -1,14 +1,10 @@
 import {Component, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ModalController} from '@ionic/angular';
-// import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
 import {User} from '../../store/user/user.model';
 import {UserService} from '../../services/user/user.service';
 import {Assessment} from '../../store/assessments/assessment.model';
 import {Score} from '../../store/models/score.model';
-import {Observable, Subject} from 'rxjs';
-import {Store} from '@ngrx/store';
-import {selectUser} from 'src/app/store/user/user.selectors';
-import {EditPropertyComponent} from 'src/app/component/edit-property/edit-property.component';
+import {take} from 'rxjs';
 
 @Component({
   selector: 'app-new-score',
@@ -20,8 +16,6 @@ export class NewScorePage implements OnInit {
   @Input() assessment: Assessment;
   @Input() curScore: Score;
   public newScore: Score;
-  // @ViewChild('rawScore') scoreInput;
-  // formData: FormGroup;
   today = new Date();
   public user$ = this.userService.getUser();
   private user: User;
@@ -32,7 +26,16 @@ export class NewScorePage implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private userService: UserService,
-  ) {}
+  ) {
+    userService.getUser().pipe(take(1)).subscribe((user) => {
+      this.user = user;
+      this.bodyWeight = user.weight;
+      if (this.newScore) {
+        this.newScore.currentWeight = this.bodyWeight;
+      }
+      console.log("newScorePage constructor user", user);
+    });
+  }
 
   ngOnInit() {
     console.log("newScore ngOnInit");
@@ -49,7 +52,7 @@ export class NewScorePage implements OnInit {
       })
       .unsubscribe();
 
-    console.log("prevScore", this.curScore.rawScore);
+    console.log("prevScore", this.curScore?.rawScore);
 
     this.newScore = {
       aid: this.assessment.aid,
@@ -100,7 +103,8 @@ export class NewScorePage implements OnInit {
   }
 
   direction(assessment: Assessment) {
-    const reverse = ["PSPR", "TWOMDST", "AGLTY"];
+    // const reverse = ["PSPR", "TWOMDST", "AGLTY"];
+    const reverse = ["PSPR", "AGLTY"];
     if (reverse.includes(assessment.aid)) {
       return -1;
     }

@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {IonicModule} from '@ionic/angular';
 
-import { NumberPickerComponent } from './number-picker.component';
+import {NumberPickerComponent} from './number-picker.component';
 
 describe('NumberPickerComponent', () => {
   let component: NumberPickerComponent;
@@ -9,8 +9,11 @@ describe('NumberPickerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ NumberPickerComponent ],
-      imports: [IonicModule.forRoot()]
+      // declarations: [ NumberPickerComponent ],
+      imports: [
+        IonicModule.forRoot(),
+        NumberPickerComponent,
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(NumberPickerComponent);

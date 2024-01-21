@@ -67,9 +67,10 @@ export class UserEffects {
               tap((res) => console.log('firestore getUserById response', res)),
               map((res) => {
                 if (res) {
-                  // 
+                  console.log("return loadUserSuccess");
                   return UserActions.loadUserSuccess({payload: res});
                 } else {
+                  console.log("return loadUserFailure");
                   return UserActions.loadUserFailure({error: 'not found'});
                 }
               }),
@@ -109,7 +110,7 @@ export class UserEffects {
         // tap(() => this.router.navigate(['home']))
         tap((newUser) => {
           console.log("route newUser to onboarding", newUser);
-          this.router.navigate(['onboarding']);
+          this.router.navigate(['home']);
         })
       ),
     {dispatch: false}

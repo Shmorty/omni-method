@@ -9,7 +9,6 @@ import {
 import {Keyboard} from '@capacitor/keyboard';
 import {AlertController, IonModal, isPlatform, ModalController} from '@ionic/angular';
 import {OverlayEventDetail} from '@ionic/core/components';
-import {Store} from '@ngrx/store';
 import {delay} from 'rxjs';
 import {EditPropertyComponent} from 'src/app/component/edit-property/edit-property.component';
 import {AuthService} from 'src/app/services/auth.service';
@@ -31,9 +30,6 @@ export class EditProfilePage implements OnInit {
     {
       text: 'Cancel',
       role: 'cancel',
-      handler: () => {
-        console.log('Delete account canceled');
-      },
       htmlAttributes: {
         'aria-label': 'cancel',
       }
@@ -42,10 +38,36 @@ export class EditProfilePage implements OnInit {
       text: 'Delete',
       role: 'confirm',
       handler: () => {
-        console.log('Delete account confirmed');
-        this.userService.deleteUser(this.user);
-        this.modalCtrl.dismiss(null, 'logout');
-        this.auth.logout();
+        // confirm delete with password
+        this.confirmDeleteAccount();
+      },
+      htmlAttributes: {
+        'aria-label': 'delete',
+      }
+    },
+  ];
+  public confirmDeleteAccountButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      htmlAttributes: {
+        'aria-label': 'cancel',
+      }
+    },
+    {
+      text: 'Delete',
+      role: 'confirm',
+      handler: (alertData) => {
+        this.authService.verifyPassword(alertData.password).then((success) => {
+          console.log("verifyPassword success", success);
+          // do delete user
+          this.userService.deleteUser(this.user);
+          this.modalCtrl.dismiss(null, 'logout');
+          this.authService.logout();
+        }, (error) => {
+          console.log("verifyPassword error", error);
+          alert("failed to verify password");
+        });
       },
       htmlAttributes: {
         'aria-label': 'delete',
@@ -56,13 +78,12 @@ export class EditProfilePage implements OnInit {
   // message =
   //   'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string;
-  public user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
+  public user$ = this.userService.getUser(); // .pipe(delay(5000));
 
   constructor(
-    private store: Store,
     private modalCtrl: ModalController,
     public userService: UserService,
-    private auth: AuthService,
+    private authService: AuthService,
     public formBuilder: FormBuilder,
     private alertController: AlertController
   ) {}
@@ -90,9 +111,9 @@ export class EditProfilePage implements OnInit {
     });
   }
 
-  deleteAccountResult(ev) {
-    console.log(`Dismissed with role: ${ev.detail.role}`);
-  }
+  // deleteAccountResult(ev) {
+  //   console.log(`Dismissed with role: ${ev.detail.role}`);
+  // }
 
   async deleteAccount() {
     const alert = await this.alertController.create({
@@ -101,16 +122,27 @@ export class EditProfilePage implements OnInit {
       // message: 'If you would like to permanently delete all your data tap "Delete" buttons, otherwise tap "Cancel".',
       buttons: this.deleteAccountButtons,
     });
-
     await alert.present();
-    console.log("deleteAccount await alert returned");
-    // this.modalCtrl.dismiss(null, 'logout');
-    // this.auth.logout();
+  }
+
+  async confirmDeleteAccount() {
+    const alert = await this.alertController.create({
+      header: 'Warning',
+      subHeader: 'This action can not be undone.',
+      message: 'To permanently delete all your data please entery your password and tap "Delete" button.',
+      buttons: this.confirmDeleteAccountButtons,
+      inputs: [{
+        name: "password",
+        placeholder: "Password",
+        type: "password"
+      }],
+    });
+    await alert.present();
   }
 
   logout() {
     this.modalCtrl.dismiss(null, 'logout');
-    this.auth.logout();
+    this.authService.logout();
   }
 
   submitForm() {

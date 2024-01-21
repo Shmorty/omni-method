@@ -5,21 +5,20 @@
     <div>
       <ion-list>
         <ion-item>
-          <!-- slot="start" fill="clear" -->
           <ion-button type="button" shape="circle"
             (click)="previous()" [disabled]="step == 1">
             <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
           </ion-button>
           <ion-progress-bar class="progress" [value]="step / 6"></ion-progress-bar>
         </ion-item>
-        <div *ngIf="step == 1">
+        <!-- <div *ngIf="step == 1"> -->
+        <div [hidden]="step !== 1">
           <div class="ion-text-center">
             <ion-text color="dark">
               <h1 class="center">Create Account</h1>
             </ion-text>
           </div>
           <ion-item>
-            <!-- <ion-label>First Name</ion-label> -->
             <ion-input
               formControlName="firstName"
               placeholder="First"
@@ -34,7 +33,6 @@
             <span *ngIf="first.errors?.required">First name is required</span>
           </div>
           <ion-item>
-            <!-- <ion-label>Last Name</ion-label> -->
             <ion-input
               formControlName="lastName"
               placeholder="Last"
@@ -49,7 +47,6 @@
             <span *ngIf="last.errors?.required">Last name is required</span>
           </div>
           <ion-item>
-            <!-- <ion-label>Nickname</ion-label> -->
             <ion-input
               formControlName="nickname"
               placeholder="Display name"
@@ -58,73 +55,64 @@
             ></ion-input>
           </ion-item>
         </div>
-        <div *ngIf="step == 2">
+        <!-- <div *ngIf="step == 2"> -->
+        <div [hidden]="step !== 2">
           <div class="ion-text-center">
             <ion-text color="dark">
               <h1 class="center">What is your gender?</h1>
             </ion-text>
           </div>
-          <ion-list>
+          <ion-item>
             <ion-radio-group formControlName="gender" value="other">
-              <ion-item>
-                <ion-label>Male</ion-label>
-                <ion-radio slot="end" value="male"></ion-radio>
-              </ion-item>
-              <ion-item>
-                <ion-label>Female</ion-label>
-                <ion-radio slot="end" value="female"></ion-radio>
-              </ion-item>
+              <ion-radio justify="start" value="male" labelPlacement="end">Male</ion-radio>
+              <ion-radio justify="start" value="female" labelPlacement="end">Female</ion-radio>
             </ion-radio-group>
-          </ion-list>
+          </ion-item>
         </div>
-        <div *ngIf="step == 3">
+        <!-- <div *ngIf="step == 3"> -->
+        <div [hidden]="step !== 3">
           <div class="ion-text-center">
             <ion-text color="dark">
               <h1 class="center">What is your date of birth?</h1>
             </ion-text>
           </div>
-          <ion-item (click)="openPicker()">
-            <ion-input
-              formControlName="dob"
-              placeholder="MM/DD/YYYY"
-            ></ion-input>
-          </ion-item>
+          <!-- value={{userDob}} -->
+          <!-- [(ngModel)]="newUser.dob" -->
+          <ion-datetime class="date-picker"
+            formControlName="dob"
+            presentation="date"
+            [preferWheel]="true"></ion-datetime>
         </div>
-        <div *ngIf="step == 4">
+        <!-- <div *ngIf="step == 4"> -->
+        <div [hidden]="step !== 4">
           <div class="ion-text-center">
             <ion-text color="dark">
               <h1 class="center">What is your height?</h1>
             </ion-text>
           </div>
           <fieldset formGroupName="height">
-            <ion-item>
-              <ion-label>Height</ion-label>
-              <!-- <ion-label>feet</ion-label> -->
-              <ion-input formControlName="feet" placeholder="Feet"></ion-input>
-              <!-- <ion-label>inches</ion-label> -->
-              <ion-input
-                formControlName="inches"
-                placeholder="Inches"
-              ></ion-input>
+            <ion-item lines="none">
+              <app-number-picker style="width: 50%;" [min]="3" [max]="7" [value]="4" [units]="'ft'"
+              [(value)]="formData.value.height.feet"></app-number-picker>
+              <app-number-picker style="width: 50%;" [min]="0" [max]="11" [value]="5" [units]="'in'"
+              [(value)]="formData.value.height.inches"></app-number-picker>
             </ion-item>
-          </fieldset>
+                    </fieldset>
         </div>
-        <div *ngIf="step == 5">
+        <!-- <div *ngIf="step == 5"> -->
+        <div [hidden]="step !== 5">
           <div class="ion-text-center">
             <ion-text color="dark">
               <h1 class="center">What is your body weight?</h1>
             </ion-text>
           </div>
           <ion-item>
-            <!-- <ion-label>Weight</ion-label> -->
-            <ion-input
-              aria-label="body weight"
-              formControlName="weight"
-              placeholder="Weight"
-            ></ion-input>
+            <app-number-picker style="width: 100%;" [min]="0" [max]="325" [value]="0" [units]="'lbs'"
+            [(value)]="formData.value.weight"></app-number-picker>
           </ion-item>
         </div>
-        <div *ngIf="step == 6">
+        <!-- <div *ngIf="step == 6"> -->
+        <div [hidden]="step !== 6">
           <div class="ion-text-center">
             <ion-text color="dark">
               <h1 class="center">What is your fitness experience level?</h1>
@@ -134,19 +122,15 @@
             <ion-radio-group
               formControlName="fitnessLevel"
               value="none">
-              <ion-radio value="none">No Experience</ion-radio>
-              <ion-radio value="beginner">Beginner</ion-radio>
-              <ion-radio value="intermediate">Intermediate</ion-radio>
-              <ion-radio value="advanced">Advanced</ion-radio>
+              <ion-radio justify="start" value="none" labelPlacement="end">No Experience</ion-radio>
+              <ion-radio justify="start" value="beginner" labelPlacement="end">Beginner</ion-radio>
+              <ion-radio justify="start" value="intermediate" labelPlacement="end">Intermediate</ion-radio>
+              <ion-radio justify="start" value="advanced" labelPlacement="end">Advanced</ion-radio>
             </ion-radio-group>
           </ion-item>
         </div>
       </ion-list>
     </div>
-    <!-- <ion-button type="button" (click)="previous()" [disabled]="step == 1"
-        >Back</ion-button> -->
-
-      <!-- <pre>{{formData.value | json}}</pre> -->
   </form>
   <ion-button class="continue-button" (click)="next()">Continue</ion-button>
 </ion-content>

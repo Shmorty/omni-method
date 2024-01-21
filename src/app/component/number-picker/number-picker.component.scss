@@ -27,11 +27,14 @@ $row-height: 34px;
     line-height: $row-height;
     text-align: center;
 }
-// .current {
-//     font-weight: bold;
-// }
+.picker-viewport {
+    height: ($row-height * 5);
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
 .spacer {
-    height: 84px;
+    height: ($row-height * 2);
 }
 .highlight {
     // background-color: #4dabfc;
