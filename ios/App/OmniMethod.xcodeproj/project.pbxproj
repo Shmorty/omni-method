@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,7 +18,6 @@
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
 		DA674AD82B30AB0E00A397A1 /* NoBounce.m in Sources */ = {isa = PBXBuildFile; fileRef = DACDF59A29C795AD0009AFA7 /* NoBounce.m */; };
 		DA674AD92B30AB0E00A397A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
-		DA674ADB2B30AB0E00A397A1 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		DA674ADD2B30AB0E00A397A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		DA674ADE2B30AB0E00A397A1 /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
 		DA674ADF2B30AB0E00A397A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
