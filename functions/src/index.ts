@@ -12,6 +12,7 @@
 
 // import { onRequest } from "firebase-functions/v2/https";
 import {onDocumentCreated, onDocumentDeleted, onDocumentUpdated} from "firebase-functions/v2/firestore";
+import {onSchedule} from "firebase-functions/v2/scheduler";
 import * as logger from "firebase-functions/logger";
 import {initializeApp} from "firebase-admin/app";
 import {getFirestore} from "firebase-admin/firestore";
@@ -188,6 +189,14 @@ export const scoreDeleted = onDocumentDeleted("user/{uid}/score/{sid}", (event) 
   logger.info("scoreDeleted recalc category", data["cid"]);
   return calcCategoryScore(event.params.uid, data["cid"])
     .then((res) => updateOmniScore(res));
+});
+
+export const nightly = "every day 00:00";
+export const hourly = "every hour";
+export const fiveMin = "every 5 minutes";
+export const expireScores = onSchedule(hourly, (event) => {
+  logger.info("onSchedule expireScores", event);
+  // db.collection()
 });
 
 /**
