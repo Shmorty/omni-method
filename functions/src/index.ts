@@ -74,6 +74,13 @@ const wrValues = {
 };
 const WR = new Map(Object.entries(wrValues));
 
+enum FitnessLevels {
+  NONE = "none",
+  BEGINNER = "beginner",
+  INTERMEDIATE = "intermediate",
+  ADVANCED = "advanced"
+}
+
 /**
  * Looks up the user's body weight
  * @param {string} uid unique user id
@@ -87,6 +94,102 @@ async function getBodyWeight(uid: string): Promise<number> {
   logger.info("weight", weight);
   return Promise.resolve(weight);
 }
+
+// async function setScore(uid: string, aid: string, cid: string, rawScore: number) {
+//   const newScore = {
+//     uid: uid, aid: aid, cid: cid,
+//     rawScore: rawScore,
+//     scoreDate: today,
+//   }
+// }
+
+export const newUser = onDocumentCreated(
+  "user/{uid}",
+  (event) => {
+    // new user
+    logger.info("newUser event", event);
+    const result = 0;
+    const snapshot = event.data;
+    if (!snapshot) {
+      logger.info("no data associated with newUser event");
+      return null;
+    }
+    // logger.info("begin creating starting scores");
+    const data = snapshot.data();
+    logger.info("data", data);
+    if (data.omniScore === 0) {
+      const today = new Date().toLocaleString("sv").replace(' ', 'T');
+      logger.info("newUser omniScore is zero");
+      switch (data.fitnessLevel) {
+        case FitnessLevels.NONE: {
+          logger.info("fitnessLevel NONE");
+          // deadlift = weight * 0.6
+          db.doc(`user/${data.id}/score`).set({
+            aid: "DLFT",
+            rawScore: data.weight * 0.6,
+            currentWeight: data.weight,
+            scoreDate: today,
+            expired: false,
+            notes: "Quick start score",
+          });
+          // squat = weight * 0.45
+          // bench = weight * 0.35
+          // weightedPullup = weight * -0.35
+          // pushUps = 0
+          // pullUps = 0
+          // squats = 0
+          // longJump = height * 0.5
+          // pushPress = weight * 0.3
+          break;
+        }
+        case FitnessLevels.BEGINNER: {
+          logger.info("fitnessLevel BEGINNER");
+          // deadlift = weight * 1
+          // squat = weight * 0.75
+          // bench = weight * 0.5
+          // weightedPullup = 0
+          // pushUps = 1
+          // pullUps = 0
+          // squats = 2
+          // longJump = height * 0.8
+          // pushPress = weight * 0.5
+          break;
+        }
+        case FitnessLevels.INTERMEDIATE: {
+          logger.info("fitnessLevel INTERMEDIATE");
+          // deadlift = weight * 1.5
+          // squat = weight * 1.25
+          // bench = weight * 0.75
+          // weightedPullup = weight * 0.1
+          // pushUps = 18
+          // pullUps = 5
+          // squats = 20
+          // longJump = height * 1
+          // pushPress = weight * 0.75
+          break;
+        }
+        case FitnessLevels.ADVANCED: {
+          logger.info("fitnessLevel ADVANCED");
+          // deadlift = weight * 2
+          // squat = weight * 1.5
+          // bench = weight * 1.25
+          // weightedPullup = weight * 0.25
+          // pushUps = 40
+          // pullUps = 14
+          // squats = 45
+          // longJump = height * 1.25
+          // pushPress = weight * 1
+          break;
+        }
+        default: {
+          logger.info("No fitnessLevel");
+          break;
+        }
+      }
+    }
+    return Promise.resolve(result);
+  }
+);
 
 /**
  * calculates number of days since scoreDate
