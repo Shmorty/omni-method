@@ -45,7 +45,7 @@
     "@ngrx/store-devtools": "^16.1.0",
     "angular-oauth2-oidc": "^13.0.1",
     "firebase-functions": "^4.5.0",
-    "rxjs": "^7.5.0",
+    "rxjs": "^7.8.1",
     "tslib": "^2.2.0",
     "zone.js": "^0.13.1"
   },

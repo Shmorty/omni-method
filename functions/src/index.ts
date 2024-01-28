@@ -47,7 +47,9 @@ interface Score {
   scoreDate: string;
   expired: boolean;
   rawScore: number;
+  checklist?: [];
   calculatedScore?: number;
+  currentWeight?: number;
   notes?: string;
 }
 const wrValues = {
@@ -95,13 +97,43 @@ async function getBodyWeight(uid: string): Promise<number> {
   return Promise.resolve(weight);
 }
 
-// async function setScore(uid: string, aid: string, cid: string, rawScore: number) {
-//   const newScore = {
-//     uid: uid, aid: aid, cid: cid,
-//     rawScore: rawScore,
-//     scoreDate: today,
-//   }
-// }
+/**
+ *
+ * @param {object[]} scoreData
+ * @param {FirebaseFirestore.DocumentData} data
+ * @return {Observable}
+ */
+async function saveScoreToDb(scoreData: object[], data: FirebaseFirestore.DocumentData): Promise<object[]> {
+  logger.info("saveScore", scoreData);
+  const d = new Date();
+  const ye = new Intl.DateTimeFormat("en", {year: "numeric"}).format(d);
+  const mo = new Intl.DateTimeFormat("en", {month: "2-digit"}).format(d);
+  const da = new Intl.DateTimeFormat("en", {day: "2-digit"}).format(d);
+  const scoreDate = `${ye}-${mo}-${da}`;
+  logger.info("scoreDate", scoreDate);
+  const today = new Date().toLocaleString("sv").replace(" ", "T");
+  // let newScore: Score;
+  let newScore: object;
+  scoreData.forEach((entry) => {
+    newScore = {
+      ...entry,
+      uid: data.id,
+      scoreDate: today,
+      currentWeight: data.weight,
+      expired: false,
+      notes: "Quick score",
+    };
+    // write score to db
+    // TODO: return merged promises
+    const path = `user/${data.id}/score/${entry["aid"]}#${scoreDate}`;
+    db.doc(path).set(newScore);
+    // .then((result) => {
+    //   logger.info("result", result);
+    // }
+    // );
+  });
+  return Promise.resolve(scoreData);
+}
 
 export const newUser = onDocumentCreated(
   "user/{uid}",
@@ -118,67 +150,410 @@ export const newUser = onDocumentCreated(
     const data = snapshot.data();
     logger.info("data", data);
     if (data.omniScore === 0) {
-      const today = new Date().toLocaleString("sv").replace(' ', 'T');
+      const scoreData = [];
+      const height = data.height.feet * 12 + data.height.inches;
       logger.info("newUser omniScore is zero");
+      // TODO: refactor switch statement
       switch (data.fitnessLevel) {
         case FitnessLevels.NONE: {
-          logger.info("fitnessLevel NONE");
           // deadlift = weight * 0.6
-          db.doc(`user/${data.id}/score`).set({
-            aid: "DLFT",
-            rawScore: data.weight * 0.6,
-            currentWeight: data.weight,
-            scoreDate: today,
-            expired: false,
-            notes: "Quick start score",
+          scoreData.push({
+            aid: "DLFT", cid: "STRG",
+            rawScore: Math.ceil(data.weight * 0.6 / 5) * 5,
+            rawScore1: data.weight * 0.6,
           });
           // squat = weight * 0.45
+          scoreData.push({
+            aid: "BKSQ", cid: "STRG",
+            rawScore: Math.ceil(data.weight * 0.45 / 5) * 5,
+          });
           // bench = weight * 0.35
+          scoreData.push({
+            aid: "BNCH", cid: "STRG",
+            rawScore: Math.ceil(data.weight * 0.35 / 5) * 5,
+          });
           // weightedPullup = weight * -0.35
+          scoreData.push({
+            aid: "WTPU", cid: "STRG",
+            rawScore: Math.ceil(data.weight * -0.35 / 5) * 5,
+          });
           // pushUps = 0
+          scoreData.push({
+            aid: "PSHU", cid: "ENDR",
+            rawScore: 0,
+          });
           // pullUps = 0
+          scoreData.push({
+            aid: "PLUP", cid: "ENDR",
+            rawScore: 0,
+          });
           // squats = 0
+          scoreData.push({
+            aid: "SQTS", cid: "ENDR",
+            rawScore: 0,
+          });
           // longJump = height * 0.5
+          scoreData.push({
+            aid: "STLJ", cid: "POWR",
+            rawScore: height * 0.5,
+          });
           // pushPress = weight * 0.3
+          scoreData.push({
+            aid: "PSHP", cid: "POWR",
+            rawScore: Math.ceil(data.weight * 0.3 / 5) * 5,
+          });
+          // 100 meter sprint = 20
+          scoreData.push({
+            aid: "PSPR", cid: "POWR",
+            rawScore: 20,
+          });
+          // Clean weight * 0.4
+          scoreData.push({
+            aid: "PWCL", cid: "POWR",
+            rawScore: Math.ceil(data.weight * 0.4 / 5) * 5,
+          });
+          // Pike = 1
+          scoreData.push({
+            aid: "PIKE", cid: "FLEX",
+            rawScore: 1,
+            checklist: [true],
+          });
+          // Backbend = 1
+          scoreData.push({
+            aid: "BKBN", cid: "FLEX",
+            rawScore: 1,
+            checklist: [true],
+          });
+          // Straddle = 90
+          scoreData.push({
+            aid: "STRD", cid: "FLEX",
+            rawScore: 90,
+          });
+          // 1 Hour Run BMI * 0.15
+          // increment 0.05
+          const bmi = (data.weight / (height * height)) * 703;
+          scoreData.push({
+            aid: "ONEHRDST", cid: "META",
+            bmi: bmi,
+            rawScore: Math.ceil(bmi * 0.15 / 0.05) * 0.05,
+          });
+          // 2 Minute Sprint bmi * 0.007 * 30
+          // (bmi* 0.21) increment 0.001
+          // scoreData.push({
+          //   aid: "TWOMDST", cid: "META",
+          //   bmi: bmi,
+          //   rawScore: Math.ceil(bmi * 0.21 / 0.001) * 0.001,
+          // });
+          // Half Spider Web = 27
+          scoreData.push({
+            aid: "AGLTY", cid: "NEUR",
+            rawScore: 27,
+          });
+
+          // write to db
+          saveScoreToDb(scoreData, data).then(() => {
+            logger.info("saved no experience quick scores");
+          });
           break;
         }
         case FitnessLevels.BEGINNER: {
           logger.info("fitnessLevel BEGINNER");
           // deadlift = weight * 1
+          scoreData.push({
+            aid: "DLFT", cid: "STRG",
+            rawScore: Math.ceil(data.weight * 1 / 5) * 5,
+          });
           // squat = weight * 0.75
+          scoreData.push({
+            aid: "BKSQ", cid: "STRG",
+            rawScore: Math.ceil(data.weight * 0.75 / 5) * 5,
+          });
           // bench = weight * 0.5
+          scoreData.push({
+            aid: "BNCH", cid: "STRG",
+            rawScore: Math.ceil(data.weight * 0.5 / 5) * 5,
+          });
           // weightedPullup = 0
+          scoreData.push({
+            aid: "WTPU", cid: "STRG",
+            rawScore: 0,
+          });
           // pushUps = 1
+          scoreData.push({
+            aid: "PSHU", cid: "ENDR",
+            rawScore: 1,
+          });
           // pullUps = 0
+          scoreData.push({
+            aid: "PLUP", cid: "ENDR",
+            rawScore: 0,
+          });
           // squats = 2
+          scoreData.push({
+            aid: "SQTS", cid: "ENDR",
+            rawScore: 2,
+          });
           // longJump = height * 0.8
+          scoreData.push({
+            aid: "STLJ", cid: "POWR",
+            rawScore: Math.ceil(height * 0.8 / 0.5) * 0.5,
+          });
           // pushPress = weight * 0.5
+          scoreData.push({
+            aid: "PSHP", cid: "POWR",
+            rawScore: Math.ceil(data.weight * 0.5 / 5) * 5,
+          });
+          // 100 meter sprint = 16
+          scoreData.push({
+            aid: "PSPR", cid: "POWR",
+            rawScore: 16,
+          });
+          // Clean weight * 0.75
+          scoreData.push({
+            aid: "PWCL", cid: "POWR",
+            rawScore: Math.ceil(data.weight * 0.75 / 5) * 5,
+          });
+          // Pike = 3
+          scoreData.push({
+            aid: "PIKE", cid: "FLEX",
+            rawScore: 3,
+            checklist: [true, true, true],
+          });
+          // Backbend = 3
+          scoreData.push({
+            aid: "BKBN", cid: "FLEX",
+            rawScore: 3,
+            checklist: [true, true, true],
+          });
+          // Straddle = 110
+          scoreData.push({
+            aid: "STRD", cid: "FLEX",
+            rawScore: 110,
+          });
+          // 1 Hour Run BMI * 0.224
+          // increment 0.05
+          const bmi = (data.weight / (height * height)) * 703;
+          scoreData.push({
+            aid: "ONEHRDST", cid: "META",
+            bmi: bmi,
+            rawScore: Math.ceil(bmi * 0.224 / 0.05) * 0.05,
+          });
+          // 2 Minute Sprint bmi * 0.01 * 30  (bmi* 0.3)
+          // scoreData.push({
+          //   aid: "TWOMDST", cid: "META",
+          //   bmi: bmi,
+          //   rawScore: Math.ceil(bmi * 0.3 / 0.001) * 0.001,
+          // });
+          // Half Spider Web = 22
+          scoreData.push({
+            aid: "AGLTY", cid: "NEUR",
+            rawScore: 22,
+          });
+
+          // write to db
+          saveScoreToDb(scoreData, data).then(() => {
+            logger.info("saved beginner quick scores");
+          });
           break;
         }
         case FitnessLevels.INTERMEDIATE: {
           logger.info("fitnessLevel INTERMEDIATE");
           // deadlift = weight * 1.5
+          scoreData.push({
+            aid: "DLFT", cid: "STRG",
+            rawScore: Math.ceil(data.weight * 1.5 / 5) * 5,
+          });
           // squat = weight * 1.25
+          scoreData.push({
+            aid: "BKSQ", cid: "STRG",
+            rawScore: Math.ceil(data.weight * 1.25 / 5) * 5,
+          });
           // bench = weight * 0.75
+          scoreData.push({
+            aid: "BNCH", cid: "STRG",
+            rawScore: Math.ceil(data.weight * 0.75 / 5) * 5,
+          });
           // weightedPullup = weight * 0.1
+          scoreData.push({
+            aid: "WTPU", cid: "STRG",
+            rawScore: Math.ceil(data.weight * 0.1 / 5) * 5,
+          });
           // pushUps = 18
+          scoreData.push({
+            aid: "PSHU", cid: "ENDR",
+            rawScore: 18,
+          });
           // pullUps = 5
+          scoreData.push({
+            aid: "PLUP", cid: "ENDR",
+            rawScore: 5,
+          });
           // squats = 20
+          scoreData.push({
+            aid: "SQTS", cid: "ENDR",
+            rawScore: 20,
+          });
           // longJump = height * 1
+          scoreData.push({
+            aid: "STLJ", cid: "POWR",
+            rawScore: Math.ceil(height * 1 / 0.5) * 0.5,
+          });
           // pushPress = weight * 0.75
+          scoreData.push({
+            aid: "PSHP", cid: "POWR",
+            rawScore: Math.ceil(data.weight * 0.75 / 5) * 5,
+          });
+          // 100 meter sprint = 14
+          scoreData.push({
+            aid: "PSPR", cid: "POWR",
+            rawScore: 14,
+          });
+          // Clean weight * 1
+          scoreData.push({
+            aid: "PWCL", cid: "POWR",
+            rawScore: Math.ceil(data.weight * 1 / 5) * 5,
+          });
+          // Pike = 5
+          scoreData.push({
+            aid: "PIKE", cid: "FLEX",
+            rawScore: 5,
+            checklist: [true, true, true, true, true],
+          });
+          // Backbend = 5
+          scoreData.push({
+            aid: "BKBN", cid: "FLEX",
+            rawScore: 5,
+            checklist: [true, true, true, true, true],
+          });
+          // Straddle = 130
+          scoreData.push({
+            aid: "STRD", cid: "FLEX",
+            rawScore: 130,
+          });
+          // 1 Hour Run BMI * 0.275
+          // increment 0.05
+          const bmi = (data.weight / (height * height)) * 703;
+          scoreData.push({
+            aid: "ONEHRDST", cid: "META",
+            bmi: bmi,
+            rawScore: Math.ceil(bmi * 0.275 / 0.05) * 0.05,
+          });
+          // 2 Minute Sprint bmi * 0.01 * 30  (bmi* 0.3)
+          // scoreData.push({
+          //   aid: "TWOMDST", cid: "META",
+          //   bmi: bmi,
+          //   rawScore: Math.ceil(bmi * 0.3 / 0.001) * 0.001,
+          // });
+          // Half Spider Web = 20
+          scoreData.push({
+            aid: "AGLTY", cid: "NEUR",
+            rawScore: 20,
+          });
+
+          // write to db
+          saveScoreToDb(scoreData, data).then(() => {
+            logger.info("saved intermediate quick scores");
+          });
           break;
         }
         case FitnessLevels.ADVANCED: {
           logger.info("fitnessLevel ADVANCED");
           // deadlift = weight * 2
+          scoreData.push({
+            aid: "DLFT", cid: "STRG",
+            rawScore: Math.ceil(data.weight * 2 / 5) * 5,
+          });
           // squat = weight * 1.5
+          scoreData.push({
+            aid: "BKSQ", cid: "STRG",
+            rawScore: Math.ceil(data.weight * 1.5 / 5) * 5,
+          });
           // bench = weight * 1.25
+          scoreData.push({
+            aid: "BNCH", cid: "STRG",
+            rawScore: Math.ceil(data.weight * 1.25 / 5) * 5,
+          });
           // weightedPullup = weight * 0.25
+          scoreData.push({
+            aid: "WTPU", cid: "STRG",
+            rawScore: Math.ceil(data.weight * 0.25 / 5) * 5,
+          });
           // pushUps = 40
+          scoreData.push({
+            aid: "PSHU", cid: "ENDR",
+            rawScore: 40,
+          });
           // pullUps = 14
+          scoreData.push({
+            aid: "PLUP", cid: "ENDR",
+            rawScore: 14,
+          });
           // squats = 45
+          scoreData.push({
+            aid: "SQTS", cid: "ENDR",
+            rawScore: 45,
+          });
           // longJump = height * 1.25
+          scoreData.push({
+            aid: "STLJ", cid: "POWR",
+            rawScore: Math.ceil(height * 1.25 / 0.5) * 0.5,
+          });
           // pushPress = weight * 1
+          scoreData.push({
+            aid: "PSHP", cid: "POWR",
+            rawScore: Math.ceil(data.weight * 1 / 5) * 5,
+          });
+          // 100 meter sprint = 13
+          scoreData.push({
+            aid: "PSPR", cid: "POWR",
+            rawScore: 13,
+          });
+          // Clean weight * 1.25
+          scoreData.push({
+            aid: "PWCL", cid: "POWR",
+            rawScore: Math.ceil(data.weight * 1.25 / 5) * 5,
+          });
+          // Pike = 7
+          scoreData.push({
+            aid: "PIKE", cid: "FLEX",
+            rawScore: 7,
+            checklist: [true, true, true, true, true, true, true],
+          });
+          // Backbend = 6
+          scoreData.push({
+            aid: "BKBN", cid: "FLEX",
+            rawScore: 6,
+            checklist: [true, true, true, true, true, true],
+          });
+          // Straddle = 150
+          scoreData.push({
+            aid: "STRD", cid: "FLEX",
+            rawScore: 150,
+          });
+          // 1 Hour Run BMI * 0.325
+          // increment 0.05
+          const bmi = (data.weight / (height * height)) * 703;
+          scoreData.push({
+            aid: "ONEHRDST", cid: "META",
+            bmi: bmi,
+            rawScore: Math.ceil(bmi * 0.325 / 0.05) * 0.05,
+          });
+          // 2 Minute Sprint bmi * 0.01 * 30  (bmi* 0.3)
+          // scoreData.push({
+          //   aid: "TWOMDST", cid: "META",
+          //   bmi: bmi,
+          //   rawScore: Math.ceil(bmi * 0.3 / 0.001) * 0.001,
+          // });
+          // Half Spider Web = 17
+          scoreData.push({
+            aid: "AGLTY", cid: "NEUR",
+            rawScore: 17,
+          });
+
+          // write to db
+          saveScoreToDb(scoreData, data).then(() => {
+            logger.info("saved intermediate quick scores");
+          });
           break;
         }
         default: {
