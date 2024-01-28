@@ -237,13 +237,12 @@ export const newUser = onDocumentCreated(
             bmi: bmi,
             rawScore: Math.ceil(bmi * 0.15 / 0.05) * 0.05,
           });
-          // 2 Minute Sprint bmi * 0.007 * 30
-          // (bmi* 0.21) increment 0.001
-          // scoreData.push({
-          //   aid: "TWOMDST", cid: "META",
-          //   bmi: bmi,
-          //   rawScore: Math.ceil(bmi * 0.21 / 0.001) * 0.001,
-          // });
+          // 2 Minute Sprint bmi * 0.007 (increment 0.001)
+          scoreData.push({
+            aid: "TWOMDST", cid: "META",
+            bmi: bmi,
+            rawScore: Math.ceil(bmi * 0.007 / 0.001) * 0.001,
+          });
           // Half Spider Web = 27
           scoreData.push({
             aid: "AGLTY", cid: "NEUR",
@@ -338,12 +337,12 @@ export const newUser = onDocumentCreated(
             bmi: bmi,
             rawScore: Math.ceil(bmi * 0.224 / 0.05) * 0.05,
           });
-          // 2 Minute Sprint bmi * 0.01 * 30  (bmi* 0.3)
-          // scoreData.push({
-          //   aid: "TWOMDST", cid: "META",
-          //   bmi: bmi,
-          //   rawScore: Math.ceil(bmi * 0.3 / 0.001) * 0.001,
-          // });
+          // 2 Minute Sprint bmi * 0.01
+          scoreData.push({
+            aid: "TWOMDST", cid: "META",
+            bmi: bmi,
+            rawScore: Math.ceil(bmi * 0.01 / 0.001) * 0.001,
+          });
           // Half Spider Web = 22
           scoreData.push({
             aid: "AGLTY", cid: "NEUR",
@@ -438,12 +437,12 @@ export const newUser = onDocumentCreated(
             bmi: bmi,
             rawScore: Math.ceil(bmi * 0.275 / 0.05) * 0.05,
           });
-          // 2 Minute Sprint bmi * 0.01 * 30  (bmi* 0.3)
-          // scoreData.push({
-          //   aid: "TWOMDST", cid: "META",
-          //   bmi: bmi,
-          //   rawScore: Math.ceil(bmi * 0.3 / 0.001) * 0.001,
-          // });
+          // 2 Minute Sprint bmi * 0.012
+          scoreData.push({
+            aid: "TWOMDST", cid: "META",
+            bmi: bmi,
+            rawScore: Math.ceil(bmi * 0.012 / 0.001) * 0.001,
+          });
           // Half Spider Web = 20
           scoreData.push({
             aid: "AGLTY", cid: "NEUR",
@@ -538,12 +537,12 @@ export const newUser = onDocumentCreated(
             bmi: bmi,
             rawScore: Math.ceil(bmi * 0.325 / 0.05) * 0.05,
           });
-          // 2 Minute Sprint bmi * 0.01 * 30  (bmi* 0.3)
-          // scoreData.push({
-          //   aid: "TWOMDST", cid: "META",
-          //   bmi: bmi,
-          //   rawScore: Math.ceil(bmi * 0.3 / 0.001) * 0.001,
-          // });
+          // 2 Minute Sprint bmi * 0.014
+          scoreData.push({
+            aid: "TWOMDST", cid: "META",
+            bmi: bmi,
+            rawScore: Math.ceil(bmi * 0.014 / 0.001) * 0.001,
+          });
           // Half Spider Web = 17
           scoreData.push({
             aid: "AGLTY", cid: "NEUR",
