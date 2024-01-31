@@ -126,11 +126,11 @@ async function saveScoreToDb(scoreData: object[], data: FirebaseFirestore.Docume
     // write score to db
     // TODO: return merged promises
     const path = `user/${data.id}/score/${entry["aid"]}#${scoreDate}`;
-    db.doc(path).set(newScore);
-    // .then((result) => {
-    //   logger.info("result", result);
-    // }
-    // );
+    db.doc(path).set(newScore)
+      .then((result) => {
+        logger.info("WriteResult", result);
+      }
+      );
   });
   return Promise.resolve(scoreData);
 }
