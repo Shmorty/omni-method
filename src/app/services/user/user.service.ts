@@ -89,7 +89,7 @@ export class UserService implements IUserService {
       .pipe(first())
       .subscribe((authUser) => {
         console.log('authUser', authUser);
-        user.id = authUser['uid'];
+        user.id = authUser['uid'] || authUser.user['uid'];
         console.log('user', user);
         // updateUserAction
         console.log('dispatch updateUser action');

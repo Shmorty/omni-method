@@ -4,18 +4,16 @@
 /**
  * Import function triggers from their respective submodules:
  *
- * import {onCall} from "firebase-functions/v2/https";
- * import {onDocumentWritten} from "firebase-functions/v2/firestore";
- *
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
-
-// import { onRequest } from "firebase-functions/v2/https";
 import {onDocumentCreated, onDocumentDeleted, onDocumentUpdated} from "firebase-functions/v2/firestore";
+// import {onSchedule} from "firebase-functions/v2/scheduler";
 import * as logger from "firebase-functions/logger";
 import {initializeApp} from "firebase-admin/app";
 import {getFirestore} from "firebase-admin/firestore";
 import * as data from "./assessments.json";
+import {createPresetScores} from "./scoring/create-preset-scores";
+import {Score, calcAssessmentScore} from "./scoring/calculate-assessment-score";
 
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
@@ -23,55 +21,6 @@ import * as data from "./assessments.json";
 initializeApp();
 const db = getFirestore();
 export const oneDay = 1000 * 3600 * 24;
-
-// interface User {
-//   id: string;
-//   firstName: string;
-//   lastName: string;
-//   nickname: string;
-//   gender: string;
-//   height: {
-//     feet: number;
-//     inches: number;
-//   };
-//   weight: number;
-//   omniScore: number;
-//   categoryScore: [];
-// }
-
-interface Score {
-  uid: string;
-  aid: string;
-  cid: string;
-  scoreDate: string;
-  expired: boolean;
-  rawScore: number;
-  calculatedScore?: number;
-  notes?: string;
-}
-const wrValues = {
-  DLFT: 939,
-  BKSQ: 800,
-  WTPU: 500,
-  BNCH: 600,
-  SQTS: 150,
-  PSHU: 150,
-  PLUP: 49,
-  STLJ: 147,
-  PSHP: 495,
-  PWCL: 400,
-  PSPR: 9.58,
-  PIKE: 0,
-  BKBN: 0,
-  STRD: 0,
-  TWOMDST: 0.5,
-  ONEHRDST: 13.25,
-  STAPN: 11.5,
-  AGLTY: 13,
-  BLNC: 10,
-  COORD: 47,
-};
-const WR = new Map(Object.entries(wrValues));
 
 /**
  * Looks up the user's body weight
@@ -88,15 +37,69 @@ async function getBodyWeight(uid: string): Promise<number> {
 }
 
 /**
- * calculates number of days since scoreDate
- * @param {string} scoreDate
- * @return {number}
+ *
+ * @param {object[]} scoreData
+ * @param {FirebaseFirestore.DocumentData} data
+ * @return {Observable}
  */
-// function calculateDays(scoreDate: string) {
-//   const date = new Date(scoreDate);
-//   const days = Math.ceil((Date.now().valueOf() - date.valueOf()) / oneDay);
-//   return days;
-// }
+async function saveScoreToDb(scoreData: object[], data: FirebaseFirestore.DocumentData): Promise<object[]> {
+  logger.info("saveScore", scoreData);
+  const d = new Date();
+  const ye = new Intl.DateTimeFormat("en", {year: "numeric"}).format(d);
+  const mo = new Intl.DateTimeFormat("en", {month: "2-digit"}).format(d);
+  const da = new Intl.DateTimeFormat("en", {day: "2-digit"}).format(d);
+  const scoreDate = `${ye}-${mo}-${da}`;
+  logger.info("scoreDate", scoreDate);
+  const today = new Date().toLocaleString("sv").replace(" ", "T");
+  // let newScore: Score;
+  let newScore: object;
+  scoreData.forEach((entry) => {
+    newScore = {
+      ...entry,
+      uid: data.id,
+      scoreDate: today,
+      currentWeight: data.weight,
+      expired: false,
+      notes: "Quick score",
+    };
+    // write score to db
+    // TODO: return merged promises
+    const path = `user/${data.id}/score/${entry["aid"]}#${scoreDate}`;
+    db.doc(path).set(newScore)
+      .then((result) => {
+        logger.info("WriteResult", result);
+      }
+      );
+  });
+  return Promise.resolve(scoreData);
+}
+
+export const newUser = onDocumentCreated(
+  "user/{uid}",
+  (event) => {
+    // new user
+    logger.info("newUser event", event);
+    const result = 0;
+    const snapshot = event.data;
+    if (!snapshot) {
+      logger.info("no data associated with newUser event");
+      return null;
+    }
+    // logger.info("begin creating starting scores");
+    const data = snapshot.data();
+    logger.info("new user ", JSON.stringify(data));
+    if (data.omniScore === 0) {
+      const scoreData = createPresetScores(data.fitnessLevel, data.height, data.weight);
+      // write scores to db
+      if (scoreData.length > 0) {
+        saveScoreToDb(scoreData, data).then(() => {
+          logger.info("saved preset scores");
+        });
+      }
+    }
+    return Promise.resolve(result);
+  }
+);
 
 export const newScore = onDocumentCreated(
   "user/{uid}/score/{sid}",
@@ -116,7 +119,7 @@ export const newScore = onDocumentCreated(
     }
     return (
       // calculate assessment score
-      calcAssessmentScore(data as Score)
+      calcAssessmentScore(data as Score, getBodyWeight)
         .then((score) => {
           logger.info("new assessment score", score);
           // write calculated score to db
@@ -131,6 +134,7 @@ export const newScore = onDocumentCreated(
         .then(() => calcCategoryScore(event.params.uid, data["cid"]))
         // update Omni Score data:{uid: val, cid: val, score: val}
         .then((res) => updateOmniScore(res))
+      // .then((res) => updateOmniScoreTransaction(res))
     );
   }
 );
@@ -157,7 +161,7 @@ export const updatedScore = onDocumentUpdated(
     }
     return (
       // calculate assessment score
-      calcAssessmentScore(data as Score)
+      calcAssessmentScore(data as Score, getBodyWeight)
         .then((score) => {
           logger.info("new assessment score", score);
           // write calculated score to db
@@ -189,6 +193,14 @@ export const scoreDeleted = onDocumentDeleted("user/{uid}/score/{sid}", (event) 
   return calcCategoryScore(event.params.uid, data["cid"])
     .then((res) => updateOmniScore(res));
 });
+
+// export const nightly = "every day 00:00";
+// export const hourly = "every hour";
+// export const fiveMin = "every 5 minutes";
+// export const expireScores = onSchedule(hourly, (event) => {
+//   logger.info("onSchedule expireScores", event);
+//   // db.collection()
+// });
 
 /**
  * Updates category score for given user and category
@@ -229,8 +241,15 @@ async function calcCategoryScore(uid: string, cid: string): Promise<unknown> {
   catScore = await Promise.all(promiseArray).then((arr) =>
     arr.reduce((partialSum, a) => partialSum + a, 0)
   );
-  catScore = Math.round(catScore / assessmentCount);
+  if (assessmentCount > 0) {
+    catScore = Math.round(catScore / assessmentCount);
+  }
+  // TODO: test for null
   logger.info("set category score", cid, catScore);
+  if (catScore === null) {
+    logger.warn("got null category score", cid);
+    return null;
+  }
   // Now set it back into the user table
   return Promise.resolve({uid: uid, cid: cid, catScore: catScore});
 }
@@ -276,95 +295,50 @@ async function updateOmniScore(req: unknown): Promise<unknown> {
 }
 
 /**
- * calculate score for checklist assessment
- * @param {Score} req
- * @return {number}
+ * Updates Omni score for given user
+ * @param {unknown} req
+ * @return {Promise}
  */
-function calcChecklistScore(req: Score): number {
-  const max = data.checklists.filter((list) => list.aid === req.aid)[0]["skills"].length;
-  logger.info("max", max);
-  return Math.round(req.rawScore / max * 1000);
-}
-
-/**
- * Calculate the assessment score
- * @param {Score} req request parameter with the new score
- * @return {Promise} returns propmis containing the calculated score
- */
-async function calcAssessmentScore(req: Score): Promise<number> {
-  const wr = WR.get(req.aid) || 0;
-  let result = req.rawScore;
-  switch (req.aid) {
-    case "DLFT": // Deadlift
-    case "BKSQ": // Squat
-    case "BNCH": // Bench
-    case "SQTS": // Squats
-    case "PSHU": // Pushups
-    case "PLUP": // Pullups
-    case "STLJ": // Standing Long Jump
-    case "PSHP": // Push Press
-    case "PWCL": // Clean
-    case "STAPN": // Static Apnea
-      // result = Math.round((req.rawScore / wr) * 100000) / 100;
-      result = Math.round((req.rawScore / wr) * 1000);
-      break;
-    case "WTPU": // Weighted Pull-up
-      await getBodyWeight(req.uid).then((bodyWeight) => {
-        logger.info("rawScore " + req.rawScore.toString());
-        logger.info("got body weight: " + bodyWeight.toString());
-        logger.info("world record " + wr.toString());
-        result = ((req.rawScore + Number(bodyWeight)) / wr) * 1000;
-        logger.info("set result " + result.toString());
-      });
-      break;
-    case "PIKE": // Pike
-    case "BKBN": // Backbend
-    case "BLNC": // Balance
-    case "COORD": // Coordination
-      // result = req.rawScore * 100;
-      result = calcChecklistScore(req);
-      break;
-    case "STRD": // Straddle
-      // result = req.rawScore * 100;
-      if (req.rawScore < 80) {
-        result = 0;
-      } else if (req.rawScore > 180) {
-        result = 1000;
-      } else {
-        result = (req.rawScore - 80) * 10;
-      }
-      break;
-    case "PSPR": // 100 meter sprint
-      // result = Math.round((Math.sqrt((req.rawScore - wr) / 0.125) * -1 + 10) * 10000) / 100;
-      result = Math.round(
-        (Math.sqrt((req.rawScore - wr) / 0.125) * -1 + 10) * 100
-      );
-      break;
-    case "TWOMDST": // 2 minute distance
-      // result = Math.round((Math.sqrt((wr - req.rawScore) / 0.005) * -1 + 10) * 10000) / 100;
-      result = Math.round(
-        (Math.sqrt((wr - req.rawScore) / 0.005) * -1 + 10) * 100
-      );
-      break;
-    case "ONEHRDST": // 1 hour distance
-      // result = Math.round((Math.sqrt((wr - req.rawScore) / 0.1325) * -1 + 10) * 10000) / 100;
-      if (req.rawScore < 5.0) {
-        result = Math.round(
-          (Math.sqrt((wr - req.rawScore) / 0.1325) * -1 + 10) * 100
-        );
-      } else {
-        result = Math.round((req.rawScore / wr) * 1000);
-      }
-      break;
-    case "AGLTY": // Agility
-      // result = Math.round((Math.sqrt((req.rawScore - wr) / 0.25) * -1 + 10) * 10000) / 100;
-      result = Math.round(
-        (Math.sqrt((req.rawScore - wr) / 0.25) * -1 + 10) * 100
-      );
-      break;
-    default:
-      // if falls through jusr return raw score
-      break;
-  }
-  return Promise.resolve(result);
-}
+// async function updateOmniScoreTransaction(req: unknown): Promise<unknown> {
+//   // {uid: string, cid: string, catScore: number}
+//   logger.info("updateOmniScoreTransaction", JSON.stringify(req));
+//   try {
+//     db.runTransaction(async (t) => {
+//       // get user document
+//       const userRef = db.collection("user").doc(req["uid"]);
+//       const userDoc = await t.get(userRef);
+//       const userData = userDoc.data();
+//       logger.info("userDoc.data()", userData);
+//       if (userData) {
+//         logger.info("userData", JSON.stringify(userData));
+//         logger.info("catScore from db", userData.categoryScore[req["cid"]]);
+//         if (userData.categoryScore[req["cid"]] !== req["catScore"]) {
+//           // update scores
+//           logger.info("update user scores setting ", req["cid"], " to ", req["catScore"]);
+//           Object.defineProperty(userData.categoryScore, req["cid"], {
+//             value: req["catScore"],
+//           });
+//           logger.info("updated categoryScore", userData.categoryScore);
+//           let unadjustedScore = 0;
+//           // eslint-disable-next-line guard-for-in
+//           for (const element in userData.categoryScore) {
+//             logger.info(`${element}: ${userData.categoryScore[element]}`);
+//             unadjustedScore += userData.categoryScore[element];
+//           }
+//           logger.info("unadjustedScore", unadjustedScore);
+//           // calculate omni score
+//           const omniScore = Math.round(Math.pow(unadjustedScore / 1500, 2) * 1500);
+//           logger.info("omniScore", omniScore);
+//           userData.omniScore = omniScore;
+//           // write updated record to db
+//           // return userSnapshot.ref.update(userData);
+//           t.update(userRef, userData);
+//           // return Promise.resolve(omniScore);
+//         }
+//       }
+//     });
+//   } catch (e) {
+//     logger.warn("unable to update omni score", e);
+//   }
+//   return null;
+// }

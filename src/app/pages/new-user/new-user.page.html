@@ -97,7 +97,7 @@
               <app-number-picker style="width: 50%;" [min]="0" [max]="11" [value]="5" [units]="'in'"
               [(value)]="formData.value.height.inches"></app-number-picker>
             </ion-item>
-                    </fieldset>
+          </fieldset>
         </div>
         <!-- <div *ngIf="step == 5"> -->
         <div [hidden]="step !== 5">
@@ -119,14 +119,25 @@
             </ion-text>
           </div>
           <ion-item>
+            <ion-list>
+            <!-- formControlName="fitnessLevel" -->
             <ion-radio-group
-              formControlName="fitnessLevel"
-              value="none">
-              <ion-radio justify="start" value="none" labelPlacement="end">No Experience</ion-radio>
-              <ion-radio justify="start" value="beginner" labelPlacement="end">Beginner</ion-radio>
-              <ion-radio justify="start" value="intermediate" labelPlacement="end">Intermediate</ion-radio>
-              <ion-radio justify="start" value="advanced" labelPlacement="end">Advanced</ion-radio>
+              (ionChange)="setFitnessLevel($event)"
+              value="fitnessLevel">
+              <ion-item>
+                <ion-radio justify="start" value="none" labelPlacement="end">No Experience</ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-radio justify="start" value="beginner" labelPlacement="end">Beginner</ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-radio justify="start" value="intermediate" labelPlacement="end">Intermediate</ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-radio justify="start" value="advanced" labelPlacement="end">Advanced</ion-radio>
+              </ion-item>
             </ion-radio-group>
+            </ion-list>
           </ion-item>
         </div>
       </ion-list>

@@ -6,9 +6,9 @@ import {UserService} from 'src/app/services/user/user.service';
 import {AuthService} from 'src/app/services/auth.service';
 import {User} from 'src/app/store/user/user.model';
 // import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
-import {isPlatform} from '@ionic/angular';
-import {Keyboard} from '@capacitor/keyboard';
-import {UserFirestoreService} from 'src/app/services/user-firestore.service';
+// import {isPlatform} from '@ionic/angular';
+// import {Keyboard} from '@capacitor/keyboard';
+// import {UserFirestoreService} from 'src/app/services/user-firestore.service';
 import {AssessmentService} from 'src/app/services/assessments/assessment.service';
 
 @Component({
@@ -19,20 +19,21 @@ import {AssessmentService} from 'src/app/services/assessments/assessment.service
 export class NewUserPage implements OnInit {
   userId: string;
   userEmail: string;
-  public newUser: User = {
-    id: this.auth.currUserId,
-    email: this.auth.currUserEmail,
-    firstName: '',
-    lastName: '',
-    dob: undefined,
-    height: {feet: 4, inches: 6},
-    weight: 75,
-    omniScore: 0,
-    categoryScore: undefined,
-  };
+  // public newUser: User = {
+  //   id: this.auth.currUserId,
+  //   email: this.auth.currUserEmail,
+  //   firstName: '',
+  //   lastName: '',
+  //   dob: undefined,
+  //   height: {feet: 4, inches: 6},
+  //   weight: 75,
+  //   omniScore: 0,
+  //   categoryScore: undefined,
+  // };
   formData: FormGroup;// = new FormGroup({});
 
   userDob: string;
+  fitnessLevel: string = 'none';
   step = 1;
   isApp = false;
 
@@ -48,23 +49,24 @@ export class NewUserPage implements OnInit {
     this.userDob = datePipe.transform(calcDate, 'yyyy-MM-dd');
     // https://stackoverflow.com/questions/65056918/reactive-form-date-picker-in-ionic-5
     console.log("newUser userDob", this.userDob);
-    console.log("newUser", this.newUser);
+    //    console.log("newUser", this.newUser);
     // set default values for new user
-    this.newUser.dob = calcDate;
+    //    this.newUser.dob = calcDate;
     // this.newUser.weight = 100;
     // this.newUser.height.feet = 4;
     // this.newUser.height.inches = 6;
     // this.newUser.height = {feet: 4, inches: 6};
     this.userId = this.auth.currUserId;
     this.userEmail = this.auth.currUserEmail;
-    this.initFormData();
   }
 
   ngOnInit() {
     console.log("newUser ngOnInit", this.userId, this.userEmail);
 
+    this.initFormData();
+
     // console.log("ngOnInit formData", this.formData);
-    console.log("ngOnInit newUser", this.newUser);
+    // console.log("ngOnInit newUser", this.newUser);
   }
 
   private initFormData() {
@@ -74,10 +76,11 @@ export class NewUserPage implements OnInit {
     // this.formData.addControl('lastName', new FormControl('', Validators.required));
     // this.formData.addControl('nickname', new FormControl());
     // this.formData.addControl('gender', new FormControl());
+    console.log("initFormData()");
     this.formData = new FormGroup({
-      id: new FormControl(this.userId, Validators.required),
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
+      id: new FormControl(this.userId, [Validators.required]),
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
       email: new FormControl(this.userEmail, [
         Validators.required,
         Validators.email,
@@ -103,16 +106,23 @@ export class NewUserPage implements OnInit {
         Validators.min(0),
         Validators.max(500),
       ]),
-      fitnessLevel: new FormControl('none', Validators.required),
+      // fitnessLevel: new FormControl('none', [Validators.required]),
     });
+    // this.formData.patchValue(this.newUser);
+  }
+
+  setFitnessLevel(ev) {
+    this.fitnessLevel = ev.target.value;
+    console.log("setFitnessLevel", this.fitnessLevel);
   }
 
   onSubmit() {
     console.log('new user onSubmit', this.formData.value);
-    this.assessmentService.getChecklist;
+    // this.assessmentService.getChecklist;
     // create user in database
     this.userService.saveNewUser({
-      ...this.formData.value,
+      ...(this.formData.value),
+      fitnessLevel: this.fitnessLevel,
       omniScore: 0,
       categoryScore: this.assessmentService.getNewCategoryScores(),
     });
@@ -152,10 +162,10 @@ export class NewUserPage implements OnInit {
     return this.formData.get('weight');
   }
 
-  async openPicker() {
-    let maxDate = new Date(); //.setFullYear(2006);
-    let curYear = maxDate.getFullYear();
-    maxDate.setFullYear(curYear - 2);
-  }
+  // async openPicker() {
+  //   let maxDate = new Date(); //.setFullYear(2006);
+  //   let curYear = maxDate.getFullYear();
+  //   maxDate.setFullYear(curYear - 2);
+  // }
 
 }

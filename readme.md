@@ -59,6 +59,12 @@ July 16, 2023
 2. run npm install
 3. ionic serve
 
+## deploy function
+
+firebase login
+firebase projects:list
+firebase --project [Project ID] deploy --only functions
+
 ## Using NgRx
 
 helpful articles
