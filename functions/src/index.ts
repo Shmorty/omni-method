@@ -265,35 +265,41 @@ async function calcCategoryScore(uid: string, cid: string): Promise<unknown> {
 async function updateOmniScore(req: unknown): Promise<unknown> {
   // {uid: string, cid: string, catScore: number}
   logger.info("updateOmniScore", JSON.stringify(req));
+  const uid = req["uid"];
+  const cid = req["cid"];
+  const catScore = req["catScore"];
+
+  // update just one category
+  db.collection("user").doc(uid).update({[`categoryScore.${cid}`]: catScore});
+
   // get user from db
-  logger.info(`user/${req["uid"]}`);
-  const userSnapshot = await db.doc(`user/${req["uid"]}`).get();
+  const userSnapshot = await db.doc(`user/${uid}`).get();
   const userData = userSnapshot.data();
   if (userData) {
     logger.info("userData", JSON.stringify(userData));
-    logger.info("catScore from db", userData.categoryScore[req["cid"]]);
-    if (userData.categoryScore[req["cid"]] !== req["catScore"]) {
-      // update scores
-      logger.info("update user scores");
-      Object.defineProperty(userData.categoryScore, req["cid"], {
-        value: req["catScore"],
-      });
-      // userData.categoryScore[req["cid"]] = req["catScore"];
-      let unadjustedScore = 0;
-      // eslint-disable-next-line guard-for-in
-      for (const element in userData.categoryScore) {
-        logger.info(`${element}: ${userData.categoryScore[element]}`);
+    let unadjustedScore = 0;
+    // add category scores
+    for (const element in userData.categoryScore) {
+      // logger.info(`${element}: ${userData.categoryScore[element]}`);
+      if (userData.categoryScore[element] != 0) {
         unadjustedScore += userData.categoryScore[element];
       }
-      logger.info("unadjustedScore", unadjustedScore);
-      const omniScore = Math.round(Math.pow(unadjustedScore / 1500, 2) * 1500);
-      logger.info("omniScore", omniScore);
-      userData.omniScore = omniScore;
-      // write updated record to db
-      return userSnapshot.ref.update(userData);
-      // return Promise.resolve(omniScore);
     }
+    logger.info("unadjustedScore", unadjustedScore);
+    const omniScore = Math.round(Math.pow(unadjustedScore / 1500, 2) * 1500);
+    logger.info("omniScore", omniScore);
+    if (userData.omniScore != omniScore) {
+      // write updated record to db
+      return db.collection("user").doc(uid).update({["omniScore"]: omniScore});
+      // userData.omniScore = omniScore;
+      // return userSnapshot.ref.update(userData);
+
+      // db.collection("user").doc(uid).collection("scoreHistory").
+    }
+    logger.info("omniScore unchanged");
+    return Promise.resolve(omniScore);
   }
+  logger.warn("DIDN'T FIND USER DATA " + uid);
   return null;
 }
 
