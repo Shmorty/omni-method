@@ -100,7 +100,7 @@ export function createPresetScores(fitnessLevel: string,
       scores.push({
         aid: "ONEHRDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(bmi * 0.15 / 0.05) * 0.05,
+        rawScore: Math.ceil(Math.ceil(bmi * 0.15 / 0.05) * 5) / 100,
       });
       // 2 Minute Sprint bmi * 0.007 (increment 0.001)
       scores.push({
@@ -194,7 +194,7 @@ export function createPresetScores(fitnessLevel: string,
       scores.push({
         aid: "ONEHRDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(bmi * 0.224 / 0.05) * 0.05,
+        rawScore: Math.ceil(Math.ceil(bmi * 0.224 / 0.05) * 5) / 100,
       });
       // 2 Minute Sprint bmi * 0.01
       scores.push({
@@ -288,7 +288,7 @@ export function createPresetScores(fitnessLevel: string,
       scores.push({
         aid: "ONEHRDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(bmi * 0.275 / 0.05) * 0.05,
+        rawScore: Math.ceil(Math.ceil(bmi * 0.275 / 0.05) * 5) / 100,
       });
       // 2 Minute Sprint bmi * 0.012
       scores.push({
@@ -382,7 +382,7 @@ export function createPresetScores(fitnessLevel: string,
       scores.push({
         aid: "ONEHRDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(bmi * 0.325 / 0.05) * 0.05,
+        rawScore: Math.ceil(Math.ceil(bmi * 0.325 / 0.05) * 5) / 100,
       });
       // 2 Minute Sprint bmi * 0.014
       scores.push({
