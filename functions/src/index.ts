@@ -213,12 +213,12 @@ async function calcCategoryScore(uid: string, cid: string): Promise<unknown> {
   let assessmentCount = 0;
   const promiseArray: Promise<number>[] = [];
   const collectionRef = await db.collection(`user/${uid}/score`);
+  logger.info("calcCategoryScore " + uid + " " + cid);
   // loop through assessments for current category
   data.assessments
     .filter((assessment) => assessment.cid === cid)
     // eslint-disable-next-line space-before-function-paren
     .forEach(async (assessmentMeta) => {
-      logger.info(assessmentMeta.aid);
       assessmentCount++;
       // collect promise for each assessment in category
       promiseArray.push(
@@ -231,24 +231,27 @@ async function calcCategoryScore(uid: string, cid: string): Promise<unknown> {
             if (!snap.empty) {
               return snap.docs.pop().get("calculatedScore");
             }
-            return null;
+            return 0;
           })
           .catch((err) => logger.info(err))
       );
     });
+  logger.info(cid + " promiseArray length: " + promiseArray.length);
   // add assessment scores for category
   // this code needs review
   catScore = await Promise.all(promiseArray).then((arr) =>
     arr.reduce((partialSum, a) => partialSum + a, 0)
   );
+  logger.info(cid + " total catScore: " + catScore + " assessmentCount " + assessmentCount);
   if (assessmentCount > 0) {
     catScore = Math.round(catScore / assessmentCount);
   }
+  logger.info(cid + " catScore " + catScore);
   // TODO: test for null
-  logger.info("set category score", cid, catScore);
+  // logger.info("set category score", cid, catScore);
   if (catScore === null) {
-    logger.warn("got null category score", cid);
-    return null;
+    // logger.warn("got null category score", cid);
+    return Promise.resolve(0);
   }
   // Now set it back into the user table
   return Promise.resolve({uid: uid, cid: cid, catScore: catScore});
