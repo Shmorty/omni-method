@@ -212,7 +212,7 @@ async function calcCategoryScore(uid: string, cid: string): Promise<unknown> {
   let catScore = 0;
   let assessmentCount = 0;
   const promiseArray: Promise<number>[] = [];
-  const collectionRef = await db.collection(`user/${uid}/score`);
+  const collectionRef = db.collection(`user/${uid}/score`);
   logger.info("calcCategoryScore " + uid + " " + cid);
   // loop through assessments for current category
   data.assessments
@@ -220,28 +220,47 @@ async function calcCategoryScore(uid: string, cid: string): Promise<unknown> {
     // eslint-disable-next-line space-before-function-paren
     .forEach(async (assessmentMeta) => {
       assessmentCount++;
+      /* read score for each assessment */
+      logger.info("get score for assessment " + assessmentMeta.aid);
+      const snapshot = await collectionRef.where("aid", "==", assessmentMeta.aid)
+        .where("expired", "!=", true)
+        .get();
+      if (snapshot.empty) {
+        logger.info("no data found");
+      } else {
+        logger.info("Found records snapshot size " + snapshot.size);
+        snapshot.forEach((doc) => {
+          logger.info("got assessment " + JSON.stringify(doc.data()));
+          logger.info("push score " + doc.get("calculatedScore"));
+          promiseArray.push(doc.get("calculatedScore"));
+        });
+      }
+      /*
       // collect promise for each assessment in category
       promiseArray.push(
         collectionRef
           .where("aid", "==", assessmentMeta.aid)
           .where("expired", "!=", true)
+          // .orderBy("id")
           .get()
           .then((snap) => {
             // pop the most recent score
-            if (!snap.empty) {
+            if (!snap.empty && snap.docs.length > 0) {
               return snap.docs.pop().get("calculatedScore");
             }
             return 0;
           })
           .catch((err) => logger.info(err))
       );
+      */
     });
   logger.info(cid + " promiseArray length: " + promiseArray.length);
   // add assessment scores for category
   // this code needs review
-  catScore = await Promise.all(promiseArray).then((arr) =>
-    arr.reduce((partialSum, a) => partialSum + a, 0)
-  );
+  catScore = await Promise.all(promiseArray).then((arr) => {
+    logger.info("reduce arr", arr);
+    return arr.reduce((partialSum, a) => partialSum + a, 0);
+  });
   logger.info(cid + " total catScore: " + catScore + " assessmentCount " + assessmentCount);
   if (assessmentCount > 0) {
     catScore = Math.round(catScore / assessmentCount);
