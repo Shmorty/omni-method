@@ -280,13 +280,13 @@ async function updateOmniScore(req: unknown): Promise<unknown> {
   const catScore = req["catScore"];
 
   // update just one category
-  db.collection("user").doc(uid).update({[`categoryScore.${cid}`]: catScore});
+  await db.collection("user").doc(uid).update({[`categoryScore.${cid}`]: catScore});
 
   // get user from db
   const userSnapshot = await db.doc(`user/${uid}`).get();
   const userData = userSnapshot.data();
   if (userData) {
-    logger.info("userData", JSON.stringify(userData));
+    logger.info("userData " + JSON.stringify(userData));
     let unadjustedScore = 0;
     // add category scores
     for (const element in userData.categoryScore) {
@@ -297,8 +297,16 @@ async function updateOmniScore(req: unknown): Promise<unknown> {
     }
     logger.info("unadjustedScore", unadjustedScore);
     const omniScore = Math.round(Math.pow(unadjustedScore / 1500, 2) * 1500);
-    logger.info("omniScore", omniScore);
+    // write score to history
+    const d = new Date();
+    const ye = new Intl.DateTimeFormat("en", {year: "numeric"}).format(d);
+    const mo = new Intl.DateTimeFormat("en", {month: "2-digit"}).format(d);
+    const yyyymm = `${ye}-${mo}`;
+    const historyScore = {omniScore: omniScore, categoryScore: userData.categoryScore};
+    logger.info("save historyScore " + yyyymm + " " + JSON.stringify(historyScore));
+    db.doc(`user/${uid}/history/${yyyymm}`).set(historyScore);
     if (userData.omniScore != omniScore) {
+      logger.info("write new omniScore to db " + omniScore);
       // write updated record to db
       return db.collection("user").doc(uid).update({["omniScore"]: omniScore});
       // userData.omniScore = omniScore;
