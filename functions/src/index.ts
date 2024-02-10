@@ -212,45 +212,58 @@ async function calcCategoryScore(uid: string, cid: string): Promise<unknown> {
   let catScore = 0;
   let assessmentCount = 0;
   const promiseArray: Promise<number>[] = [];
-  const collectionRef = await db.collection(`user/${uid}/score`);
+  const collectionRef = db.collection(`user/${uid}/score`);
+  logger.info("calcCategoryScore " + cid);
   // loop through assessments for current category
   data.assessments
     .filter((assessment) => assessment.cid === cid)
     // eslint-disable-next-line space-before-function-paren
     .forEach(async (assessmentMeta) => {
-      logger.info(assessmentMeta.aid);
       assessmentCount++;
-      // collect promise for each assessment in category
+      // read score for each assessment save promise to array
+      logger.info(cid + " get score for assessment " + assessmentMeta.aid);
       promiseArray.push(
-        collectionRef
-          .where("aid", "==", assessmentMeta.aid)
+        collectionRef.where("aid", "==", assessmentMeta.aid)
           .where("expired", "!=", true)
           .get()
-          .then((snap) => {
-            // pop the most recent score
-            if (!snap.empty) {
-              return snap.docs.pop().get("calculatedScore");
+          .then((snapshot) => {
+            if (snapshot.empty) {
+              logger.info(cid + " no data found for " + assessmentMeta.aid);
+              return 0;
+            } else {
+              logger.info(cid + " " + assessmentMeta.aid + " records found " + snapshot.size);
+              const score = snapshot.docs.pop().get("calculatedScore");
+              if (score) {
+                return score;
+              } else {
+                logger.info(cid + " " + assessmentMeta.aid + " no score");
+                return 0;
+              }
             }
-            return null;
           })
-          .catch((err) => logger.info(err))
+          .catch((err) => {
+            logger.info(cid + " no data found err " + err);
+            return 0;
+          })
       );
     });
-  // add assessment scores for category
-  // this code needs review
-  catScore = await Promise.all(promiseArray).then((arr) =>
-    arr.reduce((partialSum, a) => partialSum + a, 0)
-  );
+  // collect scores from each promise
+  logger.info(cid + " promiseArray length: " + promiseArray.length);
+  catScore = await Promise.all(promiseArray).then((arr) => {
+    logger.info(cid + " reduce arr", arr);
+    return arr.reduce((partialSum, a) => partialSum + a, 0);
+  });
+  logger.info(cid + " total catScore: " + catScore + " assessmentCount " + assessmentCount);
+  // calculate category score
   if (assessmentCount > 0) {
     catScore = Math.round(catScore / assessmentCount);
   }
-  // TODO: test for null
-  logger.info("set category score", cid, catScore);
-  if (catScore === null) {
-    logger.warn("got null category score", cid);
-    return null;
+  logger.info(cid + " catScore " + catScore);
+  if (!catScore) {
+    logger.warn(cid + " no category score");
+    return Promise.resolve(0);
   }
-  // Now set it back into the user table
+  // Now set it back as promise
   return Promise.resolve({uid: uid, cid: cid, catScore: catScore});
 }
 
@@ -262,83 +275,48 @@ async function calcCategoryScore(uid: string, cid: string): Promise<unknown> {
 async function updateOmniScore(req: unknown): Promise<unknown> {
   // {uid: string, cid: string, catScore: number}
   logger.info("updateOmniScore", JSON.stringify(req));
+  const uid = req["uid"];
+  const cid = req["cid"];
+  const catScore = req["catScore"];
+
+  // update just one category
+  await db.collection("user").doc(uid).update({[`categoryScore.${cid}`]: catScore});
+
   // get user from db
-  logger.info(`user/${req["uid"]}`);
-  const userSnapshot = await db.doc(`user/${req["uid"]}`).get();
+  const userSnapshot = await db.doc(`user/${uid}`).get();
   const userData = userSnapshot.data();
   if (userData) {
-    logger.info("userData", JSON.stringify(userData));
-    logger.info("catScore from db", userData.categoryScore[req["cid"]]);
-    if (userData.categoryScore[req["cid"]] !== req["catScore"]) {
-      // update scores
-      logger.info("update user scores");
-      Object.defineProperty(userData.categoryScore, req["cid"], {
-        value: req["catScore"],
-      });
-      // userData.categoryScore[req["cid"]] = req["catScore"];
-      let unadjustedScore = 0;
-      // eslint-disable-next-line guard-for-in
-      for (const element in userData.categoryScore) {
-        logger.info(`${element}: ${userData.categoryScore[element]}`);
+    logger.info("userData " + JSON.stringify(userData));
+    let unadjustedScore = 0;
+    // add category scores
+    for (const element in userData.categoryScore) {
+      // logger.info(`${element}: ${userData.categoryScore[element]}`);
+      if (userData.categoryScore[element] != 0) {
         unadjustedScore += userData.categoryScore[element];
       }
-      logger.info("unadjustedScore", unadjustedScore);
-      const omniScore = Math.round(Math.pow(unadjustedScore / 1500, 2) * 1500);
-      logger.info("omniScore", omniScore);
-      userData.omniScore = omniScore;
-      // write updated record to db
-      return userSnapshot.ref.update(userData);
-      // return Promise.resolve(omniScore);
     }
+    logger.info("unadjustedScore", unadjustedScore);
+    const omniScore = Math.round(Math.pow(unadjustedScore / 1500, 2) * 1500);
+    // write score to history
+    const d = new Date();
+    const ye = new Intl.DateTimeFormat("en", {year: "numeric"}).format(d);
+    const mo = new Intl.DateTimeFormat("en", {month: "2-digit"}).format(d);
+    const yyyymm = `${ye}-${mo}`;
+    const historyScore = {omniScore: omniScore, categoryScore: userData.categoryScore};
+    logger.info("save historyScore " + yyyymm + " " + JSON.stringify(historyScore));
+    db.doc(`user/${uid}/history/${yyyymm}`).set(historyScore);
+    if (userData.omniScore != omniScore) {
+      logger.info("write new omniScore to db " + omniScore);
+      // write updated record to db
+      return db.collection("user").doc(uid).update({["omniScore"]: omniScore});
+      // userData.omniScore = omniScore;
+      // return userSnapshot.ref.update(userData);
+
+      // db.collection("user").doc(uid).collection("scoreHistory").
+    }
+    logger.info("omniScore unchanged");
+    return Promise.resolve(omniScore);
   }
+  logger.warn("DIDN'T FIND USER DATA " + uid);
   return null;
 }
-
-/**
- * Updates Omni score for given user
- * @param {unknown} req
- * @return {Promise}
- */
-// async function updateOmniScoreTransaction(req: unknown): Promise<unknown> {
-//   // {uid: string, cid: string, catScore: number}
-//   logger.info("updateOmniScoreTransaction", JSON.stringify(req));
-//   try {
-//     db.runTransaction(async (t) => {
-//       // get user document
-//       const userRef = db.collection("user").doc(req["uid"]);
-//       const userDoc = await t.get(userRef);
-//       const userData = userDoc.data();
-//       logger.info("userDoc.data()", userData);
-//       if (userData) {
-//         logger.info("userData", JSON.stringify(userData));
-//         logger.info("catScore from db", userData.categoryScore[req["cid"]]);
-//         if (userData.categoryScore[req["cid"]] !== req["catScore"]) {
-//           // update scores
-//           logger.info("update user scores setting ", req["cid"], " to ", req["catScore"]);
-//           Object.defineProperty(userData.categoryScore, req["cid"], {
-//             value: req["catScore"],
-//           });
-//           logger.info("updated categoryScore", userData.categoryScore);
-//           let unadjustedScore = 0;
-//           // eslint-disable-next-line guard-for-in
-//           for (const element in userData.categoryScore) {
-//             logger.info(`${element}: ${userData.categoryScore[element]}`);
-//             unadjustedScore += userData.categoryScore[element];
-//           }
-//           logger.info("unadjustedScore", unadjustedScore);
-//           // calculate omni score
-//           const omniScore = Math.round(Math.pow(unadjustedScore / 1500, 2) * 1500);
-//           logger.info("omniScore", omniScore);
-//           userData.omniScore = omniScore;
-//           // write updated record to db
-//           // return userSnapshot.ref.update(userData);
-//           t.update(userRef, userData);
-//           // return Promise.resolve(omniScore);
-//         }
-//       }
-//     });
-//   } catch (e) {
-//     logger.warn("unable to update omni score", e);
-//   }
-//   return null;
-// }
