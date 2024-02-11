@@ -395,9 +395,9 @@
       ]
     },
     {
+      "aid": "ONEHRDST",
       "cid": "META",
       "label": "1 Hour Run",
-      "aid": "ONEHRDST",
       "icon": "/assets/images/onehourrun.png",
       "units": "Miles",
       "entryUnits": "Miles",
@@ -447,8 +447,8 @@
     {
       "aid": "AGLTY",
       "cid": "NEUR",
-      "icon": "/assets/images/agility.png",
       "label": "Half Spider Web",
+      "icon": "/assets/images/agility.png",
       "units": "Secs",
       "entryUnits": "Seconds",
       "description": "Layout of Cones:\n - Home Cone: Center\n - West Cone: 13.5 ft to the left of Home Cone\n - East Cone: 13.5 ft to the right of Home Cone\n - Northwest Cone: 21 ft in front of West Cone\n - North Cone: 21 ft in front of Home Cone\n - Northeast Cone: 21 ft in front of East Cone",
@@ -477,8 +477,8 @@
       "aid": "BLNC",
       "checklist": true,
       "cid": "NEUR",
-      "icon": "/assets/images/Balance.png",
       "label": "Balance Positions",
+      "icon": "/assets/images/Balance.png",
       "description": "",
       "instruction": [
         "Follow the instructions provided for each position",
@@ -497,8 +497,8 @@
       "aid": "COORD",
       "checklist": true,
       "cid": "NEUR",
-      "icon": "/assets/images/Coordination.png",
       "label": "Coordination Skills",
+      "icon": "/assets/images/Coordination.png",
       "description": "",
       "descriptionHide": "(see each skill for specific rules)",
       "instruction": [
