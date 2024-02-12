@@ -13,10 +13,10 @@
     <ion-segment-button value="rankings">
       <ion-label>Rankings</ion-label>
     </ion-segment-button>
-    <!-- <ion-segment-button value="updates">
+    <ion-segment-button value="updates">
       <ion-label>Updates</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="people">
+    <!-- <ion-segment-button value="people">
       <ion-label>People</ion-label>
     </ion-segment-button> -->
   </ion-segment>
@@ -37,14 +37,14 @@
         (click)="showDetail(athlete)" ngClass="{{highlightUser(athlete)}}"
         color="{{highlightUser(athlete)}}"
         lines="full">
-        <ion-text slot="start">{{i+1}}</ion-text>
+        <ion-text class="rank" slot="start">{{i+1}}</ion-text>
         <ion-avatar slot="start">
           <img *ngIf="athlete.avatar" src="{{athlete.avatar}}">
           <ion-icon *ngIf="!athlete.avatar" name="person-outline"></ion-icon>
         </ion-avatar>
         <ion-text *ngIf="athlete.nickname">{{athlete.nickname}}</ion-text>
         <ion-text *ngIf="!athlete.nickname">{{athlete.firstName}} {{athlete.lastName}}</ion-text>
-        <ion-text slot="end">{{athlete.omniScore | number}}</ion-text>
+        <ion-text class="score" slot="end">{{athlete.omniScore | number}}</ion-text>
       </ion-item>
     </ion-list>
     <ion-list *ngSwitchCase="'updates'">
@@ -53,7 +53,10 @@
           <ion-card-title></ion-card-title>
           <ion-card-subtitle>Community Updates</ion-card-subtitle>
         </ion-card-header>
-        <ion-card-content>coming soon</ion-card-content>
+        <ion-card-content>
+          <!-- handstand video -->
+          <iframe width="100%" src="https://www.youtube.com/embed/DQ2yGcC86sE?si=3ySEF_jyZZv2ivmT&rel=0" frameborder="0" allow="'none'" allowfullscreen></iframe>
+        </ion-card-content>
       </ion-card>
     </ion-list>
     <ion-list *ngSwitchCase="'people'">

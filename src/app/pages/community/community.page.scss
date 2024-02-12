@@ -29,9 +29,18 @@ ion-segment {
   --color: #b8dfff;
   // color: var(--ion-color-tertiary);
 }
+.rank {
+  min-width: 24px;
+}
 ion-avatar {
+  background-color: var(--ion-color-primary);
   ion-icon {
     aspect-ratio:  1 / 1;
+    color: var(--ion-color-primary-contrast);
     min-height: 32px;
+    width: 100%;
   }
+}
+.score {
+  color: var(--ion-color-secondary);
 }
