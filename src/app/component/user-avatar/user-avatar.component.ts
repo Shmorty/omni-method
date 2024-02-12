@@ -9,19 +9,19 @@ import {User} from 'src/app/store/user/user.model';
   selector: 'user-avatar',
   template: `
     <ion-avatar id="avatar" color="color">
-      <span *ngIf="user.avatar">
+      <div class="avatar-container" *ngIf="user.avatar">
         <img src="{{ user.avatar }}" />
-      </span>
+      </div>
       <ion-label *ngIf="!user.avatar" class="textAvatar" color="color">
-        {{user.firstName | slice : 0 : 1 }}{{user.lastName | slice : 0 : 1 }}
+        {{userInitial()}}
       </ion-label>
       <ion-icon id="icon" name="pencil-outline"></ion-icon>
-      <ion-label id="label" *ngIf="label">{{label}}</ion-label>
     </ion-avatar>
   `,
   styles: [
     `
       #avatar {
+        background-color: var(--ion-color-primary);
         border-radius: 50%;
         display: block;
         margin: auto;
@@ -29,6 +29,11 @@ import {User} from 'src/app/store/user/user.model';
         /* aspect-ratio: 1 / 1; */
         /* overflow: hidden; */
         position:relative;
+        width: 64px;
+        height: 64px;
+      }
+      .avatar-container {
+        padding-top: 8px;
       }
       #icon {
           color: var(--ion-color-primary);
@@ -40,30 +45,30 @@ import {User} from 'src/app/store/user/user.model';
           padding: 4px;
         }
       .textAvatar {
-        border: 2px solid;
+        border: 1px solid;
         border-radius: 50%;
+        display: block;
+        font-size: 32pt;
         font-weight: bold;
+        text-align: center;
         overflow: hidden;
-        padding: 0.7em 0.5em;
-        width: 3em;
-        height: 3em;
-      }
-      #label {
-        position: absolute;
-        bottom: -8px;
-        left: 6px;
+        width: 64px;
+        height: 64px;
       }
     `,
   ],
 })
 export class UserAvatarComponent implements OnInit {
   @Input() user: User;
-  @Input() label: string | undefined;
   constructor() {}
 
   ngOnInit() {
     console.log('UserAvatarComponent ngOnInit');
     console.log("user", this.user);
-    console.log("label", this.label);
+  }
+
+  userInitial() {
+    return (this.user.nickname) ?
+      this.user.nickname.substring(0, 1) : this.user.firstName.substring(0, 1);
   }
 }

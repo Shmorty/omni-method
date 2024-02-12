@@ -23,6 +23,7 @@ export class EditPropertyComponent implements OnInit {
 
   @Input() targetProperty: string;
   @Input() user: User;
+  @ViewChild('avatar') avatarTemplate: TemplateRef<any>;
   @ViewChild('name') nameTemplate: TemplateRef<any>;
   @ViewChild('nickname') nicknameTemplate: TemplateRef<any>;
   @ViewChild('dob') dobTemplate: TemplateRef<any>;
@@ -33,6 +34,28 @@ export class EditPropertyComponent implements OnInit {
   public template: TemplateRef<any>;
   public firstName: string;
   public updUser: User;
+  public imageType = "avatar";
+  public avatars = [
+    {"label": "Deadlift", "icon": "/assets/images/deadlift.png"},
+    {"label": "Squat", "icon": "/assets/images/backsquat.png"},
+    {"label": "Bench", "icon": "/assets/images/BenchPress.png"},
+    {"label": "Weighted Pull-up", "icon": "/assets/images/weightedpullup.png"},
+    {"label": "Pushups", "icon": "/assets/images/pushup.png"},
+    {"label": "Pullups", "icon": "/assets/images/pull_up.png"},
+    {"label": "Squats", "icon": "/assets/images/backsquat.png"},
+    {"label": "Long Jump", "icon": "/assets/images/Long_Jump.png"},
+    {"label": "Push Press", "icon": "/assets/images/ChestLaunch.png"},
+    {"label": "100 meter sprint", "icon": "/assets/images/100metersprint.png"},
+    {"label": "Clean", "icon": "/assets/images/powerclean.png"},
+    {"label": "Pike", "icon": "/assets/images/toetouch.png"},
+    {"label": "Backbend", "icon": "/assets/images/backbend.png"},
+    {"label": "Straddle", "icon": "/assets/images/medial_lateral.png"},
+    {"label": "1 Hour Run", "icon": "/assets/images/onehourrun.png"},
+    {"label": "2 Minute Sprint", "icon": "/assets/images/2minutedistance.png"},
+    {"label": "Half Spider Web", "icon": "/assets/images/agility.png"},
+    {"label": "Balance Positions", "icon": "/assets/images/Balance.png"},
+    {"label": "Coordination Skills", "icon": "/assets/images/Coordination.png"},
+  ];
 
   constructor(private modalCtrl: ModalController) {}
 
@@ -46,6 +69,11 @@ export class EditPropertyComponent implements OnInit {
 
   ngAfterViewInit() {
     switch (this.targetProperty) {
+      case 'avatar': {
+        this.title = "Avatar";
+        this.template = this.avatarTemplate;
+        break;
+      }
       case 'name': {
         this.title = "Name";
         this.template = this.nameTemplate;
@@ -87,6 +115,11 @@ export class EditPropertyComponent implements OnInit {
   cancel() {
     console.log("cancel", this.targetProperty);
     this.modalCtrl.dismiss();
+  }
+
+  setAvatar(avatar: string) {
+    this.updUser.avatar = avatar;
+    this.save();
   }
 
   save() {

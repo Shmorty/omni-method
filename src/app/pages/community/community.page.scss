@@ -29,3 +29,9 @@ ion-segment {
   --color: #b8dfff;
   // color: var(--ion-color-tertiary);
 }
+ion-avatar {
+  ion-icon {
+    aspect-ratio:  1 / 1;
+    min-height: 32px;
+  }
+}

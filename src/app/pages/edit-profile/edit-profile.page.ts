@@ -15,7 +15,6 @@ import {AuthService} from 'src/app/services/auth.service';
 // import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
 import {UserService} from 'src/app/services/user/user.service';
 import {User} from 'src/app/store/user/user.model';
-import * as UserSelectors from 'src/app/store/user/user.selectors';
 
 @Component({
   selector: 'edit-profile-page',
@@ -75,8 +74,6 @@ export class EditProfilePage implements OnInit {
     },
   ];
 
-  // message =
-  //   'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string;
   public user$ = this.userService.getUser(); // .pipe(delay(5000));
 

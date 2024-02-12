@@ -38,6 +38,10 @@
         color="{{highlightUser(athlete)}}"
         lines="full">
         <ion-text slot="start">{{i+1}}</ion-text>
+        <ion-avatar slot="start">
+          <img *ngIf="athlete.avatar" src="{{athlete.avatar}}">
+          <ion-icon *ngIf="!athlete.avatar" name="person-outline"></ion-icon>
+        </ion-avatar>
         <ion-text *ngIf="athlete.nickname">{{athlete.nickname}}</ion-text>
         <ion-text *ngIf="!athlete.nickname">{{athlete.firstName}} {{athlete.lastName}}</ion-text>
         <ion-text slot="end">{{athlete.omniScore | number}}</ion-text>

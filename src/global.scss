@@ -75,7 +75,8 @@ ion-button[shape="circle"] {
   --border-radius: 10px;
   --ion-backdrop-color: #b8dfff;
   --ion-safe-area-top: 0;
-  --height: 365px;
+  // --height: 365px;
+  --height: 512px;
   --width:90%;
   backdrop-filter: blur(10px);
   // &::part(backdrop) {

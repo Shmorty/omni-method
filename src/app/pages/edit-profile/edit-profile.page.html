@@ -18,7 +18,7 @@
 
 
   <ion-list *ngIf="user$ | async as user; else loading ">
-    <div class="avatar">
+    <div class="avatar" (click)="openModal('avatar')">
       <user-avatar [user]="user" class="avatar"></user-avatar>
       <!-- <user-avatar [user]="user" [ngStyle]="{'color': 'white'}"
       (click)="userService.openEditProfile($event, user)"
