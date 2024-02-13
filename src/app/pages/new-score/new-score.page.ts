@@ -16,7 +16,7 @@ export class NewScorePage implements OnInit {
   @Input() assessment: Assessment;
   @Input() curScore: Score;
   public newScore: Score;
-  today = new Date();
+  public today = new Date().toISOString();
   public user$ = this.userService.getUser();
   private user: User;
   scoreDate: string;
@@ -40,7 +40,7 @@ export class NewScorePage implements OnInit {
   ngOnInit() {
     console.log("newScore ngOnInit");
     // prefill with local date in iso format 
-    var today = new Date().toLocaleString('sv').replace(' ', 'T');
+    // var today = new Date().toLocaleString('sv').replace(' ', 'T');
 
     this.user$
       .subscribe((value) => {
@@ -59,7 +59,7 @@ export class NewScorePage implements OnInit {
       uid: this.user.id,
       cid: this.assessment.cid,
       rawScore: this.curScore?.rawScore,
-      scoreDate: today,
+      scoreDate: this.today,
       currentWeight: this.bodyWeight,
       expired: false,
       notes: '',

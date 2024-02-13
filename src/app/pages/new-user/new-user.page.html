@@ -124,17 +124,33 @@
             <ion-radio-group
               (ionChange)="setFitnessLevel($event)"
               value="fitnessLevel">
-              <ion-item>
+              <ion-item lines="none">
                 <ion-radio justify="start" value="none" labelPlacement="end">No Experience</ion-radio>
               </ion-item>
               <ion-item>
+                <ion-text color="medium"><p>
+                  Been to the gym less than a few times
+                </p></ion-text>
+              </ion-item>
+              <ion-item lines="none">
                 <ion-radio justify="start" value="beginner" labelPlacement="end">Beginner</ion-radio>
               </ion-item>
               <ion-item>
+                <ion-text color="medium"><p>
+                  Less than 2 years of experience
+                </p></ion-text>
+              </ion-item>
+              <ion-item lines="none">
                 <ion-radio justify="start" value="intermediate" labelPlacement="end">Intermediate</ion-radio>
               </ion-item>
               <ion-item>
+                <ion-text color="medium">Between 2 and 4 years of experience</ion-text>
+              </ion-item>
+              <ion-item lines="none">
                 <ion-radio justify="start" value="advanced" labelPlacement="end">Advanced</ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-text color="medium">4+ years of experience</ion-text>
               </ion-item>
             </ion-radio-group>
             </ion-list>

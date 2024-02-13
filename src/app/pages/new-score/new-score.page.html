@@ -73,10 +73,8 @@
   <ng-container [ngSwitch]="activeField">
     <!-- <ion-list *ngSwitchCase="'scoreDate'" style="background-color: transparent;"> -->
     <ion-list [hidden]="activeField !== 'scoreDate'" style="background-color: transparent;">
-        <ion-datetime [(ngModel)]="newScore.scoreDate"
-        class="date-picker"
-        presentation="date"
-        [preferWheel]="true"></ion-datetime>
+        <ion-datetime [(ngModel)]="newScore.scoreDate" class="date-picker"
+        presentation="date" [preferWheel]="true" [max]="today"></ion-datetime>
     </ion-list>
     <!-- <ion-list *ngSwitchCase="'score'" style="background-color: transparent;"> -->
     <ion-list [hidden]="activeField !== 'score'" style="background-color: transparent;">
