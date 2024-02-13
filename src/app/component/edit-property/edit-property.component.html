@@ -15,32 +15,20 @@
   <ion-list>
     <ng-container *ngTemplateOutlet="template"></ng-container>
   </ion-list>
-  <ion-footer>
-    <ion-list>
-      <ion-item lines="none">
-        <ion-button (click)="save()" shape="round">Save</ion-button>
-      </ion-item>
-      </ion-list>
-  </ion-footer>
+  <ion-button
+  type="submit"
+  (click)="save()"
+  shape="round"
+  expand="block"
+>Save</ion-button>
 </ion-content>
 
 <ng-template #avatar>
-  <!-- display selected -->
-  <!-- <ion-item lines="none">
-    <ion-avatar slot="start">
-      <img src="{{updUser.avatar}}">
-    </ion-avatar>
-  </ion-item> -->
   <ion-item lines="none">
     <!-- table of choices -->
     <ion-grid>
       <ion-row>
         <ion-col size="3" *ngFor="let avatar of avatars" ngClass="isSelected">
-          <!-- <div class="avatar-container"
-            [style.background-image]="'url(' + avatar.icon + ')'"
-            (click)="setAvatar(avatar.icon)"
-            >
-          </div> -->
           <div class="avatar-container"
             (click)="setAvatar(avatar.icon)"
             >
