@@ -58,6 +58,7 @@
           </ion-item>
           <ion-text color="danger">{{ userError$ | async }}</ion-text>
           <ion-button
+            class="register-button"
             type="submit"
             expand="block"
             [disabled]="!passwordMatch()"
