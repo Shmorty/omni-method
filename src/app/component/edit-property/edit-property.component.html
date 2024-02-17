@@ -100,9 +100,9 @@
 <ng-template #height>
   <ion-item lines="none">
     <app-number-picker style="width: 50%;" [min]="3" [max]="7" [units]="'ft'"
-    [(value)]="updUser.height.feet"></app-number-picker>
+    [(pickerValue)]="updUser.height.feet"></app-number-picker>
     <app-number-picker style="width: 50%;" [min]="0" [max]="11" [units]="'in'"
-    [(value)]="updUser.height.inches"></app-number-picker>
+    [(pickerValue)]="updUser.height.inches"></app-number-picker>
   </ion-item>
 </ng-template>
 
@@ -110,6 +110,6 @@
   <ion-item lines="none">
     <!-- <ion-label position="fixed">Weight</ion-label> -->
     <app-number-picker style="width: 100%;" [min]="0" [max]="325" [units]="'lbs'"
-      [(value)]="updUser.weight"></app-number-picker>
+      [(pickerValue)]="updUser.weight"></app-number-picker>
   </ion-item>
 </ng-template>

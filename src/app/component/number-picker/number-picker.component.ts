@@ -3,6 +3,7 @@ import {CdkVirtualScrollViewport, ScrollDispatcher, ScrollingModule} from '@angu
 import {CommonModule} from '@angular/common';
 import {IonicModule} from '@ionic/angular';
 import {Haptics} from '@capacitor/haptics';
+import {Subject, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-number-picker',
@@ -19,13 +20,16 @@ export class NumberPickerComponent implements OnInit, OnChanges {
   @Input() units = "";
   @Input() direction = 1;
   @Input() rowHeight = 34;
-  @Input() value: number;
-  @Output() valueChange = new EventEmitter<number>;
+  @Input() pickerValue: number;
+  @Output() pickerValueChange = new EventEmitter<number>();
   @ViewChild(CdkVirtualScrollViewport) viewPort: CdkVirtualScrollViewport;
   range: number[];
   public curIndex = 0;
   private startIndex = 0;
   private timeoutId = undefined;
+  private sub: Subscription = null;
+
+  onChanges = new Subject<SimpleChanges>();
 
   constructor(private scrollDispatcher: ScrollDispatcher) {}
 
@@ -36,43 +40,69 @@ export class NumberPickerComponent implements OnInit, OnChanges {
       console.log("reverse");
       this.range = this.range.reverse();
     }
-    // find index of initial value
-    this.startIndex = this.range.indexOf(this.value);
-    console.log("ngOnInit startIndex", this.startIndex);
+    this.onChanges.subscribe((data: SimpleChanges) => {
+      console.log("changes", data);
+      if (!data.pickerValue.firstChange) {
+        console.log("ngOnChanges emit", data.pickerValue.currentValue);
+        this.pickerValue = data.pickerValue.currentValue;
+        this.pickerValueChange.emit(this.pickerValue);
+        const newIndex = this.range.indexOf(this.pickerValue);
+        this.viewPort.scrollToIndex(newIndex);
+      } else {
+        console.log("pickerValue " + this.pickerValue);
+        console.log("range " + this.range);
+        // this.viewPort.scrollToIndex(this.range?.indexOf(this.pickerValue));
+      }
+    });
   }
 
   ngAfterViewInit(): void {
     console.log("NumberPickerComponent ngAfterViewInit");
 
+    // find index of initial value
+    this.startIndex = this.range.indexOf(this.pickerValue);
+    console.log("set startIndex", this.startIndex);
+    this.viewPort.scrollToIndex(this.startIndex);
+
     // set initial value after delay
-    setTimeout(() => {
+    setTimeout((ctx) => {
       // scroll to initial value
-      console.log("scrollTo startIndex", this.startIndex);
-      this.viewPort.scrollToIndex(this.startIndex);
-    }, 50);
+      console.log("scrollTo startIndex", ctx.startIndex);
+      ctx.viewPort.scrollToIndex(ctx.startIndex);
+    }, 50, this);
 
     // subscribe to updates
-    this.viewPort.scrolledIndexChange.subscribe((index) => {
+    this.sub = this.viewPort.scrolledIndexChange.subscribe((index) => {
       console.log("scrolledIndexChange", index);
       this.hapticsSelectionChanged();
+      console.log("timeoutId-" + this.timeoutId + " max " + this.max);
       if (typeof this.timeoutId == "number") {
+        console.log("clearTimeout max " + this.max);
         clearTimeout(this.timeoutId);
         Haptics.selectionStart();
       }
 
       if (this.curIndex !== index) {
         this.curIndex = index;
-        this.valueChange.emit(this.range[index]);
+        this.pickerValue = this.range[this.curIndex];
+        this.pickerValueChange.emit(this.pickerValue);
       }
       // center selection
       console.log("schedule align to", index);
-      this.timeoutId = setTimeout(() => {
-        console.log("align to", index, "should equal", this.curIndex)
-        this.viewPort.scrollToIndex(this.curIndex, 'smooth');
-        this.timeoutId = undefined;
-      }, 350);
+      this.timeoutId = setTimeout((ctx) => {
+        console.log("align to " + index + " should equal " + ctx.curIndex + " max " + this.max);
+        ctx.viewPort.scrollToIndex(ctx.curIndex, 'smooth');
+        ctx.timeoutId = undefined;
+      }, 350, this);
     });
 
+  }
+
+  ngOnDestroy() {
+    console.log("ngOnDestroy value " + this.range[this.curIndex]);
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 
   private createRange(): number[] {
@@ -82,12 +112,12 @@ export class NumberPickerComponent implements OnInit, OnChanges {
     console.log("number-picker min", this.min, "max", this.max, "increment", this.increment, "reciprocal", reciprocal, "len", len);
 
     if (Number.isInteger(this.min)) {
-      console.log("divide index by reciprocal");
+      // console.log("divide index by reciprocal");
       return Array.from(
         {length: len},
         (_, index) => this.min + index / reciprocal);
     } else {
-      console.log("multiply min by reciprocal");
+      // console.log("multiply min by reciprocal");
       return Array.from(
         {length: len},
         (_, index) => (this.min * reciprocal + index / reciprocal * reciprocal) / reciprocal);
@@ -95,11 +125,7 @@ export class NumberPickerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes", changes);
-    // if (!changes.value.firstChange) {
-    //   console.log("ngOnChanges emit", changes.value.currentValue);
-    //   this.valueChange.emit(changes.value.currentValue);
-    // }
+    this.onChanges.next(changes);
   }
 
   hapticsSelectionChanged = async () => {

@@ -55,6 +55,7 @@
             max="{{assessment.max}}"
             inputmode="{{inputMode(assessment)}}"
             value="{{newScore.rawScore | number: '1.0-3'}}"
+            [(ngModel)]="newScore.rawScore"
           ></ion-input>
         </div>
       </ion-col>
@@ -64,7 +65,10 @@
           <ion-input
             #currentWeight
             type="number"
-            value="{{newScore.currentWeight}}"></ion-input>
+            inputmode="numeric"
+            value="{{newScore.currentWeight}}"
+            [(ngModel)]="newScore.currentWeight"
+          ></ion-input>
         </div>
       </ion-col>
     </ion-row>
@@ -81,14 +85,16 @@
       <app-number-picker [min]="assessment.min" [max]="assessment.max"
         [increment]="(assessment.increment ? assessment.increment : 1)"
         [units]="assessment.entryUnits" [direction]="direction(assessment)"
-        [value]="newScore.rawScore"
-        (valueChange)="setScore($event)"></app-number-picker>
+        [(pickerValue)]="newScore.rawScore"
+      ></app-number-picker>
+      <!-- (valueChange)="setScore($event)" -->
     </ion-list>
     <!-- <ion-list *ngSwitchCase="'bodyWeight'" style="background-color: transparent;"> -->
     <ion-list [hidden]="activeField !== 'bodyWeight'" style="background-color: transparent;">
-      <app-number-picker [min]="0" [max]="325"
-        [units]="'lbs'" [value]="newScore.currentWeight"
-        (valueChange)="setWeight($event)"></app-number-picker>
+      <app-number-picker [min]="0" [max]="325" [units]="'lbs'"
+        [(pickerValue)]="newScore.currentWeight"
+      ></app-number-picker>
+      <!-- (valueChange)="setWeight($event)" -->
     </ion-list>
   </ng-container>
 
