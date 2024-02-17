@@ -109,3 +109,6 @@ ion-datetime {
 // ion-datetime::part(wheel-item active) {
 //   color: black;
 // }
+button.alert-button.logout-button-confirm {
+  color: var(--ion-color-danger);
+}

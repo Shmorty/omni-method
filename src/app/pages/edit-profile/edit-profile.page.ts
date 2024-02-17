@@ -73,6 +73,27 @@ export class EditProfilePage implements OnInit {
       }
     },
   ];
+  public confirmLogoutButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      htmlAttributes: {
+        'aria-label': 'cancel',
+      }
+    },
+    {
+      text: 'Log Out',
+      cssClass: 'logout-button-confirm',
+      role: 'confirm',
+      handler: () => {
+        this.modalCtrl.dismiss(null, 'logout');
+        this.authService.logout();
+      },
+      htmlAttributes: {
+        'aria-label': 'logout',
+      }
+    }
+  ]
 
   name: string;
   public user$ = this.userService.getUser(); // .pipe(delay(5000));
@@ -137,9 +158,14 @@ export class EditProfilePage implements OnInit {
     await alert.present();
   }
 
-  logout() {
-    this.modalCtrl.dismiss(null, 'logout');
-    this.authService.logout();
+  async logout() {
+    // this.modalCtrl.dismiss(null, 'logout');
+    // this.authService.logout();
+    const alert = await this.alertController.create({
+      header: 'Log out of your account?',
+      buttons: this.confirmLogoutButtons,
+    });
+    await alert.present();
   }
 
   submitForm() {
