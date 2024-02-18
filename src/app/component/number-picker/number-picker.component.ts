@@ -7,24 +7,24 @@ import {Subject, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-number-picker',
+  standalone: true,
   templateUrl: './number-picker.component.html',
   styleUrls: ['./number-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [ScrollingModule, CommonModule, IonicModule],
 })
 export class NumberPickerComponent implements OnInit, OnChanges {
   @Input() min = 0;
   @Input() max = 100;
   @Input() increment = 1;
-  @Input() units = "";
+  @Input() units: string;
   @Input() direction = 1;
   @Input() rowHeight = 34;
   @Input() pickerValue: number;
   @Output() pickerValueChange = new EventEmitter<number>();
   @ViewChild(CdkVirtualScrollViewport) viewPort: CdkVirtualScrollViewport;
   range: number[];
-  public curIndex = 0;
+  public curIndex;
   private startIndex = 0;
   private timeoutId = undefined;
   private sub: Subscription = null;
@@ -42,51 +42,43 @@ export class NumberPickerComponent implements OnInit, OnChanges {
     }
     this.onChanges.subscribe((data: SimpleChanges) => {
       console.log("changes", data);
-      if (!data.pickerValue.firstChange) {
-        console.log("ngOnChanges emit", data.pickerValue.currentValue);
-        this.pickerValue = data.pickerValue.currentValue;
-        this.pickerValueChange.emit(this.pickerValue);
+      if (data.pickerValue) {
+        // respond to external change to value
         const newIndex = this.range.indexOf(this.pickerValue);
         this.viewPort.scrollToIndex(newIndex);
-      } else {
-        console.log("pickerValue " + this.pickerValue);
-        console.log("range " + this.range);
-        // this.viewPort.scrollToIndex(this.range?.indexOf(this.pickerValue));
       }
     });
   }
 
   ngAfterViewInit(): void {
-    console.log("NumberPickerComponent ngAfterViewInit");
-
     // find index of initial value
+    // this.curIndex =
     this.startIndex = this.range.indexOf(this.pickerValue);
-    console.log("set startIndex", this.startIndex);
-    this.viewPort.scrollToIndex(this.startIndex);
-
-    // set initial value after delay
+    console.log("set startIndex " + this.startIndex + " pickerValue " + this.pickerValue);
+    // set initial value after small delay
     setTimeout((ctx) => {
-      // scroll to initial value
       console.log("scrollTo startIndex", ctx.startIndex);
       ctx.viewPort.scrollToIndex(ctx.startIndex);
-    }, 50, this);
+    }, 250, this);
 
     // subscribe to updates
     this.sub = this.viewPort.scrolledIndexChange.subscribe((index) => {
-      console.log("scrolledIndexChange", index);
-      this.hapticsSelectionChanged();
-      console.log("timeoutId-" + this.timeoutId + " max " + this.max);
-      if (typeof this.timeoutId == "number") {
-        console.log("clearTimeout max " + this.max);
-        clearTimeout(this.timeoutId);
-        Haptics.selectionStart();
-      }
-
+      // respond to picker updates
+      console.log("scrolledIndexChange " + index);
       if (this.curIndex !== index) {
         this.curIndex = index;
         this.pickerValue = this.range[this.curIndex];
         this.pickerValueChange.emit(this.pickerValue);
       }
+
+      this.hapticsSelectionChanged();
+      console.log("timeoutId-" + this.timeoutId + " max " + this.max);
+      if (typeof this.timeoutId === "number") {
+        console.log("clearTimeout max " + this.max);
+        clearTimeout(this.timeoutId);
+        Haptics.selectionStart();
+      }
+
       // center selection
       console.log("schedule align to", index);
       this.timeoutId = setTimeout((ctx) => {
@@ -95,7 +87,15 @@ export class NumberPickerComponent implements OnInit, OnChanges {
         ctx.timeoutId = undefined;
       }, 350, this);
     });
+  }
 
+  ngAfterContentInit() {
+    console.log("ngAfterContentInit");
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("ngOnChanges triggerd " + JSON.stringify(changes));
+    this.onChanges.next(changes);
   }
 
   ngOnDestroy() {
@@ -124,16 +124,12 @@ export class NumberPickerComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.onChanges.next(changes);
-  }
-
   hapticsSelectionChanged = async () => {
     await Haptics.selectionChanged();
   };
 
   curClass(index) {
-    if (index == this.curIndex) {
+    if (index === this.curIndex) {
       return "current"
     }
   }

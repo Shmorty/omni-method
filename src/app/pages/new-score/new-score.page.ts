@@ -27,43 +27,53 @@ export class NewScorePage implements OnInit {
     private modalCtrl: ModalController,
     private userService: UserService,
   ) {
-    userService.getUser().pipe(take(1)).subscribe((user) => {
-      this.user = user;
-      this.bodyWeight = user.weight;
-      if (this.newScore) {
-        this.newScore.currentWeight = this.bodyWeight;
-      }
-      console.log("newScorePage constructor user", user);
-    });
+    // userService.getUser().pipe(take(1)).subscribe((user) => {
+    //   this.user = user;
+    //   this.bodyWeight = user.weight;
+    //   if (this.newScore) {
+    //     this.newScore.currentWeight = this.bodyWeight;
+    //   }
+    //   console.log("newScorePage constructor user", user);
+    // });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     console.log("newScore ngOnInit");
     // prefill with local date in iso format 
     // var today = new Date().toLocaleString('sv').replace(' ', 'T');
 
-    this.user$
+    await this.user$
       .subscribe((value) => {
         this.user = value;
         this.bodyWeight = this.user.weight;
-        if (this.newScore) {
-          this.newScore.currentWeight = this.bodyWeight;
-        }
+        // if (this.newScore) {
+        //   this.newScore.currentWeight = this.bodyWeight;
+        // }
+        this.newScore = {
+          aid: this.assessment.aid,
+          uid: this.user.id,
+          cid: this.assessment.cid,
+          rawScore: this.curScore?.rawScore,
+          scoreDate: this.today,
+          currentWeight: this.bodyWeight,
+          expired: false,
+          notes: '',
+        };
       })
       .unsubscribe();
 
     console.log("prevScore", this.curScore?.rawScore);
 
-    this.newScore = {
-      aid: this.assessment.aid,
-      uid: this.user.id,
-      cid: this.assessment.cid,
-      rawScore: this.curScore?.rawScore,
-      scoreDate: this.today,
-      currentWeight: this.bodyWeight,
-      expired: false,
-      notes: '',
-    };
+    // this.newScore = {
+    //   aid: this.assessment.aid,
+    //   uid: this.user.id,
+    //   cid: this.assessment.cid,
+    //   rawScore: this.curScore?.rawScore,
+    //   scoreDate: this.today,
+    //   currentWeight: this.bodyWeight,
+    //   expired: false,
+    //   notes: '',
+    // };
 
     console.log("ngOnInit", this.newScore);
     // console.log("ngOnInit scoreInput", this.scoreInput);
