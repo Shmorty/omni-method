@@ -41,6 +41,7 @@
             #scoreDate
             placeholder="YYYY-MM-DD"
             value="{{newScore.scoreDate | date}}"
+            [readonly]="true"
           ></ion-input>
         </div>
       </ion-col>
@@ -55,6 +56,7 @@
             max="{{assessment.max}}"
             inputmode="{{inputMode(assessment)}}"
             value="{{newScore.rawScore | number: '1.0-3'}}"
+            [readonly]="true"
             [(ngModel)]="newScore.rawScore"
           ></ion-input>
         </div>
@@ -67,6 +69,7 @@
             type="number"
             inputmode="numeric"
             value="{{newScore.currentWeight}}"
+            [readonly]="true"
             [(ngModel)]="newScore.currentWeight"
           ></ion-input>
         </div>

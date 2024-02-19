@@ -59,34 +59,34 @@ export class NumberPickerComponent implements OnInit, OnChanges {
     setTimeout((ctx) => {
       console.log("scrollTo startIndex", ctx.startIndex);
       ctx.viewPort.scrollToIndex(ctx.startIndex);
+      // subscribe to updates
+      this.sub = this.viewPort.scrolledIndexChange.subscribe((index) => {
+        // respond to picker updates
+        console.log("scrolledIndexChange " + index);
+        if (this.curIndex !== index) {
+          this.curIndex = index;
+          this.pickerValue = this.range[this.curIndex];
+          this.pickerValueChange.emit(this.pickerValue);
+        }
+
+        this.hapticsSelectionChanged();
+        console.log("timeoutId-" + this.timeoutId + " max " + this.max);
+        if (typeof this.timeoutId === "number") {
+          console.log("clearTimeout max " + this.max);
+          clearTimeout(this.timeoutId);
+          Haptics.selectionStart();
+        }
+
+        // center selection
+        console.log("schedule align to", index);
+        this.timeoutId = setTimeout((ctx) => {
+          console.log("align to " + index + " should equal " + ctx.curIndex + " max " + this.max);
+          ctx.viewPort.scrollToIndex(ctx.curIndex, 'smooth');
+          ctx.timeoutId = undefined;
+        }, 350, this);
+      });
     }, 250, this);
 
-    // subscribe to updates
-    this.sub = this.viewPort.scrolledIndexChange.subscribe((index) => {
-      // respond to picker updates
-      console.log("scrolledIndexChange " + index);
-      if (this.curIndex !== index) {
-        this.curIndex = index;
-        this.pickerValue = this.range[this.curIndex];
-        this.pickerValueChange.emit(this.pickerValue);
-      }
-
-      this.hapticsSelectionChanged();
-      console.log("timeoutId-" + this.timeoutId + " max " + this.max);
-      if (typeof this.timeoutId === "number") {
-        console.log("clearTimeout max " + this.max);
-        clearTimeout(this.timeoutId);
-        Haptics.selectionStart();
-      }
-
-      // center selection
-      console.log("schedule align to", index);
-      this.timeoutId = setTimeout((ctx) => {
-        console.log("align to " + index + " should equal " + ctx.curIndex + " max " + this.max);
-        ctx.viewPort.scrollToIndex(ctx.curIndex, 'smooth');
-        ctx.timeoutId = undefined;
-      }, 350, this);
-    });
   }
 
   ngAfterContentInit() {
