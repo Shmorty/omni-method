@@ -4,7 +4,7 @@ import {Score} from '../../store/models/score.model';
 import {AssessmentService} from '../../services/assessments/assessment.service';
 import {Assessment, Category} from '../../store/assessments/assessment.model';
 import {NewScorePage} from '../new-score/new-score.page';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {UserService} from '../../services/user/user.service';
 import {User} from 'src/app/store/user/user.model';
@@ -18,6 +18,7 @@ import {Capacitor} from '@capacitor/core';
 })
 export class AssessmentDetailPage implements OnInit {
   public scores$: Observable<Score[]>;
+  public score$: Observable<Score>;
   public category$: Observable<Category>;
   public assessment$: Observable<Assessment>;
   public checklist$: Observable<string[]>;
@@ -53,15 +54,19 @@ export class AssessmentDetailPage implements OnInit {
 
     this.assessment$.subscribe((assessment) => {
       console.log("getScoresForAssessment", assessment);
+      this.score$ = this.userService.getCurrentScoreForAssessment(assessment.aid);
+      this.score$.subscribe((score) => {
+        this.curScore = score;
+      })
       this.scores$ = this.userService.getScoresForAssessment(assessment);
-      this.scores$?.subscribe((score) => {
-        console.log("score", score);
-        if (score.length > 0) {
-          // assuming most recent on top or only store one
-          this.curScore = score[0];
-          this.displayChecked = Array.from(this.curScore.checklist);
-        }
-      });
+      // this.scores$?.subscribe((score) => {
+      //   console.log("score", score);
+      //   if (score.length > 0) {
+      //     // assuming most recent on top or only store one
+      //     this.curScore = score[0];
+      //     this.displayChecked = Array.from(this.curScore.checklist);
+      //   }
+      // });
     });
     this.user$
       .subscribe((value) => {
@@ -150,39 +155,39 @@ export class AssessmentDetailPage implements OnInit {
   }
 
   async goBack() {
-    if (this.checklistChanged) {
-      await this.promptToSave();
-      console.log("finished promptToSave");
-    }
+    // if (this.checklistChanged) {
+    //   await this.promptToSave();
+    //   console.log("finished promptToSave");
+    // }
     this.navController.back();
   }
 
-  promptToSave(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      let alert = this.alertController.create({
-        header: 'Unsaved changes',
-        // subHeader: 'Warning',
-        message: "Are you sure?",
-        buttons: [
-          {
-            text: 'Leave without saving',
-            handler: () => {
-              this.navController.back();
-              return true;
-            }
-          },
-          {
-            text: 'Save',
-            handler: () => {
-              this.saveChecklist();
-              return true;
-            }
-          }
-        ],
-      }).then((res) => {
-        res.present();
-      });
-    });
-  }
+  // promptToSave(): Promise<boolean> {
+  //   return new Promise((resolve, reject) => {
+  //     let alert = this.alertController.create({
+  //       header: 'Unsaved changes',
+  //       // subHeader: 'Warning',
+  //       message: "Are you sure?",
+  //       buttons: [
+  //         {
+  //           text: 'Leave without saving',
+  //           handler: () => {
+  //             this.navController.back();
+  //             return true;
+  //           }
+  //         },
+  //         {
+  //           text: 'Save',
+  //           handler: () => {
+  //             this.saveChecklist();
+  //             return true;
+  //           }
+  //         }
+  //       ],
+  //     }).then((res) => {
+  //       res.present();
+  //     });
+  //   });
+  // }
 
 }

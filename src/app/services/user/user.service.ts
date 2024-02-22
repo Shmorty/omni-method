@@ -13,6 +13,7 @@ import {AppState} from '../../store/app.state';
 import * as UserActions from '../../store/user/user.actions';
 import {
   assessmentScores,
+  currentScore,
   selectAuthUser,
   selectUser,
 } from '../../store/user/user.selectors';
@@ -106,6 +107,10 @@ export class UserService implements IUserService {
         });
       })
     );
+  }
+
+  getCurrentScoreForAssessment(aid: string): Observable<Score> {
+    return this.store.select(currentScore(aid));
   }
 
   // trigger save score event

@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
   {
@@ -59,16 +59,20 @@ const routes: Routes = [
   },
   {
     path: 'community',
-    loadChildren: () => import('./pages/community/community.module').then( m => m.CommunityPageModule)
+    loadChildren: () => import('./pages/community/community.module').then(m => m.CommunityPageModule)
   },
   {
     path: 'ranking-detail',
-    loadChildren: () => import('./pages/ranking-detail/ranking-detail.module').then( m => m.RankingDetailPageModule)
+    loadChildren: () => import('./pages/ranking-detail/ranking-detail.module').then(m => m.RankingDetailPageModule)
   },
   {
     path: 'onboarding',
-    loadChildren: () => import('./pages/onboarding/onboarding.module').then( m => m.OnboardingPageModule)
+    loadChildren: () => import('./pages/onboarding/onboarding.module').then(m => m.OnboardingPageModule)
   },
+  // {
+  //   path: 'skill-detail',
+  //   loadChildren: () => import('./pages/skill-detail/skill-detail.module').then( m => m.SkillDetailPageModule)
+  // },
 ];
 @NgModule({
   imports: [

@@ -579,11 +579,19 @@
     {
       "aid": "BLNC",
       "skills": [
-        {"label": "Crow", "category": "Inversion"},
+        {
+          "label": "Crow",
+          "category": "Inversion",
+          "pic": "/assets/images/skills/crow_demo.png"
+        },
         {"label": "Elbow Lever", "category": "Inversion"},
         {"label": "Headstand w/hands", "category": "Inversion"},
         {"label": "Elbow stand", "category": "Inversion"},
-        {"label": "Handstand", "category": "Inversion"},
+        {
+          "label": "Handstand",
+          "category": "Inversion",
+          "video": "/assets/video/skills/handstand_demo.mp4"
+        },
         {"label": "Half Pike Handstand", "category": "Inversion"},
         {"label": "1 Arm Elbow Lever", "category": "Inversion"},
         {"label": "Headstand", "category": "Inversion"},
@@ -593,7 +601,11 @@
         {"label": "One foot", "category": "Standing"},
         {"label": "Two feet toes", "category": "Standing"},
         {"label": "One foot blind", "category": "Standing"},
-        {"label": "Tree blind", "category": "Standing"},
+        {
+          "label": "Tree blind",
+          "category": "Standing",
+          "pic": "/assets/images/skills/tree_pose_demo.png"
+        },
         {"label": "Two toes blind", "category": "Standing"},
         {"label": "One toe", "category": "Standing"},
         {"label": "Two heels", "category": "Standing"},

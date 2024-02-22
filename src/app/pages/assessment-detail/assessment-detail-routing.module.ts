@@ -1,12 +1,24 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
-import { AssessmentDetailPage } from './assessment-detail.page';
+import {AssessmentDetailPage} from './assessment-detail.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: AssessmentDetailPage
+    children: [
+      {
+        path: '',
+        component: AssessmentDetailPage,
+      },
+      {
+        path: 'skill',
+        loadChildren: () =>
+          import('../skill-detail/skill-detail.module').then(
+            (m) => m.SkillDetailPageModule
+          )
+      }
+    ]
   }
 ];
 

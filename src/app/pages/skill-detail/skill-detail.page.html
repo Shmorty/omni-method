@@ -1,0 +1,41 @@
+
+<ion-content [fullscreen]="true">
+  <div class="safe-area"> </div>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="goBack()" shape="circle">
+        <!-- <ion-icon name="chevron-back-circle-outline"></ion-icon> -->
+        <!-- <ion-icon name="arrow-back-outline"></ion-icon> -->
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Skill Detail</ion-title>
+    </ion-toolbar>
+</ion-header>
+  <ion-list>
+    <ion-item></ion-item>
+    <ng-container *ngIf="(skill$ | async) as skill">
+      <ion-item>
+        <ion-card-title>{{skill['label']}}</ion-card-title>
+        <ion-toggle slot="end" color="primary"
+          (ionChange)="toggleSkill($event)"
+          [(ngModel)]="skillChecked"
+        ></ion-toggle>
+    </ion-item>
+      <ion-item *ngIf="skill['video']">
+        <video id="skillVideo" controlsList="nodownload"
+          controls disablepictureinpicture muted>
+          <source src="{{skill['video']}}" type="video/mp4">
+        Your browser does not support the video tag.
+        </video>
+      </ion-item>
+      <ion-item *ngIf="skill['pic']">
+        <img src="{{skill['pic']}}">
+      </ion-item>
+      <ion-item>
+        <ion-text>{{skill['description']}}</ion-text>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>

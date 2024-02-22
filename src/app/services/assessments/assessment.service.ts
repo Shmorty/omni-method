@@ -13,6 +13,7 @@ import {
   selectAssessmentByIndex,
   selectCategoryById,
   selectChecklist,
+  selectChecklistSkill,
 } from '../../store/assessments/assessment.selector';
 import * as AssessmentActions from '../../store/assessments/assessment.actions';
 
@@ -57,6 +58,10 @@ export class AssessmentService implements IAssessmentService {
 
   getChecklist(aid: string): Observable<string[]> {
     return this.store.select(selectChecklist(aid));
+  }
+
+  getChecklistSkill(aid: string, index: number): Observable<Object> {
+    return this.store.select(selectChecklistSkill(aid, index));
   }
 
   getNewCategoryScores() {

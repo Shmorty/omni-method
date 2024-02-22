@@ -1,14 +1,17 @@
 .card {
     aspect-ratio: 2 / 1;
     // background-color: var(--ion-color-primary);
-    background-image: linear-gradient(to bottom, rgba(229, 243, 255, 0), rgba(207, 233, 255, 1));
+    // background-image: linear-gradient(to bottom, rgba(229, 243, 255, 0), rgba(207, 233, 255, 1));
     border: solid 1px;
     border-radius: 10px;
     // color: white;
     display: inline-flex;
     // margin: 0 5px 5px 0;
     padding: 10px;
-    width: 45%;
+    // width: 45%;
+    height: 44px;
+    aspect-ratio: 4 / 3;
+    background-color: var(--ion-color-tertiary);
   }
   .card-label {
     // display: block;
@@ -34,4 +37,10 @@
     float: right;
     margin: 5px 10px 0 0;
   }
-  
+  .checked {
+    // color: var(--ion-color-success);
+    color: inherit;
+  }
+  .hide-check {
+    color: transparent;
+  }
