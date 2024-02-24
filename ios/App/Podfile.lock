@@ -1,18 +1,18 @@
 PODS:
   - Capacitor (5.3.0):
     - CapacitorCordova
-  - CapacitorApp (5.0.6):
+  - CapacitorApp (5.0.7):
     - Capacitor
   - CapacitorCordova (5.3.0)
-  - CapacitorHaptics (5.0.6):
+  - CapacitorHaptics (5.0.7):
     - Capacitor
-  - CapacitorKeyboard (5.0.6):
+  - CapacitorKeyboard (5.0.8):
     - Capacitor
-  - CapacitorSplashScreen (5.0.6):
+  - CapacitorSplashScreen (5.0.7):
     - Capacitor
-  - CapacitorStatusBar (5.0.6):
+  - CapacitorStatusBar (5.0.7):
     - Capacitor
-  - CapacitorTextZoom (5.0.6):
+  - CapacitorTextZoom (5.0.7):
     - Capacitor
 
 DEPENDENCIES:
@@ -45,13 +45,13 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Capacitor: 1ac9165943bc4f2137642d218c5ba05df811de69
-  CapacitorApp: 024e1b1bea5f883d79f6330d309bc441c88ad04a
+  CapacitorApp: 17fecd0e6cb23feafac7eb0939417389038b0979
   CapacitorCordova: b9374d68e63ce29e96ab5db994cf14fbefd722c9
-  CapacitorHaptics: 1fffc1217c7e64a472d7845be50fb0c2f7d4204c
-  CapacitorKeyboard: b978154b024a5f65e044908e37d15b7de58b9d12
-  CapacitorSplashScreen: 5fa2ab5e46cf5cc530cf16a51c80c7a986579ccd
-  CapacitorStatusBar: 565c0a1ebd79bb40d797606a8992b4a105885309
-  CapacitorTextZoom: bd623313a291bc1f38cdc01bd94c39b2b48d794a
+  CapacitorHaptics: 7c7c206f0c96a628fed073830c96d28c4b2e772e
+  CapacitorKeyboard: aec619a578235c6ce279075009a2689c2cf5c42c
+  CapacitorSplashScreen: dd3de3f3644710fa2a697cfb91ec262eece4d242
+  CapacitorStatusBar: f390fbb49b82ffb754ea4b3cf71dc8b048baf3e7
+  CapacitorTextZoom: 69814a62b1d0f23a899cca06ea9838c38de187ff
 
 PODFILE CHECKSUM: 0f298f9c00906a8dfebd134978d73b0dbbbdec13
 
