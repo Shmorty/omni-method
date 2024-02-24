@@ -41,7 +41,7 @@ export class SkillDetailPage implements OnInit {
       this.scoreSub = this.score$.subscribe((score) => {
         // read skill setting
         this.curScore = score;
-        console.log("curScore " + JSON.stringify(score));
+        // console.log("curScore " + JSON.stringify(score));
         if (this.curScore && this.curScore.checklist) {
           this.skillChecked = (this.skillIndex < score.checklist.length) ? score.checklist[this.skillIndex] : false;
         } else {
@@ -60,23 +60,20 @@ export class SkillDetailPage implements OnInit {
     await this.createNewScore().then((score) => {
       console.log("got new score " + JSON.stringify(score));
       newScore = score;
-    });
-    console.log("toggleSkill " + this.skillChecked);
-    // update score
-    if (this.skillIndex < newScore.checklist.length) {
-      // update value in checklist array
-      newScore.checklist[this.skillIndex] = this.skillChecked;
-    } else {
-      // add elements to array
-      for (var i = newScore.checklist.length; i < this.skillIndex; i++) {
-        newScore.checklist[i] = false;
+      // update score
+      if (this.skillIndex < newScore.checklist.length) {
+        // update value in checklist array
+        newScore.checklist[this.skillIndex] = this.skillChecked;
+      } else {
+        // add elements to array
+        for (var i = newScore.checklist.length; i < this.skillIndex; i++) {
+          newScore.checklist[i] = false;
+        }
+        newScore.checklist[this.skillIndex] = this.skillChecked;
       }
-      newScore.checklist[this.skillIndex] = this.skillChecked;
-      // console.log("need to add code to resize array");
-    }
+    });
     // update raw score, count checklist items
     newScore.rawScore = newScore.checklist.filter(Boolean).length;
-    console.log("newScore " + JSON.stringify(newScore));
     this.userService.saveScore(newScore);
     this.goBack();
   }
@@ -87,8 +84,12 @@ export class SkillDetailPage implements OnInit {
     var curUser: User;
     var today = new Date().toLocaleDateString();
     if (this.curScore) {
+      // copy latest score object
       newScore = JSON.parse(JSON.stringify(this.curScore));
+      newScore.scoreDate = today;
+      newScore.expired = false;
     } else {
+      // create new score object
       var assessment$ = this.assessmentService.getAssessmentById(this.aid);
       await assessment$.subscribe((assessment) => {
         console.log("got assessment " + JSON.stringify(assessment));
@@ -105,7 +106,7 @@ export class SkillDetailPage implements OnInit {
         uid: curUser.id,
         cid: curAssessment.cid,
         checklist: [],
-        rawScore: this.curScore?.rawScore,
+        rawScore: 0,
         scoreDate: today,
         currentWeight: curUser.weight,
         expired: false,
