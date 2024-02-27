@@ -644,7 +644,11 @@
       "skills": [
         {"label": "Cobra", "description": "Upper body extended, chest lifted off the ground, arms supporting the upper body"},
         {"label": "Modified Bridge", "description": "Bridge with feet elevated to knee height (hips lifted off the ground, knees bent, feet elevated to knee height)"},
-        {"label": "Bridge", "description": "Hips lifted off the ground, knees bent, feet flat on the ground"},
+        {
+          "label": "Bridge",
+          "description": "Hips lifted off the ground, knees bent, feet flat on the ground",
+          "pic": "/assets/images/skills/backbend_demo.png"
+        },
         {"label": "Elbow bridge", "description": "Elbow bridge (similar to bridge, but resting on forearms instead of hands)"},
         {"label": "Knee bridge", "description": "Knee bridge (hips lifted off the ground, knees bent, only heels touching the ground)"},
         {"label": "Elbow + knee bridge", "description": "Elbow + knee bridge (combination of elbow bridge and knee bridge)"},
