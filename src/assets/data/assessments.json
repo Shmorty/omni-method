@@ -590,6 +590,7 @@
         {
           "label": "Handstand",
           "category": "Inversion",
+          "thumbnail": "/assets/images/skills/handstand_thumbnail.png",
           "video": "/assets/video/skills/handstand_demo.mp4"
         },
         {"label": "Half Pike Handstand", "category": "Inversion"},
