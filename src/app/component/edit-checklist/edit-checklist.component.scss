@@ -39,8 +39,8 @@
   }
   .checked {
     // color: var(--ion-color-success);
-    color: inherit;
+    opacity: 1;
   }
   .hide-check {
-    color: transparent;
+    opacity: 0.3;
   }

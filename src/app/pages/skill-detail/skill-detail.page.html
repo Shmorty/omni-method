@@ -1,41 +1,59 @@
+<ng-container *ngIf="(skill$ | async) as skill">
 
 <ion-content [fullscreen]="true">
-  <!-- <div class="safe-area"> </div> -->
-<ion-header>
+  <ion-header class="ion-no-border safe-area"> </ion-header>
+
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <!-- routerLink="/home/profile"
+    routerDirection="back" -->
+  <ion-button
+      (click)="goBack()"
+      type="button"
+      size="small"
+      shape="circle"
+      color="primary"
+    >
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+  </ion-fab>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button color="primary" (click)="goBack()" shape="circle">
-        <!-- <ion-icon name="chevron-back-circle-outline"></ion-icon> -->
-        <!-- <ion-icon name="arrow-back-outline"></ion-icon> -->
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>Skill Detail</ion-title>
     </ion-toolbar>
-</ion-header>
+</ion-header> -->
   <ion-list>
-    <ion-item></ion-item>
-    <ng-container *ngIf="(skill$ | async) as skill">
-      <ion-item>
-        <ion-card-title>{{skill['label']}}</ion-card-title>
-        <ion-toggle slot="end" color="primary"
-          (ionChange)="toggleSkill($event)"
-          [(ngModel)]="skillChecked"
-        ></ion-toggle>
-    </ion-item>
-      <ion-item *ngIf="skill['video']">
-        <video id="skillVideo" controlsList="nodownload"
-          controls disablepictureinpicture muted>
-          <source src="{{skill['video']}}" type="video/mp4">
+    <!-- <ion-item></ion-item> -->
+    <div [ngSwitch]="true">
+      <ion-item *ngSwitchCase="skill.hasOwnProperty('video')" lines="none">
+        <video class="header-content" id="skillVideo" controlsList="nodownload"
+          controls disablepictureinpicture muted preload="metadata">
+          <source src="{{skill['video']}}#t=0.1" type="video/mp4">
         Your browser does not support the video tag.
         </video>
       </ion-item>
-      <ion-item *ngIf="skill['pic']">
-        <img src="{{skill['pic']}}">
+      <ion-item *ngSwitchCase="skill.hasOwnProperty('pic')" lines="none">
+        <img class="header-content" src="{{skill['pic']}}">
       </ion-item>
-      <ion-item>
-        <ion-text>{{skill['description']}}</ion-text>
+      <ion-item *ngSwitchDefault lines="none">
+        <img class="header-content">
+        <!-- <ion-img class="header-img" src="{{aid}}"></ion-img> -->
       </ion-item>
-    </ng-container>
+    </div>
+    <ion-item class="header-item" lines="none">
+      <ion-card-title>{{skill['label']}}</ion-card-title>
+      <ion-toggle slot="end" color="primary"
+        (ionChange)="toggleSkill($event)"
+        [(ngModel)]="skillChecked"
+      ></ion-toggle>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-text>{{skill['description']}}</ion-text>
+    </ion-item>
   </ion-list>
 </ion-content>
+</ng-container>

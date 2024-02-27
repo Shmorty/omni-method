@@ -12,12 +12,13 @@
     </ol>
   </ion-item>
   <ion-item *ngFor="let item of checklist$ | async; let i = index" [button]="true"
-    (click)="openSkill(i)">
+    (click)="openSkill(i)" lines="full">
     <!-- <ion-checkbox slot="start" aria-label="item['label']" 
       [checked]="getCheckedItem(i)" disabled="true">
     </ion-checkbox> -->
     <!-- <ion-icon *ngIf="getCheckedItem(i)" name="checkmark-outline"></ion-icon> -->
-    <ion-icon slot="start" [ngClass]="getCheckedClass(i)" name="checkmark-outline"></ion-icon>
+    <!-- <ion-icon slot="start" [ngClass]="getCheckedClass(i)" name="checkmark-outline"></ion-icon> -->
+    <img slot="start" [ngClass]="getCheckedClass(i)" src="/assets/images/icons/Check.png">
     <ion-card class="card"></ion-card>
     <ion-text class="card-label">{{item["label"]}}</ion-text>
   </ion-item>
