@@ -465,7 +465,7 @@
       ],
       "min": 13,
       "max": 35,
-      "increment": 0.01,
+      "increment": 0.05,
       "onboarding": {
         "prompt": "How quickly can you perform the half spider web agility test?"
       },
