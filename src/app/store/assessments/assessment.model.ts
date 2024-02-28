@@ -10,6 +10,7 @@ export interface Assessment {
   instruction?: string[];
   rules?: string[];
   checklist?: boolean;
+  checklistCategories?: boolean;
   min: number;
   max: number;
   increment?: number;
@@ -29,5 +30,6 @@ export interface Category {
 
 export interface Checklist {
   aid: string;
-  skills: string[];
+  categories?: string[];
+  skills: object[];
 }

@@ -45,6 +45,13 @@ export const selectChecklist = (aid: string) =>
       state.checklists.find((checklist) => checklist.aid === aid).skills
   );
 
+export const selectChecklistCategories = (aid: string) =>
+  createSelector(
+    selectAssessments,
+    (state: AssessmentState) =>
+      state.checklists.find((checklist) => checklist.aid === aid).categories
+  );
+
 export const selectChecklistSkill = (aid: string, index: number) =>
   createSelector(
     selectAssessments,

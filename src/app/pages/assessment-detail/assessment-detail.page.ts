@@ -21,7 +21,7 @@ export class AssessmentDetailPage implements OnInit {
   public score$: Observable<Score>;
   public category$: Observable<Category>;
   public assessment$: Observable<Assessment>;
-  public checklist$: Observable<string[]>;
+  public checklist$: Observable<object[]>;
   public displayChecked: boolean[] = [];
   private aid: string;
   private cid: string;

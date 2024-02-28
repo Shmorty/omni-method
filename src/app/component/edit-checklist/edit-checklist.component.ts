@@ -18,7 +18,8 @@ export class EditChecklistComponent implements OnInit {
   @Input() assessment: Assessment;
   public displayChecked: boolean[] = [];
   @Output() checked = new EventEmitter<boolean[]>();
-  public checklist$: Observable<string[]>;
+  public checklist$: Observable<object[]>;
+  public checklistCategories$: Observable<string[]>;
   public assessment$: Observable<Assessment>;
   @Input() score$: Observable<Score>;
   public curScore: Score;
@@ -33,6 +34,7 @@ export class EditChecklistComponent implements OnInit {
   ngOnInit() {
     console.log("ngOnInit assessment: ", JSON.stringify(this.assessment));
     this.checklist$ = this.assessmentService.getChecklist(this.assessment.aid);
+    this.checklistCategories$ = this.assessmentService.getChecklistCategories(this.assessment.aid);
   }
 
   ngAfterViewInit(): void {
@@ -46,15 +48,6 @@ export class EditChecklistComponent implements OnInit {
         this.checked.emit(this.displayChecked);
       }
     });
-    // this.scores$?.subscribe((score) => {
-    //   console.log("score", score);
-    //   if (score.length > 0) {
-    //     // assuming most recent on top or only store one
-    //     this.curScore = score[0];
-    //     this.displayChecked = Array.from(this.curScore.checklist);
-    //     this.checked.emit(this.displayChecked);
-    //   }
-    // });
 
   }
 

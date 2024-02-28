@@ -330,6 +330,7 @@
     {
       "aid": "PIKE",
       "checklist": true,
+      "checklistCategories": false,
       "cid": "FLEX",
       "label": "Pike",
       "icon": "/assets/images/toetouch.png",
@@ -352,6 +353,7 @@
     {
       "aid": "BKBN",
       "checklist": true,
+      "checklistCategories": false,
       "cid": "FLEX",
       "label": "Backbend",
       "icon": "/assets/images/backbend.png",
@@ -476,6 +478,7 @@
     {
       "aid": "BLNC",
       "checklist": true,
+      "checklistCategories": true,
       "cid": "NEUR",
       "label": "Balance Positions",
       "icon": "/assets/images/Balance.png",
@@ -496,6 +499,7 @@
     {
       "aid": "COORD",
       "checklist": true,
+      "checklistCategories": true,
       "cid": "NEUR",
       "label": "Coordination Skills",
       "icon": "/assets/images/Coordination.png",
@@ -519,6 +523,7 @@
   "checklists": [
     {
       "aid": "COORD",
+      "categories":["Basic", "Equipment", "Forward", "Backward", "Twisting"],
       "skills": [
       {"label": "Jumping Jacks", "category": "Basic"},
       {"label": "Jump rope", "category": "Equipment"},
@@ -578,6 +583,7 @@
     },
     {
       "aid": "BLNC",
+      "categories":["Inversion", "Standing", "Equipment"],
       "skills": [
         {
           "label": "Crow",
