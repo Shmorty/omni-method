@@ -115,7 +115,7 @@ export class NumberPickerComponent implements OnInit, OnChanges {
       // console.log("divide index by reciprocal");
       return Array.from(
         {length: len},
-        (_, index) => this.min + index / reciprocal);
+        (_, index) => (this.min + index) / reciprocal);
     } else {
       // console.log("multiply min by reciprocal");
       return Array.from(
