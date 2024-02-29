@@ -58,3 +58,14 @@ img.thumbnail {
   height: 44px;
   margin: 4px 0;
 }
+ion-segment, ion-segment-button {
+  background: inherit;
+}
+.segment-button-checked {
+  font-weight: bold;
+  text-decoration: underline;
+  // text-overflow: clip;
+}
+ion-segment-button::part(indicator-background) {
+  background: var(--ion-color-tertiary);
+}

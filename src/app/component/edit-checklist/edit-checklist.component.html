@@ -12,7 +12,39 @@
     </ol>
   </ion-item>
   <ng-container *ngIf="assessment.checklistCategories;else simpleSkillList">
-    <ion-accordion-group>
+    <!-- segments -->
+    <ion-segment [(ngModel)]="category">
+      <ng-container *ngFor="let cat of checklistCategories$ | async; let i = index">
+        <ion-segment-button value="{{cat}}">
+          <ion-label>{{cat}}</ion-label>
+        </ion-segment-button>
+      </ng-container>
+    </ion-segment>
+    <!-- <ion-item><ion-label>{{category}}</ion-label></ion-item> -->
+    <ng-container *ngFor="let cat of checklistCategories$ | async">
+      <div [hidden]="category !== cat">
+        <ng-container *ngFor="let item of checklist$ | async; let i = index">
+          <ng-container *ngIf="item['category'] === cat">
+            <ion-item
+              [button]="true" slot="content"
+              (click)="openSkill(i)" lines="none">
+              <img slot="start" [ngClass]="getCheckedClass(i)" src="/assets/images/icons/Check.png">
+              <div *ngIf="item['thumbnail']" class="thumbnail">
+                <img class="thumbnail" src="{{item['thumbnail']}}">
+              </div>
+              <div *ngIf="!item['thumbnail']">
+                <ion-card class="card"></ion-card>
+              </div>
+              <div>
+                <ion-text class="card-label">{{item["label"]}}</ion-text>
+              </div>
+            </ion-item>
+          </ng-container>
+        </ng-container>
+        </div>
+    </ng-container>
+    <!-- accordion -->
+    <!-- <ion-accordion-group>
       <ng-container *ngFor="let cat of checklistCategories$ | async">
         <ion-accordion value="{{cat}}">
           <ion-item slot="header" color="light">
@@ -38,10 +70,9 @@
           </ng-container>
         </ion-accordion>
       </ng-container>
-    </ion-accordion-group>
+    </ion-accordion-group> -->
   </ng-container>
   <ng-template #simpleSkillList>
-    <ion-item>No categories</ion-item>
     <ion-item *ngFor="let item of checklist$ | async; let i = index"
     [button]="true"
     (click)="openSkill(i)" lines="none">

@@ -20,7 +20,7 @@ export enum View {
   styleUrls: ['./community.page.scss'],
 })
 export class CommunityPage implements OnInit {
-  type: string = 'rankings';
+  type: string = View.Rankings;
   // View = View;
   public view: View = View.Rankings;
   public ranking$: Observable<User[]>;

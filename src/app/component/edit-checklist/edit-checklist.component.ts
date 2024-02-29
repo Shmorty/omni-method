@@ -1,18 +1,19 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IonRouterOutlet, IonicModule} from '@ionic/angular';
-import {Observable} from 'rxjs';
+import {Observable, first, firstValueFrom, take} from 'rxjs';
 import {Assessment} from '../../store/assessments/assessment.model';
 import {AssessmentService} from '../../services/assessments/assessment.service';
 import {CommonModule} from '@angular/common';
 import {Score} from '../../store/models/score.model';
 import {Router} from '@angular/router';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-edit-checklist',
   templateUrl: './edit-checklist.component.html',
   styleUrls: ['./edit-checklist.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule],
+  imports: [IonicModule, CommonModule, FormsModule],
 })
 export class EditChecklistComponent implements OnInit {
   @Input() assessment: Assessment;
@@ -24,6 +25,7 @@ export class EditChecklistComponent implements OnInit {
   @Input() score$: Observable<Score>;
   public curScore: Score;
   private checklistChanged: boolean = false;
+  public category: string;
 
   constructor(
     private router: Router,
@@ -31,10 +33,12 @@ export class EditChecklistComponent implements OnInit {
     private assessmentService: AssessmentService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     console.log("ngOnInit assessment: ", JSON.stringify(this.assessment));
     this.checklist$ = this.assessmentService.getChecklist(this.assessment.aid);
     this.checklistCategories$ = this.assessmentService.getChecklistCategories(this.assessment.aid);
+    await this.checklistCategories$.pipe(first()).subscribe(val => this.category = val[0]);
+    console.log("category " + this.category);
   }
 
   ngAfterViewInit(): void {
