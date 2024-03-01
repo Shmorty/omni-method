@@ -88,6 +88,7 @@ export class SkillDetailPage implements OnInit {
       newScore = JSON.parse(JSON.stringify(this.curScore));
       newScore.scoreDate = today;
       newScore.expired = false;
+      newScore.calculatedScore = null;
     } else {
       // create new score object
       var assessment$ = this.assessmentService.getAssessmentById(this.aid);

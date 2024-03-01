@@ -36,6 +36,7 @@ export class EditChecklistComponent implements OnInit {
   async ngOnInit() {
     console.log("ngOnInit assessment: ", JSON.stringify(this.assessment));
     this.checklist$ = this.assessmentService.getChecklist(this.assessment.aid);
+    // if checklist with categories
     this.checklistCategories$ = this.assessmentService.getChecklistCategories(this.assessment.aid);
     await this.checklistCategories$.pipe(first()).subscribe(val => this.category = val[0]);
     console.log("category " + this.category);

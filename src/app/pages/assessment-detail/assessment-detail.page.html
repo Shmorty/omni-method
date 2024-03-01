@@ -3,9 +3,7 @@
     <ion-header class="ion-no-border safe-area"> </ion-header>
 
     <ion-fab vertical="top" horizontal="start" slot="fixed">
-      <!-- routerLink="/home/profile"
-      routerDirection="back" -->
-    <ion-button
+      <ion-button
         (click)="goBack()"
         type="button"
         size="small"
@@ -18,7 +16,7 @@
 
     <ion-img class="header-img" src="{{assessment.icon}}"></ion-img>
 
-    <ion-item>
+    <ion-item lines="full">
       <ion-label>
         <ion-card-title>
           <h1>{{ assessment.label }}</h1>
@@ -34,10 +32,6 @@
     </ion-item>
 
     <div *ngIf="!assessment.checklist">
-      <!-- <ion-button expand="block" shape="round" (click)="openNewScore(assessment)">
-      <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
-    </ion-button> -->
-
 
       <ion-accordion-group>
         <ion-accordion toggleIconSlot="none">
@@ -125,8 +119,5 @@
   <ion-button *ngIf="!assessment.checklist" class="footer-button" shape="round" (click)="openNewScore(assessment)">
     <ion-icon name="pencil-outline"></ion-icon>
   </ion-button>
-  <!-- <ion-button *ngIf="assessment.checklist" class="footer-button" shape="round" (click)="saveChecklist()">
-    <ion-icon name="save-outline"></ion-icon>
-  </ion-button> -->
 </ng-container>
 

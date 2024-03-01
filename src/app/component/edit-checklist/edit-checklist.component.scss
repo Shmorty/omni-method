@@ -58,11 +58,13 @@ img.thumbnail {
   height: 44px;
   margin: 4px 0;
 }
-ion-segment, ion-segment-button {
-  background: inherit;
+// ion-segment, ion-segment-button {
+ion-segment {
+    background: inherit;
+  margin-top: 10px;
 }
 .segment-button-checked {
-  font-weight: bold;
+  // font-weight: bold;
   text-decoration: underline;
   // text-overflow: clip;
 }
