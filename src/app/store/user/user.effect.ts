@@ -47,8 +47,9 @@ export class UserEffects {
       tap((payload) =>
         console.log('userAuthenticated effect', JSON.stringify(payload))
       ),
-      map((payload) =>
-        UserActions.loadUserAction({uid: payload.payload.user.uid})
+      map((payload) => {
+        return UserActions.loadUserAction({uid: payload.payload.user.uid})
+      }
       )
     )
   );

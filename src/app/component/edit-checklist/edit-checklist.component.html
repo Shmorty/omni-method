@@ -22,7 +22,7 @@
         </ng-container>
       </ion-segment>
     </ion-item>
-    <!-- <ion-item><ion-label>{{category}}</ion-label></ion-item> -->
+    <ion-item><ion-label>{{category}}</ion-label></ion-item>
     <ng-container *ngFor="let cat of checklistCategories$ | async">
       <div [hidden]="category !== cat">
         <ng-container *ngFor="let item of checklist$ | async; let i = index">
