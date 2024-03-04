@@ -142,7 +142,7 @@ export class EditPropertyComponent implements OnInit {
           return;
         }
         if (this.updUser.username.length < usernameMinLength) {
-          this.showToastService.showToast("Username must be at leaset " + usernameMinLength + " characters", "danger");
+          this.showToastService.showToast("Username must be at least " + usernameMinLength + " characters", "danger");
           return;
         }
         if (this.updUser.username.length > usernameMaxLength) {
