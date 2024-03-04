@@ -15,7 +15,7 @@
   <ion-list>
     <ng-container *ngTemplateOutlet="template"></ng-container>
   </ion-list>
-  <ion-button
+  <ion-button *ngIf="targetProperty != 'avatar'"
   type="submit"
   (click)="save()"
   shape="round"

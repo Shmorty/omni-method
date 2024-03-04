@@ -54,8 +54,8 @@ export class CommunityPage implements OnInit {
   }
 
   highlightUser(athlete: User) {
-    return athlete.id == this.curUserId ? "highlight" : "";
-    // return athlete.id == this.curUserId ? "light" : "";
+    // return athlete.id == this.curUserId ? "highlight" : "";
+    return athlete.id == this.curUserId ? "tertiary" : "";
   }
 
   // setView(viewName: View) {
