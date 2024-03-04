@@ -20,10 +20,6 @@
   <ion-list *ngIf="user$ | async as user; else loading ">
     <div class="avatar" (click)="openModal('avatar')">
       <user-avatar [user]="user" class="avatar"></user-avatar>
-      <!-- <user-avatar [user]="user" [ngStyle]="{'color': 'white'}"
-      (click)="userService.openEditProfile($event, user)"
-      >
-      </user-avatar> -->
     </div>
   
     <ion-item button (click)="openModal('name')">
@@ -50,7 +46,7 @@
       <ion-label>Height</ion-label>
       <ion-text slot="end">{{user.height.feet}}' {{user.height.inches}}"</ion-text>
     </ion-item>
-    <ion-list-header>Settings</ion-list-header>
+    <ion-list-header class="section_header">Settings</ion-list-header>
     <ion-item>
       <ion-label>Email</ion-label>
       <ion-text slot="end">{{user.email}}</ion-text>
