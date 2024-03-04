@@ -33,7 +33,9 @@
 form {
   min-height: 320px;
 }
-
+#nickname {
+  text-transform: lowercase;
+}
 ion-radio {
   --border-radius: 4px;
   --inner-border-radius: 4px;

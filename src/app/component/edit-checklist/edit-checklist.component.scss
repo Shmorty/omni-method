@@ -39,13 +39,13 @@
 }
 .checked {
   border-radius: 50%;
-  height: 44px;
+  height: 38px;
   margin-inline-end: 8px;
   opacity: 1;
 }
 .hide-check {
   border-radius: 50%;
-  height: 44px;
+  height: 38px;
   margin-inline-end: 8px;
   opacity: 0.22;
 }
@@ -60,8 +60,8 @@ img.thumbnail {
 }
 // ion-segment, ion-segment-button {
 ion-segment {
-    // background: inherit;
-  margin-top: 10px;
+  background: rgba(75, 177, 255, 0.10);
+  // margin-top: 10px;
 }
 .segment-button-checked {
   // font-weight: bold;
@@ -69,5 +69,5 @@ ion-segment {
   // text-overflow: clip;
 }
 ion-segment-button::part(indicator-background) {
-  background: var(--ion-color-tertiary);
+  background: var(--ion-color-primary);
 }

@@ -5,6 +5,8 @@ import {IonicModule, ModalController} from '@ionic/angular';
 import {first} from 'rxjs';
 import {User} from 'src/app/store/user/user.model';
 import {NumberPickerComponent} from '../number-picker/number-picker.component';
+import {UserService} from '../../services/user/user.service';
+import {ShowToastService} from '../../services/show-toast.service';
 
 @Component({
   selector: 'app-edit-property',
@@ -57,7 +59,11 @@ export class EditPropertyComponent implements OnInit {
     {"label": "Coordination Skills", "icon": "/assets/images/Coordination.png"},
   ];
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(
+    private modalCtrl: ModalController,
+    private userService: UserService,
+    private showToastService: ShowToastService
+  ) {}
 
   ngOnInit() {
     console.log("targetProperty", this.targetProperty);
@@ -122,7 +128,7 @@ export class EditPropertyComponent implements OnInit {
     this.save();
   }
 
-  save() {
+  async save() {
     console.log("save", this.targetProperty);
     switch (this.targetProperty) {
       case 'name': {
@@ -131,6 +137,11 @@ export class EditPropertyComponent implements OnInit {
         break;
       }
       case 'nickname': {
+        const isAvailable = await this.userService.isNicknameAvailable(this.updUser.nickname);
+        if (!isAvailable) {
+          this.showToastService.showToast("Sorry, a user already exists with that nickname", "danger");
+          return;
+        }
         console.log("nickname", this.updUser.nickname);
         break;
       }

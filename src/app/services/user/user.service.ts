@@ -40,13 +40,8 @@ export class UserService implements IUserService {
 
   reloadUser() {
     this.store.select(selectAuthUser).subscribe((authUser) => {
-      // console.log("selectAuthUser authUser", authUser.user.uid);
       this.store.dispatch(UserActions.loadUserAction({uid: authUser?.user.uid}));
     });
-    // this.authService.currentUser().then((authUser) => {
-    //   console.log("authService authUser", authUser);
-    // });
-    // console.log("authService currUserId", this.authService.currUserId);
   }
 
   getUserRankings(): Observable<User[]> {
@@ -55,6 +50,11 @@ export class UserService implements IUserService {
       return (a.omniScore < b.omniScore) ? 1 : (a.omniScore > b.omniScore) ? -1 : 0;
     }
     return this.firestoreService.getAllUsers().pipe(map((data) => data.sort(sortFn)));
+  }
+
+  isNicknameAvailable(nickname: string) {
+    console.log("is nickname available ", nickname);
+    return this.firestoreService.checkNickname(nickname);
   }
 
   // trigger new user action

@@ -48,8 +48,10 @@
           </div>
           <ion-item>
             <ion-input
+              id="nickname"
               formControlName="nickname"
               placeholder="Display name"
+              (keydown.space)="$event.preventDefault()"
               [maxlength]="30"
               aria-label="Nickname"
             ></ion-input>
@@ -64,8 +66,8 @@
           </div>
           <ion-item>
             <ion-radio-group formControlName="gender" value="other">
-              <ion-radio justify="start" value="male" labelPlacement="end">Male</ion-radio>
-              <ion-radio justify="start" value="female" labelPlacement="end">Female</ion-radio>
+              <ion-radio justify="start" value="Male" labelPlacement="end">Male</ion-radio>
+              <ion-radio justify="start" value="Female" labelPlacement="end">Female</ion-radio>
             </ion-radio-group>
           </ion-item>
         </div>

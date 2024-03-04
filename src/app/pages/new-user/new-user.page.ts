@@ -10,6 +10,8 @@ import {User} from 'src/app/store/user/user.model';
 // import {Keyboard} from '@capacitor/keyboard';
 // import {UserFirestoreService} from 'src/app/services/user-firestore.service';
 import {AssessmentService} from 'src/app/services/assessments/assessment.service';
+import {newUser} from 'functions/src';
+import {ShowToastService} from 'src/app/services/show-toast.service';
 
 @Component({
   selector: 'app-new-user',
@@ -41,7 +43,8 @@ export class NewUserPage implements OnInit {
     private userService: UserService,
     private auth: AuthService,
     private datePipe: DatePipe,
-    private assessmentService: AssessmentService
+    private assessmentService: AssessmentService,
+    private showToastService: ShowToastService
   ) {
     let calcDate = new Date();
     let curYear = calcDate.getFullYear();
@@ -65,8 +68,9 @@ export class NewUserPage implements OnInit {
 
     this.initFormData();
 
-    // console.log("ngOnInit formData", this.formData);
-    // console.log("ngOnInit newUser", this.newUser);
+    this.formData.get('nickname').valueChanges.subscribe((event) => {
+      this.formData.get('nickname').setValue(event.toLowerCase(), {emitEvent: false});
+    });
   }
 
   private initFormData() {
@@ -117,8 +121,8 @@ export class NewUserPage implements OnInit {
   }
 
   onSubmit() {
-    console.log('new user onSubmit', this.formData.value);
-    // this.assessmentService.getChecklist;
+    const newUser = this.formData.value as User;
+    console.log('new user onSubmit', newUser);
     // create user in database
     this.userService.saveNewUser({
       ...(this.formData.value),
@@ -128,9 +132,19 @@ export class NewUserPage implements OnInit {
     });
   }
 
-  next() {
+  async next() {
     console.log('next', this.formData.value);
     if (this.step < 6) {
+      if (this.step == 1) {
+        const nick = this.formData.value['nickname'];
+        console.log('check nickname', nick);
+        const isAvailable = await this.userService.isNicknameAvailable(nick);
+        console.log("nick is available", isAvailable);
+        if (!isAvailable) {
+          this.showToastService.showToast("Sorry, a user already exists with that nickname", "danger");
+          return;
+        }
+      }
       this.step = this.step + 1;
     } else {
       this.onSubmit();
