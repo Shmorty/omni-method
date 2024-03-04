@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IonAccordionGroup, ModalController, isPlatform} from '@ionic/angular';
-// import { GoogleSigninService, UserInfo } from '../google-signin.service';
-import {Assessment, Category} from '../../store/assessments/assessment.model';
+import {Assessment} from '../../store/assessments/assessment.model';
 import {Router} from '@angular/router';
 import {StatusBar, Style} from '@capacitor/status-bar';
 
@@ -15,12 +14,7 @@ import {
   selectAllCategories,
 } from 'src/app/store/assessments/assessment.selector';
 import * as UserSelectors from 'src/app/store/user/user.selectors';
-// import {
-//   selectCategoryScore,
-//   selectOmniScore,
-// } from 'src/app/store/omni-score/omni-score.selector';
 import {delay, tap} from 'rxjs/operators';
-import {EditProfilePage} from '../edit-profile/edit-profile.page';
 import {OmniScoreService, oneDay} from '../../services/omni-score.service';
 import {UserService} from '../../services/user/user.service';
 import {Capacitor} from '@capacitor/core';
@@ -31,7 +25,6 @@ import {Capacitor} from '@capacitor/core';
   styleUrls: ['profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  // @ViewChild(IonModal) modal: IonModal;
   @ViewChild('accordionGroup') accordionGroup: IonAccordionGroup;
   moreOpen: boolean = false;
   subscription: Subscription;
@@ -83,19 +76,6 @@ export class ProfilePage implements OnInit {
       }
     }
   }
-
-  handleRefresh(event) {
-    console.log("profile page pullToRefresh");
-    this.userService.reloadUser();
-    setTimeout(() => {
-      // Any calls to load data go here
-      event.target.complete();
-    }, 100);
-  }
-
-  // getCategoryScore(category: Category) {
-  //   return this.store.select(selectCategoryScore(category));
-  // }
 
   getScores$(assessment: Assessment) {
     return this.store.select(UserSelectors.assessmentScores(assessment)).pipe(

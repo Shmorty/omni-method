@@ -6,16 +6,9 @@
 <ion-content [fullscreen]="true" #scrollarea no-bounce class="ion-content-scroll-host">
   <div class="safe-area">
   </div>
-  <ion-refresher
-    slot="fixed"
-    pullMax="200"
-    pullMin="60"
-    (ionRefresh)="handleRefresh($event)"
-  >
-    <ion-refresher-content
-      pullingIcon="none"
-      refreshingSpinner="none"
-    ></ion-refresher-content>
+  <ion-refresher slot="fixed" pullMin="999999">
+    <ion-refresher-content pullingIcon="none" refreshingSpinner="none">
+  </ion-refresher-content>
   </ion-refresher>
   <app-profile-header></app-profile-header>
   <ion-card class="contentCard">
