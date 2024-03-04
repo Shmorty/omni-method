@@ -132,6 +132,14 @@ export class NewUserPage implements OnInit {
           this.showToastService.showToast("You must select a username", "danger");
           return;
         }
+        if (username.length < usernameMinLength) {
+          this.showToastService.showToast("Username must be at least " + usernameMinLength + " characters", "danger");
+          return;
+        }
+        if (username.length > usernameMaxLength) {
+          this.showToastService.showToast("Username must be no more than " + usernameMaxLength + " characters", "danger");
+          return;
+        }
         console.log('check username', username);
         const isAvailable = await this.userService.isUsernameAvailable(username);
         console.log("username is available", isAvailable);
