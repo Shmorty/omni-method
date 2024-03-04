@@ -68,7 +68,7 @@ export class UserAvatarComponent implements OnInit {
   }
 
   userInitial() {
-    return (this.user.nickname) ?
-      this.user.nickname.substring(0, 1) : this.user.firstName.substring(0, 1);
+    return (this.user.username) ?
+      this.user.username.substring(0, 1) : this.user.firstName.substring(0, 1);
   }
 }

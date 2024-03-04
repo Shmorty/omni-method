@@ -29,7 +29,7 @@ export class RankingDetailPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.title = this.athlete.nickname ? this.athlete.nickname :
+    this.title = this.athlete.username ? '@' + this.athlete.username :
       this.athlete.firstName + ' ' + this.athlete.lastName;
     // get slected user's scores
     this.scores$ = await this.userFirestoreService.getUserScores(this.athlete.id);

@@ -68,18 +68,12 @@ export class NewUserPage implements OnInit {
 
     this.initFormData();
 
-    this.formData.get('nickname').valueChanges.subscribe((event) => {
-      this.formData.get('nickname').setValue(event.toLowerCase(), {emitEvent: false});
+    this.formData.get('username').valueChanges.subscribe((event) => {
+      this.formData.get('username').setValue(event.toLowerCase(), {emitEvent: false});
     });
   }
 
   private initFormData() {
-    // this.formData.addControl('id', new FormControl(this.newUser.id, Validators.required));
-    // this.formData.addControl('email', new FormControl(this.newUser.email, [Validators.required, Validators.email]));
-    // this.formData.addControl('firstName', new FormControl('', Validators.required));
-    // this.formData.addControl('lastName', new FormControl('', Validators.required));
-    // this.formData.addControl('nickname', new FormControl());
-    // this.formData.addControl('gender', new FormControl());
     console.log("initFormData()");
     this.formData = new FormGroup({
       id: new FormControl(this.userId, [Validators.required]),
@@ -89,7 +83,7 @@ export class NewUserPage implements OnInit {
         Validators.required,
         Validators.email,
       ]),
-      nickname: new FormControl(),
+      username: new FormControl('', [Validators.required]),
       gender: new FormControl(),
       dob: new FormControl(this.userDob, [Validators.required]),
       height: new FormGroup({
@@ -136,12 +130,12 @@ export class NewUserPage implements OnInit {
     console.log('next', this.formData.value);
     if (this.step < 6) {
       if (this.step == 1) {
-        const nick = this.formData.value['nickname'];
-        console.log('check nickname', nick);
-        const isAvailable = await this.userService.isNicknameAvailable(nick);
-        console.log("nick is available", isAvailable);
+        const username = this.formData.value['username'];
+        console.log('check username', username);
+        const isAvailable = await this.userService.isUsernameAvailable(username);
+        console.log("username is available", isAvailable);
         if (!isAvailable) {
-          this.showToastService.showToast("Sorry, a user already exists with that nickname", "danger");
+          this.showToastService.showToast("Sorry, a user already exists with that username", "danger");
           return;
         }
       }
@@ -162,6 +156,10 @@ export class NewUserPage implements OnInit {
 
   get last() {
     return this.formData.get('lastName');
+  }
+
+  get username() {
+    return this.formData.get('username');
   }
 
   get email() {

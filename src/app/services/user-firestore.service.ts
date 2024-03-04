@@ -79,21 +79,21 @@ export class UserFirestoreService {
     return from(updateDoc(userDocRef, Object(user)));
   }
 
-  async checkNickname(nicknameToCheck: string) {
+  async checkUsername(usernameToCheck: string) {
     const userCollection = collection(this.firestore, "user");
-    const nicknameQuery = query(userCollection, where("nickname", "==", nicknameToCheck));
-    let nicknameSnapshot: QuerySnapshot;
+    const usernameQuery = query(userCollection, where("username", "==", usernameToCheck));
+    let usernameSnapshot: QuerySnapshot;
     try {
-      nicknameSnapshot = await getDocs(nicknameQuery);
-      console.log("nickname snapshot size", nicknameSnapshot?.size);
-      console.log("nickname docs length", nicknameSnapshot.docs.length)
+      usernameSnapshot = await getDocs(usernameQuery);
+      console.log("username snapshot size", usernameSnapshot?.size);
+      console.log("username docs length", usernameSnapshot.docs.length)
     } catch (err) {
-      console.log("check nickname error", err);
+      console.log("check username error", err);
       return false;
     }
     //
-    const result: boolean = nicknameSnapshot.empty;
-    console.log("check nickname return", result);
+    const result: boolean = usernameSnapshot.empty;
+    console.log("check username return", result);
     return result;
   }
 

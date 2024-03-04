@@ -52,9 +52,9 @@ export class UserService implements IUserService {
     return this.firestoreService.getAllUsers().pipe(map((data) => data.sort(sortFn)));
   }
 
-  isNicknameAvailable(nickname: string) {
-    console.log("is nickname available ", nickname);
-    return this.firestoreService.checkNickname(nickname);
+  isUsernameAvailable(username: string) {
+    console.log("is username available ", username);
+    return this.firestoreService.checkUsername(username);
   }
 
   // trigger new user action

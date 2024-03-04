@@ -8,6 +8,7 @@ export interface User {
   gender?: string;
   lastName: string;
   nickname?: string;
+  username: string;
   omniScore: number;
   height?: {
     feet: number;

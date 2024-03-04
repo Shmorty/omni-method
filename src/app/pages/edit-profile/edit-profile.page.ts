@@ -110,7 +110,7 @@ export class EditProfilePage implements OnInit {
     this.profileForm = new FormGroup({
       firstName: new FormControl(this.user.firstName, Validators.required),
       lastName: new FormControl(this.user.lastName, Validators.required),
-      nickname: new FormControl(this.user.nickname),
+      username: new FormControl(this.user.username),
       gender: new FormControl(this.user.gender),
       dob: new FormControl(this.user.dob),
       height: new FormGroup({

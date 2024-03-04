@@ -59,13 +59,13 @@
     </ion-item>
 </ng-template>
 
-<ng-template #nickname>
+<ng-template #username>
   <ion-item lines="none">
     <ion-input
-      id="nickname"
-      label="Display Name"
+      id="username"
+      label="Username"
       labelPlacement="fixed"
-      [(ngModel)]="updUser.nickname"
+      [(ngModel)]="updUser.username"
       (keydown.space)="$event.preventDefault()"
       oninput="this.value = this.value.toLowerCase()"
       counter="true"

@@ -27,7 +27,7 @@ export class EditPropertyComponent implements OnInit {
   @Input() user: User;
   @ViewChild('avatar') avatarTemplate: TemplateRef<any>;
   @ViewChild('name') nameTemplate: TemplateRef<any>;
-  @ViewChild('nickname') nicknameTemplate: TemplateRef<any>;
+  @ViewChild('username') usernameTemplate: TemplateRef<any>;
   @ViewChild('dob') dobTemplate: TemplateRef<any>;
   @ViewChild('sex') sexTemplate: TemplateRef<any>;
   @ViewChild('weight') weightTemplate: TemplateRef<any>;
@@ -85,9 +85,9 @@ export class EditPropertyComponent implements OnInit {
         this.template = this.nameTemplate;
         break;
       }
-      case 'nickname': {
-        this.title = "Display Name";
-        this.template = this.nicknameTemplate;
+      case 'username': {
+        this.title = "Username";
+        this.template = this.usernameTemplate;
         break;
       }
       case 'dob': {
@@ -136,13 +136,13 @@ export class EditPropertyComponent implements OnInit {
         console.log("lastName", this.updUser.lastName);
         break;
       }
-      case 'nickname': {
-        const isAvailable = await this.userService.isNicknameAvailable(this.updUser.nickname);
+      case 'username': {
+        const isAvailable = await this.userService.isUsernameAvailable(this.updUser.username);
         if (!isAvailable) {
-          this.showToastService.showToast("Sorry, a user already exists with that nickname", "danger");
+          this.showToastService.showToast("Sorry, a user already exists with that username", "danger");
           return;
         }
-        console.log("nickname", this.updUser.nickname);
+        console.log("username", this.updUser.username);
         break;
       }
       case 'dob': {

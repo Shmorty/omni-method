@@ -30,7 +30,7 @@
       <ion-item class="rank-header" lines="full">
         <!-- <ion-text slot="start">&nbsp;</ion-text> -->
         <ion-text color="medium" slot="start">Ranking</ion-text>
-        <ion-text color="medium" style="padding-left: 24px;">Name</ion-text>
+        <ion-text color="medium" style="padding-left: 24px;">Username</ion-text>
         <ion-text color="medium" slot="end">Score</ion-text>
       </ion-item>
       <ion-item *ngFor="let athlete of ranking$ | async; let i = index"
@@ -42,8 +42,8 @@
           <img *ngIf="athlete.avatar" src="{{athlete.avatar}}">
           <ion-icon *ngIf="!athlete.avatar" name="person-outline"></ion-icon>
         </ion-avatar>
-        <ion-text *ngIf="athlete.nickname">{{athlete.nickname}}</ion-text>
-        <ion-text *ngIf="!athlete.nickname">{{athlete.firstName}} {{athlete.lastName}}</ion-text>
+        <ion-text *ngIf="athlete.username">@{{athlete.username}}</ion-text>
+        <ion-text *ngIf="!athlete.username">{{athlete.firstName}} {{athlete.lastName}}</ion-text>
         <ion-text class="score" slot="end">{{athlete.omniScore | number}}</ion-text>
       </ion-item>
     </ion-list>

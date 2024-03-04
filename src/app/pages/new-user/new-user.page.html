@@ -48,14 +48,20 @@
           </div>
           <ion-item>
             <ion-input
-              id="nickname"
-              formControlName="nickname"
-              placeholder="Display name"
+              id="username"
+              formControlName="username"
+              placeholder="Username"
               (keydown.space)="$event.preventDefault()"
               [maxlength]="30"
-              aria-label="Nickname"
+              aria-label="Username"
             ></ion-input>
           </ion-item>
+          <div
+            *ngIf="(username.dirty || username.touched) && username.errors"
+            class="errors"
+          >
+            <span *ngIf="username.errors?.required">Username is required</span>
+          </div>
         </div>
         <!-- <div *ngIf="step == 2"> -->
         <div [hidden]="step !== 2">
