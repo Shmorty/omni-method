@@ -133,6 +133,10 @@ export class NewUserPage implements OnInit {
     if (this.step < 6) {
       if (this.step == 1) {
         const username = this.formData.value['username'];
+        if (!username) {
+          this.showToastService.showToast("You must select a username", "danger");
+          return;
+        }
         console.log('check username', username);
         const isAvailable = await this.userService.isUsernameAvailable(username);
         console.log("username is available", isAvailable);

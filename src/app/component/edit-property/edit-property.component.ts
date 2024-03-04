@@ -137,6 +137,10 @@ export class EditPropertyComponent implements OnInit {
         break;
       }
       case 'username': {
+        if (!this.updUser.username) {
+          this.showToastService.showToast("You must select a username", "danger");
+          return;
+        }
         const isAvailable = await this.userService.isUsernameAvailable(this.updUser.username);
         if (!isAvailable) {
           this.showToastService.showToast("Sorry, a user already exists with that username", "danger");
