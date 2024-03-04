@@ -49,15 +49,17 @@ async function saveScoreToDb(scoreData: object[], data: FirebaseFirestore.Docume
   const mo = new Intl.DateTimeFormat("en", {month: "2-digit"}).format(d);
   const da = new Intl.DateTimeFormat("en", {day: "2-digit"}).format(d);
   const scoreDate = `${ye}-${mo}-${da}`;
+  // const scoreDate = new Date().toLocaleDateString();
   logger.info("scoreDate", scoreDate);
-  const today = new Date().toLocaleString("sv").replace(" ", "T");
+  // const today = new Date().toLocaleString("sv").replace(" ", "T");
   // let newScore: Score;
   let newScore: object;
   scoreData.forEach((entry) => {
     newScore = {
       ...entry,
       uid: data.id,
-      scoreDate: today,
+      // scoreDate: today,
+      scoreDate: scoreDate,
       currentWeight: data.weight,
       expired: false,
       notes: "Quick score",
