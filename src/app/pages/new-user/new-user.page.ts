@@ -36,6 +36,7 @@ export class NewUserPage implements OnInit {
 
   userDob: string;
   fitnessLevel: string = 'none';
+  scoreDate = new Date().toISOString().split('T')[0];
   step = 1;
   isApp = false;
 
@@ -121,6 +122,7 @@ export class NewUserPage implements OnInit {
     this.userService.saveNewUser({
       ...(this.formData.value),
       fitnessLevel: this.fitnessLevel,
+      scoreDate: this.scoreDate,
       omniScore: 0,
       categoryScore: this.assessmentService.getNewCategoryScores(),
     });
