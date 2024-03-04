@@ -61,6 +61,8 @@
             class="errors"
           >
             <span *ngIf="username.errors?.required">Username is required</span>
+            <span *ngIf="username.errors?.minlength">Username is too short</span>
+            <span *ngIf="username.errors?.maxlength">Username is too long</span>
           </div>
         </div>
         <!-- <div *ngIf="step == 2"> -->

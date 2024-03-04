@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {Router} from '@angular/router';
-import {UserService} from 'src/app/services/user/user.service';
-import {AuthService} from 'src/app/services/auth.service';
-import {User} from 'src/app/store/user/user.model';
+import {UserService, usernameMinLength, usernameMaxLength} from '../../services/user/user.service';
+import {AuthService} from '../../services/auth.service';
+import {User} from '../../store/user/user.model';
 // import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
 // import {isPlatform} from '@ionic/angular';
 // import {Keyboard} from '@capacitor/keyboard';
@@ -21,17 +21,6 @@ import {ShowToastService} from 'src/app/services/show-toast.service';
 export class NewUserPage implements OnInit {
   userId: string;
   userEmail: string;
-  // public newUser: User = {
-  //   id: this.auth.currUserId,
-  //   email: this.auth.currUserEmail,
-  //   firstName: '',
-  //   lastName: '',
-  //   dob: undefined,
-  //   height: {feet: 4, inches: 6},
-  //   weight: 75,
-  //   omniScore: 0,
-  //   categoryScore: undefined,
-  // };
   formData: FormGroup;// = new FormGroup({});
 
   userDob: string;
@@ -39,6 +28,8 @@ export class NewUserPage implements OnInit {
   scoreDate = new Date().toISOString().split('T')[0];
   step = 1;
   isApp = false;
+  // usernameMinLength = 5;
+  // usernameMaxLength = 20;
 
   constructor(
     private userService: UserService,
@@ -84,7 +75,11 @@ export class NewUserPage implements OnInit {
         Validators.required,
         Validators.email,
       ]),
-      username: new FormControl('', [Validators.required]),
+      username: new FormControl('', [
+        Validators.required,
+        Validators.minLength(usernameMinLength),
+        Validators.maxLength(usernameMaxLength)
+      ]),
       gender: new FormControl(),
       dob: new FormControl(this.userDob, [Validators.required]),
       height: new FormGroup({

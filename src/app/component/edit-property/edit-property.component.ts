@@ -5,7 +5,7 @@ import {IonicModule, ModalController} from '@ionic/angular';
 import {first} from 'rxjs';
 import {User} from 'src/app/store/user/user.model';
 import {NumberPickerComponent} from '../number-picker/number-picker.component';
-import {UserService} from '../../services/user/user.service';
+import {UserService, usernameMinLength, usernameMaxLength} from '../../services/user/user.service';
 import {ShowToastService} from '../../services/show-toast.service';
 
 @Component({
@@ -139,6 +139,14 @@ export class EditPropertyComponent implements OnInit {
       case 'username': {
         if (!this.updUser.username) {
           this.showToastService.showToast("You must select a username", "danger");
+          return;
+        }
+        if (this.updUser.username.length < usernameMinLength) {
+          this.showToastService.showToast("Username must be at leaset " + usernameMinLength + " characters", "danger");
+          return;
+        }
+        if (this.updUser.username.length > usernameMaxLength) {
+          this.showToastService.showToast("Username must be no more than " + usernameMaxLength + " characters", "danger");
           return;
         }
         const isAvailable = await this.userService.isUsernameAvailable(this.updUser.username);

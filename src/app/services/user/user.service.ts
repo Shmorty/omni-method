@@ -23,10 +23,14 @@ import {AuthService} from '../auth.service';
 import {ModalController} from '@ionic/angular';
 import {EditProfilePage} from 'src/app/pages/edit-profile/edit-profile.page';
 
+export const usernameMinLength = 5;
+export const usernameMaxLength = 20;
+
 @Injectable({
   providedIn: 'root',
 })
 export class UserService implements IUserService {
+
   constructor(private http: HttpClient,
     private store: Store<AppState>,
     private firestoreService: UserFirestoreService,
