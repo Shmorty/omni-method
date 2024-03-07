@@ -60,7 +60,8 @@ img.thumbnail {
 }
 // ion-segment, ion-segment-button {
 ion-segment {
-  background: rgba(75, 177, 255, 0.10);
+  // background: rgba(75, 177, 255, 0.10);
+  background: var(--ion-color-tertiary);
   // margin-top: 10px;
 }
 .segment-button-checked {

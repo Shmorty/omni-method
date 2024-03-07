@@ -1,9 +1,9 @@
 PODS:
-  - Capacitor (5.3.0):
+  - Capacitor (5.0.5):
     - CapacitorCordova
   - CapacitorApp (5.0.7):
     - Capacitor
-  - CapacitorCordova (5.3.0)
+  - CapacitorCordova (5.0.5)
   - CapacitorHaptics (5.0.7):
     - Capacitor
   - CapacitorKeyboard (5.0.8):
@@ -49,9 +49,9 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/text-zoom"
 
 SPEC CHECKSUMS:
-  Capacitor: 1ac9165943bc4f2137642d218c5ba05df811de69
+  Capacitor: b1248915663add1bd6567e2b67c1c1fa3abcf5e8
   CapacitorApp: 17fecd0e6cb23feafac7eb0939417389038b0979
-  CapacitorCordova: b9374d68e63ce29e96ab5db994cf14fbefd722c9
+  CapacitorCordova: f8c06b897c74ee8f7701fe10e6443b40822bc83a
   CapacitorHaptics: 7c7c206f0c96a628fed073830c96d28c4b2e772e
   CapacitorKeyboard: aec619a578235c6ce279075009a2689c2cf5c42c
   CapacitorNetwork: 81ef9728aa7a65cac8c1181ce79e578162b57b57
