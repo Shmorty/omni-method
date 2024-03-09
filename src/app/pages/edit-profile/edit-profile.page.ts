@@ -233,9 +233,8 @@ export class EditProfilePage implements OnInit, OnDestroy {
     }
   }
 
-  openPicker(targetProperty: string) {
-    this.numberPickerService.openPicker(this.user, targetProperty);
-
+  openPicker(user: User, targetProperty: string) {
+    this.numberPickerService.openPicker(user, targetProperty);
   }
 }
 
