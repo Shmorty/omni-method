@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {CdkVirtualScrollViewport, ScrollDispatcher, ScrollingModule} from '@angular/cdk/scrolling';
 import {CommonModule} from '@angular/common';
 import {IonicModule} from '@ionic/angular';
@@ -10,10 +10,10 @@ import {Subject, Subscription} from 'rxjs';
   standalone: true,
   templateUrl: './number-picker.component.html',
   styleUrls: ['./number-picker.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ScrollingModule, CommonModule, IonicModule],
 })
-export class NumberPickerComponent implements OnInit, OnChanges {
+export class NumberPickerComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() min = 0;
   @Input() max = 100;
   @Input() increment = 1;

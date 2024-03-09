@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {Router} from '@angular/router';
@@ -12,17 +12,19 @@ import {User} from '../../store/user/user.model';
 import {AssessmentService} from 'src/app/services/assessments/assessment.service';
 import {newUser} from 'functions/src';
 import {ShowToastService} from 'src/app/services/show-toast.service';
+import {NumberPickerService} from 'src/app/services/number-picker.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-user.page.html',
   styleUrls: ['./new-user.page.scss'],
 })
-export class NewUserPage implements OnInit {
+export class NewUserPage implements OnInit, OnDestroy {
   userId: string;
   userEmail: string;
   formData: FormGroup;// = new FormGroup({});
-
+  numberPickerSubscription: Subscription;
   userDob: string;
   fitnessLevel: string = 'none';
   scoreDate = new Date().toISOString().split('T')[0];
@@ -36,7 +38,8 @@ export class NewUserPage implements OnInit {
     private auth: AuthService,
     private datePipe: DatePipe,
     private assessmentService: AssessmentService,
-    private showToastService: ShowToastService
+    private showToastService: ShowToastService,
+    private numberPickerService: NumberPickerService
   ) {
     let calcDate = new Date();
     let curYear = calcDate.getFullYear();
@@ -63,6 +66,16 @@ export class NewUserPage implements OnInit {
     this.formData.get('username').valueChanges.subscribe((event) => {
       this.formData.get('username').setValue(event.toLowerCase(), {emitEvent: false});
     });
+
+    this.numberPickerSubscription = this.numberPickerService.currentValue.subscribe((val) => {
+      console.log("new value", val);
+      this.formData.get('height').setValue(val['height']);
+      this.formData.get('weight').setValue(val['weight']);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.numberPickerSubscription.unsubscribe();
   }
 
   private initFormData() {
@@ -103,6 +116,10 @@ export class NewUserPage implements OnInit {
       // fitnessLevel: new FormControl('none', [Validators.required]),
     });
     // this.formData.patchValue(this.newUser);
+  }
+
+  async openPicker(targetProperty: string) {
+    await this.numberPickerService.openPicker(this.formData.value, targetProperty);
   }
 
   setFitnessLevel(ev) {

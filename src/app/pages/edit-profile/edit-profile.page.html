@@ -38,11 +38,11 @@
       <ion-label>Gender</ion-label>
       <ion-text slot="end">{{user.gender}}</ion-text>
     </ion-item>
-    <ion-item button (click)="openModal('weight')">
+    <ion-item button (click)="openPicker('weight')">
       <ion-label>Weight</ion-label>
       <ion-text slot="end">{{user.weight}}</ion-text>
     </ion-item>
-    <ion-item button (click)="openModal('height')">
+    <ion-item button (click)="openPicker('height')">
       <ion-label>Height</ion-label>
       <ion-text slot="end">{{user.height.feet}}' {{user.height.inches}}"</ion-text>
     </ion-item>

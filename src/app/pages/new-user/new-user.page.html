@@ -101,12 +101,17 @@
             </ion-text>
           </div>
           <fieldset formGroupName="height">
-            <ion-item lines="none">
-              <app-number-picker style="width: 50%;" [min]="3" [max]="7" [units]="'ft'"
+            <!-- <ion-item lines="none"> -->
+              <!-- <app-number-picker style="width: 50%;" [min]="3" [max]="7" [units]="'ft'"
               [(pickerValue)]="formData.value.height.feet"></app-number-picker>
               <app-number-picker style="width: 50%;" [min]="0" [max]="11" [units]="'in'"
-              [(pickerValue)]="formData.value.height.inches"></app-number-picker>
-            </ion-item>
+              [(pickerValue)]="formData.value.height.inches"></app-number-picker> -->
+              <ion-button class="continue-button" (click)="openPicker('height')" expand="block" shape="round">
+                {{formData.value.height.feet}} ft
+                &nbsp;
+                {{formData.value.height.inches}} in
+              </ion-button>
+            <!-- </ion-item> -->
           </fieldset>
         </div>
         <!-- <div *ngIf="step == 5"> -->
@@ -116,10 +121,13 @@
               <h1 class="center">What is your body weight?</h1>
             </ion-text>
           </div>
-          <ion-item>
+          <!-- <ion-item>
             <app-number-picker style="width: 100%;" [min]="0" [max]="325" [units]="'lbs'"
             [(pickerValue)]="formData.value.weight"></app-number-picker>
-          </ion-item>
+          </ion-item> -->
+          <ion-button class="continue-button" (click)="openPicker('weight')" expand="block" shape="round">
+          {{formData.value.weight}} lbs
+        </ion-button>
         </div>
         <!-- <div *ngIf="step == 6"> -->
         <div [hidden]="step !== 6">

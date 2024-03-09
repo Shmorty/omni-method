@@ -112,3 +112,12 @@ ion-datetime {
 button.alert-button.logout-button-confirm {
   color: var(--ion-color-danger);
 }
+ion-picker-column {
+  background: var(--ion-color-primary) !important;
+}
+.picker-above-highlight {
+  background: linear-gradient(to bottom, var(--background, var(--ion-background-color, #fff)) 5%, rgba(var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255)), 0.5) 100%) !important;
+}
+.picker-below-highlight {
+  background: linear-gradient(to top, var(--background, var(--ion-background-color, #fff)) 5%, rgba(var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255)), 0.5) 100%) !important;
+}

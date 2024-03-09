@@ -1,5 +1,5 @@
 import {DatePipe} from '@angular/common';
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,24 +7,26 @@ import {
   Validators,
 } from '@angular/forms';
 import {Keyboard} from '@capacitor/keyboard';
-import {AlertController, IonModal, isPlatform, ModalController} from '@ionic/angular';
+import {AlertController, IonModal, isPlatform, ModalController, PickerColumn, PickerColumnOption, PickerController} from '@ionic/angular';
 import {OverlayEventDetail} from '@ionic/core/components';
-import {delay} from 'rxjs';
-import {EditPropertyComponent} from 'src/app/component/edit-property/edit-property.component';
-import {AuthService} from 'src/app/services/auth.service';
+import {Subscription, delay} from 'rxjs';
+import {EditPropertyComponent} from '../../component/edit-property/edit-property.component';
+import {AuthService} from '../../services/auth.service';
 // import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
-import {UserService} from 'src/app/services/user/user.service';
-import {User} from 'src/app/store/user/user.model';
+import {UserService} from '../../services/user/user.service';
+import {User} from '../../store/user/user.model';
+import {NumberPickerService} from 'src/app/services/number-picker.service';
 
 @Component({
   selector: 'edit-profile-page',
   templateUrl: './edit-profile.page.html',
   styleUrls: ['./edit-profile.page.scss'],
 })
-export class EditProfilePage implements OnInit {
+export class EditProfilePage implements OnInit, OnDestroy {
   // @ViewChild(IonModal) modal: IonModal;
   @Input() user: User;
   profileForm: FormGroup;
+  private numberPickerSubscription: Subscription;
   public deleteAccountButtons = [
     {
       text: 'Cancel',
@@ -103,7 +105,8 @@ export class EditProfilePage implements OnInit {
     public userService: UserService,
     private authService: AuthService,
     public formBuilder: FormBuilder,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private numberPickerService: NumberPickerService
   ) {}
 
   ngOnInit() {
@@ -127,11 +130,14 @@ export class EditProfilePage implements OnInit {
       }),
       weight: new FormControl(this.user.weight),
     });
+    this.numberPickerSubscription = this.numberPickerService.currentValue.subscribe((val) => {
+      this.userService.updateUser(val as User);
+    })
   }
 
-  // deleteAccountResult(ev) {
-  //   console.log(`Dismissed with role: ${ev.detail.role}`);
-  // }
+  ngOnDestroy(): void {
+    this.numberPickerSubscription.unsubscribe();
+  }
 
   async deleteAccount() {
     const alert = await this.alertController.create({
@@ -206,12 +212,6 @@ export class EditProfilePage implements OnInit {
     });
   }
 
-  // async openPicker() {
-  //   let maxDate = new Date(); //.setFullYear(2006);
-  //   let curYear = maxDate.getFullYear();
-  //   maxDate.setFullYear(curYear - 2);
-  // }
-
   async openModal(targetProperty: string) {
     const modal = await this.modalCtrl.create({
       backdropDismiss: false,
@@ -233,14 +233,9 @@ export class EditProfilePage implements OnInit {
     }
   }
 
-  // async presentAlert() {
-  //   const alert = await this.alertController.create({
-  //     header: 'Name',
-  //     buttons: ['OK'],
-  //     inputs: [],
-  //   });
+  openPicker(targetProperty: string) {
+    this.numberPickerService.openPicker(this.user, targetProperty);
 
-  //   await alert.present();
-  // }
-
+  }
 }
+
