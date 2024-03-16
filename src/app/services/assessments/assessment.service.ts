@@ -81,4 +81,9 @@ export class AssessmentService implements IAssessmentService {
     console.log('obj', obj);
     return obj;
   }
+
+  isReverse(aid: string): boolean {
+    return ["PSPR", "AGLTY"].includes(aid);
+  }
+
 }

@@ -106,36 +106,46 @@ export class EditProfilePage implements OnInit, OnDestroy {
     private authService: AuthService,
     public formBuilder: FormBuilder,
     private alertController: AlertController,
-    private numberPickerService: NumberPickerService
+    public numberPickerService: NumberPickerService
   ) {}
 
   ngOnInit() {
-    this.profileForm = new FormGroup({
-      firstName: new FormControl(this.user.firstName, Validators.required),
-      lastName: new FormControl(this.user.lastName, Validators.required),
-      username: new FormControl(this.user.username),
-      gender: new FormControl(this.user.gender),
-      dob: new FormControl(this.user.dob),
-      height: new FormGroup({
-        feet: new FormControl(this.user.height.feet, [
-          Validators.required,
-          Validators.pattern('[0-9]'),
-        ]),
-        inches: new FormControl(this.user.height.inches, [
-          Validators.required,
-          Validators.pattern('[0-9]{1,2}'),
-          Validators.min(0),
-          Validators.max(11),
-        ]),
-      }),
-      weight: new FormControl(this.user.weight),
+    console.log("editProfile ngOnInit user", this.user);
+    this.user$.subscribe((user) => {
+      console.log("editProfile ngOnInit got user", user);
+      this.user = user;
+      this.profileForm = new FormGroup({
+        firstName: new FormControl(this.user.firstName, Validators.required),
+        lastName: new FormControl(this.user.lastName, Validators.required),
+        username: new FormControl(this.user.username),
+        gender: new FormControl(this.user.gender),
+        dob: new FormControl(this.user.dob),
+        height: new FormGroup({
+          feet: new FormControl(this.user.height.feet, [
+            Validators.required,
+            Validators.pattern('[0-9]'),
+          ]),
+          inches: new FormControl(this.user.height.inches, [
+            Validators.required,
+            Validators.pattern('[0-9]{1,2}'),
+            Validators.min(0),
+            Validators.max(11),
+          ]),
+        }),
+        weight: new FormControl(this.user.weight),
+      });
     });
-    this.numberPickerSubscription = this.numberPickerService.currentValue.subscribe((val) => {
-      this.userService.updateUser(val as User);
-    })
+    console.log("editProfile subscribe numberPickerService updates");
+    this.numberPickerSubscription = this.numberPickerService.currentValue
+      .subscribe((val) => {
+        console.log("editProfile numberPickerService value update", val);
+        this.userService.updateUser(val as User);
+      }
+      );
   }
 
   ngOnDestroy(): void {
+    console.log("editProfile unsubscribe numberPickerService updates");
     this.numberPickerSubscription.unsubscribe();
   }
 
@@ -233,8 +243,8 @@ export class EditProfilePage implements OnInit, OnDestroy {
     }
   }
 
-  openPicker(user: User, targetProperty: string) {
-    this.numberPickerService.openPicker(user, targetProperty);
-  }
+  // openPicker(user: User, targetProperty: string) {
+  //   this.numberPickerService.openProfilePicker(user, targetProperty);
+  // }
 }
 

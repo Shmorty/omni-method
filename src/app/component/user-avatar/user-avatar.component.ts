@@ -15,7 +15,7 @@ import {User} from 'src/app/store/user/user.model';
       <ion-label *ngIf="!user.avatar" class="textAvatar" color="color">
         {{userInitial()}}
       </ion-label>
-      <ion-icon id="icon" name="pencil-outline"></ion-icon>
+      <!-- <ion-icon id="icon" name="pencil-outline"></ion-icon> -->
     </ion-avatar>
   `,
   styles: [

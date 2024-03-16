@@ -22,7 +22,7 @@
     <ion-row>
       <ion-col>
         <form>
-          <ion-item>
+          <ion-item lines="inset">
             <ion-input
               [(ngModel)]="email"
               [ngModelOptions]="{standalone: true}"
@@ -32,7 +32,7 @@
               label="Email"
             ></ion-input>
           </ion-item>
-          <ion-item lines="full">
+          <ion-item lines="inset">
             <app-show-hide-password>
               <ion-input
                 [(ngModel)]="password"

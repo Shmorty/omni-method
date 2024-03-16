@@ -39,7 +39,7 @@ export class NewUserPage implements OnInit, OnDestroy {
     private datePipe: DatePipe,
     private assessmentService: AssessmentService,
     private showToastService: ShowToastService,
-    private numberPickerService: NumberPickerService
+    public numberPickerService: NumberPickerService
   ) {
     let calcDate = new Date();
     let curYear = calcDate.getFullYear();
@@ -68,9 +68,10 @@ export class NewUserPage implements OnInit, OnDestroy {
     });
 
     this.numberPickerSubscription = this.numberPickerService.currentValue.subscribe((val) => {
-      console.log("new value", val);
+      // console.log("new value", val);
       this.formData.get('height').setValue(val['height']);
       this.formData.get('weight').setValue(val['weight']);
+      this.next();
     });
   }
 
@@ -118,8 +119,14 @@ export class NewUserPage implements OnInit, OnDestroy {
     // this.formData.patchValue(this.newUser);
   }
 
-  async openPicker(targetProperty: string) {
-    await this.numberPickerService.openPicker(this.formData.value, targetProperty);
+  // async openPicker(targetProperty: string) {
+  //   await this.numberPickerService.openProfilePicker(this.formData.value, targetProperty);
+  // }
+  async openWeightPicker() {
+    this.numberPickerService.openWeightPicker(this.formData.value as User);
+  }
+  async openHeightPicker() {
+    this.numberPickerService.openHeightPicker(this.formData.value as User);
   }
 
   setFitnessLevel(ev) {

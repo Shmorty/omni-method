@@ -5,7 +5,7 @@
       (click)="cancel()"
       routerDirection="back"
       type="button"
-      size="small"
+      size="default"
       shape="circle"
       color="primary"
     >
@@ -38,11 +38,11 @@
       <ion-label>Gender</ion-label>
       <ion-text slot="end">{{user.gender}}</ion-text>
     </ion-item>
-    <ion-item button (click)="openPicker(user, 'weight')">
+    <ion-item button (click)="numberPickerService.openWeightPicker(user)">
       <ion-label>Weight</ion-label>
       <ion-text slot="end">{{user.weight}}</ion-text>
     </ion-item>
-    <ion-item button (click)="openPicker(user, 'height')">
+    <ion-item button (click)="numberPickerService.openHeightPicker(user)">
       <ion-label>Height</ion-label>
       <ion-text slot="end">{{user.height.feet}}' {{user.height.inches}}"</ion-text>
     </ion-item>

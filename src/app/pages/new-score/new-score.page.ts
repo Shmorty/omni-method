@@ -1,54 +1,49 @@
-import {Component, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, HostListener, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {User} from '../../store/user/user.model';
 import {UserService} from '../../services/user/user.service';
 import {Assessment} from '../../store/assessments/assessment.model';
 import {Score} from '../../store/models/score.model';
-import {take} from 'rxjs';
+import {Subscription, take} from 'rxjs';
+import {NumberPickerService} from 'src/app/services/number-picker.service';
 
 @Component({
   selector: 'app-new-score',
   templateUrl: './new-score.page.html',
   styleUrls: ['./new-score.page.scss'],
 })
-export class NewScorePage implements OnInit {
+export class NewScorePage implements OnInit, OnDestroy {
   activeField: string = 'score';
   @Input() assessment: Assessment;
   @Input() curScore: Score;
-  public newScore: Score;
+  public newScore: Score = {} as Score;
   public today = new Date().toISOString();
   public user$ = this.userService.getUser();
   private user: User;
   scoreDate: string;
-  rawScore: number;
+  // rawScore: number;
   bodyWeight: number;
+  numberPickerSubscription: Subscription;
+  // scorePickerColumns: PickerColumn[] = [];
+  // scorePickerButtons: PickerButton[] = [];
+  // weightPickerColumns: PickerColumn[] = [];
+  // weightPickerButtons: PickerButton[] = [];
 
   constructor(
     private modalCtrl: ModalController,
     private userService: UserService,
-  ) {
-    // userService.getUser().pipe(take(1)).subscribe((user) => {
-    //   this.user = user;
-    //   this.bodyWeight = user.weight;
-    //   if (this.newScore) {
-    //     this.newScore.currentWeight = this.bodyWeight;
-    //   }
-    //   console.log("newScorePage constructor user", user);
-    // });
-  }
+    private numberPickerService: NumberPickerService,
+  ) {}
 
   async ngOnInit() {
-    console.log("newScore ngOnInit");
-    // prefill with local date in iso format 
-    // var today = new Date().toLocaleString('sv').replace(' ', 'T');
+    console.log("newScore ngOnInit assessment " + JSON.stringify(this.assessment));
+    console.log("newScore ngOnInit curScore " + JSON.stringify(this.curScore));
 
     await this.user$
       .subscribe((value) => {
         this.user = value;
+        console.log("newScore page updated user", this.user);
         this.bodyWeight = this.user.weight;
-        // if (this.newScore) {
-        //   this.newScore.currentWeight = this.bodyWeight;
-        // }
         this.newScore = {
           aid: this.assessment.aid,
           uid: this.user.id,
@@ -58,40 +53,63 @@ export class NewScorePage implements OnInit {
           currentWeight: this.bodyWeight,
           expired: false,
           notes: '',
-        };
-      })
-      .unsubscribe();
+        } as Score;
+      }).unsubscribe();
 
-    console.log("prevScore", this.curScore?.rawScore);
-
-    // this.newScore = {
-    //   aid: this.assessment.aid,
-    //   uid: this.user.id,
-    //   cid: this.assessment.cid,
-    //   rawScore: this.curScore?.rawScore,
-    //   scoreDate: this.today,
-    //   currentWeight: this.bodyWeight,
-    //   expired: false,
-    //   notes: '',
-    // };
-
-    console.log("ngOnInit", this.newScore);
-    // console.log("ngOnInit scoreInput", this.scoreInput);
+    // subscribe to number picker value update
+    this.numberPickerSubscription = this.numberPickerService.currentValue
+      .subscribe(this.gotUpdate);
   }
 
-  @HostListener('document:visibilitychange', ['$event'])
-  visibilitychange() {
-    console.log("visibilitychange");
-    if (document.hidden) {
-      console.log("hidden");
-    } else {
-      console.log("visible");
+  ngOnDestroy(): void {
+    if (this.numberPickerSubscription) {
+      this.numberPickerSubscription.unsubscribe();
     }
   }
 
-  activate(tab: string) {
+  gotUpdate(val: Score) {
+    if (Object.keys(val).length > 0) {
+      console.log("gotUpdate val", val);
+      this.newScore = val as Score;
+      if (this.numberPickerSubscription) {
+        this.numberPickerSubscription.unsubscribe();
+      }
+      console.log("gotUpdate newScore", this.newScore);
+    }
+  }
+
+  activate(tab: string): void {
     console.log("activate", tab);
     this.activeField = tab;
+    switch (tab) {
+      case 'scoreDate': {
+        console.log("open scoreDate picker");
+        break;
+      }
+      case 'score': {
+        this.numberPickerService.openScorePicker(this.assessment, this.newScore)
+          .then(() => {
+            console.log("score picker open");
+            if (this.numberPickerSubscription) {
+              this.numberPickerSubscription.unsubscribe();
+            }
+            this.numberPickerSubscription = this.numberPickerService.currentValue
+              .subscribe(this.gotUpdate);
+          });
+        break;
+      }
+      case 'bodyWeight': {
+        this.numberPickerService.openWeightPicker(this.newScore).then(() => {
+          console.log("bodyWeight picker is open");
+          if (this.numberPickerSubscription) {
+            this.numberPickerSubscription.unsubscribe();
+          }
+          this.numberPickerSubscription = this.numberPickerService.currentValue
+            .subscribe(this.gotUpdate);
+        });
+        break;
+      }
+    }
   }
 
   tabClass(tab: string) {
@@ -103,12 +121,10 @@ export class NewScorePage implements OnInit {
   }
 
   setWeight(val) {
-    console.log("setWeight", val);
     this.newScore.currentWeight = val;
   }
 
   setNotes(val) {
-    console.log("setNotes", val);
     this.newScore.notes = val;
   }
 

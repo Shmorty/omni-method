@@ -5,7 +5,7 @@
       (click)="dismiss()"
       routerDirection="back"
       type="button"
-      size="small"
+      size="default"
       shape="circle"
       color="primary"
     >
@@ -35,7 +35,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="4">
-        <div class="rounded-tab" [ngClass]="tabClass('scoreDate')" lines="none" (click)="activate('scoreDate')">
+        <div id="scoreDate" class="rounded-tab" [ngClass]="tabClass('scoreDate')" lines="none" (click)="activate('scoreDate')">
           <ion-label position="stacked">Score Date</ion-label>
           <ion-input
             #scoreDate
@@ -46,14 +46,12 @@
         </div>
       </ion-col>
       <ion-col size="3">
-        <div class="rounded-tab" [ngClass]="tabClass('score')" lines="none" (click)="activate('score')">
+        <div id="rawScore" class="rounded-tab" [ngClass]="tabClass('score')" lines="none" (click)="activate('score')">
         <ion-label position="stacked">Score</ion-label>
         <ion-input
             #rawScore
             placeholder="{{assessment.units}}"
             type="number"
-            min="{{assessment.min}}"
-            max="{{assessment.max}}"
             inputmode="{{inputMode(assessment)}}"
             value="{{newScore.rawScore | number: '1.0-3'}}"
             [readonly]="true"
@@ -77,29 +75,53 @@
     </ion-row>
   </ion-grid>
 
-  <ng-container [ngSwitch]="activeField">
-    <!-- <ion-list *ngSwitchCase="'scoreDate'" style="background-color: transparent;"> -->
-    <ion-list [hidden]="activeField !== 'scoreDate'" style="background-color: transparent;">
+  <!-- <ng-container [ngSwitch]="activeField"> -->
+    <!-- <ion-list [hidden]="activeField !== 'scoreDate'" style="background-color: transparent;">
         <ion-datetime [(ngModel)]="newScore.scoreDate" class="date-picker"
         presentation="date" [preferWheel]="true" [max]="today"></ion-datetime>
-    </ion-list>
-    <ion-list *ngSwitchCase="'score'" style="background-color: transparent;">
-    <!-- <ion-list [hidden]="activeField !== 'score'" style="background-color: transparent;"> -->
+    </ion-list> -->
+    <!-- <ion-list *ngSwitchCase="'score'" style="background-color: transparent;">
       <app-number-picker [min]="assessment.min" [max]="assessment.max"
         [increment]="(assessment.increment ? assessment.increment : 1)"
         [units]="assessment.entryUnits" [direction]="direction(assessment)"
         [(pickerValue)]="newScore.rawScore"
       ></app-number-picker>
-      <!-- (valueChange)="setScore($event)" -->
     </ion-list>
     <ion-list *ngSwitchCase="'bodyWeight'" style="background-color: transparent;">
-    <!-- <ion-list [hidden]="activeField !== 'bodyWeight'" style="background-color: transparent;"> -->
       <app-number-picker [min]="0" [max]="325" [units]="'lbs'"
         [(pickerValue)]="newScore.currentWeight"
       ></app-number-picker>
-      <!-- (valueChange)="setWeight($event)" -->
-    </ion-list>
-  </ng-container>
+    </ion-list> -->
+  <!-- </ng-container> -->
+
+  <ion-modal #modal trigger="scoreDate" handle="false" [initialBreakpoint]="1" [breakpoints]="[0, 1]"
+    style="--height: auto;">
+    <ng-template>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="modal.dismiss()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button >Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+        <ion-datetime [(ngModel)]="newScore.scoreDate" class="date-picker"
+        presentation="date" [preferWheel]="true" [max]="today"></ion-datetime>
+    </ng-template>
+  </ion-modal>
+
+  <!-- <ion-picker
+    trigger="rawScore"
+    [isOpen]="activeField === 'score'"
+    [columns]="scorePickerColumns"
+    [buttons]="scorePickerButtons">
+  </ion-picker> -->
+
+  <!-- <ion-picker
+    [isOpen]="activeField === 'bodyWeight'"
+    [columns]="weightPickerColumns"
+    [buttons]="weightPickerButtons">
+  </ion-picker> -->
 
     <ion-grid class="input-group" [fixed]="true">
       <ion-row>

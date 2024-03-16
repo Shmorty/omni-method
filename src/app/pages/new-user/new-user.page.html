@@ -106,7 +106,8 @@
               [(pickerValue)]="formData.value.height.feet"></app-number-picker>
               <app-number-picker style="width: 50%;" [min]="0" [max]="11" [units]="'in'"
               [(pickerValue)]="formData.value.height.inches"></app-number-picker> -->
-              <ion-button class="continue-button" (click)="openPicker('height')" expand="block" shape="round">
+              <ion-button class="continue-button" (click)="openHeightPicker()" 
+                expand="block" shape="round">
                 {{formData.value.height.feet}} ft
                 &nbsp;
                 {{formData.value.height.inches}} in
@@ -125,7 +126,8 @@
             <app-number-picker style="width: 100%;" [min]="0" [max]="325" [units]="'lbs'"
             [(pickerValue)]="formData.value.weight"></app-number-picker>
           </ion-item> -->
-          <ion-button class="continue-button" (click)="openPicker('weight')" expand="block" shape="round">
+          <ion-button class="continue-button" (click)="openWeightPicker()" 
+            expand="block" shape="round">
           {{formData.value.weight}} lbs
         </ion-button>
         </div>
