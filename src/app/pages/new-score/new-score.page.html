@@ -49,14 +49,18 @@
         <div id="rawScore" class="rounded-tab" [ngClass]="tabClass('score')" lines="none" (click)="activate('score')">
         <ion-label position="stacked">Score</ion-label>
         <ion-input
-            #rawScore
+          placeholder="{{assessment.units}}"
+          [readonly]="true"
+          [value]="newScore.rawScore"
+        ></ion-input>
+        <!-- <ion-input
             placeholder="{{assessment.units}}"
             type="number"
             inputmode="{{inputMode(assessment)}}"
             value="{{newScore.rawScore | number: '1.0-3'}}"
             [readonly]="true"
             [(ngModel)]="newScore.rawScore"
-          ></ion-input>
+          ></ion-input> -->
         </div>
       </ion-col>
       <ion-col size="5">
@@ -98,11 +102,11 @@
     style="--height: auto;">
     <ng-template>
         <ion-toolbar>
-          <ion-buttons slot="start">
+          <!-- <ion-buttons slot="start">
             <ion-button (click)="modal.dismiss()">Cancel</ion-button>
-          </ion-buttons>
+          </ion-buttons> -->
           <ion-buttons slot="end">
-            <ion-button >Confirm</ion-button>
+            <ion-button (click)="modal.dismiss()">Done</ion-button>
           </ion-buttons>
         </ion-toolbar>
         <ion-datetime [(ngModel)]="newScore.scoreDate" class="date-picker"

@@ -5,7 +5,7 @@
       routerLink="/welcome"
       routerDirection="back"
       type="button"
-      size="small"
+      size="default"
       shape="circle"
     >
       <ion-icon name="chevron-back-outline"></ion-icon>
@@ -22,7 +22,7 @@
     <ion-row>
       <ion-col>
         <form>
-          <ion-item>
+          <ion-item lines="inset">
             <ion-input
               [(ngModel)]="email"
               [ngModelOptions]="{standalone: true}"
@@ -32,7 +32,7 @@
               required
             ></ion-input>
           </ion-item>
-          <ion-item lines="full">
+          <ion-item lines="inset">
             <app-show-hide-password>
               <ion-input
                 [(ngModel)]="password"
@@ -44,7 +44,7 @@
               ></ion-input>
             </app-show-hide-password>
           </ion-item>
-          <ion-item lines="full">
+          <ion-item lines="inset">
             <app-show-hide-password>
               <ion-input
                 [(ngModel)]="confirmPassword"

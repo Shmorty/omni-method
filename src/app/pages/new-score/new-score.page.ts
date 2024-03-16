@@ -1,10 +1,10 @@
-import {Component, HostListener, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {User} from '../../store/user/user.model';
 import {UserService} from '../../services/user/user.service';
 import {Assessment} from '../../store/assessments/assessment.model';
 import {Score} from '../../store/models/score.model';
-import {Subscription, take} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {NumberPickerService} from 'src/app/services/number-picker.service';
 
 @Component({
@@ -57,8 +57,8 @@ export class NewScorePage implements OnInit, OnDestroy {
       }).unsubscribe();
 
     // subscribe to number picker value update
-    this.numberPickerSubscription = this.numberPickerService.currentValue
-      .subscribe(this.gotUpdate);
+    // this.numberPickerSubscription = this.numberPickerService.currentValue
+    //   .subscribe(this.gotUpdate);
   }
 
   ngOnDestroy(): void {
@@ -70,11 +70,10 @@ export class NewScorePage implements OnInit, OnDestroy {
   gotUpdate(val: Score) {
     if (Object.keys(val).length > 0) {
       console.log("gotUpdate val", val);
-      this.newScore = val as Score;
+      this.newScore = val;
       if (this.numberPickerSubscription) {
         this.numberPickerSubscription.unsubscribe();
       }
-      console.log("gotUpdate newScore", this.newScore);
     }
   }
 
@@ -94,19 +93,20 @@ export class NewScorePage implements OnInit, OnDestroy {
               this.numberPickerSubscription.unsubscribe();
             }
             this.numberPickerSubscription = this.numberPickerService.currentValue
-              .subscribe(this.gotUpdate);
+              .subscribe((val) => this.gotUpdate(val as Score));
           });
         break;
       }
       case 'bodyWeight': {
-        this.numberPickerService.openWeightPicker(this.newScore).then(() => {
-          console.log("bodyWeight picker is open");
-          if (this.numberPickerSubscription) {
-            this.numberPickerSubscription.unsubscribe();
-          }
-          this.numberPickerSubscription = this.numberPickerService.currentValue
-            .subscribe(this.gotUpdate);
-        });
+        this.numberPickerService.openWeightPicker(this.newScore)
+          .then(() => {
+            console.log("bodyWeight picker is open");
+            if (this.numberPickerSubscription) {
+              this.numberPickerSubscription.unsubscribe();
+            }
+            this.numberPickerSubscription = this.numberPickerService.currentValue
+              .subscribe((val) => this.gotUpdate(val as Score));
+          });
         break;
       }
     }
@@ -129,7 +129,6 @@ export class NewScorePage implements OnInit, OnDestroy {
   }
 
   direction(assessment: Assessment) {
-    // const reverse = ["PSPR", "TWOMDST", "AGLTY"];
     const reverse = ["PSPR", "AGLTY"];
     if (reverse.includes(assessment.aid)) {
       return -1;

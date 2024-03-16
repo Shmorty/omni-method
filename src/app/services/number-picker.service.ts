@@ -63,6 +63,7 @@ export class NumberPickerService {
           handler: (value) => {
             const updScore = JSON.parse(JSON.stringify(score));
             updScore.rawScore = value[assessment.aid].value;
+            console.log("scorePicker return", updScore);
             this.result.next(updScore);
           },
         },
