@@ -29,9 +29,8 @@
     <ion-grid>
       <ion-row>
         <ion-col size="3" *ngFor="let avatar of avatars" ngClass="isSelected">
-          <div class="avatar-container"
-            (click)="setAvatar(avatar.icon)"
-            >
+          <div class="avatar-container" [ngClass]="getAvatarClass(avatar.icon)"
+            (click)="setAvatar(avatar.icon)">
             <img src="{{avatar.icon}}">
           </div>
         </ion-col>

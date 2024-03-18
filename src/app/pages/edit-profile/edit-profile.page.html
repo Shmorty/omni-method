@@ -20,6 +20,7 @@
   <ion-list *ngIf="user$ | async as user; else loading ">
     <div class="avatar" (click)="openModal('avatar')">
       <user-avatar [user]="user" class="avatar"></user-avatar>
+      <ion-button color="medium" shape="round" size="small">edit</ion-button>
     </div>
   
     <ion-item button (click)="openModal('name')">

@@ -48,6 +48,7 @@
     "angular-oauth2-oidc": "^13.0.1",
     "firebase-functions": "^4.5.0",
     "rxjs": "^7.8.1",
+    "sharp": "^0.33.2",
     "tslib": "^2.2.0",
     "zone.js": "^0.13.1"
   },
@@ -62,7 +63,6 @@
     "@angular/compiler": "^16.2.12",
     "@angular/compiler-cli": "^16.2.12",
     "@angular/language-service": "^16.2.12",
-    "@capacitor/assets": "^3.0.4",
     "@capacitor/cli": "^5.0.0",
     "@ionic/angular-toolkit": "^9.0.0",
     "@ionic/cli": "7.2.0",

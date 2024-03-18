@@ -114,6 +114,13 @@ export class EditPropertyComponent implements OnInit {
     console.log("template", this.template);
   }
 
+  getAvatarClass(avatarPath: string): string {
+    if (this.user.avatar === avatarPath) {
+      return "avatar-selected";
+    }
+    return "";
+  }
+
   newWeight(val) {
     this.updUser.weight = val;
   }

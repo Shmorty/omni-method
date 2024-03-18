@@ -139,7 +139,7 @@ export class UserService implements IUserService {
         user: user,
       },
       cssClass: 'edit-user-modal',
-      presentingElement: document.querySelector('ion-router-outlet'),
+      // presentingElement: document.querySelector('ion-router-outlet'),
       canDismiss: true,
     });
     await modal.present();

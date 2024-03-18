@@ -12,16 +12,18 @@ import {User} from 'src/app/store/user/user.model';
       <div class="avatar-container" *ngIf="user.avatar">
         <img src="{{ user.avatar }}" />
       </div>
-      <ion-label *ngIf="!user.avatar" class="textAvatar" color="color">
+      <!-- <ion-label *ngIf="!user.avatar" class="textAvatar" color="color">
         {{userInitial()}}
-      </ion-label>
+      </ion-label> -->
+      <ion-icon *ngIf="!user.avatar" name="person-outline" class="avatar-icon"></ion-icon>
       <!-- <ion-icon id="icon" name="pencil-outline"></ion-icon> -->
     </ion-avatar>
   `,
   styles: [
     `
       #avatar {
-        background-color: var(--ion-color-primary);
+        background-color: var(--ion-color-light);
+        border: solid 0.5px var(--ion-color-medium);
         border-radius: 50%;
         display: block;
         margin: auto;
@@ -44,6 +46,12 @@ import {User} from 'src/app/store/user/user.model';
           border-radius: 50%;
           padding: 4px;
         }
+      .avatar-icon {
+        color: var(--ion-color-medium);
+        height: 32px;
+        width: 100%;
+        margin-top: 10px;
+      }
       .textAvatar {
         border: 1px solid;
         border-radius: 50%;

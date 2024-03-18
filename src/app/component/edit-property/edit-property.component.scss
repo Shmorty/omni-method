@@ -16,8 +16,10 @@ ion-button[type="submit"] {
     margin-top: 50px;
     width: 90%;
 }
+.avatar-selected {
+    background-color: var(--ion-color-light);
+}
 .avatar-container {
-    background-color: var(--ion-color-primary);
     background-size: cover;
     border-radius: 50%;
     min-height: 64px;
