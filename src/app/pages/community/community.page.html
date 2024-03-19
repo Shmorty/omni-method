@@ -40,7 +40,8 @@
         <ion-text class="rank" slot="start">{{i+1}}</ion-text>
         <ion-avatar slot="start">
           <img *ngIf="athlete.avatar" src="{{athlete.avatar}}">
-          <ion-icon *ngIf="!athlete.avatar" name="person-outline"></ion-icon>
+          <img *ngIf="!athlete.avatar" src="/assets/images/icons/NoProfilePic.png">
+          <!-- <ion-icon *ngIf="!athlete.avatar" name="person-outline"></ion-icon> -->
         </ion-avatar>
         <ion-text *ngIf="athlete.username">@{{athlete.username}}</ion-text>
         <ion-text *ngIf="!athlete.username">{{athlete.firstName}} {{athlete.lastName}}</ion-text>
