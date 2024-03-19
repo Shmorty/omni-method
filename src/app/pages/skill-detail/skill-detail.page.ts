@@ -75,7 +75,7 @@ export class SkillDetailPage implements OnInit {
     // update raw score, count checklist items
     newScore.rawScore = newScore.checklist.filter(Boolean).length;
     this.userService.saveScore(newScore);
-    this.goBack();
+    // this.goBack();
   }
 
   async createNewScore() {

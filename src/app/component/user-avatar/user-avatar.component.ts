@@ -12,11 +12,11 @@ import {User} from 'src/app/store/user/user.model';
       <div class="avatar-container" *ngIf="user.avatar">
         <img src="{{ user.avatar }}" />
       </div>
+      <img *ngIf="!user.avatar" src="/assets/images/icons/NoProfilePic.png">
       <!-- <ion-label *ngIf="!user.avatar" class="textAvatar" color="color">
         {{userInitial()}}
       </ion-label> -->
-      <ion-icon *ngIf="!user.avatar" name="person-outline" class="avatar-icon"></ion-icon>
-      <!-- <ion-icon id="icon" name="pencil-outline"></ion-icon> -->
+      <!-- <ion-icon *ngIf="!user.avatar" name="person-outline" class="avatar-icon"></ion-icon> -->
     </ion-avatar>
   `,
   styles: [

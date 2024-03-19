@@ -9,3 +9,9 @@
 ion-item, .header-item {
     margin-top: 14px;
 }
+ion-toggle::part(track) {
+    background: var(--ion-color-medium);
+}
+ion-toggle.toggle-checked::part(track) {
+    background-color: var(--ion-color-primary);
+}
