@@ -20,13 +20,15 @@ export class NumberPickerService {
     private assessmentService: AssessmentService,
   ) {}
 
+  /*
+   * openScorePicker
+   */
   async openScorePicker(assessment: Assessment, score: Score) {
     // assessment {min, max, increment, entryUnits, label}
     // score {currentWeight, rawScore}
     let columns: PickerColumn[] = [];
     const reverse = this.assessmentService.isReverse(assessment.aid);
-    // await this.generateColumn(assessment.min, assessment.max, assessment.increment | 1,
-    //   assessment.entryUnits, score.rawScore).then((result) => columns = result);
+
     columns.push(this.generateColumn(
       assessment.aid,
       assessment.min,
@@ -57,6 +59,9 @@ export class NumberPickerService {
     await picker.present();
   }
 
+  /*
+   * openWeightPicker
+   */
   async openWeightPicker(obj: User | Score) {
     const meta = {
       name: "weight",
@@ -101,6 +106,9 @@ export class NumberPickerService {
     await picker.present();
   }
 
+  /*
+   * openHeightPicker
+   */
   async openHeightPicker(user: User) {
     let pickerColumns: PickerColumn[] = [];
 
@@ -131,72 +139,13 @@ export class NumberPickerService {
     await picker.present();
   }
 
-  // async openProfilePicker(user: User, targetProperty: string) {
-  //   // edit profile pickers for height and weight
-  //   const picker = await this.pickerCtrl.create({
-  //     columns: this.generatePickerColumns(user, targetProperty),
-  //     buttons: [
-  //       {
-  //         text: 'Cancel',
-  //         role: 'cancel',
-  //       },
-  //       {
-  //         text: 'Confirm',
-  //         handler: (value) => {
-  //           const updUser = JSON.parse(JSON.stringify(user));
-  //           console.log("You selected", value);
-  //           switch (targetProperty) {
-  //             case 'weight': {
-  //               updUser.weight = value['weight'].value;
-  //               break;
-  //             }
-  //             case 'height': {
-  //               updUser.height.feet = value['feet'].value;
-  //               updUser.height.inches = value['inches'].value;
-  //               break;
-  //             }
-  //           }
-  //           console.log("updUser", updUser);
-  //           this.result.next(updUser);
-  //           // this.userService.updateUser(updUser);
-  //         },
-  //       },
-  //     ],
-  //     // cssClass: 'inline-picker',
-  //   });
-  //   await picker.present();
-  // }
-
-  /**
-   * Meta data
-   */
-  //   private profileMeta = {
-  //   "weight": [
-  //     {
-  //       name: "weight",
-  //       min: 15,
-  //       max: 325,
-  //       increment: 1,
-  //       units: "lbs",
-  //     }],
-  //   "height": [
-  //     {
-  //       name: "feet",
-  //       min: 3,
-  //       max: 7,
-  //       increment: 1,
-  //       units: "ft",
-  //     },
-  //     {
-  //       name: "inches",
-  //       min: 0,
-  //       max: 11,
-  //       increment: 1,
-  //       units: "in",
-  //     }]
-  // };
-
   public generateColumn(name, min, max, increment, units, initialValue, reverse: boolean): PickerColumn {
+    if (increment === undefined) {
+      increment = 1;
+    }
+    if (initialValue === undefined) {
+      initialValue = reverse ? max : min;
+    }
     console.log("generateColumn min: " + min + " max: " + max + " increment: " + increment
       + " units: " + units + " initialValue: " + initialValue);
     const valueRange = this.createRange(min, max, increment);
@@ -208,37 +157,9 @@ export class NumberPickerService {
       selectedIndex: 0,
     };
     column.selectedIndex = valueRange.findIndex((x) => x === initialValue) | 0;
-    console.log("generateColumn return", column);
+    // console.log("generateColumn return", column);
     return column;
   }
-
-  // private generatePickerColumns(user: User, targetProperty: string): PickerColumn[] {
-  //   let pickerColumns: PickerColumn[] = [];
-  //   // loop through meta data to build picker columns
-  //   this.profileMeta[targetProperty].forEach((meta, index) => {
-  //     // generate values for picker wheel
-  //     const initalValue = this.profileInitialValue(user, targetProperty, index);
-  //     const column = this.generateColumn(meta.name, meta.min, meta.max, meta.increment, meta.units, initalValue, false);
-  //     pickerColumns.push(column);
-  //   });
-  //   // return collection
-  //   return pickerColumns;
-  // }
-
-  // private profileInitialValue(user: User, property: string, index: number): number {
-  //   let initialValue = 0;
-  //   switch (property) {
-  //     case 'weight': {
-  //       initialValue = user.weight;
-  //       break;
-  //     }
-  //     case 'height': {
-  //       initialValue = (index ? user.height.inches : user.height.feet);
-  //       break;
-  //     }
-  //   }
-  //   return initialValue;
-  // }
 
   private createColumnOptions(valueArray: number[], reverse: boolean): PickerColumnOption[] {
     if (reverse) {
