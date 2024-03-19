@@ -20,22 +20,6 @@ export class NumberPickerService {
     private assessmentService: AssessmentService,
   ) {}
 
-  // pickerButtons(type: string): PickerButton[] {
-  //   console.log("pickerButtons " + type);
-  //   return [
-  //     {
-  //       text: 'Cancel',
-  //       role: 'cancel',
-  //     },
-  //     {
-  //       text: 'Confirm',
-  //       handler: (value) => {
-  //         console.log("new score from picker", value);
-  //       },
-  //     },
-  //   ];
-  // }
-
   async openScorePicker(assessment: Assessment, score: Score) {
     // assessment {min, max, increment, entryUnits, label}
     // score {currentWeight, rawScore}
@@ -47,9 +31,9 @@ export class NumberPickerService {
       assessment.aid,
       assessment.min,
       assessment.max,
-      assessment.increment | 1,
+      assessment.increment,// | 1,
       assessment.entryUnits,
-      score?.rawScore | (reverse ? assessment.max : assessment.min),
+      score?.rawScore, // | (reverse ? assessment.max : assessment.min),
       reverse));
     const picker = await this.pickerCtrl.create({
       columns: columns,

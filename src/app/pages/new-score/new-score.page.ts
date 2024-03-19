@@ -58,7 +58,7 @@ export class NewScorePage implements OnInit, OnDestroy {
 
     // subscribe to number picker value update
     // this.numberPickerSubscription = this.numberPickerService.currentValue
-    //   .subscribe(this.gotUpdate);
+    //   .subscribe((val) => this.gotUpdate(val as Score));
   }
 
   ngOnDestroy(): void {
@@ -68,8 +68,8 @@ export class NewScorePage implements OnInit, OnDestroy {
   }
 
   gotUpdate(val: Score) {
-    if (Object.keys(val).length > 0) {
-      console.log("gotUpdate val", val);
+    if (Object.keys(val).length > 1 && val.aid === this.assessment.aid) {
+      console.log("gotUpdate Score from picker", val);
       this.newScore = val;
       if (this.numberPickerSubscription) {
         this.numberPickerSubscription.unsubscribe();
