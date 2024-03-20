@@ -27,7 +27,7 @@
           (value)="newValue($event)"></app-number-picker>
       </ion-list>
       <div *ngIf="assessment.checklist">
-        <app-edit-checklist [assessment]="assessment" [scores$]="scores$"
+        <app-edit-checklist [assessment]="assessment" [score$]="score$"
         (checked)="updateChecked($event)"
           ></app-edit-checklist>
       </div>

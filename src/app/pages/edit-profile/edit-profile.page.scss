@@ -7,6 +7,10 @@ user-avatar {
   ion-label {
     margin:auto;
   }
+  ion-button {
+    display: block;
+    margin: 5px 35%;
+  }
 }
 ion-content {
   --background: linear-gradient(var(--ion-color-tertiary), var(--ion-color-light));
@@ -64,4 +68,7 @@ ion-spinner {
   margin-top: 30%;
   width: 44px;
   height: 44px;
+}
+.section_header {
+  margin-top: 24px;
 }

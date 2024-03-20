@@ -5,7 +5,6 @@
 	"appId": "com.shmorty.omni-method.app",
 	"appName": "omni-method",
 	"webDir": "www",
-	"bundledWebRuntime": false,
 	"plugins": {
 		"GoogleAuth": {
 			"scopes": [
@@ -17,7 +16,7 @@
 		},
 		"SplashScreen": {
 			"launchAutoHide": true,
-			"launchShowDuration": 2000
+			"launchShowDuration": 3000
 		}
 	}
 }

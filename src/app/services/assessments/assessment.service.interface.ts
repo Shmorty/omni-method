@@ -1,5 +1,5 @@
-import { Observable } from 'rxjs';
-import { Assessment, Category } from '../../store/assessments/assessment.model';
+import {Observable} from 'rxjs';
+import {Assessment, Category} from '../../store/assessments/assessment.model';
 
 export interface IAssessmentService {
   // getAssessments(): Observable<Category[]>;
@@ -16,5 +16,5 @@ export interface IAssessmentService {
   getCategoryById(cid: string): Observable<Category>;
   getAssessmentById(aid: string): Observable<Assessment>;
 
-  getChecklist(aid: string): Observable<string[]>;
+  getChecklist(aid: string): Observable<object[]>;
 }

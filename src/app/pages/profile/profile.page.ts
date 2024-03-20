@@ -1,7 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IonAccordionGroup, ModalController, isPlatform} from '@ionic/angular';
-// import { GoogleSigninService, UserInfo } from '../google-signin.service';
-import {Assessment, Category} from '../../store/assessments/assessment.model';
+import {Assessment} from '../../store/assessments/assessment.model';
 import {Router} from '@angular/router';
 import {StatusBar, Style} from '@capacitor/status-bar';
 
@@ -15,12 +14,7 @@ import {
   selectAllCategories,
 } from 'src/app/store/assessments/assessment.selector';
 import * as UserSelectors from 'src/app/store/user/user.selectors';
-// import {
-//   selectCategoryScore,
-//   selectOmniScore,
-// } from 'src/app/store/omni-score/omni-score.selector';
 import {delay, tap} from 'rxjs/operators';
-import {EditProfilePage} from '../edit-profile/edit-profile.page';
 import {OmniScoreService, oneDay} from '../../services/omni-score.service';
 import {UserService} from '../../services/user/user.service';
 import {Capacitor} from '@capacitor/core';
@@ -30,11 +24,10 @@ import {Capacitor} from '@capacitor/core';
   templateUrl: 'profile.page.html',
   styleUrls: ['profile.page.scss'],
 })
-export class ProfilePage implements OnInit {
-  // @ViewChild(IonModal) modal: IonModal;
+export class ProfilePage implements OnInit, OnDestroy {
   @ViewChild('accordionGroup') accordionGroup: IonAccordionGroup;
   moreOpen: boolean = false;
-  subscription: Subscription;
+  userSubscription: Subscription;
   userId: string;
   user: User;
   scores: Score[];
@@ -56,18 +49,23 @@ export class ProfilePage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user$
+    this.userSubscription = this.user$
       // .pipe(first())
       .subscribe({
         next(user) {
+          console.log("user$ next", user);
           this.user = user;
-          console.log("profile.page ngOnInit", user);
         },
         error(message) {
           console.log(message);
         },
       });
-    // .unsubscribe();
+  }
+
+  ngOnDestroy(): void {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 
   ionViewWillEnter() {
@@ -83,19 +81,6 @@ export class ProfilePage implements OnInit {
       }
     }
   }
-
-  handleRefresh(event) {
-    console.log("profile page pullToRefresh");
-    this.userService.reloadUser();
-    setTimeout(() => {
-      // Any calls to load data go here
-      event.target.complete();
-    }, 100);
-  }
-
-  // getCategoryScore(category: Category) {
-  //   return this.store.select(selectCategoryScore(category));
-  // }
 
   getScores$(assessment: Assessment) {
     return this.store.select(UserSelectors.assessmentScores(assessment)).pipe(

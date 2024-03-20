@@ -1,7 +1,7 @@
-import { createSelector } from '@ngrx/store';
-import { AppState } from '../app.state';
-import { Assessment } from '../assessments/assessment.model';
-import { UserState } from './user.reducer';
+import {createSelector} from '@ngrx/store';
+import {AppState} from '../app.state';
+import {Assessment} from '../assessments/assessment.model';
+import {UserState} from './user.reducer';
 
 export const selectUserState = (state: AppState) => state.userState;
 
@@ -28,4 +28,10 @@ export const userScores = createSelector(
 export const assessmentScores = (assessment: Assessment) =>
   createSelector(userScores, (score) =>
     score.filter((s) => s.aid === assessment.aid)
+  );
+export const currentScore = (aid: string) =>
+  createSelector(userScores, (score) =>
+    score.filter((s) => s.aid === aid).sort(function (a, b) {
+      return Date.parse(b.scoreDate) - Date.parse(a.scoreDate);
+    }).shift()
   );

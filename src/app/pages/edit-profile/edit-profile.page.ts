@@ -1,5 +1,5 @@
 import {DatePipe} from '@angular/common';
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,25 +7,26 @@ import {
   Validators,
 } from '@angular/forms';
 import {Keyboard} from '@capacitor/keyboard';
-import {AlertController, IonModal, isPlatform, ModalController} from '@ionic/angular';
+import {AlertController, IonModal, isPlatform, ModalController, PickerColumn, PickerColumnOption, PickerController} from '@ionic/angular';
 import {OverlayEventDetail} from '@ionic/core/components';
-import {delay} from 'rxjs';
-import {EditPropertyComponent} from 'src/app/component/edit-property/edit-property.component';
-import {AuthService} from 'src/app/services/auth.service';
+import {Subscription, delay} from 'rxjs';
+import {EditPropertyComponent} from '../../component/edit-property/edit-property.component';
+import {AuthService} from '../../services/auth.service';
 // import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
-import {UserService} from 'src/app/services/user/user.service';
-import {User} from 'src/app/store/user/user.model';
-import * as UserSelectors from 'src/app/store/user/user.selectors';
+import {UserService} from '../../services/user/user.service';
+import {User} from '../../store/user/user.model';
+import {NumberPickerService} from 'src/app/services/number-picker.service';
 
 @Component({
   selector: 'edit-profile-page',
   templateUrl: './edit-profile.page.html',
   styleUrls: ['./edit-profile.page.scss'],
 })
-export class EditProfilePage implements OnInit {
+export class EditProfilePage implements OnInit, OnDestroy {
   // @ViewChild(IonModal) modal: IonModal;
   @Input() user: User;
   profileForm: FormGroup;
+  private numberPickerSubscription: Subscription;
   public deleteAccountButtons = [
     {
       text: 'Cancel',
@@ -74,9 +75,28 @@ export class EditProfilePage implements OnInit {
       }
     },
   ];
+  public confirmLogoutButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      htmlAttributes: {
+        'aria-label': 'cancel',
+      }
+    },
+    {
+      text: 'Log Out',
+      cssClass: 'logout-button-confirm',
+      role: 'confirm',
+      handler: () => {
+        this.modalCtrl.dismiss(null, 'logout');
+        this.authService.logout();
+      },
+      htmlAttributes: {
+        'aria-label': 'logout',
+      }
+    }
+  ]
 
-  // message =
-  //   'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string;
   public user$ = this.userService.getUser(); // .pipe(delay(5000));
 
@@ -85,35 +105,49 @@ export class EditProfilePage implements OnInit {
     public userService: UserService,
     private authService: AuthService,
     public formBuilder: FormBuilder,
-    private alertController: AlertController
+    private alertController: AlertController,
+    public numberPickerService: NumberPickerService
   ) {}
 
   ngOnInit() {
-    this.profileForm = new FormGroup({
-      firstName: new FormControl(this.user.firstName, Validators.required),
-      lastName: new FormControl(this.user.lastName, Validators.required),
-      nickname: new FormControl(this.user.nickname),
-      gender: new FormControl(this.user.gender),
-      dob: new FormControl(this.user.dob),
-      height: new FormGroup({
-        feet: new FormControl(this.user.height.feet, [
-          Validators.required,
-          Validators.pattern('[0-9]'),
-        ]),
-        inches: new FormControl(this.user.height.inches, [
-          Validators.required,
-          Validators.pattern('[0-9]{1,2}'),
-          Validators.min(0),
-          Validators.max(11),
-        ]),
-      }),
-      weight: new FormControl(this.user.weight),
+    console.log("editProfile ngOnInit user", this.user);
+    this.user$.subscribe((user) => {
+      console.log("editProfile ngOnInit got user", user);
+      this.user = user;
+      this.profileForm = new FormGroup({
+        firstName: new FormControl(this.user.firstName, Validators.required),
+        lastName: new FormControl(this.user.lastName, Validators.required),
+        username: new FormControl(this.user.username),
+        gender: new FormControl(this.user.gender),
+        dob: new FormControl(this.user.dob),
+        height: new FormGroup({
+          feet: new FormControl(this.user.height.feet, [
+            Validators.required,
+            Validators.pattern('[0-9]'),
+          ]),
+          inches: new FormControl(this.user.height.inches, [
+            Validators.required,
+            Validators.pattern('[0-9]{1,2}'),
+            Validators.min(0),
+            Validators.max(11),
+          ]),
+        }),
+        weight: new FormControl(this.user.weight),
+      });
     });
+    console.log("editProfile subscribe numberPickerService updates");
+    this.numberPickerSubscription = this.numberPickerService.currentValue
+      .subscribe((val) => {
+        console.log("editProfile numberPickerService value update", val);
+        this.userService.updateUser(val as User);
+      }
+      );
   }
 
-  // deleteAccountResult(ev) {
-  //   console.log(`Dismissed with role: ${ev.detail.role}`);
-  // }
+  ngOnDestroy(): void {
+    console.log("editProfile unsubscribe numberPickerService updates");
+    this.numberPickerSubscription.unsubscribe();
+  }
 
   async deleteAccount() {
     const alert = await this.alertController.create({
@@ -140,9 +174,14 @@ export class EditProfilePage implements OnInit {
     await alert.present();
   }
 
-  logout() {
-    this.modalCtrl.dismiss(null, 'logout');
-    this.authService.logout();
+  async logout() {
+    // this.modalCtrl.dismiss(null, 'logout');
+    // this.authService.logout();
+    const alert = await this.alertController.create({
+      header: 'Log out of your account?',
+      buttons: this.confirmLogoutButtons,
+    });
+    await alert.present();
   }
 
   submitForm() {
@@ -183,12 +222,6 @@ export class EditProfilePage implements OnInit {
     });
   }
 
-  // async openPicker() {
-  //   let maxDate = new Date(); //.setFullYear(2006);
-  //   let curYear = maxDate.getFullYear();
-  //   maxDate.setFullYear(curYear - 2);
-  // }
-
   async openModal(targetProperty: string) {
     const modal = await this.modalCtrl.create({
       backdropDismiss: false,
@@ -210,14 +243,8 @@ export class EditProfilePage implements OnInit {
     }
   }
 
-  // async presentAlert() {
-  //   const alert = await this.alertController.create({
-  //     header: 'Name',
-  //     buttons: ['OK'],
-  //     inputs: [],
-  //   });
-
-  //   await alert.present();
+  // openPicker(user: User, targetProperty: string) {
+  //   this.numberPickerService.openProfilePicker(user, targetProperty);
   // }
-
 }
+

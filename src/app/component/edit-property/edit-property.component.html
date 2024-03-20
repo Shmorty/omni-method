@@ -14,11 +14,30 @@
   </ion-header>
   <ion-list>
     <ng-container *ngTemplateOutlet="template"></ng-container>
-    <ion-item lines="none">
-      <ion-button (click)="save()" shape="round">Save</ion-button>
-    </ion-item>
   </ion-list>
+  <ion-button *ngIf="targetProperty != 'avatar'"
+  type="submit"
+  (click)="save()"
+  shape="round"
+  expand="block"
+>Save</ion-button>
 </ion-content>
+
+<ng-template #avatar>
+  <ion-item lines="none">
+    <!-- table of choices -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" *ngFor="let avatar of avatars" ngClass="isSelected">
+          <div class="avatar-container" [ngClass]="getAvatarClass(avatar.icon)"
+            (click)="setAvatar(avatar.icon)">
+            <img src="{{avatar.icon}}">
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ng-template>
 
 <ng-template #name>
     <ion-item lines="none">
@@ -39,14 +58,17 @@
     </ion-item>
 </ng-template>
 
-<ng-template #nickname>
+<ng-template #username>
   <ion-item lines="none">
     <ion-input
-      label="Display Name"
+      id="username"
+      label="Username"
       labelPlacement="fixed"
-      [(ngModel)]="updUser.nickname"
+      [(ngModel)]="updUser.username"
+      (keydown.space)="$event.preventDefault()"
+      oninput="this.value = this.value.toLowerCase()"
       counter="true"
-      [maxlength]="30"
+      [maxlength]="20"
     ></ion-input>
   </ion-item>
 </ng-template>
@@ -66,23 +88,22 @@
     <ion-radio-group [(ngModel)]="updUser.gender">
       <ion-item lines="none">
         <ion-label>Male</ion-label>
-        <ion-radio slot="end" value="male"></ion-radio>
+        <ion-radio slot="end" value="Male"></ion-radio>
       </ion-item>
       <ion-item lines="none">
         <ion-label>Female</ion-label>
-        <ion-radio slot="end" value="female"></ion-radio>
+        <ion-radio slot="end" value="Female"></ion-radio>
       </ion-item>
     </ion-radio-group>
-    <!-- <ion-picker [columns]="['male','female']"></ion-picker> -->
   </ion-item>
 </ng-template>
 
 <ng-template #height>
   <ion-item lines="none">
     <app-number-picker style="width: 50%;" [min]="3" [max]="7" [units]="'ft'"
-    [(value)]="updUser.height.feet"></app-number-picker>
+    [(pickerValue)]="updUser.height.feet"></app-number-picker>
     <app-number-picker style="width: 50%;" [min]="0" [max]="11" [units]="'in'"
-    [(value)]="updUser.height.inches"></app-number-picker>
+    [(pickerValue)]="updUser.height.inches"></app-number-picker>
   </ion-item>
 </ng-template>
 
@@ -90,6 +111,6 @@
   <ion-item lines="none">
     <!-- <ion-label position="fixed">Weight</ion-label> -->
     <app-number-picker style="width: 100%;" [min]="0" [max]="325" [units]="'lbs'"
-      [(value)]="updUser.weight"></app-number-picker>
+      [(pickerValue)]="updUser.weight"></app-number-picker>
   </ion-item>
 </ng-template>

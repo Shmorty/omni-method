@@ -1,12 +1,6 @@
-import {Component, Inject, OnInit, inject} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Capacitor} from '@capacitor/core';
 import {StatusBar, Style} from '@capacitor/status-bar';
-import {isPlatform} from '@ionic/angular';
-import {AuthService} from 'src/app/services/auth.service';
-
-interface Item {
-  hello: string;
-}
 
 @Component({
   selector: 'app-welcome',
@@ -19,7 +13,7 @@ export class WelcomePage implements OnInit {
   // private firestore: Firestore = inject(Firestore);
   // private user$: Observable<Item[]>;
 
-  constructor(private auth: AuthService) {}
+  constructor() {}
 
   ngOnInit() {}
 

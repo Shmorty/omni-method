@@ -1,9 +1,3 @@
-ion-button [expand=block]{
-    bottom: 0;
-    margin: auto;
-    position: fixed;
-    width: 80%;
-}
 .date-picker {
     margin: auto;
     min-width: unset;
@@ -12,19 +6,24 @@ ion-button [expand=block]{
     --padding-end: var(--padding-start);
 }
 ion-list {
-    // display: table;
-    // table-layout: fixed;
-    // height: calc(320px - 44px);
     ion-item {
-        // --border-style: none;
-        // display: table-row;
         text-align: center;
         --min-height: 64px;
-        // --border-style: none;
-        ion-button {
-            margin: auto;
-            height: 50%;
-            width: 100%;
-        }
+    }
+}
+ion-button[type="submit"] {
+    margin: auto;
+    margin-top: 50px;
+    width: 90%;
+}
+.avatar-selected {
+    background-color: var(--ion-color-light);
+}
+.avatar-container {
+    background-size: cover;
+    border-radius: 50%;
+    min-height: 64px;
+    img {
+        padding-top: 8px;
     }
 }

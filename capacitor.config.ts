@@ -7,7 +7,6 @@ const config: CapacitorConfig = {
   appId: 'com.shmorty.omni-method.app',
   appName: 'omni-method',
   webDir: 'www',
-  bundledWebRuntime: false,
   plugins: {
     GoogleAuth: {
       scopes: ['profile', 'email'],
@@ -18,7 +17,7 @@ const config: CapacitorConfig = {
     },
     SplashScreen: {
       launchAutoHide: true,
-      launchShowDuration: 2000,
+      launchShowDuration: 3000,
     },
   },
 };

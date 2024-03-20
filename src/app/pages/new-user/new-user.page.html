@@ -48,12 +48,22 @@
           </div>
           <ion-item>
             <ion-input
-              formControlName="nickname"
-              placeholder="Display name"
+              id="username"
+              formControlName="username"
+              placeholder="Username"
+              (keydown.space)="$event.preventDefault()"
               [maxlength]="30"
-              aria-label="Nickname"
+              aria-label="Username"
             ></ion-input>
           </ion-item>
+          <div
+            *ngIf="(username.dirty || username.touched) && username.errors"
+            class="errors"
+          >
+            <span *ngIf="username.errors?.required">Username is required</span>
+            <span *ngIf="username.errors?.minlength">Username is too short</span>
+            <span *ngIf="username.errors?.maxlength">Username is too long</span>
+          </div>
         </div>
         <!-- <div *ngIf="step == 2"> -->
         <div [hidden]="step !== 2">
@@ -64,8 +74,8 @@
           </div>
           <ion-item>
             <ion-radio-group formControlName="gender" value="other">
-              <ion-radio justify="start" value="male" labelPlacement="end">Male</ion-radio>
-              <ion-radio justify="start" value="female" labelPlacement="end">Female</ion-radio>
+              <ion-radio justify="start" value="Male" labelPlacement="end">Male</ion-radio>
+              <ion-radio justify="start" value="Female" labelPlacement="end">Female</ion-radio>
             </ion-radio-group>
           </ion-item>
         </div>
@@ -91,12 +101,18 @@
             </ion-text>
           </div>
           <fieldset formGroupName="height">
-            <ion-item lines="none">
-              <app-number-picker style="width: 50%;" [min]="3" [max]="7" [value]="4" [units]="'ft'"
-              [(value)]="formData.value.height.feet"></app-number-picker>
-              <app-number-picker style="width: 50%;" [min]="0" [max]="11" [value]="5" [units]="'in'"
-              [(value)]="formData.value.height.inches"></app-number-picker>
-            </ion-item>
+            <!-- <ion-item lines="none"> -->
+              <!-- <app-number-picker style="width: 50%;" [min]="3" [max]="7" [units]="'ft'"
+              [(pickerValue)]="formData.value.height.feet"></app-number-picker>
+              <app-number-picker style="width: 50%;" [min]="0" [max]="11" [units]="'in'"
+              [(pickerValue)]="formData.value.height.inches"></app-number-picker> -->
+              <ion-button class="continue-button" (click)="openHeightPicker()" 
+                expand="block" shape="round">
+                {{formData.value.height.feet}} ft
+                &nbsp;
+                {{formData.value.height.inches}} in
+              </ion-button>
+            <!-- </ion-item> -->
           </fieldset>
         </div>
         <!-- <div *ngIf="step == 5"> -->
@@ -106,10 +122,14 @@
               <h1 class="center">What is your body weight?</h1>
             </ion-text>
           </div>
-          <ion-item>
-            <app-number-picker style="width: 100%;" [min]="0" [max]="325" [value]="0" [units]="'lbs'"
-            [(value)]="formData.value.weight"></app-number-picker>
-          </ion-item>
+          <!-- <ion-item>
+            <app-number-picker style="width: 100%;" [min]="0" [max]="325" [units]="'lbs'"
+            [(pickerValue)]="formData.value.weight"></app-number-picker>
+          </ion-item> -->
+          <ion-button class="continue-button" (click)="openWeightPicker()" 
+            expand="block" shape="round">
+          {{formData.value.weight}} lbs
+        </ion-button>
         </div>
         <!-- <div *ngIf="step == 6"> -->
         <div [hidden]="step !== 6">
@@ -124,17 +144,33 @@
             <ion-radio-group
               (ionChange)="setFitnessLevel($event)"
               value="fitnessLevel">
-              <ion-item>
+              <ion-item lines="none">
                 <ion-radio justify="start" value="none" labelPlacement="end">No Experience</ion-radio>
               </ion-item>
               <ion-item>
+                <ion-text color="medium"><p>
+                  Been to the gym less than a few times
+                </p></ion-text>
+              </ion-item>
+              <ion-item lines="none">
                 <ion-radio justify="start" value="beginner" labelPlacement="end">Beginner</ion-radio>
               </ion-item>
               <ion-item>
+                <ion-text color="medium"><p>
+                  Less than 2 years of experience
+                </p></ion-text>
+              </ion-item>
+              <ion-item lines="none">
                 <ion-radio justify="start" value="intermediate" labelPlacement="end">Intermediate</ion-radio>
               </ion-item>
               <ion-item>
+                <ion-text color="medium">Between 2 and 4 years of experience</ion-text>
+              </ion-item>
+              <ion-item lines="none">
                 <ion-radio justify="start" value="advanced" labelPlacement="end">Advanced</ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-text color="medium">4+ years of experience</ion-text>
               </ion-item>
             </ion-radio-group>
             </ion-list>
@@ -143,5 +179,10 @@
       </ion-list>
     </div>
   </form>
-  <ion-button class="continue-button" (click)="next()">Continue</ion-button>
+  <ion-button
+    class="continue-button"
+    (click)="next()"
+    shape="round"
+    expand="block"
+  >Continue</ion-button>
 </ion-content>

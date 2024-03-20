@@ -12,6 +12,10 @@
 		"classpath": "com.capacitorjs.plugins.keyboard.KeyboardPlugin"
 	},
 	{
+		"pkg": "@capacitor/network",
+		"classpath": "com.capacitorjs.plugins.network.NetworkPlugin"
+	},
+	{
 		"pkg": "@capacitor/splash-screen",
 		"classpath": "com.capacitorjs.plugins.splashscreen.SplashScreenPlugin"
 	},

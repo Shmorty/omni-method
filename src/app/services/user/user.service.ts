@@ -13,6 +13,7 @@ import {AppState} from '../../store/app.state';
 import * as UserActions from '../../store/user/user.actions';
 import {
   assessmentScores,
+  currentScore,
   selectAuthUser,
   selectUser,
 } from '../../store/user/user.selectors';
@@ -22,10 +23,14 @@ import {AuthService} from '../auth.service';
 import {ModalController} from '@ionic/angular';
 import {EditProfilePage} from 'src/app/pages/edit-profile/edit-profile.page';
 
+export const usernameMinLength = 5;
+export const usernameMaxLength = 20;
+
 @Injectable({
   providedIn: 'root',
 })
 export class UserService implements IUserService {
+
   constructor(private http: HttpClient,
     private store: Store<AppState>,
     private firestoreService: UserFirestoreService,
@@ -39,13 +44,8 @@ export class UserService implements IUserService {
 
   reloadUser() {
     this.store.select(selectAuthUser).subscribe((authUser) => {
-      // console.log("selectAuthUser authUser", authUser.user.uid);
       this.store.dispatch(UserActions.loadUserAction({uid: authUser?.user.uid}));
     });
-    // this.authService.currentUser().then((authUser) => {
-    //   console.log("authService authUser", authUser);
-    // });
-    // console.log("authService currUserId", this.authService.currUserId);
   }
 
   getUserRankings(): Observable<User[]> {
@@ -56,29 +56,15 @@ export class UserService implements IUserService {
     return this.firestoreService.getAllUsers().pipe(map((data) => data.sort(sortFn)));
   }
 
+  isUsernameAvailable(username: string) {
+    console.log("is username available ", username);
+    return this.firestoreService.checkUsername(username);
+  }
+
   // trigger new user action
   saveNewUser(user: User) {
     console.log('userService.saveNewUser');
     this.store.dispatch(UserActions.newUser({payload: user}));
-    /*
-        this.store
-          .select(selectAuthUser)
-          .pipe(first())
-          .subscribe(
-            (authUser) => {
-              console.log('got authUser ', authUser);
-              user.id = authUser['uid'];
-              user.email = authUser['email'];
-              console.log('user', user);
-              // newUser action
-              console.log('dispatch newUser action');
-              this.store.dispatch(UserActions.newUser({payload: user}));
-            },
-            (err) => {
-              console.error('Observer got an error: ' + err);
-            }
-          );
-    */
   }
 
   // trigger update user action
@@ -106,6 +92,10 @@ export class UserService implements IUserService {
         });
       })
     );
+  }
+
+  getCurrentScoreForAssessment(aid: string): Observable<Score> {
+    return this.store.select(currentScore(aid));
   }
 
   // trigger save score event
@@ -141,15 +131,15 @@ export class UserService implements IUserService {
     );
   }
 
-  async openEditProfile(e, user) {
-    e.stopPropagation();
+  async openEditProfile(event, user) {
+    event.stopPropagation();
     const modal = await this.modalCtrl.create({
       component: EditProfilePage,
       componentProps: {
         user: user,
       },
       cssClass: 'edit-user-modal',
-      presentingElement: document.querySelector('ion-router-outlet'),
+      // presentingElement: document.querySelector('ion-router-outlet'),
       canDismiss: true,
     });
     await modal.present();

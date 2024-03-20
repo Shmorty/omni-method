@@ -44,20 +44,26 @@ async function getBodyWeight(uid: string): Promise<number> {
  */
 async function saveScoreToDb(scoreData: object[], data: FirebaseFirestore.DocumentData): Promise<object[]> {
   logger.info("saveScore", scoreData);
-  const d = new Date();
-  const ye = new Intl.DateTimeFormat("en", {year: "numeric"}).format(d);
-  const mo = new Intl.DateTimeFormat("en", {month: "2-digit"}).format(d);
-  const da = new Intl.DateTimeFormat("en", {day: "2-digit"}).format(d);
-  const scoreDate = `${ye}-${mo}-${da}`;
+  let scoreDate: string;
+  if (scoreData["scoreDate"]) {
+    scoreData = scoreData["scoreDate"];
+  } else {
+    const d = new Date();
+    const ye = new Intl.DateTimeFormat("en", {year: "numeric"}).format(d);
+    const mo = new Intl.DateTimeFormat("en", {month: "2-digit"}).format(d);
+    const da = new Intl.DateTimeFormat("en", {day: "2-digit"}).format(d);
+    scoreDate = `${ye}-${mo}-${da}`;
+  }
+  // const scoreDate = new Date().toLocaleDateString();
   logger.info("scoreDate", scoreDate);
-  const today = new Date().toLocaleString("sv").replace(" ", "T");
-  // let newScore: Score;
+
   let newScore: object;
   scoreData.forEach((entry) => {
     newScore = {
       ...entry,
       uid: data.id,
-      scoreDate: today,
+      // scoreDate: today,
+      scoreDate: scoreDate,
       currentWeight: data.weight,
       expired: false,
       notes: "Quick score",

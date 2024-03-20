@@ -1,37 +1,74 @@
 .card {
-    aspect-ratio: 2 / 1;
-    // background-color: var(--ion-color-primary);
-    background-image: linear-gradient(to bottom, rgba(229, 243, 255, 0), rgba(207, 233, 255, 1));
-    border: solid 1px;
-    border-radius: 10px;
-    // color: white;
-    display: inline-flex;
-    // margin: 0 5px 5px 0;
-    padding: 10px;
-    width: 45%;
-  }
-  .card-label {
-    // display: block;
-    float: left;
-    height: 2.5em;
-    // text-overflow: ellipsis;
-    white-space: inherit;
-    // width: 80%;
-  }
-  .card-check {
-    display: inline-block;
-    // float: right;
-    margin-top: 0.5em;
-    height: fit-content;
-    // max-width: 20%;
-  }
-  .left {
-    float: left;
-    clear: both;
-    margin: 5px 5px 0 10px;
-  }
-  .right {
-    float: right;
-    margin: 5px 10px 0 0;
-  }
-  
+  aspect-ratio: 2 / 1;
+  // background-color: var(--ion-color-primary);
+  // background-image: linear-gradient(to bottom, rgba(229, 243, 255, 0), rgba(207, 233, 255, 1));
+  border: solid 1px;
+  border-radius: 10px;
+  // color: white;
+  display: inline-flex;
+  // margin: 0 5px 5px 0;
+  padding: 10px;
+  // width: 45%;
+  height: 44px;
+  aspect-ratio: 4 / 3;
+  background-color: var(--ion-color-tertiary);
+}
+.card-label {
+  // display: block;
+  float: left;
+  height: 2.5em;
+  // text-overflow: ellipsis;
+  white-space: inherit;
+  // width: 80%;
+}
+.card-check {
+  display: inline-block;
+  // float: right;
+  margin-top: 0.5em;
+  height: fit-content;
+  // max-width: 20%;
+}
+.left {
+  float: left;
+  clear: both;
+  margin: 5px 5px 0 10px;
+}
+.right {
+  float: right;
+  margin: 5px 10px 0 0;
+}
+.checked {
+  border-radius: 50%;
+  height: 38px;
+  margin-inline-end: 8px;
+  opacity: 1;
+}
+.hide-check {
+  border-radius: 50%;
+  height: 38px;
+  margin-inline-end: 8px;
+  opacity: 0.22;
+}
+div.thumbnail {
+  margin-inline-end: 8px;
+}
+img.thumbnail {
+  border: 1px solid var(--ion-color-tertiary);
+  border-radius: 10px;
+  height: 44px;
+  margin: 4px 0;
+}
+// ion-segment, ion-segment-button {
+ion-segment {
+  // background: rgba(75, 177, 255, 0.10);
+  background: var(--ion-color-tertiary);
+  // margin-top: 10px;
+}
+.segment-button-checked {
+  // font-weight: bold;
+  text-decoration: underline;
+  // text-overflow: clip;
+}
+ion-segment-button::part(indicator-background) {
+  background: var(--ion-color-primary);
+}

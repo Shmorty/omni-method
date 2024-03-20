@@ -6,17 +6,23 @@
 <ion-content [fullscreen]="true" #scrollarea no-bounce class="ion-content-scroll-host">
   <div class="safe-area">
   </div>
-  <ion-refresher
-    slot="fixed"
-    pullMax="200"
-    pullMin="60"
-    (ionRefresh)="handleRefresh($event)"
-  >
-    <ion-refresher-content
-      pullingIcon="none"
-      refreshingSpinner="none"
-    ></ion-refresher-content>
+  <ion-refresher slot="fixed" pullMin="999999">
+    <ion-refresher-content pullingIcon="none" refreshingSpinner="none">
+  </ion-refresher-content>
   </ion-refresher>
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-button
+      type="button"
+      size="large"
+      shape="circle"
+      color="light"
+      (click)="userService.openEditProfile($event, user)"
+    >
+      <!-- <ion-icon name="settings-outline"></ion-icon> -->
+      <ion-icon name="settings-sharp"></ion-icon>
+      <!-- <ion-icon name="settings"></ion-icon> -->
+    </ion-button>
+  </ion-fab>
   <app-profile-header></app-profile-header>
   <ion-card class="contentCard">
     <ion-item lines="none">

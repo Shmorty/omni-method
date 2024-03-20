@@ -67,6 +67,7 @@ ion-fab[vertical="top"] {
 }
 ion-button[shape="circle"] {
   --border-radius: 50%;
+  // --box-shadow: -1px 11px 13px -6px rgb(87, 86, 86);
   // width: 44px;
   height: 44px;
 }
@@ -75,7 +76,8 @@ ion-button[shape="circle"] {
   --border-radius: 10px;
   --ion-backdrop-color: #b8dfff;
   --ion-safe-area-top: 0;
-  --height: 365px;
+  // --height: 365px;
+  --height: 512px;
   --width:90%;
   backdrop-filter: blur(10px);
   // &::part(backdrop) {
@@ -107,4 +109,22 @@ ion-datetime {
 
 // ion-datetime::part(wheel-item active) {
 //   color: black;
+// }
+button.alert-button.logout-button-confirm {
+  color: var(--ion-color-danger);
+}
+ion-picker-column {
+  background: var(--ion-color-primary) !important;
+}
+.picker-above-highlight {
+  background: linear-gradient(to bottom, var(--background, var(--ion-background-color, #fff)) 5%, rgba(var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255)), 0.5) 100%) !important;
+}
+.picker-below-highlight {
+  background: linear-gradient(to top, var(--background, var(--ion-background-color, #fff)) 5%, rgba(var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255)), 0.5) 100%) !important;
+}
+.picker-wrapper {
+  border-radius: 10px !important;
+}
+// .inline-picker {
+//   --height: 50%;
 // }

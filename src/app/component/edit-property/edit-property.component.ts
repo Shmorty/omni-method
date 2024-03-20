@@ -5,6 +5,8 @@ import {IonicModule, ModalController} from '@ionic/angular';
 import {first} from 'rxjs';
 import {User} from 'src/app/store/user/user.model';
 import {NumberPickerComponent} from '../number-picker/number-picker.component';
+import {UserService, usernameMinLength, usernameMaxLength} from '../../services/user/user.service';
+import {ShowToastService} from '../../services/show-toast.service';
 
 @Component({
   selector: 'app-edit-property',
@@ -23,8 +25,9 @@ export class EditPropertyComponent implements OnInit {
 
   @Input() targetProperty: string;
   @Input() user: User;
+  @ViewChild('avatar') avatarTemplate: TemplateRef<any>;
   @ViewChild('name') nameTemplate: TemplateRef<any>;
-  @ViewChild('nickname') nicknameTemplate: TemplateRef<any>;
+  @ViewChild('username') usernameTemplate: TemplateRef<any>;
   @ViewChild('dob') dobTemplate: TemplateRef<any>;
   @ViewChild('sex') sexTemplate: TemplateRef<any>;
   @ViewChild('weight') weightTemplate: TemplateRef<any>;
@@ -33,8 +36,34 @@ export class EditPropertyComponent implements OnInit {
   public template: TemplateRef<any>;
   public firstName: string;
   public updUser: User;
+  public imageType = "avatar";
+  public avatars = [
+    {"label": "Deadlift", "icon": "/assets/images/deadlift.png"},
+    {"label": "Squat", "icon": "/assets/images/backsquat.png"},
+    {"label": "Bench", "icon": "/assets/images/BenchPress.png"},
+    {"label": "Weighted Pull-up", "icon": "/assets/images/weightedpullup.png"},
+    {"label": "Pushups", "icon": "/assets/images/pushup.png"},
+    {"label": "Pullups", "icon": "/assets/images/pull_up.png"},
+    {"label": "Squats", "icon": "/assets/images/backsquat.png"},
+    {"label": "Long Jump", "icon": "/assets/images/Long_Jump.png"},
+    {"label": "Push Press", "icon": "/assets/images/ChestLaunch.png"},
+    {"label": "100 meter sprint", "icon": "/assets/images/100metersprint.png"},
+    {"label": "Clean", "icon": "/assets/images/powerclean.png"},
+    {"label": "Pike", "icon": "/assets/images/toetouch.png"},
+    {"label": "Backbend", "icon": "/assets/images/backbend.png"},
+    {"label": "Straddle", "icon": "/assets/images/medial_lateral.png"},
+    {"label": "1 Hour Run", "icon": "/assets/images/onehourrun.png"},
+    {"label": "2 Minute Sprint", "icon": "/assets/images/2minutedistance.png"},
+    {"label": "Half Spider Web", "icon": "/assets/images/agility.png"},
+    {"label": "Balance Positions", "icon": "/assets/images/Balance.png"},
+    {"label": "Coordination Skills", "icon": "/assets/images/Coordination.png"},
+  ];
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(
+    private modalCtrl: ModalController,
+    private userService: UserService,
+    private showToastService: ShowToastService
+  ) {}
 
   ngOnInit() {
     console.log("targetProperty", this.targetProperty);
@@ -46,14 +75,19 @@ export class EditPropertyComponent implements OnInit {
 
   ngAfterViewInit() {
     switch (this.targetProperty) {
+      case 'avatar': {
+        this.title = "Avatar";
+        this.template = this.avatarTemplate;
+        break;
+      }
       case 'name': {
         this.title = "Name";
         this.template = this.nameTemplate;
         break;
       }
-      case 'nickname': {
-        this.title = "Display Name";
-        this.template = this.nicknameTemplate;
+      case 'username': {
+        this.title = "Username";
+        this.template = this.usernameTemplate;
         break;
       }
       case 'dob': {
@@ -80,6 +114,13 @@ export class EditPropertyComponent implements OnInit {
     console.log("template", this.template);
   }
 
+  getAvatarClass(avatarPath: string): string {
+    if (this.user.avatar === avatarPath) {
+      return "avatar-selected";
+    }
+    return "";
+  }
+
   newWeight(val) {
     this.updUser.weight = val;
   }
@@ -89,7 +130,12 @@ export class EditPropertyComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  save() {
+  setAvatar(avatar: string) {
+    this.updUser.avatar = avatar;
+    this.save();
+  }
+
+  async save() {
     console.log("save", this.targetProperty);
     switch (this.targetProperty) {
       case 'name': {
@@ -97,8 +143,25 @@ export class EditPropertyComponent implements OnInit {
         console.log("lastName", this.updUser.lastName);
         break;
       }
-      case 'nickname': {
-        console.log("nickname", this.updUser.nickname);
+      case 'username': {
+        if (!this.updUser.username) {
+          this.showToastService.showToast("You must select a username", "danger");
+          return;
+        }
+        if (this.updUser.username.length < usernameMinLength) {
+          this.showToastService.showToast("Username must be at least " + usernameMinLength + " characters", "danger");
+          return;
+        }
+        if (this.updUser.username.length > usernameMaxLength) {
+          this.showToastService.showToast("Username must be no more than " + usernameMaxLength + " characters", "danger");
+          return;
+        }
+        const isAvailable = await this.userService.isUsernameAvailable(this.updUser.username);
+        if (!isAvailable) {
+          this.showToastService.showToast("Sorry, a user already exists with that username", "danger");
+          return;
+        }
+        console.log("username", this.updUser.username);
         break;
       }
       case 'dob': {

@@ -47,8 +47,9 @@ export class UserEffects {
       tap((payload) =>
         console.log('userAuthenticated effect', JSON.stringify(payload))
       ),
-      map((payload) =>
-        UserActions.loadUserAction({uid: payload.payload.user.uid})
+      map((payload) => {
+        return UserActions.loadUserAction({uid: payload.payload.user.uid})
+      }
       )
     )
   );
@@ -156,7 +157,9 @@ export class UserEffects {
           console.log("loadUserSuccess router.url", this.router.url);
           // user loaded test if exist
           if (data.payload) {
-            this.router.navigate(['home']);
+            if (!this.router.url.startsWith('/home')) {
+              this.router.navigate(['home']);
+            }
             // if (data.payload.omniScore) {
             //   // go to home page
             //   if (this.router.url !== "/onboarding") {

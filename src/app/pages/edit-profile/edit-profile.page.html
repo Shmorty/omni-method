@@ -1,11 +1,11 @@
 <ion-content class="ion-padding" color="default">
-  <ion-header class="ion-no-border"> </ion-header>
+  <ion-header class="ion-no-border safe-area"> </ion-header>
   <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-button
       (click)="cancel()"
       routerDirection="back"
       type="button"
-      size="small"
+      size="default"
       shape="circle"
       color="primary"
     >
@@ -18,21 +18,18 @@
 
 
   <ion-list *ngIf="user$ | async as user; else loading ">
-    <div class="avatar">
+    <div class="avatar" (click)="openModal('avatar')">
       <user-avatar [user]="user" class="avatar"></user-avatar>
-      <!-- <user-avatar [user]="user" [ngStyle]="{'color': 'white'}"
-      (click)="userService.openEditProfile($event, user)"
-      >
-      </user-avatar> -->
+      <ion-button color="medium" shape="round" size="small">edit</ion-button>
     </div>
   
     <ion-item button (click)="openModal('name')">
       <ion-label>Name</ion-label>
       <ion-text slot="end">{{user.firstName}}&nbsp;{{user.lastName}}</ion-text>
     </ion-item>
-    <ion-item button (click)="openModal('nickname')">
-      <ion-label>Display Name</ion-label>
-      <ion-text slot="end">{{user.nickname}}</ion-text>
+    <ion-item button (click)="openModal('username')">
+      <ion-label>Userame</ion-label>
+      <ion-text slot="end">{{user.username}}</ion-text>
     </ion-item>
     <ion-item button (click)="openModal('dob')">
       <ion-label>Age</ion-label>
@@ -42,15 +39,15 @@
       <ion-label>Gender</ion-label>
       <ion-text slot="end">{{user.gender}}</ion-text>
     </ion-item>
-    <ion-item button (click)="openModal('weight')">
+    <ion-item button (click)="numberPickerService.openWeightPicker(user)">
       <ion-label>Weight</ion-label>
       <ion-text slot="end">{{user.weight}}</ion-text>
     </ion-item>
-    <ion-item button (click)="openModal('height')">
+    <ion-item button (click)="numberPickerService.openHeightPicker(user)">
       <ion-label>Height</ion-label>
       <ion-text slot="end">{{user.height.feet}}' {{user.height.inches}}"</ion-text>
     </ion-item>
-    <ion-list-header>Settings</ion-list-header>
+    <ion-list-header class="section_header">Account</ion-list-header>
     <ion-item>
       <ion-label>Email</ion-label>
       <ion-text slot="end">{{user.email}}</ion-text>
@@ -64,7 +61,7 @@
       <ion-text slot="end"></ion-text>
     </ion-item>
     <ion-item button (click)="logout()">
-      <ion-label>Log Out</ion-label>
+      <ion-label color="danger">Log Out</ion-label>
     </ion-item>
   </ion-list>
 

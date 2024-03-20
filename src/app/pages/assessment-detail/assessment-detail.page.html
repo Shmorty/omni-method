@@ -3,12 +3,10 @@
     <ion-header class="ion-no-border safe-area"> </ion-header>
 
     <ion-fab vertical="top" horizontal="start" slot="fixed">
-      <!-- routerLink="/home/profile"
-      routerDirection="back" -->
-    <ion-button
+      <ion-button
         (click)="goBack()"
         type="button"
-        size="small"
+        size="default"
         shape="circle"
         color="primary"
       >
@@ -18,7 +16,7 @@
 
     <ion-img class="header-img" src="{{assessment.icon}}"></ion-img>
 
-    <ion-item>
+    <ion-item lines="full">
       <ion-label>
         <ion-card-title>
           <h1>{{ assessment.label }}</h1>
@@ -34,10 +32,6 @@
     </ion-item>
 
     <div *ngIf="!assessment.checklist">
-      <!-- <ion-button expand="block" shape="round" (click)="openNewScore(assessment)">
-      <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
-    </ion-button> -->
-
 
       <ion-accordion-group>
         <ion-accordion toggleIconSlot="none">
@@ -45,7 +39,7 @@
             <ion-item *ngIf="isFirst" class="header" slot="header" lines="none">
               <ion-label position="fixed" class="fixed-width" slot="start">Date</ion-label>
               <ion-label position="fixed" style="margin: auto;" style="text-align: center;">{{assessment.units}}</ion-label>
-              <ion-label position="fixed" slot="end" style="text-align: right;">score/1000</ion-label>
+              <ion-label position="fixed" slot="end" style="text-align: right;">Score/1000</ion-label>
             </ion-item>
             <ion-item-sliding slot="{{i < 3 ? 'header':'content'}}">
               <ion-item lines="full">
@@ -116,40 +110,14 @@
         </ion-item>
       </ng-container>
     </div>
+    <!-- edit checklist -->
     <app-edit-checklist *ngIf="assessment.checklist"
-    [assessment]="assessment" [scores$]="scores$"
-    (checked)="updateChecked($event)"
+      [assessment]="assessment" [score$]="score$"
+      (checked)="updateChecked($event)"
       ></app-edit-checklist>
-      <!-- [(ngModel)]="displayChecked" -->
-      <!-- <ion-list *ngIf="assessment.checklist">
-      <ion-item lines="none">
-        <ion-label>
-          <ion-card-title>
-            <h1>Instructions</h1>
-          </ion-card-title>
-        </ion-label>
-      </ion-item>
-      <ion-item lines="none">
-        <ol>
-          <li *ngFor="let item of assessment.instruction">{{item}}</li>
-        </ol>
-      </ion-item>
-      <ion-card
-        class="card"
-        *ngFor="let item of checklist$ | async; let i = index"
-        (click)="toggleCheckItem(i)"
-        [ngClass]="!(i%2) ? 'left' : 'right'">
-        <ion-label>{{item["label"]}}</ion-label>
-        <ion-checkbox [checked]="getCheckedItem(i)" labelPlacement="start">
-        </ion-checkbox>
-      </ion-card>
-    </ion-list> -->
   </ion-content>
   <ion-button *ngIf="!assessment.checklist" class="footer-button" shape="round" (click)="openNewScore(assessment)">
     <ion-icon name="pencil-outline"></ion-icon>
-  </ion-button>
-  <ion-button *ngIf="assessment.checklist" class="footer-button" shape="round" (click)="saveChecklist()">
-    <ion-icon name="save-outline"></ion-icon>
   </ion-button>
 </ng-container>
 

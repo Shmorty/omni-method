@@ -3,6 +3,7 @@ import {
   DocumentData,
   DocumentReference,
   Firestore,
+  QuerySnapshot,
   collection,
   collectionData,
   deleteDoc,
@@ -76,6 +77,24 @@ export class UserFirestoreService {
     console.log('docRef', userDocRef.id, userDocRef.path);
     console.log('user', user);
     return from(updateDoc(userDocRef, Object(user)));
+  }
+
+  async checkUsername(usernameToCheck: string) {
+    const userCollection = collection(this.firestore, "user");
+    const usernameQuery = query(userCollection, where("username", "==", usernameToCheck));
+    let usernameSnapshot: QuerySnapshot;
+    try {
+      usernameSnapshot = await getDocs(usernameQuery);
+      console.log("username snapshot size", usernameSnapshot?.size);
+      console.log("username docs length", usernameSnapshot.docs.length)
+    } catch (err) {
+      console.log("check username error", err);
+      return false;
+    }
+    //
+    const result: boolean = usernameSnapshot.empty;
+    console.log("check username return", result);
+    return result;
   }
 
   getUserScores(id: string): Observable<Score[]> {

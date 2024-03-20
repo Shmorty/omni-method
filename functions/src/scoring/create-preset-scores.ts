@@ -106,7 +106,7 @@ export function createPresetScores(fitnessLevel: string,
       scores.push({
         aid: "TWOMDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(bmi * 0.007 / 0.001) * 0.001,
+        rawScore: Math.ceil(bmi * 0.007 / 0.001) / 1000,
       });
       // Half Spider Web = 27
       scores.push({
@@ -200,7 +200,7 @@ export function createPresetScores(fitnessLevel: string,
       scores.push({
         aid: "TWOMDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(bmi * 0.01 / 0.001) * 0.001,
+        rawScore: Math.ceil(bmi * 0.01 / 0.001) / 1000,
       });
       // Half Spider Web = 22
       scores.push({
@@ -294,7 +294,7 @@ export function createPresetScores(fitnessLevel: string,
       scores.push({
         aid: "TWOMDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(bmi * 0.012 / 0.001) * 0.001,
+        rawScore: Math.ceil(bmi * 0.012 / 0.001) / 1000,
       });
       // Half Spider Web = 20
       scores.push({
@@ -388,7 +388,7 @@ export function createPresetScores(fitnessLevel: string,
       scores.push({
         aid: "TWOMDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(bmi * 0.014 / 0.001) * 0.001,
+        rawScore: Math.ceil(bmi * 0.014 / 0.001) / 1000,
       });
       // Half Spider Web = 17
       scores.push({

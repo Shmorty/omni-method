@@ -20,7 +20,7 @@ export enum View {
   styleUrls: ['./community.page.scss'],
 })
 export class CommunityPage implements OnInit {
-  type: string = 'rankings';
+  public type: string = 'rankings';
   // View = View;
   public view: View = View.Rankings;
   public ranking$: Observable<User[]>;
@@ -55,8 +55,7 @@ export class CommunityPage implements OnInit {
 
   highlightUser(athlete: User) {
     // return athlete.id == this.curUserId ? "highlight" : "";
-    // return athlete.id == this.curUserId ? "tertiary" : "";
-    return athlete.id == this.curUserId ? "light" : "";
+    return athlete.id == this.curUserId ? "tertiary" : "";
   }
 
   // setView(viewName: View) {

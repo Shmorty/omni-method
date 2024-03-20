@@ -30,7 +30,12 @@
   // bottom: 50px;
   width: 70%;
 }
-
+form {
+  min-height: 320px;
+}
+#username {
+  text-transform: lowercase;
+}
 ion-radio {
   --border-radius: 4px;
   --inner-border-radius: 4px;

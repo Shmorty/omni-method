@@ -27,7 +27,7 @@ export class OnboardingPage implements OnInit {
   public values = [];
   public curValue: number;
   private user: User;
-  public scores$: Observable<Score[]>;
+  public score$: Observable<Score>;
   public displayChecked: boolean[] = [];
   public isChecklist = false;
 
@@ -46,7 +46,7 @@ export class OnboardingPage implements OnInit {
     }).unsubscribe();
     this.assessments$.subscribe((arr) => this.assessmentCount = arr.length);
     // this.scores$ = this.userService.getScoresForAssessment(assessment);
-    this.scores$ = undefined;
+    this.score$ = undefined;
   }
 
   ionViewWillEnter() {
