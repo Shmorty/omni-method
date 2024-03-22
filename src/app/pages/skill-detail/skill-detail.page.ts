@@ -39,13 +39,16 @@ export class SkillDetailPage implements OnInit {
       // load current assessment score
       this.score$ = this.userService.getCurrentScoreForAssessment(this.aid);
       this.scoreSub = this.score$.subscribe((score) => {
-        // read skill setting
-        this.curScore = score;
-        // console.log("curScore " + JSON.stringify(score));
-        if (this.curScore && this.curScore.checklist) {
-          this.skillChecked = (this.skillIndex < score.checklist.length) ? score.checklist[this.skillIndex] : false;
-        } else {
-          this.skillChecked = false;
+        // console.log("subscription new score", score);
+        if (score !== undefined) {
+          // read skill setting
+          this.curScore = score;
+          // console.log("curScore " + JSON.stringify(score));
+          if (this.curScore && this.curScore.checklist) {
+            this.skillChecked = (this.skillIndex < score.checklist.length) ? score.checklist[this.skillIndex] : false;
+          } else {
+            this.skillChecked = false;
+          }
         }
       });
     });
