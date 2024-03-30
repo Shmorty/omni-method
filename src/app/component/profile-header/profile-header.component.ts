@@ -8,6 +8,7 @@ import * as UserSelectors from 'src/app/store/user/user.selectors';
 import {UserService} from 'src/app/services/user/user.service';
 import {Store} from '@ngrx/store';
 import {delay} from 'rxjs/operators';
+import {Chart, ChartItem} from 'chart.js/auto';
 
 @Component({
   selector: 'app-profile-header',
@@ -25,7 +26,9 @@ export class ProfileHeaderComponent implements OnInit {
   @Input() background: any;
   public user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
   @ViewChild('accordionGroup') accordionGroup: IonAccordionGroup;
+  @ViewChild('MyChart') myChart: ElementRef;
   moreOpen: boolean = false;
+  public chart: Chart;
 
   constructor(
     private store: Store,
@@ -35,6 +38,49 @@ export class ProfileHeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
+
+  createChart() {
+    this.user$.subscribe((user) => {
+      if (user) {
+
+        this.chart = new Chart(
+          this.myChart.nativeElement,
+          {
+            type: 'radar',
+            data: {
+              labels: Object.keys(user.categoryScore),
+              datasets: [
+                {
+                  label: "Category",
+                  data: Object.values(user.categoryScore),
+                  fill: true,
+                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                  borderColor: 'rgba(255,99,132,1)',
+                  borderWidth: 1
+                }
+              ]
+            },
+            options: {
+              scales: {
+                r: {
+                  angleLines: {
+                    display: false
+                  },
+                  suggestedMin: 100,
+                  suggestedMax: 1000
+                }
+              },
+              elements: {
+                line: {
+                  borderWidth: 3
+                }
+              }
+            }
+          });
+        console.log("chart", this.chart);
+      }
+    }).unsubscribe();
+  }
 
   ngAfterViewInit() {
     console.log("set backgroune", this.background);
@@ -46,13 +92,14 @@ export class ProfileHeaderComponent implements OnInit {
     const nativeEl = this.accordionGroup;
     console.log(nativeEl);
     console.log(event.target);
-    // if (nativeEl.value === 'moreProfile') {
-    //   nativeEl.value = undefined;
-    //   this.moreOpen = false;
-    // } else {
-    //   nativeEl.value = 'moreProfile';
-    //   this.moreOpen = true;
-    // }
+    if (nativeEl.value === 'moreProfile') {
+      nativeEl.value = undefined;
+      this.moreOpen = false;
+    } else {
+      nativeEl.value = 'moreProfile';
+      this.moreOpen = true;
+      this.createChart();
+    }
   }
 
 }

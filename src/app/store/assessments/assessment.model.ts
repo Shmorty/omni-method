@@ -18,6 +18,7 @@ export interface Assessment {
   units?: string;
   entryUnits?: string;
   scores?: Score[];
+  video?: string;
   warning?: string;
 }
 

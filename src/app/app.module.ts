@@ -14,6 +14,7 @@ import {
   initializeAuth,
   indexedDBLocalPersistence,
 } from '@angular/fire/auth';
+import {getStorage, provideStorage} from '@angular/fire/storage';
 import {ActionReducer, MetaReducer, StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
@@ -24,6 +25,7 @@ import {OmniScoreEffects} from './store/omni-score/omni-score.effects';
 import {provideFirestore, getFirestore} from '@angular/fire/firestore';
 import {Capacitor} from '@capacitor/core';
 import {UserActionType} from './store/user/user.actions';
+// import {NgApexchartsModule} from 'ng-apexcharts';
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -83,6 +85,7 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
         return getAuth();
       }
     }),
+    provideStorage(() => getStorage()),
   ],
   providers: [
     // ...environment.providers,

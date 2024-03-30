@@ -10,6 +10,7 @@ import {UserService} from '../../services/user/user.service';
 import {User} from 'src/app/store/user/user.model';
 import {StatusBar, Style} from '@capacitor/status-bar';
 import {Capacitor} from '@capacitor/core';
+import {getStorage, getDownloadURL, ref} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-assessment-detail',
@@ -30,6 +31,7 @@ export class AssessmentDetailPage implements OnInit {
   private user: User;
   public curScore: Score;
   private checklistChanged: boolean = false;
+  public videoLink: Promise<string>;
 
   constructor(
     private route: ActivatedRoute,
@@ -54,6 +56,9 @@ export class AssessmentDetailPage implements OnInit {
 
     this.assessment$.subscribe((assessment) => {
       console.log("getScoresForAssessment", assessment);
+      if (assessment.video) {
+        this.videoLink = this.getVideoUrl(assessment);
+      }
       this.score$ = this.userService.getCurrentScoreForAssessment(assessment.aid);
       this.score$.subscribe((score) => {
         this.curScore = score;
@@ -124,9 +129,19 @@ export class AssessmentDetailPage implements OnInit {
     return this.displayChecked.filter(item => item).length;
   }
 
-  // getCheckedItem(item): boolean {
-  //   return this.displayChecked[item];
-  // }
+
+  getVideoUrl(assessment: Assessment) {
+    console.log("getVideoUrl", assessment.video);
+    const storage = getStorage();
+
+    return getDownloadURL(ref(storage, assessment.video)).then((url) => {
+      console.log("downloadURL", url);
+      return url;
+    }).catch((err) => {
+      console.log("err", err);
+      return undefined;
+    });
+  }
 
   // toggleCheckItem(item) {
   //   this.displayChecked[item] = !this.displayChecked[item];
