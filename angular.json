@@ -37,9 +37,7 @@
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js"
             ],
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
             "namedChunks": true
@@ -58,8 +56,6 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",

@@ -12,7 +12,7 @@ import {
   provideAuth,
   getAuth,
   initializeAuth,
-  indexedDBLocalPersistence,
+  // indexedDBLocalPersistence,
 } from '@angular/fire/auth';
 import {getStorage, provideStorage} from '@angular/fire/storage';
 import {ActionReducer, MetaReducer, StoreModule} from '@ngrx/store';
@@ -25,7 +25,7 @@ import {OmniScoreEffects} from './store/omni-score/omni-score.effects';
 import {provideFirestore, getFirestore} from '@angular/fire/firestore';
 import {Capacitor} from '@capacitor/core';
 import {UserActionType} from './store/user/user.actions';
-// import {NgApexchartsModule} from 'ng-apexcharts';
+import {NgApexchartsModule} from 'ng-apexcharts';
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -63,6 +63,7 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
     FormsModule,
     HttpClientModule,
     IonicModule.forRoot(),
+    NgApexchartsModule,
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([AssessmentEffects, UserEffects, OmniScoreEffects]),
     StoreDevtoolsModule.instrument({
@@ -71,14 +72,15 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
       trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
-    , connectInZone: true}),
+      connectInZone: true
+    }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => {
       if (Capacitor.isNativePlatform()) {
         console.log('isNativePlatform');
         return initializeAuth(getApp(), {
-          persistence: indexedDBLocalPersistence,
+          // persistence: indexedDBLocalPersistence,
         });
       } else {
         console.log('not nativPlatform');

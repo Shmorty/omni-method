@@ -37,9 +37,22 @@
     </ion-item>
 
     <ion-item lines="none" color="none">
-      <div slot="content" class="chart-container">
+      <!-- <div slot="content" class="chart-container">
         <canvas #MyChart>{{ chart }}</canvas>
-      </div>
+      </div> -->
+      <div style="text-align:center">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [xaxis]="chartOptions.xaxis"
+          [yaxis]="chartOptions.yaxis"
+        ></apx-chart>
+          <!-- 
+          [xaxis]="chartOptions.xaxis"
+          [labels]="chartOptions.labels"
+          [title]="chartOptions.title"
+         -->
+        </div>
     </ion-item>
 
     <ion-item lines="none" color="none">

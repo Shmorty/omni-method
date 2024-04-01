@@ -2,9 +2,6 @@ import {Injectable, Optional, inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {
   Auth,
-  // GoogleAuthProvider,
-  // FacebookAuthProvider,
-  // UserCredential,
   user,
   authState,
   signInWithEmailAndPassword,
@@ -13,7 +10,7 @@ import {
   deleteUser,
   sendPasswordResetEmail,
   signInWithPopup,
-  GoogleAuthProvider,
+  // GoogleAuthProvider,
   getAdditionalUserInfo,
   signInWithRedirect,
   getRedirectResult,
@@ -23,6 +20,7 @@ import {
   AuthCredential,
   EmailAuthProvider,
 } from '@angular/fire/auth';
+
 // import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import {BehaviorSubject, from, Observable, Subscription} from 'rxjs';
 // import { User } from '../store/user/user.model';
@@ -172,66 +170,42 @@ export class AuthService {
   //     });
   // }
 
-  /*  googleSignIn_codetrix() {
-    // this.user = await GoogleAuth.signIn();
-    GoogleAuth.signIn().then(
-      (res) => {
-        console.log('success: ', res);
-        // localStorage.setItem('userId', res.id);
-        this.currUserId = res.id;
-        this.currUserEmail = res.email;
-        // UserActions.signinSuccess should trigger load user
-        // if user not found got to register user
-        // if user found go to home page
-        this.store.dispatch(
-          UserActions.userAuthenticated({
-            payload: JSON.parse(JSON.stringify(res)),
-          })
-        );
-        // this.router.navigate(['home']);
-      },
-      (error) => {
-        console.log('error ', error);
-      }
-    );
-  } */
-
-  googleSignIn_firebase() {
-    const provider = new GoogleAuthProvider();
-    if (provider) {
-      console.log('signInWithRedirect');
-      signInWithRedirect(this.auth, provider);
-      return getRedirectResult(this.auth).then(
-        (result) => {
-          console.log('redirect successful, ', result);
-        },
-        (error) => {
-          console.log('google redirect login failed, ', error);
-          const errorCode = error.code;
-          const errorMessage = error.message;
-        }
-      );
-    } else {
-      console.log('signInWithPopup');
-      return signInWithPopup(this.auth, provider).then(
-        (result) => {
-          console.log('logged in with google, ', result);
-          const credential = GoogleAuthProvider.credentialFromResult(result);
-          console.log('credential, ', credential);
-          const token = credential.accessToken;
-          const user = result.user;
-          const additionaInfo = getAdditionalUserInfo(result);
-          console.log('additionalInfo, ', additionaInfo);
-        },
-        (error) => {
-          console.log('google popup login failed, ', error);
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          const credential = GoogleAuthProvider.credentialFromError(error);
-        }
-      );
-    }
-  }
+  // googleSignIn_firebase() {
+  //   const provider = new GoogleAuthProvider();
+  //   if (provider) {
+  //     console.log('signInWithRedirect');
+  //     signInWithRedirect(this.auth, provider);
+  //     return getRedirectResult(this.auth).then(
+  //       (result) => {
+  //         console.log('redirect successful, ', result);
+  //       },
+  //       (error) => {
+  //         console.log('google redirect login failed, ', error);
+  //         const errorCode = error.code;
+  //         const errorMessage = error.message;
+  //       }
+  //     );
+  //   } else {
+  //     console.log('signInWithPopup');
+  //     return signInWithPopup(this.auth, provider).then(
+  //       (result) => {
+  //         console.log('logged in with google, ', result);
+  //         const credential = GoogleAuthProvider.credentialFromResult(result);
+  //         console.log('credential, ', credential);
+  //         const token = credential.accessToken;
+  //         const user = result.user;
+  //         const additionaInfo = getAdditionalUserInfo(result);
+  //         console.log('additionalInfo, ', additionaInfo);
+  //       },
+  //       (error) => {
+  //         console.log('google popup login failed, ', error);
+  //         const errorCode = error.code;
+  //         const errorMessage = error.message;
+  //         const credential = GoogleAuthProvider.credentialFromError(error);
+  //       }
+  //     );
+  //   }
+  // }
 
   // sign in with google method
   // googleSignIn() {

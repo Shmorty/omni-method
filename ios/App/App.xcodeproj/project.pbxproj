@@ -3,59 +3,42 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2FAD9763203C412B000D30F8 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2FAD9762203C412B000D30F8 /* config.xml */; };
-		2FE157C195CCD9FC74A7AAC9 /* Pods_OmniMethod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD46A3B3F3D6FA187CDEF0AA /* Pods_OmniMethod.framework */; };
-		384BF6A422370CA97EEAC1BE /* Pods_OmniMethodDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B96D2DCCCE13D78D52F050AE /* Pods_OmniMethodDev.framework */; };
 		50379B232058CBB4000EE86E /* capacitor.config.json in Resources */ = {isa = PBXBuildFile; fileRef = 50379B222058CBB4000EE86E /* capacitor.config.json */; };
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
 		504EC30D1FED79650016851F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30B1FED79650016851F /* Main.storyboard */; };
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
-		DA674AD82B30AB0E00A397A1 /* NoBounce.m in Sources */ = {isa = PBXBuildFile; fileRef = DACDF59A29C795AD0009AFA7 /* NoBounce.m */; };
-		DA674AD92B30AB0E00A397A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
-		DA674ADD2B30AB0E00A397A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
-		DA674ADE2B30AB0E00A397A1 /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
-		DA674ADF2B30AB0E00A397A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
-		DA674AE02B30AB0E00A397A1 /* capacitor.config.json in Resources */ = {isa = PBXBuildFile; fileRef = 50379B222058CBB4000EE86E /* capacitor.config.json */; };
-		DA674AE12B30AB0E00A397A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30B1FED79650016851F /* Main.storyboard */; };
-		DA674AE22B30AB0E00A397A1 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2FAD9762203C412B000D30F8 /* config.xml */; };
-		DA674AE32B30AB0E00A397A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA7E69B12A0A75610032C51F /* GoogleService-Info.plist */; };
-		DA7E69B22A0A75620032C51F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA7E69B12A0A75610032C51F /* GoogleService-Info.plist */; };
-		DACDF59B29C795AD0009AFA7 /* NoBounce.m in Sources */ = {isa = PBXBuildFile; fileRef = DACDF59A29C795AD0009AFA7 /* NoBounce.m */; };
+		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
+		DAF7785D2BB9023900C806A0 /* omni_methodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF7785C2BB9023900C806A0 /* omni_methodApp.swift */; };
+		DAF7785F2BB9023900C806A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF7785E2BB9023900C806A0 /* ContentView.swift */; };
+		DAF778612BB9023B00C806A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAF778602BB9023B00C806A0 /* Assets.xcassets */; };
+		DAF778642BB9023B00C806A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAF778632BB9023B00C806A0 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2FAD9762203C412B000D30F8 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
 		50379B222058CBB4000EE86E /* capacitor.config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = capacitor.config.json; sourceTree = "<group>"; };
-		504EC3041FED79650016851F /* OmniMethodDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmniMethodDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		504EC3041FED79650016851F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504EC3071FED79650016851F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		504EC30C1FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		504EC30E1FED79650016851F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		504EC3111FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		504EC3131FED79650016851F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
-		5CEE42DCA154FBA02B132980 /* Pods-AppDev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppDev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppDev/Pods-AppDev.debug.xcconfig"; sourceTree = "<group>"; };
-		8D16546B500D6E8BAB3DDCAD /* Pods-OmniMethod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OmniMethod.release.xcconfig"; path = "Pods/Target Support Files/Pods-OmniMethod/Pods-OmniMethod.release.xcconfig"; sourceTree = "<group>"; };
+		AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
-		B96D2DCCCE13D78D52F050AE /* Pods_OmniMethodDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OmniMethodDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB08E94CA6E7188A1E706D29 /* Pods-App Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-App Dev/Pods-App Dev.release.xcconfig"; sourceTree = "<group>"; };
-		BC1991FE799E37D35FADF41C /* Pods-OmniMethodDev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OmniMethodDev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OmniMethodDev/Pods-OmniMethodDev.debug.xcconfig"; sourceTree = "<group>"; };
-		C4D43381D8EE81590400AFA6 /* Pods-AppDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppDev.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppDev/Pods-AppDev.release.xcconfig"; sourceTree = "<group>"; };
-		C963488F032B7C651E8B6AEB /* Pods-App Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App Dev/Pods-App Dev.debug.xcconfig"; sourceTree = "<group>"; };
-		D20B6E4BADFB682B965C7A31 /* Pods-OmniMethodDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OmniMethodDev.release.xcconfig"; path = "Pods/Target Support Files/Pods-OmniMethodDev/Pods-OmniMethodDev.release.xcconfig"; sourceTree = "<group>"; };
-		DA674AE82B30AB0E00A397A1 /* OmniMethod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmniMethod.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA7E69B12A0A75610032C51F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		DAA2F8FC2B30BFC2004AA438 /* AppDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppDev-Info.plist"; sourceTree = "<group>"; };
-		DACDF59929C795AD0009AFA7 /* App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "App-Bridging-Header.h"; sourceTree = "<group>"; };
-		DACDF59A29C795AD0009AFA7 /* NoBounce.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoBounce.m; sourceTree = "<group>"; };
-		DD46A3B3F3D6FA187CDEF0AA /* Pods_OmniMethod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OmniMethod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAF7785A2BB9023900C806A0 /* Omni Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Omni Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAF7785C2BB9023900C806A0 /* omni_methodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = omni_methodApp.swift; sourceTree = "<group>"; };
+		DAF7785E2BB9023900C806A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DAF778602BB9023B00C806A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DAF778632BB9023B00C806A0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
-		FE908F741A3DB095B98BB230 /* Pods-OmniMethod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OmniMethod.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OmniMethod/Pods-OmniMethod.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,15 +46,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				384BF6A422370CA97EEAC1BE /* Pods_OmniMethodDev.framework in Frameworks */,
+				A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DA674ADA2B30AB0E00A397A1 /* Frameworks */ = {
+		DAF778572BB9023900C806A0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FE157C195CCD9FC74A7AAC9 /* Pods_OmniMethod.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,8 +63,7 @@
 		27E2DDA53C4D2A4D1A88CE4A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DD46A3B3F3D6FA187CDEF0AA /* Pods_OmniMethod.framework */,
-				B96D2DCCCE13D78D52F050AE /* Pods_OmniMethodDev.framework */,
+				AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -91,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				504EC3061FED79650016851F /* App */,
+				DAF7785B2BB9023900C806A0 /* omni-method */,
 				504EC3051FED79650016851F /* Products */,
 				7F8756D8B27F46E3366F6CEA /* Pods */,
 				27E2DDA53C4D2A4D1A88CE4A /* Frameworks */,
@@ -100,8 +82,8 @@
 		504EC3051FED79650016851F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				504EC3041FED79650016851F /* OmniMethodDev.app */,
-				DA674AE82B30AB0E00A397A1 /* OmniMethod.app */,
+				504EC3041FED79650016851F /* App.app */,
+				DAF7785A2BB9023900C806A0 /* Omni Dev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -109,18 +91,14 @@
 		504EC3061FED79650016851F /* App */ = {
 			isa = PBXGroup;
 			children = (
-				DAA2F8FC2B30BFC2004AA438 /* AppDev-Info.plist */,
 				50379B222058CBB4000EE86E /* capacitor.config.json */,
 				504EC3071FED79650016851F /* AppDelegate.swift */,
 				504EC30B1FED79650016851F /* Main.storyboard */,
 				504EC30E1FED79650016851F /* Assets.xcassets */,
 				504EC3101FED79650016851F /* LaunchScreen.storyboard */,
 				504EC3131FED79650016851F /* Info.plist */,
-				DA7E69B12A0A75610032C51F /* GoogleService-Info.plist */,
 				2FAD9762203C412B000D30F8 /* config.xml */,
 				50B271D01FEDC1A000F3C39B /* public */,
-				DACDF59A29C795AD0009AFA7 /* NoBounce.m */,
-				DACDF59929C795AD0009AFA7 /* App-Bridging-Header.h */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -130,24 +108,35 @@
 			children = (
 				FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */,
 				AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */,
-				C963488F032B7C651E8B6AEB /* Pods-App Dev.debug.xcconfig */,
-				BB08E94CA6E7188A1E706D29 /* Pods-App Dev.release.xcconfig */,
-				5CEE42DCA154FBA02B132980 /* Pods-AppDev.debug.xcconfig */,
-				C4D43381D8EE81590400AFA6 /* Pods-AppDev.release.xcconfig */,
-				FE908F741A3DB095B98BB230 /* Pods-OmniMethod.debug.xcconfig */,
-				8D16546B500D6E8BAB3DDCAD /* Pods-OmniMethod.release.xcconfig */,
-				BC1991FE799E37D35FADF41C /* Pods-OmniMethodDev.debug.xcconfig */,
-				D20B6E4BADFB682B965C7A31 /* Pods-OmniMethodDev.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		DAF7785B2BB9023900C806A0 /* omni-method */ = {
+			isa = PBXGroup;
+			children = (
+				DAF7785C2BB9023900C806A0 /* omni_methodApp.swift */,
+				DAF7785E2BB9023900C806A0 /* ContentView.swift */,
+				DAF778602BB9023B00C806A0 /* Assets.xcassets */,
+				DAF778622BB9023B00C806A0 /* Preview Content */,
+			);
+			path = "omni-method";
+			sourceTree = "<group>";
+		};
+		DAF778622BB9023B00C806A0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				DAF778632BB9023B00C806A0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		504EC3031FED79650016851F /* OmniMethodDev */ = {
+		504EC3031FED79650016851F /* App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 504EC3161FED79650016851F /* Build configuration list for PBXNativeTarget "OmniMethodDev" */;
+			buildConfigurationList = 504EC3161FED79650016851F /* Build configuration list for PBXNativeTarget "App" */;
 			buildPhases = (
 				6634F4EFEBD30273BCE97C65 /* [CP] Check Pods Manifest.lock */,
 				504EC3001FED79650016851F /* Sources */,
@@ -159,28 +148,26 @@
 			);
 			dependencies = (
 			);
-			name = OmniMethodDev;
+			name = App;
 			productName = App;
-			productReference = 504EC3041FED79650016851F /* OmniMethodDev.app */;
+			productReference = 504EC3041FED79650016851F /* App.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DA674AD52B30AB0E00A397A1 /* OmniMethod */ = {
+		DAF778592BB9023900C806A0 /* Omni Dev */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA674AE52B30AB0E00A397A1 /* Build configuration list for PBXNativeTarget "OmniMethod" */;
+			buildConfigurationList = DAF778652BB9023B00C806A0 /* Build configuration list for PBXNativeTarget "Omni Dev" */;
 			buildPhases = (
-				DA674AD62B30AB0E00A397A1 /* [CP] Check Pods Manifest.lock */,
-				DA674AD72B30AB0E00A397A1 /* Sources */,
-				DA674ADA2B30AB0E00A397A1 /* Frameworks */,
-				DA674ADC2B30AB0E00A397A1 /* Resources */,
-				DA674AE42B30AB0E00A397A1 /* [CP] Embed Pods Frameworks */,
+				DAF778562BB9023900C806A0 /* Sources */,
+				DAF778572BB9023900C806A0 /* Frameworks */,
+				DAF778582BB9023900C806A0 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = OmniMethod;
-			productName = App;
-			productReference = DA674AE82B30AB0E00A397A1 /* OmniMethod.app */;
+			name = "Omni Dev";
+			productName = "omni-method";
+			productReference = DAF7785A2BB9023900C806A0 /* Omni Dev.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -189,22 +176,22 @@
 		504EC2FC1FED79650016851F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 920;
-				LastUpgradeCheck = 1530;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 920;
 				ORGANIZATIONNAME = "Omni Method LLC";
 				TargetAttributes = {
 					504EC3031FED79650016851F = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1420;
+						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
 					};
-					DA674AD52B30AB0E00A397A1 = {
+					DAF778592BB9023900C806A0 = {
+						CreatedOnToolsVersion = 15.3;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 504EC2FF1FED79650016851F /* Build configuration list for PBXProject "OmniMethod" */;
+			buildConfigurationList = 504EC2FF1FED79650016851F /* Build configuration list for PBXProject "App" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -217,8 +204,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				504EC3031FED79650016851F /* OmniMethodDev */,
-				DA674AD52B30AB0E00A397A1 /* OmniMethod */,
+				504EC3031FED79650016851F /* App */,
+				DAF778592BB9023900C806A0 /* Omni Dev */,
 			);
 		};
 /* End PBXProject section */
@@ -234,21 +221,15 @@
 				50379B232058CBB4000EE86E /* capacitor.config.json in Resources */,
 				504EC30D1FED79650016851F /* Main.storyboard in Resources */,
 				2FAD9763203C412B000D30F8 /* config.xml in Resources */,
-				DA7E69B22A0A75620032C51F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DA674ADC2B30AB0E00A397A1 /* Resources */ = {
+		DAF778582BB9023900C806A0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA674ADD2B30AB0E00A397A1 /* LaunchScreen.storyboard in Resources */,
-				DA674ADE2B30AB0E00A397A1 /* public in Resources */,
-				DA674ADF2B30AB0E00A397A1 /* Assets.xcassets in Resources */,
-				DA674AE02B30AB0E00A397A1 /* capacitor.config.json in Resources */,
-				DA674AE12B30AB0E00A397A1 /* Main.storyboard in Resources */,
-				DA674AE22B30AB0E00A397A1 /* config.xml in Resources */,
-				DA674AE32B30AB0E00A397A1 /* GoogleService-Info.plist in Resources */,
+				DAF778642BB9023B00C806A0 /* Preview Assets.xcassets in Resources */,
+				DAF778612BB9023B00C806A0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,7 +247,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OmniMethodDev-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-App-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -285,40 +266,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OmniMethodDev/Pods-OmniMethodDev-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DA674AD62B30AB0E00A397A1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OmniMethod-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DA674AE42B30AB0E00A397A1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OmniMethod/Pods-OmniMethod-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-App/Pods-App-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -328,17 +276,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DACDF59B29C795AD0009AFA7 /* NoBounce.m in Sources */,
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DA674AD72B30AB0E00A397A1 /* Sources */ = {
+		DAF778562BB9023900C806A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA674AD82B30AB0E00A397A1 /* NoBounce.m in Sources */,
-				DA674AD92B30AB0E00A397A1 /* AppDelegate.swift in Sources */,
+				DAF7785F2BB9023900C806A0 /* ContentView.swift in Sources */,
+				DAF7785D2BB9023900C806A0 /* omni_methodApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,19 +315,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_MODULES_DISABLE_PRIVATE_WARNING = NO;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -388,10 +332,8 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -403,7 +345,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -431,19 +372,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_MODULES_DISABLE_PRIVATE_WARNING = NO;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -451,10 +389,8 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -466,7 +402,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -478,32 +413,23 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		504EC3171FED79650016851F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BC1991FE799E37D35FADF41C /* Pods-OmniMethodDev.debug.xcconfig */;
+			baseConfigurationReference = FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = DevIcon;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_MODULES_DISABLE_PRIVATE_WARNING = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WYA6YH9G64;
-				ENABLE_MODULE_VERIFIER = NO;
-				INFOPLIST_FILE = "App/AppDev-Info.plist";
+				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Omni Dev";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.shmorty.omni-method.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -511,8 +437,6 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "App/App-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -520,93 +444,106 @@
 		};
 		504EC3181FED79650016851F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D20B6E4BADFB682B965C7A31 /* Pods-OmniMethodDev.release.xcconfig */;
+			baseConfigurationReference = AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = DevIcon;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_MODULES_DISABLE_PRIVATE_WARNING = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WYA6YH9G64;
-				ENABLE_MODULE_VERIFIER = NO;
-				INFOPLIST_FILE = "App/AppDev-Info.plist";
+				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Omni Dev";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.shmorty.omni-method.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "App/App-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
-		DA674AE62B30AB0E00A397A1 /* Debug */ = {
+		DAF778662BB9023B00C806A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE908F741A3DB095B98BB230 /* Pods-OmniMethod.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = LightIcon;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CLANG_ENABLE_MODULES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 45BD78U9QZ;
-				INFOPLIST_FILE = App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Omni Method";
+				DEVELOPMENT_ASSET_PATHS = "\"omni-method/Preview Content\"";
+				DEVELOPMENT_TEAM = WYA6YH9G64;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Omni Dev";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.3.0;
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
-				PRODUCT_BUNDLE_IDENTIFIER = app.omnimethod;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shmorty.omni-method";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "App/App-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
-		DA674AE72B30AB0E00A397A1 /* Release */ = {
+		DAF778672BB9023B00C806A0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8D16546B500D6E8BAB3DDCAD /* Pods-OmniMethod.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = LightIcon;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CLANG_ENABLE_MODULES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 45BD78U9QZ;
-				INFOPLIST_FILE = App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Omni Method";
+				DEVELOPMENT_ASSET_PATHS = "\"omni-method/Preview Content\"";
+				DEVELOPMENT_TEAM = WYA6YH9G64;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Omni Dev";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.omnimethod;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shmorty.omni-method";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "App/App-Bridging-Header.h";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -615,7 +552,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		504EC2FF1FED79650016851F /* Build configuration list for PBXProject "OmniMethod" */ = {
+		504EC2FF1FED79650016851F /* Build configuration list for PBXProject "App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				504EC3141FED79650016851F /* Debug */,
@@ -624,7 +561,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		504EC3161FED79650016851F /* Build configuration list for PBXNativeTarget "OmniMethodDev" */ = {
+		504EC3161FED79650016851F /* Build configuration list for PBXNativeTarget "App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				504EC3171FED79650016851F /* Debug */,
@@ -633,11 +570,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA674AE52B30AB0E00A397A1 /* Build configuration list for PBXNativeTarget "OmniMethod" */ = {
+		DAF778652BB9023B00C806A0 /* Build configuration list for PBXNativeTarget "Omni Dev" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DA674AE62B30AB0E00A397A1 /* Debug */,
-				DA674AE72B30AB0E00A397A1 /* Release */,
+				DAF778662BB9023B00C806A0 /* Debug */,
+				DAF778672BB9023B00C806A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
