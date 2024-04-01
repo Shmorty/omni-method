@@ -36,36 +36,14 @@
       </ion-grid>
     </ion-item>
 
-    <ion-item lines="none" color="none">
-      <!-- <div slot="content" class="chart-container">
-        <canvas #MyChart>{{ chart }}</canvas>
-      </div> -->
-      <div style="text-align:center">
-        <apx-chart
-          [series]="chartOptions.series"
-          [chart]="chartOptions.chart"
-          [xaxis]="chartOptions.xaxis"
-          [yaxis]="chartOptions.yaxis"
-        ></apx-chart>
-          <!-- 
-          [xaxis]="chartOptions.xaxis"
-          [labels]="chartOptions.labels"
-          [title]="chartOptions.title"
-         -->
-        </div>
+    <ion-item [hidden]="!showChart" lines="none" color="none">
+      <app-category-chart [user]="user"></app-category-chart>
     </ion-item>
 
     <ion-item lines="none" color="none">
-      <ion-accordion-group #accordionGroup>
-        <ion-accordion value="moreProfile">
-          <div>chart</div>
-        </ion-accordion>
-      </ion-accordion-group>
-    </ion-item>
-    <ion-item lines="none" color="none">
       <ion-button
         class="more-button"
-        [ngClass]="moreOpen ? 'rotate-button' : ''"
+        [ngClass]="showChart ? 'rotate-button' : ''"
         (click)="toggleAccordion($event)"
         ><ion-icon name="chevron-down"></ion-icon
       ></ion-button>

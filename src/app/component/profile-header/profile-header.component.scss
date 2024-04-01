@@ -32,20 +32,12 @@ user-avatar {
     font-size: 2em;
     font-weight: bold;
     margin: auto;
+    white-space: nowrap;
 }
 .more-button {
     background-color: transparent;
     width: 100%;
 }
-    .rotate-button {
+.rotate-button {
     transform: rotate(180deg);
-}
-.chart-container {
-    width: 380px;
-    height: 600px;
-    margin: 0 auto;
-    // height: 64px;
-}
-.chart-labels {
-    fill: red !important;
 }
