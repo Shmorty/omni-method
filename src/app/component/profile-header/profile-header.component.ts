@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {IonAccordionGroup, IonicModule} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {User} from '../../store/user/user.model';
@@ -9,6 +9,10 @@ import {UserService} from 'src/app/services/user/user.service';
 import {Store} from '@ngrx/store';
 import {delay} from 'rxjs/operators';
 import {CategoryChartComponent} from '../category-chart/category-chart.component';
+// import Swiper from 'swiper';
+// import {register} from 'swiper/element/bundle';
+
+// register();
 
 @Component({
   selector: 'app-profile-header',
@@ -21,9 +25,11 @@ import {CategoryChartComponent} from '../category-chart/category-chart.component
     UserAvatarComponent,
     CategoryChartComponent
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ProfileHeaderComponent implements OnInit {
   @Input() background: any;
+  @ViewChild('swiper', {static: false}) swiper;
   public user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
   showChart: boolean = false;
 
@@ -38,9 +44,16 @@ export class ProfileHeaderComponent implements OnInit {
 
 
   ngAfterViewInit() {
-    console.log("set backgroune", this.background);
+    console.log("set background", this.background);
     console.log("element", this.element);
     this.renderer.setStyle(this.element.nativeElement, 'background', this.background);
+    console.log("ngAfterViewInit setTimeout");
+    setTimeout(() => {
+      console.log("timeout begin");
+      this.swiper?.nativeElement.initialize();
+      console.log("timeout done");
+    });
+    console.log("ngAfterViewInit done");
   }
 
   toggleAccordion(event) {

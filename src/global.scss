@@ -128,3 +128,14 @@ ion-picker-column {
 // .inline-picker {
 //   --height: 50%;
 // }
+.arrow_box {
+  color: var(--ion-color-primary);
+  // color: black;
+  // background: #def;
+  // color: rgba(var(--foreground-rgb, var(--ion-foreground-color-rgb, 255, 255, 255)), 0.5);
+  background-color: rgba(var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255)), 0.5);
+  font-size: large;
+  font-weight: bold;
+  padding: 0 6px;
+  // border: 2px solid rgba(var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255)), 0.5);
+}

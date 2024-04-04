@@ -1,5 +1,5 @@
 import {HttpClientModule} from '@angular/common/http';
-import {APP_INITIALIZER, isDevMode, NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, isDevMode, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {IonicModule} from '@ionic/angular';
 import {AppRoutingModule} from './app-routing.module';
@@ -90,38 +90,9 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
     provideStorage(() => getStorage()),
   ],
   providers: [
-    // ...environment.providers,
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: checkUserStatus,
-    //   deps: [AuthService],
-    //   multi: true,
-    // },
-    // {
-    //   provide: APP_INITIALIZER,
-    //   multi: true,
-    //   useFactory: (auth: AuthService) => {
-    //     return () => {
-    //       var user = from(auth.currentUser());
-    //       return user.pipe(take(1));
-    //     };
-    //   },
-    //   deps: [AuthService],
-    // },
-    // {
-    //   provide: APP_INITIALIZER,
-    //   multi: true,
-    //   useFactory: (userService: UserService, auth: AuthService) => {
-    //     return () => {
-    //       console.log('currUser.id: ' + auth.currUser.id);
-    //       return userService.getUser(auth.currUser.id);
-    //     };
-    //   },
-    //   deps: [UserService],
-    // },
     DatePipe,
-    // { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

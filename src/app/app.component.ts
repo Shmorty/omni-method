@@ -5,8 +5,11 @@ import {TextZoom} from '@capacitor/text-zoom';
 import {App} from '@capacitor/app';
 import {Network} from '@capacitor/network';
 import {PluginListenerHandle} from '@capacitor/core';
+import {register} from 'swiper/element/bundle';
 
 // import { GoogleSigninService } from './google-signin.service';
+
+register();
 
 @Component({
   selector: 'app-root',

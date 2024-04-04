@@ -14,6 +14,19 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+
+  <ion-item [hidden]="!showChart" lines="none" color="primary">
+    <app-category-chart [user]="athlete"></app-category-chart>
+  </ion-item>
+  <ion-item lines="none" color="primary">
+    <ion-button
+      class="more-button"
+      [ngClass]="showChart ? 'rotate-button' : ''"
+      (click)="toggleChart($event)"
+      ><ion-icon name="chevron-down"></ion-icon
+    ></ion-button>
+  </ion-item>
+
 </ion-header>
 
 <ion-content [fullscreen]="false" #scrollarea no-bounce  class="bg-transparent">

@@ -49,8 +49,8 @@ $row-height: 34px;
     z-index: -1;
 }
 .highlight-above {
-    // background: linear-gradient(to bottom, rgba(var(--ion-color-light-rgb), 0.95) 20%, rgba(var(--ion-color-light-rgb), 0.4) 100%);
     background: linear-gradient(to bottom, var(--ion-item-background, #fff) 20%, transparent 100%);
+    // background: linear-gradient(to bottom, #fff 20%, transparent 100%);
     border-radius: 8px 8px 0 0;
     inset-inline-start: 0px;
     top: 0px;
@@ -62,8 +62,8 @@ $row-height: 34px;
     z-index: 1;
 }
 .highlight-below {
-    // background: linear-gradient(to top, rgba(var(--ion-color-light-rgb), 0.95) 20%, rgba(var(--ion-color-light-rgb), 0.4) 100%);
     background: linear-gradient(to top, var(--ion-item-background, #fff) 20%, transparent 100%);
+    // background: linear-gradient(to top, #fff 20%, transparent 100%);
     border-radius: 0 0 8px 8px;
     inset-inline-start: 0px;
     top: ($row-height * 3);

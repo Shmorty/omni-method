@@ -21,6 +21,7 @@ export class RankingDetailPage implements OnInit {
   public assessments$ = this.assessmentService.getAllAssessments();
   public scores$: Observable<Score[]>;
   public userScores: Score[];
+  public showChart: boolean = false;
 
   constructor(
     private assessmentService: AssessmentService,
@@ -65,4 +66,9 @@ export class RankingDetailPage implements OnInit {
   dismiss() {
     this.modalCtrl.dismiss();
   }
+
+  toggleChart(event) {
+    this.showChart = !this.showChart;
+  }
+
 }

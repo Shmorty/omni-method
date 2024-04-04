@@ -54,3 +54,10 @@ ion-badge {
 .bottom-padding {
     min-height: 3%;
 }
+.more-button {
+    background-color: transparent;
+    width: 100%;
+}
+.rotate-button {
+    transform: rotate(180deg);
+}
