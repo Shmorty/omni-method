@@ -36,16 +36,17 @@
       </ion-grid>
     </ion-item>
 
-    <!-- <ion-item color="primary">
-      <swiper-content #swiper [loop]="true" [pagination]="true">
-        <swiper-slide>Slide 1</swiper-slide>
-        <swiper-slide>Slide 2</swiper-slide>
-        <swiper-slide>Slide 3</swiper-slide>
-      </swiper-content>
-    </ion-item> -->
-
     <ion-item [hidden]="!showChart" lines="none" color="none">
-      <app-category-chart [user]="user"></app-category-chart>
+      <!-- <app-category-chart [user]="user"></app-category-chart> -->
+      <swiper-container #swiper class="chart-swiper"
+        [config]="chartSlidesOptions">
+        <swiper-slide class="chart-slide">
+          <app-category-chart [user]="user"></app-category-chart>
+        </swiper-slide>
+        <swiper-slide class="chart-slide">
+          <app-assessment-chart [user]="user"></app-assessment-chart>
+        </swiper-slide>
+      </swiper-container>
     </ion-item>
 
     <ion-item lines="none" color="none">

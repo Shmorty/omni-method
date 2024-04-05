@@ -9,10 +9,8 @@ import {UserService} from 'src/app/services/user/user.service';
 import {Store} from '@ngrx/store';
 import {delay} from 'rxjs/operators';
 import {CategoryChartComponent} from '../category-chart/category-chart.component';
-// import Swiper from 'swiper';
-// import {register} from 'swiper/element/bundle';
-
-// register();
+import {AssessmentChartComponent} from '../assessment-chart/assessment-chart.component';
+import {SwiperOptions} from 'swiper/types';
 
 @Component({
   selector: 'app-profile-header',
@@ -23,7 +21,8 @@ import {CategoryChartComponent} from '../category-chart/category-chart.component
     CommonModule,
     IonicModule,
     UserAvatarComponent,
-    CategoryChartComponent
+    CategoryChartComponent,
+    AssessmentChartComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -32,6 +31,13 @@ export class ProfileHeaderComponent implements OnInit {
   @ViewChild('swiper', {static: false}) swiper;
   public user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
   showChart: boolean = false;
+  public chartSlidesOptions: SwiperOptions = {
+    slidesPerView: 1.2,
+    navigation: true,
+    slidesOffsetBefore: 5,
+    spaceBetween: 10,
+    slidesOffsetAfter: 5,
+  };
 
   constructor(
     private store: Store,

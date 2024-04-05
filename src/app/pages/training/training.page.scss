@@ -23,4 +23,12 @@ ion-button {
   --background: linear-gradient(#b8ffdd, #5eddf9);
   --background-activated: #5eddf9;
 }
-
+.training-swiper, .swiper-wrapper {
+  text-align: center;
+  // width: 100%;
+}
+.training-slide, .swiper-slide {
+  display: flex;
+  flex-direction: column;
+  // width: 100%;
+}

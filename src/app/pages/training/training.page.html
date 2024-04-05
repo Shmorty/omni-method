@@ -8,9 +8,15 @@
   </ion-header> -->
   <!-- <ion-searchbar></ion-searchbar> -->
   <ng-container>
-    <ion-button *ngFor="let button of buttonList" [ngClass]="button.class" expand="full" shape="round"
-      (click)="commingSoon(button.label)">
-      <ion-label>{{button.label}}</ion-label>
-    </ion-button>
+
+    <swiper-container #trainingSwiper class="training-swiper"
+      [config]="trainingSlidesOptions">
+      <swiper-slide *ngFor="let button of buttonList" class="training-slide">
+        <ion-button [ngClass]="button.class" expand="full" shape="round"
+          (click)="commingSoon(button.label)">
+          <ion-label>{{button.label}}</ion-label>
+        </ion-button>
+      </swiper-slide>
+    </swiper-container>
   </ng-container>
 </ion-content>

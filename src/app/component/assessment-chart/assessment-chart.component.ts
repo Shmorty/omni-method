@@ -1,10 +1,10 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexFill, ApexMarkers, ApexOptions, ApexPlotOptions, ApexTheme, ApexTooltip, ApexXAxis, ApexYAxis, NgApexchartsModule} from 'ng-apexcharts';
+import {ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexFill, ApexMarkers, ApexPlotOptions, ApexTheme, ApexTooltip, ApexXAxis, ApexYAxis, NgApexchartsModule} from 'ng-apexcharts';
 import {User} from '../../store/user/user.model';
-import {UserService} from 'src/app/services/user/user.service';
-import {Observable, Subscription} from 'rxjs';
+import {UserService} from '../../services/user/user.service';
+import {Observable, Subscription, take} from 'rxjs';
 import {OmniScoreService} from 'src/app/services/omni-score.service';
-import {Category} from '../../store/assessments/assessment.model';
+import {Assessment, Category} from '../../store/assessments/assessment.model';
 import {UserFirestoreService} from 'src/app/services/user-firestore.service';
 
 export type ChartOptions = {
@@ -23,16 +23,17 @@ export type ChartOptions = {
 
 @Component({
   standalone: true,
-  selector: 'app-category-chart',
-  templateUrl: './category-chart.component.html',
-  styleUrls: ['./category-chart.component.scss'],
+  selector: 'app-assessment-chart',
+  templateUrl: './assessment-chart.component.html',
+  styleUrls: ['./assessment-chart.component.scss'],
   imports: [NgApexchartsModule],
 })
-export class CategoryChartComponent implements OnInit, OnDestroy {
+export class AssessmentChartComponent implements OnInit, OnDestroy {
   @Input() user: User;
   private user$: Observable<User>;
   public chartOptions: Partial<ChartOptions>;
   private categories: Category[];
+  private assessments: Assessment[];
   private catSubscription: Subscription;
 
   constructor(
@@ -41,6 +42,9 @@ export class CategoryChartComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.omniScoreService.assessments$.subscribe((assessments) => {
+      this.assessments = assessments;
+    });
     this.catSubscription = this.omniScoreService.categories$.subscribe((categories) => {
       this.categories = categories;
     });
@@ -107,9 +111,8 @@ export class CategoryChartComponent implements OnInit, OnDestroy {
       },
       series: [
         {
-          name: "Categories",
-          // data: Object.values(this.user.categoryScore)
-          data: this.categoryValues(this.user.categoryScore),
+          name: "Assessment Scores",
+          data: this.assessmentValues(this.user),
           // color: '#35b5ff',
         }
       ],
@@ -136,11 +139,12 @@ export class CategoryChartComponent implements OnInit, OnDestroy {
       },
       xaxis: {
         type: 'category',
-        categories: this.categoryLabels(this.user.categoryScore),
+        categories: this.assessmentLabels(),
         labels: {
           show: false,
           style: {
-            colors: Array(this.categories.length).fill('white'),
+            // colors: Array(this.categories.length).fill('white'),
+            colors: Array(this.assessments.length).fill('white'),
             fontSize: '12px'
           }
         }
@@ -163,6 +167,27 @@ export class CategoryChartComponent implements OnInit, OnDestroy {
     if (this.catSubscription) {
       this.catSubscription.unsubscribe();
     }
+  }
+  assessmentValues(user: User) {
+    const scores: number[] = [];
+    this.assessments.forEach((element) => {
+      console.log("assessment", element);
+      this.userService.getCurrentScoreForAssessment(element.aid)
+        .pipe(take(1)).subscribe((val) => {
+          console.log("score", val);
+          scores.push(val?.calculatedScore | 0);
+        });
+    });
+    console.log("return assessment scores", scores);
+    return scores;
+  }
+
+  assessmentLabels(): string[] {
+    const labels: string[] = [];
+    this.assessments.forEach(element => {
+      labels.push(element.label);
+    });
+    return labels;
   }
 
   categoryValues(categoryScore: Object): number[] {
