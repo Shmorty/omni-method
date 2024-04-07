@@ -1,6 +1,6 @@
 import {createSelector} from "@ngrx/store";
 import {AppState} from "../app.state";
-import {CommunityState} from "./community.reducer";
+import {CommunityState, communityReducer} from "./community.reducer";
 import {User} from "../user/user.model";
 
 export const selectCommunityState = (state: AppState) => state.communityState;
@@ -16,3 +16,12 @@ export const selectUser = (uid: string) => createSelector(
         users.filter((u) => u.id === uid)
 );
 
+export const getSelectedUser = createSelector(
+    selectCommunityState,
+    (communityState: CommunityState) => communityState.selectedUser
+);
+
+export const getIsLoading = createSelector(
+    selectCommunityState,
+    (communityState: CommunityState) => communityState.loading
+);

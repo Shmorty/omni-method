@@ -7,7 +7,8 @@ import {IonicModule} from '@ionic/angular';
 import {RankingDetailPageRoutingModule} from './ranking-detail-routing.module';
 
 import {RankingDetailPage} from './ranking-detail.page';
-import {CategoryChartComponent} from '../../component/category-chart/category-chart.component';
+// import {CategoryChartComponent} from '../../component/category-chart/category-chart.component';
+import {ProfileHeaderComponent} from '../../component/profile-header/profile-header.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import {CategoryChartComponent} from '../../component/category-chart/category-ch
     FormsModule,
     IonicModule,
     RankingDetailPageRoutingModule,
-    CategoryChartComponent
+    // CategoryChartComponent,
+    ProfileHeaderComponent
   ],
   declarations: [RankingDetailPage]
 })

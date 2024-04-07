@@ -1,26 +1,37 @@
-<ion-header>
-  <ion-toolbar color="primary" style="--border-width:0;">
-    <ion-list style="background-color: transparent;">
+<!-- <ion-header> -->
+  <ion-header class="ion-no-border safe-area"> </ion-header>
+
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-button
+      (click)="goBack()"
+      type="button"
+      size="default"
+      shape="circle"
+      color="primary"
+    >
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+  </ion-fab>
+
+  <!-- <ion-toolbar color="primary" style="--border-width:0;"> -->
+    <!-- <ion-list style="background-color: transparent;">
       <ion-item class="name" lines="none" color="none">
         {{title}}
       </ion-item>
       <ion-item lines="none" color="none">
         <ion-text>Omni Score&nbsp;{{athlete.omniScore | number}}</ion-text>
       </ion-item>
-    </ion-list>
-    <ion-buttons slot="end">
+    </ion-list> -->
+    <!-- <ion-buttons slot="end">
       <ion-button (click)="dismiss()">
         <ion-icon name="close-circle-outline" size="large"></ion-icon>
       </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    </ion-buttons> -->
+  <!-- </ion-toolbar> -->
 
-  <ion-item *ngIf="showChart" lines="none" color="primary">
+  <!-- <ion-item *ngIf="showChart" lines="none" color="primary">
     <app-category-chart [user]="athlete"></app-category-chart>
   </ion-item>
-  <!-- <ion-item [hidden]="!showChart" lines="none" color="primary">
-    <app-category-chart [user]="athlete"></app-category-chart>
-  </ion-item> -->
   <ion-item lines="none" color="primary">
     <ion-button
       class="more-button"
@@ -29,42 +40,29 @@
       (click)="toggleChart($event)"
       ><ion-icon name="chevron-down"></ion-icon
     ></ion-button>
-  </ion-item>
+  </ion-item> -->
 
-</ion-header>
+<!-- </ion-header> -->
 
 <ion-content [fullscreen]="false" #scrollarea no-bounce  class="bg-transparent">
-  <!-- <ion-header>
-    <ion-toolbar color="default">
-      <ion-list>
-        <ion-item lines="none" color="none">{{title}}</ion-item>
-        <ion-item id="omniScore" lines="none" color="none">
-          <span>
-            <ion-label class="omni-label">Omni Score</ion-label>
-            <ion-label class="omni-score">{{athlete.omniScore}}</ion-label>
-          </span>
-        </ion-item>
-      </ion-list>
-      <ion-buttons slot="end">
-        <ion-button (click)="dismiss()">
-          <ion-icon name="close-circle-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header> -->
-  <ion-card class="bg-transparent" style="box-shadow: none; margin-bottom: 0">
-    <ion-item lines="none">
-      <ion-card-title>All Assessments</ion-card-title>
-    </ion-item>
+  <ng-container *ngIf="{
+    athlete: athlete$ | async,
+    categories: categories$ | async,
+    assessments: assessments$ | async,
+  } as data; else loading">
 
-    <ng-container *ngIf="{
-      categories: categories$ | async,
-      assessments: assessments$ | async
-    } as data; else loading">
+    <app-profile-header [athlete$]="athlete$"></app-profile-header>
+
+    <ion-card class="bg-transparent" style="box-shadow: none; margin-bottom: 0">
+      <ion-item lines="none">
+        <ion-card-title>All Assessments</ion-card-title>
+      </ion-item>
+
       <ng-container *ngFor="let category of data.categories">
         <ion-item class="cat-header" lines="none">
           <ion-text>
-            {{category.label}}: {{getCategoryScore(category.cid)}}
+            <!-- {{category.label}}: {{getCategoryScore(category.cid)}} -->
+            {{category.label}}: {{data.athlete?.categoryScore[category.cid]}}
           </ion-text>
         </ion-item>
         <ng-container *ngFor="let assessment of getCategoryAssessments(data.assessments, category.cid)">
@@ -88,19 +86,15 @@
                 >
               </ng-container>
               <ng-template #zeroScore>
-                <ion-badge
-                  class="score"
-                  slot="end"
-                  >0</ion-badge
-                >
+                <ion-badge class="score" slot="end">0</ion-badge>
               </ng-template>
-              </div>
+            </div>
           </ion-item>
         </ng-container>
       </ng-container>
-    </ng-container>
-    <ng-template #loading>Loading...</ng-template>
 
-  </ion-card>
+    </ion-card>
+  </ng-container>
+  <ng-template #loading>Loading...</ng-template>
   <div class="bottom-padding"></div>
 </ion-content>

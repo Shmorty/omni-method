@@ -23,7 +23,8 @@
       <!-- <ion-icon name="settings"></ion-icon> -->
     </ion-button>
   </ion-fab>
-  <app-profile-header></app-profile-header>
+
+  <app-profile-header [athlete$]="user$"></app-profile-header>
   <ion-card class="contentCard">
     <ion-item lines="none">
       <ion-card-title>All Assessments</ion-card-title>

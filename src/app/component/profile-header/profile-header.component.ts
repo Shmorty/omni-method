@@ -1,7 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {IonAccordionGroup, IonicModule} from '@ionic/angular';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {User} from '../../store/user/user.model';
 import {UserAvatarComponent} from '../user-avatar/user-avatar.component';
 import * as UserSelectors from 'src/app/store/user/user.selectors';
@@ -29,7 +29,8 @@ import {SwiperOptions} from 'swiper/types';
 export class ProfileHeaderComponent implements OnInit {
   @Input() background: any;
   @ViewChild('swiper', {static: false}) swiper;
-  public user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
+  @Input() athlete$: Observable<User>;
+  public user$: Observable<User>;
   showChart = false;
 
   public chartSlidesOptions: SwiperOptions = {
@@ -47,7 +48,14 @@ export class ProfileHeaderComponent implements OnInit {
     public renderer: Renderer2
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // if (this.athlete) {
+    //   this.user$ = of(this.athlete);
+    // } else {
+    //   this.user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
+    // }
+    this.user$ = this.athlete$;
+  }
 
 
   ngAfterViewInit() {

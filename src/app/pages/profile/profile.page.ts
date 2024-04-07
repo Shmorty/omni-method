@@ -93,7 +93,8 @@ export class ProfilePage implements OnInit, OnDestroy {
   }
 
   openDetails(assessment) {
-    this.router.navigate(['/home', 'profile', 'details'], {
+    // this.router.navigate(['/home', 'profile', 'details'], {
+    this.router.navigate(['/home/profile/details'], {
       queryParams: {aid: assessment.aid, cid: assessment.cid},
     });
   }

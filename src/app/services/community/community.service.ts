@@ -5,7 +5,7 @@ import {UserFirestoreService} from '../user-firestore.service';
 import {Observable, map} from 'rxjs';
 import {User} from '../../store/user/user.model';
 import * as CommunityActions from '../../store/community/community.actions';
-import {selectAllUsers} from 'src/app/store/community/community.selectors';
+import {selectAllUsers, getSelectedUser, getIsLoading} from '../../store/community/community.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,18 @@ export class CommunityService {
     }
     return this.store.select(selectAllUsers)
       .pipe(map((data) => [...data].sort(sortFn)));
+  }
+
+  loadSelectedUser(uid: string) {
+    this.store.dispatch(CommunityActions.loadSelectedUser({uid}));
+  }
+
+  getSelectedUser() {
+    return this.store.select(getSelectedUser);
+  }
+
+  isLoading() {
+    return this.store.select(getIsLoading)
   }
 
 }

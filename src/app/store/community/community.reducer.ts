@@ -6,12 +6,16 @@ export interface CommunityState {
     users: User[];
     loading: boolean;
     error: string;
+    selectedUID: string,
+    selectedUser: User;
 }
 
 const initialState: CommunityState = {
     users: [],
     loading: false,
     error: '',
+    selectedUID: '',
+    selectedUser: undefined,
 }
 
 export const communityReducer = createReducer(
@@ -29,5 +33,21 @@ export const communityReducer = createReducer(
         ...state,
         loading: false,
         error: action.error,
-    }))
+    })),
+    on(CommunityActions.loadSelectedUser, (state, action) => ({
+        ...state,
+        loading: true,
+        selectedUID: action.uid,
+        selectedUser: undefined,
+    })),
+    on(CommunityActions.loadSelectedUserSuccess, (state, action) => ({
+        ...state,
+        loading: false,
+        selectedUser: action.user,
+    })),
+    on(CommunityActions.loadSelectedUserFailure, (state, action) => ({
+        ...state,
+        loading: false,
+        error: action.error
+    })),
 );
