@@ -49,6 +49,14 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
       this.categories = categories;
     });
 
+    const chartFillColors = [
+      '--ion-color-primary-tint',
+      '--ion-color-primary',
+    ].map(val =>
+      getComputedStyle(document.documentElement).getPropertyValue(val)
+    );
+    // console.log("chartFillColors", chartFillColors);
+
     // need to subscribe to current user to set these values dynamically
     let stepSize = 100;
     const maxScore: number = Object.values(this.user.categoryScore).reduce((a, b) => Math.max(a, b));
@@ -104,7 +112,7 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
             strokeColors: '#fff',
             strokeWidth: '1px',
             fill: {
-              colors: ['#daefff', '#b8dfff']
+              colors: chartFillColors
             }
           }
         }
@@ -168,26 +176,23 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
       this.catSubscription.unsubscribe();
     }
   }
+
   assessmentValues(user: User) {
     const scores: number[] = [];
     this.assessments.forEach((element) => {
-      console.log("assessment", element);
+      // console.log("assessment", element);
       this.userService.getCurrentScoreForAssessment(element.aid)
         .pipe(take(1)).subscribe((val) => {
           console.log("score", val);
           scores.push(val?.calculatedScore | 0);
         });
     });
-    console.log("return assessment scores", scores);
+    console.log("assessmentValues", scores);
     return scores;
   }
 
   assessmentLabels(): string[] {
-    const labels: string[] = [];
-    this.assessments.forEach(element => {
-      labels.push(element.label);
-    });
-    return labels;
+    return this.assessments.map((a) => a.label);
   }
 
   categoryValues(categoryScore: Object): number[] {

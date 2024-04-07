@@ -48,14 +48,6 @@ export class UserService implements IUserService {
     });
   }
 
-  getUserRankings(): Observable<User[]> {
-    // get from firestore
-    const sortFn = (a, b) => {
-      return (a.omniScore < b.omniScore) ? 1 : (a.omniScore > b.omniScore) ? -1 : 0;
-    }
-    return this.firestoreService.getAllUsers().pipe(map((data) => data.sort(sortFn)));
-  }
-
   isUsernameAvailable(username: string) {
     console.log("is username available ", username);
     return this.firestoreService.checkUsername(username);

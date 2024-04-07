@@ -30,7 +30,8 @@ export class ProfileHeaderComponent implements OnInit {
   @Input() background: any;
   @ViewChild('swiper', {static: false}) swiper;
   public user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
-  showChart: boolean = false;
+  showChart = false;
+
   public chartSlidesOptions: SwiperOptions = {
     slidesPerView: 1.2,
     navigation: true,

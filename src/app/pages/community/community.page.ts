@@ -7,6 +7,7 @@ import {RankingDetailPage} from '../ranking-detail/ranking-detail.page';
 import {Observable} from 'rxjs';
 import {StatusBar, Style} from '@capacitor/status-bar';
 import {Capacitor} from '@capacitor/core';
+import {CommunityService} from 'src/app/services/community/community.service';
 
 export enum View {
   Rankings = 'Rankings',
@@ -29,15 +30,22 @@ export class CommunityPage implements OnInit {
   name: string;
   message: string;
 
-  constructor(private userService: UserService,
-    private modalCtrl: ModalController) {
+  constructor(
+    private userService: UserService,
+    private communityService: CommunityService,
+    private modalCtrl: ModalController
+  ) {
     this.userService.getUser().subscribe((usr) => {
       this.curUserId = usr.id;
-      this.ranking$ = this.userService.getUserRankings();
+      // loadAllUsers
+      communityService.loadAllUsers();
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // getAllUsersByScore
+    this.ranking$ = this.communityService.getAllUsersByScore();
+  }
 
   ionViewWillEnter() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');

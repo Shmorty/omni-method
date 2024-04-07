@@ -37,8 +37,9 @@
     </ion-item>
 
     <ion-item [hidden]="!showChart" lines="none" color="none">
-      <!-- <app-category-chart [user]="user"></app-category-chart> -->
-      <swiper-container #swiper class="chart-swiper"
+      <app-category-chart [user]="user"></app-category-chart>
+      <!-- <app-assessment-chart [user]="user"></app-assessment-chart> -->
+      <!-- <swiper-container #swiper class="chart-swiper"
         [config]="chartSlidesOptions">
         <swiper-slide class="chart-slide">
           <app-category-chart [user]="user"></app-category-chart>
@@ -46,12 +47,13 @@
         <swiper-slide class="chart-slide">
           <app-assessment-chart [user]="user"></app-assessment-chart>
         </swiper-slide>
-      </swiper-container>
+      </swiper-container> -->
     </ion-item>
 
     <ion-item lines="none" color="none">
       <ion-button
         class="more-button"
+        color="none"
         [ngClass]="showChart ? 'rotate-button' : ''"
         (click)="toggleAccordion($event)"
         ><ion-icon name="chevron-down"></ion-icon

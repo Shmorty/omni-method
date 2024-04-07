@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="primary" style="--border-width:0;">
     <ion-list style="background-color: transparent;">
       <ion-item class="name" lines="none" color="none">
         {{title}}
@@ -15,12 +15,16 @@
     </ion-buttons>
   </ion-toolbar>
 
-  <ion-item [hidden]="!showChart" lines="none" color="primary">
+  <ion-item *ngIf="showChart" lines="none" color="primary">
     <app-category-chart [user]="athlete"></app-category-chart>
   </ion-item>
+  <!-- <ion-item [hidden]="!showChart" lines="none" color="primary">
+    <app-category-chart [user]="athlete"></app-category-chart>
+  </ion-item> -->
   <ion-item lines="none" color="primary">
     <ion-button
       class="more-button"
+      color="none"
       [ngClass]="showChart ? 'rotate-button' : ''"
       (click)="toggleChart($event)"
       ><ion-icon name="chevron-down"></ion-icon

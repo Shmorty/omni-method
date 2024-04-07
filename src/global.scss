@@ -44,10 +44,16 @@
   src: url(assets/fonts/Overpass/Overpass-Regular.ttf);
 }
 
+// Cascadia Code
+@font-face {
+  font-family: CascadiaCode;
+  src: url(assets/fonts/CascadiaCode/ttf/CascadiaCode.ttf);
+}
+
 * {
   // font-family: Roboto, "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
   //   sans-serif;
-  font-family: "Overpass", sans-serif;
+  font-family: "CascadiaCode", "Overpass", sans-serif;
 }
 
 // .new-score-modal {

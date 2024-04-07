@@ -26,6 +26,7 @@ import {provideFirestore, getFirestore} from '@angular/fire/firestore';
 import {Capacitor} from '@capacitor/core';
 import {UserActionType} from './store/user/user.actions';
 import {NgApexchartsModule} from 'ng-apexcharts';
+import {CommunityEffects} from './store/community/community.effect';
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -65,7 +66,7 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
     IonicModule.forRoot(),
     NgApexchartsModule,
     StoreModule.forRoot(reducers, {metaReducers}),
-    EffectsModule.forRoot([AssessmentEffects, UserEffects, OmniScoreEffects]),
+    EffectsModule.forRoot([AssessmentEffects, UserEffects, OmniScoreEffects, CommunityEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode

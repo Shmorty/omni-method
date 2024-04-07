@@ -21,7 +21,7 @@ export class RankingDetailPage implements OnInit {
   public assessments$ = this.assessmentService.getAllAssessments();
   public scores$: Observable<Score[]>;
   public userScores: Score[];
-  public showChart: boolean = false;
+  showChart = false;
 
   constructor(
     private assessmentService: AssessmentService,

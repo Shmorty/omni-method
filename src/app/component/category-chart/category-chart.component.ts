@@ -41,6 +41,13 @@ export class CategoryChartComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    const chartFillColors = [
+      '--ion-color-primary-tint',
+      '--ion-color-primary',
+    ].map(val =>
+      getComputedStyle(document.documentElement).getPropertyValue(val)
+    );
+    // console.log("chartFillColors", chartFillColors);
     this.catSubscription = this.omniScoreService.categories$.subscribe((categories) => {
       this.categories = categories;
     });
@@ -100,7 +107,8 @@ export class CategoryChartComponent implements OnInit, OnDestroy {
             strokeColors: '#fff',
             strokeWidth: '1px',
             fill: {
-              colors: ['#daefff', '#b8dfff']
+              // colors: ['#daefff', '#b8dfff'],
+              colors: chartFillColors,
             }
           }
         }
