@@ -12,7 +12,7 @@ import {
   provideAuth,
   getAuth,
   initializeAuth,
-  // indexedDBLocalPersistence,
+  indexedDBLocalPersistence,
 } from '@angular/fire/auth';
 import {getStorage, provideStorage} from '@angular/fire/storage';
 import {ActionReducer, MetaReducer, StoreModule} from '@ngrx/store';
@@ -81,7 +81,7 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
       if (Capacitor.isNativePlatform()) {
         console.log('isNativePlatform');
         return initializeAuth(getApp(), {
-          // persistence: indexedDBLocalPersistence,
+          persistence: indexedDBLocalPersistence,
         });
       } else {
         console.log('not nativPlatform');

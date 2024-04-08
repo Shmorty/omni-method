@@ -1,5 +1,7 @@
-<!-- <ion-header> -->
-  <ion-header class="ion-no-border safe-area"> </ion-header>
+<ion-content [fullscreen]="true" #scrollarea no-bounce  class="bg-transparent">
+  <!-- <ion-header> -->
+  <div class="safe-area"></div>
+  <!-- <ion-header class="ion-no-border safe-area"> </ion-header> -->
 
   <ion-fab vertical="top" horizontal="start" slot="fixed">
     <ion-button
@@ -44,7 +46,6 @@
 
 <!-- </ion-header> -->
 
-<ion-content [fullscreen]="false" #scrollarea no-bounce  class="bg-transparent">
   <ng-container *ngIf="{
     athlete: athlete$ | async,
     categories: categories$ | async,

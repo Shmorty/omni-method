@@ -8,6 +8,10 @@ ion-thumbnail[slot="start"] {
 ion-header ion-toolbar ion-list ion-item {
     text-align: center;
 }
+.safe-area {
+    background-color: #b8dfff;
+    height: var(--ion-safe-area-top, 0);
+}  
 .bg-transparent {
   --ion-item-background: transparent;
 }
