@@ -11,7 +11,14 @@ ion-header ion-toolbar ion-list ion-item {
 .safe-area {
     background-color: #b8dfff;
     height: var(--ion-safe-area-top, 0);
-}  
+}
+ion-refresher {
+    background-color: #b8dfff;
+    height: 100%;
+}
+ion-refresher-content {
+    height: 60px;
+}
 .bg-transparent {
   --ion-item-background: transparent;
 }

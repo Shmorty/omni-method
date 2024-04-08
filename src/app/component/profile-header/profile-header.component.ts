@@ -11,6 +11,7 @@ import {delay} from 'rxjs/operators';
 import {CategoryChartComponent} from '../category-chart/category-chart.component';
 import {AssessmentChartComponent} from '../assessment-chart/assessment-chart.component';
 import {SwiperOptions} from 'swiper/types';
+import {Score} from 'src/app/store/models/score.model';
 
 @Component({
   selector: 'app-profile-header',
@@ -30,6 +31,7 @@ export class ProfileHeaderComponent implements OnInit {
   @Input() background: any;
   @ViewChild('swiper', {static: false}) swiper;
   @Input() athlete$: Observable<User>;
+  @Input() scores$: Observable<Score[]>;
   public user$: Observable<User>;
   showChart = false;
 
@@ -55,6 +57,7 @@ export class ProfileHeaderComponent implements OnInit {
     //   this.user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
     // }
     this.user$ = this.athlete$;
+    console.log("profile header ngOnInit scores$", this.scores$);
   }
 
 

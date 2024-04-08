@@ -2,10 +2,13 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexFill, ApexMarkers, ApexPlotOptions, ApexTheme, ApexTooltip, ApexXAxis, ApexYAxis, NgApexchartsModule} from 'ng-apexcharts';
 import {User} from '../../store/user/user.model';
 import {UserService} from '../../services/user/user.service';
-import {Observable, Subscription, take} from 'rxjs';
+import {Observable, Subscription, skip, take, tap} from 'rxjs';
 import {OmniScoreService} from 'src/app/services/omni-score.service';
 import {Assessment, Category} from '../../store/assessments/assessment.model';
 import {UserFirestoreService} from 'src/app/services/user-firestore.service';
+import {Score} from '../../store/models/score.model';
+import {CommonModule} from '@angular/common';
+import {IonicModule} from '@ionic/angular';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -26,36 +29,44 @@ export type ChartOptions = {
   selector: 'app-assessment-chart',
   templateUrl: './assessment-chart.component.html',
   styleUrls: ['./assessment-chart.component.scss'],
-  imports: [NgApexchartsModule],
+  imports: [
+    CommonModule,
+    IonicModule,
+    NgApexchartsModule
+  ],
 })
 export class AssessmentChartComponent implements OnInit, OnDestroy {
   @Input() user: User;
+  // @Input() scores: Score[];
+  @Input() scores$: Observable<Score[]>;
   private user$: Observable<User>;
-  public chartOptions: Partial<ChartOptions>;
+  public chartOptions: Partial<ChartOptions> = undefined;
   private categories: Category[];
   private assessments: Assessment[];
   private catSubscription: Subscription;
+  private assessmentScores: number[] = [];
 
   constructor(
-    private userService: UserService,
     private omniScoreService: OmniScoreService
   ) {}
 
   ngOnInit() {
-    this.omniScoreService.assessments$.subscribe((assessments) => {
-      this.assessments = assessments;
-    });
+    // console.log("ngOnInit scores", this.scores);
     this.catSubscription = this.omniScoreService.categories$.subscribe((categories) => {
       this.categories = categories;
     });
-
+    this.omniScoreService.assessments$.subscribe((assessments) => {
+      this.assessments = assessments;
+    });
+    this.setAssessmentValues();
+  }
+  setChartOptions() {
     const chartFillColors = [
       '--ion-color-primary-tint',
       '--ion-color-primary',
     ].map(val =>
       getComputedStyle(document.documentElement).getPropertyValue(val)
     );
-    // console.log("chartFillColors", chartFillColors);
 
     // need to subscribe to current user to set these values dynamically
     let stepSize = 100;
@@ -78,7 +89,9 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
         },
       },
       dataLabels: {
-        enabled: true,
+        enabled: false,
+        offsetX: 0,
+        offsetY: 0,
         style: {
           // fontSize: '12px',
           fontSize: 'inherit',
@@ -99,7 +112,7 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
         opacity: 0.5,
       },
       markers: {
-        size: 16,
+        size: 0,
         shape: 'rect',
         radius: 6,
       },
@@ -107,12 +120,13 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
         radar: {
           size: 128,
           offsetX: -72,
-          offsetY: 6,
+          offsetY: 5,
           polygons: {
-            strokeColors: '#fff',
-            strokeWidth: '1px',
+            // strokeColors: '#fff',
+            // strokeWidth: '1px',
             fill: {
-              colors: chartFillColors
+              colors: ['#daefff', '#b8dfff'],
+              // colors: chartFillColors
             }
           }
         }
@@ -120,13 +134,18 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
       series: [
         {
           name: "Assessment Scores",
-          data: this.assessmentValues(this.user),
+          data: this.assessmentScores,
           // color: '#35b5ff',
         }
       ],
       theme: {
         mode: 'light',
-        palette: 'palette1',
+        // palette: 'palette1',
+        monochrome: {
+          enabled: true,
+          color: '#5eb3f9',
+          shadeIntensity: 0,
+        }
       },
       tooltip: {
         custom: function ({series, seriesIndex, dataPointIndex, w}) {
@@ -149,7 +168,8 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
         type: 'category',
         categories: this.assessmentLabels(),
         labels: {
-          show: false,
+          show: true,
+          offsetY: 5,
           style: {
             // colors: Array(this.categories.length).fill('white'),
             colors: Array(this.assessments.length).fill('white'),
@@ -168,7 +188,7 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
         // }
       },
     };
-    // });
+
   }
 
   ngOnDestroy(): void {
@@ -177,18 +197,22 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
     }
   }
 
-  assessmentValues(user: User) {
-    const scores: number[] = [];
-    this.assessments.forEach((element) => {
-      // console.log("assessment", element);
-      this.userService.getCurrentScoreForAssessment(element.aid)
-        .pipe(take(1)).subscribe((val) => {
-          console.log("score", val);
-          scores.push(val?.calculatedScore | 0);
+  async setAssessmentValues() {
+    // let userScores: Score[] = [];
+    await this.scores$.subscribe((scoreArr) => {
+      console.log("assessment-chart scoreArr", scoreArr);
+      if (scoreArr.length > 0) {
+        this.assessmentScores = [];
+        this.assessments.forEach((assessment) => {
+          // console.log("assessment", element);
+          this.assessmentScores.push(scoreArr.filter((s) => s.aid === assessment.aid)?.sort(function (a, b) {
+            return (Date.parse(b?.scoreDate) - Date.parse(a?.scoreDate));
+          }).shift()?.calculatedScore | 0);
         });
+        console.log("assessment-chart assessmentScores", this.assessmentScores);
+        this.setChartOptions();
+      }
     });
-    console.log("assessmentValues", scores);
-    return scores;
   }
 
   assessmentLabels(): string[] {

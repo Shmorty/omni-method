@@ -1,9 +1,9 @@
 <ion-content [fullscreen]="true" #scrollarea no-bounce class="ion-content-scroll-host">
   <div class="safe-area"></div>
-  <!-- <ion-refresher slot="fixed" pullMin="999999">
+  <ion-refresher slot="fixed" pullMin="999999">
     <ion-refresher-content pullingIcon="none" refreshingSpinner="none">
   </ion-refresher-content>
-  </ion-refresher> -->
+  </ion-refresher>
 
   <ion-fab vertical="top" horizontal="start" slot="fixed">
     <ion-button
@@ -17,7 +17,8 @@
     </ion-button>
   </ion-fab>
 
-  <app-profile-header [athlete$]="user$"></app-profile-header>
+  <app-profile-header [athlete$]="user$" [scores$]="scores$"></app-profile-header>
+
   <ion-card class="contentCard">
     <ion-item lines="none">
       <ion-card-title>All Assessments</ion-card-title>

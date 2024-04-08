@@ -743,7 +743,10 @@
       "aid": "BKBN",
       "skills": [
         {"label": "Cobra", "description": "Upper body extended, chest lifted off the ground, arms supporting the upper body"},
-        {"label": "Modified Bridge", "description": "Bridge with feet elevated to knee height (hips lifted off the ground, knees bent, feet elevated to knee height)"},
+        {
+          "label": "Half Wheel",
+          "description": "Bridge with feet elevated to knee height (hips lifted off the ground, knees bent, feet elevated to knee height)"
+        },
         {
           "label": "Bridge",
           "description": "Hips lifted off the ground, knees bent, feet flat on the ground",
