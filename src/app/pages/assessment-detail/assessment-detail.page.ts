@@ -96,7 +96,7 @@ export class AssessmentDetailPage implements OnInit {
 
   updateChecked(checked) {
     if (this.displayChecked.length) {
-      this.checklistChanged = true;
+      // this.checklistChanged = true;
       this.routerOutlet.swipeGesture = false;
     }
     this.displayChecked = checked;
@@ -174,7 +174,8 @@ export class AssessmentDetailPage implements OnInit {
     //   await this.promptToSave();
     //   console.log("finished promptToSave");
     // }
-    this.navController.back();
+    this.navController.navigateBack('/home/profile');
+    // this.navController.back();
   }
 
   // promptToSave(): Promise<boolean> {

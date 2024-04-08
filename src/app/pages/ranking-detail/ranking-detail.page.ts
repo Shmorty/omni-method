@@ -8,6 +8,7 @@ import {CommunityService} from 'src/app/services/community/community.service';
 import {OmniScoreService} from 'src/app/services/omni-score.service';
 import {UserFirestoreService} from 'src/app/services/user-firestore.service';
 import {UserService} from 'src/app/services/user/user.service';
+import {Assessment} from '../../store/assessments/assessment.model';
 import {selectAllAssessments, selectAllCategories} from 'src/app/store/assessments/assessment.selector';
 import {Score} from 'src/app/store/models/score.model';
 import {User} from 'src/app/store/user/user.model';
@@ -71,8 +72,8 @@ export class RankingDetailPage implements OnInit {
   //   return this.athlete?.categoryScore[cid];
   // }
 
-  getCategoryAssessments(assessments: any[], cid: string) {
-    return assessments.filter(a => a['cid'] === cid);
+  getCategoryAssessments(assessments: Assessment[], cid: string) {
+    return assessments.filter(a => a.cid === cid);
   }
 
   scoreClass(scoreDate: string): string {
