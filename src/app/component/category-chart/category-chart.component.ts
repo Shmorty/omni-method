@@ -73,11 +73,14 @@ export class CategoryChartComponent implements OnInit, OnDestroy {
         },
       },
       dataLabels: {
-        enabled: true,
+        enabled: false,
+        offsetX: 0,
+        offsetY: 0,
         style: {
           // fontSize: '12px',
           fontSize: 'inherit',
-          colors: ['white'],
+          // colors: ['#5eb3f9'],
+          colors: ['#000'],
         },
         background: {
           enabled: true,
@@ -94,21 +97,21 @@ export class CategoryChartComponent implements OnInit, OnDestroy {
         opacity: 0.5,
       },
       markers: {
-        size: 16,
-        shape: 'rect',
+        size: 0,
+        shape: 'circle',
         radius: 6,
       },
       plotOptions: {
         radar: {
           size: 128,
           offsetX: -72,
-          offsetY: 6,
+          offsetY: 5,
           polygons: {
-            strokeColors: '#fff',
-            strokeWidth: '1px',
+            // strokeColors: '#fff',
+            // strokeWidth: '1px',
             fill: {
-              // colors: ['#daefff', '#b8dfff'],
-              colors: chartFillColors,
+              colors: ['#daefff', '#b8dfff'],
+              // colors: chartFillColors,
             }
           }
         }
@@ -123,7 +126,12 @@ export class CategoryChartComponent implements OnInit, OnDestroy {
       ],
       theme: {
         mode: 'light',
-        palette: 'palette1',
+        // palette: 'palette1',
+        monochrome: {
+          enabled: true,
+          color: '#5eb3f9',
+          shadeIntensity: 0,
+        }
       },
       tooltip: {
         custom: function ({series, seriesIndex, dataPointIndex, w}) {
@@ -146,7 +154,8 @@ export class CategoryChartComponent implements OnInit, OnDestroy {
         type: 'category',
         categories: this.categoryLabels(this.user.categoryScore),
         labels: {
-          show: false,
+          show: true,
+          offsetY: 5,
           style: {
             colors: Array(this.categories.length).fill('white'),
             fontSize: '12px'
@@ -184,7 +193,8 @@ export class CategoryChartComponent implements OnInit, OnDestroy {
   categoryLabels(categoryScore: Object): string[] {
     let result = [];
     this.categories.forEach((cat) => {
-      result.push(cat.label);
+      // result.push(cat.label);
+      result.push(cat.abrv);
     });
     return result;
   }

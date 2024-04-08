@@ -18,11 +18,17 @@
       padding-top: 10px;
     }
     .omni-score {
-      font-size: 2em;
+      font-size: 2.25em;
       font-weight: 700;
       // padding-bottom: 10px;
       text-align: center;
       margin-bottom: 10px;
+      text-shadow: 3px 1px 10px var(--ion-color-primary-shade);
+    //   1px 1px 10px var(--ion-color-primary), 
+    //   1px 1px 10px var(--ion-color-primary-tint);
+    //   0 0 60px 30px #fff,  /* inner white */
+    //   0 0 100px 60px #f0f, /* middle magenta */
+    //   0 0 140px 90px #0ff;;
     }
 }
 user-avatar {
@@ -33,6 +39,18 @@ user-avatar {
     font-weight: bold;
     margin: auto;
     white-space: nowrap;
+}
+.name ion-label {
+    height: 1.25em;
+    margin-bottom: 0;
+}
+.username {
+    font-size: inherit;
+    margin: auto;
+    white-space: nowrap;
+}
+.username ion-label {
+    margin-top: 0;
 }
 .more-button {
     background-color: transparent;

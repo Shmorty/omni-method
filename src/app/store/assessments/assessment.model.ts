@@ -26,6 +26,7 @@ export interface Category {
   cid: string;
   seq?: number;
   label: string;
+  abrv: string;
   categoryAverage?: number;
 }
 

@@ -15,6 +15,9 @@
     <ion-item lines="none" color="none" text-center class="name">
       <ion-label> {{user.firstName}} {{user.lastName}} </ion-label>
     </ion-item>
+    <ion-item lines="none" color="none" text-center class="username">
+      <ion-label>&#64;{{user.username}}</ion-label>
+    </ion-item>
     <ion-item lines="none" color="none">
       <ion-grid class="ion-text-center">
         <ion-row>
@@ -36,7 +39,7 @@
       </ion-grid>
     </ion-item>
 
-    <ion-item [hidden]="!showChart" lines="none" color="none">
+    <ion-item [hidden]="!showChart" lines="none" color="none" style="padding-top: 30px;">
       <app-category-chart [user]="user"></app-category-chart>
       <!-- <app-assessment-chart [user]="user"></app-assessment-chart> -->
       <!-- <swiper-container #swiper class="chart-swiper"

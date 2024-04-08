@@ -3,31 +3,37 @@
     {
       "cid": "STRG",
       "label": "Strength",
+      "abrv": "STR",
       "seq": 0
     },
     {
       "cid": "ENDR",
       "label": "Endurance",
+      "abrv": "END",
       "seq": 1
     },
     {
       "cid": "POWR",
       "label": "Power",
+      "abrv": "PWR",
       "seq": 2
     },
     {
       "cid": "FLEX",
       "label": "Flexibility",
+      "abrv": "FLX",
       "seq": 3
     },
     {
       "cid": "META",
       "label": "Cardiorespiratory",
+      "abrv": "CRD",
       "seq": 4
     },
     {
       "cid": "NEUR",
-      "label": "Neuromotor",
+      "label": "Motor Skills",
+      "abrv": "MTR",
       "seq": 5
     }
   ],
