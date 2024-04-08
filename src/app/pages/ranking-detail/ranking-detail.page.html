@@ -17,6 +17,7 @@
     athlete: athlete$ | async,
     categories: categories$ | async,
     assessments: assessments$ | async,
+    scores: scores$ | async,
   } as data; else loading">
 
     <app-profile-header [athlete$]="athlete$"></app-profile-header>
@@ -29,7 +30,7 @@
       <ng-container *ngFor="let category of data.categories">
         <ion-item class="cat-header" lines="none">
           <ion-text>
-            {{category.label}}: {{data.athlete.categoryScore[category.cid]}}
+            {{category.label}}: {{data.athlete?.categoryScore[category.cid]}}
           </ion-text>
         </ion-item>
         <ng-container *ngFor="let assessment of getCategoryAssessments(data.assessments, category.cid)">
@@ -44,7 +45,7 @@
             <div slot="end">
               <span class="units">{{assessment.units}}</span>
               <br />
-              <ng-container *ngIf="getScore(assessment.aid) as score; else zeroScore">
+              <ng-container *ngIf="getScore(data.scores, assessment.aid) as score; else zeroScore">
                 <ion-badge
                   class="score"
                   ngClass="{{scoreClass(score.scoreDate)}}"

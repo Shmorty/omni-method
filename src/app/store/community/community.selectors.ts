@@ -25,3 +25,8 @@ export const getIsLoading = createSelector(
     selectCommunityState,
     (communityState: CommunityState) => communityState.loading
 );
+
+export const getSelectedUserScores = createSelector(
+    selectCommunityState,
+    (communityState: CommunityState) => communityState.selectedUserScores
+);

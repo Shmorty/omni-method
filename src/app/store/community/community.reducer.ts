@@ -1,13 +1,15 @@
 import {createReducer, on} from "@ngrx/store";
 import {User} from "../user/user.model";
 import * as CommunityActions from './community.actions';
+import {Score} from "../models/score.model";
 
 export interface CommunityState {
     users: User[];
     loading: boolean;
     error: string;
-    selectedUID: string,
+    selectedUID: string;
     selectedUser: User;
+    selectedUserScores: Score[];
 }
 
 const initialState: CommunityState = {
@@ -16,6 +18,7 @@ const initialState: CommunityState = {
     error: '',
     selectedUID: '',
     selectedUser: undefined,
+    selectedUserScores: [],
 }
 
 export const communityReducer = createReducer(
@@ -46,6 +49,21 @@ export const communityReducer = createReducer(
         selectedUser: action.user,
     })),
     on(CommunityActions.loadSelectedUserFailure, (state, action) => ({
+        ...state,
+        loading: false,
+        error: action.error
+    })),
+    on(CommunityActions.loadSelectedUserScores, (state, action) => ({
+        ...state,
+        loading: true,
+        selectedUserScores: [],
+    })),
+    on(CommunityActions.loadSelectedUserScoresSuccess, (state, action) => ({
+        ...state,
+        loading: false,
+        selectedUserScores: action.scores,
+    })),
+    on(CommunityActions.loadSelectedUserScoresFailure, (state, action) => ({
         ...state,
         loading: false,
         error: action.error

@@ -60,10 +60,10 @@ export class CommunityEffects {
                     return this.firestoreService.getUserById(uid)
                         // .pipe(take(2))
                         .pipe(
-                            tap((res) => console.log("community effect loadSelectedUser response", res)),
-                            map((res) => {
-                                if (res.id === uid) {
-                                    return CommunityActions.loadSelectedUserSuccess({user: res});
+                            tap((user) => console.log("community effect loadSelectedUser response", user)),
+                            map((user) => {
+                                if (user.id === uid) {
+                                    return CommunityActions.loadSelectedUserSuccess({user: user});
                                 } else {
                                     return CommunityActions.loadSelectedUserFailure({error: 'not found'});
                                 }
@@ -82,11 +82,11 @@ export class CommunityEffects {
     loadSelectedUserSuccessEffect$ = createEffect(() =>
         this.actions$.pipe(
             ofType(CommunityActions.loadSelectedUserSuccess),
-            map((user) => {
-                console.log("loadSelectedUserSuccess effect", user);
-            })
-        ),
-        {dispatch: false}
+            tap(({user}) => console.log("loadSelectedUserSuccess effect", user)),
+            map(({user}) =>
+                CommunityActions.loadSelectedUserScores({uid: user.id})
+            )
+        )
     );
 
     // loadSelectedUserFailure
@@ -94,6 +94,50 @@ export class CommunityEffects {
         this.actions$.pipe(
             ofType(CommunityActions.loadSelectedUserFailure),
             tap((err) => console.log("loadSelectedUserFailure effect", err))
+        ),
+        {dispatch: false}
+    );
+
+    // loadSelectedUserScores
+    loadSelectedUserScoresEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(CommunityActions.loadSelectedUserScores),
+            tap(({uid}) => console.log("loadSelectedUserScores effect", uid)),
+            switchMap(({uid}) => {
+                if (uid) {
+                    return this.firestoreService.getUserScores(uid).pipe(
+                        tap((scores) => console.log("community effect loadSelectedUserScores response", scores)),
+                        map((scores) => {
+                            if (scores) {
+                                return CommunityActions.loadSelectedUserScoresSuccess({scores: scores});
+                            } else {
+                                return CommunityActions.loadSelectedUserScoresFailure({error: 'scores not found'});
+                            }
+                        }),
+                        catchError(async (err) =>
+                            CommunityActions.loadSelectedUserScoresFailure({error: err})
+                        ),
+                        finalize(() => console.log("loadSelectedUserScores finalize"))
+                    );
+                }
+            })
+        )
+    );
+
+    // loadSelectedUserScoresSuccess
+    loadSelectedUserScoresSuccessEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(CommunityActions.loadSelectedUserScoresSuccess),
+            tap(({scores}) => console.log("loadSelectedUserScoresSuccess effect", scores)),
+        ),
+        {dispatch: false}
+    );
+
+    // loadSelectedUserScoresFailure
+    loadSelectedUserScoresFailureEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(CommunityActions.loadSelectedUserScoresFailure),
+            tap((err) => console.log("loadSelectedUserScoresFailure effect", err))
         ),
         {dispatch: false}
     );

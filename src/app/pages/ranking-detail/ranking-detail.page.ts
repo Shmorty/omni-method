@@ -25,8 +25,8 @@ export class RankingDetailPage implements OnInit {
   public categories$ = this.assessmentService.getAllCategories();
   public assessments$ = this.assessmentService.getAllAssessments();
   public isLoading$ = this.communityService.isLoading();
-  public scores$: Observable<Score[]>;
-  public userScores: Score[];
+  public scores$ = this.communityService.getSelectedUserScores();
+  // public userScores: Score[];
   showChart = false;
 
   constructor(
@@ -80,10 +80,10 @@ export class RankingDetailPage implements OnInit {
     return OmniScoreService.scoreClass(scoreDate);
   }
 
-  getScore(aid: string) {
+  getScore(scores: Score[], aid: string) {
     // console.log("getScore", aid);
     // console.log("userScores", this.userScores);
-    let fl = this.userScores?.filter(sc => sc.aid === aid).sort(function (a, b) {
+    let fl = scores?.filter(sc => sc.aid === aid).sort(function (a, b) {
       return Date.parse(b.scoreDate) - Date.parse(a.scoreDate);
     });
     return (fl?.length > 0) ? fl[0] : undefined;
