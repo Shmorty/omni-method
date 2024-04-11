@@ -7,6 +7,7 @@ import {Score} from '../../store/models/score.model';
 import {UserService} from '../../services/user/user.service';
 import {Assessment} from '../../store/assessments/assessment.model';
 import {User} from 'src/app/store/user/user.model';
+import {getDownloadURL, getStorage, ref} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-skill-detail',
@@ -21,6 +22,7 @@ export class SkillDetailPage implements OnInit {
   score$: Observable<Score>;
   private scoreSub: Subscription;
   private curScore: Score;
+  public videoLink: Promise<string> = undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +38,13 @@ export class SkillDetailPage implements OnInit {
       this.skillIndex = params.skill;
       // load skill configuration
       this.skill$ = this.assessmentService.getChecklistSkill(this.aid, this.skillIndex);
+      this.skill$.pipe(take(1)).subscribe((skill) => {
+        console.log("skill detail ngOnInit skill", skill);
+        if (skill.hasOwnProperty('video')) {
+          console.log("video", skill['video']);
+          this.videoLink = this.getVideoUrl(skill['video']);
+        }
+      });
       // load current assessment score
       this.score$ = this.userService.getCurrentScoreForAssessment(this.aid);
       this.scoreSub = this.score$.subscribe((score) => {
@@ -79,6 +88,19 @@ export class SkillDetailPage implements OnInit {
     newScore.rawScore = newScore.checklist.filter(Boolean).length;
     this.userService.saveScore(newScore);
     // this.goBack();
+  }
+
+  getVideoUrl(videoPath: string) {
+    console.log("getVideoUrl", videoPath);
+    const storage = getStorage();
+
+    return getDownloadURL(ref(storage, videoPath)).then((url) => {
+      console.log("downloadURL", url);
+      return url;
+    }).catch((err) => {
+      console.log("getVideoUrl err", err);
+      return undefined;
+    });
   }
 
   async createNewScore() {
