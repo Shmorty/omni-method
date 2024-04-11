@@ -20,9 +20,10 @@
     <!-- <ion-item></ion-item> -->
     <div [ngSwitch]="true">
       <ion-item *ngSwitchCase="skill.hasOwnProperty('video')" lines="none">
-        <video class="header-content" id="skillVideo" controlsList="nodownload"
+        <video class="header-content" controlsList="nodownload"
           controls disablepictureinpicture muted preload="metadata">
-          <source src="{{skill['video']}}#t=0.1" type="video/mp4">
+          <source src="{{videoLink | async}}" type="video/mp4">
+          <!-- #t=0.1 -->
         Your browser does not support the video tag.
         </video>
       </ion-item>
