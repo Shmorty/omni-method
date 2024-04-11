@@ -58,16 +58,15 @@ export class CategoryChartComponent implements OnInit, OnDestroy {
     if (maxScore > 500) {
       stepSize = 250;
     }
-    // this.user$ = this.userService.getUser();
-    // this.user$ = this.userFirestoreService.getUserById(this.user.id);
-    // console.log("categoryScore", this.user.categoryScore);
-    // console.log("labels", this.categoryLabels(this.user.categoryScore));
-    // this.user$.subscribe((user) => {
+
     this.chartOptions = {
       chart: {
         type: 'radar',
-        // height: 380,
         width: 460,
+        // width: 'auto',
+        // height: 'auto',
+        // height: 285,
+        // parentHeightOffset: 15,
         toolbar: {
           show: false
         },
@@ -133,23 +132,19 @@ export class CategoryChartComponent implements OnInit, OnDestroy {
           shadeIntensity: 0,
         }
       },
-      tooltip: {
-        custom: function ({series, seriesIndex, dataPointIndex, w}) {
-          // console.log("series", series,
-          //   "seriesIndex", seriesIndex,
-          //   "dataPointIndex", dataPointIndex,
-          //   "w", w);
-          return (
-            '<div class="arrow_box">' +
-            "<span>" +
-            w.globals.labels[dataPointIndex] +
-            ": " +
-            series[seriesIndex][dataPointIndex] +
-            "</span>" +
-            "</div>"
-          );
-        }
-      },
+      // tooltip: {
+      //   custom: function ({series, seriesIndex, dataPointIndex, w}) {
+      //     return (
+      //       '<div class="arrow_box">' +
+      //       "<span>" +
+      //       w.globals.labels[dataPointIndex] +
+      //       ": " +
+      //       series[seriesIndex][dataPointIndex] +
+      //       "</span>" +
+      //       "</div>"
+      //     );
+      //   }
+      // },
       xaxis: {
         type: 'category',
         categories: this.categoryLabels(this.user.categoryScore),
@@ -165,15 +160,9 @@ export class CategoryChartComponent implements OnInit, OnDestroy {
       yaxis: {
         show: false,
         stepSize: stepSize,
-        // labels: {
-        //   show: true,
-        //   style: {
-        //     colors: "#ffffff",
-        //   }
-        // }
       },
     };
-    // });
+
   }
 
   ngOnDestroy(): void {

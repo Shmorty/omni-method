@@ -11,6 +11,7 @@ import {delay} from 'rxjs/operators';
 import {CategoryChartComponent} from '../category-chart/category-chart.component';
 import {AssessmentChartComponent} from '../assessment-chart/assessment-chart.component';
 import {SwiperOptions} from 'swiper/types';
+import {Pagination} from 'swiper/modules';
 import {Score} from 'src/app/store/models/score.model';
 
 @Component({
@@ -36,15 +37,17 @@ export class ProfileHeaderComponent implements OnInit {
   showChart = false;
 
   public chartSlidesOptions: SwiperOptions = {
-    slidesPerView: 1.2,
-    navigation: true,
-    slidesOffsetBefore: 5,
-    spaceBetween: 10,
-    slidesOffsetAfter: 5,
+    slidesPerView: 1,
+    // pagination: {
+    //   enabled: true,
+    //   el: "swiper-container"
+    // },
+    // slidesOffsetBefore: 5,
+    // spaceBetween: 10,
+    // slidesOffsetAfter: 5,
   };
 
   constructor(
-    private store: Store,
     public userService: UserService,
     public element: ElementRef,
     public renderer: Renderer2
@@ -68,7 +71,7 @@ export class ProfileHeaderComponent implements OnInit {
     console.log("ngAfterViewInit setTimeout");
     setTimeout(() => {
       console.log("timeout begin");
-      this.swiper?.nativeElement.initialize();
+      this.swiper?.nativeElement.initialize(Pagination);
       console.log("timeout done");
     });
     console.log("ngAfterViewInit done");

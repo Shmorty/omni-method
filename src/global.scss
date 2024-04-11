@@ -26,7 +26,7 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 @import "swiper/css/bundle";
-// @import "swiper/scss/pagination";
+@import "swiper/scss/pagination";
 
 /*
  * https://fonts.google.com/specimen/Roboto
@@ -55,12 +55,12 @@
 //   src: url(assets/fonts/Apercu\ Font\ Family/);
 // }
 
-* {
+// * {
   // font-family: Roboto, "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
   //   sans-serif;
   // font-family: "Roboto", "CascadiaCode", "Overpass", sans-serif;
   // font-family: "Roboto", sans-serif;
-}
+// }
 
 // .new-score-modal {
 //   --backdrop-opacity: 0.6;

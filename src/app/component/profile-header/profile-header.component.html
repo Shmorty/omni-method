@@ -42,8 +42,8 @@
     <ion-item [hidden]="!showChart" lines="none" color="none" style="padding-top: 30px;">
       <!-- <app-category-chart [user]="user"></app-category-chart> -->
       <!-- <app-assessment-chart [user]="user"></app-assessment-chart> -->
-      <swiper-container #swiper class="chart-swiper"
-        [config]="chartSlidesOptions">
+      <swiper-container #swiper class="chart-swiper" [pagination]="true">
+        <!-- [config]="chartSlidesOptions"> -->
         <swiper-slide class="chart-slide">
           <app-category-chart [user]="user"></app-category-chart>
         </swiper-slide>

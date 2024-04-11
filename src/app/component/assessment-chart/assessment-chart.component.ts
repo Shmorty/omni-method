@@ -1,11 +1,9 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexFill, ApexMarkers, ApexPlotOptions, ApexTheme, ApexTooltip, ApexXAxis, ApexYAxis, NgApexchartsModule} from 'ng-apexcharts';
 import {User} from '../../store/user/user.model';
-import {UserService} from '../../services/user/user.service';
 import {Observable, Subscription, skip, take, tap} from 'rxjs';
 import {OmniScoreService} from 'src/app/services/omni-score.service';
 import {Assessment, Category} from '../../store/assessments/assessment.model';
-import {UserFirestoreService} from 'src/app/services/user-firestore.service';
 import {Score} from '../../store/models/score.model';
 import {CommonModule} from '@angular/common';
 import {IonicModule} from '@ionic/angular';
@@ -39,7 +37,6 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
   @Input() user: User;
   // @Input() scores: Score[];
   @Input() scores$: Observable<Score[]>;
-  private user$: Observable<User>;
   public chartOptions: Partial<ChartOptions> = undefined;
   private categories: Category[];
   private assessments: Assessment[];
@@ -74,11 +71,7 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
     if (maxScore > 500) {
       stepSize = 250;
     }
-    // this.user$ = this.userService.getUser();
-    // this.user$ = this.userFirestoreService.getUserById(this.user.id);
-    // console.log("categoryScore", this.user.categoryScore);
-    // console.log("labels", this.categoryLabels(this.user.categoryScore));
-    // this.user$.subscribe((user) => {
+
     this.chartOptions = {
       chart: {
         type: 'radar',
@@ -149,10 +142,6 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
       },
       tooltip: {
         custom: function ({series, seriesIndex, dataPointIndex, w}) {
-          // console.log("series", series,
-          //   "seriesIndex", seriesIndex,
-          //   "dataPointIndex", dataPointIndex,
-          //   "w", w);
           return (
             '<div class="arrow_box">' +
             "<span>" +
@@ -180,12 +169,6 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
       yaxis: {
         show: false,
         stepSize: stepSize,
-        // labels: {
-        //   show: true,
-        //   style: {
-        //     colors: "#ffffff",
-        //   }
-        // }
       },
     };
 
@@ -216,23 +199,7 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
   }
 
   assessmentLabels(): string[] {
-    return this.assessments.map((a) => a.label);
-  }
-
-  categoryValues(categoryScore: Object): number[] {
-    let values = [];
-    this.categories.forEach((cat) => {
-      values.push(categoryScore[cat.cid]);
-    });
-    return values;
-  }
-
-  categoryLabels(categoryScore: Object): string[] {
-    let result = [];
-    this.categories.forEach((cat) => {
-      result.push(cat.label);
-    });
-    return result;
+    return this.assessments.map((a) => a.aid);
   }
 
 }
