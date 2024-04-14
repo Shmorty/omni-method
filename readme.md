@@ -251,3 +251,41 @@ login with email
 ```json
 {payload: {…}, type: '[User Login] User Authenticated'}
 ```
+
+## Google Cloud Media CDN
+
+> Notes from current attempt to setup video streaming for the app.
+
+Install gcloud CLI: <https://cloud.google.com/sdk/docs/install>
+
+Run ```gcloud cheat-sheet``` or refer to the gcloud command-line tool cheat
+    sheet: <https://cloud.google.com/sdk/docs/cheatsheet>
+
+### Setup
+
+Login to google cloud:
+
+```bash
+gcloud auth login
+```
+
+Select project:
+
+```bash
+gcloud projects list
+gcloud config set project PROJECT_ID
+```
+
+Enable network services API (or with console):
+
+```bash
+gcloud services enable networkservices.googleapis.com
+```
+
+Enable crertificate manager API:
+
+```bash
+gcloud services enable certificatemanager.googleapis.com
+```
+
+I am currently unable to see the Media CDN setup page, it is blank and doesn't appear in the side menu, it seems to be disabled and have been looking for a way to enable it.
