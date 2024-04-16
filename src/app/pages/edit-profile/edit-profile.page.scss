@@ -14,7 +14,8 @@ user-avatar {
 }
 ion-content {
   // --background: linear-gradient(  var(--ion-color-light),  var(--ion-color-tertiary));
-  --ion-background-color: linear-gradient(rgba(var(--ion-color-primary-rgb), 0.05), rgba(var(--ion-color-primary-rgb), 0.3));
+  // --ion-background-color: linear-gradient(rgba(var(--ion-color-primary-rgb), 0.05), rgba(var(--ion-color-primary-rgb), 0.3));
+  --ion-background-color: linear-gradient(rgba(0, 116, 252, 0), rgba(0, 116, 252, 0.29));
 }
 ion-list {
   --ion-item-background: transparent;

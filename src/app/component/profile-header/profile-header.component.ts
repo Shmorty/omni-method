@@ -1,13 +1,10 @@
 import {CommonModule} from '@angular/common';
 import {CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {IonAccordionGroup, IonicModule} from '@ionic/angular';
-import {Observable, of} from 'rxjs';
+import {Observable, of, take} from 'rxjs';
 import {User} from '../../store/user/user.model';
 import {UserAvatarComponent} from '../user-avatar/user-avatar.component';
-import * as UserSelectors from 'src/app/store/user/user.selectors';
 import {UserService} from 'src/app/services/user/user.service';
-import {Store} from '@ngrx/store';
-import {delay} from 'rxjs/operators';
 import {CategoryChartComponent} from '../category-chart/category-chart.component';
 import {AssessmentChartComponent} from '../assessment-chart/assessment-chart.component';
 import {SwiperOptions} from 'swiper/types';
@@ -35,16 +32,10 @@ export class ProfileHeaderComponent implements OnInit {
   @Input() scores$: Observable<Score[]>;
   public user$: Observable<User>;
   showChart = false;
+  showPersonalData = false;
 
   public chartSlidesOptions: SwiperOptions = {
     slidesPerView: 1,
-    // pagination: {
-    //   enabled: true,
-    //   el: "swiper-container"
-    // },
-    // slidesOffsetBefore: 5,
-    // spaceBetween: 10,
-    // slidesOffsetAfter: 5,
   };
 
   constructor(
@@ -54,11 +45,12 @@ export class ProfileHeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // if (this.athlete) {
-    //   this.user$ = of(this.athlete);
-    // } else {
     //   this.user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
-    // }
+    this.athlete$.pipe(take(1)).subscribe((dsplUser) => {
+      this.userService.getUser().pipe(take(1)).subscribe((curUser) => {
+        this.showPersonalData = (dsplUser.id === curUser.id);
+      })
+    })
     this.user$ = this.athlete$;
     console.log("profile header ngOnInit scores$", this.scores$);
   }
