@@ -46,9 +46,12 @@ export class ProfileHeaderComponent implements OnInit {
 
   ngOnInit() {
     //   this.user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
-    this.athlete$.pipe(take(1)).subscribe((dsplUser) => {
-      this.userService.getUser().pipe(take(1)).subscribe((curUser) => {
-        this.showPersonalData = (dsplUser.id === curUser.id);
+    this.userService.getUser().pipe(take(1)).subscribe((curUser) => {
+      console.log("current User", curUser);
+      this.athlete$.pipe(take(2)).subscribe((dsplUser) => {
+        console.log("display User", dsplUser);
+        this.showPersonalData = (dsplUser?.id == curUser?.id);
+        console.log("showPersonalData", this.showPersonalData);
       })
     })
     this.user$ = this.athlete$;
