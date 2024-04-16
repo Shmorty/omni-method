@@ -3,31 +3,37 @@
     {
       "cid": "STRG",
       "label": "Strength",
+      "abrv": "STR",
       "seq": 0
     },
     {
       "cid": "ENDR",
       "label": "Endurance",
+      "abrv": "END",
       "seq": 1
     },
     {
       "cid": "POWR",
       "label": "Power",
+      "abrv": "PWR",
       "seq": 2
     },
     {
       "cid": "FLEX",
       "label": "Flexibility",
+      "abrv": "FLX",
       "seq": 3
     },
     {
       "cid": "META",
       "label": "Cardiorespiratory",
+      "abrv": "CRD",
       "seq": 4
     },
     {
       "cid": "NEUR",
-      "label": "Neuromotor",
+      "label": "Motor Skills",
+      "abrv": "MTR",
       "seq": 5
     }
   ],
@@ -36,6 +42,7 @@
       "aid": "DLFT",
       "cid": "STRG",
       "label": "Deadlift",
+      "abrv": "DLFT",
       "icon": "/assets/images/deadlift.png",
       "units": "1RM (lbs)",
       "entryUnits": "lbs",
@@ -58,12 +65,14 @@
         "No supportive equipment",
         "Any stance allowed",
         "Must pause in top position for 1 second "
-      ]
+      ],
+      "video": "content/videos/assessment_demo/Deadlift.mp4"
     },
     {
       "aid": "BKSQ",
       "cid": "STRG",
       "label": "Squat",
+      "abrv": "SQT",
       "icon": "/assets/images/backsquat.png",
       "units": "1RM (lbs)",
       "entryUnits": "lbs",
@@ -84,12 +93,14 @@
       "rules": [
         "No supportive equipment",
         "Must squat below parallel"
-      ]
+      ],
+      "video": "content/videos/assessment_demo/Squat.mp4"
     },
     {
       "aid": "BNCH",
       "cid": "STRG",
       "label": "Bench",
+      "abrv": "BNCH",
       "icon": "/assets/images/BenchPress.png",
       "units": "1RM (lbs)",
       "entryUnits": "lbs",
@@ -112,12 +123,15 @@
       "rules": [
         "No supportive equipment",
         "Barbell must make contact with body in bottom position"
-      ]
+      ],
+      "test-video": "gs://omni-login-63e9f.appspot.com/content/videos/assessment_demo/BenchPress.mp4",
+      "video": "content/videos/assessment_demo/BenchPress.mp4"
     },
     {
       "aid": "WTPU",
       "cid": "STRG",
       "label": "Weighted Pull-up",
+      "abrv": "WTPU",
       "icon": "/assets/images/weightedpullup.png",
       "units": "1RM (lbs)",
       "entryUnits": "lbs",
@@ -142,12 +156,14 @@
         "Must start in dead-hang position",
         "Must pause in top position for 1 second",
         "Bottom of chin must reach higher than the top of the bar"
-      ]
+      ],
+      "video": "content/videos/assessment_demo/Pull-up.mp4"
     },
     {
       "aid": "PSHU",
       "cid": "ENDR",
       "label": "Pushups",
+      "abrv": "PSHU",
       "icon": "/assets/images/pushup.png",
       "units": "Reps",
       "entryUnits": "Reps",
@@ -169,12 +185,14 @@
         "No stopping movement at any point once the test has begun",
         "Top of elbows must be higher than top of the shoulders in bottom position",
         "Arms must straighten in top position"
-      ]
+      ],
+      "video": "content/videos/assessment_demo/Push-ups.mp4"
     },
     {
       "aid": "PLUP",
       "cid": "ENDR",
       "label": "Pullups",
+      "abrv": "PLUP",
       "icon": "/assets/images/pull_up.png",
       "units": "Reps",
       "entryUnits": "Reps",
@@ -197,12 +215,14 @@
         "Arms must straighten in bottom position",
         "Bottom of chin must reach higher than the top of the bar",
         "No kipping"
-      ]
+      ],
+      "video": "content/videos/assessment_demo/Pull-ups.mp4"
     },
     {
       "aid": "SQTS",
       "cid": "ENDR",
       "label": "Squats",
+      "abrv": "SQTS",
       "icon": "/assets/images/backsquat.png",
       "units": "Reps",
       "entryUnits": "Reps",
@@ -224,12 +244,14 @@
         "No stopping movement at any point once the test has begun",
         "Top of thighs must be below top of knees in bottom position",
         "Knees must straighten in top position"
-      ]
+      ],
+      "video": "content/videos/assessment_demo/Squats.mp4"
     },
     {
       "aid": "STLJ",
       "cid": "POWR",
       "label": "Long Jump",
+      "abrv": "STLJ",
       "icon": "/assets/images/Long_Jump.png",
       "units": "Length (in)",
       "entryUnits": "inches",
@@ -249,12 +271,14 @@
       "rules":[
         "Feet must move in tandem",
         "Heel that is furthest back is measured"
-      ]
+      ],
+      "video": "content/videos/assessment_demo/LongJump.mp4"
     },
     {
       "aid": "PSHP",
       "cid": "POWR",
       "label": "Push Press",
+      "abrv": "PSPR",
       "icon": "/assets/images/ChestLaunch.png",
       "units": "1RM (lbs)",
       "entryUnits": "lbs",
@@ -274,12 +298,14 @@
       "rules":[
         "No supportive equipment",
         "No catch"
-      ]
+      ],
+      "video": "content/videos/assessment_demo/PushPress.mp4"
     },
     {
       "aid": "PSPR",
       "cid": "POWR",
       "label": "100 meter sprint",
+      "abrv": "100m",
       "icon": "/assets/images/100metersprint.png",
       "units": "Time",
       "entryUnits": "Secs",
@@ -306,6 +332,7 @@
       "aid": "PWCL",
       "cid": "POWR",
       "label": "Clean",
+      "abrv": "PWCL",
       "icon": "/assets/images/powerclean.png",
       "units": "1RM (lbs)",
       "entryUnits": "lbs",
@@ -325,7 +352,8 @@
       },
       "rules":[
         "No supportive equipment"
-      ]
+      ],
+      "video": "content/videos/assessment_demo/Clean.mp4"
     },
     {
       "aid": "PIKE",
@@ -333,6 +361,7 @@
       "checklistCategories": false,
       "cid": "FLEX",
       "label": "Pike",
+      "abrv": "PIKE",
       "icon": "/assets/images/toetouch.png",
       "units": "Positions",
       "entryUnits": "",
@@ -356,6 +385,7 @@
       "checklistCategories": false,
       "cid": "FLEX",
       "label": "Backbend",
+      "abrv": "BACK",
       "icon": "/assets/images/backbend.png",
       "units": "Positions",
       "entryUnits": "",
@@ -376,6 +406,7 @@
       "aid": "STRD",
       "cid": "FLEX",
       "label": "Straddle",
+      "abrv": "STRA",
       "icon": "/assets/images/medial_lateral.png",
       "units": "Degrees",
       "entryUnits": "Degrees",
@@ -394,12 +425,14 @@
       },
       "rules":[
         "Position must be held for 5 seconds"
-      ]
+      ],
+      "video": "content/videos/assessment_demo/Straddle.mp4"
     },
     {
       "aid": "ONEHRDST",
       "cid": "META",
       "label": "1 Hour Run",
+      "abrv": "1HR",
       "icon": "/assets/images/onehourrun.png",
       "units": "Miles",
       "entryUnits": "Miles",
@@ -425,6 +458,7 @@
       "aid": "TWOMDST",
       "cid": "META",
       "label": "2 Minute Sprint",
+      "abrv": "2MIN",
       "icon": "/assets/images/2minutedistance.png",
       "units": "Miles",
       "entryUnits": "Miles",
@@ -444,12 +478,14 @@
       },
       "rules":[
         "Treadmill or track allowed"
-      ]
+      ],
+      "video": "content/videos/assessment_demo/2_minute_Sprint.mp4"
     },
     {
       "aid": "AGLTY",
       "cid": "NEUR",
       "label": "Half Spider Web",
+      "abrv": "AGIL",
       "icon": "/assets/images/agility.png",
       "units": "Secs",
       "entryUnits": "Seconds",
@@ -473,7 +509,8 @@
         "Must touch cone/marker with hand",
         "Order of cones/markers must be followed",
         "Feet cannot cross while side shuffling"
-      ]
+      ],
+      "video": "content/videos/assessment_demo/HalfSpiderWeb.mp4"
     },
     {
       "aid": "BLNC",
@@ -481,6 +518,7 @@
       "checklistCategories": true,
       "cid": "NEUR",
       "label": "Balance Positions",
+      "abrv": "BLNC",
       "icon": "/assets/images/Balance.png",
       "description": "",
       "instruction": [
@@ -502,6 +540,7 @@
       "checklistCategories": true,
       "cid": "NEUR",
       "label": "Coordination Skills",
+      "abrv": "COOR",
       "icon": "/assets/images/Coordination.png",
       "description": "",
       "descriptionHide": "(see each skill for specific rules)",
@@ -528,7 +567,11 @@
       {"label": "Jumping Jacks", "category": "Basic"},
       {"label": "Jump rope", "category": "Equipment"},
       {"label": "Forward Roll", "category": "Forward"},
-      {"label": "Backward Roll", "category": "Backward"},
+      {
+        "label": "Backward Roll",
+        "category": "Backward",
+        "video": "content/videos/skill_demo/coordination/BackwardRoll.mp4"
+      },
       {"label": "Half Tour (180 jump)", "category":"Twisting"},
       {"label": "Swimming", "category":"Basic"},
       {"label": "Basketball Dribbling", "category": "Equipment"},
@@ -666,7 +709,7 @@
           "label": "Handstand",
           "category": "Inversion",
           "thumbnail": "/assets/images/skills/handstand_thumbnail.png",
-          "video": "/assets/video/skills/handstand_demo.mp4"
+          "video": "content/videos/skill_demo/balance/handstand_demo.mp4"
         },
         {"label": "2 Feet on Toes Tree", "category": "Standing"},
         {"label": "2 Sticks Palms Up", "category": "Equipment"},
@@ -705,35 +748,95 @@
     {
       "aid": "PIKE",
       "skills": [
-        {"label": "Fingers to shins"},
-        {"label": "Fingers to ankles"},
-        {"label": "Fingers to toes"},
-        {"label": "Knuckles to ground"},
-        {"label": "Palms to ground"},
-        {"label": "Center of forearm to toe"},
-        {"label": "Opposite center of forearm to toe"},
-        {"label": "Elbow to toe"},
-        {"label": "Opposite elbow to toe"},
-        {"label": "Head to toe"}
+        {
+          "label": "Fingers to shins",
+          "video": "content/videos/skill_demo/pike/Pike_lvl_1.mp4"
+        },
+        {
+          "label": "Fingers to ankles",
+          "video": "content/videos/skill_demo/pike/Pike_lvl_2.mp4"
+        },
+        {
+          "label": "Fingers to toes",
+          "video": "content/videos/skill_demo/pike/Pike_lvl_3.mp4"
+        },
+        {
+          "label": "Knuckles to ground",
+          "video": "content/videos/skill_demo/pike/Pike_lvl_4.mp4"
+        },
+        {
+          "label": "Palms to ground",
+          "video": "content/videos/skill_demo/pike/Pike_lvl_5.mp4"
+        },
+        {
+          "label": "Center of forearm to toe",
+          "video": "content/videos/skill_demo/pike/Pike_lvl_6.mp4"
+        },
+        {
+          "label": "Opposite center of forearm to toe",
+          "video": "content/videos/skill_demo/pike/Pike_lvl_7.mp4"
+        },
+        {
+          "label": "Elbow to toe",
+          "video": "content/videos/skill_demo/pike/Pike_lvl_8.mp4"
+        },
+        {
+          "label": "Opposite elbow to toe"
+        },
+        {
+          "label": "Head to toe"
+        }
       ]
     },
     {
       "aid": "BKBN",
       "skills": [
-        {"label": "Cobra", "description": "Upper body extended, chest lifted off the ground, arms supporting the upper body"},
-        {"label": "Modified Bridge", "description": "Bridge with feet elevated to knee height (hips lifted off the ground, knees bent, feet elevated to knee height)"},
+        {
+          "label": "Cobra",
+          "description": "Upper body extended, chest lifted off the ground, arms supporting the upper body",
+          "video": "content/videos/skill_demo/backbend/Back_lvl_1.mp4"
+        },
+        {
+          "label": "Half Wheel",
+          "description": "Bridge with feet elevated to knee height (hips lifted off the ground, knees bent, feet elevated to knee height)",
+          "video": "content/videos/skill_demo/backbend/Back_lvl_2.mp4"
+        },
         {
           "label": "Bridge",
           "description": "Hips lifted off the ground, knees bent, feet flat on the ground",
-          "pic": "/assets/images/skills/backbend_demo.png"
+          "video": "content/videos/skill_demo/backbend/Back_lvl_3.mp4"
         },
-        {"label": "Elbow bridge", "description": "Elbow bridge (similar to bridge, but resting on forearms instead of hands)"},
-        {"label": "Knee bridge", "description": "Knee bridge (hips lifted off the ground, knees bent, only heels touching the ground)"},
-        {"label": "Elbow + knee bridge", "description": "Elbow + knee bridge (combination of elbow bridge and knee bridge)"},
-        {"label": "Extended bridge", "description": "Extended bridge (hips lifted off the ground, knees straight, feet flat on the ground)"},
-        {"label": "Grab ankles while in elbow bridge", "description": "Grab ankles while in elbow bridge (holding onto ankles with hands in elbow bridge position)"},
-        {"label": "Chin stand while grabbing ankles", "description": "Chin stand while grabbing ankles (advanced position where chin touches the ground while grabbing ankles)"},
-        {"label": "Tear Drop", "description": "Standing backbend grab ankles"}
+        {
+          "label": "Elbow bridge",
+          "description": "Elbow bridge (similar to bridge, but resting on forearms instead of hands)",
+          "video": "content/videos/skill_demo/backbend/Back_lvl_4.mp4"
+        },
+        {
+          "label": "Knee bridge",
+          "description": "Knee bridge (hips lifted off the ground, knees bent, only heels touching the ground)",
+          "video": "content/videos/skill_demo/backbend/Back_lvl_5.mp4"
+        },
+        {
+          "label": "Elbow + knee bridge",
+          "description": "Elbow + knee bridge (combination of elbow bridge and knee bridge)"
+        },
+        {
+          "label": "Extended bridge",
+          "description": "Extended bridge (hips lifted off the ground, knees straight, feet flat on the ground)"
+        },
+        {
+          "label": "Grab ankles while in elbow bridge",
+          "description": "Grab ankles while in elbow bridge (holding onto ankles with hands in elbow bridge position)",
+          "video": "content/videos/skill_demo/backbend/Back_lvl_8.mp4"
+        },
+        {
+          "label": "Chin stand while grabbing ankles",
+          "description": "Chin stand while grabbing ankles (advanced position where chin touches the ground while grabbing ankles)"
+        },
+        {
+          "label": "Tear Drop",
+          "description": "Standing backbend grab ankles"
+        }
       ]
     }
   ]
