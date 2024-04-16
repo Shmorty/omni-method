@@ -5,6 +5,7 @@ export interface Assessment {
   aid?: string;
   cid?: string;
   icon: string;
+  abrv: string;
   label: string;
   description?: string;
   instruction?: string[];

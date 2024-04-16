@@ -159,7 +159,7 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
   }
 
   assessmentLabels(): string[] {
-    return this.assessments.map((a) => a.aid);
+    return this.assessments.map((a) => a.abrv);
   }
 
 }

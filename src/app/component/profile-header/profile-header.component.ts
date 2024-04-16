@@ -1,7 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {IonAccordionGroup, IonicModule} from '@ionic/angular';
-import {Observable, of, take} from 'rxjs';
+import {Observable, filter, of, take} from 'rxjs';
 import {User} from '../../store/user/user.model';
 import {UserAvatarComponent} from '../user-avatar/user-avatar.component';
 import {UserService} from 'src/app/services/user/user.service';
@@ -48,11 +48,14 @@ export class ProfileHeaderComponent implements OnInit {
     //   this.user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
     this.userService.getUser().pipe(take(1)).subscribe((curUser) => {
       console.log("current User", curUser);
-      this.athlete$.pipe(take(2)).subscribe((dsplUser) => {
-        console.log("display User", dsplUser);
-        this.showPersonalData = (dsplUser?.id == curUser?.id);
-        console.log("showPersonalData", this.showPersonalData);
-      })
+      this.athlete$
+        .pipe(filter(usr => usr != undefined))
+        .pipe(take(1))
+        .subscribe((dsplUser) => {
+          console.log("display User", dsplUser);
+          this.showPersonalData = (dsplUser?.id == curUser?.id);
+          console.log("showPersonalData", this.showPersonalData);
+        })
     })
     this.user$ = this.athlete$;
     console.log("profile header ngOnInit scores$", this.scores$);
