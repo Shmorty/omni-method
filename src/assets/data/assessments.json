@@ -690,7 +690,7 @@
           "label": "Handstand",
           "category": "Inversion",
           "thumbnail": "/assets/images/skills/handstand_thumbnail.png",
-          "video": "/assets/video/skills/handstand_demo.mp4"
+          "video": "content/videos/skill_demo/balance/handstand_demo.mp4"
         },
         {"label": "2 Feet on Toes Tree", "category": "Standing"},
         {"label": "2 Sticks Palms Up", "category": "Equipment"},
