@@ -18,5 +18,15 @@
 			"launchAutoHide": true,
 			"launchShowDuration": 3000
 		}
-	}
+	},
+	"packageClassList": [
+		"AppPlugin",
+		"CAPCameraPlugin",
+		"HapticsPlugin",
+		"KeyboardPlugin",
+		"CAPNetworkPlugin",
+		"SplashScreenPlugin",
+		"StatusBarPlugin",
+		"TextZoomPlugin"
+	]
 }

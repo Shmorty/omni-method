@@ -5,6 +5,7 @@ export interface Assessment {
   aid?: string;
   cid?: string;
   icon: string;
+  abrv: string;
   label: string;
   description?: string;
   instruction?: string[];
@@ -18,6 +19,7 @@ export interface Assessment {
   units?: string;
   entryUnits?: string;
   scores?: Score[];
+  video?: string;
   warning?: string;
 }
 
@@ -25,6 +27,7 @@ export interface Category {
   cid: string;
   seq?: number;
   label: string;
+  abrv: string;
   categoryAverage?: number;
 }
 

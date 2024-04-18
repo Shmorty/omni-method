@@ -5,8 +5,11 @@ import {TextZoom} from '@capacitor/text-zoom';
 import {App} from '@capacitor/app';
 import {Network} from '@capacitor/network';
 import {PluginListenerHandle} from '@capacitor/core';
+import {register} from 'swiper/element/bundle';
 
 // import { GoogleSigninService } from './google-signin.service';
+
+register();
 
 @Component({
   selector: 'app-root',
@@ -55,7 +58,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   async startListeningToNetworkStatus() {
     // initialize Network status
-    this.networkListener = Network.addListener('networkStatusChange', status => {
+    // this.networkListener =
+    Network.addListener('networkStatusChange', status => {
       console.log('Network status changed', status);
       this.ngZone.run(() => {
         this.statusChanged(status);
@@ -69,9 +73,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   stopListeningToNetworkStatus() {
-    if (this.networkListener) {
-      this.networkListener.remove();
-    }
+    // if (this.networkListener) {
+    //   this.networkListener.remove();
+    // }
+    Network.removeAllListeners();
   }
 
 }

@@ -47,10 +47,26 @@ const routes: Routes = [
       },
       {
         path: 'community',
-        loadChildren: () =>
-          import('../community/community.module').then(
-            (m) => m.CommunityPageModule
-          ),
+        // loadChildren: () =>
+        //   import('../community/community.module').then(
+        //     (m) => m.CommunityPageModule
+        //   ),
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../community/community.module').then(
+                (m) => m.CommunityPageModule
+              ),
+          },
+          {
+            path: 'athlete',
+            loadChildren: () =>
+              import('../ranking-detail/ranking-detail.module').then(
+                (m) => m.RankingDetailPageModule
+              ),
+          },
+        ]
       },
       {
         path: '',

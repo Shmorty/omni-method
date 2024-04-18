@@ -57,14 +57,14 @@ const routes: Routes = [
         (m) => m.ForgotPasswordPageModule
       ),
   },
-  {
-    path: 'community',
-    loadChildren: () => import('./pages/community/community.module').then(m => m.CommunityPageModule)
-  },
-  {
-    path: 'ranking-detail',
-    loadChildren: () => import('./pages/ranking-detail/ranking-detail.module').then(m => m.RankingDetailPageModule)
-  },
+  // {
+  //   path: 'community',
+  //   loadChildren: () => import('./pages/community/community.module').then(m => m.CommunityPageModule)
+  // },
+  // {
+  //   path: 'ranking-detail',
+  //   loadChildren: () => import('./pages/ranking-detail/ranking-detail.module').then(m => m.RankingDetailPageModule)
+  // },
   {
     path: 'onboarding',
     loadChildren: () => import('./pages/onboarding/onboarding.module').then(m => m.OnboardingPageModule)

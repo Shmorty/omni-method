@@ -13,16 +13,18 @@
 }
 #omniScore {
     margin: auto;
+    text-align: center;
     .omni-label {
       font-weight: 700;
       padding-top: 10px;
     }
     .omni-score {
-      font-size: 2em;
+      font-size: 2.25em;
       font-weight: 700;
       // padding-bottom: 10px;
-      text-align: center;
       margin-bottom: 10px;
+      // glow effect
+      text-shadow: 0 0 32px rgba(255, 255, 255, 0.7);
     }
 }
 user-avatar {
@@ -32,12 +34,39 @@ user-avatar {
     font-size: 2em;
     font-weight: bold;
     margin: auto;
+    white-space: nowrap;
+}
+.name ion-label {
+    height: 1.25em;
+    margin-bottom: 0;
+}
+.username {
+    font-size: inherit;
+    margin: auto;
+    white-space: nowrap;
+}
+.username ion-label {
+    margin-top: 0;
 }
 .more-button {
     background-color: transparent;
     width: 100%;
 }
-    .rotate-button {
+.rotate-button {
     transform: rotate(180deg);
 }
-  
+.chart-swiper {
+    text-align: center;
+    width: 100%;
+    height: 330px;
+    --swiper-pagination-bullet-inactive-color: var(--ion-color-light-tint, gray);
+    --swiper-pagination-color: var(--ion-color-light, white);
+}
+.chart-slide {
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    // justify-content: center;
+    // width: 100%;
+    // height: 100px;
+}

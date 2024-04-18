@@ -1,4 +1,3 @@
-// import { createAction, props } from "@ngrx/store";
 import * as fireAuth from '@angular/fire/auth';
 import {createAction, props} from '@ngrx/store';
 import {Score} from '../models/score.model';

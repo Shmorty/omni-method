@@ -1,15 +1,30 @@
-import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AfterViewInit, CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {NavigationExtras, Router} from '@angular/router';
 import {Capacitor} from '@capacitor/core';
 import {StatusBar, Style} from '@capacitor/status-bar';
-import {AlertController, isPlatform} from '@ionic/angular';
+import {AlertController, IonicModule, isPlatform} from '@ionic/angular';
+import {SwiperOptions} from 'swiper/types';
 
 @Component({
+  standalone: true,
   selector: 'app-training',
   templateUrl: './training.page.html',
   styleUrls: ['./training.page.scss'],
+  imports: [CommonModule, FormsModule, IonicModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class TrainingPage implements OnInit {
+export class TrainingPage implements OnInit, AfterViewInit {
+  @ViewChild('trainingSwiper', {read: ElementRef, static: false}) trainingSwiper?: ElementRef;
+  public trainingSlidesOptions: SwiperOptions = {
+    slidesPerView: 1.2,
+    navigation: true,
+    slidesOffsetBefore: 5,
+    spaceBetween: 10,
+    slidesOffsetAfter: 5,
+  };
+
   constructor(private router: Router, private alertController: AlertController) {}
 
   buttonList = [
@@ -35,6 +50,8 @@ export class TrainingPage implements OnInit {
     ];
 
   }
+
+  ngAfterViewInit(): void {}
 
   ionViewWillEnter() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');

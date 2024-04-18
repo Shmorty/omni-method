@@ -1,13 +1,15 @@
 import {CommonModule} from '@angular/common';
-import {Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {IonAccordionGroup, IonicModule} from '@ionic/angular';
-import {Observable} from 'rxjs';
+import {Observable, filter, of, take} from 'rxjs';
 import {User} from '../../store/user/user.model';
 import {UserAvatarComponent} from '../user-avatar/user-avatar.component';
-import * as UserSelectors from 'src/app/store/user/user.selectors';
 import {UserService} from 'src/app/services/user/user.service';
-import {Store} from '@ngrx/store';
-import {delay} from 'rxjs/operators';
+import {CategoryChartComponent} from '../category-chart/category-chart.component';
+import {AssessmentChartComponent} from '../assessment-chart/assessment-chart.component';
+import {SwiperOptions} from 'swiper/types';
+import {Pagination} from 'swiper/modules';
+import {Score} from 'src/app/store/models/score.model';
 
 @Component({
   selector: 'app-profile-header',
@@ -18,41 +20,63 @@ import {delay} from 'rxjs/operators';
     CommonModule,
     IonicModule,
     UserAvatarComponent,
+    CategoryChartComponent,
+    AssessmentChartComponent
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ProfileHeaderComponent implements OnInit {
-
   @Input() background: any;
-  public user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
-  @ViewChild('accordionGroup') accordionGroup: IonAccordionGroup;
-  moreOpen: boolean = false;
+  @ViewChild('swiper', {static: false}) swiper;
+  @Input() athlete$: Observable<User>;
+  @Input() scores$: Observable<Score[]>;
+  public user$: Observable<User>;
+  showChart = false;
+  showPersonalData = false;
+
+  public chartSlidesOptions: SwiperOptions = {
+    slidesPerView: 1,
+  };
 
   constructor(
-    private store: Store,
     public userService: UserService,
     public element: ElementRef,
     public renderer: Renderer2
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    //   this.user$ = this.store.select(UserSelectors.selectUser); //.pipe(delay(5000));
+    this.userService.getUser().pipe(take(1)).subscribe((curUser) => {
+      console.log("current User", curUser);
+      this.athlete$
+        .pipe(filter(usr => usr != undefined))
+        .pipe(take(1))
+        .subscribe((dsplUser) => {
+          console.log("display User", dsplUser);
+          this.showPersonalData = (dsplUser?.id == curUser?.id);
+          console.log("showPersonalData", this.showPersonalData);
+        })
+    })
+    this.user$ = this.athlete$;
+    console.log("profile header ngOnInit scores$", this.scores$);
+  }
+
 
   ngAfterViewInit() {
-    console.log("set backgroune", this.background);
+    console.log("set background", this.background);
     console.log("element", this.element);
     this.renderer.setStyle(this.element.nativeElement, 'background', this.background);
+    console.log("ngAfterViewInit setTimeout");
+    setTimeout(() => {
+      console.log("timeout begin");
+      this.swiper?.nativeElement.initialize(Pagination);
+      console.log("timeout done");
+    });
+    console.log("ngAfterViewInit done");
   }
 
   toggleAccordion(event) {
-    const nativeEl = this.accordionGroup;
-    console.log(nativeEl);
-    console.log(event.target);
-    // if (nativeEl.value === 'moreProfile') {
-    //   nativeEl.value = undefined;
-    //   this.moreOpen = false;
-    // } else {
-    //   nativeEl.value = 'moreProfile';
-    //   this.moreOpen = true;
-    // }
+    this.showChart = !this.showChart;
   }
 
 }

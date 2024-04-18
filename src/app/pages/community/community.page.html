@@ -34,7 +34,7 @@
         <ion-text color="medium" slot="end">Score</ion-text>
       </ion-item>
       <ion-item *ngFor="let athlete of ranking$ | async; let i = index"
-        (click)="showDetail(athlete)" ngClass="{{highlightUser(athlete)}}"
+        (click)="openDetails(athlete)" ngClass="{{highlightUser(athlete)}}"
         color="{{highlightUser(athlete)}}"
         lines="full">
         <ion-text class="rank" slot="start">{{i+1}}</ion-text>
@@ -43,7 +43,7 @@
           <img *ngIf="!athlete.avatar" src="/assets/images/icons/NoProfilePic.png">
           <!-- <ion-icon *ngIf="!athlete.avatar" name="person-outline"></ion-icon> -->
         </ion-avatar>
-        <ion-text *ngIf="athlete.username">@{{athlete.username}}</ion-text>
+        <ion-text *ngIf="athlete.username">&#64;{{athlete.username}}</ion-text>
         <ion-text *ngIf="!athlete.username">{{athlete.firstName}} {{athlete.lastName}}</ion-text>
         <ion-text class="score" slot="end">{{athlete.omniScore | number}}</ion-text>
       </ion-item>

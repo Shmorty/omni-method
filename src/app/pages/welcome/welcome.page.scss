@@ -1,6 +1,7 @@
 ion-content {
-  --ion-background-color:linear-gradient(rgba(19, 122, 173, 0.2), rgba(0, 0, 0, 0));
-  // --ion-text-color: white;
+  // --ion-background-color:linear-gradient(rgba(0, 0, 0, 0), rgba(19, 122, 173, 0.2));
+  // --ion-background-color: linear-gradient(rgba(var(--ion-color-primary-rgb), 0.05), rgba(var(--ion-color-primary-rgb), 0.3));
+  --ion-background-color: linear-gradient(rgba(0, 116, 252, 0), rgba(0, 116, 252, 0.29));
   --padding-top: 32px;
 }
 
@@ -14,7 +15,21 @@ img.center {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 20%;
+  width: 30%;
   padding-top: 30px;
   padding-bottom: 30px;
+}
+.character-logo > p {
+  font-size: 30vw;
+  font-weight: 575;
+  letter-spacing: 30px 0;
+  text-align: center;
+  // O_Dark.png
+  // background: -webkit-linear-gradient(#53a3e8, #2c5d87);
+  // O_Light.png
+  background: -webkit-linear-gradient(#52aaf8, #90cdfa);
+  // svg fill 
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

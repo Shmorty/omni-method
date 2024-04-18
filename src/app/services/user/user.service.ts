@@ -4,7 +4,7 @@ import {
 } from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, of, throwError} from 'rxjs';
-import {catchError, first, map, single, take, tap} from 'rxjs/operators';
+import {catchError, filter, first, map, single, take, tap} from 'rxjs/operators';
 import {User} from '../../store/user/user.model';
 import {IUserService} from './user.service.interface';
 import {Score} from '../../store/models/score.model';
@@ -39,21 +39,13 @@ export class UserService implements IUserService {
 
   // get user from store
   getUser() {
-    return this.store.select(selectUser);
+    return this.store.select(selectUser).pipe(filter(usr => usr !== null));
   }
 
   reloadUser() {
     this.store.select(selectAuthUser).subscribe((authUser) => {
       this.store.dispatch(UserActions.loadUserAction({uid: authUser?.user.uid}));
     });
-  }
-
-  getUserRankings(): Observable<User[]> {
-    // get from firestore
-    const sortFn = (a, b) => {
-      return (a.omniScore < b.omniScore) ? 1 : (a.omniScore > b.omniScore) ? -1 : 0;
-    }
-    return this.firestoreService.getAllUsers().pipe(map((data) => data.sort(sortFn)));
   }
 
   isUsernameAvailable(username: string) {

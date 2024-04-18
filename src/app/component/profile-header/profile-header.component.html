@@ -3,7 +3,7 @@
     <ion-item id="omniScore" lines="none" color="none">
       <span>
         <ion-label class="omni-label">Omni Score</ion-label>
-        <ion-label class="omni-score">{{user.omniScore | number}}</ion-label>
+        <ion-label class="omni-score">&nbsp;{{user.omniScore | number}}&nbsp;</ion-label>
       </span>
     </ion-item>
     <ion-item lines="none" color="none">
@@ -12,10 +12,14 @@
       <!-- (click)="userService.openEditProfile($event, user)" -->
       </user-avatar>
     </ion-item>
-    <ion-item lines="none" color="none" text-center class="name">
+    <ion-item [hidden]="!showPersonalData" lines="none" color="none" text-center class="name">
       <ion-label> {{user.firstName}} {{user.lastName}} </ion-label>
     </ion-item>
-    <ion-item lines="none" color="none">
+    <ion-item lines="none" color="none" text-center 
+    class="{{showPersonalData ? 'username' : 'name'}}">
+      <ion-label>&#64;{{user.username}}</ion-label>
+    </ion-item>
+    <ion-item [hidden]="!showPersonalData" lines="none" color="none">
       <ion-grid class="ion-text-center">
         <ion-row>
           <ion-col>
@@ -36,22 +40,31 @@
       </ion-grid>
     </ion-item>
 
-    <ion-item lines="none" color="none" style="--min-height: 0">
-      <ion-accordion-group #accordionGroup>
-        <ion-accordion value="moreProfile">
-          <div slot="content" style="height: 44px">
-          </div>
-        </ion-accordion>
-      </ion-accordion-group>
+    <ion-item [hidden]="!showChart" lines="none" color="none" style="padding-top: 30px;">
+      <!-- <app-category-chart [user]="user"></app-category-chart> -->
+      <!-- <app-assessment-chart [user]="user"></app-assessment-chart> -->
+      <swiper-container #swiper class="chart-swiper" [pagination]="true">
+        <!-- [config]="chartSlidesOptions"> -->
+        <swiper-slide class="chart-slide">
+          <app-category-chart [user]="user"></app-category-chart>
+        </swiper-slide>
+        <ng-container *ngIf="scores$">
+          <swiper-slide class="chart-slide">
+            <app-assessment-chart [user]="user" [scores$]="scores$"></app-assessment-chart>
+          </swiper-slide>
+          </ng-container>
+      </swiper-container>
     </ion-item>
-    <!-- <ion-item lines="none" color="none">
+
+    <ion-item lines="none" color="none">
       <ion-button
         class="more-button"
-        [ngClass]="moreOpen ? 'rotate-button' : ''"
+        color="none"
+        [ngClass]="showChart ? 'rotate-button' : ''"
         (click)="toggleAccordion($event)"
         ><ion-icon name="chevron-down"></ion-icon
       ></ion-button>
-    </ion-item> -->
+    </ion-item>
   </ng-container>
 
   <ng-template #loading>

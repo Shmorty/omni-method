@@ -8,6 +8,17 @@ ion-thumbnail[slot="start"] {
 ion-header ion-toolbar ion-list ion-item {
     text-align: center;
 }
+.safe-area {
+    background-color: #b8dfff;
+    height: var(--ion-safe-area-top, 0);
+}
+ion-refresher {
+    background-color: #b8dfff;
+    height: 100%;
+}
+ion-refresher-content {
+    height: 60px;
+}
 .bg-transparent {
   --ion-item-background: transparent;
 }
@@ -23,7 +34,8 @@ ion-header ion-toolbar ion-list ion-item {
 }
 .score {
     color: white;
-    background-color: #35b5ff;
+    // background-color: #35b5ff;
+    background-color: "primary";
     border-radius: 12px;
     float: right;
     font-size: larger;
@@ -53,4 +65,11 @@ ion-badge {
 }
 .bottom-padding {
     min-height: 3%;
+}
+.more-button {
+    background-color: transparent;
+    width: 100%;
+}
+.rotate-button {
+    transform: rotate(180deg);
 }

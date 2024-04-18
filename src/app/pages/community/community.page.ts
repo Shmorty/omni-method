@@ -1,12 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AlertController, IonModal, ModalController, isPlatform} from '@ionic/angular';
-import {UserService} from 'src/app/services/user/user.service';
-import {User} from 'src/app/store/user/user.model';
+import {User} from '../../store/user/user.model';
 import {OverlayEventDetail} from '@ionic/core/components';
 import {RankingDetailPage} from '../ranking-detail/ranking-detail.page';
 import {Observable} from 'rxjs';
 import {StatusBar, Style} from '@capacitor/status-bar';
 import {Capacitor} from '@capacitor/core';
+import {CommunityService} from '../../services/community/community.service';
+import {Router} from '@angular/router';
 
 export enum View {
   Rankings = 'Rankings',
@@ -29,15 +30,20 @@ export class CommunityPage implements OnInit {
   name: string;
   message: string;
 
-  constructor(private userService: UserService,
-    private modalCtrl: ModalController) {
-    this.userService.getUser().subscribe((usr) => {
-      this.curUserId = usr.id;
-      this.ranking$ = this.userService.getUserRankings();
-    });
+  constructor(
+    private communityService: CommunityService,
+    private modalCtrl: ModalController,
+    private router: Router,
+  ) {
+
+    // loadAllUsers
+    communityService.loadAllUsers();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // getAllUsersByScore
+    this.ranking$ = this.communityService.getAllUsersByScore();
+  }
 
   ionViewWillEnter() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
@@ -65,6 +71,13 @@ export class CommunityPage implements OnInit {
   // segmentChange(event) {
   //   console.log("segmentChange", event);
   // }
+
+  openDetails(athlete: User) {
+    // load selected user
+    this.communityService.loadSelectedUser(athlete.id);
+    // go to detail page
+    this.router.navigate(['/home/community/athlete']);
+  }
 
   async showDetail(athlete: User) {
     console.log("showDetail athlete", athlete);
