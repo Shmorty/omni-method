@@ -1,8 +1,9 @@
 {
   "name": "omni-method",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "version": "1.4.0",
+  "author": "Omni Method LLC",
+  "description": "the all-in-one fitness app",
+  "homepage": "https://www.omnimethod.app/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -92,7 +93,6 @@
     "ts-node": "8.10.2",
     "typescript": "^5.3.3"
   },
-  "description": "An Ionic project",
   "browserslist": [
     "Chrome >=61",
     "ChromeAndroid >=61",

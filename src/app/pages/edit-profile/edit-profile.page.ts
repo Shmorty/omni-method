@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import {Keyboard} from '@capacitor/keyboard';
-import {AlertController, IonModal, isPlatform, ModalController, PickerColumn, PickerColumnOption, PickerController} from '@ionic/angular';
+import {AlertController, IonModal, ModalController, PickerColumn, PickerColumnOption, PickerController, isPlatform} from '@ionic/angular';
 import {OverlayEventDetail} from '@ionic/core/components';
 import {Subscription, delay} from 'rxjs';
 import {EditPropertyComponent} from '../../component/edit-property/edit-property.component';
@@ -16,6 +16,7 @@ import {AuthService} from '../../services/auth.service';
 import {UserService} from '../../services/user/user.service';
 import {User} from '../../store/user/user.model';
 import {NumberPickerService} from 'src/app/services/number-picker.service';
+import {Camera, CameraResultType} from '@capacitor/camera';
 
 @Component({
   selector: 'edit-profile-page',
@@ -96,7 +97,7 @@ export class EditProfilePage implements OnInit, OnDestroy {
       }
     }
   ]
-
+  isAvatarOptionOpen = false;
   name: string;
   public user$ = this.userService.getUser(); // .pipe(delay(5000));
 
@@ -233,6 +234,7 @@ export class EditProfilePage implements OnInit, OnDestroy {
       cssClass: "custom-popover",
     });
     modal.present();
+    this.setAvatarOpen(false);
 
     const {data, role} = await modal.onWillDismiss();
 
@@ -243,8 +245,37 @@ export class EditProfilePage implements OnInit, OnDestroy {
     }
   }
 
-  // openPicker(user: User, targetProperty: string) {
-  //   this.numberPickerService.openProfilePicker(user, targetProperty);
-  // }
+  setAvatarOpen(isOpen: boolean) {
+    console.log("setAvatarOpen", isOpen);
+    this.isAvatarOptionOpen = isOpen;
+  }
+
+  chooseFromLibrary() {
+    this.setAvatarOpen(false);
+  }
+
+
+  takePhoto() {
+    this.setAvatarOpen(false);
+    const takePicture = async () => {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.Uri
+      });
+
+      var imageUrl = image.webPath;
+
+      console.log("imageUrl", imageUrl);
+    }
+    if (isPlatform('pwa')) {
+      alert("camera not supported in pwa");
+    } else if (isPlatform('desktop')) {
+      alert("camera not supported on desktop");
+    } else {
+      takePicture();
+    }
+  }
+
 }
 

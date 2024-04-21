@@ -60,7 +60,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Omni Method requires access to photos to allow sharing.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Omni Method requires camera access to set profile pic and allow sharing.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Omni Method requires photos access to create profile pic and allow sharing.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Omni Method requires photos access to set profile pic and allow sharing.</string>
 </dict>
 </plist>
