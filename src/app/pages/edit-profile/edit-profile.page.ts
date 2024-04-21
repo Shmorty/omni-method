@@ -16,7 +16,7 @@ import {AuthService} from '../../services/auth.service';
 import {UserService} from '../../services/user/user.service';
 import {User} from '../../store/user/user.model';
 import {NumberPickerService} from 'src/app/services/number-picker.service';
-import {Camera, CameraResultType} from '@capacitor/camera';
+import {Camera, CameraResultType, CameraSource} from '@capacitor/camera';
 
 @Component({
   selector: 'edit-profile-page',
@@ -98,6 +98,7 @@ export class EditProfilePage implements OnInit, OnDestroy {
     }
   ]
   isAvatarOptionOpen = false;
+  public imageUrl: string;
   name: string;
   public user$ = this.userService.getUser(); // .pipe(delay(5000));
 
@@ -252,30 +253,30 @@ export class EditProfilePage implements OnInit, OnDestroy {
 
   chooseFromLibrary() {
     this.setAvatarOpen(false);
+    this.getPicture(CameraSource.Photos);
   }
 
 
   takePhoto() {
     this.setAvatarOpen(false);
-    const takePicture = async () => {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: true,
-        resultType: CameraResultType.Uri
-      });
+    this.getPicture(CameraSource.Camera);
+  }
 
-      var imageUrl = image.webPath;
+  // camera plugin
+  getPicture = async (source: CameraSource) => {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      saveToGallery: true,
+      resultType: CameraResultType.DataUrl,
+      source: source
+    });
 
-      console.log("imageUrl", imageUrl);
-    }
-    if (isPlatform('pwa')) {
-      alert("camera not supported in pwa");
-    } else if (isPlatform('desktop')) {
-      alert("camera not supported on desktop");
-    } else {
-      takePicture();
-    }
+    this.imageUrl = image.dataUrl;
+    console.log("imageUrl", this.imageUrl);
+    const user = this.profileForm.value as User;
+    user.avatar = image.dataUrl;
+    this.userService.updateUser(user);
   }
 
 }
-
