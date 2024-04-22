@@ -4,7 +4,9 @@ import {Score} from '../models/score.model';
 import {User} from './user.model';
 
 export enum UserActionType {
+  USER_AUTHENTICATION_START = '[User Login] Authentication Start',
   USER_AUTHENTICATED = '[User Login] User Authenticated',
+  USER_AUTHENTICATION_FAILURE = '[User Login] Authentication Failed',
   USER_LOGOUT = '[User Logout] User Logout',
   LOAD_USER = '[User Login] Load User',
   UPDATE_USER = '[User Profile Page] Update User',
@@ -26,10 +28,15 @@ export enum UserActionType {
   DELETE_USER_SUCCESS = '[User API] Delete User Successful',
 }
 
+export const userAuthenticationStart = createAction(UserActionType.USER_AUTHENTICATION_START);
 export const userAuthenticated = createAction(
   UserActionType.USER_AUTHENTICATED,
   props<{payload: any}>()
 );
+export const userAuthenticationFailed = createAction(
+  UserActionType.USER_AUTHENTICATION_FAILURE,
+  props<{error: any}>()
+)
 export const logoutAction = createAction(UserActionType.USER_LOGOUT);
 export const loadUserAction = createAction(
   UserActionType.LOAD_USER,
