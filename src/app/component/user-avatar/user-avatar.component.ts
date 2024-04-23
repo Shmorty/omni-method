@@ -34,9 +34,14 @@ import {User} from 'src/app/store/user/user.model';
         width: 64px;
         height: 64px;
       }
+      #avatar img {
+        border-radius: 50%;
+      }
+      /*
       .avatar-container {
         padding-top: 8px;
       }
+      */
       #icon {
           color: var(--ion-color-primary);
           position: absolute;

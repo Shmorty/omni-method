@@ -24,7 +24,7 @@ export class EditChecklistComponent implements OnInit {
   public assessment$: Observable<Assessment>;
   @Input() score$: Observable<Score>;
   public curScore: Score;
-  private checklistChanged: boolean = false;
+  // private checklistChanged: boolean = false;
   public category: string;
 
   constructor(
@@ -50,7 +50,7 @@ export class EditChecklistComponent implements OnInit {
       this.curScore = score;
       if (this.curScore && this.curScore.checklist) {
         this.displayChecked = Array.from(this.curScore.checklist);
-        this.checked.emit(this.displayChecked);
+        // this.checked.emit(this.displayChecked);
       }
     });
 
@@ -65,11 +65,12 @@ export class EditChecklistComponent implements OnInit {
     return this.displayChecked[item] ? "checked" : "hide-check";
   }
 
-  toggleCheckItem(item) {
+  toggleCheckItem(e, item) {
+    e.stopPropagation();
     this.displayChecked[item] = !this.displayChecked[item];
     this.checked.emit(this.displayChecked);
-    this.checklistChanged = true;
-    this.routerOutlet.swipeGesture = false;
+    // this.checklistChanged = true;
+    // this.routerOutlet.swipeGesture = false;
     console.log("toggleCheckItem", item, this.displayChecked[item]);
   }
 

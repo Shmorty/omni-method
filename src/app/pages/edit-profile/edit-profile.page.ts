@@ -16,7 +16,7 @@ import {AuthService} from '../../services/auth.service';
 import {UserService} from '../../services/user/user.service';
 import {User} from '../../store/user/user.model';
 import {NumberPickerService} from 'src/app/services/number-picker.service';
-import {Camera, CameraResultType, CameraSource} from '@capacitor/camera';
+import {Camera, CameraDirection, CameraResultType, CameraSource} from '@capacitor/camera';
 
 @Component({
   selector: 'edit-profile-page',
@@ -263,13 +263,14 @@ export class EditProfilePage implements OnInit, OnDestroy {
   }
 
   // camera plugin
-  getPicture = async (source: CameraSource) => {
+  getPicture = async (cameraSource: CameraSource) => {
     const image = await Camera.getPhoto({
       quality: 90,
-      allowEditing: false,
+      direction: CameraDirection.Front,
+      allowEditing: true,
       saveToGallery: true,
       resultType: CameraResultType.DataUrl,
-      source: source
+      source: cameraSource
     });
 
     this.imageUrl = image.dataUrl;
