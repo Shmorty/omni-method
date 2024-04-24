@@ -252,6 +252,104 @@ login with email
 {payload: {…}, type: '[User Login] User Authenticated'}
 ```
 
+## Image Cropping and Transformation with Ionic Angular
+
+Tutorial <https://www.youtube.com/watch?v=06K7nzGYRtU>
+
+### Setup
+
+Install packages
+
+- "ngx-image-cropper" <https://github.com/Mawi137/ngx-image-cropper>
+-- (wraps package cropper.js)
+- "hammerjs" for mobile gestures
+
+update main.js
+
+```
+import "hammerjs"; 
+```
+
+add ImageCropperModule to component
+
+css
+
+```css
+--cropper-outline-color: rgba(0, 0, 0, 0.5);
+--cropper-overlay-color: var(--ion-background-color);
+```
+
+TypeScript
+
+```javascript
+@ViewChild('cropper') cropper: ImageCropperComponent;
+isMobile = Capacitor.getPlatform() !== 'web';
+transform: ImageTransform = {};
+
+constructor(private loadingCtrl: LoadingController){}
+
+selectImage() {
+  cconst image = await Camera.getPhoto({
+    quality: 100,
+    allowEditing: true,
+    resultType: CameraResultType.Base64,
+  });
+  const loading = await this.loadingCtrl.create();
+  await loading.present();
+
+  this.myImage = `data:image/jpeg;base64,...`
+  this.croppedImage = null;
+}
+imageLoaded(){
+  this.loadingCtrl.dismiss();
+}
+loadImageFailed() {
+  console.log("Image load failed");
+}
+cropImage() {
+  this.croppedImage = this.cropper.crop().base64;
+  this.myImage = null;
+}
+rotate() {
+  const newValue = ((this.transform.rotate ?? 0) + 90) % 360;
+  this.transform = {
+    ...this.transform,
+    rotate: newValue
+  }
+}
+flipHorizontal() {
+  this.transform = {
+    ...this.transform,
+    flipH: !this.transform.flipH
+  }
+}
+flipVertical() {
+  this.transform = {
+    ...this.transform,
+    flipV: !this.transform.flipV
+  }
+}
+```
+
+HTML template
+
+```html
+<ion-button (click)="selectImage()" *ngIf="!myImage">
+<image-cropper
+  #cropper
+  [autoCrop]="false"
+  [imageBase64]="myImage"
+  [hideResizeSquares]="isMobile"
+  [maintainAspectRatio]="true"
+  [aspectRatio]="1 / 1"
+  format="png"
+  (imageLoaded)="imageLoaded()"
+  (loadImageFailed)="loadImageFailed()"
+  [transform]="transform"
+></image-cropper>
+<img [src]="croppedImage" *ngIf="croppedImage">
+```
+
 ## Google Cloud Media CDN
 
 > Notes from current attempt to setup video streaming for the app.
