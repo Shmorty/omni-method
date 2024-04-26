@@ -15,7 +15,7 @@ need to install
 - capacitor
   npm i -g @ionic/cli
 
-```
+```text
 % npm -g list
 /usr/local/lib
 ├── @angular/cli@15.2.4
@@ -34,8 +34,8 @@ need to install
 
 July 16, 2023
 
-```
-% npm -g list         
+```bash
+$ npm -g list         
 /usr/local/lib
 ├── @angular/cli@16.1.4
 ├── @aws-amplify/cli@12.1.1
@@ -195,20 +195,24 @@ graph TD
     C -->|Connect| F[Find Friends]
 ```
 
-#### setup App Icon for capacitor
+## setup App Icon for capacitor
 
 1. install cordova-res
 
-> `npm install -g cordova-res`
+   ```bash
+   npm install -g cordova-res
+   ```
 
 2. create files
 
-- resources/icon.png
-- resources/splash.png
+   ```text
+   - resources/icon.png
+   - resources/splash.png
+   ```
 
-3.
+3. run ionic plugin configuration script
 
-### Firebase
+## Firebase
 
 [Simon Grimm - Google login tutorial](https://www.youtube.com/watch?v=GwtpoWZ_78E)
 
@@ -219,7 +223,7 @@ graph TD
 Firebase authentication for capacitor
 [github](https://github.com/chemerisuk/cordova-plugin-firebase-authentication)
 
-```
+```bash
 npm install cordova-plugin-firebase-authentication 
 npm install @awesome-cordova-plugins/firebase-authentication 
 ionic cap sync
@@ -228,7 +232,7 @@ ionic cap sync
 GooglePlus for capacitor
 [github](https://github.com/EddyVerbruggen/cordova-plugin-googleplus)
 
-```
+```bash
 npm install cordova-plugin-googleplus 
 npm install @awesome-cordova-plugins/google-plus 
 ionic cap sync
@@ -266,7 +270,7 @@ Install packages
 
 update main.js
 
-```
+```javascript
 import "hammerjs"; 
 ```
 
@@ -359,7 +363,7 @@ Install gcloud CLI: <https://cloud.google.com/sdk/docs/install>
 Run ```gcloud cheat-sheet``` or refer to the gcloud command-line tool cheat
     sheet: <https://cloud.google.com/sdk/docs/cheatsheet>
 
-### Setup
+### Google Cloud CLI Setup
 
 Login to google cloud:
 
