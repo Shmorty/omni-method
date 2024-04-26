@@ -19,7 +19,7 @@
 
   <ion-list *ngIf="user$ | async as user; else loading ">
     <!-- <div class="avatar" (click)="openModal('avatar')"> -->
-    <div id="choose-avatar" (click)="setAvatarOpen(true)" class="avatar">
+    <div id="choose-avatar" (click)="setAvatarOptionOpen(true)" class="avatar">
       <user-avatar [user]="user" class="avatar"></user-avatar>
       <ion-button color="medium" shape="round" size="small">edit</ion-button>
     </div>
@@ -70,7 +70,10 @@
     <ion-spinner color="primary"></ion-spinner>
   </ng-template>
 
-  <ion-modal [isOpen]="isAvatarOptionOpen" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+  <ion-modal id="avatarOption"
+    [isOpen]="isAvatarOptionOpen"
+    (ionModalDidDismiss)="onDidDismiss($event)"
+    [initialBreakpoint]="1" [breakpoints]="[0, 1]">
     <ng-template>
       <ion-header>
         <ion-toolbar color="default">

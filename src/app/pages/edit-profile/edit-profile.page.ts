@@ -98,6 +98,7 @@ export class EditProfilePage implements OnInit, OnDestroy {
     }
   ]
   isAvatarOptionOpen = false;
+  @ViewChild('avatarOption') avatarOptionModal: IonModal;
   public imageUrl: string;
   name: string;
   public user$ = this.userService.getUser(); // .pipe(delay(5000));
@@ -144,6 +145,7 @@ export class EditProfilePage implements OnInit, OnDestroy {
         this.userService.updateUser(val as User);
       }
       );
+    // this.avatarOptionModal.didDismiss
   }
 
   ngOnDestroy(): void {
@@ -235,7 +237,7 @@ export class EditProfilePage implements OnInit, OnDestroy {
       cssClass: "custom-popover",
     });
     modal.present();
-    this.setAvatarOpen(false);
+    this.setAvatarOptionOpen(false);
 
     const {data, role} = await modal.onWillDismiss();
 
@@ -246,19 +248,23 @@ export class EditProfilePage implements OnInit, OnDestroy {
     }
   }
 
-  setAvatarOpen(isOpen: boolean) {
-    console.log("setAvatarOpen", isOpen);
+  setAvatarOptionOpen(isOpen: boolean) {
+    console.log("setAvatarOptionOpen", isOpen);
     this.isAvatarOptionOpen = isOpen;
   }
 
+  onDidDismiss(ev: Event) {
+    this.setAvatarOptionOpen(false);
+  }
+
   chooseFromLibrary() {
-    this.setAvatarOpen(false);
+    this.setAvatarOptionOpen(false);
     this.getPicture(CameraSource.Photos);
   }
 
 
   takePhoto() {
-    this.setAvatarOpen(false);
+    this.setAvatarOptionOpen(false);
     this.getPicture(CameraSource.Camera);
   }
 
