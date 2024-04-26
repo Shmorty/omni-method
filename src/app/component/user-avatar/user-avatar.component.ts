@@ -8,20 +8,14 @@ import {User} from 'src/app/store/user/user.model';
   standalone: true,
   selector: 'user-avatar',
   template: `
-    <ion-avatar id="avatar" color="color">
-      <div class="avatar-container" *ngIf="user.avatar">
-        <img src="{{ user.avatar }}" />
-      </div>
+    <ion-avatar>
+      <img src="{{ user.avatar }}" *ngIf="user.avatar" />
       <img *ngIf="!user.avatar" src="/assets/images/icons/NoProfilePic.png">
-      <!-- <ion-label *ngIf="!user.avatar" class="textAvatar" color="color">
-        {{userInitial()}}
-      </ion-label> -->
-      <!-- <ion-icon *ngIf="!user.avatar" name="person-outline" class="avatar-icon"></ion-icon> -->
     </ion-avatar>
   `,
   styles: [
     `
-      #avatar {
+      ion-avatar {
         background-color: var(--ion-color-light);
         border: solid 0.5px var(--ion-color-medium);
         border-radius: 50%;
@@ -29,44 +23,12 @@ import {User} from 'src/app/store/user/user.model';
         margin: auto;
         padding-left: 0px;
         /* aspect-ratio: 1 / 1; */
-        /* overflow: hidden; */
         position:relative;
         width: 64px;
         height: 64px;
       }
-      #avatar img {
+      ion-avatar img {
         border-radius: 50%;
-      }
-      /*
-      .avatar-container {
-        padding-top: 8px;
-      }
-      */
-      #icon {
-          color: var(--ion-color-primary);
-          position: absolute;
-          top: 28px;
-          right: -15px;
-          background: white;
-          border-radius: 50%;
-          padding: 4px;
-        }
-      .avatar-icon {
-        color: var(--ion-color-medium);
-        height: 32px;
-        width: 100%;
-        margin-top: 10px;
-      }
-      .textAvatar {
-        border: 1px solid;
-        border-radius: 50%;
-        display: block;
-        font-size: 32pt;
-        font-weight: bold;
-        text-align: center;
-        overflow: hidden;
-        width: 64px;
-        height: 64px;
       }
     `,
   ],

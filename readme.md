@@ -268,7 +268,7 @@ Install packages
 -- (wraps package cropper.js)
 - "hammerjs" for mobile gestures
 
-update main.js
+update main.ts
 
 ```javascript
 import "hammerjs"; 
