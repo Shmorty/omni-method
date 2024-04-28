@@ -145,14 +145,6 @@ export class UserService implements IUserService {
     );
   }
 
-  async showProfilePic(event, user: User) {
-    event.stopPropagation();
-    console.log("showProfilePic", user.avatar);
-    if (user.avatar) {
-      console.log("pop up image");
-    }
-  }
-
   async openEditProfile(event, user) {
     event.stopPropagation();
     const modal = await this.modalCtrl.create({

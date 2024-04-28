@@ -8,9 +8,7 @@
     </ion-item>
     <ion-item lines="none" color="none">
       <user-avatar [user]="user" [ngStyle]="{'color': 'white'}"
-      (click)="userService.showProfilePic($event, user)"
-      >
-      </user-avatar>
+      ></user-avatar>
     </ion-item>
     <ion-item [hidden]="!showPersonalData" lines="none" color="none" text-center class="name">
       <ion-label> {{user.firstName}} {{user.lastName}} </ion-label>
