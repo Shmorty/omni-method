@@ -154,3 +154,8 @@ ion-picker-column {
   padding: 0 6px;
   // border: 2px solid rgba(var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255)), 0.5);
 }
+.image-modal {
+  --backdrop-opacity: 0.5;
+  --height: auto;
+  --width: auto;
+}

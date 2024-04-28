@@ -23,15 +23,26 @@ const initialState: UserState = {
 
 export const userReducer = createReducer(
   initialState,
+  on(UserActions.userAuthenticationStart, (state) => ({
+    ...state,
+    ...initialState
+  })),
   on(UserActions.userAuthenticated, (state, action) => ({
     ...state,
     isAuthenticated: true,
     authUser: action.payload,
+    error: '',
+  })),
+  on(UserActions.userAuthenticationFailed, (state, action) => ({
+    ...state,
+    isAuthenticated: false,
+    error: action.error
   })),
   on(UserActions.logoutAction, (state) => ({
     ...state,
     isAuthenticated: false,
     authUser: null,
+    error: '',
   })),
   on(UserActions.loadUserAction, (state) => ({
     ...state,
@@ -80,12 +91,12 @@ export const userReducer = createReducer(
   on(UserActions.updateUserAction, (state, action) => ({
     ...state,
     loading: false,
-    error: null,
+    error: '',
   })),
   on(UserActions.saveNewScore, (state, action) => ({
     ...state,
     loading: true,
-    error: null,
+    error: '',
   })),
   on(UserActions.saveNewScoreSuccess, (state, action) => {
     console.log('UserActions.saveNewScoreSuccess reducer');
@@ -99,7 +110,7 @@ export const userReducer = createReducer(
       ...state,
       scores: [...tmpScores, action.score],
       loading: false,
-      error: null,
+      error: '',
     };
   }),
   on(UserActions.deleteAssessmentScoreSuccess, (state, action) => {
@@ -112,7 +123,7 @@ export const userReducer = createReducer(
         );
       }),
       loading: true,
-      error: null,
+      error: '',
     };
   }),
   on(UserActions.loadUserScoresAction, (state) => ({

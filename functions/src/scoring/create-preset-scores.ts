@@ -73,10 +73,10 @@ export function createPresetScores(fitnessLevel: string,
         aid: "PSPR", cid: "POWR",
         rawScore: 20,
       });
-      // Clean weight * 0.4
+      // Clean weight * 0.3
       scores.push({
         aid: "PWCL", cid: "POWR",
-        rawScore: Math.ceil(weight * 0.4 / 5) * 5,
+        rawScore: Math.ceil(weight * 0.3 / 5) * 5,
       });
       // Pike = 1
       scores.push({
@@ -95,18 +95,19 @@ export function createPresetScores(fitnessLevel: string,
         aid: "STRD", cid: "FLEX",
         rawScore: 90,
       });
-      // 1 Hour Run BMI * 0.15
+      // 1 Hour Run height * 0.055
       // increment 0.05
       scores.push({
         aid: "ONEHRDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(Math.ceil(bmi * 0.15 / 0.05) * 5) / 100,
+        rawScore: Math.ceil(Math.ceil(heightInches * 0.055 / 0.05) * 5) / 100,
       });
-      // 2 Minute Sprint bmi * 0.007 (increment 0.001)
+      // 2 Minute Sprint height * 0.003
+      // (increment 0.001)
       scores.push({
         aid: "TWOMDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(bmi * 0.007 / 0.001) / 1000,
+        rawScore: Math.ceil(heightInches * 0.003 / 0.001) / 1000,
       });
       // Half Spider Web = 27
       scores.push({
@@ -167,10 +168,10 @@ export function createPresetScores(fitnessLevel: string,
         aid: "PSPR", cid: "POWR",
         rawScore: 16,
       });
-      // Clean weight * 0.75
+      // Clean weight * 0.5
       scores.push({
         aid: "PWCL", cid: "POWR",
-        rawScore: Math.ceil(weight * 0.75 / 5) * 5,
+        rawScore: Math.ceil(weight * 0.5 / 5) * 5,
       });
       // Pike = 3
       scores.push({
@@ -189,18 +190,18 @@ export function createPresetScores(fitnessLevel: string,
         aid: "STRD", cid: "FLEX",
         rawScore: 110,
       });
-      // 1 Hour Run BMI * 0.224
+      // 1 Hour Run height * 0.075
       // increment 0.05
       scores.push({
         aid: "ONEHRDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(Math.ceil(bmi * 0.224 / 0.05) * 5) / 100,
+        rawScore: Math.ceil(Math.ceil(heightInches * 0.075 / 0.05) * 5) / 100,
       });
-      // 2 Minute Sprint bmi * 0.01
+      // 2 Minute Sprint height * 0.0035
       scores.push({
         aid: "TWOMDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(bmi * 0.01 / 0.001) / 1000,
+        rawScore: Math.ceil(heightInches * 0.0035 / 0.001) / 1000,
       });
       // Half Spider Web = 22
       scores.push({
@@ -231,20 +232,20 @@ export function createPresetScores(fitnessLevel: string,
         aid: "WTPU", cid: "STRG",
         rawScore: Math.ceil(weight * 0.1 / 5) * 5,
       });
-      // pushUps = 18
+      // pushUps = 12
       scores.push({
         aid: "PSHU", cid: "ENDR",
-        rawScore: 18,
+        rawScore: 12,
       });
       // pullUps = 5
       scores.push({
         aid: "PLUP", cid: "ENDR",
         rawScore: 5,
       });
-      // squats = 20
+      // squats = 15
       scores.push({
         aid: "SQTS", cid: "ENDR",
-        rawScore: 20,
+        rawScore: 15,
       });
       // longJump = height * 1
       scores.push({
@@ -261,10 +262,10 @@ export function createPresetScores(fitnessLevel: string,
         aid: "PSPR", cid: "POWR",
         rawScore: 14,
       });
-      // Clean weight * 1
+      // Clean weight * 0.75
       scores.push({
         aid: "PWCL", cid: "POWR",
-        rawScore: Math.ceil(weight * 1 / 5) * 5,
+        rawScore: Math.ceil(weight * 0.75 / 5) * 5,
       });
       // Pike = 5
       scores.push({
@@ -283,18 +284,18 @@ export function createPresetScores(fitnessLevel: string,
         aid: "STRD", cid: "FLEX",
         rawScore: 130,
       });
-      // 1 Hour Run BMI * 0.275
+      // 1 Hour Run height * 0.085
       // increment 0.05
       scores.push({
         aid: "ONEHRDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(Math.ceil(bmi * 0.275 / 0.05) * 5) / 100,
+        rawScore: Math.ceil(Math.ceil(heightInches * 0.085 / 0.05) * 5) / 100,
       });
-      // 2 Minute Sprint bmi * 0.012
+      // 2 Minute Sprint height * 0.0045
       scores.push({
         aid: "TWOMDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(bmi * 0.012 / 0.001) / 1000,
+        rawScore: Math.ceil(heightInches * 0.0045 / 0.001) / 1000,
       });
       // Half Spider Web = 20
       scores.push({
@@ -325,20 +326,20 @@ export function createPresetScores(fitnessLevel: string,
         aid: "WTPU", cid: "STRG",
         rawScore: Math.ceil(weight * 0.25 / 5) * 5,
       });
-      // pushUps = 40
+      // pushUps = 30
       scores.push({
         aid: "PSHU", cid: "ENDR",
-        rawScore: 40,
+        rawScore: 30,
       });
-      // pullUps = 14
+      // pullUps = 11
       scores.push({
         aid: "PLUP", cid: "ENDR",
-        rawScore: 14,
+        rawScore: 11,
       });
-      // squats = 45
+      // squats = 30
       scores.push({
         aid: "SQTS", cid: "ENDR",
-        rawScore: 45,
+        rawScore: 30,
       });
       // longJump = height * 1.25
       scores.push({
@@ -355,10 +356,10 @@ export function createPresetScores(fitnessLevel: string,
         aid: "PSPR", cid: "POWR",
         rawScore: 13,
       });
-      // Clean weight * 1.25
+      // Clean weight * 1
       scores.push({
         aid: "PWCL", cid: "POWR",
-        rawScore: Math.ceil(weight * 1.25 / 5) * 5,
+        rawScore: Math.ceil(weight * 1 / 5) * 5,
       });
       // Pike = 7
       scores.push({
@@ -377,18 +378,18 @@ export function createPresetScores(fitnessLevel: string,
         aid: "STRD", cid: "FLEX",
         rawScore: 150,
       });
-      // 1 Hour Run BMI * 0.325
+      // 1 Hour Run height * 0.095
       // increment 0.05
       scores.push({
         aid: "ONEHRDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(Math.ceil(bmi * 0.325 / 0.05) * 5) / 100,
+        rawScore: Math.ceil(Math.ceil(heightInches * 0.095 / 0.05) * 5) / 100,
       });
-      // 2 Minute Sprint bmi * 0.014
+      // 2 Minute Sprint height * 0.005
       scores.push({
         aid: "TWOMDST", cid: "META",
         bmi: bmi,
-        rawScore: Math.ceil(bmi * 0.014 / 0.001) / 1000,
+        rawScore: Math.ceil(heightInches * 0.005 / 0.001) / 1000,
       });
       // Half Spider Web = 17
       scores.push({

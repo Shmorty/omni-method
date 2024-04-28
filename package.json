@@ -1,8 +1,9 @@
 {
   "name": "omni-method",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "version": "1.4.0",
+  "author": "Omni Method LLC",
+  "description": "the all-in-one fitness app",
+  "homepage": "https://www.omnimethod.app/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -44,6 +45,7 @@
     "@capacitor/text-zoom": "^6.0.0",
     "@firebase/auth": "^1.7.0",
     "@ionic/angular": "^7.4.1",
+    "@ionic/pwa-elements": "^3.2.2",
     "@ngrx/effects": "^17.1.1",
     "@ngrx/store": "^17.1.1",
     "@ngrx/store-devtools": "^17.1.1",
@@ -51,7 +53,9 @@
     "apexcharts": "^3.48.0",
     "chart.js": "^4.4.2",
     "firebase-functions": "^4.5.0",
+    "hammerjs": "^2.0.8",
     "ng-apexcharts": "^1.9.0",
+    "ngx-image-cropper": "^7.2.1",
     "rxjs": "^7.8.1",
     "sharp": "^0.33.2",
     "swiper": "^11.1.0",
@@ -92,7 +96,6 @@
     "ts-node": "8.10.2",
     "typescript": "^5.3.3"
   },
-  "description": "An Ionic project",
   "browserslist": [
     "Chrome >=61",
     "ChromeAndroid >=61",

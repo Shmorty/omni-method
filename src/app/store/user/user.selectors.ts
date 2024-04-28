@@ -5,6 +5,10 @@ import {UserState} from './user.reducer';
 
 export const selectUserState = (state: AppState) => state.userState;
 
+export const selectAuthError = createSelector(
+  selectUserState,
+  (userState: UserState) => userState.error
+);
 export const selectAuthUser = createSelector(
   selectUserState,
   (userState: UserState) => userState.authUser

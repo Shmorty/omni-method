@@ -15,7 +15,7 @@ need to install
 - capacitor
   npm i -g @ionic/cli
 
-```
+```text
 % npm -g list
 /usr/local/lib
 ├── @angular/cli@15.2.4
@@ -34,8 +34,8 @@ need to install
 
 July 16, 2023
 
-```
-% npm -g list         
+```bash
+$ npm -g list         
 /usr/local/lib
 ├── @angular/cli@16.1.4
 ├── @aws-amplify/cli@12.1.1
@@ -195,20 +195,24 @@ graph TD
     C -->|Connect| F[Find Friends]
 ```
 
-#### setup App Icon for capacitor
+## setup App Icon for capacitor
 
 1. install cordova-res
 
-> `npm install -g cordova-res`
+   ```bash
+   npm install -g cordova-res
+   ```
 
 2. create files
 
-- resources/icon.png
-- resources/splash.png
+   ```text
+   - resources/icon.png
+   - resources/splash.png
+   ```
 
-3.
+3. run ionic plugin configuration script
 
-### Firebase
+## Firebase
 
 [Simon Grimm - Google login tutorial](https://www.youtube.com/watch?v=GwtpoWZ_78E)
 
@@ -219,7 +223,7 @@ graph TD
 Firebase authentication for capacitor
 [github](https://github.com/chemerisuk/cordova-plugin-firebase-authentication)
 
-```
+```bash
 npm install cordova-plugin-firebase-authentication 
 npm install @awesome-cordova-plugins/firebase-authentication 
 ionic cap sync
@@ -228,7 +232,7 @@ ionic cap sync
 GooglePlus for capacitor
 [github](https://github.com/EddyVerbruggen/cordova-plugin-googleplus)
 
-```
+```bash
 npm install cordova-plugin-googleplus 
 npm install @awesome-cordova-plugins/google-plus 
 ionic cap sync
@@ -252,6 +256,104 @@ login with email
 {payload: {…}, type: '[User Login] User Authenticated'}
 ```
 
+## Image Cropping and Transformation with Ionic Angular
+
+Tutorial <https://www.youtube.com/watch?v=06K7nzGYRtU>
+
+### Setup
+
+Install packages
+
+- "ngx-image-cropper" <https://github.com/Mawi137/ngx-image-cropper>
+-- (wraps package cropper.js)
+- "hammerjs" for mobile gestures
+
+update main.ts
+
+```javascript
+import "hammerjs"; 
+```
+
+add ImageCropperModule to component
+
+css
+
+```css
+--cropper-outline-color: rgba(0, 0, 0, 0.5);
+--cropper-overlay-color: var(--ion-background-color);
+```
+
+TypeScript
+
+```javascript
+@ViewChild('cropper') cropper: ImageCropperComponent;
+isMobile = Capacitor.getPlatform() !== 'web';
+transform: ImageTransform = {};
+
+constructor(private loadingCtrl: LoadingController){}
+
+selectImage() {
+  cconst image = await Camera.getPhoto({
+    quality: 100,
+    allowEditing: true,
+    resultType: CameraResultType.Base64,
+  });
+  const loading = await this.loadingCtrl.create();
+  await loading.present();
+
+  this.myImage = `data:image/jpeg;base64,...`
+  this.croppedImage = null;
+}
+imageLoaded(){
+  this.loadingCtrl.dismiss();
+}
+loadImageFailed() {
+  console.log("Image load failed");
+}
+cropImage() {
+  this.croppedImage = this.cropper.crop().base64;
+  this.myImage = null;
+}
+rotate() {
+  const newValue = ((this.transform.rotate ?? 0) + 90) % 360;
+  this.transform = {
+    ...this.transform,
+    rotate: newValue
+  }
+}
+flipHorizontal() {
+  this.transform = {
+    ...this.transform,
+    flipH: !this.transform.flipH
+  }
+}
+flipVertical() {
+  this.transform = {
+    ...this.transform,
+    flipV: !this.transform.flipV
+  }
+}
+```
+
+HTML template
+
+```html
+<ion-button (click)="selectImage()" *ngIf="!myImage">
+<image-cropper
+  #cropper
+  [autoCrop]="false"
+  [imageBase64]="myImage"
+  [hideResizeSquares]="isMobile"
+  [maintainAspectRatio]="true"
+  [aspectRatio]="1 / 1"
+  format="png"
+  (imageLoaded)="imageLoaded()"
+  (loadImageFailed)="loadImageFailed()"
+  [transform]="transform"
+></image-cropper>
+<img [src]="croppedImage" *ngIf="croppedImage">
+```
+
 ## Google Cloud Media CDN
 
 > Notes from current attempt to setup video streaming for the app.
@@ -261,7 +363,7 @@ Install gcloud CLI: <https://cloud.google.com/sdk/docs/install>
 Run ```gcloud cheat-sheet``` or refer to the gcloud command-line tool cheat
     sheet: <https://cloud.google.com/sdk/docs/cheatsheet>
 
-### Setup
+### Google Cloud CLI Setup
 
 Login to google cloud:
 

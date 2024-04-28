@@ -95,11 +95,12 @@ export class AssessmentDetailPage implements OnInit {
   }
 
   updateChecked(checked) {
+    console.log("assessmentDetail.updateChecked", checked);
     if (this.displayChecked.length) {
-      // this.checklistChanged = true;
       this.routerOutlet.swipeGesture = false;
     }
     this.displayChecked = checked;
+    this.saveChecklist();
   }
 
   deleteScore(score: Score) {
@@ -166,7 +167,7 @@ export class AssessmentDetailPage implements OnInit {
     };
     console.log('save new score: ' + JSON.stringify(score));
     this.userService.saveScore(score);
-    this.navController.back();
+    // this.navController.back();
   }
 
   async goBack() {

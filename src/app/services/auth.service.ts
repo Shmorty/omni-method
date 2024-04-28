@@ -28,6 +28,7 @@ import * as OmniUser from '../store/user/user.model';
 import {Store} from '@ngrx/store';
 import * as UserActions from '../store/user/user.actions';
 import {AppState} from '../store/app.state';
+import {selectAuthError} from '../store/user/user.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -71,13 +72,15 @@ export class AuthService {
   // login method
   login(email: string, password: string) {
     console.log("auth.service login");
+    this.store.dispatch(UserActions.userAuthenticationStart());
+    console.log("signInWithEmailAndPassword");
     signInWithEmailAndPassword(this.auth, email, password).then(
       (res) => {
         // localStorage.setItem('userId', res.user.uid);
         console.log("auth.service login res", res.user);
         console.log("auth.service login check user saved", this.currUserId, this.currUserEmail);
         this.saveUser(res.user);
-        console.log("dispatch UserActions.userAuthenticated");
+        // dispatch UserActions.userAuthenticated
         this.store.dispatch(
           UserActions.userAuthenticated({payload: JSON.parse(JSON.stringify(res.user))})
         );
@@ -85,10 +88,15 @@ export class AuthService {
       },
       (err) => {
         console.log(err);
-        alert(err.message);
-        this.router.navigate(['/login']);
+        this.store.dispatch(
+          UserActions.userAuthenticationFailed({error: "Your login is incorrect. Please try again"})
+        );
       }
     );
+  }
+
+  authError() {
+    return this.store.select(selectAuthError);
   }
 
   verifyPassword(password: string) {

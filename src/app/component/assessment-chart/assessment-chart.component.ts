@@ -10,7 +10,7 @@ import {
   NgApexchartsModule
 } from 'ng-apexcharts';
 import {User} from '../../store/user/user.model';
-import {Observable, Subscription, skip, take, tap} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {OmniScoreService} from 'src/app/services/omni-score.service';
 import {Assessment, Category} from '../../store/assessments/assessment.model';
 import {Score} from '../../store/models/score.model';

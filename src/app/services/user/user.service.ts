@@ -22,6 +22,7 @@ import {UserFirestoreService} from '../user-firestore.service';
 import {AuthService} from '../auth.service';
 import {ModalController} from '@ionic/angular';
 import {EditProfilePage} from 'src/app/pages/edit-profile/edit-profile.page';
+import {StorageReference, UploadMetadata, UploadTask, UploadTaskSnapshot, getDownloadURL, getStorage, ref, uploadBytesResumable} from '@angular/fire/storage';
 
 export const usernameMinLength = 5;
 export const usernameMaxLength = 20;
@@ -31,11 +32,11 @@ export const usernameMaxLength = 20;
 })
 export class UserService implements IUserService {
 
-  constructor(private http: HttpClient,
+  constructor(
     private store: Store<AppState>,
     private firestoreService: UserFirestoreService,
     private modalCtrl: ModalController,
-    private authService: AuthService) {}
+  ) {}
 
   // get user from store
   getUser() {
@@ -46,6 +47,27 @@ export class UserService implements IUserService {
     this.store.select(selectAuthUser).subscribe((authUser) => {
       this.store.dispatch(UserActions.loadUserAction({uid: authUser?.user.uid}));
     });
+  }
+
+  async saveAvatarFile(blob: Blob, filename: string): Promise<string> {
+    console.log("saveAvatarFile", blob);
+    const storage = getStorage();
+    const metadata: UploadMetadata = {
+      contentType: blob.type,
+    }
+    let task: UploadTask;
+    await this.getUser().pipe(take(1)).forEach((user) => {
+      task = uploadBytesResumable(ref(storage, "/users/" + user.id + "/" + filename), blob, metadata);
+    });
+    await task.then(
+      (snapshot) => {
+        console.log("onFulfilled snapshot", snapshot);
+      },
+      (error) => {
+        console.log("onRejected error", error);
+      });
+    console.log("return getDownloadURL with storageRef", task.snapshot.ref);
+    return getDownloadURL(task.snapshot.ref);
   }
 
   isUsernameAvailable(username: string) {

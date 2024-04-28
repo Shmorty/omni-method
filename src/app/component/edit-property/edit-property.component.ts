@@ -2,11 +2,12 @@ import {CommonModule} from '@angular/common';
 import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {IonicModule, ModalController} from '@ionic/angular';
-import {first} from 'rxjs';
+import {first, take} from 'rxjs';
 import {User} from 'src/app/store/user/user.model';
 import {NumberPickerComponent} from '../number-picker/number-picker.component';
 import {UserService, usernameMinLength, usernameMaxLength} from '../../services/user/user.service';
 import {ShowToastService} from '../../services/show-toast.service';
+import {AssessmentService} from 'src/app/services/assessments/assessment.service';
 
 @Component({
   selector: 'app-edit-property',
@@ -38,34 +39,39 @@ export class EditPropertyComponent implements OnInit {
   public updUser: User;
   public imageType = "avatar";
   public avatars = [
-    {"label": "Deadlift", "icon": "/assets/images/deadlift.png"},
-    {"label": "Squat", "icon": "/assets/images/backsquat.png"},
-    {"label": "Bench", "icon": "/assets/images/BenchPress.png"},
-    {"label": "Weighted Pull-up", "icon": "/assets/images/weightedpullup.png"},
-    {"label": "Pushups", "icon": "/assets/images/pushup.png"},
-    {"label": "Pullups", "icon": "/assets/images/pull_up.png"},
-    {"label": "Squats", "icon": "/assets/images/backsquat.png"},
-    {"label": "Long Jump", "icon": "/assets/images/Long_Jump.png"},
-    {"label": "Push Press", "icon": "/assets/images/ChestLaunch.png"},
-    {"label": "100 meter sprint", "icon": "/assets/images/100metersprint.png"},
-    {"label": "Clean", "icon": "/assets/images/powerclean.png"},
-    {"label": "Pike", "icon": "/assets/images/toetouch.png"},
-    {"label": "Backbend", "icon": "/assets/images/backbend.png"},
-    {"label": "Straddle", "icon": "/assets/images/medial_lateral.png"},
-    {"label": "1 Hour Run", "icon": "/assets/images/onehourrun.png"},
-    {"label": "2 Minute Sprint", "icon": "/assets/images/2minutedistance.png"},
-    {"label": "Half Spider Web", "icon": "/assets/images/agility.png"},
-    {"label": "Balance Positions", "icon": "/assets/images/Balance.png"},
-    {"label": "Coordination Skills", "icon": "/assets/images/Coordination.png"},
+    // {"label": "Deadlift", "icon": "/assets/images/deadlift.png"},
+    // {"label": "Squat", "icon": "/assets/images/backsquat.png"},
+    // {"label": "Bench", "icon": "/assets/images/BenchPress.png"},
+    // {"label": "Weighted Pull-up", "icon": "/assets/images/weightedpullup.png"},
+    // {"label": "Pushups", "icon": "/assets/images/pushup.png"},
+    // {"label": "Pullups", "icon": "/assets/images/pull_up.png"},
+    // {"label": "Squats", "icon": "/assets/images/backsquat.png"},
+    // {"label": "Long Jump", "icon": "/assets/images/Long_Jump.png"},
+    // {"label": "Push Press", "icon": "/assets/images/ChestLaunch.png"},
+    // {"label": "100 meter sprint", "icon": "/assets/images/100metersprint.png"},
+    // {"label": "Clean", "icon": "/assets/images/powerclean.png"},
+    // {"label": "Pike", "icon": "/assets/images/toetouch.png"},
+    // {"label": "Backbend", "icon": "/assets/images/backbend.png"},
+    // {"label": "Straddle", "icon": "/assets/images/medial_lateral.png"},
+    // {"label": "1 Hour Run", "icon": "/assets/images/onehourrun.png"},
+    // {"label": "2 Minute Sprint", "icon": "/assets/images/2minutedistance.png"},
+    // {"label": "Half Spider Web", "icon": "/assets/images/agility.png"},
+    // {"label": "Balance Positions", "icon": "/assets/images/Balance.png"},
+    // {"label": "Coordination Skills", "icon": "/assets/images/Coordination.png"},
   ];
 
   constructor(
     private modalCtrl: ModalController,
     private userService: UserService,
-    private showToastService: ShowToastService
+    private showToastService: ShowToastService,
+    private assessmentService: AssessmentService
   ) {}
 
   ngOnInit() {
+    this.assessmentService.getAllAssessments().pipe(take(1)).subscribe((assessments) => {
+      // filter duplicate images
+      this.avatars = assessments.filter((v1, index) => assessments.findIndex((v2) => v1.icon === v2.icon) === index);
+    });
     console.log("targetProperty", this.targetProperty);
     console.log("user", this.user);
     // this.template = document.getElementById(this.targetProperty);
