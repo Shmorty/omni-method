@@ -6,17 +6,18 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import {Keyboard} from '@capacitor/keyboard';
-import {AlertController, IonModal, ModalController, PickerColumn, PickerColumnOption, PickerController, isPlatform} from '@ionic/angular';
+import {AlertController, IonModal, LoadingController, ModalController, PickerColumn, PickerColumnOption, PickerController, isPlatform} from '@ionic/angular';
 import {OverlayEventDetail} from '@ionic/core/components';
 import {Subscription, delay} from 'rxjs';
 import {EditPropertyComponent} from '../../component/edit-property/edit-property.component';
 import {AuthService} from '../../services/auth.service';
-// import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
 import {UserService} from '../../services/user/user.service';
 import {User} from '../../store/user/user.model';
 import {NumberPickerService} from 'src/app/services/number-picker.service';
 import {Camera, CameraDirection, CameraResultType, CameraSource} from '@capacitor/camera';
+import {Capacitor} from '@capacitor/core';
+import {ImageCroppedEvent, ImageCropperComponent, ImageTransform} from 'ngx-image-cropper';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'edit-profile-page',
@@ -98,10 +99,15 @@ export class EditProfilePage implements OnInit, OnDestroy {
     }
   ]
   isAvatarOptionOpen = false;
+  isEditAvatarOpen = false;
   @ViewChild('avatarOption') avatarOptionModal: IonModal;
   public imageUrl: string;
+  @ViewChild('cropper') cropper: ImageCropperComponent;
+  isMobile = Capacitor.getPlatform() !== 'web';
+  transform: ImageTransform = {};
   name: string;
-  public user$ = this.userService.getUser(); // .pipe(delay(5000));
+  public user$ = this.userService.getUser(); //.pipe(delay(5000));
+  @ViewChild('editAvatar') editAvatarModal: IonModal;
 
   constructor(
     private modalCtrl: ModalController,
@@ -109,7 +115,9 @@ export class EditProfilePage implements OnInit, OnDestroy {
     private authService: AuthService,
     public formBuilder: FormBuilder,
     private alertController: AlertController,
-    public numberPickerService: NumberPickerService
+    public numberPickerService: NumberPickerService,
+    private loadingCtrl: LoadingController,
+    private sanitizer: DomSanitizer,
   ) {}
 
   ngOnInit() {
@@ -278,12 +286,65 @@ export class EditProfilePage implements OnInit, OnDestroy {
       resultType: CameraResultType.DataUrl,
       source: cameraSource
     });
-
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
+    console.log("picture selected, open editor");
+    this.isEditAvatarOpen = true;
     this.imageUrl = image.dataUrl;
     console.log("imageUrl", this.imageUrl);
-    const user = this.profileForm.value as User;
-    user.avatar = image.dataUrl;
-    this.userService.updateUser(user);
   }
 
+  async imageCropped(event: ImageCroppedEvent) {
+    // image cropped event
+    // console.log("imageCropped event", event);
+    // console.log("blob", event.blob);
+    // write file to storage and get url
+    const urlPromise = this.userService.saveAvatarFile(event.blob, "profilePicture.png");
+    console.log("urlPromise", urlPromise);
+    await urlPromise.then(
+      (url) => {
+        this.imageUrl = url;
+        console.log("imageUrl", this.imageUrl);
+      },
+      error => {
+        console.log("error", error);
+        this.imageUrl = null;
+      });
+    if (this.imageUrl) {
+      // update user with new image url
+      const user = this.profileForm.value as User;
+      console.log("saveImage", this.imageUrl);
+      user.avatar = this.imageUrl;
+      this.userService.updateUser(user);
+    }
+    this.loadingCtrl.dismiss();
+    this.isEditAvatarOpen = false;
+  }
+
+  async saveImage() {
+    // crop to trigger imageCropped event
+    const event = this.cropper.crop();
+    // show loading spinner
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
+  }
+
+  imageLoaded() {
+    this.loadingCtrl.dismiss();
+  }
+
+  loadImageFailed() {
+    console.log("Image load failed");
+  }
+  rotate() {
+    const newValue = ((this.transform.rotate ?? 0) + 90) % 360;
+    this.transform = {
+      ...this.transform,
+      rotate: newValue
+    }
+  }
+  cancelEditImage() {
+    this.imageUrl = null;
+    this.isEditAvatarOpen = false;
+  }
 }

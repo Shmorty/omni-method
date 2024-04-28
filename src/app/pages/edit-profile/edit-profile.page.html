@@ -1,5 +1,8 @@
 <ion-content class="ion-padding" color="default">
   <ion-header class="ion-no-border safe-area"> </ion-header>
+  <div class="ion-text-center">
+    <ion-card-title class="center" color="dark">Edit Profile</ion-card-title>
+  </div>
   <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-button
       (click)="cancel()"
@@ -12,13 +15,8 @@
       <ion-icon name="close"></ion-icon>
     </ion-button>
   </ion-fab>
-  <div class="ion-text-center">
-    <ion-card-title class="center" color="dark">Edit Profile</ion-card-title>
-  </div>
-
 
   <ion-list *ngIf="user$ | async as user; else loading ">
-    <!-- <div class="avatar" (click)="openModal('avatar')"> -->
     <div id="choose-avatar" (click)="setAvatarOptionOpen(true)" class="avatar">
       <user-avatar [user]="user" class="avatar"></user-avatar>
       <ion-button color="medium" shape="round" size="small">edit</ion-button>
@@ -100,5 +98,45 @@
       <div class="bottom-padding"></div>
     </ng-template>
   </ion-modal>
+
+  <ion-modal id="editAvatar" [isOpen]="isEditAvatarOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button size="large" (click)="cancelEditImage()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button (click)="rotate()">
+              <ion-icon slot="icon-only" name="sync-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="saveImage()">
+              <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <image-cropper
+        #cropper
+        format="png"
+        [output]="'blob'"
+        [imageBase64]="imageUrl"
+        [aspectRatio]="1 / 1"
+        [autoCrop]="false"
+        [hideResizeSquares]="isMobile"
+        [maintainAspectRatio]="true"
+        [resizeToHeight]="256"
+        [resizeToWidth]="256"
+        [transform]="transform"
+        (imageLoaded)="imageLoaded()"
+        (loadImageFailed)="loadImageFailed()"
+        (imageCropped)="imageCropped($event)"
+      ></image-cropper>
+      <ion-footer></ion-footer>
+    </ng-template>
+  </ion-modal>
+
 
 </ion-content>

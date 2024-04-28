@@ -9,4 +9,5 @@ export interface IUserService {
   updateUser(user: User): void;
   saveScore(score: Score): void;
   deleteScore(score: Score): void;
+  saveAvatarFile(blob: Blob, filename: string): Promise<string>;
 }
