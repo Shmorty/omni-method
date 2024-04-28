@@ -18,6 +18,7 @@ import {Camera, CameraDirection, CameraResultType, CameraSource} from '@capacito
 import {Capacitor} from '@capacitor/core';
 import {ImageCroppedEvent, ImageCropperComponent, ImageTransform} from 'ngx-image-cropper';
 import {DomSanitizer} from '@angular/platform-browser';
+import {ShowToastService} from 'src/app/services/show-toast.service';
 
 @Component({
   selector: 'edit-profile-page',
@@ -29,75 +30,7 @@ export class EditProfilePage implements OnInit, OnDestroy {
   @Input() user: User;
   profileForm: FormGroup;
   private numberPickerSubscription: Subscription;
-  public deleteAccountButtons = [
-    {
-      text: 'Cancel',
-      role: 'cancel',
-      htmlAttributes: {
-        'aria-label': 'cancel',
-      }
-    },
-    {
-      text: 'Delete',
-      role: 'confirm',
-      handler: () => {
-        // confirm delete with password
-        this.confirmDeleteAccount();
-      },
-      htmlAttributes: {
-        'aria-label': 'delete',
-      }
-    },
-  ];
-  public confirmDeleteAccountButtons = [
-    {
-      text: 'Cancel',
-      role: 'cancel',
-      htmlAttributes: {
-        'aria-label': 'cancel',
-      }
-    },
-    {
-      text: 'Delete',
-      role: 'confirm',
-      handler: (alertData) => {
-        this.authService.verifyPassword(alertData.password).then((success) => {
-          console.log("verifyPassword success", success);
-          // do delete user
-          this.userService.deleteUser(this.user);
-          this.modalCtrl.dismiss(null, 'logout');
-          this.authService.logout();
-        }, (error) => {
-          console.log("verifyPassword error", error);
-          alert("failed to verify password");
-        });
-      },
-      htmlAttributes: {
-        'aria-label': 'delete',
-      }
-    },
-  ];
-  public confirmLogoutButtons = [
-    {
-      text: 'Cancel',
-      role: 'cancel',
-      htmlAttributes: {
-        'aria-label': 'cancel',
-      }
-    },
-    {
-      text: 'Log Out',
-      cssClass: 'logout-button-confirm',
-      role: 'confirm',
-      handler: () => {
-        this.modalCtrl.dismiss(null, 'logout');
-        this.authService.logout();
-      },
-      htmlAttributes: {
-        'aria-label': 'logout',
-      }
-    }
-  ]
+
   isAvatarOptionOpen = false;
   isEditAvatarOpen = false;
   @ViewChild('avatarOption') avatarOptionModal: IonModal;
@@ -117,7 +50,7 @@ export class EditProfilePage implements OnInit, OnDestroy {
     private alertController: AlertController,
     public numberPickerService: NumberPickerService,
     private loadingCtrl: LoadingController,
-    private sanitizer: DomSanitizer,
+    private showToastService: ShowToastService,
   ) {}
 
   ngOnInit() {
@@ -153,7 +86,6 @@ export class EditProfilePage implements OnInit, OnDestroy {
         this.userService.updateUser(val as User);
       }
       );
-    // this.avatarOptionModal.didDismiss
   }
 
   ngOnDestroy(): void {
@@ -162,21 +94,71 @@ export class EditProfilePage implements OnInit, OnDestroy {
   }
 
   async deleteAccount() {
+    const deleteAccountButtons = [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        htmlAttributes: {
+          'aria-label': 'cancel',
+        }
+      },
+      {
+        text: 'Delete',
+        role: 'confirm',
+        handler: () => {
+          // confirm delete with password
+          this.confirmDeleteAccount();
+        },
+        htmlAttributes: {
+          'aria-label': 'delete',
+        }
+      },
+    ];
+    // present confirmation alert
     const alert = await this.alertController.create({
       header: 'Delete Account Data',
       subHeader: 'This action can not be undone.',
       // message: 'If you would like to permanently delete all your data tap "Delete" buttons, otherwise tap "Cancel".',
-      buttons: this.deleteAccountButtons,
+      buttons: deleteAccountButtons,
     });
     await alert.present();
   }
 
   async confirmDeleteAccount() {
+    const confirmDeleteAccountButtons = [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        htmlAttributes: {
+          'aria-label': 'cancel',
+        }
+      },
+      {
+        text: 'Delete',
+        role: 'confirm',
+        handler: (alertData) => {
+          this.authService.verifyPassword(alertData.password).then((success) => {
+            console.log("verifyPassword success", success);
+            // do delete user
+            this.userService.deleteUser(this.user);
+            this.modalCtrl.dismiss(null, 'logout');
+            this.authService.logout();
+          }, (error) => {
+            console.log("verifyPassword error", error);
+            this.showToastService.showToast("failed to verify password", "danger");
+          });
+        },
+        htmlAttributes: {
+          'aria-label': 'delete',
+        }
+      },
+    ];
+    // present alert
     const alert = await this.alertController.create({
       header: 'Warning',
       subHeader: 'This action can not be undone.',
       message: 'To permanently delete all your data please entery your password and tap "Delete" button.',
-      buttons: this.confirmDeleteAccountButtons,
+      buttons: confirmDeleteAccountButtons,
       inputs: [{
         name: "password",
         placeholder: "Password",
@@ -187,11 +169,31 @@ export class EditProfilePage implements OnInit, OnDestroy {
   }
 
   async logout() {
-    // this.modalCtrl.dismiss(null, 'logout');
-    // this.authService.logout();
+    const confirmLogoutButtons = [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        htmlAttributes: {
+          'aria-label': 'cancel',
+        }
+      },
+      {
+        text: 'Log Out',
+        cssClass: 'logout-button-confirm',
+        role: 'confirm',
+        handler: () => {
+          this.modalCtrl.dismiss(null, 'logout');
+          this.authService.logout();
+        },
+        htmlAttributes: {
+          'aria-label': 'logout',
+        }
+      }
+    ];
+    // present logout confirmation
     const alert = await this.alertController.create({
       header: 'Log out of your account?',
-      buttons: this.confirmLogoutButtons,
+      buttons: confirmLogoutButtons,
     });
     await alert.present();
   }
@@ -210,9 +212,6 @@ export class EditProfilePage implements OnInit, OnDestroy {
   }
 
   cancel() {
-    // let dob = this.profileForm.get('dob');
-    // console.log("dob", dob);
-    // this.profileForm.get('dob').setValue(dob);
     this.modalCtrl.dismiss(null, 'cancel');
   }
 
@@ -294,10 +293,16 @@ export class EditProfilePage implements OnInit, OnDestroy {
     console.log("imageUrl", this.imageUrl);
   }
 
+  async saveImage() {
+    // crop to trigger imageCropped event
+    this.cropper.crop();
+    // show loading spinner
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
+  }
+
   async imageCropped(event: ImageCroppedEvent) {
     // image cropped event
-    // console.log("imageCropped event", event);
-    // console.log("blob", event.blob);
     // write file to storage and get url
     const urlPromise = this.userService.saveAvatarFile(event.blob, "profilePicture.png");
     console.log("urlPromise", urlPromise);
@@ -321,21 +326,15 @@ export class EditProfilePage implements OnInit, OnDestroy {
     this.isEditAvatarOpen = false;
   }
 
-  async saveImage() {
-    // crop to trigger imageCropped event
-    const event = this.cropper.crop();
-    // show loading spinner
-    const loading = await this.loadingCtrl.create();
-    await loading.present();
-  }
-
   imageLoaded() {
     this.loadingCtrl.dismiss();
   }
 
   loadImageFailed() {
     console.log("Image load failed");
+    this.showToastService.showToast("Failed to load image, please try again.", "danger");
   }
+
   rotate() {
     const newValue = ((this.transform.rotate ?? 0) + 90) % 360;
     this.transform = {

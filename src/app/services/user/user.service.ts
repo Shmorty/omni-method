@@ -32,11 +32,11 @@ export const usernameMaxLength = 20;
 })
 export class UserService implements IUserService {
 
-  constructor(private http: HttpClient,
+  constructor(
     private store: Store<AppState>,
     private firestoreService: UserFirestoreService,
     private modalCtrl: ModalController,
-    private authService: AuthService) {}
+  ) {}
 
   // get user from store
   getUser() {
@@ -143,6 +143,14 @@ export class UserService implements IUserService {
     return throwError(
       () => new Error('Unable to process request; please try again later.')
     );
+  }
+
+  async showProfilePic(event, user: User) {
+    event.stopPropagation();
+    console.log("showProfilePic", user.avatar);
+    if (user.avatar) {
+      console.log("pop up image");
+    }
   }
 
   async openEditProfile(event, user) {
