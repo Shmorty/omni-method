@@ -1,0 +1,14 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /content/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+    // Only a user can upload their profile picture, but anyone can view it
+    match /users/{userId}/{allFiles=**} {
+      allow read; //: if request.auth != null;
+      allow write: if request.auth.uid == userId;
+    }
+  }
+}
