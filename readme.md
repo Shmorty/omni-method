@@ -212,7 +212,7 @@ graph TD
 
 3. run ionic plugin configuration script
 
-## Firebase
+## Firebase Login
 
 [Simon Grimm - Google login tutorial](https://www.youtube.com/watch?v=GwtpoWZ_78E)
 
@@ -254,6 +254,53 @@ login with email
 
 ```json
 {payload: {…}, type: '[User Login] User Authenticated'}
+```
+
+## Firebase (Google) Analytics
+
+<https://firebase.google.com/docs/analytics>
+
+Starting wih direct integration with firebase analytics since below libraries apear to be out of date.
+
+### Ionic Firebase analytics
+
+<https://ionic.io/integrations/firebase-analytics>
+
+<https://github.com/capacitor-community/firebase-analytics>
+
+versioned_docs/version-v5/native/firebase-analytics.md
+
+```bash
+npm install cordova-plugin-firebase-analytics
+npm install @awesome-cordova-plugins/firebase-analytics
+ionic cap sync
+ionic cordova plugin add cordova-plugin-firebase-analytics
+npm install @awesome-cordova-plugins/firebase-analytics
+```
+
+#### Angular
+
+```javascript
+import { FirebaseAnalytics } from '@awesome-cordova-plugins/firebase-analytics/ngx';
+
+
+constructor(private firebaseAnalytics: FirebaseAnalytics) { }
+
+...
+
+this.firebaseAnalytics.logEvent('page_view', {page: "dashboard"})
+  .then((res: any) => console.log(res))
+  .catch((error: any) => console.error(error));
+```
+
+### Ionic google analytics
+
+versioned_docs/version-v5/native/google-analytics.md
+
+```bash
+    npm install cordova-plugin-google-analytics
+    npm install @awesome-cordova-plugins/google-analytics
+    ionic cap sync
 ```
 
 ## Image Cropping and Transformation with Ionic Angular
