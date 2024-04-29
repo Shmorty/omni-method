@@ -160,5 +160,7 @@ ion-picker-column {
   --width: auto;
 }
 .image-modal::part(content) {
+  aspect-ratio: 1 / 1;
+  border: solid 0.5px var(--ion-color-medium);
   border-radius: 50%;
 }
