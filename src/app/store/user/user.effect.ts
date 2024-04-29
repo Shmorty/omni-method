@@ -7,6 +7,7 @@ import {EMPTY, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {UserFirestoreService} from 'src/app/services/user-firestore.service';
 import {AuthService} from 'src/app/services/auth.service';
+import {getAnalytics, setUserId} from "firebase/analytics";
 
 @Injectable()
 export class UserEffects {
@@ -143,7 +144,11 @@ export class UserEffects {
   loadUserSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.loadUserSuccess),
-      tap((res) => console.log('loadUserSuccess effect ', res)),
+      tap((res) => {
+        console.log('loadUserSuccess effect ', res);
+        const analytics = getAnalytics();
+        setUserId(analytics, res.payload.username);
+      }),
       map((res) => UserActions.loadUserScoresAction({uid: res.payload.id}))
     )
   );

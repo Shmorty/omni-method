@@ -1,5 +1,5 @@
 <ng-container *ngIf="(assessment$ | async) as assessment">
-  <ion-content>
+  <ion-content [fullscreen]="true">
     <ion-header class="ion-no-border safe-area"> </ion-header>
 
     <ion-fab vertical="top" horizontal="start" slot="fixed">
@@ -85,9 +85,7 @@
           <!-- #t=0.1 -->
         Your browser does not support the video tag.
         </video>
-      </ion-item>
-      <ion-item>
-        <ion-label>Demostration</ion-label>
+        <ion-text slot="helper">Demostration</ion-text>
       </ion-item>
       </ng-container>
 
@@ -138,8 +136,12 @@
       (checked)="updateChecked($event)"
       ></app-edit-checklist>
   </ion-content>
-  <ion-button *ngIf="!assessment.checklist" class="footer-button" shape="round" (click)="openNewScore(assessment)">
-    <ion-icon name="pencil-outline"></ion-icon>
-  </ion-button>
+  <ion-footer *ngIf="!assessment.checklist" class="ion-no-border text-center transparent">
+    <ion-toolbar>
+      <ion-button class="footer-button" shape="round" color="primary" (click)="openNewScore(assessment)">
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-button>
+    </ion-toolbar>
+  </ion-footer>
 </ng-container>
 

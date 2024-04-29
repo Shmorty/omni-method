@@ -260,9 +260,15 @@ login with email
 
 <https://firebase.google.com/docs/analytics>
 
-Starting wih direct integration with firebase analytics since below libraries apear to be out of date.
+Starting wih direct integration with firebase analytics since below libraries apear to be out of date. The 'firebase' module from google does everything relatedot firebase, '@angular/fire' wraps this is an angular friendly way. These can be used togther based simply on which is more convienent. Using 'firebase' directly could make keeping up with updates easier as it doesn't require a second library to be updated. Since we are already using '@angular/fire' we us it for analytics too unless we run into any challenges.
+
+<https://github.com/angular/angularfire/blob/master/docs/analytics.md#analytics>
+
+<https://firebase.google.com/docs/reference/js/analytics.md#analytics_package>
 
 ### Ionic Firebase analytics
+
+This along with other libraries listed here don't seem to be completely up to date and may not be necesarry, I'll come back to this if we run into any challenges.
 
 <https://ionic.io/integrations/firebase-analytics>
 

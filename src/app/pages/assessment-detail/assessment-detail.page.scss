@@ -61,9 +61,12 @@ ion-accordion-group > ion-accordion:last-of-type ion-item[slot="header"] {
   float: right;
   margin: 5px 10px 0 0;
 }
+ion-footer ion-toolbar {
+  --background: transparent;
+}
 .footer-button {
   width: 90%;
-  margin: auto;
+  margin: 0 auto;
 }
 .fixed-width {
   min-width: 30%;
@@ -86,9 +89,9 @@ ion-button {
 .video-content {
   background: linear-gradient(#b8dfff, #5eb3f9);
   border-radius: 20px;
-  border: 3px solid #8CA1B6;
-  margin-left:5px;
+  border: 2px solid #8CA1B6;
+  // margin-left:5px;
   // min-height: 180px;
-  margin-bottom: 10px;
-  width: 60%;
+  margin-bottom: 5px;
+  max-width: 180px;
 }

@@ -27,6 +27,7 @@ import {Capacitor} from '@capacitor/core';
 import {UserActionType} from './store/user/user.actions';
 import {NgApexchartsModule} from 'ng-apexcharts';
 import {CommunityEffects} from './store/community/community.effect';
+import {getAnalytics, provideAnalytics} from '@angular/fire/analytics';
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -89,6 +90,7 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
       }
     }),
     provideStorage(() => getStorage()),
+    provideAnalytics(() => getAnalytics()),
   ],
   providers: [
     DatePipe,
