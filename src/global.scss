@@ -159,3 +159,6 @@ ion-picker-column {
   --height: auto;
   --width: auto;
 }
+.image-modal::part(content) {
+  border-radius: 50%;
+}

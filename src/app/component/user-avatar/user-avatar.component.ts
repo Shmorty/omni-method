@@ -37,7 +37,6 @@ import {ImageComponent} from '../image/image.component';
 export class UserAvatarComponent implements OnInit {
   @Input() user: User;
   @Input() enableShowPic: boolean = true;
-  showPic: boolean = true;
 
   constructor(
     private modalCtrl: ModalController,
@@ -56,8 +55,9 @@ export class UserAvatarComponent implements OnInit {
       .create()
       .addElement(root.querySelector('.modal-wrapper')!)
       .keyframes([
-        {offset: 0, opacity: '0', transform: 'scale(0)'},
-        {offset: 1, opacity: '0.99', transform: 'scale(1)'},
+        {offset: 0, opacity: '0', transform: 'scale(0) translateY(-720px)'},
+        {offset: 0.1, opacity: '0.3', transform: 'scale(0.3) translateY(-720px)'},
+        {offset: 1, opacity: '0.99', transform: 'scale(1) translateY(0px)'},
       ]);
 
     return this.animationCtrl
@@ -80,8 +80,7 @@ export class UserAvatarComponent implements OnInit {
 
   async toggleShowPic() {
     if (this.enableShowPic && this.user.avatar) {
-      console.log("toggleShowPic");
-      this.showPic = !this.showPic;
+      // showPic
       const modal = await this.modalCtrl.create({
         component: ImageComponent,
         componentProps: {imageSrc: this.user.avatar},
@@ -93,8 +92,4 @@ export class UserAvatarComponent implements OnInit {
     }
   }
 
-  // userInitial() {
-  //   return (this.user.username) ?
-  //     this.user.username.substring(0, 1) : this.user.firstName.substring(0, 1);
-  // }
 }

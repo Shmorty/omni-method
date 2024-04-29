@@ -7,17 +7,14 @@ import {ModalController} from '@ionic/angular';
   template: `
   <img src="{{imageSrc}}" (click)="dismiss()"/>
   `,
-  styles: [
-    `
-    img {
-      margin: auto;
-    }
-    `
-  ]
+  styles: [`
+  img {
+    margin: auto;
+  }
+  `]
 })
 export class ImageComponent implements OnInit {
-  @Input() src: string;
-  imageSrc: string;
+  public imageSrc: string;
 
   constructor(private modalCtrl: ModalController) {}
 

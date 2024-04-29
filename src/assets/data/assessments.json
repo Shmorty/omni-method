@@ -332,7 +332,7 @@
       "aid": "PWCL",
       "cid": "POWR",
       "label": "Clean",
-      "abrv": "PWCL",
+      "abrv": "CLN",
       "icon": "/assets/images/powerclean.png",
       "units": "1RM (lbs)",
       "entryUnits": "lbs",
