@@ -32,7 +32,7 @@
     </ion-item>
     <ion-item button (click)="openModal('dob')">
       <ion-label>Age</ion-label>
-      <ion-text slot="end">{{userService.getAge(user)}}</ion-text>
+      <ion-text slot="end">{{getAge(user)}}</ion-text>
     </ion-item>
     <ion-item button (click)="openModal('sex')">
       <ion-label>Gender</ion-label>

@@ -27,7 +27,7 @@ import {Capacitor} from '@capacitor/core';
 import {UserActionType} from './store/user/user.actions';
 import {NgApexchartsModule} from 'ng-apexcharts';
 import {CommunityEffects} from './store/community/community.effect';
-import {getAnalytics, provideAnalytics} from '@angular/fire/analytics';
+import {getAnalytics, provideAnalytics, ScreenTrackingService} from '@angular/fire/analytics';
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -94,6 +94,7 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
   ],
   providers: [
     DatePipe,
+    ScreenTrackingService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],

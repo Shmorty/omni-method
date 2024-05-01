@@ -218,6 +218,10 @@ graph TD
 
 [omni-login user](https://console.firebase.google.com/project/omni-login-63e9f/authentication/users)
 
+AngularFire documentation explaining the benefits
+
+<https://firebaseopensource.com/projects/angular/angularfire2/>
+
 ### authentication plugins
 
 Firebase authentication for capacitor

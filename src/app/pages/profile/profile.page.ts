@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild, inject} from '@angular/core';
 import {IonAccordionGroup, ModalController, isPlatform} from '@ionic/angular';
 import {Assessment} from '../../store/assessments/assessment.model';
 import {Router} from '@angular/router';
@@ -14,10 +14,12 @@ import {
   selectAllCategories,
 } from 'src/app/store/assessments/assessment.selector';
 import * as UserSelectors from 'src/app/store/user/user.selectors';
-import {delay, tap} from 'rxjs/operators';
+import {delay, filter, tap} from 'rxjs/operators';
 import {OmniScoreService, oneDay} from '../../services/omni-score.service';
 import {UserService} from '../../services/user/user.service';
 import {Capacitor} from '@capacitor/core';
+// import {Analytics, logEvent} from '@angular/fire/analytics';
+// import {AssessmentDetailPage} from '../assessment-detail/assessment-detail.page';
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +28,7 @@ import {Capacitor} from '@capacitor/core';
 })
 export class ProfilePage implements OnInit, OnDestroy {
   @ViewChild('accordionGroup') accordionGroup: IonAccordionGroup;
+  // private analytics: Analytics = inject(Analytics);
   moreOpen: boolean = false;
   userSubscription: Subscription;
   userId: string;
@@ -51,16 +54,21 @@ export class ProfilePage implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log("profile page scores$", this.scores$);
     this.userSubscription = this.user$
-      // .pipe(first())
+      // .pipe(filter(usr => usr !== null))
       .subscribe({
         next(user) {
           console.log("user$ next", user);
           this.user = user;
+          // logEvent(this.analytics, "view_profile", {username: user.username});
         },
         error(message) {
-          console.log(message);
+          console.log("ERROR", message);
         },
       });
+    // logEvent(this.analytics, "screen_view", {
+    //   firebase_screen: "profile_page",
+    //   firebase_screen_class: "ProfilePage"
+    // });
   }
 
   ngOnDestroy(): void {
@@ -73,8 +81,6 @@ export class ProfilePage implements OnInit, OnDestroy {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
     if (Capacitor.isNativePlatform()) {
-      // if (isPlatform('mobile')) {
-      // StatusBar.setStyle({style: Style.Dark});
       if (prefersDark.matches) {
         StatusBar.setStyle({style: Style.Dark});
       } else {
@@ -93,7 +99,7 @@ export class ProfilePage implements OnInit, OnDestroy {
     );
   }
 
-  openDetails(assessment) {
+  openDetails(assessment: Assessment) {
     // this.router.navigate(['/home', 'profile', 'details'], {
     this.router.navigate(['/home/profile/details'], {
       queryParams: {aid: assessment.aid, cid: assessment.cid},

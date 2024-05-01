@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, AfterViewChecked} from '@angular/core';
+import {Component, Input, OnInit, AfterViewChecked, inject} from '@angular/core';
 import {AlertController, IonRouterOutlet, ModalController, NavController, isPlatform} from '@ionic/angular';
 import {Score} from '../../store/models/score.model';
 import {AssessmentService} from '../../services/assessments/assessment.service';
@@ -11,6 +11,7 @@ import {User} from 'src/app/store/user/user.model';
 import {StatusBar, Style} from '@capacitor/status-bar';
 import {Capacitor} from '@capacitor/core';
 import {getStorage, getDownloadURL, ref} from '@angular/fire/storage';
+import {Analytics, logEvent} from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-assessment-detail',
@@ -32,6 +33,7 @@ export class AssessmentDetailPage implements OnInit {
   public curScore: Score;
   private checklistChanged: boolean = false;
   public videoLink: Promise<string>;
+  private analytics: Analytics = inject(Analytics);
 
   constructor(
     private route: ActivatedRoute,
@@ -56,6 +58,8 @@ export class AssessmentDetailPage implements OnInit {
 
     this.assessment$.subscribe((assessment) => {
       console.log("getScoresForAssessment", assessment);
+      // log analytics event
+      logEvent(this.analytics, "assessment_detail", {assessment_label: assessment.label});
       if (assessment.video) {
         this.videoLink = this.getVideoUrl(assessment);
       }
@@ -64,14 +68,6 @@ export class AssessmentDetailPage implements OnInit {
         this.curScore = score;
       })
       this.scores$ = this.userService.getScoresForAssessment(assessment);
-      // this.scores$?.subscribe((score) => {
-      //   console.log("score", score);
-      //   if (score.length > 0) {
-      //     // assuming most recent on top or only store one
-      //     this.curScore = score[0];
-      //     this.displayChecked = Array.from(this.curScore.checklist);
-      //   }
-      // });
     });
     this.user$
       .subscribe((value) => {

@@ -36,7 +36,6 @@ export class AppComponent implements OnInit, OnDestroy {
       })
     });
     this.assessmentService.load();
-    this.initializeApp();
   }
 
   ngOnInit(): void {
@@ -45,15 +44,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.stopListeningToNetworkStatus();
-  }
-
-  initializeApp() {}
-
-  statusChanged(status) {
-    this.connected = status.connected;
-    if (!this.connected) {
-      this.stopListeningToNetworkStatus();
-    }
   }
 
   async startListeningToNetworkStatus() {
@@ -77,6 +67,13 @@ export class AppComponent implements OnInit, OnDestroy {
     //   this.networkListener.remove();
     // }
     Network.removeAllListeners();
+  }
+
+  statusChanged(status) {
+    this.connected = status.connected;
+    if (!this.connected) {
+      this.stopListeningToNetworkStatus();
+    }
   }
 
 }

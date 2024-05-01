@@ -30,6 +30,7 @@ export class EditProfilePage implements OnInit, OnDestroy {
   @Input() user: User;
   profileForm: FormGroup;
   private numberPickerSubscription: Subscription;
+  getAge = UserService.getAge;
 
   isAvatarOptionOpen = false;
   isEditAvatarOpen = false;
@@ -346,4 +347,5 @@ export class EditProfilePage implements OnInit, OnDestroy {
     this.imageUrl = null;
     this.isEditAvatarOpen = false;
   }
+
 }

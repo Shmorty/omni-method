@@ -14,6 +14,7 @@ export const environment = {
     apiKey: 'AIzaSyAEY7uvt7JvWOtvxTP46sU1wZuZ7PfcWps',
     authDomain: 'omni-login-63e9f.firebaseapp.com',
     messagingSenderId: '164197842062',
+    measurementId: "G-HVEMXMBRP5"
   },
   // providers: [{ provide: UserService, useClass: MockUserService }],
   providers: [UserService],

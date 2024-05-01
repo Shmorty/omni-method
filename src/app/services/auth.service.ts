@@ -1,4 +1,4 @@
-import {Injectable, Optional, inject} from '@angular/core';
+import {Injectable, OnDestroy, Optional, inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {
   Auth,
@@ -33,11 +33,12 @@ import {selectAuthError} from '../store/user/user.selectors';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService implements OnDestroy {
   private auth: Auth = inject(Auth);
-  user$ = user(this.auth);
+  // user$ = user(this.auth);
   authState$ = authState(this.auth);
-  userSubscription: Subscription;
+  authStateSubscription: Subscription;
+  // userSubscription: Subscription;
 
   loggedIn = new BehaviorSubject<boolean>(false);
   loggedIn$ = this.loggedIn.asObservable();
@@ -46,7 +47,8 @@ export class AuthService {
   currUser: OmniUser.User;
 
   constructor(private router: Router, private store: Store<AppState>) {
-    onAuthStateChanged(this.auth, (user) => {
+    // angular/fire provided authState observer
+    this.authStateSubscription = this.authState$.subscribe((user) => {
       if (user) {
         console.log("auth.service onAuthStateChanged user", user);
         console.log("auth.service onAuthStateChanged check user saved", this.currUserId, this.currUserEmail);
@@ -61,7 +63,11 @@ export class AuthService {
         console.log("auth.service onAuthStateChanged check user saved", this.currUserId, this.currUserEmail);
         // this.router.navigate(['/welcome']);
       }
-    });
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.authStateSubscription.unsubscribe();
   }
 
   currentUser(): Promise<any> {

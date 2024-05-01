@@ -1,23 +1,28 @@
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {map, switchMap, tap, catchError, finalize, take, takeWhile, takeUntil, first} from 'rxjs/operators';
 import * as UserActions from './user.actions';
 import {Store} from '@ngrx/store';
 import {EMPTY, of} from 'rxjs';
 import {Router} from '@angular/router';
-import {UserFirestoreService} from 'src/app/services/user-firestore.service';
-import {AuthService} from 'src/app/services/auth.service';
-import {getAnalytics, setUserId} from "firebase/analytics";
+import {UserFirestoreService} from '../../services/user-firestore.service';
+import {AuthService} from '../../services/auth.service';
+import {Analytics, CustomParams, getAnalytics, setUserId, setUserProperties} from '@angular/fire/analytics';
+import {UserService} from 'src/app/services/user/user.service';
 
 @Injectable()
 export class UserEffects {
+  private analytics: Analytics; // = inject(Analytics);
+
   constructor(
     private actions$: Actions,
     private firestoreService: UserFirestoreService,
     private store: Store,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) {
+    this.analytics = getAnalytics();
+  }
 
   // UserActions.registerUserSuccess
   userRegistered$ = createEffect(
@@ -45,13 +50,14 @@ export class UserEffects {
   userAuthenticated$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.userAuthenticated),
-      tap((payload) =>
-        console.log('userAuthenticated effect', JSON.stringify(payload))
-      ),
+      tap((payload) => {
+        console.log('userAuthenticated effect', JSON.stringify(payload));
+      }),
       map((payload) => {
-        return UserActions.loadUserAction({uid: payload.payload.user.uid})
-      }
-      )
+        const props = {uid: payload.payload.user.uid};
+        console.log("loadUserAction", props);
+        return UserActions.loadUserAction(props);
+      })
     )
   );
 
@@ -62,6 +68,10 @@ export class UserEffects {
       tap(console.log),
       switchMap(({uid}) => {
         if (uid) {
+          // initialize analytics with user id
+          console.log("setUserId analytics", uid);
+          setUserId(this.analytics, uid);
+          // return Observable<User>
           return this.firestoreService.getUserById(uid)
             .pipe(takeUntil(this.logout$))
             // .pipe(first())
@@ -69,7 +79,20 @@ export class UserEffects {
               tap((res) => console.log('firestore getUserById response', res)),
               map((res) => {
                 if (res) {
-                  console.log("return loadUserSuccess");
+                  console.log("return loadUserSuccess", res);
+                  // set user properties for analytics
+                  const props: CustomParams = {
+
+                  };
+                  setUserProperties(this.analytics,
+                    {
+                      username: res.username,
+                      gender: res.gender,
+                      age: UserService.getAge(res),
+                      omniScore: res.omniScore,
+                    },
+                    {global: true});
+
                   return UserActions.loadUserSuccess({payload: res});
                 } else {
                   console.log("return loadUserFailure");
@@ -146,8 +169,6 @@ export class UserEffects {
       ofType(UserActions.loadUserSuccess),
       tap((res) => {
         console.log('loadUserSuccess effect ', res);
-        const analytics = getAnalytics();
-        setUserId(analytics, res.payload.username);
       }),
       map((res) => UserActions.loadUserScoresAction({uid: res.payload.id}))
     )
