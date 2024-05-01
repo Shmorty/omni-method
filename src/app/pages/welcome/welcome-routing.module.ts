@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
-import { WelcomePage } from './welcome.page';
+import {WelcomePage} from './welcome.page';
 
 const routes: Routes = [
   {
     path: '',
+    title: 'Welcome',
     component: WelcomePage
   }
 ];

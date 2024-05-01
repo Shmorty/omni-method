@@ -9,10 +9,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        title: 'Assessment',
         component: AssessmentDetailPage,
       },
       {
         path: 'skill',
+        title: 'Skill',
         loadChildren: () =>
           import('../skill-detail/skill-detail.module').then(
             (m) => m.SkillDetailPageModule

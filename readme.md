@@ -72,6 +72,10 @@ helpful articles
 - [NgRx](https://www.concretepage.com/ngrx/ngrx-effects-example)
 - [tutorial](https://eliteionic.com/tutorials/using-ngrx-for-state-management-in-an-ionic-angular-application/)
 
+### meta reducer
+
+can be used to clear state when user logs out
+
 ### App State
 
 ```json

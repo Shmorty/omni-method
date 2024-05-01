@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
-import { SkillDetailPage } from './skill-detail.page';
+import {SkillDetailPage} from './skill-detail.page';
 
 const routes: Routes = [
   {
     path: '',
+    title: 'Skill Detail',
     component: SkillDetailPage
   }
 ];
