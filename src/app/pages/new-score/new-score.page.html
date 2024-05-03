@@ -79,6 +79,31 @@
     </ion-row>
   </ion-grid>
 
+  <div style="padding-top: 30px;">
+    <swiper-container #inputSwiper class="input-swiper"
+      [pagination]="true" 
+      [autoHeight]="true"
+      [spaceBetween]="5"
+      >
+      <swiper-slide class="input-slide">
+        <ion-datetime [(ngModel)]="newScore.scoreDate" class="date-picker"
+          presentation="date" [preferWheel]="true" [max]="today"></ion-datetime>
+      </swiper-slide>
+      <swiper-slide class="input-slide">
+        <app-number-picker [min]="assessment.min" [max]="assessment.max"
+        [increment]="(assessment.increment ? assessment.increment : 1)"
+        [units]="assessment.entryUnits" [direction]="direction(assessment)"
+        [(pickerValue)]="newScore.rawScore"
+      ></app-number-picker>
+      </swiper-slide>
+      <swiper-slide class="input-slide">
+        <app-number-picker [min]="0" [max]="325" [units]="'lbs'"
+        [(pickerValue)]="newScore.currentWeight"
+      ></app-number-picker>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
   <!-- <ng-container [ngSwitch]="activeField"> -->
     <!-- <ion-list [hidden]="activeField !== 'scoreDate'" style="background-color: transparent;">
         <ion-datetime [(ngModel)]="newScore.scoreDate" class="date-picker"
@@ -98,13 +123,10 @@
     </ion-list> -->
   <!-- </ng-container> -->
 
-  <ion-modal #modal trigger="scoreDate" handle="false" [initialBreakpoint]="1" [breakpoints]="[0, 1]"
+  <!-- <ion-modal #modal trigger="scoreDate" handle="false" [initialBreakpoint]="1" [breakpoints]="[0, 1]"
     style="--height: auto;">
     <ng-template>
         <ion-toolbar>
-          <!-- <ion-buttons slot="start">
-            <ion-button (click)="modal.dismiss()">Cancel</ion-button>
-          </ion-buttons> -->
           <ion-buttons slot="end">
             <ion-button (click)="modal.dismiss()">Done</ion-button>
           </ion-buttons>
@@ -112,7 +134,7 @@
         <ion-datetime [(ngModel)]="newScore.scoreDate" class="date-picker"
         presentation="date" [preferWheel]="true" [max]="today"></ion-datetime>
     </ng-template>
-  </ion-modal>
+  </ion-modal> -->
 
   <!-- <ion-picker
     trigger="rawScore"
