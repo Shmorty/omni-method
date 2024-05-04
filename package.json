@@ -44,7 +44,7 @@
     "@capacitor/status-bar": "^6.0.0",
     "@capacitor/text-zoom": "^6.0.0",
     "@firebase/auth": "^1.7.0",
-    "@ionic/angular": "^7.4.1",
+    "@ionic/angular": "^8.1.0",
     "@ionic/pwa-elements": "^3.2.2",
     "@ngrx/effects": "^17.1.1",
     "@ngrx/store": "^17.1.1",
@@ -97,12 +97,11 @@
     "typescript": "^5.3.3"
   },
   "browserslist": [
-    "Chrome >=61",
-    "ChromeAndroid >=61",
-    "Firefox >=63",
-    "Firefox ESR",
-    "Edge >=79",
-    "Safari >=13",
-    "iOS >=13"
+    "Chrome >=89",
+    "ChromeAndroid >=89",
+    "Firefox >=75",
+    "Edge >=89",
+    "Safari >=15",
+    "iOS >=15"
   ]
 }

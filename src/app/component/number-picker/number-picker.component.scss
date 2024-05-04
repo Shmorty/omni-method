@@ -2,7 +2,11 @@ $row-height: 34px;
 // --wheel-fade-background-rgb: #222222;
 // --background-rgb
 // --ion-background-color-rgb
-
+ion-picker {
+    --highlight-background: var(--ion-color-primary);
+    --highlight-border-radius: 50px;
+    --fade-background-rgb: var(--ion-color-light-rgb);
+}
 .picker {
     // background: rgba(var(--ion-color-light-rgb), 0.4);
     border: 0px solid gray;
@@ -39,7 +43,7 @@ $row-height: 34px;
 .highlight {
     // background-color: #4dabfc;
     background-color: var(--ion-color-primary);
-    border-radius: 8px;
+    border-radius: 50px;
     height: $row-height;
     margin: auto;
     pointer-events: none;

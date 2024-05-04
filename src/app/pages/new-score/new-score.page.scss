@@ -24,6 +24,7 @@
 }
 .date-picker {
   border-radius: 8px;
+  height: 170px;
   margin: auto;
   min-width: 90%;
 }
@@ -58,10 +59,26 @@ ion-textarea.notes-textarea {
   // border: 1px solid var(--ion-color-medium);
   // box-shadow: inset 1px 1px #373737;
   margin: 10px auto;
+  text-align: start;
   // width: 90%;
 }
 ion-button[type="submit"] {
   margin: auto;
   margin-top: 50px;
   width: 90%;
+}
+.input-swiper {
+  text-align: center;
+  width: 100%;
+  height: 200px;
+  // --swiper-pagination-bullet-inactive-color: var(--ion-color-light-tint, gray);
+  // --swiper-pagination-color: var(--ion-color-light, white);
+}
+.input-slide {
+  background-color: var(--ion-background-color-400);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 170px;
+  // padding: 5px;
 }
