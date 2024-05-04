@@ -71,22 +71,28 @@
       </ng-container>
 
       <ng-container *ngIf="assessment.video">
-        <ion-item lines="none">
-          <ion-label>
-            <ion-card-title>
-              <h1>Videos</h1>
-            </ion-card-title>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <video class="video-content" controlsList="nodownload"
-          controls disablepictureinpicture muted preload="metadata">
-          <source src="{{ videoLink | async }}" type="video/mp4">
-          <!-- #t=0.1 -->
-        Your browser does not support the video tag.
-        </video>
-        <ion-text slot="helper">Demostration</ion-text>
-      </ion-item>
+        <ion-list>
+          <ion-item lines="none">
+            <ion-label>
+              <ion-card-title>
+                <h1>Videos</h1>
+              </ion-card-title>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <video class="video-content" controlsList="nodownload"
+            controls disablepictureinpicture muted preload="metadata">
+              <source src="{{ videoLink | async }}" type="video/mp4">
+              <!-- #t=0.1 -->
+              Your browser does not support the video tag.
+            </video>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-text>
+              <p>Demostration</p>
+            </ion-text>
+          </ion-item>
+        </ion-list>
       </ng-container>
 
       <ng-container *ngIf="assessment.description">

@@ -94,7 +94,7 @@
    * -------------------------------------------
    */
 
-  body {
+  :root {
     // --ion-color-primary: #428cff;
     --ion-color-primary: #35b5ff;
     --ion-color-primary-rgb: 66, 140, 255;
@@ -169,7 +169,7 @@
    * -------------------------------------------
    */
 
-  .ios body {
+  .ios :root {
     --ion-background-color: #000000;
     --ion-background-color-rgb: 0, 0, 0;
 
@@ -212,7 +212,7 @@
    * -------------------------------------------
    */
 
-  .md body {
+  .md :root {
     --ion-background-color: #121212;
     --ion-background-color-rgb: 18, 18, 18;
 
