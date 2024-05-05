@@ -115,6 +115,7 @@ ion-datetime {
   // --background-rgb: 245, 235, 247;
   --wheel-highlight-background: var(--ion-color-primary);
   --wheel-fade-background-rgb: var(--ion-color-medium-contrast-rgb);
+  --highlight-border-radius: 50px !important;
   // --wheel-fade-background-rgb: red(var(--ion-item-background, #fff)), green(var(--ion-item-background, #fff)), blue(var(--ion-item-background, #fff));
 }
 
@@ -128,9 +129,9 @@ ion-datetime {
 button.alert-button.logout-button-confirm {
   color: var(--ion-color-danger);
 }
-ion-picker-column {
-  background: var(--ion-color-primary) !important;
-}
+// ion-picker-column {
+//   background: var(--ion-color-primary) !important;
+// }
 .picker-above-highlight {
   background: linear-gradient(to bottom, var(--background, var(--ion-background-color, #fff)) 5%, rgba(var(--background-rgb, var(--ion-background-color-rgb, 255, 255, 255)), 0.5) 100%) !important;
 }

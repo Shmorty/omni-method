@@ -18,20 +18,6 @@
     >
   </div>
 
-  <!-- <ion-segment value="score"
-    [(ngModel)]="activeField"
-    color="primary">
-    <ion-segment-button value="scoreDate">
-      <ion-label>Score Date</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="score">
-      <ion-label>Score</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="bodyWeight">
-      <ion-label>Body Weight</ion-label>
-    </ion-segment-button>
-  </ion-segment> -->
-
   <ion-grid>
     <ion-row>
       <ion-col size="4">
@@ -53,14 +39,6 @@
           [readonly]="true"
           [value]="newScore.rawScore"
         ></ion-input>
-        <!-- <ion-input
-            placeholder="{{assessment.units}}"
-            type="number"
-            inputmode="{{inputMode(assessment)}}"
-            value="{{newScore.rawScore | number: '1.0-3'}}"
-            [readonly]="true"
-            [(ngModel)]="newScore.rawScore"
-          ></ion-input> -->
         </div>
       </ion-col>
       <ion-col size="5">

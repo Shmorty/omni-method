@@ -6,6 +6,12 @@ ion-picker {
     --highlight-background: var(--ion-color-primary);
     --highlight-border-radius: 50px;
     --fade-background-rgb: var(--ion-color-light-rgb);
+    background-color: var(--ion-color-light);
+    // border-radius: 17px;
+    // border: 1px solid black;
+}
+.picker-before, .picker-after {
+    border-radius: 17px;
 }
 .picker {
     // background: rgba(var(--ion-color-light-rgb), 0.4);

@@ -21,7 +21,7 @@
   <div class="highlight-below"></div>
 </div> -->
 <ion-picker>
-  <ion-picker-column value="{{pickerValue}}">
+  <ion-picker-column [value]="pickerValue" (ionChange)="onPickerColumnChange($event)">
     <div slot="prefix"></div>
     <ng-container *ngFor="let value of range; index as i">
       <ion-picker-column-option [value]="value">
