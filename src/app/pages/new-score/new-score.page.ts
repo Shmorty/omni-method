@@ -103,39 +103,7 @@ export class NewScorePage implements OnInit, OnDestroy {
   activate(tab: string): void {
     console.log("activate", tab);
     this.activeField = tab;
-    switch (tab) {
-      case 'scoreDate': {
-        console.log("open scoreDate picker");
-        this.swiper.slideTo(0, this.slideToSpeed, false);
-        break;
-      }
-      case 'score': {
-        this.swiper.slideTo(1, this.slideToSpeed, false);
-        // this.numberPickerService.openScorePicker(this.assessment, this.newScore)
-        //   .then(() => {
-        //     console.log("score picker open");
-        //     if (this.numberPickerSubscription) {
-        //       this.numberPickerSubscription.unsubscribe();
-        //     }
-        //     this.numberPickerSubscription = this.numberPickerService.currentValue
-        //       .subscribe((val) => this.gotUpdate(val as Score));
-        //   });
-        break;
-      }
-      case 'bodyWeight': {
-        this.swiper.slideTo(2, this.slideToSpeed, false);
-        // this.numberPickerService.openWeightPicker(this.newScore)
-        //   .then(() => {
-        //     console.log("bodyWeight picker is open");
-        //     if (this.numberPickerSubscription) {
-        //       this.numberPickerSubscription.unsubscribe();
-        //     }
-        //     this.numberPickerSubscription = this.numberPickerService.currentValue
-        //       .subscribe((val) => this.gotUpdate(val as Score));
-        //   });
-        break;
-      }
-    }
+    this.swiper.slideTo(this.fieldNames.indexOf(tab), this.slideToSpeed, false);
   }
 
   tabClass(tab: string) {
