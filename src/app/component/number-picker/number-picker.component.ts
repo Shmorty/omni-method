@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {AfterViewInit, CUSTOM_ELEMENTS_SCHEMA, ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {CdkVirtualScrollViewport, ScrollDispatcher, ScrollingModule} from '@angular/cdk/scrolling';
 import {CommonModule} from '@angular/common';
 import {IonicModule} from '@ionic/angular';
@@ -12,8 +12,9 @@ import {Subject, Subscription} from 'rxjs';
   styleUrls: ['./number-picker.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ScrollingModule, CommonModule, IonicModule],
+  // schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class NumberPickerComponent implements OnInit, AfterViewInit, OnChanges {
+export class NumberPickerComponent implements OnInit, AfterViewInit { // }, OnChanges {
   @Input() min = 0;
   @Input() max = 100;
   @Input() increment = 1;
@@ -56,36 +57,36 @@ export class NumberPickerComponent implements OnInit, AfterViewInit, OnChanges {
     this.startIndex = this.range.indexOf(this.pickerValue);
     console.log("set startIndex " + this.startIndex + " pickerValue " + this.pickerValue);
     // set initial value after small delay
-    setTimeout((ctx) => {
-      console.log("scrollTo startIndex", ctx.startIndex);
-      ctx.viewPort.scrollToIndex(ctx.startIndex);
-      // subscribe to updates
-      this.sub = this.viewPort.scrolledIndexChange.subscribe((index) => {
-        // respond to picker updates
-        console.log("scrolledIndexChange " + index);
-        if (this.curIndex !== index) {
-          this.curIndex = index;
-          this.pickerValue = this.range[this.curIndex];
-          this.pickerValueChange.emit(this.pickerValue);
-        }
+    // setTimeout((ctx) => {
+    //   console.log("scrollTo startIndex", ctx.startIndex);
+    //   ctx.viewPort.scrollToIndex(ctx.startIndex);
+    //   // subscribe to updates
+    //   this.sub = this.viewPort.scrolledIndexChange.subscribe((index) => {
+    //     // respond to picker updates
+    //     console.log("scrolledIndexChange " + index);
+    //     if (this.curIndex !== index) {
+    //       this.curIndex = index;
+    //       this.pickerValue = this.range[this.curIndex];
+    //       this.pickerValueChange.emit(this.pickerValue);
+    //     }
 
-        this.hapticsSelectionChanged();
-        console.log("timeoutId-" + this.timeoutId + " max " + this.max);
-        if (typeof this.timeoutId === "number") {
-          console.log("clearTimeout max " + this.max);
-          clearTimeout(this.timeoutId);
-          Haptics.selectionStart();
-        }
+    //     this.hapticsSelectionChanged();
+    //     console.log("timeoutId-" + this.timeoutId + " max " + this.max);
+    //     if (typeof this.timeoutId === "number") {
+    //       console.log("clearTimeout max " + this.max);
+    //       clearTimeout(this.timeoutId);
+    //       Haptics.selectionStart();
+    //     }
 
-        // center selection
-        console.log("schedule align to", index);
-        this.timeoutId = setTimeout((ctx) => {
-          console.log("align to " + index + " should equal " + ctx.curIndex + " max " + this.max);
-          ctx.viewPort.scrollToIndex(ctx.curIndex, 'smooth');
-          ctx.timeoutId = undefined;
-        }, 350, this);
-      });
-    }, 250, this);
+    //     // center selection
+    //     console.log("schedule align to", index);
+    //     this.timeoutId = setTimeout((ctx) => {
+    //       console.log("align to " + index + " should equal " + ctx.curIndex + " max " + this.max);
+    //       ctx.viewPort.scrollToIndex(ctx.curIndex, 'smooth');
+    //       ctx.timeoutId = undefined;
+    //     }, 350, this);
+    //   });
+    // }, 250, this);
 
   }
 
@@ -93,10 +94,14 @@ export class NumberPickerComponent implements OnInit, AfterViewInit, OnChanges {
     console.log("ngAfterContentInit");
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log("ngOnChanges triggerd " + JSON.stringify(changes));
-    this.onChanges.next(changes);
+  onPickerColumnChange(event) {
+    this.pickerValueChange.emit(event.detail.value);
   }
+
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   console.log("ngOnChanges triggerd " + JSON.stringify(changes));
+  //   this.onChanges.next(changes);
+  // }
 
   ngOnDestroy() {
     console.log("ngOnDestroy value " + this.range[this.curIndex]);

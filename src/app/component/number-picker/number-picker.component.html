@@ -1,4 +1,4 @@
-<cdk-virtual-scroll-viewport
+<!-- <cdk-virtual-scroll-viewport
   itemSize="{{rowHeight}}"
   class="picker ion-content-scroll-host">
   <div class="picker-opt"></div>
@@ -19,9 +19,9 @@
     </span>
   </div>
   <div class="highlight-below"></div>
-</div>
-<!-- <ion-picker>
-  <ion-picker-column value="{{pickerValue}}">
+</div> -->
+<ion-picker>
+  <ion-picker-column [value]="pickerValue" (ionChange)="onPickerColumnChange($event)">
     <div slot="prefix"></div>
     <ng-container *ngFor="let value of range; index as i">
       <ion-picker-column-option [value]="value">
@@ -30,4 +30,4 @@
       </ng-container>
     <div slot="suffix">{{units}}</div>
   </ion-picker-column>
-</ion-picker> -->
+</ion-picker>

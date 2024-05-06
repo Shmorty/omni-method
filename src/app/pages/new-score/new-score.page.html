@@ -18,20 +18,6 @@
     >
   </div>
 
-  <!-- <ion-segment value="score"
-    [(ngModel)]="activeField"
-    color="primary">
-    <ion-segment-button value="scoreDate">
-      <ion-label>Score Date</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="score">
-      <ion-label>Score</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="bodyWeight">
-      <ion-label>Body Weight</ion-label>
-    </ion-segment-button>
-  </ion-segment> -->
-
   <ion-grid>
     <ion-row>
       <ion-col size="4">
@@ -53,14 +39,6 @@
           [readonly]="true"
           [value]="newScore.rawScore"
         ></ion-input>
-        <!-- <ion-input
-            placeholder="{{assessment.units}}"
-            type="number"
-            inputmode="{{inputMode(assessment)}}"
-            value="{{newScore.rawScore | number: '1.0-3'}}"
-            [readonly]="true"
-            [(ngModel)]="newScore.rawScore"
-          ></ion-input> -->
         </div>
       </ion-col>
       <ion-col size="5">
@@ -90,85 +68,40 @@
           presentation="date" [preferWheel]="true" [max]="today"></ion-datetime>
       </swiper-slide>
       <swiper-slide class="input-slide">
-        <app-number-picker [min]="assessment.min" [max]="assessment.max"
+        <app-number-picker class="number-picker" [min]="assessment.min" [max]="assessment.max"
         [increment]="(assessment.increment ? assessment.increment : 1)"
         [units]="assessment.entryUnits" [direction]="direction(assessment)"
         [(pickerValue)]="newScore.rawScore"
       ></app-number-picker>
       </swiper-slide>
       <swiper-slide class="input-slide">
-        <app-number-picker [min]="0" [max]="325" [units]="'lbs'"
+        <app-number-picker class="number-picker" [min]="0" [max]="325" [units]="'lbs'"
         [(pickerValue)]="newScore.currentWeight"
       ></app-number-picker>
       </swiper-slide>
     </swiper-container>
   </div>
 
-  <!-- <ng-container [ngSwitch]="activeField"> -->
-    <!-- <ion-list [hidden]="activeField !== 'scoreDate'" style="background-color: transparent;">
-        <ion-datetime [(ngModel)]="newScore.scoreDate" class="date-picker"
-        presentation="date" [preferWheel]="true" [max]="today"></ion-datetime>
-    </ion-list> -->
-    <!-- <ion-list *ngSwitchCase="'score'" style="background-color: transparent;">
-      <app-number-picker [min]="assessment.min" [max]="assessment.max"
-        [increment]="(assessment.increment ? assessment.increment : 1)"
-        [units]="assessment.entryUnits" [direction]="direction(assessment)"
-        [(pickerValue)]="newScore.rawScore"
-      ></app-number-picker>
-    </ion-list>
-    <ion-list *ngSwitchCase="'bodyWeight'" style="background-color: transparent;">
-      <app-number-picker [min]="0" [max]="325" [units]="'lbs'"
-        [(pickerValue)]="newScore.currentWeight"
-      ></app-number-picker>
-    </ion-list> -->
-  <!-- </ng-container> -->
-
-  <!-- <ion-modal #modal trigger="scoreDate" handle="false" [initialBreakpoint]="1" [breakpoints]="[0, 1]"
-    style="--height: auto;">
-    <ng-template>
-        <ion-toolbar>
-          <ion-buttons slot="end">
-            <ion-button (click)="modal.dismiss()">Done</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-        <ion-datetime [(ngModel)]="newScore.scoreDate" class="date-picker"
-        presentation="date" [preferWheel]="true" [max]="today"></ion-datetime>
-    </ng-template>
-  </ion-modal> -->
-
-  <!-- <ion-picker
-    trigger="rawScore"
-    [isOpen]="activeField === 'score'"
-    [columns]="scorePickerColumns"
-    [buttons]="scorePickerButtons">
-  </ion-picker> -->
-
-  <!-- <ion-picker
-    [isOpen]="activeField === 'bodyWeight'"
-    [columns]="weightPickerColumns"
-    [buttons]="weightPickerButtons">
-  </ion-picker> -->
-
-    <ion-grid class="input-group" [fixed]="true">
-      <ion-row>
-        <ion-col size="12">
-          <ion-textarea
-            #notes
-            class="notes-textarea"
-            label="Notes"
-            labelPlacement="floating"
-            fill="outline"
-            maxlength="128"
-            [(ngModel)]="newScore.notes"
-          ></ion-textarea>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <ion-toolbar color="default">
-      <ion-button type="submit" color="primary" shape="round" expand="block" (click)="onSubmit()">
-        Submit
-      </ion-button>
-    </ion-toolbar>
+  <ion-grid class="input-group" [fixed]="true">
+    <ion-row>
+      <ion-col size="12">
+        <ion-textarea
+          #notes
+          class="notes-textarea"
+          label="Notes"
+          labelPlacement="floating"
+          fill="outline"
+          maxlength="128"
+          [(ngModel)]="newScore.notes"
+        ></ion-textarea>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-toolbar color="default">
+    <ion-button type="submit" color="primary" shape="round" expand="block" (click)="onSubmit()">
+      Submit
+    </ion-button>
+  </ion-toolbar>
 
 </ion-content>
 
