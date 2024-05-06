@@ -23,7 +23,6 @@
 		"AppPlugin",
 		"CAPCameraPlugin",
 		"HapticsPlugin",
-		"KeyboardPlugin",
 		"CAPNetworkPlugin",
 		"SplashScreenPlugin",
 		"StatusBarPlugin",
