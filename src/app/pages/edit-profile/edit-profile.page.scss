@@ -90,3 +90,19 @@ ion-modal {
 ion-modal#editAvatar {
   --height: 100%;
 }
+.date-picker {
+  height: 200px;
+  margin: auto;
+  min-width: 90%;
+}
+.gender-button {
+  --border-radius: 55px;
+  height: 70px;
+  padding: 0px 20px;
+  width: 110px;
+}
+ion-radio.gender-radio {
+  // --border-radius: 17px;
+  --color: var(--ion-light);
+  --color-checked: var(--ion-primary-color);
+}

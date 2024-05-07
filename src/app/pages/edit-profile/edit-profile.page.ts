@@ -31,7 +31,7 @@ export class EditProfilePage implements OnInit, OnDestroy {
   profileForm: FormGroup;
   private numberPickerSubscription: Subscription;
   getAge = UserService.getAge;
-
+  public today = new Date().toISOString();
   isAvatarOptionOpen = false;
   isEditAvatarOpen = false;
   @ViewChild('avatarOption') avatarOptionModal: IonModal;

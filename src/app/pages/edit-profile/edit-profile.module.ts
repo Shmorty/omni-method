@@ -7,6 +7,7 @@ import {EditProfilePage} from './edit-profile.page';
 import {EditProfilePageRoutingModule} from './edit-profile-routing.module';
 import {UserAvatarComponent} from 'src/app/component/user-avatar/user-avatar.component';
 import {ImageCropperModule} from 'ngx-image-cropper';
+import {NumberPickerComponent} from 'src/app/component/number-picker/number-picker.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import {ImageCropperModule} from 'ngx-image-cropper';
     ReactiveFormsModule,
     UserAvatarComponent,
     ImageCropperModule,
+    NumberPickerComponent,
   ],
   declarations: [EditProfilePage],
 })

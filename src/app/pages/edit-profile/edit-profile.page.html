@@ -16,12 +16,13 @@
     </ion-button>
   </ion-fab>
 
-  <ion-list *ngIf="user$ | async as user; else loading ">
+  <ng-container *ngIf="user$ | async as user; else loading ">
     <div id="choose-avatar" (click)="setAvatarOptionOpen(true)" class="avatar">
       <user-avatar [user]="user" [enableShowPic]="false" class="avatar"></user-avatar>
       <ion-button color="medium" shape="round" size="small">edit</ion-button>
     </div>
-  
+
+  <!-- 
     <ion-item button (click)="openModal('name')">
       <ion-label>Name</ion-label>
       <ion-text slot="end">{{user.firstName}}&nbsp;{{user.lastName}}</ion-text>
@@ -46,6 +47,88 @@
       <ion-label>Height</ion-label>
       <ion-text slot="end">{{user.height.feet}}' {{user.height.inches}}"</ion-text>
     </ion-item>
+   -->
+
+    <ion-accordion-group>
+      <ion-accordion>
+        <ion-item slot="header">
+          <ion-label>Name</ion-label>
+          <ion-text slot="end">{{user.firstName}}&nbsp;{{user.lastName}}</ion-text>
+        </ion-item>
+        <div class="ion-padding" slot="content" color="light">
+          <ion-input label="First Name" [(ngModel)]="user.firstName"></ion-input>
+          <ion-input label="Last Name" [(ngModel)]="user.lastName"></ion-input>
+        </div>
+      </ion-accordion>
+      <ion-accordion>
+        <ion-item slot="header">
+          <ion-label>Userame</ion-label>
+          <ion-text slot="end">{{user.username}}</ion-text>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-input></ion-input>
+        </div>
+      </ion-accordion>
+      <ion-accordion>
+        <ion-item slot="header">
+          <ion-label>Age</ion-label>
+          <ion-text slot="end">{{getAge(user)}}</ion-text>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-datetime [(ngModel)]="user.dob" class="date-picker"
+          presentation="date" [preferWheel]="true" [max]="today"></ion-datetime>
+        </div>
+      </ion-accordion>
+      <ion-accordion>
+        <ion-item slot="header">
+          <ion-label>Gender</ion-label>
+          <ion-text slot="end">{{user.gender}}</ion-text>
+        </ion-item>
+        <div class="ion-padding align-center" slot="content">
+          <ion-radio-group [value]="user.gender">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button size="large" class="gender-button">
+                  <ion-icon slot="icon-only" name="male" size="large"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button size="large" class="gender-button">
+                  <ion-icon slot="icon-only" name="female" size="large"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-radio value="Male" labelPlacement="stacked" alignment="center">Male</ion-radio>
+              </ion-col>
+              <ion-col>
+                <ion-radio value="Female" labelPlacement="stacked" alignment="center">Female</ion-radio>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-radio-group>
+        </div>
+      </ion-accordion>
+      <ion-accordion>
+        <ion-item slot="header">
+          <ion-label>Weight</ion-label>
+          <ion-text slot="end">{{user.weight}}</ion-text>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <app-number-picker class="number-picker" [min]="0" [max]="325" [units]="'lbs'"
+            [(pickerValue)]="user.weight"
+          ></app-number-picker>
+        </div>
+      </ion-accordion>
+      <ion-accordion>
+        <ion-item slot="header">
+          <ion-label>Height</ion-label>
+          <ion-text slot="end">{{user.height.feet}}' {{user.height.inches}}"</ion-text>
+        </ion-item>
+        <div class="ion-padding" slot="content">edit username</div>
+      </ion-accordion>
     <ion-list-header class="section_header">Account</ion-list-header>
     <ion-item>
       <ion-label>Email</ion-label>
@@ -62,7 +145,8 @@
     <ion-item button (click)="logout()">
       <ion-label color="danger">Log Out</ion-label>
     </ion-item>
-  </ion-list>
+  </ion-accordion-group>
+</ng-container>
 
   <ng-template #loading>
     <ion-spinner color="primary"></ion-spinner>
