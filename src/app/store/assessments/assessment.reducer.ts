@@ -42,5 +42,8 @@ export const assessmentReducer = createReducer(
     loading: false,
     error: action.error,
     // status: 'error',
-  }))
+  })),
+  // on(AssessmentActions.updateAssessmentInStore, (state, action) => ({
+  //   ...state.assessments.filter,
+  // }))
 );

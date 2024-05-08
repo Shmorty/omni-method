@@ -26,6 +26,7 @@ export class EditChecklistComponent implements OnInit {
   public curScore: Score;
   // private checklistChanged: boolean = false;
   public category: string;
+  public hideChecked = false;
 
   constructor(
     private router: Router,
@@ -36,6 +37,7 @@ export class EditChecklistComponent implements OnInit {
   async ngOnInit() {
     console.log("ngOnInit assessment: ", JSON.stringify(this.assessment));
     this.checklist$ = this.assessmentService.getChecklist(this.assessment.aid);
+    this.hideChecked = this.assessment.hideChecked;
     // if checklist with categories
     this.checklistCategories$ = this.assessmentService.getChecklistCategories(this.assessment.aid);
     await this.checklistCategories$.pipe(first()).subscribe(val => this.category = val[0]);
@@ -79,6 +81,20 @@ export class EditChecklistComponent implements OnInit {
     this.router.navigate(['/home', 'profile', 'details', 'skill'], {
       queryParams: {aid: this.assessment.aid, skill: index},
     });
+  }
+
+  hideItem(index): boolean {
+    return (this.displayChecked[index] && this.hideChecked);
+  }
+
+  getFilterClass() {
+    return (this.hideChecked ? "dark" : "light");
+  }
+
+  toggleFilter() {
+    console.log("toggleFilter");
+    this.hideChecked = !this.hideChecked;
+    this.assessment.hideChecked = this.hideChecked;
   }
 
 }

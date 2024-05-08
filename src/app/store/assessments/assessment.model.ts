@@ -21,6 +21,7 @@ export interface Assessment {
   scores?: Score[];
   video?: string;
   warning?: string;
+  hideChecked?: boolean;
 }
 
 export interface Category {

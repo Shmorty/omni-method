@@ -72,3 +72,9 @@ ion-segment {
 ion-segment-button::part(indicator-background) {
   background: var(--ion-color-primary);
 }
+ion-button.light {
+  --background: var(--ion-color-medium);
+}
+ion-button.dark {
+  --background: var(--ion-color-primary);
+}

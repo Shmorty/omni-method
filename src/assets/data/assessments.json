@@ -564,7 +564,11 @@
       "aid": "COORD",
       "categories":["Basic", "Equipment", "Forward", "Backward", "Twisting"],
       "skills": [
-      {"label": "Jumping Jacks", "category": "Basic"},
+      {
+        "label": "Jumping Jacks",
+        "category": "Basic",
+        "description": "Jump while spreading your legs and raising your arms overhead, then return to the starting position."
+      },
       {"label": "Jump rope", "category": "Equipment"},
       {"label": "Forward Roll", "category": "Forward"},
       {
@@ -573,47 +577,118 @@
         "video": "content/videos/skill_demo/coordination/BackwardRoll.mp4"
       },
       {"label": "Half Tour (180 jump)", "category":"Twisting"},
-      {"label": "Swimming", "category":"Basic"},
+      {
+        "label": "Swimming (25 yards)",
+        "category":"Basic",
+        "description": "Swim 25 yards without assistance."
+      },
       {"label": "Basketball Dribbling", "category": "Equipment"},
       {"label": "Bar Forward Roll", "category":"Forward"},
       {"label": "Pull-over", "category": "Backward"},
       {"label": "Single Tour (360 jump)", "category": "Twisting"},
-      {"label": "Skipping", "category": "Basic"},
+      {
+        "label": "Skipping",
+        "category": "Basic",
+        "description": "Hop forward on one foot while alternating legs."
+      },
       {"label": "Ride a Bicycle", "category": "Equipment"},
       {"label": "Handstand Foreward Roll", "category": "Forward"},
       {"label": "Axe", "category": "Backward"},
       {"label": "Dragon 180", "category": "Twisting"},
-      {"label": "Karaoke", "category": "Basic"},
+      {
+        "label": "Karaoke (or Grapevine)",
+        "category": "Basic",
+        "description": "Step sideways with one foot, cross the other foot in front, and continue alternating steps by stepping behind."
+      },
       {"label": "2 Ball Juggling", "category": "Equipment"},
       {"label": "Front Walkover", "category": "Forward"},
       {"label": "Back Hip Circle", "category": "Backward"},
       {"label": "B Twist", "category": "Twisting"},
-      {"label": "Precision Jump", "category": "Basic"},
+      {
+        "label": "Precision Jump",
+        "category": "Basic",
+        "description": "Jump the distance of your height, landing on the edge of a surface with control."
+      },
       {"label": "Throwing (tennis ball 15ft)", "category": "Equipment"},
       {"label": "Dive Roll", "category": "Forward"},
       {"label": "Macaco", "category": "Backward"},
       {"label": "Back Half", "category": "Twisting"},
-      {"label": "Bear Crawls", "category": "Basic"},
+      {
+        "label": "Bear Crawls",
+        "category": "Basic",
+        "description": "Move on all fours in all directions on the hands and feet, with opposite limbs moving together, keeping knees off the ground."
+      },
       {"label": "Catching (tennis ball 15ft)", "category": "Equipment"},
       {"label": "Front Mini Giant", "category": "Forward"},
       {"label": "Back Handspring", "category": "Backward"},
       {"label": "Double Tour (720 jump)", "category": "Twisting"},
 
 
-      {"label": "Precision Roll", "category": "Basic"},
-      {"label": "Cartwheel", "category": "Basic"},
-      {"label": "One Arm Cartwheel", "category": "Basic"},
-      {"label": "Roundoff", "category": "Basic"},
+      {
+        "label": "Precision Roll",
+        "category": "Basic",
+        "description": "Jump from a surface at least half your height and a distance of your height, landing on your feet and then rolling to dissipate force."
+      },
+      {
+        "label": "Cartwheel",
+        "category": "Basic",
+        "description": "Perform a sideways flip with hands and feet touching the ground alternately."
+      },
+      {
+        "label": "One Arm Cartwheel",
+        "category": "Basic",
+        "description": "Perform a cartwheel using only one hand."
+      },
+      {
+        "label": "Roundoff",
+        "category": "Basic",
+        "description": "Perform a cartwheel landing with both feet together, followed by a backward rebound."
+      },
       {"label": "One Arm Cartwheel (other side)","category": "Basic"},
-      {"label": "Handstand Walking 15 ft", "category": "Basic"},
-      {"label": "Lock", "category": "Basic"},
-      {"label": "Wall Spin", "category": "Basic"},
-      {"label": "Aerial", "category": "Basic"},
-      {"label": "Handstand Pirouettes x5", "category": "Basic"},
-      {"label": "Kip up ground", "category": "Basic"},
-      {"label": "V-muscle up", "category": "Basic"},
-      {"label": "Side Flip", "category": "Basic"},
-      {"label": "Touchdown Raiz", "category": "Basic"},
+      {
+        "label": "Handstand Walking",
+        "category": "Basic",
+        "description": "Walk 15 feet on your hands."
+      },
+      {
+        "label": "Lock", "category": "Basic",
+        "description": "Swing backward on a bar, then contract your lats to bring yourself to the top of the bar."
+      },
+      {
+        "label": "Raiz",
+        "category": "Basic",
+        "description": "Begin by jumping off one foot, rotating your body sideways. As you rotate, swing your arms to generate momentum. Finally, land on the opposite foot to complete the move."
+      },
+      {
+        "label": "Aerial",
+        "category": "Basic",
+        "description": "Perform a cartwheel with no hands"
+      },
+      {
+        "label": "Handstand Pirouettes x5",
+        "category": "Basic",
+        "description": "Spin around 5 times while in a handstand"
+      },
+      {
+        "label": "Kip up ground",
+        "category": "Basic",
+        "description": "From a supine position, explosively push off the ground with your hands and feet to propel your body upward into a standing position."
+      },
+      {
+        "label": "V-muscle up",
+        "category": "Basic",
+        "description": "Begin by swinging on the bar. As you swing, guide your legs and body through the space between the bar and your body. Once through, complete the motion by performing a muscle up, ending in a seated position on top of the bar."
+      },
+      {
+        "label": "Side Flip",
+        "category": "Basic",
+        "description": "Jump sideways while tucking your body, rotate horizontally, then land."
+      },
+      {
+        "label": "Touchdown Raiz",
+        "category": "Basic",
+        "description": "A Raiz, but with one hand touching the ground for added stability during the rotation."
+      },
 
       {"label": "3 ball juggling", "category": "Equipment"},
       {"label": "Throwing (tennis ball 30ft)", "category": "Equipment"},

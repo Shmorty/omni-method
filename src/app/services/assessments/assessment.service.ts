@@ -57,6 +57,10 @@ export class AssessmentService implements IAssessmentService {
     this.store.dispatch(AssessmentActions.loadAssessmentsBegin());
   }
 
+  // updateAssessment(assessment: Assessment) {
+  //   this.store.
+  // }
+
   getChecklist(aid: string): Observable<object[]> {
     return this.store.select(selectChecklist(aid));
   }

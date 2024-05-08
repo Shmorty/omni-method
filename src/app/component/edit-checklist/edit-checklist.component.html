@@ -11,16 +11,22 @@
       <li *ngFor="let item of assessment.instruction">{{item}}</li>
     </ol>
   </ion-item>
+  <ion-item lines="none">
+    <ion-label>
+      <ion-card-title>
+        <h1>
+          <ion-text>Checklist</ion-text>
+          <ion-button class="ion-float-right" [ngClass]="getFilterClass()"
+          shape="round" (click)="toggleFilter()">
+            <ion-icon slot="icon-only" size="large" name="filter-circle-outline"></ion-icon>
+          </ion-button>
+        </h1>
+      </ion-card-title>
+    </ion-label>
+  </ion-item>
   <ng-container *ngIf="assessment.checklistCategories;else simpleSkillList">
     <!-- segments -->
     <ion-item lines="none">
-      <ion-label>
-        <ion-card-title>
-          <h1>Checklist</h1>
-        </ion-card-title>
-      </ion-label>
-    </ion-item>
-      <ion-item lines="none">
       <ion-segment [(ngModel)]="category" [scrollable]="true">
         <ng-container *ngFor="let cat of checklistCategories$ | async; let i = index">
           <ion-segment-button value="{{cat}}">
@@ -35,7 +41,7 @@
         <ng-container *ngFor="let item of checklist$ | async; let i = index">
           <ng-container *ngIf="item['category'] === cat">
             <ion-item
-              [button]="true" slot="content"
+              [button]="true" slot="content" [hidden]="hideItem(i)"
               (click)="openSkill(i)" lines="none">
               <img (click)="toggleCheckItem($event, i)" slot="start" [ngClass]="getCheckedClass(i)" src="/assets/images/icons/Check.png">
               <div *ngIf="item['thumbnail']" class="thumbnail">
@@ -55,7 +61,7 @@
   </ng-container>
   <ng-template #simpleSkillList>
     <ion-item *ngFor="let item of checklist$ | async; let i = index"
-      [button]="true"
+      [button]="true" [hidden]="hideItem(i)"
       (click)="openSkill(i)" lines="none">
       <ion-img (click)="toggleCheckItem($event,i)" slot="start" [ngClass]="getCheckedClass(i)" src="/assets/images/icons/Check.png"></ion-img>
       <div *ngIf="item['thumbnail']" class="thumbnail">
