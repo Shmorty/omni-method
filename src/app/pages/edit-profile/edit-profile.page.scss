@@ -52,18 +52,14 @@ ion-button {
   bottom: 0;
 }
 
-ion-datetime {
-  // --background: #5eb3f9;
-  // --background-rgb: 94, 179, 249;
-  --wheel-highlight-background: #5eb3f9;
-  --wheel-fade-background-rgb: 94, 179, 249;
-  &::part(wheel-item) {
-    color: rgb(0, 0, 0);
-  }
-  &::part(wheel-item active) {
-    color: rgb(255, 255, 255);
-  }
-}
+// ion-datetime {
+//   &::part(wheel-item) {
+//     color: rgb(0, 0, 0);
+//   }
+//   &::part(wheel-item active) {
+//     color: rgb(255, 255, 255);
+//   }
+// }
 ion-spinner {
   display: block;
   margin: auto;
