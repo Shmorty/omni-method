@@ -15,6 +15,7 @@ import {
   selectChecklist,
   selectChecklistCategories,
   selectChecklistSkill,
+  selectHideCheckFlag,
 } from '../../store/assessments/assessment.selector';
 import * as AssessmentActions from '../../store/assessments/assessment.actions';
 
@@ -57,9 +58,13 @@ export class AssessmentService implements IAssessmentService {
     this.store.dispatch(AssessmentActions.loadAssessmentsBegin());
   }
 
-  // updateAssessment(assessment: Assessment) {
-  //   this.store.
-  // }
+  setAssessmentHideCheckedFlag(aid: string, hideChecked: boolean) {
+    this.store.dispatch(AssessmentActions.setAssessmentHideCheckedFlag({aid, hideChecked}));
+  }
+
+  getAssessmentHideCheckedFlag(aid: string): Observable<boolean> {
+    return this.store.select(selectHideCheckFlag(aid));
+  }
 
   getChecklist(aid: string): Observable<object[]> {
     return this.store.select(selectChecklist(aid));

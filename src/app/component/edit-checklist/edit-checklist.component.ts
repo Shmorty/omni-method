@@ -26,6 +26,7 @@ export class EditChecklistComponent implements OnInit {
   public curScore: Score;
   // private checklistChanged: boolean = false;
   public category: string;
+  private hideCheckedFlag$: Observable<boolean>;
   public hideChecked = false;
 
   constructor(
@@ -40,8 +41,14 @@ export class EditChecklistComponent implements OnInit {
     this.hideChecked = this.assessment.hideChecked;
     // if checklist with categories
     this.checklistCategories$ = this.assessmentService.getChecklistCategories(this.assessment.aid);
-    await this.checklistCategories$.pipe(first()).subscribe(val => this.category = val[0]);
+    await this.checklistCategories$.pipe(first()).subscribe(val => {
+      if (val) {
+        this.category = val[0];
+      }
+    });
     console.log("category " + this.category);
+    this.hideCheckedFlag$ = this.assessmentService.getAssessmentHideCheckedFlag(this.assessment.aid);
+    this.hideCheckedFlag$.subscribe((value) => this.hideChecked = value);
   }
 
   ngAfterViewInit(): void {
@@ -94,7 +101,9 @@ export class EditChecklistComponent implements OnInit {
   toggleFilter() {
     console.log("toggleFilter");
     this.hideChecked = !this.hideChecked;
-    this.assessment.hideChecked = this.hideChecked;
+    // this.assessment.hideChecked = this.hideChecked;
+    console.log("call aService setFlag", this.assessment);
+    this.assessmentService.setAssessmentHideCheckedFlag(this.assessment.aid, this.hideChecked);
   }
 
 }

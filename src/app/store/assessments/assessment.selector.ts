@@ -58,3 +58,10 @@ export const selectChecklistSkill = (aid: string, index: number) =>
     (state: AssessmentState) =>
       state.checklists.find((checklist) => checklist.aid === aid).skills[index]
   );
+
+export const selectHideCheckFlag = (aid: string) =>
+  createSelector(
+    selectAssessments,
+    (state: AssessmentState) =>
+      state.assessments.find((assessment) => assessment.aid === aid).hideChecked
+  );

@@ -1,5 +1,5 @@
-import { Action, createAction, props } from '@ngrx/store';
-import { Assessment } from './assessment.model';
+import {Action, createAction, props} from '@ngrx/store';
+import {Assessment} from './assessment.model';
 
 // export enum AssessmentActionType {
 //   GET_ASSESSMENTS = '[Assessment] Get User Assessments',
@@ -24,6 +24,7 @@ export enum AssessmentActionType {
   LOAD_ASSESSMENTS_BEGIN = '[App Startup] Load Assessments Begin',
   LOAD_ASSESSMENTS_SUCCESS = '[Assessment API] Load Assessments Success',
   LOAD_ASSESSMENTS_FAILURE = '[Assessment API] Load Assessments Failure',
+  SET_ASSESSMENT_HIDE_CHECKED_FLAG = '[Edit Checklist] Set Hide Checked',
 }
 
 export const loadAssessmentsBegin = createAction(
@@ -33,10 +34,15 @@ export const loadAssessmentsBegin = createAction(
 export const loadAssessmentsSuccess = createAction(
   AssessmentActionType.LOAD_ASSESSMENTS_SUCCESS,
   // props<{ categories: Category[] }>()
-  props<{ data: any }>()
+  props<{data: any}>()
 );
 
 export const loadAssessmentsFailure = createAction(
   AssessmentActionType.LOAD_ASSESSMENTS_FAILURE,
-  props<{ error: any }>()
+  props<{error: any}>()
+);
+
+export const setAssessmentHideCheckedFlag = createAction(
+  AssessmentActionType.SET_ASSESSMENT_HIDE_CHECKED_FLAG,
+  props<{aid: string, hideChecked: boolean}>()
 );
