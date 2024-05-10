@@ -1,7 +1,7 @@
-user-avatar {
-  background: -primary;
-  margin: 12px auto;
-}
+// user-avatar {
+//   background: -primary;
+//   margin: 12px auto;
+// }
 .avatar {
   margin: 24px auto 0;
   ion-label {
@@ -85,6 +85,16 @@ ion-modal {
 }
 ion-modal#editAvatar {
   --height: 100%;
+}
+.current-value {
+  border: 1.5px solid var(--ion-color-light);
+  background-color: var(--ion-color-medium);
+  border-radius: 17px;
+  color: var(--ion-color-light);
+  padding: 5px 10px;
+}
+.username-input input::before {
+  content: '&#64;';
 }
 .date-picker {
   height: 200px;

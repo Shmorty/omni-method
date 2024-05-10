@@ -49,40 +49,41 @@
     </ion-item>
    -->
 
-    <ion-accordion-group>
-      <ion-accordion>
+   <ion-list-header class="section_header"></ion-list-header>
+   <ion-accordion-group>
+      <ion-accordion toggleIconSlot="none">
         <ion-item slot="header">
           <ion-label>Name</ion-label>
-          <ion-text slot="end">{{user.firstName}}&nbsp;{{user.lastName}}</ion-text>
+          <ion-text class="current-value" slot="end">{{user.firstName}}&nbsp;{{user.lastName}}</ion-text>
         </ion-item>
         <div class="ion-padding" slot="content" color="light">
-          <ion-input label="First Name" [(ngModel)]="user.firstName"></ion-input>
-          <ion-input label="Last Name" [(ngModel)]="user.lastName"></ion-input>
+          <ion-input shape="round" label="First:" [(ngModel)]="user.firstName"></ion-input>
+          <ion-input shape="round" label="Last:" [(ngModel)]="user.lastName"></ion-input>
         </div>
       </ion-accordion>
-      <ion-accordion>
+      <ion-accordion toggleIconSlot="none">
         <ion-item slot="header">
-          <ion-label>Userame</ion-label>
-          <ion-text slot="end">{{user.username}}</ion-text>
+          <ion-label>Username</ion-label>
+          <ion-text class="current-value" slot="end">&#64;{{user.username}}</ion-text>
         </ion-item>
         <div class="ion-padding" slot="content">
-          <ion-input></ion-input>
+          <ion-input class="username-input" label="Username:" [(ngModel)]="user.username"></ion-input>
         </div>
       </ion-accordion>
-      <ion-accordion>
+      <ion-accordion toggleIconSlot="none">
         <ion-item slot="header">
           <ion-label>Age</ion-label>
-          <ion-text slot="end">{{getAge(user)}}</ion-text>
+          <ion-text class="current-value" slot="end">{{getAge(user)}}</ion-text>
         </ion-item>
         <div class="ion-padding" slot="content">
           <ion-datetime [(ngModel)]="user.dob" class="date-picker"
           presentation="date" [preferWheel]="true" [max]="today"></ion-datetime>
         </div>
       </ion-accordion>
-      <ion-accordion>
+      <ion-accordion toggleIconSlot="none">
         <ion-item slot="header">
           <ion-label>Gender</ion-label>
-          <ion-text slot="end">{{user.gender}}</ion-text>
+          <ion-text class="current-value" slot="end">{{user.gender}}</ion-text>
         </ion-item>
         <div class="ion-padding align-center" slot="content">
           <ion-radio-group [value]="user.gender">
@@ -111,10 +112,10 @@
         </ion-radio-group>
         </div>
       </ion-accordion>
-      <ion-accordion>
+      <ion-accordion toggleIconSlot="none">
         <ion-item slot="header">
           <ion-label>Weight</ion-label>
-          <ion-text slot="end">{{user.weight}}</ion-text>
+          <ion-text class="current-value" slot="end">{{user.weight}}</ion-text>
         </ion-item>
         <div class="ion-padding" slot="content">
           <app-number-picker class="number-picker" [min]="0" [max]="325" [units]="'lbs'"
@@ -122,10 +123,10 @@
           ></app-number-picker>
         </div>
       </ion-accordion>
-      <ion-accordion>
+      <ion-accordion toggleIconSlot="none">
         <ion-item slot="header">
           <ion-label>Height</ion-label>
-          <ion-text slot="end">{{user.height.feet}}' {{user.height.inches}}"</ion-text>
+          <ion-text class="current-value" slot="end">{{user.height.feet}}' {{user.height.inches}}"</ion-text>
         </ion-item>
         <div class="ion-padding" slot="content">edit username</div>
       </ion-accordion>
