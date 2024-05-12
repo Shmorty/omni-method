@@ -97,27 +97,23 @@ ion-modal#editAvatar {
   // border: 0.5px solid var(--ion-color-medium);
   border-radius: 3px;
 }
-ion-input.input-field {
-  $label-margin-bottom: 0px;
+ion-input.input-field::part(native) {
+  // $label-margin-bottom: 0px;
   // border: 1px solid blue;
   border-radius: 17px;
   overflow: hidden;
   margin-bottom: 4px;
-  // label {
-  //   padding-bottom: 0 !important;
-  // }
-  // background-color: var(--ion-color-light);
   --background: var(--ion-color-medium);
   --color: var(--ion-color-medium-contrast);
-  // --placeholder-color: #ddd;
-  // --placeholder-opacity: 0.8;
 
   --padding-bottom: 10px;
   --padding-end: 10px;
   --padding-start: 10px;
   --padding-top: 10px;
   label.native-wraper div.native-input {
-    background: lightgray;
+    background: var(--ion-color-medium);
+    // color: var(--ion-color-medium-contrast);
+    color: red;
     border-radius: 17px;
     padding-left: 17px;
   }

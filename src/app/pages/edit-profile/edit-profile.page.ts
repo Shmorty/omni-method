@@ -199,6 +199,11 @@ export class EditProfilePage implements OnInit, OnDestroy {
     await alert.present();
   }
 
+  onTextChange(event: Event) {
+    console.log("onTextChange", event);
+    this.submitForm();
+  }
+
   submitForm() {
     console.log('edit profile submitForm', this.profileForm.value);
     this.userService.updateUser(this.profileForm.value);

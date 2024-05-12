@@ -57,13 +57,19 @@
           <ion-text class="current-value" slot="end">{{user.firstName}}&nbsp;{{user.lastName}}</ion-text>
         </ion-item>
         <div class="ion-padding input-div" slot="content" color="light">
-          <ion-input class="input-field" label="First:" [(ngModel)]="user.firstName"></ion-input>
-          <ion-input class="input-field" label="Last:" [(ngModel)]="user.lastName"></ion-input>
+          <ion-input class="input-field" label="First:" 
+            [value]="user.firstName"
+            (ionChange)="onTextChange($event)"
+            ></ion-input>
+          <ion-input class="input-field" label="Last:"
+            [value]="user.lastName"
+            (ionChange)="onTextChange($event)"
+            ></ion-input>
         </div>
       </ion-accordion>
       <ion-accordion toggleIconSlot="none">
         <ion-item slot="header">
-          <ion-label>Username</ion-label>
+          <ion-label slot="start">Username</ion-label>
           <ion-text class="current-value" slot="end">&#64;{{user.username}}</ion-text>
         </ion-item>
         <div class="ion-padding input-div" slot="content">
