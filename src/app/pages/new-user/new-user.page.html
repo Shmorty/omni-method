@@ -3,8 +3,8 @@
  
   <form [formGroup]="formData" (ngSubmit)="onSubmit()">
     <div>
-      <ion-list>
-        <ion-item>
+      <ion-list style="padding: 15px;">
+        <ion-item lines="none">
           <ion-button type="button" shape="circle"
             (click)="previous()" [disabled]="step == 1">
             <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
@@ -18,7 +18,7 @@
               <h1 class="center">Create Account</h1>
             </ion-text>
           </div>
-          <ion-item>
+          <ion-item lines="full">
             <ion-input
               formControlName="firstName"
               placeholder="First"
@@ -32,7 +32,7 @@
           >
             <span *ngIf="first.errors?.required">First name is required</span>
           </div>
-          <ion-item>
+          <ion-item lines="full">
             <ion-input
               formControlName="lastName"
               placeholder="Last"
@@ -46,7 +46,7 @@
           >
             <span *ngIf="last.errors?.required">Last name is required</span>
           </div>
-          <ion-item>
+          <ion-item lines="full">
             <ion-input
               id="username"
               formControlName="username"
@@ -72,7 +72,7 @@
               <h1 class="center">What is your gender?</h1>
             </ion-text>
           </div>
-          <ion-item>
+          <ion-item lines="full">
             <ion-radio-group formControlName="gender" value="other">
               <ion-radio justify="start" value="Male" labelPlacement="end">Male</ion-radio>
               <ion-radio justify="start" value="Female" labelPlacement="end">Female</ion-radio>
