@@ -97,11 +97,16 @@ ion-modal#editAvatar {
   // border: 0.5px solid var(--ion-color-medium);
   border-radius: 3px;
 }
-ion-input.input-field::part(native) {
+.input-field {
+  border-bottom: 1px solid var(--ion-color-dark);
+  // --inner-border-width: 3px;
+}
+ionICK-item::part(native) {
   // $label-margin-bottom: 0px;
   // border: 1px solid blue;
-  border-radius: 17px;
-  overflow: hidden;
+  border-bottom: 3px solid red;
+  // border-radius: 17px;
+  // overflow: hidden;
   margin-bottom: 4px;
   --background: var(--ion-color-medium);
   --color: var(--ion-color-medium-contrast);
@@ -118,10 +123,11 @@ ion-input.input-field::part(native) {
     padding-left: 17px;
   }
 }
-.username-input input::before {
-  content: '&#64;';
-}
+// .username-input::before {
+//   content: '&#64;';
+// }
 .date-picker {
+  border: 0.5px solid var(--ion-color-medium);
   height: 200px;
   margin: auto;
   min-width: 90%;
@@ -131,6 +137,12 @@ ion-input.input-field::part(native) {
   height: 70px;
   padding: 0px 20px;
   width: 110px;
+}
+.active {
+  --background: var(--ion-color-primary);
+}
+.disabled {
+  --background: var(--ion-color-medium)
 }
 ion-radio.gender-radio {
   // --border-radius: 17px;

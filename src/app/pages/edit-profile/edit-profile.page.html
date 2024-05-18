@@ -57,11 +57,11 @@
           <ion-text class="current-value" slot="end">{{user.firstName}}&nbsp;{{user.lastName}}</ion-text>
         </ion-item>
         <div class="ion-padding input-div" slot="content" color="light">
-          <ion-input class="input-field" label="First:" 
+          <ion-input class="input-field" label="First:" labelPlacement="stacked"
             [value]="user.firstName"
             (ionChange)="onTextChange($event)"
             ></ion-input>
-          <ion-input class="input-field" label="Last:"
+          <ion-input class="input-field" label="Last:" labelPlacement="stacked"
             [value]="user.lastName"
             (ionChange)="onTextChange($event)"
             ></ion-input>
@@ -70,10 +70,13 @@
       <ion-accordion toggleIconSlot="none">
         <ion-item slot="header">
           <ion-label slot="start">Username</ion-label>
-          <ion-text class="current-value" slot="end">&#64;{{user.username}}</ion-text>
+          <ion-text class="current-value" slot="end">&#64;{{user.username}}
+          </ion-text>
         </ion-item>
         <div class="ion-padding input-div" slot="content">
-          <ion-input class="input-field username-input" label="Username:" [(ngModel)]="user.username"></ion-input>
+          <ion-input class="input-field username-input"
+            [(ngModel)]="user.username"
+            ></ion-input>
         </div>
       </ion-accordion>
       <ion-accordion toggleIconSlot="none">
@@ -96,12 +99,18 @@
           <ion-grid>
             <ion-row>
               <ion-col>
-                <ion-button size="large" class="gender-button">
+                <ion-button size="large"
+                  class="gender-button"
+                  ngClass="{{user.gender == 'Male' ? 'active' : 'disabled'}}"
+                  >
                   <ion-icon slot="icon-only" name="male" size="large"></ion-icon>
                 </ion-button>
               </ion-col>
               <ion-col>
-                <ion-button size="large" class="gender-button">
+                <ion-button size="large"
+                  class="gender-button"
+                  ngClass="{{user.gender == 'Female' ? 'active' : 'disabled'}}"
+                  >
                   <ion-icon slot="icon-only" name="female" size="large"></ion-icon>
                 </ion-button>
               </ion-col>
