@@ -94,21 +94,19 @@ ion-modal#editAvatar {
   padding: 5px 10px;
 }
 .input-div {
-  // border: 0.5px solid var(--ion-color-medium);
-  border-radius: 3px;
+  padding-top: 0;
 }
 .input-field {
-  border-bottom: 1px solid var(--ion-color-dark);
-  // --inner-border-width: 3px;
+  border-bottom: 1px solid var(--ion-color-medium);
 }
-ionICK-item::part(native) {
+ion-item::part(native) {
   // $label-margin-bottom: 0px;
   // border: 1px solid blue;
-  border-bottom: 3px solid red;
+  // border-bottom: 3px solid red;
   // border-radius: 17px;
   // overflow: hidden;
   margin-bottom: 4px;
-  --background: var(--ion-color-medium);
+  // --background: var(--ion-color-medium);
   --color: var(--ion-color-medium-contrast);
 
   --padding-bottom: 10px;
@@ -127,10 +125,25 @@ ionICK-item::part(native) {
 //   content: '&#64;';
 // }
 .date-picker {
-  border: 0.5px solid var(--ion-color-medium);
+  border: 2px solid var(--ion-color-light);
   height: 200px;
   margin: auto;
   min-width: 90%;
+}
+// gender radio button
+// ion-radio::part(mark) {
+//   color:greenyellow;
+// }
+.gender-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.gender-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 .gender-button {
   --border-radius: 55px;
@@ -144,8 +157,9 @@ ionICK-item::part(native) {
 .disabled {
   --background: var(--ion-color-medium)
 }
-ion-radio.gender-radio {
-  // --border-radius: 17px;
-  --color: var(--ion-light);
-  --color-checked: var(--ion-primary-color);
-}
+// .number-picker {
+//   border-radius: 17px;
+//   overflow: hidden;
+//   margin: auto;
+//   width: 90%;
+// }

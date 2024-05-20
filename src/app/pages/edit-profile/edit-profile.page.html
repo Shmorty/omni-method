@@ -57,13 +57,17 @@
           <ion-text class="current-value" slot="end">{{user.firstName}}&nbsp;{{user.lastName}}</ion-text>
         </ion-item>
         <div class="ion-padding input-div" slot="content" color="light">
-          <ion-input class="input-field" label="First:" labelPlacement="stacked"
+          <ion-input class="input-field" aria-label="First"
+            id="firstName"
             [value]="user.firstName"
             (ionChange)="onTextChange($event)"
+            placeholder="first name"
             ></ion-input>
-          <ion-input class="input-field" label="Last:" labelPlacement="stacked"
+          <ion-input class="input-field" aria-label="Last"
+            id="lastName"
             [value]="user.lastName"
             (ionChange)="onTextChange($event)"
+            placeholder="last name"
             ></ion-input>
         </div>
       </ion-accordion>
@@ -75,7 +79,11 @@
         </ion-item>
         <div class="ion-padding input-div" slot="content">
           <ion-input class="input-field username-input"
-            [(ngModel)]="user.username"
+            #usernameInput
+            maxlength={{usernameMaxLength}}
+            [value]="'&#64;'+user.username"
+            (ionChange)="updateUsername($event)"
+            (ionInput)="onUsernameInput($event)"
             ></ion-input>
         </div>
       </ion-accordion>
@@ -85,7 +93,7 @@
           <ion-text class="current-value" slot="end">{{getAge(user)}}</ion-text>
         </ion-item>
         <div class="ion-padding" slot="content">
-          <ion-datetime [(ngModel)]="user.dob" class="date-picker"
+          <ion-datetime [value]="user.dob" (ionChange)="onDobChange($event)" class="date-picker"
           presentation="date" [preferWheel]="true" [max]="today"></ion-datetime>
         </div>
       </ion-accordion>
@@ -94,47 +102,36 @@
           <ion-label>Gender</ion-label>
           <ion-text class="current-value" slot="end">{{user.gender}}</ion-text>
         </ion-item>
-        <div class="ion-padding align-center" slot="content">
-          <ion-radio-group [value]="user.gender">
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                <ion-button size="large"
-                  class="gender-button"
-                  ngClass="{{user.gender == 'Male' ? 'active' : 'disabled'}}"
-                  >
-                  <ion-icon slot="icon-only" name="male" size="large"></ion-icon>
-                </ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button size="large"
-                  class="gender-button"
-                  ngClass="{{user.gender == 'Female' ? 'active' : 'disabled'}}"
-                  >
-                  <ion-icon slot="icon-only" name="female" size="large"></ion-icon>
-                </ion-button>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <ion-radio value="Male" labelPlacement="stacked" alignment="center">Male</ion-radio>
-              </ion-col>
-              <ion-col>
-                <ion-radio value="Female" labelPlacement="stacked" alignment="center">Female</ion-radio>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-radio-group>
+        <div class="ion-padding gender-container" slot="content">
+          <div class="gender-item">
+            <ion-button size="large" class="gender-button"
+              ngClass="{{user.gender == 'Male' ? 'active' : 'disabled'}}"
+              (click)="setGender('Male')"
+              >
+              <ion-icon slot="icon-only" name="male" size="large"></ion-icon>
+            </ion-button>
+            <ion-text>Male</ion-text>
+          </div>
+          <div class="gender-item">
+            <ion-button size="large" class="gender-button"
+              ngClass="{{user.gender == 'Female' ? 'active' : 'disabled'}}"
+              (click)="setGender('Female')"
+              >
+              <ion-icon slot="icon-only" name="female" size="large"></ion-icon>
+            </ion-button>
+            <ion-text>Female</ion-text>
+            </div>
         </div>
       </ion-accordion>
       <ion-accordion toggleIconSlot="none">
         <ion-item slot="header">
           <ion-label>Weight</ion-label>
-          <ion-text class="current-value" slot="end">{{user.weight}}</ion-text>
+          <ion-text class="current-value" slot="end">{{userWeight}}</ion-text>
         </ion-item>
         <div class="ion-padding" slot="content">
           <app-number-picker class="number-picker" [min]="0" [max]="325" [units]="'lbs'"
-            [(pickerValue)]="user.weight"
+            [(pickerValue)]="userWeight"
+            (pickerValueChange)="onWeightChange($event)"
           ></app-number-picker>
         </div>
       </ion-accordion>
@@ -143,7 +140,14 @@
           <ion-label>Height</ion-label>
           <ion-text class="current-value" slot="end">{{user.height.feet}}' {{user.height.inches}}"</ion-text>
         </ion-item>
-        <div class="ion-padding" slot="content">edit username</div>
+        <div class="ion-padding" slot="content">
+          <app-height-picker
+            [(feet)]="userHeightFeet"
+            (feetChange)="onHeightFeetChange($event)"
+            [(inches)]="userHeightInches"
+            (inchesChange)="onHeightInchesChange($event)"
+            ></app-height-picker>
+        </div>
       </ion-accordion>
     <ion-list-header class="section_header">Account</ion-list-header>
     <ion-item>

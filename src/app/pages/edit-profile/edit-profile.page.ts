@@ -6,18 +6,19 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import {AlertController, IonModal, LoadingController, ModalController, PickerColumn, PickerColumnOption, PickerController, isPlatform} from '@ionic/angular';
+import {
+  AlertController, IonInput, IonModal, LoadingController, ModalController,
+} from '@ionic/angular';
 import {OverlayEventDetail} from '@ionic/core/components';
 import {Subscription, delay} from 'rxjs';
 import {EditPropertyComponent} from '../../component/edit-property/edit-property.component';
 import {AuthService} from '../../services/auth.service';
-import {UserService} from '../../services/user/user.service';
+import {UserService, usernameMaxLength} from '../../services/user/user.service';
 import {User} from '../../store/user/user.model';
 import {NumberPickerService} from 'src/app/services/number-picker.service';
 import {Camera, CameraDirection, CameraResultType, CameraSource} from '@capacitor/camera';
 import {Capacitor} from '@capacitor/core';
 import {ImageCroppedEvent, ImageCropperComponent, ImageTransform} from 'ngx-image-cropper';
-import {DomSanitizer} from '@angular/platform-browser';
 import {ShowToastService} from 'src/app/services/show-toast.service';
 
 @Component({
@@ -39,9 +40,14 @@ export class EditProfilePage implements OnInit, OnDestroy {
   @ViewChild('cropper') cropper: ImageCropperComponent;
   isMobile = Capacitor.getPlatform() !== 'web';
   transform: ImageTransform = {};
-  name: string;
+  // name: string;
+  userWeight: number;
+  userHeightFeet: number;
+  userHeightInches: number;
+  usernameMaxLength = usernameMaxLength;
   public user$ = this.userService.getUser(); //.pipe(delay(5000));
   @ViewChild('editAvatar') editAvatarModal: IonModal;
+  @ViewChild('usernameInput') usernameInput: IonInput;
 
   constructor(
     private modalCtrl: ModalController,
@@ -59,6 +65,9 @@ export class EditProfilePage implements OnInit, OnDestroy {
     this.user$.subscribe((user) => {
       console.log("editProfile ngOnInit got user", user);
       this.user = user;
+      this.userWeight = user.weight;
+      this.userHeightFeet = user.height.feet;
+      this.userHeightInches = user.height.inches;
       this.profileForm = new FormGroup({
         firstName: new FormControl(this.user.firstName, Validators.required),
         lastName: new FormControl(this.user.lastName, Validators.required),
@@ -199,15 +208,73 @@ export class EditProfilePage implements OnInit, OnDestroy {
     await alert.present();
   }
 
-  onTextChange(event: Event) {
-    console.log("onTextChange", event);
+  onTextChange(e) {
+    // console.log("onTextChange", e.target.id, " ", e.target.value);
+    this.profileForm.get(e.target.id).setValue(e.target.value);
     this.submitForm();
+  }
+
+  onUsernameInput(ev) {
+    const value = ev.target!.value;
+
+    // Removes non alphanumeric characters, allow [.-_]
+    const filteredValue = value.replace(/[^a-zA-Z0-9_\-\.]+/g, '');
+
+    /**
+     * Update both the state variable and
+     * the component to keep them in sync.
+     */
+    this.usernameInput.value = '@' + filteredValue.toLowerCase();
+  }
+
+  async updateUsername(e) {
+    console.log("updateUsername", e);
+    const username = e.target.value.substring(1);
+    console.log('check username', username);
+    const isAvailable = await this.userService.isUsernameAvailable(username);
+    console.log("username is available", isAvailable);
+    if (!isAvailable) {
+      this.usernameInput.setFocus();
+      this.showToastService.showToast("Sorry, a user already exists with that username", "danger");
+      return;
+    }
+  }
+
+  setGender(gender: string) {
+    console.log("setGender", gender);
+    this.profileForm.get('gender').setValue(gender);
+    this.submitForm();
+  }
+
+  onWeightChange(weight) {
+    console.log("onWeightChange", weight);
+    if (weight !== this.user.weight) {
+      console.log("update user weight");
+      this.profileForm.get('weight').setValue(weight);
+      this.submitForm();
+    }
+  }
+
+  onHeightFeetChange(feet) {
+    if (feet !== this.user.height.feet) {
+      console.log("heightFeetChange", this.profileForm);
+      this.profileForm.get('height').get('feet').setValue(feet);
+      this.submitForm();
+    }
+  }
+
+  onHeightInchesChange(inches) {
+    if (inches !== this.user.height.inches) {
+      console.log("heightInchesChange", this.profileForm);
+      this.profileForm.get('height').get('inches').setValue(inches);
+      this.submitForm();
+    }
   }
 
   submitForm() {
     console.log('edit profile submitForm', this.profileForm.value);
     this.userService.updateUser(this.profileForm.value);
-    this.modalCtrl.dismiss();
+    // this.modalCtrl.dismiss();
   }
 
   onSubmit() {
@@ -221,9 +288,9 @@ export class EditProfilePage implements OnInit, OnDestroy {
     this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  save() {
-    this.modalCtrl.dismiss(this.name, 'save');
-  }
+  // save() {
+  //   this.modalCtrl.dismiss(this.name, 'save');
+  // }
 
   onWillDismiss(event: Event) {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
@@ -232,11 +299,16 @@ export class EditProfilePage implements OnInit, OnDestroy {
     }
   }
 
-  getDate(e) {
+  onDobChange(e) {
+    console.log("onDobChange", e);
+    // }
+
+    // getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
     this.profileForm.get('dob').setValue(date, {
       onlyself: true,
     });
+    this.submitForm();
   }
 
   async openModal(targetProperty: string) {

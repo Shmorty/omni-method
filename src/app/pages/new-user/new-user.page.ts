@@ -195,6 +195,10 @@ export class NewUserPage implements OnInit, OnDestroy {
     return this.formData.get('username');
   }
 
+  get gender() {
+    return this.formData.get('gender');
+  }
+
   get email() {
     return this.formData.get('email');
   }

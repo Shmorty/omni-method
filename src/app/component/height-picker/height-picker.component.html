@@ -1,0 +1,20 @@
+<ion-picker>
+  <ion-picker-column id="feet" [value]="feet" (ionChange)="onPickerColumnChange($event)">
+    <div slot="prefix"></div>
+    <ng-container *ngFor="let value of rangeFeet; index as i">
+      <ion-picker-column-option [value]="value">
+        {{value | number: '1.0-3'}}
+      </ion-picker-column-option>
+      </ng-container>
+    <div slot="suffix">ft</div>
+  </ion-picker-column>
+  <ion-picker-column id="inches" [value]="inches" (ionChange)="onPickerColumnChange($event)">
+    <div slot="prefix"></div>
+    <ng-container *ngFor="let value of rangeInches; index as i">
+      <ion-picker-column-option [value]="value">
+        {{value | number: '1.0-3'}}
+      </ion-picker-column-option>
+      </ng-container>
+    <div slot="suffix">in</div>
+  </ion-picker-column>
+</ion-picker>
