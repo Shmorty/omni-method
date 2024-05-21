@@ -19,6 +19,7 @@ import {
   reauthenticateWithCredential,
   AuthCredential,
   EmailAuthProvider,
+  updatePassword,
 } from '@angular/fire/auth';
 
 // import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
@@ -106,7 +107,7 @@ export class AuthService implements OnDestroy {
   }
 
   verifyPassword(password: string) {
-    console.log("verifyPassword", password);
+    // console.log("verifyPassword", password);
     var credential = EmailAuthProvider.credential(this.auth.currentUser.email, password);
     return reauthenticateWithCredential(this.auth.currentUser, credential);
   }
@@ -152,6 +153,18 @@ export class AuthService implements OnDestroy {
         alert(err.message);
       }
     );
+  }
+
+  updatePassword(oldPassword: string, newPassword: string): Promise<void> {
+    return this.verifyPassword(oldPassword)
+      .then(async (userCred) => {
+        console.log("updatePassword for userCred", userCred);
+        return updatePassword(this.auth.currentUser, newPassword);
+      })
+      .catch(err => {
+        console.log("verify old password failed", err);
+        throw ("Verify old password failed");
+      })
   }
 
   // forgot password method

@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import {
-  AlertController, IonInput, IonModal, LoadingController, ModalController,
+  AlertController, AlertOptions, IonInput, IonModal, LoadingController, ModalController,
 } from '@ionic/angular';
 import {OverlayEventDetail} from '@ionic/core/components';
 import {Subscription, delay} from 'rxjs';
@@ -101,6 +101,76 @@ export class EditProfilePage implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     console.log("editProfile unsubscribe numberPickerService updates");
     this.numberPickerSubscription.unsubscribe();
+  }
+
+  async changePassword() {
+    const changePasswordButtons = [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        htmlAttributes: {
+          'aria-label': 'cancel',
+        }
+      },
+      {
+        text: 'Ok',
+        role: 'confirm',
+        handler: (alertData) => {
+          if (alertData.newPassword !== alertData.confirmPassword) {
+            console.log("new password mismatch");
+            this.showToastService.showToast("new Password entered doesn't match", "danger");
+            return;
+          }
+          this.authService.verifyPassword(alertData.oldPassword).then((success) => {
+            console.log("verifyPassword success", success);
+            // update password
+            this.authService.updatePassword(alertData.oldPassword, alertData.newPassword)
+              .then(() => {
+                console.log("password updated successfully");
+                this.showToastService.showToast("Password updated successfully.", "success");
+              })
+              .catch((err) => {
+                console.log("updatePassword failed", err);
+                this.showToastService.showToast(err, "danger");
+              });
+            this.modalCtrl.dismiss(null, 'changePassword');
+            // this.authService.logout();
+          }, (error) => {
+            console.log("verifyPassword error", error);
+            this.showToastService.showToast("failed to verify password", "danger");
+          });
+        },
+        htmlAttributes: {
+          'aria-label': 'delete',
+        }
+      },
+    ];
+    // present alert
+    const alert = await this.alertController.create({
+      header: 'Change Password',
+      id: 'changePassword',
+      subHeader: 'This action can not be undone.',
+      message: 'Please enter your password and a new password.',
+      buttons: changePasswordButtons,
+      inputs: [
+        {
+          name: "oldPassword",
+          placeholder: "Old Password",
+          type: "password"
+        },
+        {
+          name: "newPassword",
+          placeholder: "New Password",
+          type: "password"
+        },
+        {
+          name: "confirmPassword",
+          placeholder: "Confirm New Password",
+          type: "password"
+        }
+      ],
+    });
+    await alert.present();
   }
 
   async deleteAccount() {
@@ -203,6 +273,7 @@ export class EditProfilePage implements OnInit, OnDestroy {
     // present logout confirmation
     const alert = await this.alertController.create({
       header: 'Log out of your account?',
+      id: 'logout',
       buttons: confirmLogoutButtons,
     });
     await alert.present();
