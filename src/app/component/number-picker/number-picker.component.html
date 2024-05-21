@@ -1,6 +1,7 @@
 <ion-picker>
   <ion-picker-column [value]="pickerValue" (ionChange)="onPickerColumnChange($event)">
-    <div slot="prefix"></div>
+    <!-- include prefix to center picker -->
+    <div slot="prefix" style="color: transparent;">{{units}}</div>
     <ng-container *ngFor="let value of range; index as i">
       <ion-picker-column-option [value]="value">
         {{value | number: '1.0-3'}}

@@ -238,6 +238,8 @@ export class EditProfilePage implements OnInit, OnDestroy {
       this.showToastService.showToast("Sorry, a user already exists with that username", "danger");
       return;
     }
+    this.profileForm.get('username').setValue(username);
+    this.submitForm();
   }
 
   setGender(gender: string) {
