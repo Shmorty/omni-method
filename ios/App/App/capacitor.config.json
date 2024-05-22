@@ -25,7 +25,6 @@
 		"HapticsPlugin",
 		"CAPNetworkPlugin",
 		"SplashScreenPlugin",
-		"StatusBarPlugin",
-		"TextZoomPlugin"
+		"StatusBarPlugin"
 	]
 }

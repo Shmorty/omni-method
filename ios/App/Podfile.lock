@@ -14,8 +14,6 @@ PODS:
     - Capacitor
   - CapacitorStatusBar (6.0.0):
     - Capacitor
-  - CapacitorTextZoom (6.0.0):
-    - Capacitor
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
@@ -26,7 +24,6 @@ DEPENDENCIES:
   - "CapacitorNetwork (from `../../node_modules/@capacitor/network`)"
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
-  - "CapacitorTextZoom (from `../../node_modules/@capacitor/text-zoom`)"
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -45,8 +42,6 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/splash-screen"
   CapacitorStatusBar:
     :path: "../../node_modules/@capacitor/status-bar"
-  CapacitorTextZoom:
-    :path: "../../node_modules/@capacitor/text-zoom"
 
 SPEC CHECKSUMS:
   Capacitor: 559d073c4ca6c27f8e7002c807eea94c3ba435a9
@@ -57,8 +52,7 @@ SPEC CHECKSUMS:
   CapacitorNetwork: f15a94c16a33cba7c47a17814cb6bcfe3ea34ded
   CapacitorSplashScreen: 5431ab8d19c1c6e95777d53bfaa7a36a6c3d94c7
   CapacitorStatusBar: 2e4369f99166125435641b1908d05f561eaba6f6
-  CapacitorTextZoom: 696722e5c479b364f2429584f11ad386d609bd1a
 
-PODFILE CHECKSUM: b546f25e3fd686dcbc7d06ecba5ddbc74ac7bfb1
+PODFILE CHECKSUM: 5aeddb91f25b1b8a901898735ee0d73d0e029193
 
 COCOAPODS: 1.15.2

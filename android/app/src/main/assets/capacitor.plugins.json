@@ -22,9 +22,5 @@
 	{
 		"pkg": "@capacitor/status-bar",
 		"classpath": "com.capacitorjs.plugins.statusbar.StatusBarPlugin"
-	},
-	{
-		"pkg": "@capacitor/text-zoom",
-		"classpath": "com.capacitorjs.plugins.textzoom.TextZoomPlugin"
 	}
 ]
