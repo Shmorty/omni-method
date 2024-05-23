@@ -5,7 +5,7 @@ export interface User {
   dob: Date;
   email: string;
   firstName: string;
-  gender?: string;
+  gender?: Gender;
   lastName: string;
   nickname?: string;
   username: string;
@@ -16,6 +16,8 @@ export interface User {
   };
   weight: number;
 }
+
+export type Gender = "Male" | "Female";
 
 export interface AuthenticationUser {
   uid: string;

@@ -1,0 +1,23 @@
+.gender-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .gender-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .gender-button {
+    --border-radius: 55px;
+    height: 70px;
+    padding: 0px 20px;
+    width: 110px;
+  }
+  .active {
+    --background: var(--ion-color-primary);
+  }
+  .disabled {
+    --background: var(--ion-color-medium)
+  }

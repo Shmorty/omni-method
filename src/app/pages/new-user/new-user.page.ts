@@ -4,7 +4,7 @@ import {DatePipe} from '@angular/common';
 import {Router} from '@angular/router';
 import {UserService, usernameMinLength, usernameMaxLength} from '../../services/user/user.service';
 import {AuthService} from '../../services/auth.service';
-import {User} from '../../store/user/user.model';
+import {Gender, User} from '../../store/user/user.model';
 // import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
 // import {isPlatform} from '@ionic/angular';
 // import {Keyboard} from '@capacitor/keyboard';
@@ -30,6 +30,8 @@ export class NewUserPage implements OnInit, OnDestroy {
   scoreDate = new Date().toISOString().split('T')[0];
   step = 1;
   isApp = false;
+  userGender: Gender;
+  userWeight: number = 97;
   // usernameMinLength = 5;
   // usernameMaxLength = 20;
 
@@ -68,6 +70,7 @@ export class NewUserPage implements OnInit, OnDestroy {
     });
 
     this.numberPickerSubscription = this.numberPickerService.currentValue.subscribe((val) => {
+      console.log("numberPicker currentValue", val);
       // console.log("new value", val);
       this.formData.get('height').setValue(val['height']);
       this.formData.get('weight').setValue(val['weight']);
@@ -140,6 +143,8 @@ export class NewUserPage implements OnInit, OnDestroy {
     // create user in database
     this.userService.saveNewUser({
       ...(this.formData.value),
+      gender: this.userGender,
+      weight: this.userWeight,
       fitnessLevel: this.fitnessLevel,
       scoreDate: this.scoreDate,
       omniScore: 0,

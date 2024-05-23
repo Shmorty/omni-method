@@ -9,6 +9,7 @@ import {UserAvatarComponent} from 'src/app/component/user-avatar/user-avatar.com
 import {ImageCropperModule} from 'ngx-image-cropper';
 import {NumberPickerComponent} from 'src/app/component/number-picker/number-picker.component';
 import {HeightPickerComponent} from 'src/app/component/height-picker/height-picker.component';
+import {GenderPickerComponent} from 'src/app/component/gender-picker/gender-picker.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {HeightPickerComponent} from 'src/app/component/height-picker/height-pick
     ImageCropperModule,
     NumberPickerComponent,
     HeightPickerComponent,
+    GenderPickerComponent,
   ],
   declarations: [EditProfilePage],
 })

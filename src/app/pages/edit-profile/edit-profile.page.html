@@ -102,7 +102,11 @@
           <ion-label>Gender</ion-label>
           <ion-text class="current-value" slot="end">{{user.gender}}</ion-text>
         </ion-item>
-        <div class="ion-padding gender-container" slot="content">
+        <app-gender-picker slot="content"
+          [gender]="user.gender"
+          (genderChange)="setGender('Male')"
+          ></app-gender-picker>
+        <!-- <div class="ion-padding gender-container" slot="content">
           <div class="gender-item">
             <ion-button size="large" class="gender-button"
               ngClass="{{user.gender == 'Male' ? 'active' : 'disabled'}}"
@@ -120,8 +124,8 @@
               <ion-icon slot="icon-only" name="female" size="large"></ion-icon>
             </ion-button>
             <ion-text>Female</ion-text>
-            </div>
-        </div>
+          </div>
+        </div> -->
       </ion-accordion>
       <ion-accordion toggleIconSlot="none">
         <ion-item slot="header">

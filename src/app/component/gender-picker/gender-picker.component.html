@@ -1,0 +1,20 @@
+<div class="ion-padding gender-container" slot="content">
+  <div class="gender-item">
+    <ion-button size="large" class="gender-button"
+      ngClass="{{gender == 'Male' ? 'active' : 'disabled'}}"
+      (click)="setGender('Male')"
+      >
+      <ion-icon slot="icon-only" name="male" size="large"></ion-icon>
+    </ion-button>
+    <ion-text>Male</ion-text>
+  </div>
+  <div class="gender-item">
+    <ion-button size="large" class="gender-button"
+      ngClass="{{gender == 'Female' ? 'active' : 'disabled'}}"
+      (click)="setGender('Female')"
+      >
+      <ion-icon slot="icon-only" name="female" size="large"></ion-icon>
+    </ion-button>
+    <ion-text>Female</ion-text>
+  </div>
+</div>

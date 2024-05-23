@@ -130,10 +130,7 @@ ion-item::part(native) {
   margin: auto;
   min-width: 90%;
 }
-// gender radio button
-// ion-radio::part(mark) {
-//   color:greenyellow;
-// }
+// gender
 .gender-container {
   display: flex;
   flex-direction: row;
@@ -157,12 +154,7 @@ ion-item::part(native) {
 .disabled {
   --background: var(--ion-color-medium)
 }
-// .number-picker {
-//   border-radius: 17px;
-//   overflow: hidden;
-//   margin: auto;
-//   width: 90%;
-// }
+
 .bottom-padding {
   height: 50px;
 }
