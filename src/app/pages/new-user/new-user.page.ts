@@ -142,7 +142,7 @@ export class NewUserPage implements OnInit, OnDestroy {
     console.log('new user onSubmit', newUser);
     // create user in database
     this.userService.saveNewUser({
-      ...(this.formData.value),
+      ...(newUser),
       gender: this.userGender,
       weight: this.userWeight,
       fitnessLevel: this.fitnessLevel,
