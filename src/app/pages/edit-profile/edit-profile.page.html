@@ -102,7 +102,7 @@
           <ion-label>Gender</ion-label>
           <ion-text class="current-value" slot="end">{{user.gender}}</ion-text>
         </ion-item>
-        <app-gender-picker slot="content"
+        <app-gender-picker style="width: 100%;" slot="content"
           [gender]="user.gender"
           (genderChange)="setGender('Male')"
           ></app-gender-picker>
