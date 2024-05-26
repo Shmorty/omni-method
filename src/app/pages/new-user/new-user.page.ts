@@ -30,7 +30,7 @@ export class NewUserPage implements OnInit, OnDestroy {
   scoreDate = new Date().toISOString().split('T')[0];
   step = 1;
   isApp = false;
-  userGender: Gender;
+  userGender = new FormControl('');
   userWeight: number = 97;
   // usernameMinLength = 5;
   // usernameMaxLength = 20;
@@ -97,7 +97,8 @@ export class NewUserPage implements OnInit, OnDestroy {
         Validators.minLength(usernameMinLength),
         Validators.maxLength(usernameMaxLength)
       ]),
-      gender: new FormControl(),
+      // gender: new FormControl(),
+      gender: this.userGender,
       dob: new FormControl(this.userDob, [Validators.required]),
       height: new FormGroup({
         feet: new FormControl(4, [
@@ -143,7 +144,7 @@ export class NewUserPage implements OnInit, OnDestroy {
     // create user in database
     this.userService.saveNewUser({
       ...(newUser),
-      gender: this.userGender,
+      gender: this.userGender.value as Gender,
       weight: this.userWeight,
       fitnessLevel: this.fitnessLevel,
       scoreDate: this.scoreDate,

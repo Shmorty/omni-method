@@ -29,7 +29,7 @@
           <div
             *ngIf="(first.dirty || first.touched) && first.errors"
             class="errors"
-          >
+            >
             <span *ngIf="first.errors?.required">First name is required</span>
           </div>
           <ion-item lines="full">
@@ -43,7 +43,7 @@
           <div
             *ngIf="(last.dirty || last.touched) && last.errors"
             class="errors"
-          >
+            >
             <span *ngIf="last.errors?.required">Last name is required</span>
           </div>
           <ion-item lines="full">
@@ -73,13 +73,18 @@
             </ion-text>
           </div>
           <ion-item lines="full">
-            <app-gender-picker [(gender)]="formData.value.gender" style="width: 100%;"></app-gender-picker>
+            <app-gender-picker
+              ngDefaultControl
+              [(gender)]="formData.value.gender"
+              style="width: 100%;"
+              ></app-gender-picker>
+              <!-- formControlName="gender" -->
             <!-- <ion-radio-group formControlName="gender" value="other">
               <ion-radio justify="start" value="Male" labelPlacement="end">Male</ion-radio>
               <ion-radio justify="start" value="Female" labelPlacement="end">Female</ion-radio>
             </ion-radio-group> -->
             <!-- [formControl]="formData.value.username" -->
-            <ion-text>{{formData.value.gender}}</ion-text>
+            <div>{{formData.value.gender?.value}}</div>
           </ion-item>
         </div>
         <!-- <div *ngIf="step == 3"> -->

@@ -18,3 +18,7 @@
     <ion-text>Female</ion-text>
   </div>
 </div>
+<div>
+  <input id="gender" hidden ngDefaultControl [formControl]="genderValue"/>
+  <p>{{genderValue.value}}</p>
+</div>

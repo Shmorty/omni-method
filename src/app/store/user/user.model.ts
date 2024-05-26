@@ -19,7 +19,7 @@ export interface User {
   fitnessLevel?: string;
 }
 
-export type Gender = "Male" | "Female";
+export type Gender = "Male" | "Female" | "";
 
 export interface AuthenticationUser {
   uid: string;
