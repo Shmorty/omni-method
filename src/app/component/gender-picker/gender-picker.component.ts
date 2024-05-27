@@ -1,6 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ControlValueAccessor, FormControl, ReactiveFormsModule} from '@angular/forms';
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {Gender} from 'src/app/store/user/user.model';
 
@@ -9,7 +9,8 @@ import {Gender} from 'src/app/store/user/user.model';
   standalone: true,
   templateUrl: './gender-picker.component.html',
   styleUrls: ['./gender-picker.component.scss'],
-  imports: [IonicModule, CommonModule, ReactiveFormsModule]
+  imports: [IonicModule, CommonModule, ReactiveFormsModule],
+  // providers: [NG_VALUE_ACCESSOR],
 })
 export class GenderPickerComponent implements OnInit {
   @Input() gender: Gender;
@@ -17,13 +18,14 @@ export class GenderPickerComponent implements OnInit {
 
   constructor() {}
 
+
   ngOnInit() {
     console.log("GenderPicker ngOnInit", this.gender);
   }
 
   setGender(value: Gender) {
     console.log("setGender", value);
-    // this.gender = value;
+    this.gender = value;
     // this.genderValue.setValue(value);
     this.genderChange.emit(value);
   }

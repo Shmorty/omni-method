@@ -86,7 +86,7 @@ export class NewUserPage implements OnInit, OnDestroy {
         Validators.minLength(usernameMinLength),
         Validators.maxLength(usernameMaxLength)
       ]),
-      gender: new FormControl(''),
+      gender: new FormControl(),
       dob: new FormControl(this.initDob, [Validators.required]),
       height: this.userHeight,
       weight: new FormControl(95, [
@@ -129,7 +129,7 @@ export class NewUserPage implements OnInit, OnDestroy {
   }
 
   async next() {
-    console.log('next gender:', this.formData.value.gender);
+    console.log('next()', JSON.stringify(this.formData.value));
     if (this.step < 6) {
       if (this.step == 1) {
         const username = this.formData.value['username'];
@@ -160,7 +160,7 @@ export class NewUserPage implements OnInit, OnDestroy {
   }
 
   previous() {
-    console.log('previous', this.formData.value);
+    console.log('previous()', JSON.stringify(this.formData.value));
     this.step = this.step - 1;
   }
 
