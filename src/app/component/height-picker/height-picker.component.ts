@@ -10,8 +10,8 @@ import {IonicModule} from '@ionic/angular';
   imports: [IonicModule, CommonModule]
 })
 export class HeightPickerComponent implements OnInit {
-  @Input() feet = 4;
-  @Input() inches = 6;
+  @Input() feet: number;
+  @Input() inches: number;
   @Output() feetChange = new EventEmitter<number>();
   @Output() inchesChange = new EventEmitter<number>();
   public rangeFeet: number[]; // 3..7

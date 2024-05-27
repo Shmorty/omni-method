@@ -73,7 +73,7 @@ export class UserService implements IUserService {
 
   // trigger new user action
   saveNewUser(user: User) {
-    console.log('userService.saveNewUser');
+    console.log("userService.saveNewUser", user);
     this.store.dispatch(UserActions.newUser({payload: user}));
   }
 

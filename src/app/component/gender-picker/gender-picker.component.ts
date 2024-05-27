@@ -11,34 +11,21 @@ import {Gender} from 'src/app/store/user/user.model';
   styleUrls: ['./gender-picker.component.scss'],
   imports: [IonicModule, CommonModule, ReactiveFormsModule]
 })
-export class GenderPickerComponent implements OnInit, ControlValueAccessor {
+export class GenderPickerComponent implements OnInit {
   @Input() gender: Gender;
   @Output() genderChange = new EventEmitter<Gender>();
 
-  genderValue = new FormControl('');
-
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("GenderPicker ngOnInit", this.gender);
+  }
 
   setGender(value: Gender) {
     console.log("setGender", value);
-    this.gender = value;
-    this.genderValue.setValue(value);
+    // this.gender = value;
+    // this.genderValue.setValue(value);
     this.genderChange.emit(value);
-  }
-
-  writeValue(obj: any): void {
-    throw new Error('Method not implemented.');
-  }
-  registerOnChange(fn: any): void {
-    throw new Error('Method not implemented.');
-  }
-  registerOnTouched(fn: any): void {
-    throw new Error('Method not implemented.');
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    throw new Error('Method not implemented.');
   }
 
 }
