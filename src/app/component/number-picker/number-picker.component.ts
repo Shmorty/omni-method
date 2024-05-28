@@ -2,7 +2,7 @@ import {AfterViewInit, CUSTOM_ELEMENTS_SCHEMA, ChangeDetectionStrategy, Componen
 import {CdkVirtualScrollViewport, ScrollDispatcher, ScrollingModule} from '@angular/cdk/scrolling';
 import {CommonModule} from '@angular/common';
 import {IonicModule} from '@ionic/angular';
-import {Haptics} from '@capacitor/haptics';
+// import {Haptics} from '@capacitor/haptics';
 import {Subject, Subscription} from 'rxjs';
 
 @Component({
@@ -96,18 +96,18 @@ export class NumberPickerComponent implements OnInit, AfterViewInit { // }, OnCh
     }
   }
 
-  hapticsSelectionChanged = async () => {
-    await Haptics.selectionChanged();
-  };
+  // hapticsSelectionChanged = async () => {
+  //   await Haptics.selectionChanged();
+  // };
 
-  curClass(index) {
-    if (index === this.curIndex) {
-      return "current"
-    }
-  }
+  // curClass(index) {
+  //   if (index === this.curIndex) {
+  //     return "current"
+  //   }
+  // }
 
-  click(item) {
-    // console.log("click", item);
-    this.viewPort.scrollToIndex(item, 'smooth');
-  }
+  // click(item) {
+  //   // console.log("click", item);
+  //   this.viewPort.scrollToIndex(item, 'smooth');
+  // }
 }
