@@ -22,33 +22,6 @@
       <ion-button color="medium" shape="round" size="small">edit</ion-button>
     </div>
 
-  <!-- 
-    <ion-item button (click)="openModal('name')">
-      <ion-label>Name</ion-label>
-      <ion-text slot="end">{{user.firstName}}&nbsp;{{user.lastName}}</ion-text>
-    </ion-item>
-    <ion-item button (click)="openModal('username')">
-      <ion-label>Userame</ion-label>
-      <ion-text slot="end">{{user.username}}</ion-text>
-    </ion-item>
-    <ion-item button (click)="openModal('dob')">
-      <ion-label>Age</ion-label>
-      <ion-text slot="end">{{getAge(user)}}</ion-text>
-    </ion-item>
-    <ion-item button (click)="openModal('sex')">
-      <ion-label>Gender</ion-label>
-      <ion-text slot="end">{{user.gender}}</ion-text>
-    </ion-item>
-    <ion-item button (click)="numberPickerService.openWeightPicker(user)">
-      <ion-label>Weight</ion-label>
-      <ion-text slot="end">{{user.weight}}</ion-text>
-    </ion-item>
-    <ion-item button (click)="numberPickerService.openHeightPicker(user)">
-      <ion-label>Height</ion-label>
-      <ion-text slot="end">{{user.height.feet}}' {{user.height.inches}}"</ion-text>
-    </ion-item>
-   -->
-
    <ion-list-header class="section_header"></ion-list-header>
    <ion-accordion-group>
       <ion-accordion toggleIconSlot="none">
@@ -104,28 +77,8 @@
         </ion-item>
         <app-gender-picker style="width: 100%;" slot="content"
           [gender]="user.gender"
-          (genderChange)="setGender('Male')"
+          (genderChange)="setGender($event)"
           ></app-gender-picker>
-        <!-- <div class="ion-padding gender-container" slot="content">
-          <div class="gender-item">
-            <ion-button size="large" class="gender-button"
-              ngClass="{{user.gender == 'Male' ? 'active' : 'disabled'}}"
-              (click)="setGender('Male')"
-              >
-              <ion-icon slot="icon-only" name="male" size="large"></ion-icon>
-            </ion-button>
-            <ion-text>Male</ion-text>
-          </div>
-          <div class="gender-item">
-            <ion-button size="large" class="gender-button"
-              ngClass="{{user.gender == 'Female' ? 'active' : 'disabled'}}"
-              (click)="setGender('Female')"
-              >
-              <ion-icon slot="icon-only" name="female" size="large"></ion-icon>
-            </ion-button>
-            <ion-text>Female</ion-text>
-          </div>
-        </div> -->
       </ion-accordion>
       <ion-accordion toggleIconSlot="none">
         <ion-item slot="header">
