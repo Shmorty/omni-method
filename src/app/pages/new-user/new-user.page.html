@@ -73,13 +73,16 @@
             </ion-text>
           </div>
           <ion-item lines="full">
+            <!-- <ion-radio-group (ionChange)="setGender($event)" formControlName="gender">
+              <ion-radio value="Male">Male</ion-radio>
+              <ion-radio value="Female">Female</ion-radio>
+            </ion-radio-group> -->
             <app-gender-picker
+              id="gender"
+              formControlName="gender"
               [(gender)]="formData.value.gender"
               style="width: 100%;"
               ></app-gender-picker>
-              <!-- ngDefaultControl -->
-              <!-- formControlName="gender" -->
-            <!-- <div>{{formData.value.gender?.value}}</div> -->
           </ion-item>
         </div>
         <!-- <div *ngIf="step == 3"> -->

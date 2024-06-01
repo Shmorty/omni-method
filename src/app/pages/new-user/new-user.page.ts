@@ -86,7 +86,7 @@ export class NewUserPage implements OnInit, OnDestroy {
         Validators.minLength(usernameMinLength),
         Validators.maxLength(usernameMaxLength)
       ]),
-      gender: new FormControl(),
+      gender: new FormControl('', []),
       dob: new FormControl(this.initDob, [Validators.required]),
       height: this.userHeight,
       weight: new FormControl(95, [
@@ -113,6 +113,11 @@ export class NewUserPage implements OnInit, OnDestroy {
   setFitnessLevel(ev) {
     this.fitnessLevel = ev.target.value;
     console.log("setFitnessLevel", this.fitnessLevel);
+  }
+
+  setGender(ev) {
+    console.log("setGender", ev);
+    this.formData.value.gender = ev.target.value;
   }
 
   onSubmit() {
