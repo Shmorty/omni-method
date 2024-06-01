@@ -69,7 +69,7 @@ export class OmniScoreService {
                 // get score for assessment
                 // console.log(assessment.label);
                 this.store
-                  .select(assessmentScores(assessment))
+                  .select(assessmentScores(assessment.aid))
                   .pipe(take(1))
                   .subscribe((scores) => {
                     // console.log('  - score ' + scores);

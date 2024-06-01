@@ -90,7 +90,7 @@ export class ProfilePage implements OnInit, OnDestroy {
   }
 
   getScores$(assessment: Assessment) {
-    return this.store.select(UserSelectors.assessmentScores(assessment)).pipe(
+    return this.store.select(UserSelectors.assessmentScores(assessment.aid)).pipe(
       tap((results) => {
         results?.sort(function (a, b) {
           return Date.parse(b.scoreDate) - Date.parse(a.scoreDate);

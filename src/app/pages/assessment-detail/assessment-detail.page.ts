@@ -41,7 +41,7 @@ export class AssessmentDetailPage implements OnInit {
     private navController: NavController,
     private assessmentService: AssessmentService,
     private userService: UserService,
-    private alertController: AlertController,
+    private router: Router,
     private routerOutlet: IonRouterOutlet
   ) {}
 
@@ -67,7 +67,7 @@ export class AssessmentDetailPage implements OnInit {
       this.score$.subscribe((score) => {
         this.curScore = score;
       })
-      this.scores$ = this.userService.getScoresForAssessment(assessment);
+      this.scores$ = this.userService.getScoresForAssessment(assessment.aid);
     });
     this.user$
       .subscribe((value) => {
@@ -103,6 +103,12 @@ export class AssessmentDetailPage implements OnInit {
     console.log('dispatch deleteAssessmentScore ' + score.scoreDate);
     this.userService.deleteScore(score);
     this.navController.back();
+  }
+
+  showScores(assessment: Assessment) {
+    console.log("showScores", assessment);
+    this.router.navigate(['assessment-scores'], {queryParams: {aid: assessment.aid, cid: assessment.cid}});
+    // this.router.navigateByUrl('/assessment-scores', assessment);
   }
 
   async openNewScore(assessment: Assessment) {

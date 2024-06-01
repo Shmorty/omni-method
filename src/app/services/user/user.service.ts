@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import {HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {filter, first, take, tap} from 'rxjs/operators';
@@ -94,8 +94,8 @@ export class UserService implements IUserService {
   }
 
   // get score from store
-  getScoresForAssessment(assessment: Assessment): Observable<Score[]> {
-    return this.store.select(assessmentScores(assessment)).pipe(
+  getScoresForAssessment(aid: string): Observable<Score[]> {
+    return this.store.select(assessmentScores(aid)).pipe(
       tap((results) => {
         results.sort(function (a, b) {
           return Date.parse(b.scoreDate) - Date.parse(a.scoreDate);

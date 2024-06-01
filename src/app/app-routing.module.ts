@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {AssessmentScoresPage} from './pages/assessment-scores/assessment-scores.page';
 
 const routes: Routes = [
   {
@@ -77,6 +78,14 @@ const routes: Routes = [
     path: 'onboarding',
     title: 'Onboarding',
     loadChildren: () => import('./pages/onboarding/onboarding.module').then(m => m.OnboardingPageModule)
+  },
+  {
+    path: 'assessment-scores',
+    title: 'Assessment Scores',
+    // data: {assessment: Assessment},
+    // loadChildren: () => import('./pages/assessment-scores/assessment-scores.module').then( m => m.AssessmentScoresPageModule),
+    component: AssessmentScoresPage,
+    data: {assessment: null}
   },
   // {
   //   path: 'skill-detail',

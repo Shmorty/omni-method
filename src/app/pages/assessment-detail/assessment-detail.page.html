@@ -32,36 +32,34 @@
     </ion-item>
 
     <div *ngIf="!assessment.checklist">
-
-      <ion-accordion-group>
-        <ion-accordion toggleIconSlot="none">
-          <ng-container *ngFor="let score of scores$ | async; index as i; first as isFirst">
-            <ion-item *ngIf="isFirst" class="header" slot="header" lines="none">
-              <ion-label position="fixed" class="fixed-width" slot="start">Date</ion-label>
-              <ion-label position="fixed" style="margin: auto;" style="text-align: center;">{{assessment.units}}</ion-label>
-              <ion-label position="fixed" slot="end" style="text-align: right;">Score/1000</ion-label>
-            </ion-item>
-            <ion-item-sliding slot="{{i < 3 ? 'header':'content'}}">
-              <ion-item lines="full">
-                <ion-label position="fixed" class="fixed-width" slot="start">
-                  <div>{{score.scoreDate | date:'mediumDate' }}</div>
-                </ion-label>
-                <ion-label position="fixed" style="text-align: center;">
-                  <div style="font-weight: bold">{{ score.rawScore }}</div>
-                </ion-label>
-                <ion-label color="primary" position="fixed" slot="end">
-                  <div class="score" style="text-align: right;">{{ score.calculatedScore }}</div>
-                </ion-label>
-              </ion-item>
-              <ion-item-options>
-                <ion-item-option color="danger" (click)="deleteScore(score)">
-                  <ion-icon slot="icon-only" name="trash"></ion-icon
-                ></ion-item-option>
-              </ion-item-options>
-            </ion-item-sliding>
+      <ng-container *ngIf="score$ | async as score;">
+        <ion-item class="header" slot="header" lines="none">
+          <ion-label position="fixed" class="fixed-width" slot="start">Date</ion-label>
+          <ion-label position="fixed" style="margin: auto;" style="text-align: center;">{{assessment.units}}</ion-label>
+          <ion-label position="fixed" slot="end" style="text-align: right;">Score/1000</ion-label>
+        </ion-item>
+        <ion-item-sliding>
+          <ion-item lines="full">
+            <ion-label position="fixed" class="fixed-width" slot="start">
+              <div>{{score.scoreDate | date:'mediumDate' }}</div>
+            </ion-label>
+            <ion-label position="fixed" style="text-align: center;">
+              <div style="font-weight: bold">{{ score.rawScore }}</div>
+            </ion-label>
+            <ion-label color="primary" position="fixed" slot="end">
+              <div class="score" style="text-align: right;">{{ score.calculatedScore }}</div>
+            </ion-label>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="danger" (click)="deleteScore(score)">
+              <ion-icon slot="icon-only" name="trash"></ion-icon
+            ></ion-item-option>
+          </ion-item-options>
+          <ng-container *ngIf="(scores$ | async).length > 1;">
+            <ion-button class="ion-float-right " fill="clear" (click)="showScores(assessment)">more...</ion-button>
           </ng-container>
-        </ion-accordion>
-      </ion-accordion-group>
+        </ion-item-sliding>
+      </ng-container>
 
       <ng-container *ngIf="assessment.warning">
         <ion-item lines="full">
