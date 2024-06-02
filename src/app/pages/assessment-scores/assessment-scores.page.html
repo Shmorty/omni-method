@@ -37,7 +37,7 @@
         <ion-label position="fixed" slot="end" style="text-align: right;">Score/1000</ion-label>
       </ion-item>
       <ion-item-sliding>
-        <ion-item lines="full">
+        <ion-item lines="none">
           <ion-label position="fixed" class="fixed-width" slot="start">
             <div>{{score.scoreDate | date:'mediumDate' }}</div>
           </ion-label>
@@ -54,6 +54,12 @@
           ></ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
+      <ion-item *ngIf="score.notes" lines="none">
+        <ion-note>{{score.notes}}</ion-note>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-text>{{scoreExpirationMsg(score)}}</ion-text>
+      </ion-item>
     </ng-container>
 
   </ion-content>

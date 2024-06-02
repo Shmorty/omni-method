@@ -6,7 +6,8 @@ import {Observable} from 'rxjs';
 import {AssessmentService} from '../../services/assessments/assessment.service';
 import {Assessment, Category} from '../../store/assessments/assessment.model';
 import {Score} from '../../store/models/score.model';
-import {UserService} from 'src/app/services/user/user.service';
+import {UserService} from '../../services/user/user.service';
+import {OmniScoreService} from '../../services/omni-score.service';
 
 @Component({
   selector: 'app-assessment-scores',
@@ -49,6 +50,11 @@ export class AssessmentScoresPage implements OnInit {
 
   goBack() {
     this.navController.back();
+  }
+
+  scoreExpirationMsg(score: Score) {
+    const daysToExpire = OmniScoreService.scoreDaysToExpire(score.scoreDate);
+    return daysToExpire === 0 ? 'Expired' : `Expires in ${daysToExpire} days`;
   }
 
   deleteScore(score: Score) {

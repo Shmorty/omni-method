@@ -55,11 +55,11 @@
               <ion-icon slot="icon-only" name="trash"></ion-icon
             ></ion-item-option>
           </ion-item-options>
-          <ng-container *ngIf="(scores$ | async).length > 1;">
-            <ion-button class="ion-float-right " fill="clear" (click)="showScores(assessment)">more...</ion-button>
-          </ng-container>
         </ion-item-sliding>
-      </ng-container>
+        <div *ngIf="(scores$ | async).length > 1;">
+          <ion-button class="ion-float-right" slot="end" fill="clear" (click)="showScores(assessment)">more...</ion-button>
+        </div>
+  </ng-container>
 
       <ng-container *ngIf="assessment.warning">
         <ion-item lines="full">
