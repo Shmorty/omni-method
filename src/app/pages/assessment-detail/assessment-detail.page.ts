@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, AfterViewChecked} from '@angular/core';
+import {Component, Input, OnInit, AfterViewChecked, inject} from '@angular/core';
 import {AlertController, IonRouterOutlet, ModalController, NavController, isPlatform} from '@ionic/angular';
 import {Score} from '../../store/models/score.model';
 import {AssessmentService} from '../../services/assessments/assessment.service';
@@ -11,6 +11,8 @@ import {User} from 'src/app/store/user/user.model';
 import {StatusBar, Style} from '@capacitor/status-bar';
 import {Capacitor} from '@capacitor/core';
 import {getStorage, getDownloadURL, ref} from '@angular/fire/storage';
+import {Analytics, logEvent} from '@angular/fire/analytics';
+import {OmniScoreService} from 'src/app/services/omni-score.service';
 
 @Component({
   selector: 'app-assessment-detail',
@@ -32,6 +34,7 @@ export class AssessmentDetailPage implements OnInit {
   public curScore: Score;
   private checklistChanged: boolean = false;
   public videoLink: Promise<string>;
+  private analytics: Analytics = inject(Analytics);
 
   constructor(
     private route: ActivatedRoute,
@@ -39,7 +42,7 @@ export class AssessmentDetailPage implements OnInit {
     private navController: NavController,
     private assessmentService: AssessmentService,
     private userService: UserService,
-    private alertController: AlertController,
+    private router: Router,
     private routerOutlet: IonRouterOutlet
   ) {}
 
@@ -56,6 +59,8 @@ export class AssessmentDetailPage implements OnInit {
 
     this.assessment$.subscribe((assessment) => {
       console.log("getScoresForAssessment", assessment);
+      // log analytics event
+      logEvent(this.analytics, "assessment_detail", {assessment_label: assessment.label});
       if (assessment.video) {
         this.videoLink = this.getVideoUrl(assessment);
       }
@@ -63,15 +68,7 @@ export class AssessmentDetailPage implements OnInit {
       this.score$.subscribe((score) => {
         this.curScore = score;
       })
-      this.scores$ = this.userService.getScoresForAssessment(assessment);
-      // this.scores$?.subscribe((score) => {
-      //   console.log("score", score);
-      //   if (score.length > 0) {
-      //     // assuming most recent on top or only store one
-      //     this.curScore = score[0];
-      //     this.displayChecked = Array.from(this.curScore.checklist);
-      //   }
-      // });
+      this.scores$ = this.userService.getScoresForAssessment(assessment.aid);
     });
     this.user$
       .subscribe((value) => {
@@ -94,6 +91,10 @@ export class AssessmentDetailPage implements OnInit {
     }
   }
 
+  scoreClass(scoreDate: string): string {
+    return OmniScoreService.scoreClass(scoreDate);
+  }
+
   updateChecked(checked) {
     console.log("assessmentDetail.updateChecked", checked);
     if (this.displayChecked.length) {
@@ -107,6 +108,12 @@ export class AssessmentDetailPage implements OnInit {
     console.log('dispatch deleteAssessmentScore ' + score.scoreDate);
     this.userService.deleteScore(score);
     this.navController.back();
+  }
+
+  showScores(assessment: Assessment) {
+    console.log("showScores", assessment);
+    this.router.navigate(['assessment-scores'], {queryParams: {aid: assessment.aid, cid: assessment.cid}});
+    // this.router.navigateByUrl('/assessment-scores', assessment);
   }
 
   async openNewScore(assessment: Assessment) {

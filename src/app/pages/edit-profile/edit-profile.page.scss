@@ -1,7 +1,7 @@
-user-avatar {
-  background: -primary;
-  margin: 12px auto;
-}
+// user-avatar {
+//   background: -primary;
+//   margin: 12px auto;
+// }
 .avatar {
   margin: 24px auto 0;
   ion-label {
@@ -52,18 +52,14 @@ ion-button {
   bottom: 0;
 }
 
-ion-datetime {
-  // --background: #5eb3f9;
-  // --background-rgb: 94, 179, 249;
-  --wheel-highlight-background: #5eb3f9;
-  --wheel-fade-background-rgb: 94, 179, 249;
-  &::part(wheel-item) {
-    color: rgb(0, 0, 0);
-  }
-  &::part(wheel-item active) {
-    color: rgb(255, 255, 255);
-  }
-}
+// ion-datetime {
+//   &::part(wheel-item) {
+//     color: rgb(0, 0, 0);
+//   }
+//   &::part(wheel-item active) {
+//     color: rgb(255, 255, 255);
+//   }
+// }
 ion-spinner {
   display: block;
   margin: auto;
@@ -89,4 +85,76 @@ ion-modal {
 }
 ion-modal#editAvatar {
   --height: 100%;
+}
+.current-value {
+  border: 1.5px solid var(--ion-color-light);
+  background-color: var(--ion-color-medium);
+  border-radius: 17px;
+  color: var(--ion-color-light);
+  padding: 5px 10px;
+}
+.input-div {
+  padding-top: 0;
+}
+.input-field {
+  border-bottom: 1px solid var(--ion-color-medium);
+}
+ion-item::part(native) {
+  // $label-margin-bottom: 0px;
+  // border: 1px solid blue;
+  // border-bottom: 3px solid red;
+  // border-radius: 17px;
+  // overflow: hidden;
+  margin-bottom: 4px;
+  // --background: var(--ion-color-medium);
+  --color: var(--ion-color-medium-contrast);
+
+  --padding-bottom: 10px;
+  --padding-end: 10px;
+  --padding-start: 10px;
+  --padding-top: 10px;
+  label.native-wraper div.native-input {
+    background: var(--ion-color-medium);
+    // color: var(--ion-color-medium-contrast);
+    color: red;
+    border-radius: 17px;
+    padding-left: 17px;
+  }
+}
+// .username-input::before {
+//   content: '&#64;';
+// }
+.date-picker {
+  border: 2px solid var(--ion-color-light);
+  height: 200px;
+  margin: auto;
+  min-width: 90%;
+}
+// gender
+.gender-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.gender-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.gender-button {
+  --border-radius: 55px;
+  height: 70px;
+  padding: 0px 20px;
+  width: 110px;
+}
+.active {
+  --background: var(--ion-color-primary);
+}
+.disabled {
+  --background: var(--ion-color-medium)
+}
+
+.bottom-padding {
+  height: 50px;
 }

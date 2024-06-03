@@ -1,22 +1,12 @@
-<cdk-virtual-scroll-viewport
-  itemSize="{{rowHeight}}"
-  class="picker ion-content-scroll-host">
-  <div class="picker-opt"></div>
-  <div class="picker-opt"></div>
-  <div *cdkVirtualFor="let value of range;index as i" class="picker-opt"
-    [ngClass]="curClass(i)"
-    (click)="click(i)">
-    {{value | number: '1.0-3'}}
-  </div>
-  <div class="picker-opt"></div>
-  <div class="picker-opt"></div>
-</cdk-virtual-scroll-viewport>
-<div style="height: 0;">
-  <div class="highlight-above"></div>
-  <div class="highlight">
-    <span class="units current" slot="right">
-      {{units}}
-    </span>
-  </div>
-  <div class="highlight-below"></div>
-</div>
+<ion-picker>
+  <ion-picker-column [value]="pickerValue" (ionChange)="onPickerColumnChange($event)">
+    <!-- include prefix to center picker -->
+    <div slot="prefix" style="color: transparent;">{{units}}</div>
+    <ng-container *ngFor="let value of range; index as i">
+      <ion-picker-column-option [value]="value">
+        {{value | number: '1.0-3'}}
+      </ion-picker-column-option>
+      </ng-container>
+    <div slot="suffix">{{units}}</div>
+  </ion-picker-column>
+</ion-picker>

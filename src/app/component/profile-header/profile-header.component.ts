@@ -33,6 +33,7 @@ export class ProfileHeaderComponent implements OnInit {
   public user$: Observable<User>;
   showChart = false;
   showPersonalData = false;
+  getAge = UserService.getAge;
 
   public chartSlidesOptions: SwiperOptions = {
     slidesPerView: 1,

@@ -1,18 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
-import {Router} from '@angular/router';
 import {UserService, usernameMinLength, usernameMaxLength} from '../../services/user/user.service';
 import {AuthService} from '../../services/auth.service';
 import {User} from '../../store/user/user.model';
-// import {DatePicker, DatePickerOptions} from '@pantrist/capacitor-date-picker';
-// import {isPlatform} from '@ionic/angular';
-// import {Keyboard} from '@capacitor/keyboard';
-// import {UserFirestoreService} from 'src/app/services/user-firestore.service';
 import {AssessmentService} from 'src/app/services/assessments/assessment.service';
-import {newUser} from 'functions/src';
 import {ShowToastService} from 'src/app/services/show-toast.service';
-import {NumberPickerService} from 'src/app/services/number-picker.service';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -24,12 +17,13 @@ export class NewUserPage implements OnInit, OnDestroy {
   userId: string;
   userEmail: string;
   formData: FormGroup;// = new FormGroup({});
+  userHeight: FormGroup;
   numberPickerSubscription: Subscription;
-  userDob: string;
+  initDob: string;
   fitnessLevel: string = 'none';
   scoreDate = new Date().toISOString().split('T')[0];
   step = 1;
-  isApp = false;
+  // isApp = false;
   // usernameMinLength = 5;
   // usernameMaxLength = 20;
 
@@ -39,21 +33,13 @@ export class NewUserPage implements OnInit, OnDestroy {
     private datePipe: DatePipe,
     private assessmentService: AssessmentService,
     private showToastService: ShowToastService,
-    public numberPickerService: NumberPickerService
   ) {
     let calcDate = new Date();
     let curYear = calcDate.getFullYear();
     calcDate.setFullYear(curYear - 16);
-    this.userDob = datePipe.transform(calcDate, 'yyyy-MM-dd');
+    this.initDob = datePipe.transform(calcDate, 'yyyy-MM-dd');
     // https://stackoverflow.com/questions/65056918/reactive-form-date-picker-in-ionic-5
-    console.log("newUser userDob", this.userDob);
-    //    console.log("newUser", this.newUser);
-    // set default values for new user
-    //    this.newUser.dob = calcDate;
-    // this.newUser.weight = 100;
-    // this.newUser.height.feet = 4;
-    // this.newUser.height.inches = 6;
-    // this.newUser.height = {feet: 4, inches: 6};
+    console.log("newUser initDob", this.initDob);
     this.userId = this.auth.currUserId;
     this.userEmail = this.auth.currUserEmail;
   }
@@ -67,12 +53,6 @@ export class NewUserPage implements OnInit, OnDestroy {
       this.formData.get('username').setValue(event.toLowerCase(), {emitEvent: false});
     });
 
-    this.numberPickerSubscription = this.numberPickerService.currentValue.subscribe((val) => {
-      // console.log("new value", val);
-      this.formData.get('height').setValue(val['height']);
-      this.formData.get('weight').setValue(val['weight']);
-      this.next();
-    });
   }
 
   ngOnDestroy(): void {
@@ -81,6 +61,18 @@ export class NewUserPage implements OnInit, OnDestroy {
 
   private initFormData() {
     console.log("initFormData()");
+    this.userHeight = new FormGroup({
+      feet: new FormControl(4, [
+        Validators.required,
+        Validators.pattern('[0-9]'),
+      ]),
+      inches: new FormControl(8, [
+        Validators.required,
+        Validators.pattern('[0-9]{1,2}'),
+        Validators.min(0),
+        Validators.max(11),
+      ]),
+    });
     this.formData = new FormGroup({
       id: new FormControl(this.userId, [Validators.required]),
       firstName: new FormControl('', [Validators.required]),
@@ -94,20 +86,9 @@ export class NewUserPage implements OnInit, OnDestroy {
         Validators.minLength(usernameMinLength),
         Validators.maxLength(usernameMaxLength)
       ]),
-      gender: new FormControl(),
-      dob: new FormControl(this.userDob, [Validators.required]),
-      height: new FormGroup({
-        feet: new FormControl(4, [
-          Validators.required,
-          Validators.pattern('[0-9]'),
-        ]),
-        inches: new FormControl(8, [
-          Validators.required,
-          Validators.pattern('[0-9]{1,2}'),
-          Validators.min(0),
-          Validators.max(11),
-        ]),
-      }),
+      gender: new FormControl('', []),
+      dob: new FormControl(this.initDob, [Validators.required]),
+      height: this.userHeight,
       weight: new FormControl(95, [
         Validators.required,
         Validators.pattern('[0-9]*'),
@@ -122,16 +103,21 @@ export class NewUserPage implements OnInit, OnDestroy {
   // async openPicker(targetProperty: string) {
   //   await this.numberPickerService.openProfilePicker(this.formData.value, targetProperty);
   // }
-  async openWeightPicker() {
-    this.numberPickerService.openWeightPicker(this.formData.value as User);
-  }
-  async openHeightPicker() {
-    this.numberPickerService.openHeightPicker(this.formData.value as User);
-  }
+  // async openWeightPicker() {
+  //   this.numberPickerService.openWeightPicker(this.formData.value as User);
+  // }
+  // async openHeightPicker() {
+  //   this.numberPickerService.openHeightPicker(this.formData.value as User);
+  // }
 
   setFitnessLevel(ev) {
     this.fitnessLevel = ev.target.value;
     console.log("setFitnessLevel", this.fitnessLevel);
+  }
+
+  setGender(ev) {
+    console.log("setGender", ev);
+    this.formData.value.gender = ev.target.value;
   }
 
   onSubmit() {
@@ -139,7 +125,7 @@ export class NewUserPage implements OnInit, OnDestroy {
     console.log('new user onSubmit', newUser);
     // create user in database
     this.userService.saveNewUser({
-      ...(this.formData.value),
+      ...(newUser),
       fitnessLevel: this.fitnessLevel,
       scoreDate: this.scoreDate,
       omniScore: 0,
@@ -148,7 +134,7 @@ export class NewUserPage implements OnInit, OnDestroy {
   }
 
   async next() {
-    console.log('next', this.formData.value);
+    console.log('next()', JSON.stringify(this.formData.value));
     if (this.step < 6) {
       if (this.step == 1) {
         const username = this.formData.value['username'];
@@ -179,7 +165,7 @@ export class NewUserPage implements OnInit, OnDestroy {
   }
 
   previous() {
-    console.log('previous', this.formData.value);
+    console.log('previous()', JSON.stringify(this.formData.value));
     this.step = this.step - 1;
   }
 
@@ -193,6 +179,10 @@ export class NewUserPage implements OnInit, OnDestroy {
 
   get username() {
     return this.formData.get('username');
+  }
+
+  get gender() {
+    return this.formData.get('gender');
   }
 
   get email() {

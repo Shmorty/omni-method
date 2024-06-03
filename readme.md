@@ -72,6 +72,10 @@ helpful articles
 - [NgRx](https://www.concretepage.com/ngrx/ngrx-effects-example)
 - [tutorial](https://eliteionic.com/tutorials/using-ngrx-for-state-management-in-an-ionic-angular-application/)
 
+### meta reducer
+
+can be used to clear state when user logs out
+
 ### App State
 
 ```json
@@ -212,11 +216,15 @@ graph TD
 
 3. run ionic plugin configuration script
 
-## Firebase
+## Firebase Login
 
 [Simon Grimm - Google login tutorial](https://www.youtube.com/watch?v=GwtpoWZ_78E)
 
 [omni-login user](https://console.firebase.google.com/project/omni-login-63e9f/authentication/users)
+
+AngularFire documentation explaining the benefits
+
+<https://firebaseopensource.com/projects/angular/angularfire2/>
 
 ### authentication plugins
 
@@ -254,6 +262,59 @@ login with email
 
 ```json
 {payload: {…}, type: '[User Login] User Authenticated'}
+```
+
+## Firebase (Google) Analytics
+
+<https://firebase.google.com/docs/analytics>
+
+Starting wih direct integration with firebase analytics since below libraries apear to be out of date. The 'firebase' module from google does everything relatedot firebase, '@angular/fire' wraps this is an angular friendly way. These can be used togther based simply on which is more convienent. Using 'firebase' directly could make keeping up with updates easier as it doesn't require a second library to be updated. Since we are already using '@angular/fire' we us it for analytics too unless we run into any challenges.
+
+<https://github.com/angular/angularfire/blob/master/docs/analytics.md#analytics>
+
+<https://firebase.google.com/docs/reference/js/analytics.md#analytics_package>
+
+### Ionic Firebase analytics
+
+This along with other libraries listed here don't seem to be completely up to date and may not be necesarry, I'll come back to this if we run into any challenges.
+
+<https://ionic.io/integrations/firebase-analytics>
+
+<https://github.com/capacitor-community/firebase-analytics>
+
+versioned_docs/version-v5/native/firebase-analytics.md
+
+```bash
+npm install cordova-plugin-firebase-analytics
+npm install @awesome-cordova-plugins/firebase-analytics
+ionic cap sync
+ionic cordova plugin add cordova-plugin-firebase-analytics
+npm install @awesome-cordova-plugins/firebase-analytics
+```
+
+#### Angular
+
+```javascript
+import { FirebaseAnalytics } from '@awesome-cordova-plugins/firebase-analytics/ngx';
+
+
+constructor(private firebaseAnalytics: FirebaseAnalytics) { }
+
+...
+
+this.firebaseAnalytics.logEvent('page_view', {page: "dashboard"})
+  .then((res: any) => console.log(res))
+  .catch((error: any) => console.error(error));
+```
+
+### Ionic google analytics
+
+versioned_docs/version-v5/native/google-analytics.md
+
+```bash
+    npm install cordova-plugin-google-analytics
+    npm install @awesome-cordova-plugins/google-analytics
+    ionic cap sync
 ```
 
 ## Image Cropping and Transformation with Ionic Angular

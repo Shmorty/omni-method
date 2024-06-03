@@ -3,8 +3,8 @@
  
   <form [formGroup]="formData" (ngSubmit)="onSubmit()">
     <div>
-      <ion-list>
-        <ion-item>
+      <ion-list style="padding: 15px;">
+        <ion-item lines="none">
           <ion-button type="button" shape="circle"
             (click)="previous()" [disabled]="step == 1">
             <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
@@ -18,7 +18,7 @@
               <h1 class="center">Create Account</h1>
             </ion-text>
           </div>
-          <ion-item>
+          <ion-item lines="full">
             <ion-input
               formControlName="firstName"
               placeholder="First"
@@ -29,10 +29,10 @@
           <div
             *ngIf="(first.dirty || first.touched) && first.errors"
             class="errors"
-          >
+            >
             <span *ngIf="first.errors?.required">First name is required</span>
           </div>
-          <ion-item>
+          <ion-item lines="full">
             <ion-input
               formControlName="lastName"
               placeholder="Last"
@@ -43,10 +43,10 @@
           <div
             *ngIf="(last.dirty || last.touched) && last.errors"
             class="errors"
-          >
+            >
             <span *ngIf="last.errors?.required">Last name is required</span>
           </div>
-          <ion-item>
+          <ion-item lines="full">
             <ion-input
               id="username"
               formControlName="username"
@@ -72,11 +72,17 @@
               <h1 class="center">What is your gender?</h1>
             </ion-text>
           </div>
-          <ion-item>
-            <ion-radio-group formControlName="gender" value="other">
-              <ion-radio justify="start" value="Male" labelPlacement="end">Male</ion-radio>
-              <ion-radio justify="start" value="Female" labelPlacement="end">Female</ion-radio>
-            </ion-radio-group>
+          <ion-item lines="none">
+            <!-- <ion-radio-group (ionChange)="setGender($event)" formControlName="gender">
+              <ion-radio value="Male">Male</ion-radio>
+              <ion-radio value="Female">Female</ion-radio>
+            </ion-radio-group> -->
+            <app-gender-picker
+              id="gender"
+              formControlName="gender"
+              [(gender)]="formData.value.gender"
+              style="width: 100%;"
+              ></app-gender-picker>
           </ion-item>
         </div>
         <!-- <div *ngIf="step == 3"> -->
@@ -101,18 +107,11 @@
             </ion-text>
           </div>
           <fieldset formGroupName="height">
-            <!-- <ion-item lines="none"> -->
-              <!-- <app-number-picker style="width: 50%;" [min]="3" [max]="7" [units]="'ft'"
-              [(pickerValue)]="formData.value.height.feet"></app-number-picker>
-              <app-number-picker style="width: 50%;" [min]="0" [max]="11" [units]="'in'"
-              [(pickerValue)]="formData.value.height.inches"></app-number-picker> -->
-              <ion-button class="continue-button" (click)="openHeightPicker()" 
-                expand="block" shape="round">
-                {{formData.value.height.feet}} ft
-                &nbsp;
-                {{formData.value.height.inches}} in
-              </ion-button>
-            <!-- </ion-item> -->
+            <app-height-picker
+              ngDefaultControl
+              [(feet)]="userHeight.value.feet"
+              [(inches)]="userHeight.value.inches"
+              ></app-height-picker>
           </fieldset>
         </div>
         <!-- <div *ngIf="step == 5"> -->
@@ -126,10 +125,14 @@
             <app-number-picker style="width: 100%;" [min]="0" [max]="325" [units]="'lbs'"
             [(pickerValue)]="formData.value.weight"></app-number-picker>
           </ion-item> -->
-          <ion-button class="continue-button" (click)="openWeightPicker()" 
+          <app-number-picker
+            [(pickerValue)]="formData.value.weight"
+            [min]="0" [max]="325" units="lbs"
+            ></app-number-picker>
+          <!-- <ion-button class="continue-button" (click)="openWeightPicker()" 
             expand="block" shape="round">
-          {{formData.value.weight}} lbs
-        </ion-button>
+            {{formData.value.weight}} lbs
+          </ion-button> -->
         </div>
         <!-- <div *ngIf="step == 6"> -->
         <div [hidden]="step !== 6">

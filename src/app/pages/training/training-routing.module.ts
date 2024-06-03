@@ -1,12 +1,13 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { VideosPage } from '../videos/videos.page';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {VideosPage} from '../videos/videos.page';
 
-import { TrainingPage } from './training.page';
+import {TrainingPage} from './training.page';
 
 const routes: Routes = [
   {
     path: '',
+    title: 'Training',
     component: TrainingPage,
     // children: [
     //   {
@@ -17,6 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'videos',
+    title: 'Videos',
     loadChildren: () =>
       import('../videos/videos.module').then((m) => m.VideosPageModule),
   },

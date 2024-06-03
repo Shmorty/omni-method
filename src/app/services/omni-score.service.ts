@@ -48,6 +48,15 @@ export class OmniScoreService {
     }
   }
 
+  public static scoreDaysToExpire(scoreDate: string): number {
+    const ONE_DAY = 1000 * 60 * 60 * 24;
+    const today_ms = new Date().getTime();
+    const score_date_ms = new Date(scoreDate).getTime();
+    const days_old = Math.round((today_ms - score_date_ms) / ONE_DAY);
+    const expire = 90 - days_old;
+    return expire < 0 ? 0 : expire;
+  }
+
   calculateScores() {
     let omniScore = 0;
 
@@ -69,7 +78,7 @@ export class OmniScoreService {
                 // get score for assessment
                 // console.log(assessment.label);
                 this.store
-                  .select(assessmentScores(assessment))
+                  .select(assessmentScores(assessment.aid))
                   .pipe(take(1))
                   .subscribe((scores) => {
                     // console.log('  - score ' + scores);

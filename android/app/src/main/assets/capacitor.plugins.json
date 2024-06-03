@@ -12,10 +12,6 @@
 		"classpath": "com.capacitorjs.plugins.haptics.HapticsPlugin"
 	},
 	{
-		"pkg": "@capacitor/keyboard",
-		"classpath": "com.capacitorjs.plugins.keyboard.KeyboardPlugin"
-	},
-	{
 		"pkg": "@capacitor/network",
 		"classpath": "com.capacitorjs.plugins.network.NetworkPlugin"
 	},
@@ -26,9 +22,5 @@
 	{
 		"pkg": "@capacitor/status-bar",
 		"classpath": "com.capacitorjs.plugins.statusbar.StatusBarPlugin"
-	},
-	{
-		"pkg": "@capacitor/text-zoom",
-		"classpath": "com.capacitorjs.plugins.textzoom.TextZoomPlugin"
 	}
 ]

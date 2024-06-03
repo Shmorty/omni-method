@@ -1,10 +1,7 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-} from '@angular/common/http';
+import {HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable, of, throwError} from 'rxjs';
-import {catchError, filter, first, map, single, take, tap} from 'rxjs/operators';
+import {Observable, throwError} from 'rxjs';
+import {filter, first, take, tap} from 'rxjs/operators';
 import {User} from '../../store/user/user.model';
 import {IUserService} from './user.service.interface';
 import {Score} from '../../store/models/score.model';
@@ -19,10 +16,9 @@ import {
 } from '../../store/user/user.selectors';
 import {Assessment} from '../../store/assessments/assessment.model';
 import {UserFirestoreService} from '../user-firestore.service';
-import {AuthService} from '../auth.service';
 import {ModalController} from '@ionic/angular';
 import {EditProfilePage} from 'src/app/pages/edit-profile/edit-profile.page';
-import {StorageReference, UploadMetadata, UploadTask, UploadTaskSnapshot, getDownloadURL, getStorage, ref, uploadBytesResumable} from '@angular/fire/storage';
+import {UploadMetadata, UploadTask, getDownloadURL, getStorage, ref, uploadBytesResumable} from '@angular/fire/storage';
 
 export const usernameMinLength = 5;
 export const usernameMaxLength = 20;
@@ -77,7 +73,7 @@ export class UserService implements IUserService {
 
   // trigger new user action
   saveNewUser(user: User) {
-    console.log('userService.saveNewUser');
+    console.log("userService.saveNewUser", user);
     this.store.dispatch(UserActions.newUser({payload: user}));
   }
 
@@ -98,8 +94,8 @@ export class UserService implements IUserService {
   }
 
   // get score from store
-  getScoresForAssessment(assessment: Assessment): Observable<Score[]> {
-    return this.store.select(assessmentScores(assessment)).pipe(
+  getScoresForAssessment(aid: string): Observable<Score[]> {
+    return this.store.select(assessmentScores(aid)).pipe(
       tap((results) => {
         results.sort(function (a, b) {
           return Date.parse(b.scoreDate) - Date.parse(a.scoreDate);
@@ -162,7 +158,7 @@ export class UserService implements IUserService {
     });
   }
 
-  getAge(user: User) {
+  static getAge(user: User) {
     var today = new Date();
     var birthDate = new Date(user.dob);
     var age = today.getFullYear() - birthDate.getFullYear();

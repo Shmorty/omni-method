@@ -15,6 +15,7 @@ import {
   selectChecklist,
   selectChecklistCategories,
   selectChecklistSkill,
+  selectHideCheckFlag,
 } from '../../store/assessments/assessment.selector';
 import * as AssessmentActions from '../../store/assessments/assessment.actions';
 
@@ -57,6 +58,14 @@ export class AssessmentService implements IAssessmentService {
     this.store.dispatch(AssessmentActions.loadAssessmentsBegin());
   }
 
+  setAssessmentHideCheckedFlag(aid: string, hideChecked: boolean) {
+    this.store.dispatch(AssessmentActions.setAssessmentHideCheckedFlag({aid, hideChecked}));
+  }
+
+  getAssessmentHideCheckedFlag(aid: string): Observable<boolean> {
+    return this.store.select(selectHideCheckFlag(aid));
+  }
+
   getChecklist(aid: string): Observable<object[]> {
     return this.store.select(selectChecklist(aid));
   }
@@ -70,16 +79,15 @@ export class AssessmentService implements IAssessmentService {
   }
 
   getNewCategoryScores() {
-    const obj = {};
+    const newCategoryScores = {};
     const categories$ = this.store.select(selectAllCategories);
     categories$.subscribe((cat) => {
       cat.forEach((c) => {
-        console.log('addCategoryScore', c.cid);
-        obj[c.cid] = 0;
+        newCategoryScores[c.cid] = 0;
       });
     });
-    console.log('obj', obj);
-    return obj;
+    console.log('newCategoryScores obj', newCategoryScores);
+    return newCategoryScores;
   }
 
   isReverse(aid: string): boolean {

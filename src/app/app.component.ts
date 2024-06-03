@@ -1,8 +1,6 @@
 import {Component, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AssessmentService} from './services/assessments/assessment.service';
 import {IonModal, ModalController, Platform} from '@ionic/angular';
-import {TextZoom} from '@capacitor/text-zoom';
-import {App} from '@capacitor/app';
 import {Network} from '@capacitor/network';
 import {PluginListenerHandle} from '@capacitor/core';
 import {register} from 'swiper/element/bundle';
@@ -30,13 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
     public platform: Platform,
     private ngZone: NgZone
   ) {
-    App.addListener('appStateChange', ({isActive}) => {
-      TextZoom.getPreferred().then(value => {
-        TextZoom.set(value);
-      })
-    });
     this.assessmentService.load();
-    this.initializeApp();
   }
 
   ngOnInit(): void {
@@ -45,15 +37,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.stopListeningToNetworkStatus();
-  }
-
-  initializeApp() {}
-
-  statusChanged(status) {
-    this.connected = status.connected;
-    if (!this.connected) {
-      this.stopListeningToNetworkStatus();
-    }
   }
 
   async startListeningToNetworkStatus() {
@@ -77,6 +60,13 @@ export class AppComponent implements OnInit, OnDestroy {
     //   this.networkListener.remove();
     // }
     Network.removeAllListeners();
+  }
+
+  statusChanged(status) {
+    this.connected = status.connected;
+    if (!this.connected) {
+      this.stopListeningToNetworkStatus();
+    }
   }
 
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {User} from '../../store/user/user.model';
 import {UserService} from '../../services/user/user.service';
@@ -6,6 +6,9 @@ import {Assessment} from '../../store/assessments/assessment.model';
 import {Score} from '../../store/models/score.model';
 import {Subscription} from 'rxjs';
 import {NumberPickerService} from 'src/app/services/number-picker.service';
+import {Pagination} from 'swiper/modules';
+import {Swiper} from 'swiper';
+import {SwiperOptions} from 'swiper/types';
 
 @Component({
   selector: 'app-new-score',
@@ -16,6 +19,11 @@ export class NewScorePage implements OnInit, OnDestroy {
   activeField: string = 'score';
   @Input() assessment: Assessment;
   @Input() curScore: Score;
+  @ViewChild('inputSwiper', {static: false}) swiperEl;
+  private swiper: Swiper;
+  private swiperOptions: SwiperOptions;
+  private slideToSpeed = 500;
+  private fieldNames = ['scoreDate', 'score', 'bodyWeight'];
   public newScore: Score = {} as Score;
   public today = new Date().toISOString();
   public user$ = this.userService.getUser();
@@ -67,6 +75,21 @@ export class NewScorePage implements OnInit, OnDestroy {
     }
   }
 
+  ngAfterViewInit() {
+    setTimeout(() => {
+      console.log("timeout begin");
+      this.swiperEl?.nativeElement.initialize(Pagination);
+      this.swiper = this.swiperEl.nativeElement.swiper;
+      // create event listener
+      this.swiperEl.nativeElement.addEventListener('swiperslidechange', (event) => {
+        this.activate(this.fieldNames[this.swiper.activeIndex]);
+      });
+      // this.swiperOptions.
+      this.activate(this.activeField);
+      console.log("timeout done");
+    });
+  }
+
   gotUpdate(val: Score) {
     if (Object.keys(val).length > 1 && val.aid === this.assessment.aid) {
       console.log("gotUpdate Score from picker", val);
@@ -80,36 +103,7 @@ export class NewScorePage implements OnInit, OnDestroy {
   activate(tab: string): void {
     console.log("activate", tab);
     this.activeField = tab;
-    switch (tab) {
-      case 'scoreDate': {
-        console.log("open scoreDate picker");
-        break;
-      }
-      case 'score': {
-        this.numberPickerService.openScorePicker(this.assessment, this.newScore)
-          .then(() => {
-            console.log("score picker open");
-            if (this.numberPickerSubscription) {
-              this.numberPickerSubscription.unsubscribe();
-            }
-            this.numberPickerSubscription = this.numberPickerService.currentValue
-              .subscribe((val) => this.gotUpdate(val as Score));
-          });
-        break;
-      }
-      case 'bodyWeight': {
-        this.numberPickerService.openWeightPicker(this.newScore)
-          .then(() => {
-            console.log("bodyWeight picker is open");
-            if (this.numberPickerSubscription) {
-              this.numberPickerSubscription.unsubscribe();
-            }
-            this.numberPickerSubscription = this.numberPickerService.currentValue
-              .subscribe((val) => this.gotUpdate(val as Score));
-          });
-        break;
-      }
-    }
+    this.swiper.slideTo(this.fieldNames.indexOf(tab), this.slideToSpeed, false);
   }
 
   tabClass(tab: string) {

@@ -1,6 +1,6 @@
 {
   "name": "omni-method",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "author": "Omni Method LLC",
   "description": "the all-in-one fitness app",
   "homepage": "https://www.omnimethod.app/",
@@ -23,14 +23,14 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/cdk": "17.3.2",
-    "@angular/common": "^17.3.2",
-    "@angular/core": "^17.3.2",
-    "@angular/fire": "^17.0.1",
-    "@angular/forms": "^17.3.2",
-    "@angular/platform-browser": "^17.3.2",
-    "@angular/platform-browser-dynamic": "^17.3.2",
-    "@angular/router": "^17.3.2",
+    "@angular/cdk": "18.0.0",
+    "@angular/common": "^18.0.1",
+    "@angular/core": "^18.0.1",
+    "@angular/fire": "^18.0.1",
+    "@angular/forms": "^18.0.1",
+    "@angular/platform-browser": "^18.0.1",
+    "@angular/platform-browser-dynamic": "^18.0.1",
+    "@angular/router": "^18.0.1",
     "@awesome-cordova-plugins/core": "^6.6.0",
     "@capacitor/android": "^6.0.0",
     "@capacitor/app": "^6.0.0",
@@ -38,13 +38,11 @@
     "@capacitor/core": "^6.0.0",
     "@capacitor/haptics": "^6.0.0",
     "@capacitor/ios": "^6.0.0",
-    "@capacitor/keyboard": "^6.0.0",
     "@capacitor/network": "^6.0.0",
     "@capacitor/splash-screen": "^6.0.0",
     "@capacitor/status-bar": "^6.0.0",
-    "@capacitor/text-zoom": "^6.0.0",
     "@firebase/auth": "^1.7.0",
-    "@ionic/angular": "^7.4.1",
+    "@ionic/angular": "^8.1.0",
     "@ionic/pwa-elements": "^3.2.2",
     "@ngrx/effects": "^17.1.1",
     "@ngrx/store": "^17.1.1",
@@ -54,7 +52,7 @@
     "chart.js": "^4.4.2",
     "firebase-functions": "^4.5.0",
     "hammerjs": "^2.0.8",
-    "ng-apexcharts": "^1.9.0",
+    "ng-apexcharts": "^1.10.0",
     "ngx-image-cropper": "^7.2.1",
     "rxjs": "^7.8.1",
     "sharp": "^0.33.2",
@@ -63,16 +61,16 @@
     "zone.js": "^0.14.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.3.2",
-    "@angular-eslint/builder": "17.3.0",
-    "@angular-eslint/eslint-plugin": "17.3.0",
-    "@angular-eslint/eslint-plugin-template": "17.3.0",
-    "@angular-eslint/schematics": "17.3.0",
-    "@angular-eslint/template-parser": "17.3.0",
-    "@angular/cli": "^17.3.2",
-    "@angular/compiler": "^17.3.2",
-    "@angular/compiler-cli": "^17.3.2",
-    "@angular/language-service": "^17.3.2",
+    "@angular-devkit/build-angular": "^18.0.2",
+    "@angular-eslint/builder": "18.0.0",
+    "@angular-eslint/eslint-plugin": "18.0.0",
+    "@angular-eslint/eslint-plugin-template": "18.0.0",
+    "@angular-eslint/schematics": "18.0.0",
+    "@angular-eslint/template-parser": "18.0.0",
+    "@angular/cli": "^18.0.2",
+    "@angular/compiler": "^18.0.1",
+    "@angular/compiler-cli": "^18.0.1",
+    "@angular/language-service": "^18.0.1",
     "@capacitor/cli": "^6.0.0",
     "@ionic/angular-toolkit": "11.0.1",
     "@ionic/cli": "7.2.0",
@@ -97,12 +95,26 @@
     "typescript": "^5.3.3"
   },
   "browserslist": [
-    "Chrome >=61",
-    "ChromeAndroid >=61",
-    "Firefox >=63",
-    "Firefox ESR",
-    "Edge >=79",
-    "Safari >=13",
-    "iOS >=13"
-  ]
+    "Chrome >=89",
+    "ChromeAndroid >=89",
+    "Firefox >=75",
+    "Edge >=89",
+    "Safari >=15",
+    "iOS >=15"
+  ],
+  "overrides": {
+    "@ngrx/store-devtools": {
+      ".": "^17.1.1",
+      "@angular/core": "^18.0.1"
+    },
+    "@ngrx/effects": {
+      ".": "^17.1.1",
+      "@angular/core": "^18.0.1"
+    },
+    "ng-apexcharts": {
+      ".": "^1.10.0",
+      "@angular/common": "^18.0.1",
+      "@angular/core": "^18.0.1"
+    }
+  }
 }

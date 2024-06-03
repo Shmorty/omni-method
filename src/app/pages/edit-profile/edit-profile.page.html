@@ -16,42 +16,102 @@
     </ion-button>
   </ion-fab>
 
-  <ion-list *ngIf="user$ | async as user; else loading ">
+  <ng-container *ngIf="user$ | async as user; else loading ">
     <div id="choose-avatar" (click)="setAvatarOptionOpen(true)" class="avatar">
       <user-avatar [user]="user" [enableShowPic]="false" class="avatar"></user-avatar>
       <ion-button color="medium" shape="round" size="small">edit</ion-button>
     </div>
-  
-    <ion-item button (click)="openModal('name')">
-      <ion-label>Name</ion-label>
-      <ion-text slot="end">{{user.firstName}}&nbsp;{{user.lastName}}</ion-text>
-    </ion-item>
-    <ion-item button (click)="openModal('username')">
-      <ion-label>Userame</ion-label>
-      <ion-text slot="end">{{user.username}}</ion-text>
-    </ion-item>
-    <ion-item button (click)="openModal('dob')">
-      <ion-label>Age</ion-label>
-      <ion-text slot="end">{{userService.getAge(user)}}</ion-text>
-    </ion-item>
-    <ion-item button (click)="openModal('sex')">
-      <ion-label>Gender</ion-label>
-      <ion-text slot="end">{{user.gender}}</ion-text>
-    </ion-item>
-    <ion-item button (click)="numberPickerService.openWeightPicker(user)">
-      <ion-label>Weight</ion-label>
-      <ion-text slot="end">{{user.weight}}</ion-text>
-    </ion-item>
-    <ion-item button (click)="numberPickerService.openHeightPicker(user)">
-      <ion-label>Height</ion-label>
-      <ion-text slot="end">{{user.height.feet}}' {{user.height.inches}}"</ion-text>
-    </ion-item>
+
+   <ion-list-header class="section_header"></ion-list-header>
+   <ion-accordion-group>
+      <ion-accordion toggleIconSlot="none">
+        <ion-item slot="header">
+          <ion-label>Name</ion-label>
+          <ion-text class="current-value" slot="end">{{user.firstName}}&nbsp;{{user.lastName}}</ion-text>
+        </ion-item>
+        <div class="ion-padding input-div" slot="content" color="light">
+          <ion-input class="input-field" aria-label="First"
+            id="firstName"
+            [value]="user.firstName"
+            (ionChange)="onTextChange($event)"
+            placeholder="first name"
+            ></ion-input>
+          <ion-input class="input-field" aria-label="Last"
+            id="lastName"
+            [value]="user.lastName"
+            (ionChange)="onTextChange($event)"
+            placeholder="last name"
+            ></ion-input>
+        </div>
+      </ion-accordion>
+      <ion-accordion toggleIconSlot="none">
+        <ion-item slot="header">
+          <ion-label slot="start">Username</ion-label>
+          <ion-text class="current-value" slot="end">&#64;{{user.username}}
+          </ion-text>
+        </ion-item>
+        <div class="ion-padding input-div" slot="content">
+          <ion-input class="input-field username-input"
+            #usernameInput
+            maxlength={{usernameMaxLength}}
+            [value]="'&#64;'+user.username"
+            (ionChange)="updateUsername($event)"
+            (ionInput)="onUsernameInput($event)"
+            ></ion-input>
+        </div>
+      </ion-accordion>
+      <ion-accordion toggleIconSlot="none">
+        <ion-item slot="header">
+          <ion-label>Age</ion-label>
+          <ion-text class="current-value" slot="end">{{getAge(user)}}</ion-text>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-datetime [value]="user.dob" (ionChange)="onDobChange($event)" class="date-picker"
+          presentation="date" [preferWheel]="true" [max]="today"></ion-datetime>
+        </div>
+      </ion-accordion>
+      <ion-accordion toggleIconSlot="none">
+        <ion-item slot="header">
+          <ion-label>Gender</ion-label>
+          <ion-text class="current-value" slot="end">{{user.gender}}</ion-text>
+        </ion-item>
+        <app-gender-picker style="width: 100%;" slot="content"
+          [gender]="user.gender"
+          (genderChange)="setGender($event)"
+          ></app-gender-picker>
+      </ion-accordion>
+      <ion-accordion toggleIconSlot="none">
+        <ion-item slot="header">
+          <ion-label>Weight</ion-label>
+          <ion-text class="current-value" slot="end">{{userWeight}}</ion-text>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <app-number-picker class="number-picker" [min]="0" [max]="325" [units]="'lbs'"
+            [(pickerValue)]="userWeight"
+            (pickerValueChange)="onWeightChange($event)"
+          ></app-number-picker>
+        </div>
+      </ion-accordion>
+      <ion-accordion toggleIconSlot="none">
+        <ion-item slot="header">
+          <ion-label>Height</ion-label>
+          <ion-text class="current-value" slot="end">{{user.height.feet}}' {{user.height.inches}}"</ion-text>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <app-height-picker
+            [(feet)]="userHeightFeet"
+            (feetChange)="onHeightFeetChange($event)"
+            [(inches)]="userHeightInches"
+            (inchesChange)="onHeightInchesChange($event)"
+            ></app-height-picker>
+        </div>
+      </ion-accordion>
     <ion-list-header class="section_header">Account</ion-list-header>
     <ion-item>
       <ion-label>Email</ion-label>
       <ion-text slot="end">{{user.email}}</ion-text>
     </ion-item>
-    <ion-item button>
+    <ion-item button (click)="changePassword()">
       <ion-label>Change Password</ion-label>
       <ion-text slot="end">******</ion-text>
     </ion-item>
@@ -62,7 +122,9 @@
     <ion-item button (click)="logout()">
       <ion-label color="danger">Log Out</ion-label>
     </ion-item>
-  </ion-list>
+  </ion-accordion-group>
+  <div class="bottom-padding"></div>
+</ng-container>
 
   <ng-template #loading>
     <ion-spinner color="primary"></ion-spinner>
@@ -109,9 +171,9 @@
             </ion-button>
           </ion-buttons>
           <ion-buttons slot="end">
-            <ion-button (click)="rotate()">
+            <!-- <ion-button (click)="rotate()">
               <ion-icon slot="icon-only" name="sync-outline"></ion-icon>
-            </ion-button>
+            </ion-button> -->
             <ion-button (click)="saveImage()">
               <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
             </ion-button>

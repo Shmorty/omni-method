@@ -1,4 +1,4 @@
-import {HttpClientModule} from '@angular/common/http';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {CUSTOM_ELEMENTS_SCHEMA, isDevMode, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {IonicModule} from '@ionic/angular';
@@ -27,6 +27,7 @@ import {Capacitor} from '@capacitor/core';
 import {UserActionType} from './store/user/user.actions';
 import {NgApexchartsModule} from 'ng-apexcharts';
 import {CommunityEffects} from './store/community/community.effect';
+import {getAnalytics, provideAnalytics, ScreenTrackingService} from '@angular/fire/analytics';
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -57,12 +58,15 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
 //     !environment.production ? [StoreDevtoolsModule.instrument()] : [];
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  bootstrap: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
-    HttpClientModule,
     IonicModule.forRoot(),
     NgApexchartsModule,
     StoreModule.forRoot(reducers, {metaReducers}),
@@ -75,6 +79,8 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
       connectInZone: true
     }),
+  ],
+  providers: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => {
@@ -83,17 +89,17 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
         return initializeAuth(getApp(), {
           persistence: indexedDBLocalPersistence,
         });
-      } else {
+      }
+      else {
         console.log('not nativPlatform');
         return getAuth();
       }
     }),
     provideStorage(() => getStorage()),
-  ],
-  providers: [
+    provideAnalytics(() => getAnalytics()),
     DatePipe,
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  bootstrap: [AppComponent],
+    ScreenTrackingService,
+    provideHttpClient(withInterceptorsFromDi()),
+  ]
 })
 export class AppModule {}

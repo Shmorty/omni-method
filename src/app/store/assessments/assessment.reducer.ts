@@ -42,5 +42,17 @@ export const assessmentReducer = createReducer(
     loading: false,
     error: action.error,
     // status: 'error',
-  }))
+  })),
+  on(AssessmentActions.setAssessmentHideCheckedFlag, (state, action) => {
+    let modifiedAssessments = state.assessments.map((obj) => {
+      if (obj.aid == action.aid) {
+        return {...obj, hideChecked: action.hideChecked};
+      }
+      return obj;
+    });
+    return {
+      ...state,
+      assessments: [...modifiedAssessments]
+    };
+  })
 );

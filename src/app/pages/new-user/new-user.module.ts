@@ -8,6 +8,8 @@ import {NewUserPageRoutingModule} from './new-user-routing.module';
 
 import {NewUserPage} from './new-user.page';
 import {NumberPickerComponent} from 'src/app/component/number-picker/number-picker.component';
+import {GenderPickerComponent} from 'src/app/component/gender-picker/gender-picker.component';
+import {HeightPickerComponent} from 'src/app/component/height-picker/height-picker.component';
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import {NumberPickerComponent} from 'src/app/component/number-picker/number-pick
     IonicModule,
     NewUserPageRoutingModule,
     ReactiveFormsModule,
-    NumberPickerComponent
+    NumberPickerComponent,
+    GenderPickerComponent,
+    HeightPickerComponent
   ],
   declarations: [NewUserPage],
 })

@@ -9,6 +9,7 @@ const routes: Routes = [
     children: [
       {
         path: 'profile',
+        title: 'Profile',
         children: [
           {
             path: '',
@@ -40,6 +41,7 @@ const routes: Routes = [
       //   },
       {
         path: 'training',
+        title: 'Training',
         loadChildren: () =>
           import('../training/training.module').then(
             (m) => m.TrainingPageModule
@@ -47,10 +49,7 @@ const routes: Routes = [
       },
       {
         path: 'community',
-        // loadChildren: () =>
-        //   import('../community/community.module').then(
-        //     (m) => m.CommunityPageModule
-        //   ),
+        title: 'Community',
         children: [
           {
             path: '',
@@ -61,6 +60,7 @@ const routes: Routes = [
           },
           {
             path: 'athlete',
+            title: 'Athlete',
             loadChildren: () =>
               import('../ranking-detail/ranking-detail.module').then(
                 (m) => m.RankingDetailPageModule

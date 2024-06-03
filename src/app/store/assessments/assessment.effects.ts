@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap, catchError, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { AssessmentService } from '../../services/assessments/assessment.service';
+import {Injectable} from '@angular/core';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {map, switchMap, catchError, tap} from 'rxjs/operators';
+import {noop, of} from 'rxjs';
+import {AssessmentService} from '../../services/assessments/assessment.service';
 import * as AssessmentActions from './assessment.actions';
-import { Store } from '@ngrx/store';
-import { AppState } from '../app.state';
+import {Store} from '@ngrx/store';
+import {AppState} from '../app.state';
 
 @Injectable()
 export class AssessmentEffects {
@@ -29,7 +29,7 @@ export class AssessmentEffects {
           ),
           // tap(console.log),
           catchError((error) =>
-            of(AssessmentActions.loadAssessmentsFailure({ error }))
+            of(AssessmentActions.loadAssessmentsFailure({error}))
           )
         )
       )
