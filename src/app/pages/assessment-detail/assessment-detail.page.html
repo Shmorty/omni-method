@@ -29,37 +29,18 @@
         <ion-card-title><h1>{{ curScore?.rawScore }}</h1></ion-card-title>
         <ion-card-subtitle><h5>{{ curScore?.scoreDate }}</h5></ion-card-subtitle>
       </ion-label>
+      <ion-label *ngIf="!assessment.checklist" slot="end">
+        <div>
+          <ion-badge class="score" ngClass="{{scoreClass(curScore?.scoreDate)}}">
+            {{curScore?.rawScore}}
+          </ion-badge>
+        </div>
+        <br/>
+        <ion-card-subtitle (click)="showScores(assessment)" color="primary"><h5>See more ></h5></ion-card-subtitle>
+      </ion-label>
     </ion-item>
 
     <div *ngIf="!assessment.checklist">
-      <ng-container *ngIf="score$ | async as score;">
-        <ion-item class="header" slot="header" lines="none">
-          <ion-label position="fixed" class="fixed-width" slot="start">Date</ion-label>
-          <ion-label position="fixed" style="margin: auto;" style="text-align: center;">{{assessment.units}}</ion-label>
-          <ion-label position="fixed" slot="end" style="text-align: right;">Score/1000</ion-label>
-        </ion-item>
-        <ion-item-sliding>
-          <ion-item lines="full">
-            <ion-label position="fixed" class="fixed-width" slot="start">
-              <div>{{score.scoreDate | date:'mediumDate' }}</div>
-            </ion-label>
-            <ion-label position="fixed" style="text-align: center;">
-              <div style="font-weight: bold">{{ score.rawScore }}</div>
-            </ion-label>
-            <ion-label color="primary" position="fixed" slot="end">
-              <div class="score" style="text-align: right;">{{ score.calculatedScore }}</div>
-            </ion-label>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option color="danger" (click)="deleteScore(score)">
-              <ion-icon slot="icon-only" name="trash"></ion-icon
-            ></ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <div *ngIf="(scores$ | async).length > 1;">
-          <ion-button class="ion-float-right" slot="end" fill="clear" (click)="showScores(assessment)">more...</ion-button>
-        </div>
-  </ng-container>
 
       <ng-container *ngIf="assessment.warning">
         <ion-item lines="full">

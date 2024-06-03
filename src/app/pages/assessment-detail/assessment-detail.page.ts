@@ -12,6 +12,7 @@ import {StatusBar, Style} from '@capacitor/status-bar';
 import {Capacitor} from '@capacitor/core';
 import {getStorage, getDownloadURL, ref} from '@angular/fire/storage';
 import {Analytics, logEvent} from '@angular/fire/analytics';
+import {OmniScoreService} from 'src/app/services/omni-score.service';
 
 @Component({
   selector: 'app-assessment-detail',
@@ -88,6 +89,10 @@ export class AssessmentDetailPage implements OnInit {
         StatusBar.setStyle({style: Style.Light});
       }
     }
+  }
+
+  scoreClass(scoreDate: string): string {
+    return OmniScoreService.scoreClass(scoreDate);
   }
 
   updateChecked(checked) {
