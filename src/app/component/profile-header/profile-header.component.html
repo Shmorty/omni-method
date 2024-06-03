@@ -1,11 +1,5 @@
 <ion-card class="card cardStyle topCard">
   <ng-container *ngIf="user$ | async as user; else loading ">
-    <ion-item id="omniScore" lines="none" color="none">
-      <span>
-        <ion-label class="omni-label">Omni Score</ion-label>
-        <ion-label class="omni-score">&nbsp;{{user.omniScore | number}}&nbsp;</ion-label>
-      </span>
-    </ion-item>
     <ion-item lines="none" color="none">
       <user-avatar [user]="user" [ngStyle]="{'color': 'white'}"
       ></user-avatar>
@@ -17,6 +11,14 @@
     class="{{showPersonalData ? 'username' : 'name'}}">
       <ion-label>&#64;{{user.username}}</ion-label>
     </ion-item>
+
+    <ion-item id="omniScore" lines="none" color="none">
+      <span>
+        <ion-label class="omni-label">Omni Score</ion-label>
+        <ion-label class="omni-score">&nbsp;{{user.omniScore | number}}&nbsp;</ion-label>
+      </span>
+    </ion-item>
+
     <ion-item [hidden]="!showPersonalData" lines="none" color="none">
       <ion-grid class="ion-text-center">
         <ion-row>
