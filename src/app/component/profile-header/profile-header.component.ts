@@ -80,4 +80,12 @@ export class ProfileHeaderComponent implements OnInit {
     this.showChart = !this.showChart;
   }
 
+  userLevel(user: User): number {
+    return Math.trunc(user.omniScore / 100);
+  }
+
+  userExp(user: User): number {
+    return Math.trunc(user.omniScore % 100);
+  }
+
 }

@@ -97,19 +97,6 @@ ion-button[shape="circle"] {
   --height: 512px;
   --width:90%;
   backdrop-filter: blur(10px);
-  // &::part(backdrop) {
-  //   background-color: teal;
-  // }
-  // &::part(content) {
-  //   border-radius: 10px;
-  //   height: 50%;
-  //   margin: auto;
-  //   width: 80%;
-  //   width: 350px;
-  //   position: relative;
-  //   display: block;
-  //   contain: content;
-  // }
 }
 
 ion-datetime {
