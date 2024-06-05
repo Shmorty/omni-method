@@ -19,12 +19,13 @@
   </ion-grid> -->
   <ion-grid style="padding-top: 0; position: relative; top: -10px">
     <ion-row>
-      <ion-col size="8" offset="1" no-padding>
+      <ion-col size="10" offset="1">
         <ion-progress-bar class="exp-progress" value="{{((user.omniScore % 100) / 100)}}" buffer="0"></ion-progress-bar>
       </ion-col>
-      <ion-col size="2" no-padding>
-        <div class="exp-score">Exp.</div>
-        <div class="exp-score">{{userExp(user) | number}}%</div>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="exp-score">Exp&nbsp;{{userExp(user) | number}}/100</div>
       </ion-col>
     </ion-row>
   </ion-grid>

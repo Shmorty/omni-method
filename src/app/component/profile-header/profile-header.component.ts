@@ -33,7 +33,7 @@ export class ProfileHeaderComponent implements OnInit {
   @Input() athlete$: Observable<User>;
   @Input() scores$: Observable<Score[]>;
   public user$: Observable<User>;
-  showChart = false;
+  showChart = true;
   showPersonalData = false;
   getAge = UserService.getAge;
 
