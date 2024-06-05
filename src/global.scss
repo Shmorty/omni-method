@@ -57,12 +57,18 @@
 //   src: url(assets/fonts/Apercu\ Font\ Family/);
 // }
 
-// * {
+// Averia_Serif_Libre
+@font-face {
+  font-family: AveriaSerifLibre;
+  src: url(assets/fonts/Averia_Serif_Libre/AveriaSerifLibre-Regular.ttf);
+}
+
+* {
   // font-family: Roboto, "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
   //   sans-serif;
   // font-family: "Roboto", "CascadiaCode", "Overpass", sans-serif;
-  // font-family: "Roboto", sans-serif;
-// }
+  font-family: "AveriaSerifLibre", sans-serif;
+}
 
 // .new-score-modal {
 //   --backdrop-opacity: 0.6;
