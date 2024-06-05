@@ -36,7 +36,8 @@
     </ion-item>
 
     <ion-item id="omniScore" lines="none" color="none">
-      <ion-grid>
+      <app-user-level class="user-score" [user$]="user$"></app-user-level>
+      <!-- <ion-grid>
         <ion-row>
           <ion-col>
             <ion-label class="omni-label">Level</ion-label>
@@ -56,11 +57,11 @@
             <ion-progress-bar class="exp-progress" value="{{((user.omniScore % 100) / 100)}}" buffer="0"></ion-progress-bar>
           </ion-col>
           <ion-col size="2">
-            <div class="exp-score">Exp</div>
-            <div class="exp-score">{{userExp(user) | number}}&nbsp;/&nbsp;100</div>
+            <div class="exp-score">Exp.</div>
+            <div class="exp-score">{{userExp(user) | number}}%</div>
           </ion-col>
         </ion-row>
-      </ion-grid>
+      </ion-grid> -->
   </ion-item>
 
     <ion-item [hidden]="!showChart" lines="none" color="none" style="padding-top: 30px;">

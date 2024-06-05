@@ -10,6 +10,7 @@ import {AssessmentChartComponent} from '../assessment-chart/assessment-chart.com
 import {SwiperOptions} from 'swiper/types';
 import {Pagination} from 'swiper/modules';
 import {Score} from 'src/app/store/models/score.model';
+import {UserLevelComponent} from '../user-level/user-level.component';
 
 @Component({
   selector: 'app-profile-header',
@@ -21,7 +22,8 @@ import {Score} from 'src/app/store/models/score.model';
     IonicModule,
     UserAvatarComponent,
     CategoryChartComponent,
-    AssessmentChartComponent
+    AssessmentChartComponent,
+    UserLevelComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -78,14 +80,6 @@ export class ProfileHeaderComponent implements OnInit {
 
   toggleAccordion(event) {
     this.showChart = !this.showChart;
-  }
-
-  userLevel(user: User): number {
-    return Math.trunc(user.omniScore / 100);
-  }
-
-  userExp(user: User): number {
-    return Math.trunc(user.omniScore % 100);
   }
 
 }
