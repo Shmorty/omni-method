@@ -24,50 +24,16 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+@import "./theme/fonts.scss";
 
 @import '@ionic/angular/css/palettes/dark.system.css';
 
 @import "swiper/css/bundle";
 @import "swiper/scss/pagination";
 
-/*
- * https://fonts.google.com/specimen/Roboto
-@font-face {
-  font-family: Roboto;
-  src: url(assets/fonts/Roboto/Roboto-Regular.ttf);
-}
- */
-
-/*
- * https://fonts.google.com/specimen/Overpass
- */
-@font-face {
-  font-family: Overpass;
-  src: url(assets/fonts/Overpass/Overpass-Regular.ttf);
-}
-
-// Cascadia Code
-@font-face {
-  font-family: CascadiaCode;
-  src: url(assets/fonts/CascadiaCode/ttf/CascadiaCode.ttf);
-}
-
-// @font-face {
-//   font-family: Apercu;
-//   src: url(assets/fonts/Apercu\ Font\ Family/);
-// }
-
-// Averia_Serif_Libre
-@font-face {
-  font-family: AveriaSerifLibre;
-  src: url(assets/fonts/Averia_Serif_Libre/AveriaSerifLibre-Regular.ttf);
-}
 
 * {
-  // font-family: Roboto, "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-  //   sans-serif;
-  // font-family: "Roboto", "CascadiaCode", "Overpass", sans-serif;
-  font-family: "AveriaSerifLibre", sans-serif;
+  font-family: 'AveriaSerifLibre', Times, serif !important;
 }
 
 // .new-score-modal {
