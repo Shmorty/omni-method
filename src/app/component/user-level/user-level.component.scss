@@ -26,6 +26,10 @@
     // padding: 1px;
     width: 100%;
 }
+.exp-progress::part(stream) {
+    animation: none;
+    background-image: none;
+}
 .exp-score {
     font-size: small;
     text-align: center;
