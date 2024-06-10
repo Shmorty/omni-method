@@ -33,10 +33,16 @@
 
       <ng-container *ngFor="let category of data.categories">
         <ion-item class="cat-header" lines="none">
-          <ion-text>
+          <!-- <ion-text>
             {{category.label}}: {{data.athlete?.categoryScore[category.cid]}}
+          </ion-text> -->
+          <ion-text>
+            {{category.label}}
           </ion-text>
-        </ion-item>
+          <ion-text slot="end">
+            Level: {{data.athlete?.categoryScore[category.cid] / 10 | number:'1.0-0'}}
+          </ion-text>
+          </ion-item>
         <ng-container *ngFor="let assessment of getCategoryAssessments(data.assessments, category.cid)">
           <ion-item lines="none" style="--inner-border-width: 0">
             <ion-thumbnail slot="start">

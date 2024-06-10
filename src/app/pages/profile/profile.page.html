@@ -29,13 +29,17 @@
     >
       <ion-item class="cat-header" lines="none">
         <ion-text>
-          {{category.label}}: {{(user$ | async)?.categoryScore[category.cid]}}
+          {{category.label}}
+        </ion-text>
+        <ion-text slot="end">
+          Level: {{(user$ | async)?.categoryScore[category.cid] / 10 | number:'1.0-0'}}
         </ion-text>
       </ion-item>
       <ng-container *ngFor="let assessment of assessments$ | async">
         <ng-container *ngIf="assessment.cid == category.cid">
           <ion-item
             (click)="openDetails(assessment)"
+            button
             style="--inner-border-width: 0"
           >
             <ion-thumbnail slot="start">
