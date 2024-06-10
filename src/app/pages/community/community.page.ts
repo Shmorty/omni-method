@@ -58,4 +58,8 @@ export class CommunityPage implements OnInit {
     this.router.navigate(['/home/community/athlete']);
   }
 
+  userLevel(athlete: User): number {
+    return Math.trunc(athlete.omniScore / 100);
+  }
+
 }

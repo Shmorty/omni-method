@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild, inject} from '@angular/core';
-import {IonAccordionGroup, ModalController, isPlatform} from '@ionic/angular';
+import {IonAccordionGroup, IonRouterOutlet, ModalController, isPlatform} from '@ionic/angular';
 import {Assessment} from '../../store/assessments/assessment.model';
 import {Router} from '@angular/router';
 import {StatusBar, Style} from '@capacitor/status-bar';
@@ -48,7 +48,8 @@ export class ProfilePage implements OnInit, OnDestroy {
     private store: Store,
     private router: Router,
     private modalCtrl: ModalController,
-    public userService: UserService
+    public userService: UserService,
+    private routerOutlet: IonRouterOutlet
   ) {}
 
   ngOnInit(): void {
@@ -88,6 +89,16 @@ export class ProfilePage implements OnInit, OnDestroy {
       }
     }
   }
+
+  // ionViewDidEnter() {
+  //   console.log("ionViewDidEnter, disable swipe gesture");
+  //   this.routerOutlet.swipeGesture = false;
+  // }
+
+  // ionViewWillLeave() {
+  //   console.log("ionViewWillLeave, enable swipe gesture");
+  //   this.routerOutlet.swipeGesture = true;
+  // }
 
   getScores$(assessment: Assessment) {
     return this.store.select(UserSelectors.assessmentScores(assessment.aid)).pipe(

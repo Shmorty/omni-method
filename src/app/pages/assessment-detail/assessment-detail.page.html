@@ -29,9 +29,9 @@
         <ion-card-title><h1>{{ curScore?.rawScore }}</h1></ion-card-title>
         <ion-card-subtitle><h5>{{ curScore?.scoreDate }}</h5></ion-card-subtitle>
       </ion-label>
-      <ion-label *ngIf="!assessment.checklist" slot="end">
+      <ion-label class="score" *ngIf="!assessment.checklist && curScore" slot="end">
         <div>
-          <ion-badge class="score" ngClass="{{scoreClass(curScore?.scoreDate)}}">
+          <ion-badge ngClass="{{scoreClass(curScore?.scoreDate)}}">
             {{curScore?.rawScore}}
           </ion-badge>
         </div>

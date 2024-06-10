@@ -42,8 +42,8 @@ export class AssessmentScoresPage implements OnInit {
       this.cid = params.cid;
       this.category$ = this.assessmentService.getCategoryById(params.cid);
       this.assessment$ = this.assessmentService.getAssessmentById(params.aid);
-      // this.checklist$ = this.assessmentService.getChecklist(params.aid);
-      this.routerOutlet.swipeGesture = true;
+
+      // this.routerOutlet.swipeGesture = true;
     });
     this.scores$ = this.userService.getScoresForAssessment(this.aid);
   }

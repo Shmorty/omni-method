@@ -1,0 +1,36 @@
+
+#omniScore {
+    color: #fff;
+    text-align: center;
+    margin: auto;
+    .omni-label {
+        font-weight: 700;
+        padding-top: 10px;
+    }
+    .omni-score {
+        font-size: 2.25em;
+        font-weight: 700;
+          margin-bottom: 10px;
+        // glow effect
+        text-shadow: 0 0 32px rgba(255, 255, 255, 0.7);
+    }
+}
+
+.exp-progress {
+    // position: absolute;
+    // top: 50%;
+    --background: var(--ion-background-color);
+    --progress-background: var(--ion-color-light);
+    border: 2px solid var(--ion-color-light);
+    height: 12px;
+    // padding: 1px;
+    width: 100%;
+}
+.exp-progress::part(stream) {
+    animation: none;
+    background-image: none;
+}
+.exp-score {
+    font-size: small;
+    text-align: center;
+}

@@ -93,18 +93,24 @@ ion-button {
   max-width: 180px;
 }
 .score {
-  color: white;
-  background-color: "primary";
-  border-radius: 12px;
-  float: right;
-  font-size: larger;
-  font-weight: bold;
-  // padding: 0.25em 0.8em 0.1em 0.8em;
-  padding: 0.1em 1em;
+  margin-bottom: 0;
+  ion-badge {
+    color: white;
+    background-color: "primary";
+    border-radius: 12px;
+    float: right;
+    font-size: larger;
+    font-weight: bold;
+    // padding: 0.25em 0.8em 0.1em 0.8em;
+    padding: 0.1em 1em;
+  }
+  ion-card-subtitle {
+    margin: 5px 0 0 0;
+  }
 }
-ion-badge {
-  float: right;
-}
+// ion-badge {
+//   float: right;
+// }
 .caution {
   background-color: #4d91ca;
 }

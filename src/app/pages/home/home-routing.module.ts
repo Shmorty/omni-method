@@ -25,20 +25,16 @@ const routes: Routes = [
                 (m) => m.AssessmentDetailPageModule
               ),
           },
+          {
+            path: 'scores',
+            title: 'Scores',
+            loadChildren: () =>
+              import('../assessment-scores/assessment-scores.module').then(
+                (m) => m.AssessmentScoresPageModule
+              )
+          }
         ],
       },
-      // path: '',
-      // component: HomePage,
-      // children: [
-      //   {
-      //     path: 'assessments',
-      //     loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
-      //   },
-      //   {
-      //     path: 'assessments/:id',
-      //     loadChildren: () => import('../assessment-detail/assessment-detail.module')
-      //       .then( m => m.AssessmentDetailPageModule)
-      //   },
       {
         path: 'training',
         title: 'Training',
