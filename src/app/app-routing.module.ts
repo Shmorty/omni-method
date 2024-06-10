@@ -66,31 +66,11 @@ const routes: Routes = [
         (m) => m.ForgotPasswordPageModule
       ),
   },
-  // {
-  //   path: 'community',
-  //   loadChildren: () => import('./pages/community/community.module').then(m => m.CommunityPageModule)
-  // },
-  // {
-  //   path: 'ranking-detail',
-  //   loadChildren: () => import('./pages/ranking-detail/ranking-detail.module').then(m => m.RankingDetailPageModule)
-  // },
   {
     path: 'onboarding',
     title: 'Onboarding',
     loadChildren: () => import('./pages/onboarding/onboarding.module').then(m => m.OnboardingPageModule)
   },
-  {
-    path: 'assessment-scores',
-    title: 'Assessment Scores',
-    // data: {assessment: Assessment},
-    // loadChildren: () => import('./pages/assessment-scores/assessment-scores.module').then( m => m.AssessmentScoresPageModule),
-    component: AssessmentScoresPage,
-    data: {assessment: null}
-  },
-  // {
-  //   path: 'skill-detail',
-  //   loadChildren: () => import('./pages/skill-detail/skill-detail.module').then( m => m.SkillDetailPageModule)
-  // },
 ];
 @NgModule({
   imports: [

@@ -112,8 +112,7 @@ export class AssessmentDetailPage implements OnInit {
 
   showScores(assessment: Assessment) {
     console.log("showScores", assessment);
-    this.router.navigate(['assessment-scores'], {queryParams: {aid: assessment.aid, cid: assessment.cid}});
-    // this.router.navigateByUrl('/assessment-scores', assessment);
+    this.router.navigate(['/home/profile/scores'], {queryParams: {aid: assessment.aid, cid: assessment.cid}});
   }
 
   async openNewScore(assessment: Assessment) {
