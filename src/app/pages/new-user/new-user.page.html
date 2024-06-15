@@ -52,7 +52,8 @@
               formControlName="username"
               placeholder="Username"
               (keydown.space)="$event.preventDefault()"
-              [maxlength]="30"
+              [minlength]="usernameMinLength"
+              [maxlength]="usernameMaxLength"
               aria-label="Username"
             ></ion-input>
           </ion-item>

@@ -24,8 +24,8 @@ export class NewUserPage implements OnInit, OnDestroy {
   scoreDate = new Date().toISOString().split('T')[0];
   step = 1;
   // isApp = false;
-  // usernameMinLength = 5;
-  // usernameMaxLength = 20;
+  usernameMinLength = usernameMinLength;
+  usernameMaxLength = usernameMaxLength;
 
   constructor(
     private userService: UserService,
