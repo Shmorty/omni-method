@@ -37,12 +37,15 @@ export class DistanceSpeedPickerComponent implements OnInit {
     const mphMin = this.min * 30;
     const mphMax = this.max * 30;
     const mphIncrement = 0.3;
-    this.mphPickerValue = Math.round(this.pickerValue * 30 * 10) / 10;
+    const inv = 1 / mphIncrement;
+    this.mphPickerValue = Math.round(this.pickerValue * 30 * inv) / inv;
+    // this.mphPickerValue = Math.round(this.pickerValue * 30 * 10) / 10;
     this.mph_range = this.createRange(mphMin, mphMax, mphIncrement);
   }
 
   onPickerValueChange(event) {
-    this.mphPickerValue = Math.round(event.detail.value * 30 * 10) / 10;
+    const inv = 1 / 0.3;
+    this.mphPickerValue = Math.round(event.detail.value * 30 * inv) / inv;
     this.pickerValueChange.emit(event.detail.value);
   }
 
