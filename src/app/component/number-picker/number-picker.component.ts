@@ -1,5 +1,5 @@
 import {AfterViewInit, CUSTOM_ELEMENTS_SCHEMA, ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {CdkVirtualScrollViewport, ScrollDispatcher, ScrollingModule} from '@angular/cdk/scrolling';
+// import {CdkVirtualScrollViewport, ScrollDispatcher, ScrollingModule} from '@angular/cdk/scrolling';
 import {CommonModule} from '@angular/common';
 import {IonicModule} from '@ionic/angular';
 // import {Haptics} from '@capacitor/haptics';
@@ -11,7 +11,10 @@ import {Subject, Subscription} from 'rxjs';
   templateUrl: './number-picker.component.html',
   styleUrls: ['./number-picker.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ScrollingModule, CommonModule, IonicModule],
+  imports: [
+    // ScrollingModule,
+    CommonModule,
+    IonicModule],
   // schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class NumberPickerComponent implements OnInit, AfterViewInit { // }, OnChanges {
@@ -23,16 +26,18 @@ export class NumberPickerComponent implements OnInit, AfterViewInit { // }, OnCh
   @Input() rowHeight = 34;
   @Input() pickerValue: number;
   @Output() pickerValueChange = new EventEmitter<number>();
-  @ViewChild(CdkVirtualScrollViewport) viewPort: CdkVirtualScrollViewport;
+  // @ViewChild(CdkVirtualScrollViewport) viewPort: CdkVirtualScrollViewport;
   range: number[];
   public curIndex;
   private startIndex = 0;
-  private timeoutId = undefined;
+  // private timeoutId = undefined;
   private sub: Subscription = null;
 
-  onChanges = new Subject<SimpleChanges>();
+  // onChanges = new Subject<SimpleChanges>();
 
-  constructor(private scrollDispatcher: ScrollDispatcher) {}
+  constructor(
+    // private scrollDispatcher: ScrollDispatcher
+  ) {}
 
   ngOnInit() {
     this.range = this.createRange();
@@ -41,14 +46,14 @@ export class NumberPickerComponent implements OnInit, AfterViewInit { // }, OnCh
       console.log("reverse");
       this.range = this.range.reverse();
     }
-    this.onChanges.subscribe((data: SimpleChanges) => {
-      console.log("changes", data);
-      if (data.pickerValue) {
-        // respond to external change to value
-        const newIndex = this.range.indexOf(this.pickerValue);
-        this.viewPort.scrollToIndex(newIndex);
-      }
-    });
+    // this.sub = this.onChanges.subscribe((data: SimpleChanges) => {
+    //   console.log("changes", data);
+    //   if (data.pickerValue) {
+    //     // respond to external change to value
+    //     const newIndex = this.range.indexOf(this.pickerValue);
+    //     this.viewPort.scrollToIndex(newIndex);
+    //   }
+    // });
   }
 
   ngAfterViewInit(): void {
@@ -96,18 +101,4 @@ export class NumberPickerComponent implements OnInit, AfterViewInit { // }, OnCh
     }
   }
 
-  // hapticsSelectionChanged = async () => {
-  //   await Haptics.selectionChanged();
-  // };
-
-  // curClass(index) {
-  //   if (index === this.curIndex) {
-  //     return "current"
-  //   }
-  // }
-
-  // click(item) {
-  //   // console.log("click", item);
-  //   this.viewPort.scrollToIndex(item, 'smooth');
-  // }
 }

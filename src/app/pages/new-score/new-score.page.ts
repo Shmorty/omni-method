@@ -130,6 +130,14 @@ export class NewScorePage implements OnInit, OnDestroy {
     return 1;
   }
 
+  useDistancePicker(assessment: Assessment): boolean {
+    const distancePicker = ["TWOMDST"]; //, "ONEHRDST"];
+    if (distancePicker.includes(assessment.aid)) {
+      return true;
+    }
+    return false;
+  }
+
   // ionViewDidEnter() {
   //   console.log("newScore ionViewDidEnter scoreInput", this.scoreInput);
   //   setTimeout(() => {
