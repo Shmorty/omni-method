@@ -6,7 +6,7 @@
       </ion-picker-column-option>
     </ng-container>
   </ion-picker-column>
-  <ion-picker-column [hidden]="input_units != 'MPH'" [value]="mphPickerValue" (ionChange)="onPickerMPHChange($event)">
+  <ion-picker-column [hidden]="input_units != 'mph'" [value]="mphPickerValue" (ionChange)="onPickerMPHChange($event)">
     <ng-container *ngFor="let value of mph_range; index as i">
       <ion-picker-column-option [value]="value">
         {{value | number: '1.0-3'}}

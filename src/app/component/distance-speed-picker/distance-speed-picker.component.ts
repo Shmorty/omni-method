@@ -24,27 +24,27 @@ export class DistanceSpeedPickerComponent implements OnInit {
   public mph_range: number[];
   public unit_choices: string[];
   public input_units: string;
-  private minutes: 2;
+  private mphIncrement = 0.1; // = 0.3;
+  // private minutes: 2;
 
   constructor() {}
 
   ngOnInit() {
     this.range = this.createRange(this.min, this.max, this.increment);
-    this.unit_choices = ["Miles", "MPH"];
+    this.unit_choices = ["Miles", "mph"];
     this.input_units = this.unit_choices[0];
     // "min": 0, "max": 0.5, "increment": 0.001,
 
     const mphMin = this.min * 30;
     const mphMax = this.max * 30;
-    const mphIncrement = 0.3;
-    const inv = 1 / mphIncrement;
+    const inv = 1 / this.mphIncrement;
     this.mphPickerValue = Math.round(this.pickerValue * 30 * inv) / inv;
     // this.mphPickerValue = Math.round(this.pickerValue * 30 * 10) / 10;
-    this.mph_range = this.createRange(mphMin, mphMax, mphIncrement);
+    this.mph_range = this.createRange(mphMin, mphMax, this.mphIncrement);
   }
 
   onPickerValueChange(event) {
-    const inv = 1 / 0.3;
+    const inv = 1 / this.mphIncrement;
     this.mphPickerValue = Math.round(event.detail.value * 30 * inv) / inv;
     this.pickerValueChange.emit(event.detail.value);
   }
