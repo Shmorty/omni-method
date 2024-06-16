@@ -50,7 +50,8 @@ export class DistanceSpeedPickerComponent implements OnInit {
   }
 
   onPickerMPHChange(event) {
-    this.pickerValue = Math.round(event.detail.value / 30 * 100) / 100;
+    const inv = 1 / this.increment;
+    this.pickerValue = Math.round(event.detail.value / 30 * inv) / inv;
     this.pickerValueChange.emit(this.pickerValue);
   }
 

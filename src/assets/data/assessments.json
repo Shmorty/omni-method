@@ -473,7 +473,7 @@
       ],
       "min": 0,
       "max": 0.5,
-      "increment": 0.01,
+      "increment": 0.005,
       "onboarding": {
         "prompt": "How far can you run in 2 minutes?"
       },
