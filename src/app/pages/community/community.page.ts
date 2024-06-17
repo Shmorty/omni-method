@@ -6,6 +6,7 @@ import {StatusBar, Style} from '@capacitor/status-bar';
 import {Capacitor} from '@capacitor/core';
 import {CommunityService} from '../../services/community/community.service';
 import {Router} from '@angular/router';
+import {getBytes, getDownloadURL, getStorage, ref} from '@angular/fire/storage';
 
 export enum View {
   Rankings = 'Rankings',
@@ -25,19 +26,28 @@ export class CommunityPage implements OnInit {
   public ranking$: Observable<User[]>;
   // @ViewChild(IonModal) modal: IonModal;
   private curUserId: string;
+  public announcements = {
+    "videos": [
+      {
+        "title": "Error loading content",
+        "filename": undefined
+      }
+    ]
+  };
 
   constructor(
     private communityService: CommunityService,
     private router: Router,
   ) {
-
     // loadAllUsers
     communityService.loadAllUsers();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     // getAllUsersByScore
     this.ranking$ = this.communityService.getAllUsersByScore();
+    await this.readAnnouncementsFile();
+    console.log("ngOnInit", JSON.stringify(this.announcements));
   }
 
   ionViewWillEnter() {
@@ -60,6 +70,33 @@ export class CommunityPage implements OnInit {
 
   userLevel(athlete: User): number {
     return Math.trunc(athlete.omniScore / 100);
+  }
+
+  async readAnnouncementsFile() {
+    const filePath = "content/videos/announcements/announcements.json";
+    const storage = getStorage();
+
+    const fileRef = ref(storage, filePath);
+    console.log("fileRef fullPath", fileRef.fullPath);
+    console.log("fileRef name", fileRef.name);
+    getBytes(fileRef).then((arrBuf) => {
+      console.log("arrBuf", arrBuf);
+    }).catch((err) => {
+      console.log("getBytes err", err);
+      return undefined;
+    });
+    // getDownloadURL(fileRef).then((url) => {
+    //   console.log("announcements file URL", url);
+    //   fetch(url).then((response) => {
+    //     response.json().then((json) => {
+    //       console.log("file json", json);
+    //       this.announcements = json;
+    //     });
+    //   });
+    // }).catch((err) => {
+    //   console.log("readAnnouncements err", err);
+    //   return undefined;
+    // });
   }
 
 }
