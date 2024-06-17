@@ -67,7 +67,7 @@ export class AssessmentDetailPage implements OnInit {
       this.score$ = this.userService.getCurrentScoreForAssessment(assessment.aid);
       this.score$.subscribe((score) => {
         this.curScore = score;
-      })
+      });
       this.scores$ = this.userService.getScoresForAssessment(assessment.aid);
     });
     this.user$

@@ -1,6 +1,8 @@
 <ng-container *ngIf="(assessment$ | async) as assessment">
   <ion-content [fullscreen]="true">
+
     <ion-header class="ion-no-border safe-area"></ion-header>
+
     <ion-fab vertical="top" horizontal="start" slot="fixed">
       <ion-button
         (click)="goBack()"
@@ -10,6 +12,18 @@
         color="primary"
       >
         <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-fab>
+
+    <ion-fab *ngIf="!assessment.checklist" vertical="top" horizontal="end" slot="fixed">
+      <ion-button
+        (click)="openNewScore(assessment)"
+        type="button"
+        size="default"
+        shape="circle"
+        color="primary"
+      >
+        <ion-icon name="add-outline"></ion-icon>
       </ion-button>
     </ion-fab>
 
