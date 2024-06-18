@@ -54,7 +54,8 @@
         <div class="ion-padding input-div" slot="content">
           <ion-input class="input-field username-input"
             #usernameInput
-            maxlength={{usernameMaxLength}}
+            [minlength]="usernameMinLength"
+            [maxlength]="usernameMaxLength"
             [value]="'&#64;'+user.username"
             (ionChange)="updateUsername($event)"
             (ionInput)="onUsernameInput($event)"

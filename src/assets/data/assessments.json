@@ -272,6 +272,7 @@
         "Feet must move in tandem",
         "Heel that is furthest back is measured"
       ],
+      "vimeo-video": "https://player.vimeo.com/video/956834957?h=a0ca008545",
       "video": "content/videos/assessment_demo/LongJump.mp4"
     },
     {
@@ -472,7 +473,7 @@
       ],
       "min": 0,
       "max": 0.5,
-      "increment": 0.001,
+      "increment": 0.005,
       "onboarding": {
         "prompt": "How far can you run in 2 minutes?"
       },

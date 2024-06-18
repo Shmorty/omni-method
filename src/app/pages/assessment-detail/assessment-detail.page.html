@@ -14,6 +14,18 @@
       </ion-button>
     </ion-fab>
 
+    <ion-fab *ngIf="!assessment.checklist" vertical="top" horizontal="end" slot="fixed">
+      <ion-button
+        (click)="openNewScore(assessment)"
+        type="button"
+        size="default"
+        shape="circle"
+        color="primary"
+      >
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-fab>
+
     <ion-img class="header-img" src="{{assessment.icon}}"></ion-img>
 
     <ion-item lines="full">
@@ -121,12 +133,12 @@
       (checked)="updateChecked($event)"
       ></app-edit-checklist>
   </ion-content>
-  <ion-footer *ngIf="!assessment.checklist" class="ion-no-border text-center transparent">
+  <!-- <ion-footer *ngIf="!assessment.checklist" class="ion-no-border text-center transparent">
     <ion-toolbar>
       <ion-button class="footer-button" shape="round" color="primary" (click)="openNewScore(assessment)">
         <ion-icon name="pencil-outline"></ion-icon>
       </ion-button>
     </ion-toolbar>
-  </ion-footer>
+  </ion-footer> -->
 </ng-container>
 

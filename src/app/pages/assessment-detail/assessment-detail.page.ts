@@ -67,7 +67,7 @@ export class AssessmentDetailPage implements OnInit {
       this.score$ = this.userService.getCurrentScoreForAssessment(assessment.aid);
       this.score$.subscribe((score) => {
         this.curScore = score;
-      })
+      });
       this.scores$ = this.userService.getScoresForAssessment(assessment.aid);
     });
     this.user$
@@ -137,8 +137,14 @@ export class AssessmentDetailPage implements OnInit {
   }
 
 
-  getVideoUrl(assessment: Assessment) {
+  getVideoUrl(assessment: Assessment): Promise<string> {
     console.log("getVideoUrl", assessment.video);
+    if (assessment.video.startsWith("http")) {
+      // return assessment.video;
+      return new Promise<string>((resolve) => {
+        resolve(assessment.video);
+      });
+    }
     const storage = getStorage();
 
     return getDownloadURL(ref(storage, assessment.video)).then((url) => {

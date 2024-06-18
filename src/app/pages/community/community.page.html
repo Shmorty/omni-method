@@ -13,9 +13,9 @@
     <ion-segment-button value="rankings">
       <ion-label>Rankings</ion-label>
     </ion-segment-button>
-    <!-- <ion-segment-button value="updates">
-      <ion-label>Updates</ion-label>
-    </ion-segment-button> -->
+    <ion-segment-button value="announcements">
+      <ion-label>Announcements</ion-label>
+    </ion-segment-button>
     <!-- <ion-segment-button value="people">
       <ion-label>People</ion-label>
     </ion-segment-button> -->
@@ -48,16 +48,16 @@
         <ion-text class="score" slot="end">{{userLevel(athlete) | number}}</ion-text>
       </ion-item>
     </ion-list>
-    <ion-list *ngSwitchCase="'updates'">
-      <ion-card>
+    <ion-list *ngSwitchCase="'announcements'">
+      <ion-card *ngFor="let video of announcements.videos">
         <ion-card-header>
-          <ion-card-title></ion-card-title>
-          <ion-card-subtitle>Community Updates</ion-card-subtitle>
+          <ion-card-title>{{video.title}}</ion-card-title>
+          <!-- <ion-card-subtitle>Community Updates</ion-card-subtitle> -->
         </ion-card-header>
         <ion-card-content>
-          coming soon
-          <!-- handstand video -->
-          <!-- <iframe width="100%" src="https://www.youtube.com/embed/DQ2yGcC86sE?si=3ySEF_jyZZv2ivmT&rel=0" frameborder="0" allow="'none'" allowfullscreen></iframe> -->
+          <!-- welcome video -->
+          {{video.filename}}
+          <iframe width="100%" src="{{video.filename}}" frameborder="0" allow="'none'" allowfullscreen></iframe>
         </ion-card-content>
       </ion-card>
     </ion-list>

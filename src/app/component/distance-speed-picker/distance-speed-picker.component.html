@@ -1,0 +1,23 @@
+<ion-picker>
+  <ion-picker-column [hidden]="input_units != 'Miles'" [value]="pickerValue" (ionChange)="onPickerValueChange($event)">
+    <ng-container *ngFor="let value of range; index as i">
+      <ion-picker-column-option [value]="value">
+        {{value | number: '1.0-3'}}
+      </ion-picker-column-option>
+    </ng-container>
+  </ion-picker-column>
+  <ion-picker-column [hidden]="input_units != 'mph'" [value]="mphPickerValue" (ionChange)="onPickerMPHChange($event)">
+    <ng-container *ngFor="let value of mph_range; index as i">
+      <ion-picker-column-option [value]="value">
+        {{value | number: '1.0-3'}}
+      </ion-picker-column-option>
+    </ng-container>
+  </ion-picker-column>
+  <ion-picker-column id="units" (ionChange)="onPickerUnitsChange($event)">
+    <ng-container *ngFor="let value of unit_choices; index as i">
+      <ion-picker-column-option [value]="value">
+        {{value}}
+      </ion-picker-column-option>
+    </ng-container>
+  </ion-picker-column>
+</ion-picker>

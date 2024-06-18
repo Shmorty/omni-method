@@ -1,13 +1,14 @@
 import {CommonModule} from '@angular/common';
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {IonRouterOutlet, IonicModule, NavController} from '@ionic/angular';
+import {IonRouterOutlet, IonicModule, ModalController, NavController} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {AssessmentService} from '../../services/assessments/assessment.service';
 import {Assessment, Category} from '../../store/assessments/assessment.model';
 import {Score} from '../../store/models/score.model';
 import {UserService} from '../../services/user/user.service';
 import {OmniScoreService} from '../../services/omni-score.service';
+import {NewScorePage} from '../new-score/new-score.page';
 
 @Component({
   selector: 'app-assessment-scores',
@@ -26,13 +27,15 @@ export class AssessmentScoresPage implements OnInit {
   public category$: Observable<Category>;
   public assessment$: Observable<Assessment>;
   public scores$: Observable<Score[]>;
+  public curScore: Score;
 
   constructor(
     private route: ActivatedRoute,
     private navController: NavController,
     private assessmentService: AssessmentService,
     private userService: UserService,
-    private routerOutlet: IonRouterOutlet
+    private modalCtrl: ModalController,
+    // private routerOutlet: IonRouterOutlet
   ) {}
 
   ngOnInit() {
@@ -46,6 +49,9 @@ export class AssessmentScoresPage implements OnInit {
       // this.routerOutlet.swipeGesture = true;
     });
     this.scores$ = this.userService.getScoresForAssessment(this.aid);
+    this.userService.getCurrentScoreForAssessment(this.aid).subscribe((score) => {
+      this.curScore = score;
+    });
   }
 
   goBack() {
@@ -61,6 +67,23 @@ export class AssessmentScoresPage implements OnInit {
     console.log('dispatch deleteAssessmentScore ' + score.scoreDate);
     this.userService.deleteScore(score);
     // this.navController.back();
+  }
+
+  async openNewScore(assessment: Assessment) {
+    const modal = await this.modalCtrl.create({
+      component: NewScorePage,
+      componentProps: {
+        assessment: assessment,
+        curScore: this.curScore,
+      },
+      cssClass: 'new-score-modal',
+      // presentingElement: document.querySelector('ion-router-outlet'),
+      canDismiss: true,
+    });
+    modal.present();
+    modal.onDidDismiss().then((res) => {
+      this.navController.back();
+    });
   }
 
 }

@@ -13,7 +13,7 @@ import {OverlayEventDetail} from '@ionic/core/components';
 import {Subscription, delay} from 'rxjs';
 import {EditPropertyComponent} from '../../component/edit-property/edit-property.component';
 import {AuthService} from '../../services/auth.service';
-import {UserService, usernameMaxLength} from '../../services/user/user.service';
+import {UserService, usernameMinLength, usernameMaxLength} from '../../services/user/user.service';
 import {User} from '../../store/user/user.model';
 import {NumberPickerService} from 'src/app/services/number-picker.service';
 import {Camera, CameraDirection, CameraResultType, CameraSource} from '@capacitor/camera';
@@ -44,6 +44,7 @@ export class EditProfilePage implements OnInit, OnDestroy {
   userWeight: number;
   userHeightFeet: number;
   userHeightInches: number;
+  usernameMinLength = usernameMinLength;
   usernameMaxLength = usernameMaxLength;
   public user$ = this.userService.getUser(); //.pipe(delay(5000));
   @ViewChild('editAvatar') editAvatarModal: IonModal;
@@ -71,7 +72,11 @@ export class EditProfilePage implements OnInit, OnDestroy {
       this.profileForm = new FormGroup({
         firstName: new FormControl(this.user.firstName, Validators.required),
         lastName: new FormControl(this.user.lastName, Validators.required),
-        username: new FormControl(this.user.username),
+        username: new FormControl(this.user.username, [
+          Validators.required,
+          Validators.minLength(usernameMinLength),
+          Validators.maxLength(usernameMaxLength)
+        ]),
         gender: new FormControl(this.user.gender),
         dob: new FormControl(this.user.dob),
         height: new FormGroup({
@@ -300,8 +305,19 @@ export class EditProfilePage implements OnInit, OnDestroy {
 
   async updateUsername(e) {
     console.log("updateUsername", e);
-    const username = e.target.value.substring(1);
+    const username: string = e.target.value.substring(1);
     console.log('check username', username);
+    const length = username.length;
+    if (length < usernameMinLength) {
+      this.usernameInput.setFocus();
+      this.showToastService.showToast("Username must be at least " + usernameMinLength + " characters", "danger");
+      return;
+    }
+    if (length > usernameMaxLength) {
+      this.usernameInput.setFocus();
+      this.showToastService.showToast("Username must be less than " + usernameMaxLength + " characters", "danger");
+      return;
+    }
     const isAvailable = await this.userService.isUsernameAvailable(username);
     console.log("username is available", isAvailable);
     if (!isAvailable) {
