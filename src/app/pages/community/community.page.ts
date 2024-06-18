@@ -3,7 +3,7 @@ import {Component, OnInit, ViewChild, inject} from '@angular/core';
 import {User} from '../../store/user/user.model';
 import {Observable} from 'rxjs';
 import {StatusBar, Style} from '@capacitor/status-bar';
-import {Capacitor} from '@capacitor/core';
+import {Capacitor, CapacitorHttp, HttpOptions, HttpResponse} from '@capacitor/core';
 import {CommunityService} from '../../services/community/community.service';
 import {Router} from '@angular/router';
 import {getBytes, getDownloadURL, getStorage, ref} from '@angular/fire/storage';
@@ -79,24 +79,42 @@ export class CommunityPage implements OnInit {
     const fileRef = ref(storage, filePath);
     console.log("fileRef fullPath", fileRef.fullPath);
     console.log("fileRef name", fileRef.name);
-    getBytes(fileRef).then((arrBuf) => {
-      console.log("arrBuf", arrBuf);
-    }).catch((err) => {
-      console.log("getBytes err", err);
-      return undefined;
-    });
-    // getDownloadURL(fileRef).then((url) => {
-    //   console.log("announcements file URL", url);
-    //   fetch(url).then((response) => {
-    //     response.json().then((json) => {
-    //       console.log("file json", json);
-    //       this.announcements = json;
-    //     });
-    //   });
+
+    // getBytes(fileRef).then((arrBuf) => {
+    //   console.log("arrBuf", arrBuf);
     // }).catch((err) => {
-    //   console.log("readAnnouncements err", err);
+    //   console.log("getBytes err", err);
     //   return undefined;
     // });
+    getDownloadURL(fileRef).then(async (url) => {
+      console.log("announcements file URL", url);
+      const options: HttpOptions = {
+        url: url,
+        method: "GET",
+        responseType: "json",
+        readTimeout: 2000,
+        connectTimeout: 2000,
+        webFetchExtra: {
+          mode: "no-cors"
+        }
+      };
+      // const response: HttpResponse = await CapacitorHttp.get(options).then((resp) => {
+      await CapacitorHttp.get(options).then((resp) => {
+        console.log("response.status", resp.status);
+        console.log("response.data", resp.data);
+        console.log("response.url", resp.url);
+        console.log("response.headers", resp.headers);
+      });
+      // fetch(url).then((response) => {
+      //   response.json().then((json) => {
+      //     console.log("file json", json);
+      //     this.announcements = json;
+      //   });
+      // });
+    }).catch((err) => {
+      console.log("readAnnouncements err", err);
+      return undefined;
+    });
   }
 
 }

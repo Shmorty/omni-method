@@ -8,6 +8,9 @@ const config: CapacitorConfig = {
   appName: 'omni-method',
   webDir: 'www',
   plugins: {
+    CapacitorHttp: {
+      enabled: true
+    },
     GoogleAuth: {
       scopes: ['profile', 'email'],
       /* web client */
