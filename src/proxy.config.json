@@ -1,0 +1,10 @@
+{
+    "/v0/**": {
+        "target": "https://firebasestorage.googleapis.com",
+        "changeOrigin": true
+    },
+    "/content/**": {
+        "target": "https://firebasestorage.googleapis.com",
+        "changeOrigin": true
+    }
+}

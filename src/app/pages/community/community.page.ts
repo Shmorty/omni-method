@@ -7,12 +7,14 @@ import {Capacitor, CapacitorHttp, HttpOptions, HttpResponse} from '@capacitor/co
 import {CommunityService} from '../../services/community/community.service';
 import {Router} from '@angular/router';
 import {getBytes, getDownloadURL, getStorage, ref} from '@angular/fire/storage';
+import {HttpClient} from '@angular/common/http';
+import {StorageService} from '../../services/storage/storage.service';
 
-export enum View {
-  Rankings = 'Rankings',
-  Updates = 'Updates',
-  People = 'People',
-}
+// export enum View {
+//   Rankings = 'Rankings',
+//   Announcements = 'Announcements',
+//   People = 'People',
+// }
 
 @Component({
   selector: 'app-community',
@@ -21,10 +23,8 @@ export enum View {
 })
 export class CommunityPage implements OnInit {
   public type: string = 'rankings';
-  // View = View;
-  public view: View = View.Rankings;
+  // public view: View = View.Rankings;
   public ranking$: Observable<User[]>;
-  // @ViewChild(IonModal) modal: IonModal;
   private curUserId: string;
   public announcements = {
     "videos": [
@@ -38,6 +38,7 @@ export class CommunityPage implements OnInit {
   constructor(
     private communityService: CommunityService,
     private router: Router,
+    private storageService: StorageService,
   ) {
     // loadAllUsers
     communityService.loadAllUsers();
@@ -46,7 +47,10 @@ export class CommunityPage implements OnInit {
   async ngOnInit() {
     // getAllUsersByScore
     this.ranking$ = this.communityService.getAllUsersByScore();
-    await this.readAnnouncementsFile();
+
+    // await this.readAnnouncementsFile();
+    this.storageService.getAnnouncements();
+
     console.log("ngOnInit", JSON.stringify(this.announcements));
   }
 
@@ -73,7 +77,12 @@ export class CommunityPage implements OnInit {
   }
 
   async readAnnouncementsFile() {
-    const filePath = "content/videos/announcements/announcements.json";
+    const filePath = "/content/videos/announcements/announcements.json";
+
+    // this.http.get(filePath).subscribe((resp) => {
+    //   console.log("get file", resp);
+    // });
+
     const storage = getStorage();
 
     const fileRef = ref(storage, filePath);
@@ -88,6 +97,10 @@ export class CommunityPage implements OnInit {
     // });
     getDownloadURL(fileRef).then(async (url) => {
       console.log("announcements file URL", url);
+      // this.http.get(url).subscribe((resp) => {
+      //   console.log("get resp", resp);
+      // });
+      /*
       const options: HttpOptions = {
         url: url,
         method: "GET",
@@ -105,6 +118,7 @@ export class CommunityPage implements OnInit {
         console.log("response.url", resp.url);
         console.log("response.headers", resp.headers);
       });
+      */
       // fetch(url).then((response) => {
       //   response.json().then((json) => {
       //     console.log("file json", json);

@@ -1,4 +1,4 @@
-import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {provideHttpClient, withFetch, withInterceptorsFromDi} from '@angular/common/http';
 import {CUSTOM_ELEMENTS_SCHEMA, isDevMode, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {IonicModule} from '@ionic/angular';
@@ -81,6 +81,9 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
     }),
   ],
   providers: [
+    provideHttpClient(
+      withFetch(),
+    ),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => {
