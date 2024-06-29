@@ -49,7 +49,9 @@ export class CommunityPage implements OnInit {
     this.ranking$ = this.communityService.getAllUsersByScore();
 
     // await this.readAnnouncementsFile();
-    this.storageService.getAnnouncements();
+    const announcements = await this.storageService.getAnnouncements();
+    console.log("announcements", announcements);
+    this.announcements = announcements;
 
     console.log("ngOnInit", JSON.stringify(this.announcements));
   }
@@ -129,6 +131,11 @@ export class CommunityPage implements OnInit {
       console.log("readAnnouncements err", err);
       return undefined;
     });
+  }
+
+  getVideoLink(filename: string) {
+    const filePath = "/content/videos/announcements/" + filename;
+    return this.storageService.getVideoUrl(filePath);
   }
 
 }

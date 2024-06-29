@@ -19,7 +19,7 @@ export class CommunityEffects {
             switchMap(() => {
                 console.log("community.effect getAllUsers");
                 return this.firestoreService.getAllUsers().pipe(
-                    tap((res) => console.log('firestore getAllUsers response', res)),
+                    tap((res) => console.log('firestore getAllUsers response', res.length)),
                     map((res) => {
                         if (res) {
                             return CommunityActions.loadCommunityUsersSuccess({users: res});

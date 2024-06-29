@@ -452,3 +452,19 @@ gcloud services enable certificatemanager.googleapis.com
 ```
 
 I am currently unable to see the Media CDN setup page, it is blank and doesn't appear in the side menu, it seems to be disabled and have been looking for a way to enable it.
+
+## firebase storage
+
+commands to set CORS settings using google cloud shell
+
+$ cat cors_file.json
+[
+    {
+      "origin": ["http://localhost:8100"],
+      "method": ["GET"],
+      "responseHeader": ["Content-Type"],
+      "maxAgeSeconds": 3600
+    }
+]
+
+$ gcloud storage buckets update gs://<bucket-name>.appspot.com --cors-file cors_file.json

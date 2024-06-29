@@ -9,8 +9,9 @@ ion-content {
     border: 3px solid #8CA1B6;
     background-image: linear-gradient(to bottom, rgba(229, 243, 255, 0), rgba(207, 233, 255, 1));
     margin:auto;
-    width: 97%;
-  }
+    max-width: 97%;
+    max-height: 320px;
+    }
   .header {
     color: rgba(118, 118, 118, 1);
     font-size: 11px;

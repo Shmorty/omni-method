@@ -57,8 +57,12 @@
         <ion-card-content>
           <!-- welcome video -->
           {{video.filename}}
-          <iframe width="100%" src="{{video.filename}}" frameborder="0" allow="'none'" allowfullscreen></iframe>
-        </ion-card-content>
+          <video class="video-content" controlsList="nodownload"
+          controls disablepictureinpicture muted preload="metadata">
+            <!-- <source src="{{ video?.url }}" type="video/mp4"> -->
+            Your browser does not support the video tag.
+          </video>
+      </ion-card-content>
       </ion-card>
     </ion-list>
     <ion-list *ngSwitchCase="'people'">

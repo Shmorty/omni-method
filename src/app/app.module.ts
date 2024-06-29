@@ -1,4 +1,4 @@
-import {provideHttpClient, withFetch, withInterceptorsFromDi} from '@angular/common/http';
+import {provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi} from '@angular/common/http';
 import {CUSTOM_ELEMENTS_SCHEMA, isDevMode, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {IonicModule} from '@ionic/angular';
@@ -28,6 +28,7 @@ import {UserActionType} from './store/user/user.actions';
 import {NgApexchartsModule} from 'ng-apexcharts';
 import {CommunityEffects} from './store/community/community.effect';
 import {getAnalytics, provideAnalytics, ScreenTrackingService} from '@angular/fire/analytics';
+import {loggingInterceptor} from './services/storage/storage.service';
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -83,6 +84,7 @@ export const metaReducers: MetaReducer<any>[] = []; // [clearState, debug];
   providers: [
     provideHttpClient(
       withFetch(),
+      withInterceptors([loggingInterceptor])
     ),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),

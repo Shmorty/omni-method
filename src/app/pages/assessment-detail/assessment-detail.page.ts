@@ -136,7 +136,6 @@ export class AssessmentDetailPage implements OnInit {
     return this.displayChecked.filter(item => item).length;
   }
 
-
   getVideoUrl(assessment: Assessment): Promise<string> {
     console.log("getVideoUrl", assessment.video);
     if (assessment.video.startsWith("http")) {
