@@ -36,7 +36,7 @@ export class CommunityEffects {
     loadCommunityUsersSuccessEffect$ = createEffect(() =>
         this.actions$.pipe(
             ofType(CommunityActions.loadCommunityUsersSuccess),
-            tap((res) => console.log('loadCommunityUsersSuccessEffect', res)),
+            tap((res) => console.log('loadCommunityUsersSuccessEffect', res.users.length)),
         ),
         {dispatch: false}
     )

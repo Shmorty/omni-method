@@ -468,3 +468,19 @@ $ cat cors_file.json
 ]
 
 $ gcloud storage buckets update gs://<bucket-name>.appspot.com --cors-file cors_file.json
+
+## error reading files
+
+⚡️  [log] - getBytes error {"code":"storage/unknown","customData":{"serverResponse":""},"name":"FirebaseError","status_":400,"_baseMessage":"Firebase Storage: An unknown error occurred, please check the error payload for server response. (storage/unknown)"}
+
+```json
+{
+  "code":"storage/unknown",
+  "customData":{
+    "serverResponse":""
+    },
+  "name":"FirebaseError",
+  "status_":400,
+  "_baseMessage":"Firebase Storage: An unknown error occurred, please check the error payload for server response. (storage/unknown)"
+}
+```

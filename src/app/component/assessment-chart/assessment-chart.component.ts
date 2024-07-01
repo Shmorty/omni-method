@@ -143,7 +143,7 @@ export class AssessmentChartComponent implements OnInit, OnDestroy {
   async setAssessmentValues() {
     // let userScores: Score[] = [];
     await this.scores$.subscribe((scoreArr) => {
-      console.log("assessment-chart scoreArr", scoreArr);
+      console.log("assessment-chart scoreArr", scoreArr.length);
       if (scoreArr.length > 0) {
         this.assessmentScores = [];
         this.assessments.forEach((assessment) => {

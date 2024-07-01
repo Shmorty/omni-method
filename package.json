@@ -32,6 +32,7 @@
     "@angular/platform-browser-dynamic": "^18.0.1",
     "@angular/router": "^18.0.1",
     "@awesome-cordova-plugins/core": "^6.6.0",
+    "@capacitor-community/in-app-review": "^6.0.0",
     "@capacitor/android": "^6.0.0",
     "@capacitor/app": "^6.0.0",
     "@capacitor/camera": "^6.0.0",

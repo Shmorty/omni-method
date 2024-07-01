@@ -10,6 +10,8 @@ import {Observable, from} from 'rxjs';
 * BUCKET_NAME.storage.googleapis.com
 */
 
+const ANNOUNCEMENTS_DIR = "/content/videos/announcements/";
+
 export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   console.log("loggingInterceptor", req.url);
   console.log("loggingInterceptor Origin", req.headers.get('Origin'));
@@ -32,9 +34,10 @@ export class StorageService {
   public getAnnouncements(): any {
     console.log("getAnnouncements");
 
-    const filePath = "/content/videos/announcements/announcements.json";
-    const isNativePlatform = Capacitor.isNativePlatform();
-    console.log("isNativePlatform", isNativePlatform);
+    const filePath = ANNOUNCEMENTS_DIR + "announcements.json";
+
+    // const isNativePlatform = Capacitor.isNativePlatform();
+    // console.log("isNativePlatform", isNativePlatform);
 
     const fileRef = ref(this.storage, filePath);
     console.log("fileRef fullPath", fileRef.fullPath);
@@ -121,7 +124,7 @@ export class StorageService {
   async getUrls(obj) {
     for (var entry of obj.videos) {
       console.log("getUrl for file", entry.filename);
-      entry.url = await this.getVideoUrl(entry.filename);
+      entry.url = await this.getVideoUrl(ANNOUNCEMENTS_DIR + entry.filename);
     }
   }
 
