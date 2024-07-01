@@ -17,11 +17,11 @@
 }
 
 .exp-progress {
-    // position: absolute;
-    // top: 50%;
     --background: var(--ion-background-color);
-    --progress-background: var(--ion-color-light);
-    border: 2px solid var(--ion-color-light);
+    // --progress-background: var(--ion-color-light);
+    // border: 2px solid var(--ion-color-light);
+    --progress-background: #fff;
+    border: 2px solid #fff;
     height: 12px;
     // padding: 1px;
     width: 100%;
